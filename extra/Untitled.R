@@ -57,7 +57,17 @@ permuteTC <- function(cohort,
     stop("Unknown CVD risk type")
   }
 
-  cohort$name <- paste0(cohort$name, " T: ", permutation$shortName, " CVD: ", permutation$cvd)
+  if (permutation$age == "older") {
+    # Do nothing
+  } else if (permutation$age == "younger") {
+    # TODO
+  } else if (permutation$age == "all") {
+    cohort$expression$InclusionRules[[1]] <- NULL
+  } else {
+    stop("Unknown age type")
+  }
+
+  cohort$name <- paste0(cohort$name, " T: ", permutation$shortName, " CVD: ", permutation$cvd, " Age: ", permutation$age)
   return(cohort)
 }
 
