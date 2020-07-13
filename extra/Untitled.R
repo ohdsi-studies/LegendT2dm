@@ -60,7 +60,7 @@ permuteTC <- function(cohort,
   if (permutation$age == "older") {
     # Do nothing
   } else if (permutation$age == "younger") {
-    # TODO
+    cohort$expression$InclusionRules[[1]]$expression$DemographicCriteriaList[[1]]$Age$Op <- "lt"
   } else if (permutation$age == "all") {
     cohort$expression$InclusionRules[[1]] <- NULL
   } else {
@@ -70,6 +70,21 @@ permuteTC <- function(cohort,
   cohort$name <- paste0(cohort$name, " T: ", permutation$shortName, " CVD: ", permutation$cvd, " Age: ", permutation$age)
   return(cohort)
 }
+
+allCohorts <-
+  do.call("rbind",
+          lapply(1:nrow(permutations), function(i) {
+            cohortDefinition <- permuteTC(baseCohort, permutations[i,])
+            cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
+                                                    baseUrlJnj)
+           return(cohortSql)
+            #return(cohortDefinition)
+          })
+          )
+
+
+permutations$sql <- allCohorts
+readr::write_csv(permutations, path = "classComparisonsWithSql.csv")
 
 c1 <- permuteTC(baseCohort, permutations[12,])
 ROhdsiWebApi::postCohortDefinition(c1$name, c1, baseUrl = baseUrlJnj)
