@@ -20,6 +20,7 @@ Imports:
     EmpiricalCalibration (>= 1.4.0),
 	MethodEvaluation (>= 0.3.1),
     ParallelLogger,
+    ROhdsiWebApi,
     plyr,
     meta
 Suggests:

@@ -2,8 +2,8 @@
 library(dplyr)
 
 
-baseUrlPublic <- baseUrl = "http://atlas-demo.ohdsi.org:80/WebAPI"
-baseUrlJnj <- baseUrl = "http://atlas-demo.ohdsi.org:80/WebAPI"
+baseUrlPublic <- "http://atlas-demo.ohdsi.org:80/WebAPI"
+baseUrlJnj <- "https://epi.jnj.com:8443/WebAPI"
 
 
 function() {
