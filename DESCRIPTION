@@ -1,4 +1,4 @@
-Package: Legend
+Package: LegendT2dm
 Title: Large-Scale Evidence Generation and Evaluation in a Network of Databases
 Version: 0.0.1
 Author: Marc A. Suchard [aut, cre],
@@ -21,6 +21,7 @@ Imports:
 	MethodEvaluation (>= 0.3.1),
     ParallelLogger,
     ROhdsiWebApi,
+    CohortDiagnostics,
     plyr,
     meta
 Suggests:

@@ -28,7 +28,9 @@ readr::read_csv("inst/settings/ExcludedIngredientConcepts.csv") %>% arrange(conc
 baseCohort <- ROhdsiWebApi::getCohortDefinition(1774646, baseUrl = baseUrlPublic)
 #saveRDS(baseCohort, file = "baseCohort.rds")
 
-permutations <- readr::read_csv("classComparisons.csv")
+generateStats <- FALSE
+
+permutations <- readr::read_csv("inst/settings/classComparisons.csv")
 exposuresOfInterest <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% select(cohortId, shortName)
 permutations <- inner_join(permutations, exposuresOfInterest, by = c("targetId" = "cohortId"))
 
@@ -71,21 +73,49 @@ permuteTC <- function(cohort,
   return(cohort)
 }
 
-allCohorts <-
+allCohortsSql <-
   do.call("rbind",
           lapply(1:nrow(permutations), function(i) {
             cohortDefinition <- permuteTC(baseCohort, permutations[i,])
             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
-                                                    baseUrlJnj)
+                                                    baseUrlJnj,
+                                                    generateStats = generateStats)
            return(cohortSql)
+          }))
+
+allCohortsJson <-
+  do.call("rbind",
+          lapply(1:nrow(permutations), function(i) {
+            cohortDefinition <- permuteTC(baseCohort, permutations[i,])
+            cohortJson <- RJSONIO::toJSON(cohortDefinition)
+            return(cohortJson)
             #return(cohortDefinition)
-          })
-          )
+          }))
 
 
-permutations$sql <- allCohorts
-readr::write_csv(permutations, path = "classComparisonsWithSql.csv")
+permutations$json <- allCohortsJson
+readr::write_csv(permutations, path = "inst/settings/classComparisonsWithJson.csv")
 
-c1 <- permuteTC(baseCohort, permutations[12,])
-ROhdsiWebApi::postCohortDefinition(c1$name, c1, baseUrl = baseUrlJnj)
+permutations$sql <- allCohortsSql
+permutations <- permutations %>%
+  mutate(atlasName = paste0(shortName, " CVD: ", cvd, " Age: ", age)) %>%
+  mutate(name = paste0("ID", cohortId))
+
+for (i in 1:nrow(permutations)) {
+    row <- permutations[i,]
+    sqlFileName <- file.path("inst/sql/sql_server", paste(name, "sql", sep = "."))
+    SqlRender::writeSql(row$sql, sqlFileName)
+    jsonFileName <- file.path("inst/cohort", paste(name, "json", sep = "."))
+    SqlRender::writeSql(row$json, jsonFileName)
+}
+
+cohortsToCreate <- permutations %>% mutate(atlasId = cohortId) %>%
+  select(atlasId, atlasName, cohortId, name)
+
+readr::write_csv(cohortsToCreate, file.path("inst/settings", "CohortsToCreate.csv"))
+
+comparisons <- readr::read_csv("inst/settings/classComparisonsWithJson.csv")
+
+
+
 
