@@ -70,32 +70,40 @@ createExposureCohorts <- function(connectionDetails,
   exposureGroupTable <- ""
   exposureCombis <- NULL
 
-  cohorts <- readr::read_csv(file = system.file("settings", "classComparisonsWithJson.csv",
-                                                package = "LegendT2dm"))
+  # cohorts <- readr::read_csv(file = system.file("settings", "classComparisonsWithJson.csv",
+  #                                               package = "LegendT2dm"))
+  #
+  # if (!is.null(filterExposureCohorts)) {
+  #   cohorts <- filterExposureCohorts(cohorts)
+  # }
+  #
+  # for (idx in 1:nrow(cohorts)) {
+  #
+  #   json <- cohorts[idx, "json"] %>% pull()
+  #   targetId <- cohorts[idx, "cohortId"] %>% pull()
+  #
+  #   sql <- ROhdsiWebApi::getCohortSql(RJSONIO::fromJSON(json),
+  #                                           baseUrl,
+  #                                           generateStats = createInclusionStatsTables)
+  #
+  #   CohortDiagnostics::instantiateCohort(connectionDetails = connectionDetails,
+  #                                        connection = conn,
+  #                                        cdmDatabaseSchema = cdmDatabaseSchema,
+  #                                        cohortDatabaseSchema = cohortDatabaseSchema,
+  #                                        cohortTable = exposureCohortTable,
+  #                                        cohortJson = json,
+  #                                        cohortSql = sql,
+  #                                        cohortId = targetId,
+  #                                        generateInclusionStats = createInclusionStatsTables)
+  # }
 
-  if (!is.null(filterExposureCohorts)) {
-    cohorts <- filterExposureCohorts(cohorts)
-  }
-
-  for (idx in 1:nrow(cohorts)) {
-
-    json <- cohorts[idx, "json"] %>% pull()
-    targetId <- cohorts[idx, "cohortId"] %>% pull()
-
-    sql <- ROhdsiWebApi::getCohortSql(RJSONIO::fromJSON(json),
-                                            baseUrl,
-                                            generateStats = createInclusionStatsTables)
-
-    CohortDiagnostics::instantiateCohort(connectionDetails = connectionDetails,
-                                         connection = conn,
-                                         cdmDatabaseSchema = cdmDatabaseSchema,
-                                         cohortDatabaseSchema = cohortDatabaseSchema,
-                                         cohortTable = exposureCohortTable,
-                                         cohortJson = json,
-                                         cohortSql = sql,
-                                         cohortId = targetId,
-                                         generateInclusionStats = createInclusionStatsTables)
-  }
+  CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
+                                          connection = conn,
+                                          cdmDatabaseSchema = cdmDatabaseSchema,
+                                          cohortDatabaseSchema = cohortDatabaseSchema,
+                                          cohortTable = exposureCohortTable,
+                                          packageName = "LegendT2dm",
+                                          generateInclusionStats = createInclusionStatsTables)
 
   ParallelLogger::logInfo("Counting cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
