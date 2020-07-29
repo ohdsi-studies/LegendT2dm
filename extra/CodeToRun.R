@@ -1,6 +1,7 @@
 
 library(LegendT2dm)
 
+baseUrlJnj <- "https://atlas.ohdsi.org/WebAPI" # "https://epi.jnj.com:8443/WebAPI"
 
 
 dbms <- "pdw"
@@ -27,15 +28,37 @@ indicationId <- "T2DM"
 # tablePrefix <- "legend_t2md_ccae"
 # outputFolder <- "d:/LegendT2dmOutput_ccae"
 
-cdmDatabaseSchema <- "cdm_ibm_mdcr_1192.dbo"
+# cdmDatabaseSchema <- "cdm_ibm_mdcr_v1192.dbo"
+# cohortDatabaseSchema <- "scratch.dbo"
+# databaseId<- "MDCR"
+# databaseName <- "TODO"
+# databaseDescription <- "TODO"
+# tablePrefix <- "legend_t2md_mdcr"
+# outputFolder <- "d:/LegendT2dmOutput_mdcr"
+
+# cdmDatabaseSchema <- "cdm_optum_panther_v1157.dbo"
+# cohortDatabaseSchema <- "scratch.dbo"
+# databaseId<- "PanTher"
+# databaseName <- "TODO"
+# databaseDescription <- "TODO"
+# tablePrefix <- "legend_t2md_panther"
+# outputFolder <- "d:/LegendT2dmOutput_panther"
+
+# cdmDatabaseSchema <- "cdm_optum_extended_dod_v1194.dbo"
+# cohortDatabaseSchema <- "scratch.dbo"
+# databaseId<- "Optum"
+# databaseName <- "TODO"
+# databaseDescription <- "TODO"
+# tablePrefix <- "legend_t2md_optum"
+# outputFolder <- "d:/LegendT2dmOutput_optum"
+
+cdmDatabaseSchema <- "cdm_ibm_mdcd_v1259.dbo"
 cohortDatabaseSchema <- "scratch.dbo"
-databaseId<- "MDCR"
+databaseId<- "MDCD"
 databaseName <- "TODO"
 databaseDescription <- "TODO"
-tablePrefix <- "legend_t2md_mdcr"
-outputFolder <- "d:/LegendT2dmOutput_mdcr"
-
-
+tablePrefix <- "legend_t2md_mdcd"
+outputFolder <- "d:/LegendT2dmOutput_mdcd"
 
 
 # Feasibility assessment ---------------------------------------------------------
