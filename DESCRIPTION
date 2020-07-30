@@ -9,23 +9,29 @@ Description: Large-Scale Evidence Generation and Evaluation in a Network of Data
     for Type 2 Diabetes
 Depends:
     R (>= 3.6),
-    DatabaseConnector (>= 2.2.0)
+    DatabaseConnector (>= 3.0.0)
 Imports:
     Cyclops (>= 3.0),
-	Andromeda (>= 1.0.0),
-	SqlRender (>= 1.6.0),
-    FeatureExtraction,
+	Andromeda (>= 0.3.2),
+	SqlRender (>= 1.6.6),
+    FeatureExtraction (>= 3.0.1),
     CohortMethod (>= 4.0.0),
-    IcTemporalPatternDiscovery,
     EmpiricalCalibration (>= 1.4.0),
-	MethodEvaluation (>= 0.3.1),
-    ParallelLogger,
-    ROhdsiWebApi,
-    CohortDiagnostics,
+	MethodEvaluation (>= 2.0.0),
+    ParallelLogger (>= 2.0.0),
+    CohortDiagnostics (>= 1.1.0),
     plyr,
     meta
 Suggests:
-    testthat
+    testthat,
+    ROhdsiWebApi
+Remotes:
+    ohdsi/FeatureExtraction,
+    ohdsi/CohortMethod,
+    ohdsi/MethodEvaluation,
+    ohdsi/CohortDiagnostics,
+    ohdsi/ROhdsiWebApi
 License: Apache License 2.0
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
+Encoding: UTF-8

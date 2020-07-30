@@ -1,12 +1,4 @@
 {
- "id": 1774646,
-"name": "[LEGEND-T2DM] Development exposure cohort /  ITT T: SGLT2Is CVD: high Age: all",
-"description": "Straw-person for LEGEND-T2DM exposure",
-"createdBy": "",
-"createdDate": "2020-07-07 23:45",
-"modifiedBy": "",
-"modifiedDate": "2020-07-13 18:39",
-"expression": {
  "cdmVersionRange": ">=5.0.0",
 "PrimaryCriteria": {
  "CriteriaList": [
@@ -2734,10 +2726,10 @@
 },
 "InclusionRules": [
  {
- "name": "High cardiovascular risk",
-"description": "Identify patients at high cardiovascular risk (based on Ryan et al. 2018 Diabetes Obes Metab)",
+ "name": "Low cardiovascular risk",
+"description": "Identify patients at low cardiovascular risk (based on Ryan et al. 2018 Diabetes Obes Metab)",
 "expression": {
- "Type": "ANY",
+ "Type": "ALL",
 "CriteriaList": [
  {
  "Criteria": {
@@ -2760,8 +2752,8 @@
 "RestrictVisit": false,
 "IgnoreObservationPeriod": false,
 "Occurrence": {
- "Type":        2,
-"Count":        1,
+ "Type":        0,
+"Count":        0,
 "IsDistinct": false 
 } 
 },
@@ -2786,8 +2778,8 @@
 "RestrictVisit": false,
 "IgnoreObservationPeriod": false,
 "Occurrence": {
- "Type":        2,
-"Count":        1,
+ "Type":        0,
+"Count":        0,
 "IsDistinct": false 
 } 
 } 
@@ -2810,6 +2802,4 @@
 "EraPad":        0 
 },
 "CensorWindow": {} 
-},
-"expressionType": "SIMPLE_EXPRESSION" 
 }

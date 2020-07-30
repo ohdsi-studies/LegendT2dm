@@ -15,8 +15,6 @@
 #'                               should include both the database and schema name, for example
 #'                               'cdm_data.dbo'.
 #' @param tablePrefix            A prefix to be used for all table names created for this study.
-#' @param indicationId           A string denoting the indicationId for which the exposure cohorts
-#'                               should be created.
 #' @param oracleTempSchema       Should be used in Oracle to specify a schema where the user has write
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
@@ -32,114 +30,129 @@ assessPhenotypes <- function(connectionDetails,
                              cdmDatabaseSchema,
                              cohortDatabaseSchema,
                              tablePrefix = "legend",
-                             indicationId = "T2DM",
                              oracleTempSchema,
                              outputFolder,
                              sampleSize = 1e+05,
                              minCellCount = 5,
                              databaseId,
-                             baseUrl,
+                             databaseName = databaseId,
+                             databaseDescription = databaseId,
+                             createCohorts = TRUE,
+                             runCohortDiagnostics = TRUE,
                              filterExposureCohorts = NULL) {
-  indicationFolder <- file.path(outputFolder, indicationId)
-  if (!file.exists(indicationFolder)) {
-    dir.create(indicationFolder, recursive = TRUE)
+  if (!file.exists(outputFolder)) {
+    dir.create(outputFolder, recursive = TRUE)
   }
-  assessmentExportFolder <- file.path(indicationFolder, "assessmentOfPhenotypes")
-  if (!file.exists(assessmentExportFolder)) {
-    dir.create(assessmentExportFolder, recursive = TRUE)
+  ParallelLogger::addDefaultFileLogger(file.path(outputFolder, "assessmentLog.txt"))
+  ParallelLogger::addDefaultErrorReportLogger(file.path(outputFolder, "errorReportR.txt"))
+  on.exit(ParallelLogger::unregisterLogger("DEFAULT_FILE_LOGGER", silent = TRUE))
+  on.exit(ParallelLogger::unregisterLogger("DEFAULT_ERRORREPORT_LOGGER", silent = TRUE), add = TRUE)
+
+
+  if (createCohorts) {
+    # Exposures ----------------------------------------------------------------------------------------
+    createAllCohorts(connectionDetails = connectionDetails,
+                     cdmDatabaseSchema = cdmDatabaseSchema,
+                     cohortDatabaseSchema = cohortDatabaseSchema,
+                     tablePrefix = tablePrefix,
+                     oracleTempSchema = oracleTempSchema,
+                     outputFolder = outputFolder,
+                     databaseId = databaseId,
+                     filterExposureCohorts = filterExposureCohorts)
+
+    # exposureCohortTable <- paste(tablePrefix, tolower(indicationId), "exp_cohort", sep = "_")
+    # sql <- "SELECT COUNT(*) AS exposure_count, cohort_definition_id AS cohort_id FROM @cohort_database_schema.@exposure_cohort_table GROUP BY cohort_definition_id;"
+    # sql <- SqlRender::renderSql(sql = sql,
+    #                             cohort_database_schema = cohortDatabaseSchema,
+    #                             exposure_cohort_table = exposureCohortTable)$sql
+    # sql <- SqlRender::translateSql(sql, targetDialect = connectionDetails$dbms)$sql
+    # conn <- DatabaseConnector::connect(connectionDetails)
+    # exposureCounts <- DatabaseConnector::querySql(conn, sql)
+    # DatabaseConnector::disconnect(conn)
+    # colnames(exposureCounts) <- SqlRender::snakeCaseToCamelCase(colnames(exposureCounts))
+    # pathToCsv <- system.file("settings", "ExposuresOfInterest.csv", package = "Legend")
+    # exposuresOfInterest <- read.csv(pathToCsv)
+    # exposureCounts <- merge(exposureCounts, exposuresOfInterest[, c("cohortId", "type", "name")])
+    # # To do: handle combination exposures for hypertension
+    # exposureCounts$exposureCount[exposureCounts$exposureCount < minCellCount] <- paste0("<",
+    #                                                                                     minCellCount)
+    # exposureCounts$indicationId <- indicationId
+    # exposureCounts$databaseId <- databaseId
+    # write.csv(exposureCounts, file.path(assessmentExportFolder, "exposures.csv"), row.names = FALSE)
+    #
+    # # Outcomes ----------------------------------------------------------------------------------
+    # createOutcomeCohorts(connectionDetails = connectionDetails,
+    #                      cdmDatabaseSchema = cdmDatabaseSchema,
+    #                      cohortDatabaseSchema = cohortDatabaseSchema,
+    #                      tablePrefix = tablePrefix,
+    #                      indicationId = indicationId,
+    #                      oracleTempSchema = oracleTempSchema,
+    #                      outputFolder = outputFolder)
+    # outcomeCounts <- read.csv(file.path(outputFolder, indicationId, "outcomeCohortCounts.csv"))
+    # outcomeCounts$count[outcomeCounts$count < minCellCount] <- paste0("<", minCellCount)
+    # outcomeCounts$indicationId <- indicationId
+    # outcomeCounts$databaseId <- databaseId
+    # write.csv(outcomeCounts, file.path(assessmentExportFolder, "outcomes.csv"), row.names = FALSE)
+    #
+    # # Subgroups ---------------------------------------------------------------------------------
+    # ParallelLogger::logInfo("Sampling cohorts for subgroup feasibility")
+    # pairedCohortTable <- paste(tablePrefix, tolower(indicationId), "pair_cohort", sep = "_")
+    # smallSampleTable <- paste(tablePrefix, tolower(indicationId), "small_sample", sep = "_")
+    # sql <- SqlRender::loadRenderTranslateSql("SampleCohortsForSubgroupFeasibility.sql",
+    #                                          "Legend",
+    #                                          dbms = connectionDetails$dbms,
+    #                                          oracleTempSchema = oracleTempSchema,
+    #                                          cohort_database_schema = cohortDatabaseSchema,
+    #                                          paired_cohort_table = pairedCohortTable,
+    #                                          small_sample_table = smallSampleTable,
+    #                                          sample_size = sampleSize)
+    # conn <- DatabaseConnector::connect(connectionDetails)
+    # DatabaseConnector::executeSql(conn, sql)
+    #
+    # subgroupCovariateSettings <- createSubgroupCovariateSettings()
+    # subgroupCovs <- FeatureExtraction::getDbCovariateData(connection = conn,
+    #                                                       oracleTempSchema = oracleTempSchema,
+    #                                                       cdmDatabaseSchema = cdmDatabaseSchema,
+    #                                                       cohortDatabaseSchema = cohortDatabaseSchema,
+    #                                                       cohortTable = smallSampleTable,
+    #                                                       cohortTableIsTemp = FALSE,
+    #                                                       covariateSettings = subgroupCovariateSettings,
+    #                                                       aggregated = FALSE)
+    # DatabaseConnector::disconnect(conn)
+    # covs <- ff::as.ram(subgroupCovs$covariates)
+    # covs <- aggregate(covariateValue ~ covariateId, covs, sum)
+    # covs <- merge(covs, data.frame(covariateId = ff::as.ram(subgroupCovs$covariateRef$covariateId),
+    #                                covariateName = ff::as.ram(subgroupCovs$covariateRef$covariateName)))
+    #
+    # covs$fraction <- round(covs$covariateValue/subgroupCovs$metaData$populationSize, 3)
+    # idx <- covs$covariateValue < minCellCount
+    # covs$fraction[idx] <- paste0("<", round(minCellCount/subgroupCovs$metaData$populationSize, 3))
+    # covs <- covs[, c("covariateId", "covariateName", "fraction")]
+    # covs$indicationId <- indicationId
+    # covs$databaseId <- databaseId
+    # write.csv(covs, file.path(assessmentExportFolder, "subgroups.csv"), row.names = FALSE)
+    #
+    # # Compress ----------------------------------------------------------------------------------
+    # zipName <- file.path(assessmentExportFolder,
+    #                      sprintf("PhenotypeAssessment%s%s.zip", indicationId, databaseId))
+    # files <- list.files(assessmentExportFolder, pattern = ".*\\.csv$")
+    # oldWd <- setwd(assessmentExportFolder)
+    # on.exit(setwd(oldWd))
+    # DatabaseConnector::createZipFile(zipFile = zipName, files = files)
+    # ParallelLogger::logInfo("Results are ready for sharing at:", zipName)
   }
-  ParallelLogger::addDefaultFileLogger(file.path(indicationFolder, "logAssesPhenotypes.txt"))
 
-  # Exposures ----------------------------------------------------------------------------------------
-  createExposureCohorts(connectionDetails = connectionDetails,
-                        cdmDatabaseSchema = cdmDatabaseSchema,
-                        cohortDatabaseSchema = cohortDatabaseSchema,
-                        tablePrefix = tablePrefix,
-                        indicationId = indicationId,
-                        oracleTempSchema = oracleTempSchema,
-                        baseUrl = baseUrl,
-                        outputFolder = outputFolder,
-                        databaseId = databaseId,
-                        filterExposureCohorts = filterExposureCohorts)
 
-  # exposureCohortTable <- paste(tablePrefix, tolower(indicationId), "exp_cohort", sep = "_")
-  # sql <- "SELECT COUNT(*) AS exposure_count, cohort_definition_id AS cohort_id FROM @cohort_database_schema.@exposure_cohort_table GROUP BY cohort_definition_id;"
-  # sql <- SqlRender::renderSql(sql = sql,
-  #                             cohort_database_schema = cohortDatabaseSchema,
-  #                             exposure_cohort_table = exposureCohortTable)$sql
-  # sql <- SqlRender::translateSql(sql, targetDialect = connectionDetails$dbms)$sql
-  # conn <- DatabaseConnector::connect(connectionDetails)
-  # exposureCounts <- DatabaseConnector::querySql(conn, sql)
-  # DatabaseConnector::disconnect(conn)
-  # colnames(exposureCounts) <- SqlRender::snakeCaseToCamelCase(colnames(exposureCounts))
-  # pathToCsv <- system.file("settings", "ExposuresOfInterest.csv", package = "Legend")
-  # exposuresOfInterest <- read.csv(pathToCsv)
-  # exposureCounts <- merge(exposureCounts, exposuresOfInterest[, c("cohortId", "type", "name")])
-  # # To do: handle combination exposures for hypertension
-  # exposureCounts$exposureCount[exposureCounts$exposureCount < minCellCount] <- paste0("<",
-  #                                                                                     minCellCount)
-  # exposureCounts$indicationId <- indicationId
-  # exposureCounts$databaseId <- databaseId
-  # write.csv(exposureCounts, file.path(assessmentExportFolder, "exposures.csv"), row.names = FALSE)
-  #
-  # # Outcomes ----------------------------------------------------------------------------------
-  # createOutcomeCohorts(connectionDetails = connectionDetails,
-  #                      cdmDatabaseSchema = cdmDatabaseSchema,
-  #                      cohortDatabaseSchema = cohortDatabaseSchema,
-  #                      tablePrefix = tablePrefix,
-  #                      indicationId = indicationId,
-  #                      oracleTempSchema = oracleTempSchema,
-  #                      outputFolder = outputFolder)
-  # outcomeCounts <- read.csv(file.path(outputFolder, indicationId, "outcomeCohortCounts.csv"))
-  # outcomeCounts$count[outcomeCounts$count < minCellCount] <- paste0("<", minCellCount)
-  # outcomeCounts$indicationId <- indicationId
-  # outcomeCounts$databaseId <- databaseId
-  # write.csv(outcomeCounts, file.path(assessmentExportFolder, "outcomes.csv"), row.names = FALSE)
-  #
-  # # Subgroups ---------------------------------------------------------------------------------
-  # ParallelLogger::logInfo("Sampling cohorts for subgroup feasibility")
-  # pairedCohortTable <- paste(tablePrefix, tolower(indicationId), "pair_cohort", sep = "_")
-  # smallSampleTable <- paste(tablePrefix, tolower(indicationId), "small_sample", sep = "_")
-  # sql <- SqlRender::loadRenderTranslateSql("SampleCohortsForSubgroupFeasibility.sql",
-  #                                          "Legend",
-  #                                          dbms = connectionDetails$dbms,
-  #                                          oracleTempSchema = oracleTempSchema,
-  #                                          cohort_database_schema = cohortDatabaseSchema,
-  #                                          paired_cohort_table = pairedCohortTable,
-  #                                          small_sample_table = smallSampleTable,
-  #                                          sample_size = sampleSize)
-  # conn <- DatabaseConnector::connect(connectionDetails)
-  # DatabaseConnector::executeSql(conn, sql)
-  #
-  # subgroupCovariateSettings <- createSubgroupCovariateSettings()
-  # subgroupCovs <- FeatureExtraction::getDbCovariateData(connection = conn,
-  #                                                       oracleTempSchema = oracleTempSchema,
-  #                                                       cdmDatabaseSchema = cdmDatabaseSchema,
-  #                                                       cohortDatabaseSchema = cohortDatabaseSchema,
-  #                                                       cohortTable = smallSampleTable,
-  #                                                       cohortTableIsTemp = FALSE,
-  #                                                       covariateSettings = subgroupCovariateSettings,
-  #                                                       aggregated = FALSE)
-  # DatabaseConnector::disconnect(conn)
-  # covs <- ff::as.ram(subgroupCovs$covariates)
-  # covs <- aggregate(covariateValue ~ covariateId, covs, sum)
-  # covs <- merge(covs, data.frame(covariateId = ff::as.ram(subgroupCovs$covariateRef$covariateId),
-  #                                covariateName = ff::as.ram(subgroupCovs$covariateRef$covariateName)))
-  #
-  # covs$fraction <- round(covs$covariateValue/subgroupCovs$metaData$populationSize, 3)
-  # idx <- covs$covariateValue < minCellCount
-  # covs$fraction[idx] <- paste0("<", round(minCellCount/subgroupCovs$metaData$populationSize, 3))
-  # covs <- covs[, c("covariateId", "covariateName", "fraction")]
-  # covs$indicationId <- indicationId
-  # covs$databaseId <- databaseId
-  # write.csv(covs, file.path(assessmentExportFolder, "subgroups.csv"), row.names = FALSE)
-  #
-  # # Compress ----------------------------------------------------------------------------------
-  # zipName <- file.path(assessmentExportFolder,
-  #                      sprintf("PhenotypeAssessment%s%s.zip", indicationId, databaseId))
-  # files <- list.files(assessmentExportFolder, pattern = ".*\\.csv$")
-  # oldWd <- setwd(assessmentExportFolder)
-  # on.exit(setwd(oldWd))
-  # DatabaseConnector::createZipFile(zipFile = zipName, files = files)
-  # ParallelLogger::logInfo("Results are ready for sharing at:", zipName)
+  if (runCohortDiagnostics) {
+    runCohortDiagnostics(connectionDetails,
+                         cdmDatabaseSchema,
+                         cohortDatabaseSchema,
+                         tablePrefix = tablePrefix,
+                         oracleTempSchema = oracleTempSchema,
+                         outputFolder = outputFolder,
+                         databaseId = databaseId,
+                         databaseName = databaseName,
+                         databaseDescription = databaseDescription,
+                         minCellCount = minCellCount)
+  }
 }

@@ -23,52 +23,39 @@
 #' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
 #'
 #' @export
-createExposureCohorts <- function(connectionDetails,
-                                  cdmDatabaseSchema,
-                                  cohortDatabaseSchema,
-                                  tablePrefix = "legend",
-                                  indicationId = "T2DM",
-                                  oracleTempSchema,
-                                  outputFolder,
-                                  baseUrl,
-                                  databaseId,
-                                  filterExposureCohorts = NULL,
-                                  createInclusionStatsTables = FALSE,
-                                  imputeExposureLengthWhenMissing = FALSE) {
+createAllCohorts <- function(connectionDetails,
+                             cdmDatabaseSchema,
+                             cohortDatabaseSchema,
+                             tablePrefix = "legend",
+                             oracleTempSchema,
+                             outputFolder,
+                             databaseId,
+                             filterExposureCohorts = NULL,
+                             imputeExposureLengthWhenMissing = FALSE) {
 
-  ParallelLogger::logInfo("Creating exposure cohorts for indicationId: ", indicationId)
+  ParallelLogger::logInfo("Creating exposure cohorts")
 
-  indicationFolder <- file.path(outputFolder, indicationId)
-  attritionTable <- paste(tablePrefix, tolower(indicationId), "attrition", sep = "_")
-  exposureEraTable <- paste(tablePrefix, tolower(indicationId), "exp_era", sep = "_")
-  exposureCohortTable <- paste(tablePrefix, tolower(indicationId), "exp_cohort", sep = "_")
-  pairedCohortTable <- paste(tablePrefix, tolower(indicationId), "pair_cohort", sep = "_")
-  pairedCohortSummaryTable <- paste(tablePrefix, tolower(indicationId), "pair_sum", sep = "_")
-
-  if (!file.exists(indicationFolder)) {
-    dir.create(indicationFolder, recursive = TRUE)
-  }
+  cohortTable <- paste(tablePrefix, "cohort", sep = "_")
 
 
-  conn <- DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
+  # Note: using connection when calling createCohortTable and instantiateCohortSet is pereferred, but requires this
+  # fix in CohortDiagnostics to be released: https://github.com/OHDSI/CohortDiagnostics/commit/f4c920bc4feb5d701f1149ddd9cf7ca968be6a71
+  # connection <- DatabaseConnector::connect(connectionDetails)
+  # on.exit(DatabaseConnector::disconnect(connection))
 
   CohortDiagnostics::createCohortTable(connectionDetails = connectionDetails,
-                                       connection = conn,
                                        cohortDatabaseSchema = cohortDatabaseSchema,
-                                       cohortTable = exposureCohortTable,
-                                       createInclusionStatsTables = createInclusionStatsTables)
+                                       cohortTable = cohortTable)
 
-  # Load exposures of interest --------------------------------------------------------------------
-  pathToCsv <- system.file("settings", "ExposuresOfInterest.csv", package = "Legend")
-  exposuresOfInterest <- read.csv(pathToCsv)
-  exposuresOfInterest <- exposuresOfInterest[exposuresOfInterest$indicationId == indicationId, ]
-  exposuresOfInterest <- exposuresOfInterest[order(exposuresOfInterest$conceptId), ]
+  # # Load exposures of interest --------------------------------------------------------------------
+  # pathToCsv <- system.file("settings", "ExposuresOfInterest.csv", package = "LegendT2dm")
+  # exposuresOfInterest <- read.csv(pathToCsv)
+  # exposuresOfInterest <- exposuresOfInterest[order(exposuresOfInterest$conceptId), ]
 
   # Create exposure eras and cohorts ------------------------------------------------------
-  ParallelLogger::logInfo("- Populating tables ", exposureEraTable, " and ", exposureCohortTable)
-  exposureGroupTable <- ""
-  exposureCombis <- NULL
+  ParallelLogger::logInfo("- Populating table ", cohortTable)
+  # exposureGroupTable <- ""
+  # exposureCombis <- NULL
 
   # cohorts <- readr::read_csv(file = system.file("settings", "classComparisonsWithJson.csv",
   #                                               package = "LegendT2dm"))
@@ -87,7 +74,7 @@ createExposureCohorts <- function(connectionDetails,
   #                                           generateStats = createInclusionStatsTables)
   #
   #   CohortDiagnostics::instantiateCohort(connectionDetails = connectionDetails,
-  #                                        connection = conn,
+  #                                        connection = connection,
   #                                        cdmDatabaseSchema = cdmDatabaseSchema,
   #                                        cohortDatabaseSchema = cohortDatabaseSchema,
   #                                        cohortTable = exposureCohortTable,
@@ -98,12 +85,14 @@ createExposureCohorts <- function(connectionDetails,
   # }
 
   CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
-                                          connection = conn,
                                           cdmDatabaseSchema = cdmDatabaseSchema,
                                           cohortDatabaseSchema = cohortDatabaseSchema,
-                                          cohortTable = exposureCohortTable,
+                                          oracleTempSchema = oracleTempSchema,
+                                          cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
-                                          generateInclusionStats = createInclusionStatsTables)
+                                          cohortToCreateFile = "settings/CohortsToCreate.csv",
+                                          generateInclusionStats = TRUE,
+                                          inclusionStatisticsFolder = outputFolder)
 
   ParallelLogger::logInfo("Counting cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
@@ -112,9 +101,10 @@ createExposureCohorts <- function(connectionDetails,
                                            oracleTempSchema = oracleTempSchema,
                                            cdm_database_schema = cdmDatabaseSchema,
                                            work_database_schema = cohortDatabaseSchema,
-                                           study_cohort_table = exposureCohortTable)
-  counts <- DatabaseConnector::querySql(conn, sql)
-  colnames(counts) <- SqlRender::snakeCaseToCamelCase(colnames(counts))
+                                           study_cohort_table = cohortTable)
+  connection <- DatabaseConnector::connect(connectionDetails)
+  counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
+  DatabaseConnector::disconnect(connection)
   counts$databaseId <- databaseId
   #counts <- addCohortNames(counts)
   write.csv(counts, file.path(outputFolder, "CohortCounts.csv"), row.names = FALSE)

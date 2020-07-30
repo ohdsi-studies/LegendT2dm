@@ -1,0 +1,34 @@
+DBMS:
+pdw
+
+Error:
+com.microsoft.sqlserver.jdbc.SQLServerException: Invalid object name 'scratch.dbo.legend_cohort'.
+
+SQL:
+SELECT cohort_definition_id AS cohort_id,
+    COUNT(*) AS cohort_entries,
+    COUNT(DISTINCT subject_id) AS cohort_subjects
+FROM scratch.dbo.legend_cohort 
+WHERE cohort_definition_id IN (100,200)
+GROUP BY cohort_definition_id;
+
+
+R version:
+R version 4.0.2 (2020-06-22)
+
+Platform:
+x86_64-w64-mingw32
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- dplyr (1.0.0)
+- LegendT2dm (0.0.1)
+- DatabaseConnector (3.0.0)

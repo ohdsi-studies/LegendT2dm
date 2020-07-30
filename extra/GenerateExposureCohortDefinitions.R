@@ -2,33 +2,37 @@
 library(dplyr)
 
 
-baseUrlPublic <- "http://atlas-demo.ohdsi.org:80/WebAPI"
-baseUrlJnj <- "https://epi.jnj.com:8443/WebAPI"
+baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
+baseUrlJnj <- keyring::key_get("baseUrl")
 
 
 function() {
-exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
+  exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
 
-dpp4isConceptIds <- exp %>% filter(class == "DPP4Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-glp1rasConceptIds <- exp %>% filter(class == "GLP1RAs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-sglt2isConceptIds <- exp %>% filter(class == "SGLT2Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-susConceptIds <- exp %>% filter(class == "SUs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
+  dpp4isConceptIds <- exp %>% filter(class == "DPP4Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
+  glp1rasConceptIds <- exp %>% filter(class == "GLP1RAs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
+  sglt2isConceptIds <- exp %>% filter(class == "SGLT2Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
+  susConceptIds <- exp %>% filter(class == "SUs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
 
-exp[!is.na(exp$shortName) & exp$shortName == "DPP4Is", "includedConceptIds"] <- dpp4isConceptIds
-exp[!is.na(exp$shortName) &exp$shortName == "GLP1RAs", "includedConceptIds"] <- glp1rasConceptIds
-exp[!is.na(exp$shortName) &exp$shortName == "SGLT2Is", "includedConceptIds"] <- sglt2isConceptIds
-exp[!is.na(exp$shortName) &exp$shortName == "SUs", "includedConceptIds"] <- susConceptIds
+  exp[!is.na(exp$shortName) & exp$shortName == "DPP4Is", "includedConceptIds"] <- dpp4isConceptIds
+  exp[!is.na(exp$shortName) & exp$shortName == "GLP1RAs", "includedConceptIds"] <- glp1rasConceptIds
+  exp[!is.na(exp$shortName) & exp$shortName == "SGLT2Is", "includedConceptIds"] <- sglt2isConceptIds
+  exp[!is.na(exp$shortName) & exp$shortName == "SUs", "includedConceptIds"] <- susConceptIds
 
-readr::write_csv(exp, "inst/settings/tmp.csv")
+  readr::write_csv(exp, "inst/settings/tmp.csv")
 
-readr::read_csv("inst/settings/ExcludedIngredientConcepts.csv") %>% arrange(conceptId) %>% pull(conceptId) %>% paste0(collapse = ";")
+  readr::read_csv("inst/settings/ExcludedIngredientConcepts.csv") %>% arrange(conceptId) %>% pull(conceptId) %>% paste0(collapse = ";")
 
 }
 
-baseCohort <- ROhdsiWebApi::getCohortDefinition(1774646, baseUrl = baseUrlPublic)
+# OHDSI's public webAPI is down right now:
+# baseCohort <- ROhdsiWebApi::getCohortDefinition(1774646, baseUrl = baseUrlPublic)
+baseCohort <- ROhdsiWebApi::getCohortDefinition(17111, baseUrl = baseUrlJnj)
+
+
 #saveRDS(baseCohort, file = "baseCohort.rds")
 
-generateStats <- FALSE
+generateStats <- TRUE
 
 permutations <- readr::read_csv("inst/settings/classComparisons.csv")
 exposuresOfInterest <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% select(cohortId, shortName)
@@ -80,14 +84,14 @@ allCohortsSql <-
             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
                                                     baseUrlJnj,
                                                     generateStats = generateStats)
-           return(cohortSql)
+            return(cohortSql)
           }))
 
 allCohortsJson <-
   do.call("rbind",
           lapply(1:nrow(permutations), function(i) {
             cohortDefinition <- permuteTC(baseCohort, permutations[i,])
-            cohortJson <- RJSONIO::toJSON(cohortDefinition)
+            cohortJson <- RJSONIO::toJSON(cohortDefinition$expression)
             return(cohortJson)
             #return(cohortDefinition)
           }))
@@ -102,11 +106,11 @@ permutations <- permutations %>%
   mutate(name = paste0("ID", cohortId))
 
 for (i in 1:nrow(permutations)) {
-    row <- permutations[i,]
-    sqlFileName <- file.path("inst/sql/sql_server", paste(name, "sql", sep = "."))
-    SqlRender::writeSql(row$sql, sqlFileName)
-    jsonFileName <- file.path("inst/cohort", paste(name, "json", sep = "."))
-    SqlRender::writeSql(row$json, jsonFileName)
+  row <- permutations[i,]
+  sqlFileName <- file.path("inst/sql/sql_server", paste(row$name, "sql", sep = "."))
+  SqlRender::writeSql(row$sql, sqlFileName)
+  jsonFileName <- file.path("inst/cohorts", paste(row$name, "json", sep = "."))
+  SqlRender::writeSql(row$json, jsonFileName)
 }
 
 cohortsToCreate <- permutations %>% mutate(atlasId = cohortId) %>%
