@@ -69,5 +69,10 @@ assessPhenotypes(connectionDetails = connectionDetails,
                  databaseId = databaseId,
                  databaseName = databaseName,
                  databaseDescription = databaseDescription,
-                 createCohorts = F,
+                 createCohorts = TRUE,
                  runCohortDiagnostics = TRUE)
+
+# Code demonstrating how to view the results --------------------------------------
+exportFolder <- file.path(outputFolder, "cohortDiagnosticsExport")
+CohortDiagnostics::preMergeDiagnosticsFiles(exportFolder)
+CohortDiagnostics::launchDiagnosticsExplorer(exportFolder)
