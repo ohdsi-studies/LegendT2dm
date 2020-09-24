@@ -44,6 +44,11 @@ output:
 params:
   date: '2020-09-24'
   version: 0.0.99
+subtitle: 'Version: `r params$version`'
+title: |
+  | RESEARCH PROTOCOL
+  | 
+  | Large-scale evidence generation and evaluation across a network of databases for type 2 diabetes mellitus
 ---
 
 \thispagestyle{fancy}
@@ -54,10 +59,6 @@ options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 #knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
 ```
-
-\centerline{\Huge RESEARCH PROTOCOL}
-\vspace{1.0em}
-\centerline{Name of study}
 
 \tableofcontents
 
@@ -92,7 +93,6 @@ library(kableExtra)
 # Appendix 1: Literature Review
 
 # Appendix 2: Target, Comparator and Outcome Cohort Definitions
-
 
 ## R Markdown
 
