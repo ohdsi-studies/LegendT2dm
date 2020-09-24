@@ -1,12 +1,51 @@
 ---
-title: "LEGEND-T2DM Protocol"
-author: "Marc A. Suchard"
-date: "9/24/2020"
-output: pdf_document
+params:
+  version: "0.0.99"
+  date: "2020-09-24"
+output:
+  pdf_document:
+    keep_tex: true
+    md_extensions: +raw_attribute
+    latex_engine: xelatex
+mainfont: Arial
+fontsize: 11pt
+geometry: margin=1in
+classoptions: doublespace
+longtable: true
+header-includes:
+  - \usepackage[numbers,sort&compress]{natbib}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{caption}
+  - \usepackage{rotating}
+  - \usepackage{multirow}
+  - \usepackage{mwe,tikz}
+  - \usepackage[percent]{overpic}
+  - \usepackage{enumitem}
+  - \usepackage{hyperref}
+  - \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+  - \newcommand{\footerDate}{`r params$date`}
+  - \input{header.tex} 
 ---
+
+\thispagestyle{fancy}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
 ```
 
 ## R Markdown
