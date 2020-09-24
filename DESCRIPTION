@@ -20,6 +20,7 @@ Imports:
 	MethodEvaluation (>= 2.0.0),
     ParallelLogger (>= 2.0.0),
     CohortDiagnostics (>= 1.1.0),
+    rmdrive,
     plyr,
     meta
 Suggests:
@@ -31,6 +32,7 @@ Remotes:
     ohdsi/MethodEvaluation,
     ohdsi/CohortDiagnostics,
     ohdsi/ROhdsiWebApi
+    januz/rmdrive
 License: Apache License 2.0
 LazyData: true
 RoxygenNote: 7.1.1
