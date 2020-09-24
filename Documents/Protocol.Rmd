@@ -4,11 +4,12 @@ params:
   date: "2020-09-24"
 output:
   pdf_document:
+    number_sections: true
     keep_tex: true
     md_extensions: +raw_attribute
     latex_engine: xelatex
 mainfont: Arial
-fontsize: 11pt
+fontsize: 12pt
 geometry: margin=1in
 classoptions: doublespace
 longtable: true
@@ -47,6 +48,45 @@ options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 #knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
 ```
+
+\centerline{\Huge RESEARCH PROTOCOL}
+\vspace{1.0em}
+\centerline{Name of study}
+
+\tableofcontents
+
+# List of Abbreviations
+
+# Responsible Parties
+
+# Abstract
+
+# Amendments and Updates
+
+# Rationale and Background
+
+# Study Objectives
+
+# Research Methods
+
+# Sample Size and Study Power
+
+# Strengths and Limitations
+
+# Protection of Human Subjects
+
+# Management and Reporting of Adverse Events and Adverse Reactions
+
+# Plans for Disseminating and Communicating Study Results
+
+# Lists of Tables and Figures
+
+# References
+
+# Appendix 1: Literature Review
+
+# Appendix 2: Target, Comparator and Outcome Cohort Definitions
+
 
 ## R Markdown
 
