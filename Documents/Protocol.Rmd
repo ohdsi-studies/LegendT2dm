@@ -1,43 +1,49 @@
 ---
-params:
-  version: "0.0.99"
-  date: "2020-09-24"
-output:
-  pdf_document:
-    number_sections: true
-    keep_tex: true
-    md_extensions: +raw_attribute
-    latex_engine: xelatex
-mainfont: Arial
+classoptions: doublespace
 fontsize: 12pt
 geometry: margin=1in
-classoptions: doublespace
-longtable: true
 header-includes:
-  - \usepackage[numbers,sort&compress]{natbib}
-  - \usepackage{booktabs}
-  - \usepackage{longtable}
-  - \usepackage{array}
-  - \usepackage{multirow}
-  - \usepackage{wrapfig}
-  - \usepackage{float}
-  - \usepackage{colortbl}
-  - \usepackage{pdflscape}
-  - \usepackage{tabu}
-  - \usepackage{threeparttable}
-  - \usepackage{threeparttablex}
-  - \usepackage[normalem]{ulem}
-  - \usepackage{makecell}
-  - \usepackage{caption}
-  - \usepackage{rotating}
-  - \usepackage{multirow}
-  - \usepackage{mwe,tikz}
-  - \usepackage[percent]{overpic}
-  - \usepackage{enumitem}
-  - \usepackage{hyperref}
-  - \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
-  - \newcommand{\footerDate}{`r params$date`}
-  - \input{header.tex} 
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{header.tex}
+longtable: yes
+mainfont: Arial
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: yes
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+params:
+  date: '2020-09-24'
+  version: 0.0.99
 ---
 
 \thispagestyle{fancy}
