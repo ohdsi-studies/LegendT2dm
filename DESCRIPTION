@@ -12,14 +12,15 @@ Depends:
     DatabaseConnector (>= 3.0.0)
 Imports:
     Cyclops (>= 3.0),
-	Andromeda (>= 0.3.2),
-	SqlRender (>= 1.6.6),
+	  Andromeda (>= 0.3.2),
+	  SqlRender (>= 1.6.6),
     FeatureExtraction (>= 3.0.1),
     CohortMethod (>= 4.0.0),
     EmpiricalCalibration (>= 1.4.0),
-	MethodEvaluation (>= 2.0.0),
+	  MethodEvaluation (>= 2.0.0),
     ParallelLogger (>= 2.0.0),
     CohortDiagnostics (>= 1.1.0),
+    CirceR (>= 0.0.1),
     rmdrive,
     plyr,
     meta

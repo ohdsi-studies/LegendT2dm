@@ -14,5 +14,5 @@ rmdrive::update_rmd(file = "Documents/Protocol",
 path <- googledrive::drive_get(path = gdrive_path)
 googledrive::drive_upload(media = "Documents/Protocol.pdf",
                           path = path,
-                          name = "LEGEND-T2DM_Protocol_rendered.pdf",
+                          name = "rendered_LEGEND-T2DM_Protocol_rendered.pdf",
                           overwrite = TRUE)
