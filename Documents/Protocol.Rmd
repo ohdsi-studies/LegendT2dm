@@ -75,18 +75,30 @@ kable(abbreviations, col.names = NULL, booktabs = TRUE) %>%
 
 # Responsible Parties
 
+## Investigators
+
 ```{r parties, echo=FALSE}
 parties <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
-  Responsible party; Institution/Affiliation
+  Investigator; Institution/Affiliation
   George Hripcsak; Department of Biomedical Informatics, Columbia University, New York, NY, USA
   Harlan M. Krumholz; Department of Medicine, Yale University, New Haven, CT, USA
-  Martijn J. Schuemie; Janssen Research and Development, Titusville, NJ, USA
+  Patrick B. Ryan; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
+  Martijn J. Schuemie; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
   Marc A. Suchard *; Department of Biostatistics, University of California, Los Angeles, Los Angeles, CA, USA
 ")
 kable(parties, booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
+  column_spec(1, width = "10em") %>%
+  column_spec(2, width = "30em") %>%
   footnote(general = "* Principal Investigator", general_title = "")
 ```
+
+## Disclosures
+
+This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
+**GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
+**PBR** and **MJS** are employees of Janssen Research and Development and shareholders in John & Johnson.
+**MAS** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
 
 # Abstract
 
@@ -104,11 +116,39 @@ kable(amendments, booktabs = TRUE) %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped")
 ```
 
+```{r dates, echo=FALSE}
+dates <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Milestone; Planned / actual date
+  EU PAS Registration; 
+  Start of analysis;
+  End of analysis;
+  Results presentation;
+")
+options(knitr.kable.NA = "")
+kable(dates, booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+```
+
+
 # Rationale and Background
 
 # Study Objectives
 
 # Research Methods
+
+## Data Sources
+
+## Patient Cohorts
+
+## Exposures
+
+## Controls or Comparators
+
+## Outcomes
+
+## Covariates
+
+## Analysis
 
 # Sample Size and Study Power
 
@@ -116,9 +156,24 @@ kable(amendments, booktabs = TRUE) %>%
 
 # Protection of Human Subjects
 
+This study uses only de-identified data.
+Confidentiality of patient records will be maintained at all times.
+All study reports will contain aggregated results only and will not identify indvidual patients or physicians.
+
 # Management and Reporting of Adverse Events and Adverse Reactions
 
+This study uses coded data that already exist in an electronic database.
+In this type of database, it is not possible to link (i.e., identify a potentual causal association between) a particular product and medical event for any specific individual.
+Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not availabile and adverse events are not reportable as individual adverse event reports.
+The study results will be assessed for medically important findings.
+
 # Plans for Disseminating and Communicating Study Results
+
+(should copy more info from proposal)
+
+This study protocol will be registered in the EU PAS Register and study results will be posted on the OHDSI website after completion of the study.
+At least one paper describing the study and its results will be written and submitted for publication to a peer-reviewed scientific journal.
+The results will also be presented at OHDSI in-person or virtual events.
 
 # Lists of Tables and Figures
 
