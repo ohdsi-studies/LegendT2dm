@@ -11,3 +11,12 @@
 \cfoot{}
 \rfoot{\thepage}
 
+%\AtBeginDocument{\thispagestyle{fancy}}
+
+%\let\oldmaketitle\maketitle
+%\AtBeginDocument{\let\maketitle\relax}
+
+\patchcmd{\maketitle}
+  {\end{titlepage}}
+  {\thispagestyle{fancy}\end{titlepage}}
+  {}{}

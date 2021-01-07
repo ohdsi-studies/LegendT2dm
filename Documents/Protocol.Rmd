@@ -1,7 +1,23 @@
 ---
-classoptions: doublespace
+title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluation
+  across a network of databases for type 2 diabetes mellitus\n"
 fontsize: 12pt
 geometry: margin=1in
+output:
+  bookdown::html_document2:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    number_sections: yes
+    number_tables: yes
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    includes:
+      before_body: title.tex
 header-includes:
 - \usepackage[numbers,sort&compress]{natbib}
 - \usepackage{booktabs}
@@ -29,29 +45,13 @@ header-includes:
 - \input{header.tex}
 longtable: yes
 mainfont: Arial
-output:
-  pdf_document:
-    keep_tex: yes
-    latex_engine: xelatex
-    md_extensions: +raw_attribute
-    number_sections: yes
-  html_document:
-    df_print: paged
-    toc: true
-    toc_depth: 2
-    toc_float: true
-    number_sections: yes
+bibliography: Protocol.bib
 params:
   date: '2020-09-24'
   version: 0.0.99
 subtitle: 'Version: `r params$version`'
-title: |
-  | RESEARCH PROTOCOL
-  | 
-  | Large-scale evidence generation and evaluation across a network of databases for type 2 diabetes mellitus
+classoptions: doublespace
 ---
-
-\thispagestyle{fancy}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -60,14 +60,18 @@ library(kableExtra)
 #knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
 ```
 
-\tableofcontents
-
 # List of Abbreviations
 
 ```{r abbreviations, echo=FALSE}
 abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRUE, file = "
-  LEGEND; Large-scale evidence generation and evaluation across a network of databases
-  DDP4; Yep
+  CDM; Common data model
+  DPP4; Dipeptidyl peptidase-4 
+  GLP1; Glucagon-like peptide-1
+  LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
+  OMOP; Observational Medical Outcomes Partnership
+  RCT; Randomized controlled trial
+  SGLT2; Sodium-glucose co-transporter-2
+  T2DM; Type 2 diabetes mellitus
 ")
 kable(abbreviations, col.names = NULL, booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = "striped", latex_options = "striped")
@@ -132,11 +136,112 @@ kable(dates, booktabs = TRUE) %>%
 
 # Rationale and Background
 
+The landscape of therapeutic options for type 2 diabetes mellitus (T2DM) has been dramatically transformed over the last decade [@Lo2018-ca].
+The emergence of drugs targeting the sodium-glucose co-transporter-2 (SGLT2) and the glucagon-like peptide-1 (GLP1) receptor has expanded the role of T2DM agents from lowering blood glucose to directly reducing cardiovascular risk [@North2019-xn].
+A series of large randomized clinical trials designed to evaluate the cardiovascular safety of SGLT2 inhibitors and GLP1 receptor agonists found that use of many of these agents led to a reduction in major adverse cardiovascular events, including myocardial infarction, hospitalization for heart failure, and cardiovascular mortality [@Zinman2015-ps; @Neal2017-gs; @Marso2016-zg; @Marso2016-yk].
+However, other T2DM drugs widely used before the introduction of these novel agents, such as sulfonylureas, did not undergo similarly comprehensive trials to evaluate their cardiovascular efficacy or safety.
+Moreover, direct comparisons of newer agents with dipeptidyl peptidase-4 (DPP4) inhibitors, with neutral effects on major cardiovascular outcomes [@Scirica2013-gl; @White2013-zl; @Green2015-pv; @Rosenstock2019-cp], have not been conducted. 
+Nevertheless, DPP4 inhibitors and sulfonylureas continue to be used in clinical practice and are recommended as second line T2DM agents in national clinical practice guidelines.
+
+Several challenges remain in formulating T2DM treatment recommendations based on existing evidence [@Cefalu2018-mu].
+First, trials of novel agents did not pursue head-to-head comparisons to older agents and were instead designed as additive treatments on the background of commonly used T2DM agents.
+Therefore, the relative cardiovascular efficacy and safety of novel compared with older agents is not known.
+Second, trials of novel agents have tested individual drugs against placebo, but have not directly compared SGLT2 inhibitors with GLP1 receptor agonists in reducing adverse cardiovascular event risk.
+Moreover, there is no evidence to guide the use of individual drugs within each class and across different drug classes, particularly among patients at lower cardiovascular risk than recruited in clinical trials.
+Third, randomized trials focused on cardiovascular efficacy and safety, but were not powered to adequately assess the safety of these agents across a spectrum of non-cardiovascular outcomes.
+Finally, restricted enrollment across regions, and subgroups of age, sex, and race further limits the efficacy and safety assessment that may guide individual patients’ treatment.
+
+Evidence gaps from these trials also pose a challenge in designing treatment algorithms, which rely on comparative effectiveness and safety of drugs.
+Perhaps, as a result, there is large variation in clinical practice guidelines and in clinical practice with regard to these medications, with many patients initiated on the newer therapies and many others treated with older regimens [@McCoy2019-hu; @Curtis2018-zg; @Arnold2017-fo; @Dave2020-ql; @Le2020-lh].
+Among the second-line options, there is much variation with respect to the order of drugs used.
+This lack of consensus about the best approach provides an opportunity for systematic, large-scale observational studies. 
+
 # Study Objectives
+
+To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of second-line T2DM glucose-lowering agents. Specifically, these studies aim
+
+1. To determine, through systematic evaluation, the comparative effectiveness of second-line T2DM agents, SGLT2 inhibitors and GLP1 receptor agonists, with each other and with DPP4 inhibitors and sulfonylureas, for cardiovascular outcomes.
+2. To determine, through systematic evaluation, the comparative safety of second-line T2DM agents among patients with T2DM.
+3. To assess heterogeneity in effectiveness and safety of second-line T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.  
 
 # Research Methods
 
+LEGEND-T2DM will execute three systematic, large-scale observational studies of second-line T2DM agents to estimate the relative risks of cardiovascular effectiveness and safety outcomes.
+
+1. The **Class-vs-Class Study** will provide all pairwise comparisons between the four major T2DM agent classes to evaluate their comparative effects on cardiovascular risk  (Aim 1) and patient-centered safety outcomes (Aim 2);  
+2. The **Drug-vs-Drug Study** will furnish head-to-head pairwise comparisons between individual agents within and across classes (both Aims 1 and 2); and 
+3. The **Heterogeneity Study** will refine these comparisons for T2DM patients for important subgroups (Aim 3).   
+In contrast to a single comparison approach, LEGEND-T2DM will provide a comprehensive view of the findings and their consistency across populations, drugs, and outcomes.
+We will model each study on our successful collaborative research evaluating the comparative effectiveness of antihypertensives recently published in _The Lancet_ [@Suchard2019-gq].
+
+For each study, we will employ an active comparator, new-user cohort design [@Yoshida2015-ln; @Ryan2013-wq; @Schuemie2020-wx].
+New-user cohort design is advocated as the primary design to be considered for comparative effectiveness and drug safety [@Schneeweiss2010-my; @Gagne2012-at; @Johnson2013-db].
+By identifying patients who start a new treatment course and using therapy initiation as the start of follow-up, the new-user design models an randomized controlled trial (RCT) where treatment commences at the index study visit.
+Exploiting such an index date allows a clear separation of baseline patient characteristics that occur prior to index date and are usable as covariates in the analysis without concern of inadvertently introducing mediator variables that arise between exposure and outcome [@Schneeweiss2007-am]. 
+Excluding prevalent users as those without a sufficient washout period prior to first exposure occurrence further reduces bias due to balancing mediators on the causal pathway, time-varying hazards, and depletion of susceptibles.
+[@Johnson2013-db, @Suissa2017-lv]. 
+Our systematic framework across studies in this proposal further will address residual confounding, publication bias, and p-hacking using data-driven, large-scale propensity adjustment for measured confounding [@Tian2018-xy], a large set of negative control outcome experiments to address unmeasured and systematic bias
+[@Schuemie2014-bv; @Schuemie2016-km], and full disclosure of hypotheses tested [@Schuemie2018-zi].
+
 ## Data Sources
+
+We will execute LEGEND-T2DM as a series of OHDSI network studies.
+All data partners within OHDSI are encouraged to participate voluntarily and can do so conveniently, because of the community's shared Observational Medical Outcomes Partnership (OMOP) common data model (CDM) and OHDSI tool-stack.
+Many OHDSI community data partners have already committed to participate and we will recruit further data partners through OHDSI’s standard recruitment process, which includes protocol publication on OHDSI’s GitHub, an announcement in OHDSI’s research forum, presentation at the weekly OHDSI all-hands-on meeting and direct requests to data holders.
+
+Table \@ref(tab:data-sources) lists the 13 already committed data sources for LEGEND-T2DM; these sources encompass a large variety of practice types and populations. 
+For each data source, we report a brief description and size of the population it represents and its patient capture process and start date.
+While the earliest patient capture begins in 1989 (CUIMC), the vast majority come from the mid-2000s to today, providing almost two decades of T2DM treatment coverage.
+US populations include those commercially and publicly insured, enriched for older individuals (MDCR, VA), lower socioeconomic status (MDCD), and racially diverse (VA >20% Black or African American, CUIMC 8%).
+The US data sources may capture the same patients across multiple sources.
+Different views of the same patients are an advantage in capturing the diversity of real-world health events that patients experience.
+Across CCAE (commercially insured), MCDR (Medicare)  and MCDC (Medicaid), we expect little overlap in terms of the same observations recorded at the same time for a patient; patients can flow between sources (e.g., a CCAE patient who retires can opt-in to become an MDCR patient), but the enrollment time periods stand distinct.
+On the other hand, Optum, PanTher, OpenClaims, CUIMC and YNHHS may overlap in time with the other US data sources.
+While it remains against licensing agreements to attempt to link patients between most data sources, Optum reports <20% overlap between their claims and EHR data sources that is reassuringly small.
+All data sources will receive institutional review board approval or exemption for their participation before executing LEGEND-T2DM.
+
+```{r data-sources, echo=FALSE, warning=FALSE}
+data_sources <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Data source ; Population ; Patients ; History ; Data capture process and short description
+  IBM MarketScan Commercial Claims and Encounters (CCAE) ; Commercially insured, < 65 years ; 142M ; 2000 -- ; Adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy)  from large employers and health plans who provide private healthcare coverage to employees, their spouses and dependents.
+  IBM MarketScan Medicare Supplemental Database (MDCR)  ; Commercially insured, 65$+$ years ; 10M ; 2000 -- ; Adjudicated health insurance claims of retirees with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service or capitated health plans.
+  IBM MarketScan Multi-State Medicaid Database (MDCD) ; Medicaid enrollees, racially diverse ; 26M ; 2006 -- ; Adjudicated health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims.
+  IQVIA Open Claims (IOC) ; General ; 160M ; 2010 -- ; Pre-adjudicated claims at the anonymized patient-level collected from office-based physicians and specialists via office management software and clearinghouse switch sources for the purpose of reimbursement.
+  Japan Medical Data Center (JMDC) ; Japan, general ; 5.5M ; 2005 -- ; Data from 60 society-managed health insurance plans covering workers aged 18 to 65 and their dependents.
+  Korea National Health Insurance Service (NHIS) ; 2% random sample of South Korea ; 1M ; 2002 -- ; National administrative claims database covering the South Korean population.
+  Optum Clinformatics Data Mart (Optum) ; Commercially or Medicare insured ; 85M ; 2000 -- ; Inpatient and outpatient healthcare insurance claims.
+  Columbia University Irving Medical Center (CIUMC) ; Academic medical center patients, racially diverse ; 6M ; 1989 -- ; General practice, specialists and inpatient hospital services from the New York-Presbyterian hospital and affiliated academic physician practices in New York.
+  Department of Veterans Affairs (VA) ; Veterans, older, racially diverse ; 12M ; 2000 -- ; National VA health care system, the largest integrated provider of medical services in the US, provided at 170 VA medical centers and 1,063 outpatient sites.
+  Information System for Research in Primary Care (SIDIAP) ; 80% of all Catalonia (Spain) ; 7.7M ; 2006 -- ; Primary care partially linked to inpatient data with pharmacy dispensations and primary care laboratories.  Healthcare is universal and taxpayer funded in the region, and PCPs are gatekeeps for all care and responsible for repeat prescriptions. 
+  IQVIA Disease Analyzer Germany (DAG) ; Germany, general ; 37M ; 1992 -- ; Collection from patient management software used by general practitioners and selected specialists to document patients’ medical records within their office-based practice during a visit.
+  Optum Electronic Health Records (OptumEHR) ; US, general ; 93M ; 2006 -- ; Clinical information, prescriptions, lab results, vital signs, body measurements, diagnoses and procedures derived from clinical notes using natural language processing. 
+  Yale New Haven Health System (YNHHS) ; Academic medical center patients ; 2M ; 2013 -- ; General practice, specialists and inpatient hospital services from the YNHHS in Connecticut.
+")
+tab <- kable(data_sources, booktabs = TRUE,
+      caption = "Committed LEGEND-T2DM data sources and the populations they cover.") %>% 
+  kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
+  pack_rows("Administrative claims", 1, 7, latex_align = "c", indent = FALSE) %>%
+  pack_rows("Electronic health records (EHRs)", 8, 13, latex_align = "c", indent = FALSE)
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "10em") %>%
+    column_spec(2, width = "10em") %>%
+    column_spec(5, width = "25em") %>%
+    kable_styling(font_size = 8)
+} else {
+  tab
+}
+```
+
+
+
+
+
+
+
+
+
 
 ## Patient Cohorts
 
@@ -164,7 +269,7 @@ All study reports will contain aggregated results only and will not identify ind
 
 This study uses coded data that already exist in an electronic database.
 In this type of database, it is not possible to link (i.e., identify a potentual causal association between) a particular product and medical event for any specific individual.
-Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not availabile and adverse events are not reportable as individual adverse event reports.
+Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not available and adverse events are not reportable as individual adverse event reports.
 The study results will be assessed for medically important findings.
 
 # Plans for Disseminating and Communicating Study Results
