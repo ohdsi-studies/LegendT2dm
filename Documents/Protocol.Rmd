@@ -11,6 +11,7 @@ output:
     toc_float: yes
     number_sections: yes
     number_tables: yes
+    css: "style.css"
   bookdown::pdf_document2:
     keep_tex: yes
     latex_engine: xelatex
@@ -67,6 +68,7 @@ abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRU
   CDM; Common data model
   DPP4; Dipeptidyl peptidase-4 
   GLP1; Glucagon-like peptide-1
+  IRB; Institutional review board
   LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
   OMOP; Observational Medical Outcomes Partnership
   RCT; Randomized controlled trial
@@ -251,6 +253,22 @@ if (knitr::is_latex_output()) {
 
 ## Outcomes
 
+```{r outcomes, echo=FALSE, warning=FALSE}
+outcomes <- read.csv("OutcomeCohortTable.csv")
+
+tab <- kable(outcomes, booktabs = TRUE,
+      caption = "Committed LEGEND-T2DM data sources and the populations they cover.") %>% 
+  kable_styling(bootstrap_options = "striped", latex_options = "striped") 
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(3, width = "25em") %>%
+    kable_styling(font_size = 8)
+} else {
+  tab
+}
+```
+
 ## Covariates
 
 ## Analysis
@@ -259,16 +277,52 @@ if (knitr::is_latex_output()) {
 
 # Strengths and Limitations
 
+
+
+
 # Protection of Human Subjects
 
-This study uses only de-identified data.
-Confidentiality of patient records will be maintained at all times.
-All study reports will contain aggregated results only and will not identify indvidual patients or physicians.
+LEGEND-T2DM does not involve human subjects research.
+The project does, however, use de-identified human data collected during routine healthcare provision.
+All data partners executing the LEGEND-T2DM studies within their data sources will have received institutional review board (IRB) approval or waiver for participation in accordance to their institutional governance prior to execution (see Table ADD-REF).
+LEGEND-T2DM executes across a federated and distributed data network, where analysis code is sent to participating data partners and only aggregate summary statistics are returned, with no sharing of patient-level data between organizations.
+
+```{r irb, echo=FALSE}
+data_sources <- readr::read_delim(col_names = TRUE, delim = "&", trim_ws = TRUE, file = "
+Data source & Statement
+IBM MarketScan Commercial Claims and Encounters (CCAE) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+IBM MarketScan Medicare Supplemental Database (MDCR)  & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+IBM MarketScan Multi-State Medicaid Database (MDCD) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+IQVIA Open Claims (IOC) & This is a retrospective database study on de-identified data and is deemed not human subject research. Approval is provided for OHDSI network studies.
+Japan Medical Data Center (JMDC) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+Korea National Health Insurance Service (NHIS) & Ajou University Institutional Review Board (AJIRB-MED-EXP-17-054 for LEGEND-HTN) and approval expected shortly for LEGEND-T2DM.
+Optum Clinformatics Data Mart (Optum) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+Columbia University Irving Medical Center (CIUMC) & Use of the CUIMC data source was approved by the Columbia University Institutional Review Board as an OHDSI network study (IRB\\# AAAO7805).
+Department of Veterans Affairs (VA) & Use of the VA-OMOP data source was reviewed by the Department of Veterans Affairs Central Institutional Review Board (IRB) and was determined to meet the criteria for exemption under Exemption Category 4(3) and approved the request for Waiver of HIPAA Authorization.
+Information System for Research in Primary Care (SIDIAP) & Use of the SIDIAP data source was approved by the Clinical Research Ethics Committee of IDIAPJGol (project code: 20/070-PCV)
+IQVIA Disease Analyzer Germany (DAG) & This is a retrospective database study on de-identified data and is deemed not human subject research. Approval is provided for OHDSI network studies.
+Optum Electronic Health Records (OptumEHR) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
+Yale New Haven Health System (YNHHS) & Use of the YNHHS EHR data source was approved by the Yale University Institutional Review Board as an OHDSI network study (IRB\\# pending).
+")
+
+tab <- kable(data_sources, booktabs = TRUE,
+      caption = "IRB approval or waiver statement from partners.") %>% 
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "15em") %>%
+    column_spec(2, width = "40em") %>%
+    kable_styling(font_size = 8)
+} else {
+  tab
+}
+```
 
 # Management and Reporting of Adverse Events and Adverse Reactions
 
-This study uses coded data that already exist in an electronic database.
-In this type of database, it is not possible to link (i.e., identify a potentual causal association between) a particular product and medical event for any specific individual.
+LEGEND-T2DM uses coded data that already exist in electronic databases.
+In these types of databases, it is not possible to link (i.e., identify a potential causal association between) a particular product and medical event for any specific individual.
 Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not available and adverse events are not reportable as individual adverse event reports.
 The study results will be assessed for medically important findings.
 

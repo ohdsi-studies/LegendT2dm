@@ -1,0 +1,24 @@
+rank,name,description,cite2
+Primary,3-point MACE,"Condition record of acute myocardial infarction, hemorrhagic or ischemic stroke or sudden cardiac death during an inpatient or ER visit",[@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag;@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm;@Hennessy2010-gn]
+Primary,4-point MACE,3-Point MACE $+$ inpatient or ER visit (hospitalization) with heart failure condition record,[@Ryan2018-ci;@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag;@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm;@Hennessy2010-gn;@Kaspar2018-ol;@Feder2018-nj;@Rosenman2014-vv;@Voors2017-rd;@Floyd2016-fi;@Gini2016-gf]
+Secondary,Acute myocardial infarction,Condition record of acute myocardial infarction during an inpatient or ER vist,[@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag]
+Secondary,Acute renal failure,Condition record of acute renal failure during an inpatient or ER visit,[@Afzal2013-uz;@Lenihan2013-id;@Winkelmayer2005-jh;@Grams2014-zx;@Arnold2018-rq;@Sutherland2015-ya;@Waikar2006-uq;@Rhee2015-mm]
+Secondary,Glycemic control,First hemoglobin A1c measurement with value $\le$ 7\%,[@Vashisht2018-qk]
+Secondary,Hospitalization for heart failure,Inpatient or ER visit with heart failure condition record,[@Ryan2018-ci;@Kaspar2018-ol;@Feder2018-nj;@Rosenman2014-vv;@Voors2017-rd;@Floyd2016-fi;@Gini2016-gf]
+Secondary,Measured renal dysfunction,First creatinine measurement with value > 3 mg/dL,[@Rhee2015-mm]
+Secondary,Revascularization,Procedure record of percutaneous coronary intervention or coronary artery bypass grafting during an inpatient or ER visit,[@You_undated-fz]
+Secondary,Stroke,Condition record of hemorrhagic or ischemic stroke during an inpatient or ER visit,[@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm]
+Secondary,Sudden cardiac death,Condition record of sudden cardiac death during an inpatient or ER visit,[@Singh2018-jg;@Hennessy2010-gn]
+Exploratory,Abnormal weight gain or loss,Abnormal weight gain or loss record of any type; note: weight measurements not used,[@Broder2016-qq;@Williams2017-zb]
+Exploratory,Acute pancreatitis,Condition record of acute pancreatitis during an inpatient or ER visit,[@Yabe2015-da;@Dore2013-km;@Dore2011-gx;@Chen2017-bb]
+Exploratory,Bladder cancer,To be developed,
+Exploratory,Diabetic ketoacidosis,Condition record of diabetic ketoacidosis during an inpatient or ER visit,[@Wang2017-su]
+Exploratory,Genitourinary infection,Condition record of any type of genital or urinary tract infection,[@Nichols2017-ah]
+Exploratory,"Diarrhea, nausea or vomiting","Condition record of any type of diarrhea, nausea or vomiting TODO separate (for each separately)",[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
+Exploratory,Edema,To be developed,
+Exploratory,Hypoglycemia,To be developed,
+Exploratory,Hypotension,Hypotension condition record of any type,[@Chrischilles2001-ak]
+Exploratory,Joint pain,To be developed,
+Exploratory,Lower extremity amputation,Procedure record of below knee lower extremity amputation during inpatient or outpatient visit,[@Ryan2018-ci;@Yuan2018-am]
+Exploratory,Thyroid tumor,To be developed,
+Exploratory,TODO,"Up to 28 additional stakeholder-guided, second-line T2DM agent side-effects.",[@Suchard2019-gq]

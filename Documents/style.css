@@ -1,0 +1,10 @@
+#TOC::before {
+  content: "";
+  display: block;
+  height: 50px;
+  margin: 5px 0px 5px 0px;
+  background-image: url("OHDSI_toc_header.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
