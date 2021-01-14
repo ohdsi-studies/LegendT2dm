@@ -296,12 +296,60 @@ if (knitr::is_latex_output()) {
 * Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
 
 ```{r additional-oucomes, echo=FALSE, warning=FALSE}
-htn_outcomes <- read.csv("LegendHtnTable.csv")
-tab <- kable(htn_outcomes %>% select(name), booktabs = TRUE,
+htn_outcomes <- read.csv("LegendHtnTable.csv") %>% select(name)
+htn_outcomes$columns <- rep(c(1,2,3,4), nrow(htn_outcomes))[1:nrow(htn_outcomes)]
+
+add.col <- function(df, new.col) {
+  n.row <- dim(df)[1]
+  length(new.col) <- n.row
+  cbind(df, new.col)
+}
+
+htn_outcomes <- data.frame(label1 = htn_outcomes %>% filter(columns == 1) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 2) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 3) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 4) %>% select(name) %>% pull())
+names(htn_outcomes) <- c()
+
+tab <- kable(htn_outcomes, booktabs = TRUE, longtable = TRUE,
       caption = "All LEGEND-HTN outcomes") %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped")
 if (knitr::is_latex_output()) {
   tab %>%
+    column_spec(1, width = "13em") %>%
+    column_spec(2, width = "13em") %>%
+    column_spec(3, width = "13em") %>%
+    column_spec(4, width = "13em") %>%
+    kable_styling(font_size = 8)
+} else {
+  tab
+}
+```
+
+* Which additional outcomes from the table below from the PhenotypeLibrary are also relevant for T2DM?
+
+```{r pl-outcomes, echo=FALSE, warning=FALSE}
+pl_outcomes <- read.csv("PhenotypeLibraryDescriptions.csv") %>% select(phenotypeName)
+pl_outcomes$columns <- rep(c(1,2,3,4), nrow(pl_outcomes))[1:nrow(pl_outcomes)]
+
+
+
+pl_outcomes <- data.frame(label1 = pl_outcomes %>% filter(columns == 1) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 2) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 3) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 4) %>% select(phenotypeName) %>% pull())
+
+names(pl_outcomes) <- c()
+
+tab <- kable(pl_outcomes, booktabs = TRUE, longtable = TRUE,
+      caption = "All PhenotypeLibrary outcomes") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "13em") %>%
+    column_spec(2, width = "13em") %>%
+    column_spec(3, width = "13em") %>%
+    column_spec(4, width = "13em") %>%
     kable_styling(font_size = 8)
 } else {
   tab
