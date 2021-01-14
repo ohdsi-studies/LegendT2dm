@@ -1,4 +1,4 @@
-rank,name,description,cite2
+rank,name,description,cite
 Primary,3-point MACE,"Condition record of acute myocardial infarction, hemorrhagic or ischemic stroke or sudden cardiac death during an inpatient or ER visit",[@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag;@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm;@Hennessy2010-gn]
 Primary,4-point MACE,3-Point MACE $+$ inpatient or ER visit (hospitalization) with heart failure condition record,[@Ryan2018-ci;@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag;@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm;@Hennessy2010-gn;@Kaspar2018-ol;@Feder2018-nj;@Rosenman2014-vv;@Voors2017-rd;@Floyd2016-fi;@Gini2016-gf]
 Secondary,Acute myocardial infarction,Condition record of acute myocardial infarction during an inpatient or ER vist,[@Ammann2018-kh;@Floyd2016-ch;@Rubbo2015-rh;@Singh2018-jg;@Wahl2010-ii;@Normand1995-ag]

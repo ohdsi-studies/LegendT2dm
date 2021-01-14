@@ -4,6 +4,14 @@ title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluatio
 fontsize: 12pt
 geometry: margin=1in
 output:
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    citation_package: natbib
+    includes:
+      before_body: title.tex
   bookdown::html_document2:
     df_print: paged
     toc: yes
@@ -12,13 +20,6 @@ output:
     number_sections: yes
     number_tables: yes
     css: "style.css"
-  bookdown::pdf_document2:
-    keep_tex: yes
-    latex_engine: xelatex
-    md_extensions: +raw_attribute
-    number_sections: yes
-    includes:
-      before_body: title.tex
 header-includes:
 - \usepackage[numbers,sort&compress]{natbib}
 - \usepackage{booktabs}
@@ -51,7 +52,8 @@ params:
   date: '2020-09-24'
   version: 0.0.99
 subtitle: 'Version: `r params$version`'
-classoptions: doublespace
+link-citations: true
+csl: jamia.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -59,6 +61,7 @@ knitr::opts_chunk$set(echo = TRUE)
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 #knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
+library(dplyr)
 ```
 
 # List of Abbreviations
@@ -70,7 +73,9 @@ abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRU
   GLP1; Glucagon-like peptide-1
   IRB; Institutional review board
   LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
+  MDRR; Minimum detectable risk ratio
   OMOP; Observational Medical Outcomes Partnership
+  PS; Propensity score
   RCT; Randomized controlled trial
   SGLT2; Sodium-glucose co-transporter-2
   T2DM; Type 2 diabetes mellitus
@@ -181,9 +186,9 @@ New-user cohort design is advocated as the primary design to be considered for c
 By identifying patients who start a new treatment course and using therapy initiation as the start of follow-up, the new-user design models an randomized controlled trial (RCT) where treatment commences at the index study visit.
 Exploiting such an index date allows a clear separation of baseline patient characteristics that occur prior to index date and are usable as covariates in the analysis without concern of inadvertently introducing mediator variables that arise between exposure and outcome [@Schneeweiss2007-am]. 
 Excluding prevalent users as those without a sufficient washout period prior to first exposure occurrence further reduces bias due to balancing mediators on the causal pathway, time-varying hazards, and depletion of susceptibles.
-[@Johnson2013-db, @Suissa2017-lv]. 
+[@Johnson2013-db; @Suissa2017-lv]. 
 Our systematic framework across studies in this proposal further will address residual confounding, publication bias, and p-hacking using data-driven, large-scale propensity adjustment for measured confounding [@Tian2018-xy], a large set of negative control outcome experiments to address unmeasured and systematic bias
-[@Schuemie2014-bv; @Schuemie2016-km], and full disclosure of hypotheses tested [@Schuemie2018-zi].
+[@Schuemie2014-bv; @Schuemie2016-km; @Schuemie2018-hq], and full disclosure of hypotheses tested [@Schuemie2018-zi].
 
 ## Data Sources
 
@@ -253,21 +258,56 @@ if (knitr::is_latex_output()) {
 
 ## Outcomes
 
-```{r outcomes, echo=FALSE, warning=FALSE}
+```{r outcomes, echo=FALSE, warning=FALSE, results='asis'}
 outcomes <- read.csv("OutcomeCohortTable.csv")
 
-tab <- kable(outcomes, booktabs = TRUE,
+if (knitr::is_latex_output()) {
+  convertCitationToLatex <- function(cite) {
+    if (cite != "") {
+      tmp <- substring(cite, 2, nchar(cite) - 1)
+      citeList <- strsplit(tmp, ";")
+      tmpList <- lapply(citeList, function(x) {
+        substring(x, 2, nchar(x))
+      })
+      tags <- paste(unlist(tmpList), collapse = ",")
+      cite <- paste("\\cite{", tags, "}", sep = "")
+    }
+    cite
+  }
+  outcomes$cite <- sapply(outcomes$cite, convertCitationToLatex)
+}
+
+tab <- kable(outcomes, booktabs = TRUE, escape = FALSE,
       caption = "Committed LEGEND-T2DM data sources and the populations they cover.") %>% 
   kable_styling(bootstrap_options = "striped", latex_options = "striped") 
 
 if (knitr::is_latex_output()) {
   tab %>%
     column_spec(3, width = "25em") %>%
+    column_spec(4, width = "10em") %>%
     kable_styling(font_size = 8)
 } else {
   tab
 }
 ```
+
+### TODO: Additional outcomes
+
+* Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
+
+```{r additional-oucomes, echo=FALSE, warning=FALSE}
+htn_outcomes <- read.csv("LegendHtnTable.csv")
+tab <- kable(htn_outcomes %>% select(name), booktabs = TRUE,
+      caption = "All LEGEND-HTN outcomes") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+if (knitr::is_latex_output()) {
+  tab %>%
+    kable_styling(font_size = 8)
+} else {
+  tab
+}
+```
+
 
 ## Covariates
 
@@ -275,10 +315,41 @@ if (knitr::is_latex_output()) {
 
 # Sample Size and Study Power
 
+Within each data source, we will execute all comparisons with $\ge$ 1,000 eligible patients per arm.
+Blinded to effect estimates, investigators and stakeholders will evaluate extensive study diagnostics for each comparison to assess reliability and generalizability, and only report risk estimates that pass [@Schuemie2018-zi; @Schuemie2020-he].
+These diagnostics will include 
+
+1. Minimum detectable risk ratio (MDRR) as a typical proxy for power, 
+2. Preference score distributions to evaluate empirical equipoise10 and population generalizability, 
+3. Extensive patient characteristics to evaluate cohort balance before and after PS-adjustment, 
+4. Negative control calibration plots to assess residual bias, and 
+5. Kaplan-Meier plots to examine hazard ratio proportionality assumptions.
+
+We will define cohorts to stand in empirical equipoise if the majority of patients carry preference scores between 0.3 and 0.7 and to achieve balance if all after-adjustment characteristics return absolute standardized mean differences $<$ 0.1 [@Austin2009-af].
+
+### TODO: Meta-analysis heterogeneity measures $i^2$. How does this apply to our total evidence approach?
+
 # Strengths and Limitations
 
-
-
+## Strengths
+- Cohort studies allow direct estimation of incidence rates following exposure of interest, and the new-user design can capture early events following treatment exposures while avoiding confounding from previous treatment effects; new use allows for a clear exposure index date.
+- Large-scale propensity score matching and stratification create balance on a large number of baseline potential confounders and have been found in the past to balance unmeasured confounders.
+- Systematic processes including a pre-specified selection of covariates avoids investigator-specific biases in variable selection.
+- Use of real negative and synthetic positive control outcomes provides an independent estimate of residual bias in the experiment.
+- The fully specified study protocol is being published before analysis begins.
+- Dissemination of the results will not depend on estimated effects, avoiding publication bias.
+- All analytic methods have previously been verified on real data.
+- All software is freely available as open source.
+- Use of a common data model allows extension of the experiment to future databases and allows replication of these results on licensable databases that were used in this experiment, while still maintaining patient privacy on patient-level data.
+- Use of multiple databases allows estimating consistency to add credibility and supports generalizability.
+ 
+## Limitations
+ 
+- Even though many potential confounders will be included in this study, there may be residual bias due to unmeasured or misspecified confounders, such as confounding by indication, differences in physician characteristics that may be associated with drug choice, concomitant use of other drugs started after the index date, and informative censoring at the end of the on-treatment periods. To minimize this risk, we used methods to detect residual bias through our negative and positive controls.
+- Our follow-up times are limited and variable, potentially reducing power to detect differences in effectiveness and safety.
+- We assume hazards are not time varying.
+- Misclassification of study variables is unavoidable in secondary use of health data, so it is possible to misclassify treatments, covariates, and outcomes; we do not expect differential misclassification, so bias will most likely be towards the null.
+- The electronic health record databases may be missing care episodes for patients due to care outside the respective health systems; bias will most likely be towards the null.
 
 # Protection of Human Subjects
 
@@ -328,15 +399,41 @@ The study results will be assessed for medically important findings.
 
 # Plans for Disseminating and Communicating Study Results
 
-(should copy more info from proposal)
+Open science aims to make scientific research, including its data process and software, and its dissemination, through publication and presentation, accessible to all levels of an inquiring society, amateur or professional [@Woelfle2011-ss] and is a governing principle of LEGEND-T2DM.
+Open science delivers reproducible, transparent and reliable evidence.
+All aspects of LEGEND-T2DM (except private patient data) will be open and we will actively encourage other interested researchers, clinicians and patients to participate.
+This differs fundamentally from traditional studies that rarely open their analytic tools or share all result artifacts, and inform the community about hard-to-verify conclusions at completion.
 
-This study protocol will be registered in the EU PAS Register and study results will be posted on the OHDSI website after completion of the study.
-At least one paper describing the study and its results will be written and submitted for publication to a peer-reviewed scientific journal.
-The results will also be presented at OHDSI in-person or virtual events.
+## Transparent and re-usable research tools
+
+We will publicly register this protocol and announce its availability for feedback from stakeholders, the OHDSI community and within clinical professional societies.
+This protocol will link to open source code for all steps to generating diagnostics, effect estimates, figures and tables.
+Such transparency is possible because we will construct our studies on top of the OHDSI toolstack of open source software tools that are community developed and rigorously tested [@Schuemie2020-wx].
+We will publicly host LEGEND-T2DM source code at (https://github.com/ohdsi-studies/LegendT2dm), allowing public contribution and review, and free re-use for anyone’s future research.
+
+## Continous sharing of results
+
+LEGEND-T2DM embodies a new approach to generating evidence from healthcare data that overcome weaknesses in the current process of answering and publishing (or not) one question at a time.
+Generating evidence for thousands of research and control questions using a systematic process enables us to not only evaluate that process and the coherence and consistency of the evidence, but also to avoid $p$-hacking and publication bias [@Schuemie2018-zi].
+We will store and openly communicate all of these results as they become available using a user-friendly web-based app that serves up all descriptive statistics, study diagnostics and effect estimates for each cohort comparison and outcome.
+Open access to this app will be through a general public facing LEGEND-T2DM web-page.
+
+## Scientific meetings and publications
+
+We will deliver multiple presentations annually in scientific venues including the annual meetings of the American Diabetes Association, American College of Cardiology, American Heart Association and American Medical Informatics Association.
+We will also prepare multiple scientific publications for clinical, informatics and statistical journals.
+
+## General public
+
+We believe in sharing our findings that will guide clinical care with the general public.
+LEGEND-T2DM will use social-media (Twitter) to facilitate this.
+With dedicated support from the OHDSI communications specialist, we will deliver regular press releases at key project stages, distributed via the extensive media networks of UCLA, Columbia and Yale.
 
 # Lists of Tables and Figures
 
 # References
+
+<div id="refs"></div>
 
 # Appendix 1: Literature Review
 
