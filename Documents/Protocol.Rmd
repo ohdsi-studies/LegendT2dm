@@ -145,14 +145,14 @@ This study is undertaken within Observational Health Data Sciences and Informati
 Therapeutic options for T2DM have expanded over the last decade with the emergence of sodium-glucose co-transporter-2 (SGLT2) inhibitors and glucagon-like peptide-1 (GLP1) receptor agonists, which reduced the risk of major cardiovascular events in randomized controlled trials (RCTs).
 Cardiovascular evidence for older second-line agents, such as sulfonylureas, and direct head-to-head comparisons, including with dipeptidyl peptidase 4 (DPP4) inhibitors, are lacking, leaving a critical gap in our understanding of the relative effects of T2DM agents on cardiovascular risk and on patient-centered safety outcomes.
 
-**Study Aims**: To determine real-world comparative effectiveness and safety of second-line T2DM agents using health information encompassing millions of patients with T2DM, with a focus on individuals at moderate cardiovascular risk and other key subgroups.
+**Study Aims**: To determine real-world comparative effectiveness and safety of traditionally second-line T2DM agents using health information encompassing millions of patients with T2DM, with a focus on individuals at moderate cardiovascular risk and other key subgroups.
 
 **Study Description**: We will conduct three large-scale, systematic, observational studies to make pairwise comparisons of all SGLT2 inhibitor, GLP1 receptor agonist, DPP4 inhibitor and sulfonylurea agents at the drug-, class- and population subgroup-level within our proposed Large-Scale Evidence Generations Across a Network of Databases for T2DM (LEGEND-T2DM) initiative.
 LEGEND-T2DM will leverage the Observational Health Data Science and Informatics (OHDSI) community that provides access to a standing global network of administrative claims and electronic health record (EHR) data sources.
 The 13 data sources already committed to LEGEND-T2DM cover $>$ 190 million patients in the US and about 50 million internationally, and include two academic medical centers, IBM MarketScan and Optum databases, and the US Department of Veterans Affairs.
 LEGEND-T2DM will study:
 
-* **Population**: Adult, T2DM patients who newly initiate a second-line T2DM agent after using metformin, including individuals with and without established cardiovascular disease 
+* **Population**: Adult, T2DM patients who newly initiate a traditionally second-line T2DM agent, including individuals with and without established cardiovascular disease 
 
 Preliminary work in our data sources reveals > 1 million such new-users of SGLT2 inhibitors, GLP1 receptor agonists, DPP4 inhibitors or sulfonylureas with no prior, observed use of other second-line agents to best emulate the idealized RCT one would aim to run if it were practical, to compare: 
 
@@ -162,7 +162,7 @@ Preliminary work in our data sources reveals > 1 million such new-users of SGLT2
   - DPP4 inhibitors: alogliptin, linagliptin, saxagliptin, sitagliptin, vildagliptin
   - Sulfonylureas: chlorpropamide, glimepiride, glipizide, gliquidone, glyburide, tolazamide, tolbutamide
  
-LEGEND-T2DM will execute all 237 pairwise class-vs-class and drug-vs-drug comparisons in each data source that meet a minimum patient count of 1,000 per arm and extensive study diagnostics that assess reliability and generalizability through cohort balance and equipoise to examine the relative risk of cardiovascular and safety outcomes:
+LEGEND-T2DM will execute allpairwise class-vs-class and drug-vs-drug comparisons in each data source that meet a minimum patient count of 1,000 per arm and extensive study diagnostics that assess reliability and generalizability through cohort balance and equipoise to examine the relative risk of cardiovascular and safety outcomes:
 
 * **Outcomes**:
   - Primary: 3- and 4-point major adverse cardiovascular events
@@ -243,9 +243,9 @@ This lack of consensus about the best approach provides an opportunity for syste
 
 To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of second-line T2DM glucose-lowering agents. Specifically, these studies aim
 
-1. To determine, through systematic evaluation, the comparative effectiveness of second-line T2DM agents, SGLT2 inhibitors and GLP1 receptor agonists, with each other and with DPP4 inhibitors and sulfonylureas, for cardiovascular outcomes.
-2. To determine, through systematic evaluation, the comparative safety of second-line T2DM agents among patients with T2DM.
-3. To assess heterogeneity in effectiveness and safety of second-line T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.  
+1. To determine, through systematic evaluation, the comparative effectiveness of traditionally second-line T2DM agents, SGLT2 inhibitors and GLP1 receptor agonists, with each other and with DPP4 inhibitors and sulfonylureas, for cardiovascular outcomes.
+2. To determine, through systematic evaluation, the comparative safety of traditionally second-line T2DM agents among patients with T2DM.
+3. To assess heterogeneity in effectiveness and safety of traditionally second-line T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.  
 
 # Research Methods
 
@@ -369,8 +369,8 @@ if (knitr::is_latex_output()) {
 
 ## Study Population
 
-We will include all subjects in a data source who met inclusion criteria for one or more second-line T2DM agent exposure cohorts.
-Broadly, these cohorts will consist of T2DM patients with prior metformin monotherapy who now initiate treatment with one of the 22 drug ingredients that comprise the DPP4 inhibitor, GLP1 receptor agonist, SGT2 inhibitor and sulfonylurea drug classes (Table \@ref(tab:drug-table)).
+We will include all subjects in a data source who met inclusion criteria for one or more traditionally second-line T2DM agent exposure cohorts.
+Broadly, these cohorts will consist of T2DM patients either with or without prior metformin monotherapy who now initiate treatment with one of the 22 drug ingredients that comprise the DPP4 inhibitor, GLP1 receptor agonist, SGT2 inhibitor and sulfonylurea drug classes (Table \@ref(tab:drug-table)).
 We do not consider thiazolidinediones given their known risk association with heart failure and bladder cancer 
 [@Graham2010-pg; @Turner2014-oq].
 We describe specific definitions for exposure cohorts for each study in the following sections.
@@ -378,16 +378,24 @@ We describe specific definitions for exposure cohorts for each study in the foll
 ## Exposure Comparators
 
 ### Class-vs-Class Study comparisons {#class-v-class}
-The **Class-vs-Class** Study will construct four exposure cohorts for new-users of any drug ingredient within the four second-line drug classes in Table \@ref(tab:drug-table).
+The **Class-vs-Class** Study will construct four exposure cohorts for new-users of any drug ingredient within the four traditionally second-line drug classes in Table \@ref(tab:drug-table).
 Cohort entry (index date) for each patient is their first observed exposure to any drug ingredient for the four second-line drug classes.
 Consistent with an idealized target trial for T2DM therapy and cardiovascular risk [@Hernan2016-ab; @Hernan2019-ie], inclusion criteria for patients based on the index date will include:
 
 * T2DM diagnosis and no Type 1 or secondary diabetes mellitus diagnosis before the index date;
-* At least 1 year of observation time before the index date (to improve new-user sensitivity);
-* At least 3 months of metformin use before the index date; and
+* At least 1 year of observation time before the index date (to improve new-user sensitivity); and
 * No prior drug exposure to a comparator second-line or other antihyperglycemic agent (i.e. thiazolidinediones, acarbose, acetohexamide, bromocriptine, glibornuride, miglitol and nateglinide) or insulin before index date.
 
-Three months of metformin is consistent with ADA guidelines [@American_Diabetes_Association2018-yz].
+We will construct and compare separately cohorts patients either with
+
+* At least 3 months of metformin use before the index date,    **TODO** We need to define this more specifically in the ATLAS cohort definitions
+
+or
+
+* No prior metformin use before the index date.
+
+In the first case, three months of metformin is consistent with ADA guidelines [@American_Diabetes_Association2018-yz].
+In the second case, we are interested in relative effectiveness and safety of these traditionally second-line agents in patients who iniative their treatments without first using metformin.
 We purposefully do not automatically exclude patients with a history of myocardial infarction, stroke or other major cardiovascular events, which will allow us to report relative effectiveness and safety for individuals with both low or moderate and high cardiovascular risk. 
 Likewise, we do not automatically exclude individuals with severe renal impairment [@Nathan2013-cu].
 We will use cohort diagnostics, such as achieving covariate balance and clinical empirical equipoise between exposure cohorts (Section \@ref(section-todo)) and stakeholder input to guide the possible need to exclude other prior diagnoses, such as congestive heart failure, pancreatitis or cancer [@Nathan2013-cu].
@@ -396,22 +404,20 @@ We will use cohort diagnostics, such as achieving covariate balance and clinical
 
 We remain acutely aware that these inclusion criteria do not directly incorporate quantitative measures of poor glycemic control, such as one or more elevated serum HbA1c measurements; such laboratory values are irregularly captured in large claims and even EHR data sources. 
 Older ADA guidelines (but not since 2020 for patients with cardiovascular  disease [@Association2020-ic]) advise escalating to a second-line agent only when glycemic control is not met with metformin monotherapy, nicely mirroring our cohort design for our historical data. 
-We will conduct important sensitivity analyses involving available HbA1c measurements to demonstrate their balance between exposure cohorts (described later in Section \@ref(section-todo)). 
+We will conduct sensitivity analyses involving available HbA1c measurements to demonstrate their balance between exposure cohorts (described later in Section \@ref(section-todo)). 
 In the unlikely event that balance is not met, we will consider an inclusion criterion of at least two HbA1c measurements $\ge$ 7% within 6 months before the index [@Hernan2019-ie].
 We will also conduct sensitivity analyses to the prior insulin use exclusions, bearing in mind difficulties in assessing insulin use end-dates. 
 
-#### TODO Add ATLAS description of sensitivity cohorts
-
-For each data source, we will then execute all ${4 \choose 2} = 6$ pairwise class comparisons for which the data source yields $\ge$ 1,000 patients in each arm.
+For each data source, we will then execute all $2 \times {4 \choose 2} = 6$ pairwise class comparisons for which the data source yields $\ge$ 1,000 patients in each arm.
 Significantly fewer numbers of patients strongly suggest data source-specific differences in prescribing practices that may introduce residual bias and sufficient samples sizes are required to construct effective propensity score models [@Schuemie_undated-rt, @Suchard2019-gq].
 
 ### Drug-vs-Drug Study comparisons {#drug-v-drug}
 
-The **Drug-vs-Drug Study** will construct 22 exposure cohorts for new-users of each drug ingredient in Table \@ref(tab:drug-table).
+The **Drug-vs-Drug Study** will construct $2 \times 22$ exposure cohorts for new-users of each drug ingredient in Table \@ref(tab:drug-table).
 We will apply the same cohort definition, inclusion criteria and patient count minimum as described in Section \@ref(class-v-class).
 
-For each data source, we will then execute all ${22 \choose 2} = 231$ pairwise drug comparisons.
-While we will publicly report studies results for all pairwise comparisons, we will focus primary clinical interpretation and scientific publishing to the ${5 \choose 2}$ [within DPP4Is] $+ {6 \choose 2}$ [within GLPR1RAs] $+ {4 \choose 2}$ [within SGLT2Is] $+ {7 \choose 2}$ [within SUs] $= 52$ comparisons that pit drugs within the same class against each other, as well as across-class comparisons that stakeholders deem pertinent given their experiences.
+For each data source, we will then execute all $2 \times {22 \choose 2} = 462$ pairwise drug comparisons.
+While we will publicly report studies results for all pairwise comparisons, we will focus primary clinical interpretation and scientific publishing to the $2 \times {5 \choose 2}$ [within DPP4Is] $+ 2 \times {6 \choose 2}$ [within GLPR1RAs] $+ 2 \times {4 \choose 2}$ [within SGLT2Is] $+ 2 \times {7 \choose 2}$ [within SUs] $= 104$ comparisons that pit drugs within the same class against each other, as well as across-class comparisons that stakeholders deem pertinent given their experiences.
 
 #### TODO What are the relevant across-class drug-ingredient-level comparisons?
 
@@ -444,7 +450,6 @@ This can allow researchers and stakeholders to understand the heterogeneity of s
 
 ## Outcomes
 
-
 Across all data sources and pairwise exposure cohorts, we will assess relative risks of **TODO #** cardiovascular and patient-centered outcomes (Table \@ref(outcome-table)).
 Primary outcomes of interest are: 
 
@@ -474,8 +479,6 @@ We will employ the same level of systematic rigor in studying outcomes regardles
 
 A majority of outcome definitions have been previously implemented and validated in our own work [@Suchard2019-gq; @You_undated-fz; @Ryan2018-ci; @Wang2017-su; @Weinstein2020-ic; @Yuan2018-am] based heavily on prior development by others (see references in Table \@ref(outcome-table)).
 To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.  
-
-
 
 ```{r outcomes, echo=FALSE, warning=FALSE, results='asis'}
 outcomes <- read.csv("OutcomeCohortTable.csv")
@@ -779,8 +782,6 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 ## **TODO** for cohort definitions
 
 1. **TODO** prior metformin use
-2. **TODO** alternative cohort exit for treatment escalation (OT2)
-
 
 ```{r test, echo=FALSE}
 
@@ -794,32 +795,39 @@ printConceptSet <- function(conceptSet) {
                                   collapse = '\n'), delim = '|',)
   
   header <- gsub("###", "### Concept:", header)
-  writeLines(header)
   
   tab <- data %>% mutate_if(is.numeric, format, digits = 10) %>% kable(linesep = "", booktabs = TRUE, longtable = TRUE)
   
   if (knitr::is_latex_output()) {    
+    writeLines(header)
+    
     tab %>% 
       kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
       column_spec(1, width = "5em") %>%
       column_spec(2, width = "20em")   
-  } else {
+  } else if (knitr::is_html_output()) {
+    writeLines(header)
+    
     writeLines(tab %>% 
       kable_styling(bootstrap_options = "striped"))
-  }  
+  } else {
+    writeLines(markdown)
+  }
 }
 
 printCohortClose <- function() {
   writeLines("")
-  if (knitr::is_latex_output()) { 
-    writeLines("------")
+  if (knitr::is_html_output()) {
+     writeLines("<hr style=\"border:2px solid gray\"> </hr>")
   } else {
-    writeLines("<hr style=\"border:2px solid gray\"> </hr>")
+    writeLines("------")
   }
   writeLines("")
 }
 
-printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL) {
+printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL, 
+                                                 withConcepts = TRUE,
+                                                 withClosing = TRUE) {
   
   if (is.null(obj)) {
     obj <- CirceR::cohortExpressionFromJson(json)
@@ -833,6 +841,9 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL) 
   markdown <- gsub("criteria:\\r\\n ", "criteria:\\\r\\\n\\\r\\\n ", markdown)
   markdown <- gsub("old.\\r\\n\\r\\n", "old.\\\r\\\n", markdown)
   
+  markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
+  markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
+  
   rows <- unlist(strsplit(markdown, "\\r\\n")) 
   rows <- gsub("^   ", "", rows)
   markdown <- paste(rows, collapse = "\n")
@@ -840,10 +851,14 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL) 
   writeLines(markdown)
 
   # Print concept sets
-  lapply(obj$conceptSets, printConceptSet)
   
-  printCohortClose()
+  if (withConcepts) {
+    lapply(obj$conceptSets, printConceptSet)
+  }
   
+  if (withClosing) {
+    printCohortClose()
+  }
 }
 
 printCohortDefinition <- function(info) {
@@ -866,62 +881,87 @@ printInclusionCriteria <- function(obj, removeDescription = FALSE) {
   writeLines(markdown)
 }
 
+printExitCriteria <- function(obj) {
+  
+  markdown <- CirceR::cohortPrintFriendly(obj)
+  markdown <- sub(".*### Cohort Exit", "", markdown)
+  markdown <- sub("### Cohort Eras.*", "", markdown)
+  markdown <- sub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
+  markdown <- sub("following events:", "following events:\\\r\\\n", markdown)
+  
+  writeLines(markdown)
+}
+
 ```
 
 ```{r base-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-baseCohortJson <- SqlRender::readSql(system.file("cohorts", "ID100000.json", package = "LegendT2dm"))
+baseCohortJson <- SqlRender::readSql(system.file("cohorts", "ID1100000.json", package = "LegendT2dm"))
 baseCohort <- RJSONIO::fromJSON(baseCohortJson)
 
-baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13)] # remove CVD and renal
+baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13, 14)] # remove CVD, renal and alternative targets
 baseCohortJson <- RJSONIO::toJSON(baseCohort, digits = 50)
 
-printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort",
+printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort / OT1",
                                      json = baseCohortJson)
+```
+
+## Escalation Exit Criteria
+
+```{r escalation-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "ID1200000.json", package = "LegendT2dm"))
+ot2Cohort <- CirceR::cohortExpressionFromJson(ot2CohortJson)
+
+# printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (GLP1 New-User) Cohort / OT2",
+#                                      json = ot2CohortJson, withConcepts = FALSE, withClosing = FALSE)
+
+printExitCriteria(ot2Cohort)
+printConceptSet(ot2Cohort$conceptSets[[14]]) 
+printCohortClose()
 ```
 
 ## Heterogenity Study Inclusion Criteria
 
 ```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Age
-youngerJson <- SqlRender::readSql(system.file("cohorts", "ID110000.json", package = "LegendT2dm"))
+youngerJson <- SqlRender::readSql(system.file("cohorts", "ID1110000.json", package = "LegendT2dm"))
 youngerCohort <- CirceR::cohortExpressionFromJson(youngerJson)
 printInclusionCriteria(youngerCohort)
 
-middleJson <- SqlRender::readSql(system.file("cohorts", "ID120000.json", package = "LegendT2dm"))
+middleJson <- SqlRender::readSql(system.file("cohorts", "ID1120000.json", package = "LegendT2dm"))
 middleCohort <- CirceR::cohortExpressionFromJson(middleJson)
 printInclusionCriteria(middleCohort)
 
-olderJson <- SqlRender::readSql(system.file("cohorts", "ID130000.json", package = "LegendT2dm"))
+olderJson <- SqlRender::readSql(system.file("cohorts", "ID1130000.json", package = "LegendT2dm"))
 olderCohort <- CirceR::cohortExpressionFromJson(olderJson)
 printInclusionCriteria(olderCohort)
 ```
 
 ```{r heterogenity-cohort2, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Sex
-femaleJson <- SqlRender::readSql(system.file("cohorts", "ID101000.json", package = "LegendT2dm"))
+femaleJson <- SqlRender::readSql(system.file("cohorts", "ID1101000.json", package = "LegendT2dm"))
 femaleCohort <- CirceR::cohortExpressionFromJson(femaleJson)
 printInclusionCriteria(femaleCohort)
 
-maleJson <- SqlRender::readSql(system.file("cohorts", "ID102000.json", package = "LegendT2dm"))
+maleJson <- SqlRender::readSql(system.file("cohorts", "ID1102000.json", package = "LegendT2dm"))
 maleCohort <- CirceR::cohortExpressionFromJson(maleJson)
 printInclusionCriteria(maleCohort)
 ```
 
 ```{r heterogenity-cohort-race, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Race
-blackJson <- SqlRender::readSql(system.file("cohorts", "ID100100.json", package = "LegendT2dm"))
+blackJson <- SqlRender::readSql(system.file("cohorts", "ID1100100.json", package = "LegendT2dm"))
 blackCohort <- CirceR::cohortExpressionFromJson(blackJson)
 printInclusionCriteria(blackCohort)
 ```
 
 ```{r heterogenity-cohort3, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # CVD
-lowCvdJson <- SqlRender::readSql(system.file("cohorts", "ID100010.json", package = "LegendT2dm"))
+lowCvdJson <- SqlRender::readSql(system.file("cohorts", "ID1100010.json", package = "LegendT2dm"))
 lowCvdCohort <- CirceR::cohortExpressionFromJson(lowCvdJson)
 
 printInclusionCriteria(lowCvdCohort)
 
-highCvdJson <- SqlRender::readSql(system.file("cohorts", "ID100020.json", package = "LegendT2dm"))
+highCvdJson <- SqlRender::readSql(system.file("cohorts", "ID1100020.json", package = "LegendT2dm"))
 highCvdCohort <- CirceR::cohortExpressionFromJson(highCvdJson)
 
 printInclusionCriteria(highCvdCohort)
@@ -933,12 +973,12 @@ printCohortClose()
 
 ```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Renal
-noRenalJson <- SqlRender::readSql(system.file("cohorts", "ID100001.json", package = "LegendT2dm"))
+noRenalJson <- SqlRender::readSql(system.file("cohorts", "ID1100001.json", package = "LegendT2dm"))
 noRenalCohort <- CirceR::cohortExpressionFromJson(noRenalJson)
 
 printInclusionCriteria(noRenalCohort)
 
-withRenalJson <- SqlRender::readSql(system.file("cohorts", "ID100002.json", package = "LegendT2dm"))
+withRenalJson <- SqlRender::readSql(system.file("cohorts", "ID1100002.json", package = "LegendT2dm"))
 
 cohort <- RJSONIO::fromJSON(withRenalJson)
 
@@ -952,7 +992,7 @@ printCohortClose()
 
 # Outcome Cohort Definitions
 
-```{r, echo=FALSE, results="asis", warning=FALSE, message=FALSE, cache=TRUE}
+```{r, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 invisible(lapply(list(
   list(name = "Acute myocardial infarction", 
        jsonFileName = system.file("cohorts", "Acute myocardial infarction.json", package = "Legend")),
