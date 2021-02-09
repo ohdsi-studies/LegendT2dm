@@ -79,6 +79,13 @@ pdf2png <- function(path) {
 latex_table_font_size <- 8
 ```
 
+# TODO List
+
+* Evaluate additional outcomes from `LEGEND-HTN` and `PhenotypeLibrary` [here](#addition-outcomes)
+* Write strengths and limitations section [here](#strengths-limitations)
+* Make cohort definition for without any prior metformin exposure [here](#prior-metformin)
+* Calculate total numbers of exposure cohorts for studies [here](#cohort-counts)
+
 # List of Abbreviations
 
 ```{r abbreviations, echo=FALSE}
@@ -258,7 +265,7 @@ In contrast to a single comparison approach, LEGEND-T2DM will provide a comprehe
 We will model each study on our successful collaborative research evaluating the comparative effectiveness of antihypertensives recently published in _The Lancet_ [@Suchard2019-gq].
 
 Table \@ref(tab:drug-table) list the four major T2DM agent classes and the individual agents licensed in the U.S. within each class.
-We will examine all $4 \choose 2 = 6$ class-wise comparisons and all $5 + 6 + 4 + 7 \choose 2 = 231$ ingredient-wise comparisons.
+We will examine all ${4 \choose 2} = 6$ class-wise comparisons and all ${5 + 6 + 4 + 7 \choose 2} = 231$ ingredient-wise comparisons.
 
 For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes listed in Table \@ref(tab:outcome-table).
 
@@ -388,7 +395,7 @@ Consistent with an idealized target trial for T2DM therapy and cardiovascular ri
 
 We will construct and compare separately cohorts patients either with
 
-* At least 3 months of metformin use before the index date,    **TODO** We need to define this more specifically in the ATLAS cohort definitions
+* At least 3 months of metformin use before the index date,
 
 or
 
@@ -513,70 +520,6 @@ if (knitr::is_latex_output()) {
 }
 ```
 
-### TODO: Additional outcomes
-
-* Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
-
-```{r additional-oucomes, echo=FALSE, warning=FALSE}
-htn_outcomes <- read.csv("LegendHtnTable.csv") %>% select(name)
-htn_outcomes$columns <- rep(c(1,2,3,4), nrow(htn_outcomes))[1:nrow(htn_outcomes)]
-
-add.col <- function(df, new.col) {
-  n.row <- dim(df)[1]
-  length(new.col) <- n.row
-  cbind(df, new.col)
-}
-
-htn_outcomes <- data.frame(label1 = htn_outcomes %>% filter(columns == 1) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 2) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 3) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 4) %>% select(name) %>% pull())
-names(htn_outcomes) <- c()
-
-tab <- kable(htn_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
-      caption = "All LEGEND-HTN outcomes") %>%
-  kable_styling(bootstrap_options = "striped", latex_options = "striped")
-if (knitr::is_latex_output()) {
-  tab %>%
-    column_spec(1, width = "13em") %>%
-    column_spec(2, width = "13em") %>%
-    column_spec(3, width = "13em") %>%
-    column_spec(4, width = "13em") %>%
-    kable_styling(font_size = latex_table_font_size)
-} else {
-  tab
-}
-```
-
-* Which additional outcomes from the table below from the PhenotypeLibrary are also relevant for T2DM?
-
-```{r pl-outcomes, echo=FALSE, warning=FALSE}
-pl_outcomes <- read.csv("PhenotypeLibraryDescriptions.csv") %>% select(phenotypeName)
-pl_outcomes$columns <- rep(c(1,2,3,4), nrow(pl_outcomes))[1:nrow(pl_outcomes)]
-
-
-
-pl_outcomes <- data.frame(label1 = pl_outcomes %>% filter(columns == 1) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 2) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 3) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 4) %>% select(phenotypeName) %>% pull())
-
-names(pl_outcomes) <- c()
-
-tab <- kable(pl_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
-      caption = "All PhenotypeLibrary outcomes") %>%
-  kable_styling(bootstrap_options = "striped", latex_options = "striped")
-if (knitr::is_latex_output()) {
-  tab %>%
-    column_spec(1, width = "13em") %>%
-    column_spec(2, width = "13em") %>%
-    column_spec(3, width = "13em") %>%
-    column_spec(4, width = "13em") %>%
-    kable_styling(font_size = latex_table_font_size)
-} else {
-  tab
-}
-```
 
 ## Analysis
 
@@ -663,7 +606,7 @@ We will define cohorts to stand in empirical equipoise if the majority of patien
 
 ### TODO: Meta-analysis heterogeneity measures $i^2$. How does this apply to our total evidence approach?
 
-# Strengths and Limitations
+# Strengths and Limitations {#strengths-limitations}
 
 ## Strengths
 - Cohort studies allow direct estimation of incidence rates following exposure of interest, and the new-user design can capture early events following treatment exposures while avoiding confounding from previous treatment effects; new use allows for a clear exposure index date.
@@ -779,10 +722,6 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 
 # Exposure Cohort Definitions
 
-## **TODO** for cohort definitions
-
-1. **TODO** prior metformin use
-
 ```{r test, echo=FALSE}
 
 printConceptSet <- function(conceptSet) {
@@ -801,10 +740,10 @@ printConceptSet <- function(conceptSet) {
   if (knitr::is_latex_output()) {    
     writeLines(header)
     
-    tab %>% 
+    writeLines(tab %>% 
       kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
       column_spec(1, width = "5em") %>%
-      column_spec(2, width = "20em")   
+      column_spec(2, width = "20em"))   
   } else if (knitr::is_html_output()) {
     writeLines(header)
     
@@ -843,6 +782,9 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   
   markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
   markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
+  
+  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria", markdown)
+  markdown <- gsub("#### \\d+.", "*", markdown)
   
   rows <- unlist(strsplit(markdown, "\\r\\n")) 
   rows <- gsub("^   ", "", rows)
@@ -895,7 +837,7 @@ printExitCriteria <- function(obj) {
 ```
 
 ```{r base-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-baseCohortJson <- SqlRender::readSql(system.file("cohorts", "ID1100000.json", package = "LegendT2dm"))
+baseCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101100000.json", package = "LegendT2dm"))
 baseCohort <- RJSONIO::fromJSON(baseCohortJson)
 
 baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13, 14)] # remove CVD, renal and alternative targets
@@ -908,7 +850,7 @@ printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-U
 ## Escalation Exit Criteria
 
 ```{r escalation-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "ID1200000.json", package = "LegendT2dm"))
+ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "class","ID102100000.json", package = "LegendT2dm"))
 ot2Cohort <- CirceR::cohortExpressionFromJson(ot2CohortJson)
 
 # printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (GLP1 New-User) Cohort / OT2",
@@ -919,49 +861,51 @@ printConceptSet(ot2Cohort$conceptSets[[14]])
 printCohortClose()
 ```
 
+### No prior metformin use modifier {#prior-metformin}
+
 ## Heterogenity Study Inclusion Criteria
 
 ```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Age
-youngerJson <- SqlRender::readSql(system.file("cohorts", "ID1110000.json", package = "LegendT2dm"))
+youngerJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101210000.json", package = "LegendT2dm"))
 youngerCohort <- CirceR::cohortExpressionFromJson(youngerJson)
 printInclusionCriteria(youngerCohort)
 
-middleJson <- SqlRender::readSql(system.file("cohorts", "ID1120000.json", package = "LegendT2dm"))
+middleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101220000.json", package = "LegendT2dm"))
 middleCohort <- CirceR::cohortExpressionFromJson(middleJson)
 printInclusionCriteria(middleCohort)
 
-olderJson <- SqlRender::readSql(system.file("cohorts", "ID1130000.json", package = "LegendT2dm"))
+olderJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101230000.json", package = "LegendT2dm"))
 olderCohort <- CirceR::cohortExpressionFromJson(olderJson)
 printInclusionCriteria(olderCohort)
 ```
 
 ```{r heterogenity-cohort2, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Sex
-femaleJson <- SqlRender::readSql(system.file("cohorts", "ID1101000.json", package = "LegendT2dm"))
+femaleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101201000.json", package = "LegendT2dm"))
 femaleCohort <- CirceR::cohortExpressionFromJson(femaleJson)
 printInclusionCriteria(femaleCohort)
 
-maleJson <- SqlRender::readSql(system.file("cohorts", "ID1102000.json", package = "LegendT2dm"))
+maleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101202000.json", package = "LegendT2dm"))
 maleCohort <- CirceR::cohortExpressionFromJson(maleJson)
 printInclusionCriteria(maleCohort)
 ```
 
 ```{r heterogenity-cohort-race, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Race
-blackJson <- SqlRender::readSql(system.file("cohorts", "ID1100100.json", package = "LegendT2dm"))
+blackJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200100.json", package = "LegendT2dm"))
 blackCohort <- CirceR::cohortExpressionFromJson(blackJson)
 printInclusionCriteria(blackCohort)
 ```
 
 ```{r heterogenity-cohort3, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # CVD
-lowCvdJson <- SqlRender::readSql(system.file("cohorts", "ID1100010.json", package = "LegendT2dm"))
+lowCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200010.json", package = "LegendT2dm"))
 lowCvdCohort <- CirceR::cohortExpressionFromJson(lowCvdJson)
 
 printInclusionCriteria(lowCvdCohort)
 
-highCvdJson <- SqlRender::readSql(system.file("cohorts", "ID1100020.json", package = "LegendT2dm"))
+highCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200020.json", package = "LegendT2dm"))
 highCvdCohort <- CirceR::cohortExpressionFromJson(highCvdJson)
 
 printInclusionCriteria(highCvdCohort)
@@ -973,12 +917,12 @@ printCohortClose()
 
 ```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Renal
-noRenalJson <- SqlRender::readSql(system.file("cohorts", "ID1100001.json", package = "LegendT2dm"))
+noRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200001.json", package = "LegendT2dm"))
 noRenalCohort <- CirceR::cohortExpressionFromJson(noRenalJson)
 
 printInclusionCriteria(noRenalCohort)
 
-withRenalJson <- SqlRender::readSql(system.file("cohorts", "ID1100002.json", package = "LegendT2dm"))
+withRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200002.json", package = "LegendT2dm"))
 
 cohort <- RJSONIO::fromJSON(withRenalJson)
 
@@ -989,6 +933,20 @@ printInclusionCriteria(withRenalCohort)
 printConceptSet(withRenalCohort$conceptSets[[13]]) 
 printCohortClose()
 ```
+
+```{r drug-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+drugCohortJson <- SqlRender::readSql(system.file("cohorts", "drug", "ID111100000.json", package = "LegendT2dm"))
+drugCohort <- CirceR::cohortExpressionFromJson(drugCohortJson)
+
+printCohortDefinitionFromNameAndJson(name = "Drug-vs-Drug Exposure (Alogliptin New-User) Cohort / OT1",
+                                     json = drugCohortJson, withConcepts = FALSE)
+
+printConceptSet(drugCohort$conceptSets[[1]]) 
+printConceptSet(drugCohort$conceptSets[[15]]) 
+printCohortClose()
+
+```
+
 
 # Outcome Cohort Definitions
 
@@ -1020,13 +978,115 @@ design <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file 
 footnote <- c("FE: FeatureExtraction package (365 days long-term, 180 days medium-term and 30 days short-term look-back)", 
               "PS: Propensity score")
 
+tab <- kable(design, linesep = "", booktabs = TRUE,
+             caption = "CohortMethod analysis descriptions") %>% 
+  footnote(general = footnote, general_title = "")
+  
+
 if (knitr::is_latex_output()) {
-  kable(design, linesep = "", booktabs = TRUE) %>% 
-    kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
-    footnote(general = footnote, general_title = "")
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
 } else {
-  kable(design, linesep = "", booktabs = TRUE) %>% 
-    kable_styling(bootstrap_options = "striped") %>%
-    footnote(general = footnote, general_title = "")
+  tab %>% kable_styling(bootstrap_options = "striped")
 }
 ```
+
+# Exposure Cohort Counts
+
+For the **Class-vs-Class Study**, we will construct
+$$
+\begin{align}
+& (4 \text{ drug-class targets})\ \times \\
+& (2 \text{ On-treatment censoring types})\ \times \\
+& (2 \text{ Prior metformin-use choices}) \\
+& = 16
+\end{align}
+$$
+exposure cohort definitions.
+Likewise, for the **Drug-vs-Drug Study**, we will construct
+$$
+\begin{align}
+& (22 \text{ drug-ingredient targets})\ \times \\
+& (2 \text{ On-treatment censoring types})\ \times \\
+& (2 \text{ Prior metformin-use choices}) \\
+& = 88
+\end{align}
+$$
+exposure cohort definitions.
+For the **Heterogeneity Study**, we will stratify each of these cohort definitions into
+$$
+\begin{align}
+& 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\ 
+& 2 \text{ (sex: female / male) } + \\ 
+& 1 \text{ (race: Black) } + \\ 
+& 2 \text{ (cardiovascular risk: lower / higher) } + \\ 
+& 2 \text{ (renal impairment: with/without) } \\ 
+& = 10
+\end{align}
+$$
+additional definitions, results in $(16 + 88) \times 10 = 1040$ further cohort definitions.
+
+# Additional Outcomes to Evaluate {#addition-outcomes}
+
+* Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
+
+```{r additional-oucomes, echo=FALSE, warning=FALSE}
+htn_outcomes <- read.csv("LegendHtnTable.csv") %>% select(name)
+htn_outcomes$columns <- rep(c(1,2,3,4), nrow(htn_outcomes))[1:nrow(htn_outcomes)]
+
+add.col <- function(df, new.col) {
+  n.row <- dim(df)[1]
+  length(new.col) <- n.row
+  cbind(df, new.col)
+}
+
+htn_outcomes <- data.frame(label1 = htn_outcomes %>% filter(columns == 1) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 2) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 3) %>% select(name) %>% pull()) %>%
+  add.col(htn_outcomes %>% filter(columns == 4) %>% select(name) %>% pull())
+names(htn_outcomes) <- c()
+
+tab <- kable(htn_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
+      caption = "All LEGEND-HTN outcomes") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "13em") %>%
+    column_spec(2, width = "13em") %>%
+    column_spec(3, width = "13em") %>%
+    column_spec(4, width = "13em") %>%
+    kable_styling(font_size = latex_table_font_size)
+} else {
+  tab
+}
+```
+
+* Which additional outcomes from the table below from the PhenotypeLibrary are also relevant for T2DM?
+
+```{r pl-outcomes, echo=FALSE, warning=FALSE}
+pl_outcomes <- read.csv("PhenotypeLibraryDescriptions.csv") %>% select(phenotypeName)
+pl_outcomes$columns <- rep(c(1,2,3,4), nrow(pl_outcomes))[1:nrow(pl_outcomes)]
+
+
+
+pl_outcomes <- data.frame(label1 = pl_outcomes %>% filter(columns == 1) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 2) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 3) %>% select(phenotypeName) %>% pull()) %>%
+  add.col(pl_outcomes %>% filter(columns == 4) %>% select(phenotypeName) %>% pull())
+
+names(pl_outcomes) <- c()
+
+tab <- kable(pl_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
+      caption = "All PhenotypeLibrary outcomes") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "13em") %>%
+    column_spec(2, width = "13em") %>%
+    column_spec(3, width = "13em") %>%
+    column_spec(4, width = "13em") %>%
+    kable_styling(font_size = latex_table_font_size)
+} else {
+  tab
+}
+```
+
