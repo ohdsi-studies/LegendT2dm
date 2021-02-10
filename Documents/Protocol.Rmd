@@ -121,7 +121,9 @@ if (knitr::is_latex_output()) {
 parties <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
   Investigator; Institution/Affiliation
   George Hripcsak; Department of Biomedical Informatics, Columbia University, New York, NY, USA
+  Rohan Khera; Department of Medicine, Yale University, New Haven, CT, USA
   Harlan M. Krumholz; Department of Medicine, Yale University, New Haven, CT, USA
+  Yuan Lu; Department of Medicine, Yale University, New Haven, CT, USA
   Patrick B. Ryan; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
   Martijn J. Schuemie; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
   Marc A. Suchard *; Department of Biostatistics, University of California, Los Angeles, Los Angeles, CA, USA
