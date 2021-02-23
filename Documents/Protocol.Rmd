@@ -79,12 +79,14 @@ pdf2png <- function(path) {
 latex_table_font_size <- 8
 ```
 
-# TODO List
+# TODO List {-}
 
 * Evaluate additional outcomes from `LEGEND-HTN` and `PhenotypeLibrary` [here](#addition-outcomes)
-* Write strengths and limitations section [here](#strengths-limitations)
-* Make cohort definition for without any prior metformin exposure [here](#prior-metformin)
-* Calculate total numbers of exposure cohorts for studies [here](#cohort-counts)
+* New citations:
+  - Recent one in Medicare: [@patorno2021comparative]
+  - In VA population: [@xie2020comparative]
+  - New networks meta-analysis in BMJ: [@palmer2021sodium]
+  - Others: [@qiu2021comparative] [@yamada2021cardiovascular]
 
 # List of Abbreviations
 
@@ -595,7 +597,7 @@ In all reports, we will clearly tabulate numbers of missing observations and pat
 # Sample Size and Study Power {#sample-size}
 
 Within each data source, we will execute all comparisons with $\ge$ 1,000 eligible patients per arm.
-Blinded to effect estimates, investigators and stakeholders will evaluate extensive study diagnostics for each comparison to assess reliability and generalizability, and only report risk estimates that pass [@Schuemie2018-zi; @Schuemie2020-he].
+Blinded to effect estimates, investigators and stakeholders will evaluate extensive study diagnostics for each comparison to assess reliability and generalizability, and only report risk estimates that pass [@Schuemie2018-zi; @Schuemie2020-wx].
 These diagnostics will include 
 
 1. Minimum detectable risk ratio (MDRR) as a typical proxy for power, 
@@ -611,30 +613,45 @@ We will define cohorts to stand in empirical equipoise if the majority of patien
 # Strengths and Limitations {#strengths-limitations}
 
 ## Strengths
-- Cohort studies allow direct estimation of incidence rates following exposure of interest, and the new-user design can capture early events following treatment exposures while avoiding confounding from previous treatment effects; new use allows for a clear exposure index date.
-- Large-scale propensity score matching and stratification create balance on a large number of baseline potential confounders and have been found in the past to balance unmeasured confounders.
-- Systematic processes including a pre-specified selection of covariates avoids investigator-specific biases in variable selection.
-- Use of real negative and synthetic positive control outcomes provides an independent estimate of residual bias in the experiment.
-- The fully specified study protocol is being published before analysis begins.
-- Dissemination of the results will not depend on estimated effects, avoiding publication bias.
-- All analytic methods have previously been verified on real data.
-- All software is freely available as open source.
-- Use of a common data model allows extension of the experiment to future databases and allows replication of these results on licensable databases that were used in this experiment, while still maintaining patient privacy on patient-level data.
-- Use of multiple databases allows estimating consistency to add credibility and supports generalizability.
 
-#### TODO: possible text to work in here 
- 
-For antihypertensives, we have successfully shown that adjustment via these models yielded balanced cohorts on all observed features (not just a handful of prespecified characteristics as is typical of many observational studies) and further balanced cohorts on blood pressure in data sources where these measurements were available, even though these measurements were not included in model building, hence providing some protection against unmeasured confounding as well.  This stands out as a major strength of LEGEND-T2DM, as direct observation of glycemic control is missing in some data sources. 
+LEGEND-T2DM is, to our knowledge, the largest and most comprehensive study to provide evidence about the comparative effectiveness and safety of second-line T2DM agents.
+The LEGEND-T2DM studies will encompass over 1 million patients initiating second-line T2DM agents across at least 13 databases from 5 countries and will examine all pairwise comparisons between the four second-line drug classes against a panel of TODO health outcomes. 
+Through an international network, LEGEND-T2DM seeks to take advantage of disparate health databases drawn from different sources and across a range of countries and practice settings.
+These large-scale and unfiltered populations better represent real-world practice than the restricted study populations in prescribed treatment and follow-up settings from RCTs.
+Our use of the OMOP CDM allows extension of the LEGEND-T2DM experiment to future databases and allows replication of these results on licensable databases that were used in this experiment, while still maintaining patient privacy on patient-level data.
 
-Ideal negative controls carry identical confounding between exposures and the outcome of interest.110 The true confounding structure, however, is unknowable.  Instead of attempting to find the elusive perfect negative control, we will rely on a large sample of controls that represent a wide range of confounding structures.  If a study comparison proves to be unbiased for all negative controls, we can feel confident that it will also be unbiased for the outcome of interest.  In our previous studies,23,24,111 using the active comparator, new-user cohort design we will employ here, we have observed minimal residual bias using negative controls.  This stands in stark contrast to other designs such as the (nested) case-control that tends to show large residual bias because of incomparable exposure cohorts implied by the design.32 
- 
+LEGEND-T2DM further advances the statistically rigorous and empirically validated methods we have developed in OHDSI that specifically address bias inherent in observational studies and allow for reliable causal inference.
+Patient characteristics and their treatment choices are likely to confound comparative effectiveness and safety estimates.
+Our approach combines active comparator new-user designs that emulate randomized clinical trials with large-scale propensity adjustment for measured confounding, a large set of negative control outcome experiments to address unmeasured and systematic bias, and full disclosure of hypotheses tested.
+
+Each LEGEND-T2DM aim will represent evidence synthesis from a large number of bespoke studies across multiple data sources.
+Addressing questions one bespoke study at a time is prone to errors arising from multiple testing, random variation in effect estimates and publication bias.
+LEGEND-T2DM is designed to avoid these concerns through methodologic best practices [@Schuemie_undated-mx] with full study diagnostics and external replication.
+
+Through open science, LEGEND-T2DM will allow any interested investigators to engage as partners in our work at many levels.
+We will publicly develop all protocols and analytic code.
+This invites additional data custodians to participate in LEGEND-T2DM and enables others to modify and reuse our approach for other investigations.
+We will also host real-time access to all study result artifacts for outside analysis and interpretation.
+Such an open science framework ensures a feed-forward effect on other scientific contributions in the community.
+Collectively, LEGEND-T2DM will generate patient-centered, high quality, generalizable evidence that will transform the clinical management of T2DM through our active collaboration with patients, clinicians, and national medical societies. 
+LEGEND-T2DM will spur scientific innovation through the generation of open-source resources in data science.
+
 ## Limitations
  
-- Even though many potential confounders will be included in this study, there may be residual bias due to unmeasured or misspecified confounders, such as confounding by indication, differences in physician characteristics that may be associated with drug choice, concomitant use of other drugs started after the index date, and informative censoring at the end of the on-treatment periods. To minimize this risk, we used methods to detect residual bias through our negative and positive controls.
-- Our follow-up times are limited and variable, potentially reducing power to detect differences in effectiveness and safety.
-- We assume hazards are not time varying.
-- Misclassification of study variables is unavoidable in secondary use of health data, so it is possible to misclassify treatments, covariates, and outcomes; we do not expect differential misclassification, so bias will most likely be towards the null.
-- The electronic health record databases may be missing care episodes for patients due to care outside the respective health systems; bias will most likely be towards the null.
+Even though many potential confounders will be included in these studies, there may be residual bias due to unmeasured or misspecified confounders, such as confounding by indication, differences in physician characteristics that may be associated with drug choice, concomitant use of other drugs started after the index date, and informative censoring at the end of the on-treatment periods.
+To minimize this risk, we will use methods to detect residual bias through a large number of negative and positive controls.
+
+Ideal negative controls carry identical confounding between exposures and the outcome of interest [@Lipsitch2010-oj].
+The true confounding structure, however, is unknowable.
+Instead of attempting to find the elusive perfect negative control, we will rely on a large sample of controls that represent a wide range of confounding structures.
+If a study comparison proves to be unbiased for all negative controls, we can feel confident that it will also be unbiased for the outcome of interest.
+In our previous studies [@Suchard2019-gq; @Hripcsak2020-gz; @Schuemie2020-wx], using the active comparator, new-user cohort design we will employ here, we have observed minimal residual bias using negative controls.
+This stands in stark contrast to other designs such as the (nested) case-control that tends to show large residual bias because of incomparable exposure cohorts implied by the design [@Schuemie2019-ay].
+
+Observed follow-up times are limited and variable, potentially reducing power to detect differences in effectiveness and safety and, further, misclassification of study variables is unavoidable in secondary use of health data, so it is possible to misclassify treatments, covariates, and outcomes.
+Based on our previous successful studies on antihypertensives, we do not expect differential misclassification, and therefore bias will most likely be towards the null.
+Finally, the electronic health record databases may be missing care episodes for patients due to care outside the respective health systems.
+Such bias, however, will also most likely be towards the null.
 
 # Protection of Human Subjects
 
@@ -996,34 +1013,34 @@ if (knitr::is_latex_output()) {
 
 For the **Class-vs-Class Study**, we will construct
 $$
-\begin{align}
+\begin{aligned}
 & (4 \text{ drug-class targets})\ \times \\
 & (2 \text{ On-treatment censoring types})\ \times \\
 & (2 \text{ Prior metformin-use choices}) \\
 & = 16
-\end{align}
+\end{aligned}
 $$
 exposure cohort definitions.
 Likewise, for the **Drug-vs-Drug Study**, we will construct
 $$
-\begin{align}
+\begin{aligned}
 & (22 \text{ drug-ingredient targets})\ \times \\
 & (2 \text{ On-treatment censoring types})\ \times \\
 & (2 \text{ Prior metformin-use choices}) \\
 & = 88
-\end{align}
+\end{aligned}
 $$
 exposure cohort definitions.
 For the **Heterogeneity Study**, we will stratify each of these cohort definitions into
 $$
-\begin{align}
+\begin{aligned}
 & 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\ 
 & 2 \text{ (sex: female / male) } + \\ 
 & 1 \text{ (race: Black) } + \\ 
 & 2 \text{ (cardiovascular risk: lower / higher) } + \\ 
 & 2 \text{ (renal impairment: with/without) } \\ 
 & = 10
-\end{align}
+\end{aligned}
 $$
 additional definitions, results in $(16 + 88) \times 10 = 1040$ further cohort definitions.
 
