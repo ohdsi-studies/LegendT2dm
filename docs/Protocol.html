@@ -4347,7 +4347,7 @@ We will prefer stratification over matching if both sufficiently balance patient
 <li>On-treatment-1 (TAR: index + 1 → treatment discontinuation) is more patient-centered <span class="citation">[<a href="#ref-Murray2018-zf" role="doc-biblioref">94</a>]</span> and captures direct treatment effect while allowing for escalation with additional T2DM agents; and</li>
 <li>On-treatment-2 (TAR: index + 1 → discontinuation or escalation with T2DM agents) carries the least possible confounding with other concurrent T2DM agents.</li>
 </ul>
-<p>Our “on-treatment” is often called “pre-protocol” <span class="citation">[<a href="#ref-Hernan2017-qp" role="doc-biblioref">95</a>]</span>.
+<p>Our “on-treatment” is often called “per-protocol” <span class="citation">[<a href="#ref-Hernan2017-qp" role="doc-biblioref">95</a>]</span>.
 Systematically executing with multiple causal contrasts enables us to identify potential biases that missing prescription data, treatment escalation and behavioral changes introduce, while preserving the ease of intent-to-treat interpretation and power if the data demonstrate them as unbiased.</p>
 <p>We will aggregate HR estimates across non-overlapping data sources to produce meta-analytic estimates using a random-effects meta-analysis <span class="citation">[<a href="#ref-DerSimonian1986-co" role="doc-biblioref">96</a>]</span>.
 This classic meta-analysis assumes that per-data source likelihoods are approximately normally distributed <span class="citation">[<a href="#ref-Gronsbell2020-sr" role="doc-biblioref">97</a>]</span>.
@@ -4362,8 +4362,8 @@ Finally, blinded to all trial results, study investigators will evaluate study d
 </div>
 <div id="sensitivity-analyses-and-missingness" class="section level3">
 <h3><span class="header-section-number">8.6.3</span> Sensitivity analyses and missingness</h3>
-<p>Because of the potential confounding effect of glycemic control at baseline between treatment choice and outcomes and to better understand the impact of limited glucose level measurements on effectiveness and safety estimation that arises in administrative claims and some EHR data, we will perform pre-specified sensitivity analyses for all studies within data sources that contain reliable glucose measurements.
-Within a study, for each exposure pair, we will first rebuild PS models where we additionally include baseline glucose measurements as patient characteristics, stratify or match patients under the new PS models that directly adjust for potential glycemic confounding and then estimate effectiveness and safety HRs.</p>
+<p>Because of the potential confounding effect of glycemic control at baseline between treatment choice and outcomes and to better understand the impact of limited glucose level measurements on effectiveness and safety estimation that arises in administrative claims and some EHR data, we will perform pre-specified sensitivity analyses for all studies within data sources that contain reliable glucose or hemoglobin A1c measurements.
+Within a study, for each exposure pair, we will first rebuild PS models where we additionally include baseline glucose or hemoglobin A1c measurements as patient characteristics, stratify or match patients under the new PS models that directly adjust for potential glycemic confounding and then estimate effectiveness and safety HRs.</p>
 <p>Missing data of potential concern are patient demographics (gender, age, race) for our inclusion criteria.
 We will include only individuals whose baseline eligibility can be characterized that will most notably influence race subgroup assessments in the <strong>Heterogeneity Study</strong>.
 No further missing data can arise in our large-scale PS models because all features, with the exception of demographics, simply indicate the presence or absence of health records in a given time-period. Finally, we limit the impact of missing data, such as prescription information, relating to exposure time-at-risk by entertaining multiple definitions <span class="citation">[<a href="#ref-Schneeweiss2007-am" role="doc-biblioref">29</a>]</span>.
@@ -4430,8 +4430,9 @@ Such bias, however, will also most likely be towards the null.</p>
 <div id="protection-of-human-subjects" class="section level1">
 <h1><span class="header-section-number">11</span> Protection of Human Subjects</h1>
 <p>LEGEND-T2DM does not involve human subjects research.
-The project does, however, use de-identified human data collected during routine healthcare provision.
-All data partners executing the LEGEND-T2DM studies within their data sources will have received institutional review board (IRB) approval or waiver for participation in accordance to their institutional governance prior to execution (see Table ADD-REF).
+The project does, however, use human data collected during routine healthcare provision.
+Most often the data are de-identified within data source.
+All data partners executing the LEGEND-T2DM studies within their data sources will have received institutional review board (IRB) approval or waiver for participation in accordance to their institutional governance prior to execution (see Table <a href="#tab:irb">11.1</a>).
 LEGEND-T2DM executes across a federated and distributed data network, where analysis code is sent to participating data partners and only aggregate summary statistics are returned, with no sharing of patient-level data between organizations.</p>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -4558,7 +4559,7 @@ Use of the YNHHS EHR data source was approved by the Yale University Institution
 <div id="management-and-reporting-of-adverse-events-and-adverse-reactions" class="section level1">
 <h1><span class="header-section-number">12</span> Management and Reporting of Adverse Events and Adverse Reactions</h1>
 <p>LEGEND-T2DM uses coded data that already exist in electronic databases.
-In these types of databases, it is not possible to link (i.e., identify a potential causal association between) a particular product and medical event for any specific individual.
+In these types of databases, it is not usually possible to link (i.e., identify a potential causal association between) a particular product and medical event for any specific individual.
 Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not available and adverse events are not reportable as individual adverse event reports.
 The study results will be assessed for medically important findings.</p>
 </div>
