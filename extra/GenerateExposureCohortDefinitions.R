@@ -1,9 +1,9 @@
 # Make ExposuresOfInterest.csv
 library(dplyr)
 
-
 #baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
-#baseUrlJnj <- keyring::key_get("baseUrl")
+#baseUrlWebApi <- keyring::key_get("baseUrl")
+baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
 
 function() {
   exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
@@ -121,7 +121,7 @@ function() {
 
 # OHDSI's public webAPI is down right now:
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1774646, baseUrl = baseUrlPublic)
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(17111, baseUrl = baseUrlJnj)
+# baseCohort <- ROhdsiWebApi::getCohortDefinition(17111, baseUrl = baseUrlWebApi)
 
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, digits = 50)
@@ -191,12 +191,10 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     tId <- floor(permutation$targetId / 10)
   }
 
-
   cohort$expression$PrimaryCriteria$CriteriaList[[1]]$DrugExposure$CodesetId <- tId
   cohort$expression$AdditionalCriteria$CriteriaList[[1]]$Criteria$DrugExposure$CodesetId <- c1Id
   cohort$expression$AdditionalCriteria$CriteriaList[[2]]$Criteria$DrugExposure$CodesetId <- c2Id
   cohort$expression$AdditionalCriteria$CriteriaList[[3]]$Criteria$DrugExposure$CodesetId <- c3Id
-
 
   cohort$expression$EndStrategy$CustomEra[1] <- tId
 
@@ -337,15 +335,15 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   return(cohort)
 }
 
-# allCohortsSql <-
-#   do.call("rbind",
-#           lapply(1:nrow(permutations), function(i) {
-#             cohortDefinition <- permuteTC(baseCohort, permutations[i,])
-#             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
-#                                                     baseUrlJnj,
-#                                                     generateStats = generateStats)
-#             return(cohortSql)
-#           }))
+allCohortsSql <-
+  do.call("rbind",
+          lapply(1:nrow(permutations), function(i) {
+            cohortDefinition <- permuteTC(baseCohort, permutations[i,])
+            cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
+                                                    baseUrlWebApi,
+                                                    generateStats = generateStats)
+            return(cohortSql)
+          }))
 
 allCohortsJson <-
   do.call("rbind",
@@ -353,25 +351,26 @@ allCohortsJson <-
             cohortDefinition <- permuteTC(baseCohort, permutations[i,])
             cohortJson <- RJSONIO::toJSON(cohortDefinition$expression, indent = 2, digits = 10)
             return(cohortJson)
-            #return(cohortDefinition)
           }))
 
-
 permutations$json <- allCohortsJson
-#readr::write_csv(permutations, path = "inst/settings/classComparisonsWithJson.csv")
+permutations$sql <- allCohortsSql
 
-# permutations$sql <- allCohortsSql
 permutations <- permutations %>%
-  mutate(atlasName = paste0(shortName, " CVD: ", cvd, " Age: ", age)) %>%
+  mutate(atlasName = paste0(shortName, " CVD: ", cvd, " Age: ", age)) %>% # TODO Update names
   mutate(name = paste0("ID", as.integer(cohortId)))
 
 for (i in 1:nrow(permutations)) {
   row <- permutations[i,]
-  # sqlFileName <- file.path("inst/sql/sql_server/class", paste(row$name, "sql", sep = "."))
-  # SqlRender::writeSql(row$sql, sqlFileName)
+  sqlFileName <- file.path("inst/sql/sql_server/class", paste(row$name, "sql", sep = "."))
+  SqlRender::writeSql(row$sql, sqlFileName)
   jsonFileName <- file.path("inst/cohorts/class", paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)
 }
+
+
+
+# TODO Move to separate file
 
 # Generate ingredient-level cohorts
 permutations <- readr::read_csv("inst/settings/classComparisons.csv")
