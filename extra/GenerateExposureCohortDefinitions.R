@@ -2,8 +2,8 @@
 library(dplyr)
 
 #baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
-#baseUrlWebApi <- keyring::key_get("baseUrl")
-baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
+baseUrlWebApi <- keyring::key_get("baseUrl")
+#baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
 
 function() {
   exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
@@ -362,13 +362,18 @@ permutations <- permutations %>%
 
 for (i in 1:nrow(permutations)) {
   row <- permutations[i,]
-  sqlFileName <- file.path("inst/sql/sql_server/class", paste(row$name, "sql", sep = "."))
+  sqlFileName <- file.path("inst/sql/sql_server/class/", paste(row$name, "sql", sep = "."))
   SqlRender::writeSql(row$sql, sqlFileName)
-  jsonFileName <- file.path("inst/cohorts/class", paste(row$name, "json", sep = "."))
+  jsonFileName <- file.path("inst/cohorts/class/", paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
+classCohortsToCreate <- permutations %>%
+  mutate(atlasId = cohortId,
+         name = paste0("/class/", name)) %>%
+  select(atlasId, atlasName, cohortId, name)
 
+readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
 
 # TODO Move to separate file
 

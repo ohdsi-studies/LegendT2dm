@@ -1,4 +1,4 @@
-#' Create the exposure cohorts
+#' Create the class exposure cohorts
 #'
 #' @details
 #' This function will create the exposure cohorts following the definitions included in this package.
@@ -23,7 +23,7 @@
 #' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
 #'
 #' @export
-createAllCohorts <- function(connectionDetails,
+createClassCohorts <- function(connectionDetails,
                              cdmDatabaseSchema,
                              cohortDatabaseSchema,
                              tablePrefix = "legend",
@@ -33,7 +33,7 @@ createAllCohorts <- function(connectionDetails,
                              filterExposureCohorts = NULL,
                              imputeExposureLengthWhenMissing = FALSE) {
 
-  ParallelLogger::logInfo("Creating exposure cohorts")
+  ParallelLogger::logInfo("Creating class exposure cohorts")
 
   cohortTable <- paste(tablePrefix, "cohort", sep = "_")
 
@@ -47,42 +47,7 @@ createAllCohorts <- function(connectionDetails,
                                        cohortDatabaseSchema = cohortDatabaseSchema,
                                        cohortTable = cohortTable)
 
-  # # Load exposures of interest --------------------------------------------------------------------
-  # pathToCsv <- system.file("settings", "ExposuresOfInterest.csv", package = "LegendT2dm")
-  # exposuresOfInterest <- read.csv(pathToCsv)
-  # exposuresOfInterest <- exposuresOfInterest[order(exposuresOfInterest$conceptId), ]
-
-  # Create exposure eras and cohorts ------------------------------------------------------
   ParallelLogger::logInfo("- Populating table ", cohortTable)
-  # exposureGroupTable <- ""
-  # exposureCombis <- NULL
-
-  # cohorts <- readr::read_csv(file = system.file("settings", "classComparisonsWithJson.csv",
-  #                                               package = "LegendT2dm"))
-  #
-  # if (!is.null(filterExposureCohorts)) {
-  #   cohorts <- filterExposureCohorts(cohorts)
-  # }
-  #
-  # for (idx in 1:nrow(cohorts)) {
-  #
-  #   json <- cohorts[idx, "json"] %>% pull()
-  #   targetId <- cohorts[idx, "cohortId"] %>% pull()
-  #
-  #   sql <- ROhdsiWebApi::getCohortSql(RJSONIO::fromJSON(json),
-  #                                           baseUrl,
-  #                                           generateStats = createInclusionStatsTables)
-  #
-  #   CohortDiagnostics::instantiateCohort(connectionDetails = connectionDetails,
-  #                                        connection = connection,
-  #                                        cdmDatabaseSchema = cdmDatabaseSchema,
-  #                                        cohortDatabaseSchema = cohortDatabaseSchema,
-  #                                        cohortTable = exposureCohortTable,
-  #                                        cohortJson = json,
-  #                                        cohortSql = sql,
-  #                                        cohortId = targetId,
-  #                                        generateInclusionStats = createInclusionStatsTables)
-  # }
 
   CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
                                           cdmDatabaseSchema = cdmDatabaseSchema,
@@ -90,11 +55,11 @@ createAllCohorts <- function(connectionDetails,
                                           oracleTempSchema = oracleTempSchema,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
-                                          cohortToCreateFile = "settings/CohortsToCreate.csv",
+                                          cohortToCreateFile = "settings/classCohortsToCreate.csv",
                                           generateInclusionStats = TRUE,
                                           inclusionStatisticsFolder = outputFolder)
 
-  ParallelLogger::logInfo("Counting cohorts")
+  ParallelLogger::logInfo("Counting class cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
                                            "LegendT2dm",
                                            dbms = connectionDetails$dbms,
@@ -107,5 +72,5 @@ createAllCohorts <- function(connectionDetails,
   DatabaseConnector::disconnect(connection)
   counts$databaseId <- databaseId
   #counts <- addCohortNames(counts)
-  write.csv(counts, file.path(outputFolder, "CohortCounts.csv"), row.names = FALSE)
+  write.csv(counts, file.path(outputFolder, "classCohortCounts.csv"), row.names = FALSE)
 }

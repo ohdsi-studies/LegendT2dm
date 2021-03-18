@@ -22,7 +22,8 @@ Imports:
     CohortDiagnostics (>= 1.1.0),
     CirceR (>= 0.0.1),
     PhenotypeLibrary (>= 0.0.1),
-    rmdrive,
+    readr (>= 1.4.0),
+    trackdown,
     plyr,
     meta
 Suggests:
