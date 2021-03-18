@@ -128,7 +128,7 @@ function() {
 # SqlRender::writeSql(baseCohortJson, targetFile = "baseCohort.json")
 # saveRDS(baseCohort, file = "baseCohort.rds")
 
-# Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5
+# Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5, PriorMet == 6, NoMet == 7
 
 baseCohort <- readRDS("baseCohort.rds")
 
@@ -300,8 +300,10 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   if (permutation$met == "prior") {
     # Do nothing
     cohort$expression$InclusionRules[[met]]$description <- NULL
+    cohort$expression$InclusionRules[[met + 1]] <- NULL
+    delta <- delta + 1
   } else if (permutation$met == "none") {
-    # TODO Should change to no prior met instead of no restrictions
+    cohort$expression$InclusionRules[[met + 1]]$description <- NULL
     cohort$expression$InclusionRules[[met]] <- NULL
     delta <- delta + 1
   } else {

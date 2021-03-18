@@ -409,13 +409,17 @@ In the first case, three months of metformin is consistent with ADA guidelines [
 In the second case, we are interested in relative effectiveness and safety of these traditionally second-line agents in patients who iniative their treatments without first using metformin.
 We purposefully do not automatically exclude patients with a history of myocardial infarction, stroke or other major cardiovascular events, which will allow us to report relative effectiveness and safety for individuals with both low or moderate and high cardiovascular risk. 
 Likewise, we do not automatically exclude individuals with severe renal impairment [@Nathan2013-cu].
-We will use cohort diagnostics, such as achieving covariate balance and clinical empirical equipoise between exposure cohorts (Section \@ref(section-todo)) and stakeholder input to guide the possible need to exclude other prior diagnoses, such as congestive heart failure, pancreatitis or cancer [@Nathan2013-cu].
+We will use cohort diagnostics, such as achieving covariate balance and clinical empirical equipoise between exposure cohorts (Section \@ref(sample-size)) and stakeholder input to guide the possible need to exclude other prior diagnoses, such as congestive heart failure, pancreatitis or cancer [@Nathan2013-cu].
 
-#### TODO Add ATLAS description of exposure cohorts
+Appendix \@ref(class-cohort) reports the complete OHDSI `ATLAS` cohort description for new-users of DDP4 inhibitors with prior metformin use.
+This description lists complete specification of cohort entry events, additional inclusion criteria, cohort exit events, and all associated standard OMOP CDM concept code sets used in the definition.
+We generate programmatically equivalent cohort definitions for new-others of each drug class with and without prior metformin use.
+`ATLAS` then automatically translates these definitions into network-deployable SQL source code.
+Appendix \@ref(prior-metformin) lists the inclusion criteria modifier for no prior metformin use.
 
 We remain acutely aware that these inclusion criteria do not directly incorporate quantitative measures of poor glycemic control, such as one or more elevated serum HbA1c measurements; such laboratory values are irregularly captured in large claims and even EHR data sources. 
 Older ADA guidelines (but not since 2020 for patients with cardiovascular  disease [@Association2020-ic]) advise escalating to a second-line agent only when glycemic control is not met with metformin monotherapy, nicely mirroring our cohort design for our historical data. 
-We will conduct sensitivity analyses involving available HbA1c measurements to demonstrate their balance between exposure cohorts (described later in Section \@ref(section-todo)). 
+We will conduct sensitivity analyses involving available HbA1c measurements to demonstrate their balance between exposure cohorts (described later in Section \@ref(sample-size)).
 In the unlikely event that balance is not met, we will consider an inclusion criterion of at least two HbA1c measurements $\ge$ 7% within 6 months before the index [@Hernan2019-ie].
 We will also conduct sensitivity analyses to the prior insulin use exclusions, bearing in mind difficulties in assessing insulin use end-dates. 
 
@@ -430,8 +434,8 @@ We will apply the same cohort definition, inclusion criteria and patient count m
 For each data source, we will then execute all $2 \times {22 \choose 2} = 462$ pairwise drug comparisons.
 While we will publicly report studies results for all pairwise comparisons, we will focus primary clinical interpretation and scientific publishing to the $2 \times {5 \choose 2}$ [within DPP4Is] $+ 2 \times {6 \choose 2}$ [within GLPR1RAs] $+ 2 \times {4 \choose 2}$ [within SGLT2Is] $+ 2 \times {7 \choose 2}$ [within SUs] $= 104$ comparisons that pit drugs within the same class against each other, as well as across-class comparisons that stakeholders deem pertinent given their experiences.
 
-#### TODO What are the relevant across-class drug-ingredient-level comparisons?
-
+Appendix \@ref(drug-cohort) reports the complete OHDSI `ATLAS` cohort description for new-users of aloglipitin with prior metformin use.
+Again, we programmatically construct all new-user drug-level cohort and automatically translate into SQL.
 
 ### Heterogeneity Study comparisons
 
@@ -448,16 +452,14 @@ We will define patients at high cardiovascular risk as those who fulfill at inde
 Under this definition, established CVD means having at least 1 diagnosis code for a condition indicating cardiovascular disease, such as arteriosclerotic vascular disease, cerebrovascular disease, ischemic heart disease or peripheral vascular disease, or having undergone at least 1 procedure indicating cardiovascular disease, such as percutaneous coronary intervention, coronary artery bypass graft or revascularization, any time on or prior to the exposure start.
 Likewise, we will define renal impairment through diagnosis codes for chronic kidney disease and end-stage renal disease, dialysis procedures, and laboratory measurements of estimated glomerular filtration rate, serum creatinine and urine albumin.
 
-#### TODO Need ATLAS definition for renal impairment
-
-Appendix \@ref(atlas-subgroups) presents complete ATLAS specifications for these subgroups. **TODO**
+Appendix \@ref(atlas-subgroups) presents complete OHDSI `ATLAS` specifications for these subgroups, including all standard OMOP CDM concept codes defining cardiovascular risk and renal disease.
 
 ### Validation
 
 We will validate exposure cohorts and aggregate drug utilization using comprehensive cohort characterization tools against both claims and EHR data sources.
-Chief among these tools stands OHDSI’s CohortDiagnostic package (**TODO** link to package).
+Chief among these tools stands OHDSI’s `CohortDiagnostic` package ([github](https://ohdsi.github.io/CohortDiagnostics/)).
 For any cohort and data source mapped to OMOP CDM, this package systematically generates incidence new-user rates (stratified by age, gender, and calendar year), cohort characteristics (all comorbidities, drug use, procedures, health utilization) and the actual codes found in the data triggering the various rules in the cohort definitions.
-This can allow researchers and stakeholders to understand the heterogeneity of source coding for exposures and health outcomes as well as the impact of various inclusion criteria on overall cohort counts (details described in Section D.7 \@ref(section-todo) **TODO**). 
+This can allow researchers and stakeholders to understand the heterogeneity of source coding for exposures and health outcomes as well as the impact of various inclusion criteria on overall cohort counts (details described in \@ref{sample-size}).
 
 ## Outcomes
 
@@ -571,6 +573,7 @@ We will execute each comparison using three different TAR definitions, reflectin
 
 Our "on-treatment" is often called "per-protocol" [@Hernan2017-qp].
 Systematically executing with multiple causal contrasts enables us to identify potential biases that missing prescription data, treatment escalation and behavioral changes introduce, while preserving the ease of intent-to-treat interpretation and power if the data demonstrate them as unbiased.
+Appendix \@ref(escalation-cohort) reports the modified cohort exit rule for the on-treatment-2 TAR.
 
 We will aggregate HR estimates across non-overlapping data sources to produce meta-analytic estimates using a random-effects meta-analysis [@DerSimonian1986-co].
 This classic meta-analysis assumes that per-data source likelihoods are approximately normally distributed [@Gronsbell2020-sr].
@@ -607,8 +610,6 @@ These diagnostics will include
 5. Kaplan-Meier plots to examine hazard ratio proportionality assumptions.
 
 We will define cohorts to stand in empirical equipoise if the majority of patients carry preference scores between 0.3 and 0.7 and to achieve balance if all after-adjustment characteristics return absolute standardized mean differences $<$ 0.1 [@Austin2009-af].
-
-### TODO: Meta-analysis heterogeneity measures $i^2$. How does this apply to our total evidence approach?
 
 # Strengths and Limitations {#strengths-limitations}
 
@@ -731,8 +732,6 @@ We will also prepare multiple scientific publications for clinical, informatics 
 We believe in sharing our findings that will guide clinical care with the general public.
 LEGEND-T2DM will use social-media (Twitter) to facilitate this.
 With dedicated support from the OHDSI communications specialist, we will deliver regular press releases at key project stages, distributed via the extensive media networks of UCLA, Columbia and Yale.
-
-# Lists of Tables and Figures
 
 # References {-}
 
@@ -863,11 +862,21 @@ baseCohort <- RJSONIO::fromJSON(baseCohortJson)
 baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13, 14)] # remove CVD, renal and alternative targets
 baseCohortJson <- RJSONIO::toJSON(baseCohort, digits = 50)
 
-printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort / OT1",
+printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort / OT1 {#class-cohort}",
                                      json = baseCohortJson)
 ```
 
-## Escalation Exit Criteria
+## Metformin Use Modifier {#prior-metformin}
+
+```{r met-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+metCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200000.json", package = "LegendT2dm"))
+# metCohort <- RJSONIO::fromJSON(metCohortJson)
+metCohort <- CirceR::cohortExpressionFromJson(metCohortJson)
+
+printInclusionCriteria(metCohort, removeDescription = FALSE)
+```
+
+## Escalation Exit Criteria {#escalation-cohort}
 
 ```{r escalation-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "class","ID102100000.json", package = "LegendT2dm"))
@@ -881,9 +890,7 @@ printConceptSet(ot2Cohort$conceptSets[[14]])
 printCohortClose()
 ```
 
-### No prior metformin use modifier {#prior-metformin}
-
-## Heterogenity Study Inclusion Criteria
+## Heterogenity Study Inclusion Criteria {#atlas-subgroups}
 
 ```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Age
@@ -958,7 +965,7 @@ printCohortClose()
 drugCohortJson <- SqlRender::readSql(system.file("cohorts", "drug", "ID111100000.json", package = "LegendT2dm"))
 drugCohort <- CirceR::cohortExpressionFromJson(drugCohortJson)
 
-printCohortDefinitionFromNameAndJson(name = "Drug-vs-Drug Exposure (Alogliptin New-User) Cohort / OT1",
+printCohortDefinitionFromNameAndJson(name = "Drug-vs-Drug Exposure (Alogliptin New-User) Cohort / OT1 {#drug-cohort}",
                                      json = drugCohortJson, withConcepts = FALSE)
 
 printConceptSet(drugCohort$conceptSets[[1]]) 
@@ -981,36 +988,9 @@ invisible(lapply(list(
   ), printCohortDefinition))
 ```
 
-# Analysis Plan Matrix
+# Implemented Details
 
-```{r, echo=FALSE, warning=FALSE}
-design <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
-  ID; PS-covariates; PS-adjustment; Outcome model; Risk-window end
-  1; ; ; Cox; observational period
-  2; FE defaults; 1-to-1 match; Cox (conditional); target exposure end
-  3; FE defaults; 1-to-1 match; Cox (conditional); target exposure end or escalation
-  4; FE defaults; 1-to-1 match; Cox (conditional); observation period end
-  5; FE defaults; 5 strata; Cox (conditional); target exposure end
-  6; FE defaults; 5 strata; Cox (conditional); target exposure end or escalation
-  7; FE defaults; 5 strata; Cox (conditional); observational period end
-")
-
-footnote <- c("FE: FeatureExtraction package (365 days long-term, 180 days medium-term and 30 days short-term look-back)", 
-              "PS: Propensity score")
-
-tab <- kable(design, linesep = "", booktabs = TRUE,
-             caption = "CohortMethod analysis descriptions") %>% 
-  footnote(general = footnote, general_title = "")
-  
-
-if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
-} else {
-  tab %>% kable_styling(bootstrap_options = "striped")
-}
-```
-
-# Exposure Cohort Counts
+## Exposure Cohort Counts
 
 For the **Class-vs-Class Study**, we will construct
 $$
@@ -1044,6 +1024,115 @@ $$
 \end{aligned}
 $$
 additional definitions, results in $(16 + 88) \times 10 = 1040$ further cohort definitions.
+
+## Exposure Cohort ID Key
+
+This section documents internal coding used across the three studies to label cohort definitions and their SQL representation.  Each cohort carries 9-digit identifier
+$$ \text{ID}\ [DD][T][M][A][S][R][C][K] $$
+where Table \@ref(tab:drug-codes) reports the target 2-digit drug codes $DD$ and Table \@ref(tab:category-codes) lists the codes for time-at-risk $T$, metformin $M$, age $A$, sex $S$, race $R$, cardiovascular $C$ and renal (kidney) $K$ categories.
+
+```{r drug-codes, echo=FALSE, message=FALSE, warning=FALSE}
+addTab <- function(name, cohortId) {
+  if (cohortId %% 10 != 0) {
+    paste0("\\ \\ \\ \\ ", name)
+  } else {
+    name
+  }
+}
+
+drugCodes <- exposures  %>% arrange(cohortId) %>%
+  rowwise() %>%
+  mutate(name = addTab(name, cohortId)) %>%
+  select(name, cohortId) %>%
+  rename(Drug = name, "2-digit Code" = cohortId)
+
+tab <- kable(drugCodes, booktabs = TRUE, linesep = "",
+             caption = "2-Digit Drug Codes") %>% 
+  column_spec(1, width = "10em") %>%
+  column_spec(2, width = "30em")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+```{r category-codes, echo=FALSE, warning=FALSE, message=FALSE}
+categoryCodes <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Category; Value; 1-digit Code
+  Time-at-risk; 
+  ; ITT/OT1; 1
+  ; OT2; 2
+  Metformin; 
+  ; prior; 1
+  ; none; 2
+  Age ;
+  ; any; 0
+  ; younger; 1
+  ; middle; 2
+  ; older; 3
+  Sex ;
+  ; any; 0
+  ; female; 1
+  ; male; 2
+  Race ;
+  ; any; 0
+  ; Black; 1
+  Cardiovascular risk ;
+  ; any; 0
+  ; low; 1
+  ; higher; 2
+  Renal disease ;
+  ; any; 0
+  ; without; 1
+  ; with; 2
+")
+
+footnote <- c("ITT: intent-to-treat; OT1: on-treatment-1; OT2: on-treatment-2")
+
+tab <- kable(categoryCodes, booktabs = TRUE, linesep = "",
+             caption = "Other Cohort Category Codes") %>% 
+  footnote(general = footnote, general_title = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+## Analysis Plan Matrix
+
+For each comparison within each study, we will execute the 7 `CohortMethod` analysis plans in Table \@ref(tab:plan-matrix).
+
+```{r, plan-matrix, echo=FALSE, warning=FALSE}
+design <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  ID; PS-covariates; PS-adjustment; Outcome model; Risk-window end
+  1; ; ; Cox; observational period
+  2; FE defaults; 1-to-1 match; Cox (conditional); target exposure end
+  3; FE defaults; 1-to-1 match; Cox (conditional); target exposure end or escalation
+  4; FE defaults; 1-to-1 match; Cox (conditional); observation period end
+  5; FE defaults; 5 strata; Cox (conditional); target exposure end
+  6; FE defaults; 5 strata; Cox (conditional); target exposure end or escalation
+  7; FE defaults; 5 strata; Cox (conditional); observational period end
+")
+
+footnote <- c("FE: FeatureExtraction package (365 days long-term, 180 days medium-term and 30 days short-term look-back)", 
+              "PS: Propensity score")
+
+tab <- kable(design, linesep = "", booktabs = TRUE,
+             caption = "CohortMethod analysis descriptions") %>% 
+  footnote(general = footnote, general_title = "")
+  
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
 
 # Additional Outcomes to Evaluate {#addition-outcomes}
 
