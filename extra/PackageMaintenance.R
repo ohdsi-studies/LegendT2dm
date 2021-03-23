@@ -16,28 +16,41 @@
 
 # Format and check code
 OhdsiRTools::formatRFolder()
-OhdsiRTools::checkUsagePackage("Andromeda")
+OhdsiRTools::checkUsagePackage("LegendT2dm")
 OhdsiRTools::updateCopyrightYearFolder()
 devtools::spell_check()
 
-# Create manual and vignette
-unlink("extras/Andromeda.pdf")
-shell("R CMD Rd2pdf ./ --output=extras/Andromeda.pdf")
 
-dir.create("inst/doc", recursive = TRUE)
-rmarkdown::render("vignettes/UsingAndromeda.Rmd",
-                  output_file = "../inst/doc/UsingAndromeda.pdf",
-                  rmarkdown::pdf_document(latex_engine = "pdflatex",
-                                          toc = TRUE,
-                                          number_sections = TRUE))
-unlink("inst/doc/UsingAndromeda.tex")
+baseUrl <- "http://atlas-covid19.ohdsi.org:80/WebAPI"
 
-pkgdown::build_site(preview = FALSE)
-OhdsiRTools::fixHadesLogo()
+# Import outcome definitions
+ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/OutcomesOfInterest.csv",
+                                                baseUrl = baseUrl,
+                                                insertTableSql = FALSE,
+                                                insertCohortCreationR = FALSE,
+                                                generateStats = FALSE,
+                                                packageName = "LegendT2dm")
 
-# Release package:
-devtools::check_win_devel()
 
-devtools::check_rhub()
 
-devtools::release()
+# # Create manual and vignette
+# unlink("extras/LegendT2dm")
+# shell("R CMD Rd2pdf ./ --output=extras/LegendT2dm")
+#
+# dir.create("inst/doc", recursive = TRUE)
+# rmarkdown::render("vignettes/UsingLegendT2dm.Rmd",
+#                   output_file = "../inst/doc/UsingLegendT2dm.pdf",
+#                   rmarkdown::pdf_document(latex_engine = "pdflatex",
+#                                           toc = TRUE,
+#                                           number_sections = TRUE))
+# unlink("inst/doc/UsingLegendT2dm.tex")
+#
+# pkgdown::build_site(preview = FALSE)
+# OhdsiRTools::fixHadesLogo()
+#
+# # Release package:
+# devtools::check_win_devel()
+#
+# devtools::check_rhub()
+#
+# devtools::release()
