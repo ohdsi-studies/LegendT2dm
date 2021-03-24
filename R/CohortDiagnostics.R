@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-runCohortDiagnostics <- function(connectionDetails,
+runClassCohortDiagnostics <- function(connectionDetails,
                                  cdmDatabaseSchema,
                                  cohortDatabaseSchema,
                                  tablePrefix,
@@ -27,7 +27,7 @@ runCohortDiagnostics <- function(connectionDetails,
 
 
   CohortDiagnostics::runCohortDiagnostics(packageName = "LegendT2dm",
-                                          cohortToCreateFile = "settings/CohortsToCreate.csv",
+                                          cohortToCreateFile = "settings/classCohortsToCreate.csv",
                                           connectionDetails = connectionDetails,
                                           cdmDatabaseSchema = cdmDatabaseSchema,
                                           oracleTempSchema = oracleTempSchema,
@@ -42,7 +42,7 @@ runCohortDiagnostics <- function(connectionDetails,
                                           runBreakdownIndexEvents = TRUE,
                                           runIncludedSourceConcepts = TRUE,
                                           runCohortCharacterization = TRUE,
-                                          runTemporalCohortCharacterization = TRUE,
+                                          #runTemporalCohortCharacterization = TRUE,
                                           runCohortOverlap = TRUE,
                                           runOrphanConcepts = TRUE,
                                           runIncidenceRate = TRUE,

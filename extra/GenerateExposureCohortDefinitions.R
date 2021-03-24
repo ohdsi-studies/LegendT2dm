@@ -2,8 +2,8 @@
 library(dplyr)
 
 #baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
-#baseUrlWebApi <- keyring::key_get("baseUrl")
-baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
+baseUrlWebApi <- keyring::key_get("baseUrl")
+#baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
 
 function() {
   exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
@@ -137,6 +137,12 @@ generateStats <- TRUE
 permutations <- readr::read_csv("inst/settings/classComparisons.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
+
+makeName <- function(permutation) {
+  paste0(permutation$shortName, ": ", permutation$tar, ", ", permutation$met, " met, ",
+         permutation$age, " age, ", permutation$sex, " sex, ", permutation$race, " race, ",
+         permutation$cvd, " cv risk, ", permutation$renal, " rd status")
+}
 
 permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 
@@ -333,7 +339,8 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown TAR")
   }
 
-  cohort$name <- paste0(cohort$name, " T: ", permutation$shortName, " CVD: ", permutation$cvd, " Age: ", permutation$age)
+  cohort$name <- makeName(permutation)
+  # cohort$name <- paste0(cohort$name, " T: ", permutation$shortName, " CVD: ", permutation$cvd, " Age: ", permutation$age)
   return(cohort)
 }
 
@@ -355,12 +362,15 @@ allCohortsJson <-
             return(cohortJson)
           }))
 
+
+
 permutations$json <- allCohortsJson
 permutations$sql <- allCohortsSql
 
 permutations <- permutations %>%
-  mutate(atlasName = paste0(shortName, " CVD: ", cvd, " Age: ", age)) %>% # TODO Update names
   mutate(name = paste0("ID", as.integer(cohortId)))
+
+permutations$atlasName <- makeName(permutations)
 
 for (i in 1:nrow(permutations)) {
   row <- permutations[i,]
@@ -370,7 +380,12 @@ for (i in 1:nrow(permutations)) {
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
+classCohortsToCreate <- permutations %>%
+  mutate(atlasId = cohortId,
+         name = paste0("class/", name)) %>%
+  select(atlasId, atlasName, cohortId, name)
 
+readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
 
 # TODO Move to separate file
 

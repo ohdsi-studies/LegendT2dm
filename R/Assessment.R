@@ -51,7 +51,7 @@ assessPhenotypes <- function(connectionDetails,
 
   if (createCohorts) {
     # Exposures ----------------------------------------------------------------------------------------
-    createAllCohorts(connectionDetails = connectionDetails,
+    createClassCohorts(connectionDetails = connectionDetails,
                      cdmDatabaseSchema = cdmDatabaseSchema,
                      cohortDatabaseSchema = cohortDatabaseSchema,
                      tablePrefix = tablePrefix,
@@ -144,15 +144,15 @@ assessPhenotypes <- function(connectionDetails,
 
 
   if (runCohortDiagnostics) {
-    runCohortDiagnostics(connectionDetails,
-                         cdmDatabaseSchema,
-                         cohortDatabaseSchema,
-                         tablePrefix = tablePrefix,
-                         oracleTempSchema = oracleTempSchema,
-                         outputFolder = outputFolder,
-                         databaseId = databaseId,
-                         databaseName = databaseName,
-                         databaseDescription = databaseDescription,
-                         minCellCount = minCellCount)
+    runClassCohortDiagnostics(connectionDetails,
+                              cdmDatabaseSchema,
+                              cohortDatabaseSchema,
+                              tablePrefix = tablePrefix,
+                              oracleTempSchema = oracleTempSchema,
+                              outputFolder = outputFolder,
+                              databaseId = databaseId,
+                              databaseName = databaseName,
+                              databaseDescription = databaseDescription,
+                              minCellCount = minCellCount)
   }
 }
