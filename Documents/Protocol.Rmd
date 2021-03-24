@@ -87,6 +87,9 @@ latex_table_font_size <- 8
   - In VA population: [@xie2020comparative]
   - New networks meta-analysis in BMJ: [@palmer2021sodium]
   - Others: [@qiu2021comparative] [@yamada2021cardiovascular]
+* Outcome definition questions:
+  - Measured renal dysfx: Cr >= 3 or lower?
+  - Glycemic control: A1c <= 7? how frequently?
 
 # List of Abbreviations
 
@@ -97,6 +100,7 @@ abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRU
   GLP1; Glucagon-like peptide-1
   IRB; Institutional review board
   LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
+  MACE; Major adverse cardiovascular event
   MDRR; Minimum detectable risk ratio
   OHDSI; Observational Health Data Science and Informatics
   OMOP; Observational Medical Outcomes Partnership
