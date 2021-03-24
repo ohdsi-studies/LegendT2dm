@@ -28,7 +28,7 @@ function() {
 
   idFn <- function(targetId, age, sex, race, cvd, renal, tar, met) {
     cAge <- -1
-    if (age == "all") {
+    if (age == "any") {
       cAge <- 0
     } else if (age == "younger") {
       cAge <- 1
@@ -41,7 +41,7 @@ function() {
     }
 
     cSex <- -1
-    if (sex == "all") {
+    if (sex == "any") {
       cSex <- 0
     } else if (sex == "female") {
       cSex <- 1
@@ -52,7 +52,7 @@ function() {
     }
 
     cRace <- -1
-    if (race == "all") {
+    if (race == "any") {
       cRace <- 0
     } else if (race == "black") {
       cRace <- 1
@@ -61,7 +61,7 @@ function() {
     }
 
     cCvd <- -1
-    if (cvd == "all") {
+    if (cvd == "any") {
       cCvd <- 0
     } else if (cvd == "low") {
       cCvd <- 1
@@ -72,7 +72,7 @@ function() {
     }
 
     cRenal <- -1
-    if (renal == "all") {
+    if (renal == "any") {
       cRenal <- 0
     } else if (renal == "without") {
       cRenal <- 1
@@ -88,13 +88,13 @@ function() {
     } else if (tar == "ot2") {
       cTar <- 2
     } else {
-      stop("Unknown met")
+      stop("Unknown tar")
     }
 
     cMet <- -1
-    if (met == "prior") {
+    if (met == "with") {
       cMet <- 1
-    } else if (met == "none") {
+    } else if (met == "no") {
       cMet <- 2
     } else {
       stop("Unknown met")
@@ -139,9 +139,9 @@ exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.c
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
 makeName <- function(permutation) {
-  paste0(permutation$shortName, ": ", permutation$tar, ", ", permutation$met, " met, ",
+  paste0(permutation$shortName, ": ", permutation$tar, ", ", permutation$met, " prior met, ",
          permutation$age, " age, ", permutation$sex, " sex, ", permutation$race, " race, ",
-         permutation$cvd, " cv risk, ", permutation$renal, " rd status")
+         permutation$cvd, " cv risk, ", permutation$renal, " renal")
 }
 
 permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
@@ -222,7 +222,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     cohort$expression$InclusionRules[[age]]$description <- NULL
     cohort$expression$InclusionRules[[age]]$expression$DemographicCriteriaList[[2]]$Age$Op <- "gte"
     cohort$expression$InclusionRules[[age]]$expression$DemographicCriteriaList[[1]] <- NULL
-  } else if (permutation$age == "all") {
+  } else if (permutation$age == "any") {
     cohort$expression$InclusionRules[[age]] <- NULL
     delta <- delta + 1
   } else {
@@ -240,7 +240,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     cohort$expression$InclusionRules[[sex]]$description <- NULL
     cohort$expression$InclusionRules[[sex]]$expression$DemographicCriteriaList[[1]]$Gender[[1]]$CONCEPT_ID <- 8507
     cohort$expression$InclusionRules[[sex]]$expression$DemographicCriteriaList[[1]]$Gender[[1]]$CONCEPT_NAME <- "male"
-  } else if (permutation$sex == "all") {
+  } else if (permutation$sex == "any") {
     cohort$expression$InclusionRules[[sex]] <- NULL
     delta <- delta + 1
   } else {
@@ -251,7 +251,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   if (permutation$race == "black") {
     cohort$expression$InclusionRules[[race]]$name <- "Race stratum"
     cohort$expression$InclusionRules[[race]]$description <- NULL
-  } else if (permutation$race == "all") {
+  } else if (permutation$race == "any") {
     cohort$expression$InclusionRules[[race]] <- NULL
     delta <- delta + 1
   } else {
@@ -279,7 +279,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 
     cohort$expression$InclusionRules[[cvd]]$expression$CriteriaList[[2]]$Occurrence$Type <- 2
     cohort$expression$InclusionRules[[cvd]]$expression$CriteriaList[[2]]$Occurrence$Count <- 1
-  } else if (permutation$cvd == "all") {
+  } else if (permutation$cvd == "any") {
     cohort$expression$InclusionRules[[cvd]] <- NULL
     delta <- delta  + 1
   } else {
@@ -295,7 +295,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   } else if (permutation$renal == "with") {
     cohort$expression$InclusionRules[[renal]]$name <- "Renal impairment"
     cohort$expression$InclusionRules[[renal]]$description <- NULL
-  } else if (permutation$renal == "all") {
+  } else if (permutation$renal == "any") {
     cohort$expression$InclusionRules[[renal]] <- NULL
     delta <- delta  + 1
   } else {
@@ -303,12 +303,12 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   }
 
   met <- 6 - delta
-  if (permutation$met == "prior") {
+  if (permutation$met == "with") {
     # Do nothing
     cohort$expression$InclusionRules[[met]]$description <- NULL
     cohort$expression$InclusionRules[[met + 1]] <- NULL
     delta <- delta + 1
-  } else if (permutation$met == "none") {
+  } else if (permutation$met == "no") {
     cohort$expression$InclusionRules[[met + 1]]$description <- NULL
     cohort$expression$InclusionRules[[met]] <- NULL
     delta <- delta + 1

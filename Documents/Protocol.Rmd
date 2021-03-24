@@ -897,47 +897,53 @@ printCohortClose()
 ## Heterogenity Study Inclusion Criteria {#atlas-subgroups}
 
 ```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+removeMetformin <- function(json) {
+  obj <- RJSONIO::fromJSON(json)
+  obj$InclusionRules[[2]] <- NULL
+  RJSONIO::toJSON(obj, digits = 50)
+}
+
 # Age
 youngerJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101210000.json", package = "LegendT2dm"))
-youngerCohort <- CirceR::cohortExpressionFromJson(youngerJson)
+youngerCohort <- CirceR::cohortExpressionFromJson(removeMetformin(youngerJson))
 printInclusionCriteria(youngerCohort)
 
 middleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101220000.json", package = "LegendT2dm"))
-middleCohort <- CirceR::cohortExpressionFromJson(middleJson)
+middleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(middleJson))
 printInclusionCriteria(middleCohort)
 
 olderJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101230000.json", package = "LegendT2dm"))
-olderCohort <- CirceR::cohortExpressionFromJson(olderJson)
+olderCohort <- CirceR::cohortExpressionFromJson(removeMetformin(olderJson))
 printInclusionCriteria(olderCohort)
 ```
 
 ```{r heterogenity-cohort2, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Sex
 femaleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101201000.json", package = "LegendT2dm"))
-femaleCohort <- CirceR::cohortExpressionFromJson(femaleJson)
+femaleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(femaleJson))
 printInclusionCriteria(femaleCohort)
 
 maleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101202000.json", package = "LegendT2dm"))
-maleCohort <- CirceR::cohortExpressionFromJson(maleJson)
+maleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(maleJson))
 printInclusionCriteria(maleCohort)
 ```
 
 ```{r heterogenity-cohort-race, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Race
 blackJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200100.json", package = "LegendT2dm"))
-blackCohort <- CirceR::cohortExpressionFromJson(blackJson)
+blackCohort <- CirceR::cohortExpressionFromJson(removeMetformin(blackJson))
 printInclusionCriteria(blackCohort)
 ```
 
 ```{r heterogenity-cohort3, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # CVD
 lowCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200010.json", package = "LegendT2dm"))
-lowCvdCohort <- CirceR::cohortExpressionFromJson(lowCvdJson)
+lowCvdCohort <- CirceR::cohortExpressionFromJson(removeMetformin(lowCvdJson))
 
 printInclusionCriteria(lowCvdCohort)
 
 highCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200020.json", package = "LegendT2dm"))
-highCvdCohort <- CirceR::cohortExpressionFromJson(highCvdJson)
+highCvdCohort <- CirceR::cohortExpressionFromJson(removeMetformin(highCvdJson))
 
 printInclusionCriteria(highCvdCohort)
 
@@ -949,7 +955,7 @@ printCohortClose()
 ```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 # Renal
 noRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200001.json", package = "LegendT2dm"))
-noRenalCohort <- CirceR::cohortExpressionFromJson(noRenalJson)
+noRenalCohort <- CirceR::cohortExpressionFromJson(removeMetformin(noRenalJson))
 
 printInclusionCriteria(noRenalCohort)
 
@@ -957,7 +963,7 @@ withRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200002
 
 cohort <- RJSONIO::fromJSON(withRenalJson)
 
-withRenalCohort <- CirceR::cohortExpressionFromJson(withRenalJson)
+withRenalCohort <- CirceR::cohortExpressionFromJson(removeMetformin(withRenalJson))
 
 printInclusionCriteria(withRenalCohort)
 
@@ -977,7 +983,6 @@ printConceptSet(drugCohort$conceptSets[[15]])
 printCohortClose()
 
 ```
-
 
 # Outcome Cohort Definitions
 
