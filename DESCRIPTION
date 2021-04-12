@@ -25,7 +25,8 @@ Imports:
     readr (>= 1.4.0),
     trackdown,
     plyr,
-    meta
+    meta,
+    diffr
 Suggests:
     testthat,
     ROhdsiWebApi

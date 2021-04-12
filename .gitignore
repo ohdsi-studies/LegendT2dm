@@ -2,3 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+extra/Credentials.R
+
+Documents/Protocol.aux
+Documents/Protocol.html
+Documents/Protocol.log
+Documents/Protocol.out
+Documents/Protocol.pdf
+Documents/Protocol.tex
+Documents/Protocol.toc
+Documents/Protocol_files/

@@ -54,3 +54,31 @@ ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/Outco
 # devtools::check_rhub()
 #
 # devtools::release()
+
+### Manage OHDSI Postgres server
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("ohdsiPostgresServer"),
+                 keyring::key_get("ohdsiPostgresShinyDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("ohdsiPostgresUser"),
+  password = keyring::key_get("ohdsiPostgresPassword"))
+
+schema <- "legendt2dm"
+
+connection <- DatabaseConnector::connect(connectionDetails = connectionDetails)
+
+# Create cohort diagnostics on remote database
+if (FALSE) { # Do this once!
+  cohortDiagnosticsScheme <- CohortDiagnostics:::getResultsDataModelSpecifications()
+
+  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails,
+                                            schema = schema)
+
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = schema,
+    zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/cohortDiagnosticsExport/Results_CCAE.zip")
+}
+
+DatabaseConnector::disconnect(connection)
