@@ -66,19 +66,16 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 
 schema <- "legendt2dm"
 
-connection <- DatabaseConnector::connect(connectionDetails = connectionDetails)
-
 # Create cohort diagnostics on remote database
 if (FALSE) { # Do this once!
-  cohortDiagnosticsScheme <- CohortDiagnostics:::getResultsDataModelSpecifications()
 
   CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails,
-                                            schema = schema)
+                                                schema = schema,
+                                                prefix = "class")
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
     schema = schema,
+    prefix = "class",
     zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/cohortDiagnosticsExport/Results_CCAE.zip")
 }
-
-DatabaseConnector::disconnect(connection)

@@ -4,17 +4,29 @@ source("R/Tables.R")
 source("R/Plots.R")
 source("R/Results.R")
 
-# shinySettings <- list(connectionDetails = DatabaseConnector::createConnectionDetails(dbms = "postgresql",
-#                                              server = "localhost/ohdsi",
-#                                              user = "postgres",
-#                                              password = Sys.getenv("pwPostgres")),
-#                       resultsDatabaseSchema =  "phenotype_library",
-#                       vocabularyDatabaseSchema =  "phenotype_library")
-# shinySettings <- list(dataFolder = "s:/examplePackageOutput")
+# connectionDetails <- DatabaseConnector::createConnectionDetails(
+#   dbms = "postgresql",
+#   server = paste(keyring::key_get("legendt2dmServer"),
+#                  keyring::key_get("legendt2dmDatabase"),
+#                  sep = "/"),
+#   user = keyring::key_get("legendt2dmUser"),
+#   password = keyring::key_get("legendt2dmPassword"))
+#
+# shinySettings <- list(connectionDetails = connectionDetails,
+#                       resultsDatabaseSchema = "legendt2dm",
+#                       vocabularyDatabaseSchema = "legendt2dm",
+#                       prefix = "class",
+#                       dataFolder = NULL,
+#                       dataFile = NULL,
+#                       aboutText = NULL,
+#                       cohortBaseUrl = "https://atlas.ohdsi.org/#/cohortdefinition/",
+#                       conceptBaseUrl = "https://athena.ohdsi.org/search-terms/terms/")
+
 
 # Settings when running on server:
 defaultLocalDataFolder <- "data"
 defaultLocalDataFile <- "PreMerged.RData"
+defaultPrefix <- NULL
 
 connectionPool <- NULL
 defaultServer <- Sys.getenv("phoebedbServer")
@@ -105,6 +117,7 @@ if (!exists("shinySettings")) {
     )
     resultsDatabaseSchema <- defaultResultsSchema
     vocabularyDatabaseSchema <- defaultVocabularySchema
+    prefix <- defaultPrefix
   } else {
     dataFolder <- defaultLocalDataFolder
   }
@@ -138,6 +151,7 @@ if (!exists("shinySettings")) {
     }
     resultsDatabaseSchema <- shinySettings$resultsDatabaseSchema
     vocabularyDatabaseSchema <- shinySettings$vocabularyDatabaseSchema
+    prefix <- shinySettings$prefix
   } else {
     dataFolder <- shinySettings$dataFolder
   }
@@ -164,10 +178,16 @@ if (databaseMode) {
   resultsTablesOnServer <- tolower(DatabaseConnector::dbListTables(connectionPool, schema = resultsDatabaseSchema))
 
   loadResultsTable <- function(tableName, required = FALSE) {
+
+    dbTableName <- tableName
+    if (!is.null(prefix)) {
+      dbTableName <- paste0(prefix, "_", tableName)
+    }
+
     if (required || tableName %in% resultsTablesOnServer) {
       tryCatch({
         table <- DatabaseConnector::dbReadTable(connectionPool,
-                                                paste(resultsDatabaseSchema, tableName, sep = "."))
+                                                paste(resultsDatabaseSchema, dbTableName, sep = "."))
       }, error = function(err) {
         stop("Error reading from ", paste(resultsDatabaseSchema, tableName, sep = "."), ": ", err$message)
       })
