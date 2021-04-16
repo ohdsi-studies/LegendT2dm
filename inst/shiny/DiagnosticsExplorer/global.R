@@ -26,7 +26,6 @@ source("R/Results.R")
 # Settings when running on server:
 defaultLocalDataFolder <- "data"
 defaultLocalDataFile <- "PreMerged.RData"
-defaultPrefix <- NULL
 
 connectionPool <- NULL
 defaultServer <- Sys.getenv("phoebedbServer")
@@ -117,7 +116,6 @@ if (!exists("shinySettings")) {
     )
     resultsDatabaseSchema <- defaultResultsSchema
     vocabularyDatabaseSchema <- defaultVocabularySchema
-    prefix <- defaultPrefix
   } else {
     dataFolder <- defaultLocalDataFolder
   }
@@ -151,7 +149,6 @@ if (!exists("shinySettings")) {
     }
     resultsDatabaseSchema <- shinySettings$resultsDatabaseSchema
     vocabularyDatabaseSchema <- shinySettings$vocabularyDatabaseSchema
-    prefix <- shinySettings$prefix
   } else {
     dataFolder <- shinySettings$dataFolder
   }
@@ -178,16 +175,10 @@ if (databaseMode) {
   resultsTablesOnServer <- tolower(DatabaseConnector::dbListTables(connectionPool, schema = resultsDatabaseSchema))
 
   loadResultsTable <- function(tableName, required = FALSE) {
-
-    dbTableName <- tableName
-    if (!is.null(prefix)) {
-      dbTableName <- paste0(prefix, "_", tableName)
-    }
-
     if (required || tableName %in% resultsTablesOnServer) {
       tryCatch({
         table <- DatabaseConnector::dbReadTable(connectionPool,
-                                                paste(resultsDatabaseSchema, dbTableName, sep = "."))
+                                                paste(resultsDatabaseSchema, tableName, sep = "."))
       }, error = function(err) {
         stop("Error reading from ", paste(resultsDatabaseSchema, tableName, sep = "."), ": ", err$message)
       })

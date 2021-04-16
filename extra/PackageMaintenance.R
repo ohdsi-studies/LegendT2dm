@@ -64,18 +64,38 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("ohdsiPostgresUser"),
   password = keyring::key_get("ohdsiPostgresPassword"))
 
-schema <- "legendt2dm"
+grantPermission <- function(connectionDetails,schema) {
+  sql <- paste0("grant select on all tables in schema ", schema, " to legendt2dm_readonly;")
+  connection <- DatabaseConnector::connect(connectionDetails)
+  DatabaseConnector::executeSql(connection, sql)
+  DatabaseConnector::disconnect(connection)
+}
 
 # Create cohort diagnostics on remote database
 if (FALSE) { # Do this once!
 
-  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails,
-                                                schema = schema,
-                                                prefix = "class")
+  # Class
+
+  classSchema <- "legendt2dm_class_diagnostics"
+  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = classSchema)
+
+  grantPermission(connectionDetails = connectionDetails, schema = classSchema)
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
-    schema = schema,
-    prefix = "class",
+    schema = classSchema,
     zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/cohortDiagnosticsExport/Results_CCAE.zip")
+
+
+  # Outcome
+
+  outcomeSchema <- "legendt2dm_outcome_diagnostics"
+  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = outcomeSchema)
+
+  grantPermission(connectionDetails = connectionDetails, schema = outcomeSchema)
+
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = outcomeSchema,
+    zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/MCDR/outcomeDiagnosticsExport/Results_MDCR.zip")
 }
