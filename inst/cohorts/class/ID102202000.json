@@ -2842,6 +2842,41 @@
 ],
 "Groups": [] 
 } 
+},
+{
+ "name": "No prior metformin use",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugEra": {
+ "CodesetId":           7 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":          -1 
+},
+"End": {
+ "Days":           0,
+"Coeff":           1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": false,
+"Occurrence": {
+ "Type":           0,
+"Count":           0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
 } 
 ],
 "EndStrategy": {
