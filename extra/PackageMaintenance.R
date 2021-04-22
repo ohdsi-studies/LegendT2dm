@@ -20,15 +20,15 @@ OhdsiRTools::checkUsagePackage("LegendT2dm")
 OhdsiRTools::updateCopyrightYearFolder()
 devtools::spell_check()
 
-
 baseUrl <- "http://atlas-covid19.ohdsi.org:80/WebAPI"
+baseUrl <- keyring::key_get("baseUrl")
 
 # Import outcome definitions
 ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/OutcomesOfInterest.csv",
                                                 baseUrl = baseUrl,
                                                 insertTableSql = FALSE,
                                                 insertCohortCreationR = FALSE,
-                                                generateStats = FALSE,
+                                                generateStats = TRUE,
                                                 packageName = "LegendT2dm")
 
 
