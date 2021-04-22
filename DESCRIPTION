@@ -23,12 +23,24 @@ Imports:
     CirceR (>= 0.0.1),
     PhenotypeLibrary (>= 0.0.1),
     readr (>= 1.4.0),
-    trackdown,
     plyr,
-    meta
+    dplyr,
+    meta,
+    diffr
 Suggests:
     testthat,
-    ROhdsiWebApi
+    ROhdsiWebApi,
+    shiny,
+    shinydashboard,
+    shinyWidgets,
+    DT,
+    htmltools,
+    scales,
+    pool,
+    tidyr,
+    ggiraph,
+    stringr,
+    purrr
 Remotes:
     ohdsi/FeatureExtraction,
     ohdsi/CohortMethod,
@@ -36,7 +48,7 @@ Remotes:
     ohdsi/CohortDiagnostics,
     ohdsi/ROhdsiWebApi,
     ohdsi/PhenotypeLibrary,
-    januz/rmdrive
+    ohdsi/CirceR
 License: Apache License 2.0
 LazyData: true
 RoxygenNote: 7.1.1
