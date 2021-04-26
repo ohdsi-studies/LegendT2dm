@@ -135,6 +135,7 @@ baseCohort <- readRDS("baseCohort.rds")
 generateStats <- TRUE
 
 permutations <- readr::read_csv("inst/settings/classComparisons.csv")
+# permutations <- readr::read_csv("inst/settings/testComparisons.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
@@ -312,6 +313,10 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     cohort$expression$InclusionRules[[met + 1]]$description <- NULL
     cohort$expression$InclusionRules[[met]] <- NULL
     delta <- delta + 1
+  } else if (permutations$met == "test") {
+    cohort$expression$InclusionRules[[met]]$description <- NULL
+    cohort$expression$InclusionRules[[met]]$expression$Type <- "NONE"
+    cohort$expression$InclusionRules[[met + 1]] <- NULL
   } else {
     stop("Unknown metformin type")
   }

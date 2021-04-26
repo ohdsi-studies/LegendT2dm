@@ -1,0 +1,5 @@
+cohortId,targetId,comparator1Id,comparator2Id,comparator3Id,age,sex,race,cvd,renal,tar,met
+101300000,10,20,30,40,any,any,any,any,any,ot1,with
+201300000,20,10,30,40,any,any,any,any,any,ot1,with
+301300000,30,10,20,40,any,any,any,any,any,ot1,with
+401300000,40,10,20,30,any,any,any,any,any,ot1,with
