@@ -17,13 +17,13 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms = dbms,
                                                                 password = pw,
                                                                 port = port)
 
-# cdmDatabaseSchema <- "cdm_ibm_ccae_v1191.dbo"
-# cohortDatabaseSchema <- "scratch.dbo"
-# databaseId <- "CCAE"
-# databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
-# databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
-# tablePrefix <- "legend_t2md_ccae"
-# outputFolder <- "d:/LegendT2dmOutput_ccae"
+cdmDatabaseSchema <- "cdm_ibm_ccae_v1191.dbo"
+cohortDatabaseSchema <- "scratch.dbo"
+databaseId <- "CCAE"
+databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
+databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
+tablePrefix <- "legend_t2md_ccae"
+outputFolder <- "d:/LegendT2dmOutput_ccae2"
 
 # cdmDatabaseSchema <- "cdm_ibm_mdcr_v1192.dbo"
 # cohortDatabaseSchema <- "scratch.dbo"
@@ -50,29 +50,83 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms = dbms,
 # tablePrefix <- "legend_t2md_optum"
 # outputFolder <- "d:/LegendT2dmOutput_optum"
 
-cdmDatabaseSchema <- "cdm_ibm_mdcd_v1259.dbo"
-cohortDatabaseSchema <- "scratch.dbo"
-databaseId <- "MDCD"
-databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
-databaseDescription <- "IBM Health MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data. [For further information link to RWE site for Truven MDCD."
-tablePrefix <- "legend_t2md_mdcd"
-outputFolder <- "s:/LegendT2dmOutput_mdcd"
+# cdmDatabaseSchema <- "cdm_ibm_mdcd_v1259.dbo"
+# cohortDatabaseSchema <- "scratch.dbo"
+# databaseId <- "MDCD"
+# databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
+# databaseDescription <- "IBM Health MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data. [For further information link to RWE site for Truven MDCD."
+# tablePrefix <- "legend_t2md_mdcd"
+# outputFolder <- "d:/LegendT2dmOutput_mdcd2"
 
 
 # Feasibility assessment ---------------------------------------------------------
-assessPhenotypes(connectionDetails = connectionDetails,
-                 cdmDatabaseSchema = cdmDatabaseSchema,
-                 oracleTempSchema = oracleTempSchema,
-                 cohortDatabaseSchema = cohortDatabaseSchema,
-                 outputFolder = outputFolder,
-                 tablePrefix = tablePrefix,
-                 databaseId = databaseId,
-                 databaseName = databaseName,
-                 databaseDescription = databaseDescription,
-                 createCohorts = TRUE,
-                 runCohortDiagnostics = TRUE)
+# assessPhenotypes(connectionDetails = connectionDetails,
+#                  cdmDatabaseSchema = cdmDatabaseSchema,
+#                  oracleTempSchema = oracleTempSchema,
+#                  cohortDatabaseSchema = cohortDatabaseSchema,
+#                  outputFolder = outputFolder,
+#                  tablePrefix = tablePrefix,
+#                  databaseId = databaseId,
+#                  databaseName = databaseName,
+#                  databaseDescription = databaseDescription,
+#                  createCohorts = FALSE,
+#                  runCohortDiagnostics = TRUE)
 
-# Code demonstrating how to view the results --------------------------------------
-exportFolder <- file.path(outputFolder, "cohortDiagnosticsExport")
-CohortDiagnostics::preMergeDiagnosticsFiles(exportFolder)
-CohortDiagnostics::launchDiagnosticsExplorer(exportFolder)
+
+
+cohortTable <- paste(tablePrefix, "cohort", sep = "_")
+
+CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
+                                        cdmDatabaseSchema = cdmDatabaseSchema,
+                                        cohortDatabaseSchema = cohortDatabaseSchema,
+                                        oracleTempSchema = oracleTempSchema,
+                                        cohortTable = cohortTable,
+                                        packageName = "LegendT2dm",
+                                        cohortToCreateFile = "settings/testCohortsToCreate.csv",
+                                        generateInclusionStats = TRUE,
+                                        inclusionStatisticsFolder = outputFolder)
+
+sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
+                                         "LegendT2dm",
+                                         dbms = connectionDetails$dbms,
+                                         oracleTempSchema = oracleTempSchema,
+                                         cdm_database_schema = cdmDatabaseSchema,
+                                         work_database_schema = cohortDatabaseSchema,
+                                         study_cohort_table = cohortTable)
+connection <- DatabaseConnector::connect(connectionDetails)
+counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
+DatabaseConnector::disconnect(connection)
+counts$databaseId <- databaseId
+#counts <- addCohortNames(counts)
+write.csv(counts, file.path(outputFolder, "testCohortCounts.csv"), row.names = FALSE)
+
+CohortDiagnostics::runCohortDiagnostics(packageName = "LegendT2dm",
+                                        cohortToCreateFile = "settings/testCohortsToCreate.csv",
+                                        connectionDetails = connectionDetails,
+                                        cdmDatabaseSchema = cdmDatabaseSchema,
+                                        oracleTempSchema = oracleTempSchema,
+                                        cohortDatabaseSchema = cohortDatabaseSchema,
+                                        cohortTable = paste(tablePrefix, "cohort", sep = "_"),
+                                        inclusionStatisticsFolder = outputFolder,
+                                        exportFolder = file.path(outputFolder, "testCohortDiagnosticsExport"),
+                                        databaseId = databaseId,
+                                        databaseName = databaseName,
+                                        databaseDescription = databaseDescription,
+                                        runInclusionStatistics = TRUE,
+                                        runBreakdownIndexEvents = TRUE,
+                                        runIncludedSourceConcepts = TRUE,
+                                        runCohortCharacterization = TRUE,
+                                        #runTemporalCohortCharacterization = TRUE,
+                                        runCohortOverlap = FALSE,
+                                        runOrphanConcepts = TRUE,
+                                        runIncidenceRate = TRUE,
+                                        runTimeDistributions = TRUE,
+                                        minCellCount = 5)
+
+LegendT2dm::launchCohortExplorer(connectionDetails = connectionDetails,
+                                        cdmDatabaseSchema = cdmDatabaseSchema,
+                                        cohortDatabaseSchema = cohortDatabaseSchema,
+                                        cohortTable = paste(tablePrefix, "cohort", sep = "_"),
+                                        cohortId = 101300000, # c(201300000, 301300000, 401300000),
+                                        sampleSize = 100)
+

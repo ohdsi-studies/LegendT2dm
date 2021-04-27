@@ -3,5 +3,6 @@
 export(assessPhenotypes)
 export(createClassCohorts)
 export(launchDiagnosticsExplorer)
+export(launchCohortExplorer)
 importFrom(dplyr,`%>%`)
 importFrom(dplyr,pull)

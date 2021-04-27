@@ -313,9 +313,10 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     cohort$expression$InclusionRules[[met + 1]]$description <- NULL
     cohort$expression$InclusionRules[[met]] <- NULL
     delta <- delta + 1
-  } else if (permutations$met == "test") {
+  } else if (permutation$met == "test") {
     cohort$expression$InclusionRules[[met]]$description <- NULL
-    cohort$expression$InclusionRules[[met]]$expression$Type <- "NONE"
+    cohort$expression$InclusionRules[[met]]$expression$Type <- "AT_MOST"
+    cohort$expression$InclusionRules[[met]]$expression$Count <- 0
     cohort$expression$InclusionRules[[met + 1]] <- NULL
   } else {
     stop("Unknown metformin type")
@@ -390,8 +391,8 @@ classCohortsToCreate <- permutations %>%
          name = paste0("class/", name)) %>%
   select(atlasId, atlasName, cohortId, name)
 
-readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
-
+# readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
+readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
 # TODO Move to separate file
 
 # Generate ingredient-level cohorts

@@ -1,60 +1,60 @@
 cohortId,atlasId,atlasName,name
 1,21390,3pt MACE,outcome/3pt_MACE
 2,21389,4pt MACE,outcome/4pt_MACE
-2,7364,Acute myocardial infarction,outcome/Acute_myocardial_infarction
-28,7382,Acute renal failure,outcome/Acute_renal_failure
-52,7368,Hospitalization with heart failure,outcome/Hospitalization_with_heart_failure
-60,7384,Measured renal dysfunction,outcome/Measured_renal_dysfunction
-18,7464,Stroke,outcome/Stroke
-64,7365,Sudden cardiac death,outcome/Sudden_cardiac_death
-24,7397,Abdominal pain,outcome/Abdominal_pain
-25,7415,Abnormal weight gain,outcome/Abnormal_weight_gain
-26,7416,Abnormal weight loss,outcome/Abnormal_weight_loss
-7,7391,Diarrhea,outcome/Diarrhea
-15,7389,Nausea,outcome/Nausea
-71,7390,Vomiting,outcome/Vomiting
-27,7400,Acute pancreatitis,outcome/Acute_pancreatitis
-29,7361,All-cause mortality,outcome/All-cause_mortality
-30,7378,Anaphylactoid reaction,outcome/Anaphylactoid_reaction
-31,7412,Anemia,outcome/Anemia
-32,7377,Angioedema,outcome/Angioedema
-33,7407,Anxiety,outcome/Anxiety
-34,7404,Bradycardia,outcome/Bradycardia
-35,7399,Cardiac arrhythmia,outcome/Cardiac_arrhythmia
-37,7362,Cardiovascular-related mortality,outcome/Cardiovascular-related_mortality
-38,7396,Chest pain or angina,outcome/Chest_pain_or_angina
-39,7373,Kidney disease,outcome/Kidney_disease
-40,7366,Coronary heart disease,outcome/Coronary_heart_disease
-41,7388,Cough,outcome/Cough
-5,7394,Decreased libido,outcome/Decreased_libido
-42,7414,Dementia,outcome/Dementia
-43,7405,Depression,outcome/Depression
-44,7409,Edema,outcome/Edema
-45,7374,End stage renal disease,outcome/End_stage_renal_disease
-46,7411,Fall,outcome/Fall
-9,7376,Gastrointestinal bleeding,outcome/Gastrointestinal_bleeding
-47,7413,Gout,outcome/Gout
-48,7392,Headache,outcome/Headache
-49,7369,Heart failure,outcome/Heart_failure
-50,7372,Hemorrhagic stroke,outcome/Hemorrhagic_stroke
-51,7381,Hepatic failure,outcome/Hepatic_failure
-53,7371,Hospitalization with preinfarction syndrome,outcome/Hospitalization_with_preinfarction_syndrome
-54,7383,Hyperkalemia,outcome/Hyperkalemia
-55,7386,Hypokalemia,outcome/Hypokalemia
-56,7417,Hypomagnesemia,outcome/Hypomagnesemia
-11,7387,Hyponatremia,outcome/Hyponatremia
-12,7379,Hypotension,outcome/Hypotension
-57,7395,Impotence,outcome/Impotence
-58,7363,Ischemic stroke,outcome/Ischemic_stroke
-59,7375,Malignant neoplasm,outcome/Malignant_neoplasm
-61,7380,Neutropenia or agranulocytosis,outcome/Neutropenia_or_agranulocytosis
-62,7408,Rash,outcome/Rash
-63,7418,Rhabdomyolysis,outcome/Rhabdomyolysis
-65,7410,Syncope,outcome/Syncope
-66,7402,Thrombocytopenia,outcome/Thrombocytopenia
-67,7370,Transient ischemic attack,outcome/Transient_ischemic_attack
-68,7403,Type 2 diabetes mellitus,outcome/Type_2_diabetes_mellitus
-69,7406,Vasculitis,outcome/Vasculitis
-70,7398,Venous thromboembolic events,outcome/Venous_thromboembolic_events
-23,7393,Vertigo,outcome/Vertigo
-72,7614,Chronic kidney disease,outcome/Chronic_kidney_disease
+3,7364,Acute myocardial infarction,outcome/Acute_myocardial_infarction
+4,7382,Acute renal failure,outcome/Acute_renal_failure
+5,7368,Hospitalization with heart failure,outcome/Hospitalization_with_heart_failure
+6,7384,Measured renal dysfunction,outcome/Measured_renal_dysfunction
+7,7464,Stroke,outcome/Stroke
+8,7365,Sudden cardiac death,outcome/Sudden_cardiac_death
+9,7397,Abdominal pain,outcome/Abdominal_pain
+10,7415,Abnormal weight gain,outcome/Abnormal_weight_gain
+11,7416,Abnormal weight loss,outcome/Abnormal_weight_loss
+12,7391,Diarrhea,outcome/Diarrhea
+13,7389,Nausea,outcome/Nausea
+14,7390,Vomiting,outcome/Vomiting
+15,7400,Acute pancreatitis,outcome/Acute_pancreatitis
+16,7361,All-cause mortality,outcome/All-cause_mortality
+17,7378,Anaphylactoid reaction,outcome/Anaphylactoid_reaction
+18,7412,Anemia,outcome/Anemia
+19,7377,Angioedema,outcome/Angioedema
+20,7407,Anxiety,outcome/Anxiety
+21,7404,Bradycardia,outcome/Bradycardia
+22,7399,Cardiac arrhythmia,outcome/Cardiac_arrhythmia
+23,7362,Cardiovascular-related mortality,outcome/Cardiovascular-related_mortality
+24,7396,Chest pain or angina,outcome/Chest_pain_or_angina
+25,7373,Kidney disease,outcome/Kidney_disease
+26,7366,Coronary heart disease,outcome/Coronary_heart_disease
+27,7388,Cough,outcome/Cough
+28,7394,Decreased libido,outcome/Decreased_libido
+29,7414,Dementia,outcome/Dementia
+30,7405,Depression,outcome/Depression
+31,7409,Edema,outcome/Edema
+32,7374,End stage renal disease,outcome/End_stage_renal_disease
+33,7411,Fall,outcome/Fall
+34,7376,Gastrointestinal bleeding,outcome/Gastrointestinal_bleeding
+35,7413,Gout,outcome/Gout
+36,7392,Headache,outcome/Headache
+37,7369,Heart failure,outcome/Heart_failure
+38,7372,Hemorrhagic stroke,outcome/Hemorrhagic_stroke
+39,7381,Hepatic failure,outcome/Hepatic_failure
+40,7371,Hospitalization with preinfarction syndrome,outcome/Hospitalization_with_preinfarction_syndrome
+41,7383,Hyperkalemia,outcome/Hyperkalemia
+42,7386,Hypokalemia,outcome/Hypokalemia
+43,7417,Hypomagnesemia,outcome/Hypomagnesemia
+44,7387,Hyponatremia,outcome/Hyponatremia
+45,7379,Hypotension,outcome/Hypotension
+46,7395,Impotence,outcome/Impotence
+47,7363,Ischemic stroke,outcome/Ischemic_stroke
+48,7375,Malignant neoplasm,outcome/Malignant_neoplasm
+49,7380,Neutropenia or agranulocytosis,outcome/Neutropenia_or_agranulocytosis
+50,7408,Rash,outcome/Rash
+51,7418,Rhabdomyolysis,outcome/Rhabdomyolysis
+52,7410,Syncope,outcome/Syncope
+53,7402,Thrombocytopenia,outcome/Thrombocytopenia
+54,7370,Transient ischemic attack,outcome/Transient_ischemic_attack
+55,7403,Type 2 diabetes mellitus,outcome/Type_2_diabetes_mellitus
+56,7406,Vasculitis,outcome/Vasculitis
+57,7398,Venous thromboembolic events,outcome/Venous_thromboembolic_events
+58,7393,Vertigo,outcome/Vertigo
+59,7614,Chronic kidney disease,outcome/Chronic_kidney_disease

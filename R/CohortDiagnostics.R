@@ -190,3 +190,43 @@ ensure_installed <- function(pkg) {
     }
   }
 }
+
+#' Launch the CohortExplorer Shiny app
+#'
+#' @template CohortTable
+#'
+#' @template CdmDatabaseSchema
+#'
+#' @param connectionDetails    An object of type \code{connectionDetails} as created using the
+#'                             \code{\link[DatabaseConnector]{createConnectionDetails}} function in the
+#'                             DatabaseConnector package.
+#' @param cohortId             The ID of the cohort.
+#' @param sampleSize           Number of subjects to sample from the cohort. Ignored if subjectIds is specified.
+#' @param subjectIds           A vector of subject IDs to view.
+#'
+#' @details
+#' Launches a Shiny app that allows the user to explore a cohort of interest.
+#'
+#' @export
+launchCohortExplorer <- function(connectionDetails,
+                                 cdmDatabaseSchema,
+                                 cohortDatabaseSchema,
+                                 cohortTable,
+                                 cohortId,
+                                 sampleSize = 100,
+                                 subjectIds = NULL) {
+  ensure_installed("shiny")
+  ensure_installed("DT")
+  ensure_installed("plotly")
+  ensure_installed("RColorBrewer")
+  .GlobalEnv$shinySettings <- list(connectionDetails = connectionDetails,
+                                   cdmDatabaseSchema = cdmDatabaseSchema,
+                                   cohortDatabaseSchema = cohortDatabaseSchema,
+                                   cohortTable = cohortTable,
+                                   cohortDefinitionId = cohortId,
+                                   sampleSize = sampleSize,
+                                   subjectIds = subjectIds)
+  on.exit(rm("shinySettings", envir = .GlobalEnv))
+  appDir <- system.file("shiny", "CohortExplorer", package = "CohortDiagnostics")
+  shiny::runApp(appDir)
+}
