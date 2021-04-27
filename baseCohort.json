@@ -3181,7 +3181,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   0,
 "Count":                                                   0,
@@ -3207,7 +3207,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   0,
 "Count":                                                   0,
@@ -3244,7 +3244,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   2,
 "Count":                                                   1,
@@ -3284,7 +3284,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   2,
 "Count":                                                   1,
@@ -3310,7 +3310,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   2,
 "Count":                                                   3,
@@ -3346,7 +3346,7 @@
 "UseEventEnd": false 
 },
 "RestrictVisit": false,
-"IgnoreObservationPeriod": false,
+"IgnoreObservationPeriod": true,
 "Occurrence": {
  "Type":                                                   0,
 "Count":                                                   0,
