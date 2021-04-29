@@ -121,7 +121,7 @@
 		},
 		{
 			"id" : 3,
-			"name" : "[LEGEND HTN] Stroke (ischemic or hemorrhagic)",
+			"name" : "[LEGEND-T2DM] Stroke (ischemic or hemorrhagic)",
 			"expression" : {
 				"items" : [
 					{

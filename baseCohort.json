@@ -1169,6 +1169,23 @@
 "isExcluded": false,
 "includeDescendants": true,
 "includeMapped": false 
+},
+{
+ "concept": {
+ "CONCEPT_ID":                                            21600713,
+"CONCEPT_NAME": "INSULINS AND ANALOGUES",
+"STANDARD_CONCEPT": "C",
+"STANDARD_CONCEPT_CAPTION": "Classification",
+"INVALID_REASON": "V",
+"INVALID_REASON_CAPTION": "Valid",
+"CONCEPT_CODE": "A10A",
+"DOMAIN_ID": "Drug",
+"VOCABULARY_ID": "ATC",
+"CONCEPT_CLASS_ID": "ATC 3rd" 
+},
+"isExcluded": false,
+"includeDescendants": true,
+"includeMapped": false 
 } 
 ] 
 } 

@@ -121,7 +121,7 @@
 		},
 		{
 			"id" : 3,
-			"name" : "[LEGEND HTN] Acute myocardial Infarction",
+			"name" : "[LEGEND-T2DM] Acute myocardial Infarction",
 			"expression" : {
 				"items" : [
 					{
