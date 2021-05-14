@@ -1,0 +1,361 @@
+---
+title: "| OPERATIONS MANUAL\n| \n| Large-scale evidence generation and evaluation
+  across a network of databases for type 2 diabetes mellitus\n"
+fontsize: 12pt
+geometry: margin=1in
+output:
+  bookdown::html_document2:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    number_sections: yes
+    number_tables: yes
+    css: "style.css"
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    # citation_package: natbib
+    includes:
+      before_body: title.tex
+header-includes:
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{header.tex}
+longtable: yes
+mainfont: Arial
+bibliography: Protocol.bib
+params:
+  date: '2020-09-24'
+  version: 0.0.99
+subtitle: 'Version: `r params$version`'
+link-citations: true
+csl: jamia.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
+library(dplyr)
+options(knitr.kable.NA = "")
+
+pdf2png <- function(path) {
+  # only do the conversion for non-LaTeX output
+  if (knitr::is_latex_output()) {
+    return(path)
+  }
+  path2 <- xfun::with_ext(path, "png")
+  img <- magick::image_read_pdf(path)
+  magick::image_write(img, path2, format = "png")
+  path2
+}
+
+
+latex_table_font_size <- 8
+```
+
+# TODO List {-}
+
+* Item
+
+# List of Abbreviations
+
+```{r abbreviations, echo=FALSE}
+abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRUE, file = "
+  CDM; Common data model
+  DPP4; Dipeptidyl peptidase-4 
+  GLP1; Glucagon-like peptide-1
+  IRB; Institutional review board
+  LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
+  MACE; Major adverse cardiovascular event
+  MDRR; Minimum detectable risk ratio
+  OHDSI; Observational Health Data Science and Informatics
+  OMOP; Observational Medical Outcomes Partnership
+  PS; Propensity score
+  RCT; Randomized controlled trial
+  SGLT2; Sodium-glucose co-transporter-2
+  T2DM; Type 2 diabetes mellitus
+")
+
+tab <- kable(abbreviations, col.names = NULL, linesep = "", booktabs = TRUE)
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+# Exposure Cohort Counts
+
+For the **Class-vs-Class Study**, we will construct
+$$
+\begin{aligned}
+& (4 \text{ drug-class targets})\ \times \\
+& (2 \text{ On-treatment censoring types})\ \times \\
+& (2 \text{ Prior metformin-use choices}) \\
+& = 16
+\end{aligned}
+$$
+exposure cohort definitions.
+Likewise, for the **Drug-vs-Drug Study**, we will construct
+$$
+\begin{aligned}
+& (22 \text{ drug-ingredient targets})\ \times \\
+& (2 \text{ On-treatment censoring types})\ \times \\
+& (2 \text{ Prior metformin-use choices}) \\
+& = 88
+\end{aligned}
+$$
+exposure cohort definitions.
+For the **Heterogeneity Study**, we will stratify each of these cohort definitions into
+$$
+\begin{aligned}
+& 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\ 
+& 2 \text{ (sex: female / male) } + \\ 
+& 1 \text{ (race: Black) } + \\ 
+& 2 \text{ (cardiovascular risk: lower / higher) } + \\ 
+& 2 \text{ (renal impairment: with/without) } \\ 
+& = 10
+\end{aligned}
+$$
+additional definitions, results in $(16 + 88) \times 10 = 1040$ further cohort definitions.
+
+# Exposure Cohort ID Key
+
+This section documents internal coding used across the three studies to label cohort definitions and their SQL representation.  Each cohort carries 9-digit identifier
+$$ \text{ID}\ [DD][T][M][A][S][R][C][K] $$
+where Table \@ref(tab:drug-codes) reports the target 2-digit drug codes $DD$ and Table \@ref(tab:category-codes) lists the codes for time-at-risk $T$, metformin $M$, age $A$, sex $S$, race $R$, cardiovascular $C$ and renal (kidney) $K$ categories.
+
+```{r drug-codes, echo=FALSE, message=FALSE, warning=FALSE}
+addTab <- function(name, cohortId) {
+  if (cohortId %% 10 != 0) {
+    paste0("\\ \\ \\ \\ ", name)
+  } else {
+    name
+  }
+}
+
+exposures <- read.csv(system.file("settings/ExposuresOfInterest.csv", package = "LegendT2dm"))
+
+drugCodes <- exposures  %>% arrange(cohortId) %>%
+  rowwise() %>%
+  mutate(name = addTab(name, cohortId)) %>%
+  select(name, cohortId) %>%
+  rename(Drug = name, "2-digit Code" = cohortId)
+
+tab <- kable(drugCodes, booktabs = TRUE, linesep = "",
+             caption = "2-Digit Drug Codes") %>% 
+  column_spec(1, width = "10em") %>%
+  column_spec(2, width = "30em")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+```{r category-codes, echo=FALSE, warning=FALSE, message=FALSE}
+categoryCodes <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Category; Value; 1-digit Code
+  Time-at-risk; 
+  ; ITT/OT1; 1
+  ; OT2; 2
+  Metformin; 
+  ; prior; 1
+  ; none; 2
+  Age ;
+  ; any; 0
+  ; younger; 1
+  ; middle; 2
+  ; older; 3
+  Sex ;
+  ; any; 0
+  ; female; 1
+  ; male; 2
+  Race ;
+  ; any; 0
+  ; Black; 1
+  Cardiovascular risk ;
+  ; any; 0
+  ; low; 1
+  ; higher; 2
+  Renal disease ;
+  ; any; 0
+  ; without; 1
+  ; with; 2
+")
+
+footnote <- c("ITT: intent-to-treat; OT1: on-treatment-1; OT2: on-treatment-2")
+
+tab <- kable(categoryCodes, booktabs = TRUE, linesep = "",
+             caption = "Other Cohort Category Codes") %>% 
+  footnote(general = footnote, general_title = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+# Analysis Plan Matrix
+
+For each comparison within each study, we will execute the 7 `CohortMethod` analysis plans in Table \@ref(tab:plan-matrix).
+
+```{r, plan-matrix, echo=FALSE, warning=FALSE}
+design <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  ID; PS-covariates; PS-adjustment; Outcome model; Risk-window end
+  1; ; ; Cox; observational period
+  2; FE defaults; 1-to-1 match; Cox (conditional); target exposure end
+  3; FE defaults; 1-to-1 match; Cox (conditional); target exposure end or escalation
+  4; FE defaults; 1-to-1 match; Cox (conditional); observation period end
+  5; FE defaults; 5 strata; Cox (conditional); target exposure end
+  6; FE defaults; 5 strata; Cox (conditional); target exposure end or escalation
+  7; FE defaults; 5 strata; Cox (conditional); observational period end
+")
+
+footnote <- c("FE: FeatureExtraction package (365 days long-term, 180 days medium-term and 30 days short-term look-back)", 
+              "PS: Propensity score")
+
+tab <- kable(design, linesep = "", booktabs = TRUE,
+             caption = "CohortMethod analysis descriptions") %>% 
+  footnote(general = footnote, general_title = "")
+  
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+# Data models
+
+This document describes the data models for storing the output of the `CohortDiagnostics` and `CohortMethod` study artifacts for the LEGEND-T2DM study.
+
+## Fields with minimum values
+
+Some fields contain patient counts or fractions that are easily converted to patient counts. 
+To prevent identifiability, these fields are subject to a minimum value. 
+When the value falls below this minimum, it is replaced with the negative value of the minimum. 
+For example, if the minimum subject count is 5, and the actual count is 2, the value stored in the data model will be -5, which could be represented as '\<5' to the user. 
+Note that the value 0 is permissible, as it identifies no persons.
+
+
+## Cohort diagnostics data model
+
+```{r echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+specifications <- readr::read_csv(system.file("/settings/resultsDataModelSpecification.csv", package = "CohortDiagnostics")) %>%
+  filter(optional == "No")
+
+tables <- split(specifications, specifications$tableName)
+
+for (table in tables) {
+  header <- sprintf("### Table %s", table$tableName[1])
+  
+  table <- table %>% 
+    select(Field = .data$fieldName, Type = .data$type, Key = .data$primaryKey
+           # , Description = .data$description
+           ) %>%
+    kable(linesep = "", booktabs = TRUE, longtable = TRUE)
+  
+  if (knitr::is_latex_output()) {    
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
+                 column_spec(1, width = "10em") %>%
+                 column_spec(2, width = "5em") %>%
+                 column_spec(3, width = "3em") %>%
+                 column_spec(4, width = "16em"))
+  } else if (knitr::is_html_output()) {
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(bootstrap_options = "striped"))
+  } 
+}
+```
+
+## Study results data model
+
+```{r echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+specifications <- readr::read_csv(system.file("settings/resultsModelSpecs.csv", package = "LegendT2dm")) 
+
+tables <- split(specifications, specifications$tableName)
+
+for (table in tables) {
+  header <- sprintf("### Table %s", table$tableName[1])
+  
+  table <- table %>% 
+    select(Field = .data$fieldName, Type = .data$type, Key = .data$primaryKey
+           # , Description = .data$description
+           ) %>%
+    kable(linesep = "", booktabs = TRUE, longtable = TRUE)
+  
+  if (knitr::is_latex_output()) {    
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
+                 column_spec(1, width = "10em") %>%
+                 column_spec(2, width = "5em") %>%
+                 column_spec(3, width = "3em") %>%
+                 column_spec(4, width = "16em"))
+  } else if (knitr::is_html_output()) {
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(bootstrap_options = "striped"))
+  } 
+}
+```
+
+
+# Database access
+
+# Definitions
+
+## Orphan concepts
+
+Orphan concepts are (source) concepts that likely should be included in a concept set, but aren't, often because of vocabulary issues.
+This is a rough outline of the process:
+
+* Given a concept set expression, find all included concepts.
+* Find all names of those concepts, including synonyms, and the names of source concepts that map to them.
+* Search for concepts (standard and source) that contain any of those names as substring.
+* Filter those concepts to those that are not in the original set of concepts (i.e. orphans).
+* Restrict the set of orphan concepts to those that appear in the CDM database as either source concept or standard concept.
+
+

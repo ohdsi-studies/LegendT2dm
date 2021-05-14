@@ -1,0 +1,348 @@
+---
+title: "Shared Resource Examples"
+fontsize: 11pt
+geometry: margin=1in
+output:
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: no
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    # citation_package: natbib
+    includes:
+      before_body: title.tex
+header-includes:
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{grant_header.tex}
+longtable: yes
+mainfont: Arial
+bibliography: Protocol.bib
+params:
+  version: 0.0.99
+subtitle: ''
+link-citations: true
+csl: jamia.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
+library(dplyr)
+options(knitr.kable.NA = "")
+
+pdf2png <- function(path) {
+  # only do the conversion for non-LaTeX output
+  if (knitr::is_latex_output()) {
+    return(path)
+  }
+  path2 <- xfun::with_ext(path, "png")
+  img <- magick::image_read_pdf(path)
+  magick::image_write(img, path2, format = "png")
+  path2
+}
+
+
+latex_table_font_size <- 8
+```
+
+<!-- # Example Cohort Characterization and Diagnostics Tools -->
+
+
+
+<!-- \begin{figure} -->
+<!-- %\begin{minipage}[t]{0.75\textwidth} -->
+<!-- \centerline{\includegraphics[width=0.8\textwidth]{MockCD}} -->
+<!-- %\vspace{-1.0em} -->
+<!-- %\caption{ -->
+<!-- Preliminary web-based CohortDiagnostics App (to be publicly available) to evaluate LEGEND-T2DM exposure cohorts. -->
+<!-- Panel on left lists various diagnostics, each available in tabular and graphical form. -->
+<!-- Here we show the first 1/3 of the simple base-line demographics table. -->
+<!-- Pairwise cohort comparison in graphical form of -->
+<!-- 10,000s of baseline characteristics clearly shows, for example and as expected, index year imbalance before propensity score adjustment. -->
+<!-- Note the display here reports the CCAE data source of claims from large employers who provide private healthcare coverage. -->
+<!-- Other data sources, such as MDCR (Medicare), well cover older populations. -->
+<!-- %} -->
+<!-- %\end{minipage} -->
+<!-- \end{figure} -->
+
+
+# Example Fully-Specified Exposure Cohort Definitions
+
+```{r test, echo=FALSE}
+
+printConceptSet <- function(conceptSet) {
+
+  markdown <- CirceR::conceptSetPrintFriendly(conceptSet)
+  rows <- unlist(strsplit(markdown, "\\r\\n"))
+  rows <- gsub("^\\|", "", rows)
+  header <- rows[1]
+  data <- readr::read_delim(paste(rows[c(2,4:(length(rows)-2))], 
+                                  collapse = '\n'), delim = '|',)
+  
+  header <- gsub("###", "### Concept:", header)
+  
+  tab <- data %>% mutate_if(is.numeric, format, digits = 10) %>% kable(linesep = "", booktabs = TRUE, longtable = TRUE)
+  
+  if (knitr::is_latex_output()) {    
+    writeLines(header)
+    
+    writeLines(tab %>% 
+      kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
+      column_spec(1, width = "5em") %>%
+      column_spec(2, width = "20em"))   
+  } else if (knitr::is_html_output()) {
+    writeLines(header)
+    
+    writeLines(tab %>% 
+      kable_styling(bootstrap_options = "striped"))
+  } else {
+    writeLines(markdown)
+  }
+}
+
+printCohortClose <- function() {
+  writeLines("")
+  if (knitr::is_html_output()) {
+     writeLines("<hr style=\"border:2px solid gray\"> </hr>")
+  } else {
+    writeLines("------")
+  }
+  writeLines("")
+}
+
+printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL, 
+                                                 withConcepts = TRUE,
+                                                 withClosing = TRUE) {
+  
+  if (is.null(obj)) {
+    obj <- CirceR::cohortExpressionFromJson(json)
+  }
+
+  writeLines(paste("##", name, "\n"))
+  
+  # Print main definition
+  markdown <- CirceR::cohortPrintFriendly(obj)
+  
+  markdown <- gsub("criteria:\\r\\n ", "criteria:\\\r\\\n\\\r\\\n ", markdown)
+  markdown <- gsub("old.\\r\\n\\r\\n", "old.\\\r\\\n", markdown)
+  
+  markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
+  markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
+  
+  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria", markdown)
+  markdown <- gsub("#### \\d+.", "*", markdown)
+  
+  rows <- unlist(strsplit(markdown, "\\r\\n")) 
+  rows <- gsub("^   ", "", rows)
+  markdown <- paste(rows, collapse = "\n")
+  
+  writeLines(markdown)
+
+  # Print concept sets
+  
+  if (withConcepts) {
+    lapply(obj$conceptSets, printConceptSet)
+  }
+  
+  if (withClosing) {
+    printCohortClose()
+  }
+}
+
+printCohortDefinition <- function(info) {
+  json <- SqlRender::readSql(info$jsonFileName)
+  printCohortDefinitionFromNameAndJson(info$name, json)
+}
+
+printInclusionCriteria <- function(obj, removeDescription = FALSE) {
+  
+  markdown <- CirceR::cohortPrintFriendly(obj)
+  markdown <- sub(".*### Inclusion Criteria", "", markdown)
+  markdown <- sub("### Cohort Exit.*", "", markdown)
+  markdown <- gsub("### \\d+.", "##", markdown)
+  markdown <- gsub("criteria:\\r\\n ", "criteria:\\\r\\\n\\\r\\\n ", markdown)
+  
+  rows <- unlist(strsplit(markdown, "\\r\\n")) 
+  rows <- gsub("^   ", "", rows)
+  markdown <- paste(rows, collapse = "\n")
+  
+  writeLines(markdown)
+}
+
+printExitCriteria <- function(obj) {
+  
+  markdown <- CirceR::cohortPrintFriendly(obj)
+  markdown <- sub(".*### Cohort Exit", "", markdown)
+  markdown <- sub("### Cohort Eras.*", "", markdown)
+  markdown <- sub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
+  markdown <- sub("following events:", "following events:\\\r\\\n", markdown)
+  
+  writeLines(markdown)
+}
+
+```
+
+```{r base-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+baseCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101100000.json", package = "LegendT2dm"))
+baseCohort <- RJSONIO::fromJSON(baseCohortJson)
+
+baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13, 14)] # remove CVD, renal and alternative targets
+baseCohortJson <- RJSONIO::toJSON(baseCohort, digits = 50)
+
+printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort / OT1 {#class-cohort}",
+                                     json = baseCohortJson)
+```
+
+## Metformin Use Modifier {#prior-metformin}
+
+```{r met-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+metCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200000.json", package = "LegendT2dm"))
+# metCohort <- RJSONIO::fromJSON(metCohortJson)
+metCohort <- CirceR::cohortExpressionFromJson(metCohortJson)
+
+printInclusionCriteria(metCohort, removeDescription = FALSE)
+```
+
+## Escalation Exit Criteria {#escalation-cohort}
+
+```{r escalation-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "class","ID102100000.json", package = "LegendT2dm"))
+ot2Cohort <- CirceR::cohortExpressionFromJson(ot2CohortJson)
+
+# printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (GLP1 New-User) Cohort / OT2",
+#                                      json = ot2CohortJson, withConcepts = FALSE, withClosing = FALSE)
+
+printExitCriteria(ot2Cohort)
+printConceptSet(ot2Cohort$conceptSets[[14]]) 
+printCohortClose()
+```
+
+## Heterogenity Study Inclusion Criteria {#atlas-subgroups}
+
+```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+removeMetformin <- function(json) {
+  obj <- RJSONIO::fromJSON(json)
+  obj$InclusionRules[[2]] <- NULL
+  RJSONIO::toJSON(obj, digits = 50)
+}
+
+# Age
+youngerJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101210000.json", package = "LegendT2dm"))
+youngerCohort <- CirceR::cohortExpressionFromJson(removeMetformin(youngerJson))
+printInclusionCriteria(youngerCohort)
+
+middleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101220000.json", package = "LegendT2dm"))
+middleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(middleJson))
+printInclusionCriteria(middleCohort)
+
+olderJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101230000.json", package = "LegendT2dm"))
+olderCohort <- CirceR::cohortExpressionFromJson(removeMetformin(olderJson))
+printInclusionCriteria(olderCohort)
+```
+
+```{r heterogenity-cohort2, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Sex
+femaleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101201000.json", package = "LegendT2dm"))
+femaleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(femaleJson))
+printInclusionCriteria(femaleCohort)
+
+maleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101202000.json", package = "LegendT2dm"))
+maleCohort <- CirceR::cohortExpressionFromJson(removeMetformin(maleJson))
+printInclusionCriteria(maleCohort)
+```
+
+```{r heterogenity-cohort-race, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Race
+blackJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200100.json", package = "LegendT2dm"))
+blackCohort <- CirceR::cohortExpressionFromJson(removeMetformin(blackJson))
+printInclusionCriteria(blackCohort)
+```
+
+```{r heterogenity-cohort3, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# CVD
+lowCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200010.json", package = "LegendT2dm"))
+lowCvdCohort <- CirceR::cohortExpressionFromJson(removeMetformin(lowCvdJson))
+
+printInclusionCriteria(lowCvdCohort)
+
+highCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200020.json", package = "LegendT2dm"))
+highCvdCohort <- CirceR::cohortExpressionFromJson(removeMetformin(highCvdJson))
+
+printInclusionCriteria(highCvdCohort)
+
+printConceptSet(lowCvdCohort$conceptSets[[8]]) 
+printConceptSet(lowCvdCohort$conceptSets[[9]])  
+printCohortClose()
+```
+
+```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Renal
+noRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200001.json", package = "LegendT2dm"))
+noRenalCohort <- CirceR::cohortExpressionFromJson(removeMetformin(noRenalJson))
+
+printInclusionCriteria(noRenalCohort)
+
+withRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200002.json", package = "LegendT2dm"))
+
+cohort <- RJSONIO::fromJSON(withRenalJson)
+
+withRenalCohort <- CirceR::cohortExpressionFromJson(removeMetformin(withRenalJson))
+
+printInclusionCriteria(withRenalCohort)
+
+printConceptSet(withRenalCohort$conceptSets[[13]]) 
+printCohortClose()
+```
+
+```{r drug-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+drugCohortJson <- SqlRender::readSql(system.file("cohorts", "drug", "ID111100000.json", package = "LegendT2dm"))
+drugCohort <- CirceR::cohortExpressionFromJson(drugCohortJson)
+
+printCohortDefinitionFromNameAndJson(name = "Drug-vs-Drug Exposure (Alogliptin New-User) Cohort / OT1 {#drug-cohort}",
+                                     json = drugCohortJson, withConcepts = FALSE)
+
+printConceptSet(drugCohort$conceptSets[[1]]) 
+printConceptSet(drugCohort$conceptSets[[15]]) 
+printCohortClose()
+
+```
+
+# Example Full-Specified Outcome Cohort Definitions
+
+```{r, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+invisible(lapply(list(
+  list(name = "Acute myocardial infarction", 
+       jsonFileName = system.file("cohorts/outcome", "Acute_myocardial_infarction.json", package = "LegendT2dm")),
+  list(name = "Hospitalization with heart failure", 
+       jsonFileName = system.file("cohorts/outcome", "Hospitalization_with_heart_failure.json", package = "LegendT2dm")),
+  list(name = "Stroke",
+       jsonFileName = system.file("cohorts/outcome", "Stroke.json", package = "LegendT2dm"))
+  ), printCohortDefinition))
+```
+
+

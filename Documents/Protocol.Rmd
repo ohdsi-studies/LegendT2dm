@@ -1207,14 +1207,3 @@ if (knitr::is_latex_output()) {
   tab
 }
 ```
-
-### Orphan concepts
-
-Orphan concepts are (source) concepts that likely should be included in a concept set, but aren't, often because of vocabulary issues.
-This is a rough outline of the process:
-
-* Given a concept set expression, find all included concepts.
-* Find all names of those concepts, including synonyms, and the names of source concepts that map to them.
-* Search for concepts (standard and source) that contain any of those names as substring.
-* Filter those concepts to those that are not in the original set of concepts (i.e. orphans).
-* Restrict the set of orphan concepts to those that appear in the CDM database as either source concept or standard concept.
