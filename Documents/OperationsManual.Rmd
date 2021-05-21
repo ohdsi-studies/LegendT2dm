@@ -345,6 +345,20 @@ for (table in tables) {
 
 # Database access
 
+All `LegendT2dm` tables are located on OHDSI's public `PostgreSQL` server that is the backend for the apps on (https://data.ohdsi.org).
+Study PIs can provide read-only credentials that can be stored encrypted on individual computers.
+For this latter task, we recommend using the cross-platform `keyring` `R` package to securely store: `legendt2dmServer`, `legendt2dmDatabase`, `legendt2dmUser` and `legendt2dmPassword` and specifying connection details via:
+
+```{r, execute=FALSE}
+legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("legendt2dmServer"),
+                 keyring::key_get("legendt2dmDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("legendt2dmUser"),
+  password = keyring::key_get("legendt2dmPassword"))
+```
+
 # Definitions
 
 ## Orphan concepts

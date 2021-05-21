@@ -81,12 +81,6 @@ latex_table_font_size <- 8
 
 # TODO List {-}
 
-* Evaluate additional outcomes from `LEGEND-HTN` and `PhenotypeLibrary` [here](#addition-outcomes)
-* New citations:
-  - Recent one in Medicare: [@patorno2021comparative]
-  - In VA population: [@xie2020comparative]
-  - New networks meta-analysis in BMJ: [@palmer2021sodium]
-  - Others: [@qiu2021comparative] [@yamada2021cardiovascular]
 * Outcome definition questions:
   - Measured renal dysfx: Cr >= 3 or lower?
   - Glycemic control: A1c <= 7? how frequently?
@@ -243,7 +237,7 @@ Nevertheless, DPP4 inhibitors and sulfonylureas continue to be used in clinical 
 
 Several challenges remain in formulating T2DM treatment recommendations based on existing evidence [@Cefalu2018-mu].
 First, trials of novel agents did not pursue head-to-head comparisons to older agents and were instead designed as additive treatments on the background of commonly used T2DM agents.
-Therefore, the relative cardiovascular efficacy and safety of novel compared with older agents is not known.
+Therefore, the relative cardiovascular efficacy and safety of novel compared with older agents is not known, and indirect estimates have relied on summary-level data restricted to common comparators [@Palmer2021-nl; @Qiu2021-sb; @Yamada2021-hw] and are less reliable [@Puhan2014-ov; @Brignardello-Petersen2020-bx].
 Second, trials of novel agents have tested individual drugs against placebo, but have not directly compared SGLT2 inhibitors with GLP1 receptor agonists in reducing adverse cardiovascular event risk.
 Moreover, there is no evidence to guide the use of individual drugs within each class and across different drug classes, particularly among patients at lower cardiovascular risk than recruited in clinical trials.
 Third, randomized trials focused on cardiovascular efficacy and safety, but were not powered to adequately assess the safety of these agents across a spectrum of non-cardiovascular outcomes.
@@ -277,6 +271,27 @@ We will examine all ${4 \choose 2} = 6$ class-wise comparisons and all ${5 + 6 +
 
 For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes listed in Table \@ref(tab:outcome-table).
 
+<!-- Acute pancreatitis -->
+<!-- Cancer -->
+<!--             Bladder -->
+<!--             Renal -->
+<!--             Breast -->
+<!-- Photosensitivity -->
+<!-- DKA -->
+<!-- Amputation -->
+<!-- Fracture: -->
+<!--             All -->
+<!--             Fracture-related -->
+<!-- VTE -->
+<!-- Infection of male genitalia -->
+<!-- Hypovolemia or dehydration -->
+<!-- Hepatic injury -->
+<!-- Hyperkalemia -->
+<!-- Mycotic genital infection (women) -->
+<!-- Severe hypersensitivity -->
+<!-- ?cutaneous reaction -->
+<!-- Progression of albuminuria (an efficacy outcome based on labs other than renal function) -->
+
 ```{r drug-table, echo=FALSE}
 exposures <- read.csv(system.file("settings/ExposuresOfInterest.csv", package = "LegendT2dm"))
 classes <- exposures %>% filter(type == "Drug") %>% select(class) %>% pull() %>% unique()
@@ -303,10 +318,6 @@ if (knitr::is_latex_output()) {
 } else {
   tab
 }
-```
-
-```{r outcome-table, echo=FALSE}
-
 ```
 
 ## Study Design
@@ -467,7 +478,7 @@ This can allow researchers and stakeholders to understand the heterogeneity of s
 
 ## Outcomes
 
-Across all data sources and pairwise exposure cohorts, we will assess relative risks of **TODO #** cardiovascular and patient-centered outcomes (Table \@ref(outcome-table)).
+Across all data sources and pairwise exposure cohorts, we will assess relative risks of **TODO #** cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
 Primary outcomes of interest are: 
 
 * 3-point major adverse cardiovascular events (MACE), including acute myocardial infarction, stroke, and sudden cardiac death, and
@@ -484,20 +495,20 @@ In data sources with laboratory measurements, secondary outcomes further include
 * glycemic control, and 
 * measured renal dysfunction  
 
-We will also study second-line T2DM drug side-effects and safety concerns highlighted in the 2018 ADA guidelines [@American_Diabetes_Association2018-yz], including:
+We will also study second-line T2DM drug side-effects and safety concerns highlighted in the 2018 ADA guidelines [@American_Diabetes_Association2018-yz] and from RCTs, including:
 
 * abnormal weight change, 
 * genitourinary (GU) infection, 
 * various cancers, and 
-* hypoglycemia 
+* hypoglycemia. 
 
-While we list many patient-centered outcomes as "exploratory" in the table, we use this term to highlight those that are less likely to achieve high statistical power across all data sources due to lower event rates.
-We will employ the same level of systematic rigor in studying outcomes regardless of their label. 
+<!-- While we list many patient-centered outcomes as "exploratory" in the table, we use this term to highlight those that are less likely to achieve high statistical power across all data sources due to lower event rates. -->
+We will employ the same level of systematic rigor in studying outcomes regardless of their primary or secondary label. 
 
-A majority of outcome definitions have been previously implemented and validated in our own work [@Suchard2019-gq; @You_undated-fz; @Ryan2018-ci; @Wang2017-su; @Weinstein2020-ic; @Yuan2018-am] based heavily on prior development by others (see references in Table \@ref(outcome-table)).
+A majority of outcome definitions have been previously implemented and validated in our own work [@Suchard2019-gq; @You_undated-fz; @Ryan2018-ci; @Wang2017-su; @Weinstein2020-ic; @Yuan2018-am] based heavily on prior development by others (see references in Table \@ref(tab:outcome-table)).
 To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.  
 
-```{r outcomes, echo=FALSE, warning=FALSE, results='asis'}
+```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
 outcomes <- read.csv("OutcomeCohortTable.csv")
 
 if (knitr::is_latex_output()) {
@@ -517,7 +528,7 @@ if (knitr::is_latex_output()) {
 }
 
 tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
-      caption = "Committed LEGEND-T2DM data sources and the populations they cover.") %>% 
+      caption = "Cardiovascular and patient-centered safety outcomes for the three LEGEND-T2DM studies.") %>% 
   kable_styling(bootstrap_options = "striped", latex_options = "striped") 
 
 if (knitr::is_latex_output()) {
