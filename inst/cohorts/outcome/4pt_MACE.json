@@ -147,7 +147,7 @@
 		},
 		{
 			"id" : 3,
-			"name" : "[LEGEND HTN] Acute myocardial Infarction",
+			"name" : "Acute myocardial Infarction",
 			"expression" : {
 				"items" : [
 					{
@@ -189,7 +189,7 @@
 		},
 		{
 			"id" : 4,
-			"name" : "[LEGEND HTN] Sudden cardiac death",
+			"name" : "Sudden cardiac death",
 			"expression" : {
 				"items" : [
 					{
@@ -299,7 +299,7 @@
 		},
 		{
 			"id" : 5,
-			"name" : "[LEGEND HTN] Ischemic stroke",
+			"name" : "Ischemic stroke",
 			"expression" : {
 				"items" : [
 					{
@@ -375,7 +375,7 @@
 		},
 		{
 			"id" : 7,
-			"name" : "[LEGEND HTN] intracranial bleed Hemorrhagic stroke",
+			"name" : "Iintracranial bleed Hemorrhagic stroke",
 			"expression" : {
 				"items" : [
 					{
@@ -434,7 +434,7 @@
 		},
 		{
 			"id" : 9,
-			"name" : "[LEGEND HTN] Heart Failure ",
+			"name" : "Heart Failure ",
 			"expression" : {
 				"items" : [
 					{

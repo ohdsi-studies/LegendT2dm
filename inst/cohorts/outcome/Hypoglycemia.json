@@ -4,7 +4,7 @@
 		"CriteriaList" : [
 			{
 				"ConditionOccurrence" : {
-					"CodesetId" : 3,
+					"CodesetId" : 0,
 					"ConditionTypeExclude" : false
 				}
 			}
@@ -17,173 +17,21 @@
 			"Type" : "All"
 		}
 	},
-	"AdditionalCriteria" : {
-		"Type" : "ANY",
-		"CriteriaList" : [
-			{
-				"Criteria" : {
-					"VisitOccurrence" : {
-						"CodesetId" : 2,
-						"VisitTypeExclude" : false
-					}
-				},
-				"StartWindow" : {
-					"Start" : {
-						"Coeff" : -1
-					},
-					"End" : {
-						"Days" : 1,
-						"Coeff" : 1
-					},
-					"UseEventEnd" : false
-				},
-				"EndWindow" : {
-					"Start" : {
-						"Days" : 0,
-						"Coeff" : -1
-					},
-					"End" : {
-						"Coeff" : 1
-					},
-					"UseEventEnd" : true
-				},
-				"RestrictVisit" : false,
-				"IgnoreObservationPeriod" : false,
-				"Occurrence" : {
-					"Type" : 2,
-					"Count" : 1,
-					"IsDistinct" : false
-				}
-			}
-		],
-		"DemographicCriteriaList" : [],
-		"Groups" : []
-	},
 	"ConceptSets" : [
 		{
-			"id" : 2,
-			"name" : "Inpatient or ER visit",
+			"id" : 0,
+			"name" : "Hypoglycemia",
 			"expression" : {
 				"items" : [
 					{
 						"concept" : {
-							"CONCEPT_ID" : 262,
-							"CONCEPT_NAME" : "Emergency Room and Inpatient Visit",
+							"CONCEPT_ID" : 380688,
+							"CONCEPT_NAME" : "Hypoglycemic coma",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "ERIP",
-							"DOMAIN_ID" : "Visit",
-							"VOCABULARY_ID" : "Visit",
-							"CONCEPT_CLASS_ID" : "Visit"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : true,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 9203,
-							"CONCEPT_NAME" : "Emergency Room Visit",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "ER",
-							"DOMAIN_ID" : "Visit",
-							"VOCABULARY_ID" : "Visit",
-							"CONCEPT_CLASS_ID" : "Visit"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : true,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 9201,
-							"CONCEPT_NAME" : "Inpatient Visit",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "IP",
-							"DOMAIN_ID" : "Visit",
-							"VOCABULARY_ID" : "Visit",
-							"CONCEPT_CLASS_ID" : "Visit"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : true,
-						"includeMapped" : false
-					}
-				]
-			}
-		},
-		{
-			"id" : 3,
-			"name" : "[LEGEND-T2DM] Stroke (ischemic or hemorrhagic)",
-			"expression" : {
-				"items" : [
-					{
-						"concept" : {
-							"CONCEPT_ID" : 372924,
-							"CONCEPT_NAME" : "Cerebral artery occlusion",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "20059004",
-							"DOMAIN_ID" : "Condition",
-							"VOCABULARY_ID" : "SNOMED",
-							"CONCEPT_CLASS_ID" : "Clinical Finding"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : false,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 375557,
-							"CONCEPT_NAME" : "Cerebral embolism",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "75543006",
-							"DOMAIN_ID" : "Condition",
-							"VOCABULARY_ID" : "SNOMED",
-							"CONCEPT_CLASS_ID" : "Clinical Finding"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : false,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 376713,
-							"CONCEPT_NAME" : "Cerebral hemorrhage",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "274100004",
-							"DOMAIN_ID" : "Condition",
-							"VOCABULARY_ID" : "SNOMED",
-							"CONCEPT_CLASS_ID" : "Clinical Finding"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : false,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 443454,
-							"CONCEPT_NAME" : "Cerebral infarction",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "432504007",
+							"CONCEPT_CODE" : "267384006",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
@@ -194,53 +42,172 @@
 					},
 					{
 						"concept" : {
-							"CONCEPT_ID" : 441874,
-							"CONCEPT_NAME" : "Cerebral thrombosis",
+							"CONCEPT_ID" : 4048805,
+							"CONCEPT_NAME" : "Non-diabetic hypoglycemic coma",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "71444005",
+							"CONCEPT_CODE" : "230796005",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
 						},
-						"isExcluded" : false,
-						"includeDescendants" : false,
+						"isExcluded" : true,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
 						"concept" : {
-							"CONCEPT_ID" : 439847,
-							"CONCEPT_NAME" : "Intracranial hemorrhage",
+							"CONCEPT_ID" : 4226798,
+							"CONCEPT_NAME" : "Hypoglycemic coma due to diabetes mellitus",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "1386000",
+							"CONCEPT_CODE" : "421725003",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
 						"concept" : {
-							"CONCEPT_ID" : 432923,
-							"CONCEPT_NAME" : "Subarachnoid hemorrhage",
+							"CONCEPT_ID" : 4228112,
+							"CONCEPT_NAME" : "Hypoglycemic coma due to type 1 diabetes mellitus",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "21454007",
+							"CONCEPT_CODE" : "421437000",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36714116,
+							"CONCEPT_NAME" : "Hypoglycemic coma due to type 2 diabetes mellitus",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "719216001",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 24609,
+							"CONCEPT_NAME" : "Hypoglycemia",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "302866003",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 23034,
+							"CONCEPT_NAME" : "Neonatal hypoglycemia",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "52767006",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 4029424,
+							"CONCEPT_NAME" : "Non-diabetic hypoglycemia",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "237637005",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 4029423,
+							"CONCEPT_NAME" : "Hypoglycemia due to diabetes mellitus",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "237633009",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45769876,
+							"CONCEPT_NAME" : "Hypoglycemia due to type 1 diabetes mellitus",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "84371000119108",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45757363,
+							"CONCEPT_NAME" : "Hypoglycemia due to type 2 diabetes mellitus",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "120731000119103",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					}
 				]
@@ -248,7 +215,7 @@
 		}
 	],
 	"QualifiedLimit" : {
-		"Type" : "All"
+		"Type" : "First"
 	},
 	"ExpressionLimit" : {
 		"Type" : "All"
@@ -257,13 +224,13 @@
 	"EndStrategy" : {
 		"DateOffset" : {
 			"DateField" : "StartDate",
-			"Offset" : 7
+			"Offset" : 1
 		}
 	},
 	"CensoringCriteria" : [],
 	"CollapseSettings" : {
 		"CollapseType" : "ERA",
-		"EraPad" : 180
+		"EraPad" : 30
 	},
 	"CensorWindow" : {}
 }

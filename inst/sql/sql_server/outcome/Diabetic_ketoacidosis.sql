@@ -18,86 +18,14 @@ UNION  select c.concept_id
 ) C UNION ALL 
 SELECT 3 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4329847)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (443727)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (4329847)
+  and ca.ancestor_concept_id in (443727)
   and c.invalid_reason is null
 
 ) I
-LEFT JOIN
-(
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (314666)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (314666)
-  and c.invalid_reason is null
-
-) E ON I.concept_id = E.concept_id
-WHERE E.concept_id is null
-) C UNION ALL 
-SELECT 4 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
-( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4048809,321042,442289,4317150,4132309)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (4048809,321042,442289,4317150,4132309)
-  and c.invalid_reason is null
-
-) I
-LEFT JOIN
-(
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (437894)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (437894)
-  and c.invalid_reason is null
-
-) E ON I.concept_id = E.concept_id
-WHERE E.concept_id is null
-) C UNION ALL 
-SELECT 5 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
-( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (372924,375557,443454,441874)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (443454)
-  and c.invalid_reason is null
-
-) I
-) C UNION ALL 
-SELECT 7 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
-( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (376713,439847,432923)
-
-) I
-) C UNION ALL 
-SELECT 9 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
-( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (316139)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (316139)
-  and c.invalid_reason is null
-
-) I
-LEFT JOIN
-(
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (315295)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (315295)
-  and c.invalid_reason is null
-
-) E ON I.concept_id = E.concept_id
-WHERE E.concept_id is null
 ) C
 ;
 
@@ -120,62 +48,6 @@ FROM
   SELECT co.* 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
   JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 3))
-) C
-
-
--- End Condition Occurrence Criteria
-
-UNION ALL
--- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
-FROM 
-(
-  SELECT co.* 
-  FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 4))
-) C
-
-
--- End Condition Occurrence Criteria
-
-UNION ALL
--- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
-FROM 
-(
-  SELECT co.* 
-  FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 5))
-) C
-
-
--- End Condition Occurrence Criteria
-
-UNION ALL
--- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
-FROM 
-(
-  SELECT co.* 
-  FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 7))
-) C
-
-
--- End Condition Occurrence Criteria
-
-UNION ALL
--- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
-FROM 
-(
-  SELECT co.* 
-  FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 9))
 ) C
 
 
@@ -223,14 +95,14 @@ JOIN #Codesets codesets on ((vo.visit_concept_id = codesets.concept_id and codes
 
 -- End Visit Occurrence Criteria
 
-) A on A.person_id = P.person_id  AND A.START_DATE >= P.OP_START_DATE AND A.START_DATE <= P.OP_END_DATE AND A.START_DATE >= P.OP_START_DATE AND A.START_DATE <= DATEADD(day,0,P.START_DATE) AND A.END_DATE >= DATEADD(day,0,P.START_DATE) AND A.END_DATE <= P.OP_END_DATE ) cc 
+) A on A.person_id = P.person_id  AND A.START_DATE >= P.OP_START_DATE AND A.START_DATE <= P.OP_END_DATE AND A.START_DATE >= P.OP_START_DATE AND A.START_DATE <= DATEADD(day,1,P.START_DATE) AND A.END_DATE >= DATEADD(day,0,P.START_DATE) AND A.END_DATE <= P.OP_END_DATE ) cc 
 GROUP BY cc.person_id, cc.event_id
 HAVING COUNT(cc.event_id) >= 1
 -- End Correlated Criteria
 
   ) CQ on E.person_id = CQ.person_id and E.event_id = CQ.event_id
   GROUP BY E.person_id, E.event_id
-  HAVING COUNT(index_id) = 1
+  HAVING COUNT(index_id) > 0
 ) G
 -- End Criteria Group
 ) AC on AC.person_id = pe.person_id and AC.event_id = pe.event_id

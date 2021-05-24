@@ -5,23 +5,23 @@ CREATE TABLE #Codesets (
 ;
 
 INSERT INTO #Codesets (codeset_id, concept_id)
-SELECT 5 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
+SELECT 0 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (31967)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (380688,4226798,36714116,24609,4029423,45757363)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (31967)
+  and ca.ancestor_concept_id in (380688,4226798,36714116,24609,4029423,45757363)
   and c.invalid_reason is null
 
 ) I
 LEFT JOIN
 (
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (30284)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4048805,4228112,23034,4029424,45769876)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (30284)
+  and ca.ancestor_concept_id in (4048805,4228112,23034,4029424,45769876)
   and c.invalid_reason is null
 
 ) E ON I.concept_id = E.concept_id
@@ -47,7 +47,7 @@ FROM
 (
   SELECT co.* 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 5))
+  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 0))
 ) C
 
 

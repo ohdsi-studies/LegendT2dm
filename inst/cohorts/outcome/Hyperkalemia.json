@@ -13,7 +13,7 @@
 					"CodesetId" : 1,
 					"MeasurementTypeExclude" : false,
 					"ValueAsNumber" : {
-						"Value" : 5.6,
+						"Value" : 5.5999999999999996447286,
 						"Op" : "gt"
 					},
 					"Unit" : [
@@ -74,7 +74,7 @@
 				"items" : [
 					{
 						"concept" : {
-							"CONCEPT_ID" : 4.078989e+07,
+							"CONCEPT_ID" : 40789890,
 							"CONCEPT_NAME" : "Potassium | Bld-Ser-Plas",
 							"STANDARD_CONCEPT" : "C",
 							"STANDARD_CONCEPT_CAPTION" : "Classification",

@@ -4,51 +4,35 @@
 		"CriteriaList" : [
 			{
 				"ConditionOccurrence" : {
-					"CodesetId" : 11,
+					"CodesetId" : 0,
+					"First" : true,
 					"ConditionTypeExclude" : false
 				}
 			}
 		],
 		"ObservationWindow" : {
-			"PriorDays" : 0,
+			"PriorDays" : 365,
 			"PostDays" : 0
 		},
 		"PrimaryCriteriaLimit" : {
-			"Type" : "All"
+			"Type" : "First"
 		}
 	},
 	"ConceptSets" : [
 		{
-			"id" : 11,
-			"name" : "Edema",
+			"id" : 0,
+			"name" : "Neoplasm of thyroid gland",
 			"expression" : {
 				"items" : [
 					{
 						"concept" : {
-							"CONCEPT_ID" : 433595,
-							"CONCEPT_NAME" : "Edema",
+							"CONCEPT_ID" : 4131909,
+							"CONCEPT_NAME" : "Neoplasm of thyroid gland",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "267038008",
-							"DOMAIN_ID" : "Condition",
-							"VOCABULARY_ID" : "SNOMED",
-							"CONCEPT_CLASS_ID" : "Clinical Finding"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : true,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 133299,
-							"CONCEPT_NAME" : "Swelling of limb",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "80068009",
+							"CONCEPT_CODE" : "127018007",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
@@ -65,19 +49,13 @@
 		"Type" : "First"
 	},
 	"ExpressionLimit" : {
-		"Type" : "All"
+		"Type" : "First"
 	},
 	"InclusionRules" : [],
-	"EndStrategy" : {
-		"DateOffset" : {
-			"DateField" : "StartDate",
-			"Offset" : 1
-		}
-	},
 	"CensoringCriteria" : [],
 	"CollapseSettings" : {
 		"CollapseType" : "ERA",
-		"EraPad" : 180
+		"EraPad" : 0
 	},
 	"CensorWindow" : {}
 }

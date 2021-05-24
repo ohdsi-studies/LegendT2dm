@@ -23,14 +23,15 @@ devtools::spell_check()
 baseUrl <- "http://atlas-covid19.ohdsi.org:80/WebAPI"
 baseUrl <- keyring::key_get("baseUrl")
 
+
 # Import outcome definitions
+ROhdsiWebApi::authorizeWebApi(baseUrl = baseUrl, authMethod = "windows")
 ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/OutcomesOfInterest.csv",
                                                 baseUrl = baseUrl,
                                                 insertTableSql = FALSE,
                                                 insertCohortCreationR = FALSE,
                                                 generateStats = TRUE,
                                                 packageName = "LegendT2dm")
-
 
 
 # # Create manual and vignette

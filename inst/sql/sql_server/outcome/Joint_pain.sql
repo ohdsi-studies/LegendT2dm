@@ -5,27 +5,11 @@ CREATE TABLE #Codesets (
 ;
 
 INSERT INTO #Codesets (codeset_id, concept_id)
-SELECT 5 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
+SELECT 0 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (31967)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (31967)
-  and c.invalid_reason is null
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (77074)
 
 ) I
-LEFT JOIN
-(
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (30284)
-UNION  select c.concept_id
-  from @vocabulary_database_schema.CONCEPT c
-  join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (30284)
-  and c.invalid_reason is null
-
-) E ON I.concept_id = E.concept_id
-WHERE E.concept_id is null
 ) C
 ;
 
@@ -47,7 +31,7 @@ FROM
 (
   SELECT co.* 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
-  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 5))
+  JOIN #Codesets codesets on ((co.condition_concept_id = codesets.concept_id and codesets.codeset_id = 0))
 ) C
 
 
@@ -131,7 +115,7 @@ with cteEndDates (person_id, end_date) AS -- the magic
 (	
 	SELECT
 		person_id
-		, DATEADD(day,-1 * 30, event_date)  as end_date
+		, DATEADD(day,-1 * 90, event_date)  as end_date
 	FROM
 	(
 		SELECT
@@ -154,7 +138,7 @@ with cteEndDates (person_id, end_date) AS -- the magic
 
 			SELECT
 				person_id
-				, DATEADD(day,30,end_date) as end_date
+				, DATEADD(day,90,end_date) as end_date
 				, 1 AS event_type
 				, NULL
 			FROM #cohort_rows

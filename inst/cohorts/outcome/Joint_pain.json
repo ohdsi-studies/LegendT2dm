@@ -4,7 +4,7 @@
 		"CriteriaList" : [
 			{
 				"ConditionOccurrence" : {
-					"CodesetId" : 11,
+					"CodesetId" : 0,
 					"ConditionTypeExclude" : false
 				}
 			}
@@ -19,42 +19,25 @@
 	},
 	"ConceptSets" : [
 		{
-			"id" : 11,
-			"name" : "Edema",
+			"id" : 0,
+			"name" : "Joint pain",
 			"expression" : {
 				"items" : [
 					{
 						"concept" : {
-							"CONCEPT_ID" : 433595,
-							"CONCEPT_NAME" : "Edema",
+							"CONCEPT_ID" : 77074,
+							"CONCEPT_NAME" : "Joint pain",
 							"STANDARD_CONCEPT" : "S",
 							"STANDARD_CONCEPT_CAPTION" : "Standard",
 							"INVALID_REASON" : "V",
 							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "267038008",
+							"CONCEPT_CODE" : "57676002",
 							"DOMAIN_ID" : "Condition",
 							"VOCABULARY_ID" : "SNOMED",
 							"CONCEPT_CLASS_ID" : "Clinical Finding"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : true,
-						"includeMapped" : false
-					},
-					{
-						"concept" : {
-							"CONCEPT_ID" : 133299,
-							"CONCEPT_NAME" : "Swelling of limb",
-							"STANDARD_CONCEPT" : "S",
-							"STANDARD_CONCEPT_CAPTION" : "Standard",
-							"INVALID_REASON" : "V",
-							"INVALID_REASON_CAPTION" : "Valid",
-							"CONCEPT_CODE" : "80068009",
-							"DOMAIN_ID" : "Condition",
-							"VOCABULARY_ID" : "SNOMED",
-							"CONCEPT_CLASS_ID" : "Clinical Finding"
-						},
-						"isExcluded" : false,
-						"includeDescendants" : true,
+						"includeDescendants" : false,
 						"includeMapped" : false
 					}
 				]
@@ -77,7 +60,7 @@
 	"CensoringCriteria" : [],
 	"CollapseSettings" : {
 		"CollapseType" : "ERA",
-		"EraPad" : 180
+		"EraPad" : 90
 	},
 	"CensorWindow" : {}
 }
