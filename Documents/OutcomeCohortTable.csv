@@ -9,25 +9,25 @@ Secondary,Measured renal dysfunction,First creatinine measurement with value > 3
 Secondary,Revascularization,Procedure record of percutaneous coronary intervention or coronary artery bypass grafting during an inpatient or ER visit,[@You_undated-fz]
 Secondary,Stroke,Condition record of hemorrhagic or ischemic stroke during an inpatient or ER visit,[@Andrade2012-sp;@Park2016-wa;@Gon2017-rp;@Sung2016-xi;@Tu2013-qv;@Yuan2017-wm]
 Secondary,Sudden cardiac death,Condition record of sudden cardiac death during an inpatient or ER visit,[@Singh2018-jg;@Hennessy2010-gn]
-Secondary,Abnormal weight gain or loss,Abnormal weight gain or loss record of any type; note: weight measurements not used,[@Broder2016-qq;@Williams2017-zb]
+Secondary,Abnormal weight gain,Abnormal weight gain record of any type; note: weight measurements not used,[@Broder2016-qq;@Williams2017-zb]
 Secondary,Abnormal weight loss,Abnormal weight loss record of any type; note: weight measurements are not used,
 Secondary,Acute pancreatitis,Condition record of acute pancreatitis during an inpatient or ER visit,[@Yabe2015-da;@Dore2013-km;@Dore2011-gx;@Chen2017-bb]
-Secondary,All-cause mortality,To be developed,
-Secondary,Bone fracture,Condition record of a bone fracture during an outpatient or ER visit,
+Secondary,All-cause mortality,From LEGEND-HTN,
 Secondary,Bladder cancer,To be developed,
+Secondary,Bone fracture,Condition record of a bone fracture during an outpatient or ER visit,
 Secondary,Breast cancer,To be developed,
 Secondary,Diabetic ketoacidosis,Condition record of diabetic ketoacidosis during an inpatient or ER visit,[@Wang2017-su]
-Secondary,Diarrhea,To be developed,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
-Secondary,Edema,To be developed,
+Secondary,Diarrhea,From LEGEND-HTN,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
+Secondary,Edema,From LEGEND-HTN (check),
 Secondary,Genitourinary infection,Condition record of any type of genital or urinary tract infection during an outpatient or ER vists,[@Nichols2017-ah]
-Secondary,Hyperkalemia,FROM LEGEND-T2DM,
+Secondary,Hyperkalemia,From LEGEND-HTN,
 Secondary,Hypoglycemia,To be developed,
 Secondary,Hypotension,Condition record of hypotension during any type of visit,[@Chrischilles2001-ak]
 Secondary,Joint pain,To be developed,
 Secondary,Lower extremity amputation,Procedure record of below knee lower extremity amputation during inpatient or outpatient visit,[@Ryan2018-ci;@Yuan2018-am]
-Secondary,Nausea,To be developed,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
+Secondary,Nausea,From LEGEND-HTN,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
 Secondary,Renal cancer,To be developed,
 Secondary,Photosensitivity,Condition record of drug-induced photosensitivity during any type of visit,
 Secondary,Thyroid tumor,Condition record of medullary thyroid carcinoma during inpatient or outpatient visit,
-Secondary,Venous thromboembolism,To be developed,[@Tamariz2012b;@Burwen2017;@Coleman2016;@Ammann2018b]
-Secondary,Vomitting,To be developed,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
+Secondary,Venous thromboembolism,From LEGEND-HTN,[@Tamariz2012b;@Burwen2017;@Coleman2016;@Ammann2018b]
+Secondary,Vomitting,From LEGEND-HTN,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt;@Goldstein2003-mx;@Donga2017-vh;@Marrett2016-rr]
