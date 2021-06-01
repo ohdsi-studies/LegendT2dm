@@ -1,13 +1,13 @@
 cohortId,atlasId,atlasName,name
-01,538,3pt MACE,outcome/3pt_MACE
-02,539,4pt MACE,outcome/4pt_MACE
-03,540,Acute myocardial infarction,outcome/Acute_myocardial_infarction
-04,541,Acute renal failure,outcome/Acute_renal_failure
-05,558,Glycemic control,outcome/Glycemic_control
-06,542,Hospitalization with heart failure,outcome/Hospitalization_with_heart_failure
-07,543,Measured renal dysfunction,outcome/Measured_renal_dysfunction
-08,557,Revascularization,outcome/Revascularization
-09,544,Stroke,outcome/Stroke
+1,538,3pt MACE,outcome/3pt_MACE
+2,539,4pt MACE,outcome/4pt_MACE
+3,540,Acute myocardial infarction,outcome/Acute_myocardial_infarction
+4,541,Acute renal failure,outcome/Acute_renal_failure
+5,558,Glycemic control,outcome/Glycemic_control
+6,542,Hospitalization with heart failure,outcome/Hospitalization_with_heart_failure
+7,543,Measured renal dysfunction,outcome/Measured_renal_dysfunction
+8,557,Revascularization,outcome/Revascularization
+9,544,Stroke,outcome/Stroke
 10,545,Sudden cardiac death,outcome/Sudden_cardiac_death
 21,546,Abnormal weight gain,outcome/Abnormal_weight_gain
 22,547,Abnormal weight loss,outcome/Abnormal_weight_loss

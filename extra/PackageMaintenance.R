@@ -30,7 +30,7 @@ ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/Outco
                                                 baseUrl = baseUrl,
                                                 insertTableSql = FALSE,
                                                 insertCohortCreationR = FALSE,
-                                                generateStats = TRUE,
+                                                generateStats = FALSE,
                                                 packageName = "LegendT2dm")
 
 
@@ -72,6 +72,8 @@ grantPermission <- function(connectionDetails,schema) {
   DatabaseConnector::disconnect(connection)
 }
 
+Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+
 # Create cohort diagnostics on remote database
 if (FALSE) { # Do this once!
 
@@ -85,8 +87,12 @@ if (FALSE) { # Do this once!
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
     schema = classSchema,
-    zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/cohortDiagnosticsExport/Results_CCAE.zip")
+    zipFileName = "d:/LegendT2dmOutput_ccae7/classCohortDiagnosticsExport/Results_CCAE.zip")
 
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = classSchema,
+    zipFileName = "d:/LegendT2dmOutput_mdcr7/classCohortDiagnosticsExport/Results_MDCR.zip")
 
   # Outcome
 
@@ -98,5 +104,10 @@ if (FALSE) { # Do this once!
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
     schema = outcomeSchema,
-    zipFileName = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Diagnostics/MCDR/outcomeDiagnosticsExport/Results_MDCR.zip")
+    zipFileName = "d:/LegendT2dmOutput_ccae7/outcomeCohortDiagnosticsExport/Results_CCAE.zip")
+
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = outcomeSchema,
+    zipFileName = "d:/LegendT2dmOutput_mdcr7/outcomeCohortDiagnosticsExport/Results_MDCR.zip")
 }

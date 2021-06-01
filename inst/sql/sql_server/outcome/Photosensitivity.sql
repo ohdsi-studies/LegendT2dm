@@ -174,12 +174,6 @@ FROM #final_cohort CO
 ;
 
 
--- BEGIN: Censored Stats
-
-delete from @results_database_schema.cohort_censor_stats where cohort_definition_id = @target_cohort_id;
-
--- END: Censored Stats
-
 
 
 TRUNCATE TABLE #strategy_ends;

@@ -391,8 +391,8 @@ classCohortsToCreate <- permutations %>%
          name = paste0("class/", name)) %>%
   select(atlasId, atlasName, cohortId, name)
 
-# readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
-readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
+readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
+# readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
 # TODO Move to separate file
 
 # Generate ingredient-level cohorts

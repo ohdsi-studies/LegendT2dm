@@ -43,9 +43,9 @@ createClassCohorts <- function(connectionDetails,
   # connection <- DatabaseConnector::connect(connectionDetails)
   # on.exit(DatabaseConnector::disconnect(connection))
 
-  CohortDiagnostics::createCohortTable(connectionDetails = connectionDetails,
-                                       cohortDatabaseSchema = cohortDatabaseSchema,
-                                       cohortTable = cohortTable)
+  # CohortDiagnostics:::createCohortTable(connectionDetails = connectionDetails,
+  #                                      cohortDatabaseSchema = cohortDatabaseSchema,
+  #                                      cohortTable = cohortTable)
 
   ParallelLogger::logInfo("- Populating table ", cohortTable)
 
@@ -55,6 +55,7 @@ createClassCohorts <- function(connectionDetails,
                                           oracleTempSchema = oracleTempSchema,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
+                                          createCohortTable = TRUE,
                                           cohortToCreateFile = "settings/classCohortsToCreate.csv",
                                           generateInclusionStats = TRUE,
                                           inclusionStatisticsFolder = outputFolder)
@@ -116,9 +117,9 @@ createOutcomeCohorts <- function(connectionDetails,
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
 
-  CohortDiagnostics::createCohortTable(connection = connection,
-                                       cohortDatabaseSchema = cohortDatabaseSchema,
-                                       cohortTable = cohortTable)
+  # CohortDiagnostics:::createCohortTable(connection = connection,
+  #                                      cohortDatabaseSchema = cohortDatabaseSchema,
+  #                                      cohortTable = cohortTable)
 
   ParallelLogger::logInfo("- Populating table ", cohortTable)
 
@@ -129,7 +130,8 @@ createOutcomeCohorts <- function(connectionDetails,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
                                           cohortToCreateFile = "settings/OutcomesOfInterest.csv",
-                                          generateInclusionStats = TRUE,
+                                          generateInclusionStats = FALSE,
+                                          createCohortTable = TRUE,
                                           inclusionStatisticsFolder = outputFolder)
 
   # Creating negative control outcome cohorts -------------------

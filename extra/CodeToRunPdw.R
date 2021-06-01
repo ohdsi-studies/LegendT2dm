@@ -23,7 +23,7 @@ databaseId <- "CCAE"
 databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
 databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
 tablePrefix <- "legend_t2md_ccae"
-outputFolder <- "d:/LegendT2dmOutput_ccae2"
+outputFolder <- "d:/LegendT2dmOutput_ccae3"
 
 # cdmDatabaseSchema <- "cdm_ibm_mdcr_v1192.dbo"
 # cohortDatabaseSchema <- "scratch.dbo"
@@ -60,73 +60,75 @@ outputFolder <- "d:/LegendT2dmOutput_ccae2"
 
 
 # Feasibility assessment ---------------------------------------------------------
-# assessPhenotypes(connectionDetails = connectionDetails,
-#                  cdmDatabaseSchema = cdmDatabaseSchema,
-#                  oracleTempSchema = oracleTempSchema,
-#                  cohortDatabaseSchema = cohortDatabaseSchema,
-#                  outputFolder = outputFolder,
-#                  tablePrefix = tablePrefix,
-#                  databaseId = databaseId,
-#                  databaseName = databaseName,
-#                  databaseDescription = databaseDescription,
-#                  createCohorts = FALSE,
-#                  runCohortDiagnostics = TRUE)
+assessPhenotypes(connectionDetails = connectionDetails,
+                 cdmDatabaseSchema = cdmDatabaseSchema,
+                 oracleTempSchema = oracleTempSchema,
+                 cohortDatabaseSchema = cohortDatabaseSchema,
+                 outputFolder = outputFolder,
+                 tablePrefix = tablePrefix,
+                 databaseId = databaseId,
+                 databaseName = databaseName,
+                 databaseDescription = databaseDescription,
+                 createExposureCohorts = TRUE,
+                 runExposureCohortDiagnostics = TRUE,
+                 createOutcomeCohorts = FALSE,
+                 runOutcomeCohortDiagnostics = FALSE)
 
 
 
-cohortTable <- paste(tablePrefix, "cohort", sep = "_")
-
-CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
-                                        cdmDatabaseSchema = cdmDatabaseSchema,
-                                        cohortDatabaseSchema = cohortDatabaseSchema,
-                                        oracleTempSchema = oracleTempSchema,
-                                        cohortTable = cohortTable,
-                                        packageName = "LegendT2dm",
-                                        cohortToCreateFile = "settings/testCohortsToCreate.csv",
-                                        generateInclusionStats = TRUE,
-                                        inclusionStatisticsFolder = outputFolder)
-
-sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
-                                         "LegendT2dm",
-                                         dbms = connectionDetails$dbms,
-                                         oracleTempSchema = oracleTempSchema,
-                                         cdm_database_schema = cdmDatabaseSchema,
-                                         work_database_schema = cohortDatabaseSchema,
-                                         study_cohort_table = cohortTable)
-connection <- DatabaseConnector::connect(connectionDetails)
-counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
-DatabaseConnector::disconnect(connection)
-counts$databaseId <- databaseId
-#counts <- addCohortNames(counts)
-write.csv(counts, file.path(outputFolder, "testCohortCounts.csv"), row.names = FALSE)
-
-CohortDiagnostics::runCohortDiagnostics(packageName = "LegendT2dm",
-                                        cohortToCreateFile = "settings/testCohortsToCreate.csv",
-                                        connectionDetails = connectionDetails,
-                                        cdmDatabaseSchema = cdmDatabaseSchema,
-                                        oracleTempSchema = oracleTempSchema,
-                                        cohortDatabaseSchema = cohortDatabaseSchema,
-                                        cohortTable = paste(tablePrefix, "cohort", sep = "_"),
-                                        inclusionStatisticsFolder = outputFolder,
-                                        exportFolder = file.path(outputFolder, "testCohortDiagnosticsExport"),
-                                        databaseId = databaseId,
-                                        databaseName = databaseName,
-                                        databaseDescription = databaseDescription,
-                                        runInclusionStatistics = TRUE,
-                                        runBreakdownIndexEvents = TRUE,
-                                        runIncludedSourceConcepts = TRUE,
-                                        runCohortCharacterization = TRUE,
-                                        #runTemporalCohortCharacterization = TRUE,
-                                        runCohortOverlap = FALSE,
-                                        runOrphanConcepts = TRUE,
-                                        runIncidenceRate = TRUE,
-                                        runTimeDistributions = TRUE,
-                                        minCellCount = 5)
-
-LegendT2dm::launchCohortExplorer(connectionDetails = connectionDetails,
-                                        cdmDatabaseSchema = cdmDatabaseSchema,
-                                        cohortDatabaseSchema = cohortDatabaseSchema,
-                                        cohortTable = paste(tablePrefix, "cohort", sep = "_"),
-                                        cohortId = 101300000, # c(201300000, 301300000, 401300000),
-                                        sampleSize = 100)
+# cohortTable <- paste(tablePrefix, "cohort", sep = "_")
+#
+# CohortDiagnostics::instantiateCohortSet(connectionDetails = connectionDetails,
+#                                         cdmDatabaseSchema = cdmDatabaseSchema,
+#                                         cohortDatabaseSchema = cohortDatabaseSchema,
+#                                         oracleTempSchema = oracleTempSchema,
+#                                         cohortTable = cohortTable,
+#                                         packageName = "LegendT2dm",
+#                                         cohortToCreateFile = "settings/testCohortsToCreate.csv",
+#                                         generateInclusionStats = TRUE,
+#                                         inclusionStatisticsFolder = outputFolder)
+#
+# sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
+#                                          "LegendT2dm",
+#                                          dbms = connectionDetails$dbms,
+#                                          oracleTempSchema = oracleTempSchema,
+#                                          cdm_database_schema = cdmDatabaseSchema,
+#                                          work_database_schema = cohortDatabaseSchema,
+#                                          study_cohort_table = cohortTable)
+# connection <- DatabaseConnector::connect(connectionDetails)
+# counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
+# DatabaseConnector::disconnect(connection)
+# counts$databaseId <- databaseId
+# #counts <- addCohortNames(counts)
+# write.csv(counts, file.path(outputFolder, "testCohortCounts.csv"), row.names = FALSE)
+#
+# CohortDiagnostics::runCohortDiagnostics(packageName = "LegendT2dm",
+#                                         cohortToCreateFile = "settings/testCohortsToCreate.csv",
+#                                         connectionDetails = connectionDetails,
+#                                         cdmDatabaseSchema = cdmDatabaseSchema,
+#                                         oracleTempSchema = oracleTempSchema,
+#                                         cohortDatabaseSchema = cohortDatabaseSchema,
+#                                         cohortTable = paste(tablePrefix, "cohort", sep = "_"),
+#                                         inclusionStatisticsFolder = outputFolder,
+#                                         exportFolder = file.path(outputFolder, "testCohortDiagnosticsExport"),
+#                                         databaseId = databaseId,
+#                                         databaseName = databaseName,
+#                                         databaseDescription = databaseDescription,
+#                                         runInclusionStatistics = TRUE,
+#                                         runBreakdownIndexEvents = TRUE,
+#                                         runIncludedSourceConcepts = TRUE,
+#                                         runCohortCharacterization = TRUE,
+#                                         #runTemporalCohortCharacterization = TRUE,
+#                                         runCohortOverlap = FALSE,
+#                                         runOrphanConcepts = TRUE,
+#                                         runIncidenceRate = TRUE,
+#                                         runTimeDistributions = TRUE,
+#                                         minCellCount = 5)
+#
+# LegendT2dm::launchCohortExplorer(connectionDetails = connectionDetails,
+#                                         cdmDatabaseSchema = cdmDatabaseSchema,
+#                                         cohortDatabaseSchema = cohortDatabaseSchema,
+#                                         cohortTable = paste(tablePrefix, "cohort", sep = "_"),
+#                                         cohortId = 101300000, # c(201300000, 301300000, 401300000),
+#                                         sampleSize = 100)
 
