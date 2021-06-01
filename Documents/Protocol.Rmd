@@ -75,7 +75,6 @@ pdf2png <- function(path) {
   path2
 }
 
-
 latex_table_font_size <- 8
 ```
 
@@ -515,7 +514,11 @@ A majority of outcome definitions have been previously implemented and validated
 To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.  
 
 ```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
-outcomes <- read.csv("OutcomeCohortTable.csv")
+outcomes <- read.csv(system.file("settings/OutcomesOfInterest.csv",
+                                 package = "LegendT2dm")) %>% 
+  select(atlasName,description,cite,isNew) %>%
+  mutate(isNew = ifelse(isNew == "yes", "yes", ""))
+colnames(outcomes) <- c("Phenotype", "Brief logical description", "Supporting references", "Needs review?")
 
 if (knitr::is_latex_output()) {
   convertCitationToLatex <- function(cite) {
@@ -534,8 +537,10 @@ if (knitr::is_latex_output()) {
 }
 
 tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
-      caption = "Cardiovascular and patient-centered safety outcomes for the three LEGEND-T2DM studies.") %>% 
-  kable_styling(bootstrap_options = "striped", latex_options = "striped") 
+      caption = "LEGEND-T2DM study outcomes") %>% 
+  kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
+  pack_rows("Cardiovascular outcomes", 1, 2, latex_align = "c", indent = FALSE)  %>%
+  pack_rows("Patient-centered safety outcomes", 11, 12, latex_align = "c", indent = FALSE)
 
 if (knitr::is_latex_output()) {
   tab %>%
@@ -1004,15 +1009,19 @@ printCohortClose()
 # Outcome Cohort Definitions
 
 ```{r, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-invisible(lapply(list(
-  list(name = "Acute myocardial infarction", 
-       jsonFileName = system.file("cohorts", "Acute myocardial infarction.json", package = "Legend")),
-  list(name = "All-cause mortality", 
-       jsonFileName = system.file("cohorts", "All-cause mortality.json", package = "Legend")),
-  list(name = "Constipation",
-       jsonFileName = system.file("cohorts", "Constipation.json", package = "Legend"))
-  ), printCohortDefinition))
+invisible(readr::read_csv(system.file("settings/OutcomesOfInterest.csv", package = "LegendT2dm")) %>%
+  mutate(text = atlasName, fileName = name) %>%
+  select(text, fileName) %>%
+  rowwise() %>%
+  mutate(
+    output = printCohortDefinition(
+      list(name = text, 
+           jsonFileName = system.file("cohorts", paste0(fileName, ".json"), package = "LegendT2dm")
+      )
+    )))
 ```
+
+
 
 # Implemented Details
 
