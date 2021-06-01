@@ -16,11 +16,11 @@ cohortId,atlasId,atlasName,name,description,cite,isNew
 25,559,Bladder cancer,outcome/Bladder_cancer,Malignant tumor of urinary bladder condition record of any type; limited to earliest event per person,,yes
 26,575,Bone fracture,outcome/Bone_fracture,Bone fracture condition record of any type; successive records with > 90 day gap are considered independent episodes,,yes
 27,560,Breast cancer,outcome/Breast_cancer,Malignant tumor of breast condition record of any type; limited to earliest event per person,,yes
-28,572,Diabetic ketoacidosis,outcome/Diabetic_ketoacidosis,Diabetic ketoacidosis condition record during an inpatient or ER visit,[@Wang2017-su],no
+28,572,Diabetic ketoacidosis,outcome/Diabetic_ketoacidosis,Diabetic ketoacidosis condition record during an inpatient or ER visit,[@Wang2017-su;@wang2019diabetic],no
 29,550,Diarrhea,outcome/Diarrhea,Diarrhea condition record of any type; successive records with > 30 day gap are considered independent episodes,[@Buono2017-rg;@Krishnarajah2016-af;@Panozzo2014-tt],no
 30,563,Genitourinary infection,outcome/Genitourinary_infection,Condition record of any type of genital or urinary tract infection during an outpatient or ER vists,[@Nichols2017-ah],no
 31,552,Hyperkalemia,outcome/Hyperkalemia,Condition record for hyperkalemia or potassium measurements > 5.6 mmol/L; successive records with >90 day gap are considered independent episodes,[@Abbas2015;@Betts2018;@Fitch2017],no
-32,564,Hypoglycemia,outcome/Hypoglycemia,Hypoglycemia condition record of any type; successive records with > 90 day gap are considered independent episodes,,yes
+32,564,Hypoglycemia,outcome/Hypoglycemia,Hypoglycemia condition record of any type; successive records with > 90 day gap are considered independent episodes,[@leonard2018comparative],yes
 33,553,Hypotension,outcome/Hypotension,Hypotension condition record of any type; successive records with > 90 day gap are considered independent episodes,[@Chrischilles2001-ak],no
 34,569,Joint pain,outcome/Joint_pain,Joint pain condition record of any type; successive records with > 90 days gap are considered independent episodes,,yes
 35,570,Lower extremity amputation,outcome/LE_amputation,Procedure record of below knee lower extremity amputation during inpatient or outpatient visit,[@Ryan2018-ci;@Yuan2018-am],no

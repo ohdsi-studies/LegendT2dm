@@ -83,12 +83,7 @@ latex_table_font_size <- 8
 * Outcome definition questions:
   - Measured renal dysfx: Cr >= 3 or lower?
   - Glycemic control: A1c <= 7? how frequently?
-* Review of all outcome cohorts, but particularly:
-  - genitourinary infection
-  - joint pain
-  - bone fracture
-  - hypoglycemia (definition from: Comparative risk of serious hypoglycemia with oral antidiabetic monotherapy: A retrospective cohort study)
-  - DKA (definition from: Diabetic ketoacidosis in patients with type 2 diabetes treated with sodium glucose co‐transporter 2 inhibitors versus other antihyperglycemic agents: An observational study of four US administrative claims databases)
+* Review of all outcome cohorts, but particularly marked "Need Review"
 
 # List of Abbreviations
 
