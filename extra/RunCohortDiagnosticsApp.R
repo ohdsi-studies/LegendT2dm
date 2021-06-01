@@ -12,21 +12,3 @@ LegendT2dm::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
 
 LegendT2dm::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
                                       resultsDatabaseSchema = "legendt2dm_outcome_diagnostics")
-
-dataFolder <- "~/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/cohortDiagnosticsExport"
-CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = dataFolder)
-LegendT2dm::launchDiagnosticsExplorer(dataFolder = dataFolder)
-
-dataFolder <- "~/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/outcomeDiagnosticsExport"
-CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = dataFolder)
-LegendT2dm::launchDiagnosticsExplorer(dataFolder = dataFolder)
-CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = dataFolder)
-
-dataFolder <- "~/Dropbox/Projects/LegendT2dm_Diagnostics/MDCR/cohortDiagnosticsExport"
-CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = dataFolder)
-LegendT2dm::launchDiagnosticsExplorer(dataFolder = dataFolder)
-
-# Look at test (metformin) cohorts
-dataFolder <- "~/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/testCohortDiagnosticsExport"
-CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = dataFolder)
-LegendT2dm::launchDiagnosticsExplorer(dataFolder = dataFolder)

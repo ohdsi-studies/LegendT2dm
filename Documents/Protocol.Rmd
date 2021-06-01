@@ -84,7 +84,7 @@ latex_table_font_size <- 8
 * Outcome definition questions:
   - Measured renal dysfx: Cr >= 3 or lower?
   - Glycemic control: A1c <= 7? how frequently?
-* Review of all, but particularly:
+* Review of all outcome cohorts, but particularly:
   - genitourinary infection
   - joint pain
   - bone fracture
@@ -1159,7 +1159,7 @@ if (knitr::is_latex_output()) {
 }
 ```
 
-
+<!--
 # Additional Outcomes to Evaluate {#addition-outcomes}
 
 * Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
@@ -1224,3 +1224,4 @@ if (knitr::is_latex_output()) {
   tab
 }
 ```
+-->
