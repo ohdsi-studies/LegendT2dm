@@ -7,8 +7,8 @@ appConnectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("legendt2dmUser"),
   password = keyring::key_get("legendt2dmPassword"))
 
-LegendT2dm::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
+CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
                                       resultsDatabaseSchema = "legendt2dm_class_diagnostics")
 
-LegendT2dm::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
+CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = appConnectionDetails,
                                       resultsDatabaseSchema = "legendt2dm_outcome_diagnostics")
