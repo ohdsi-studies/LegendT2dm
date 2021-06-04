@@ -1,4 +1,4 @@
-#' Create the class exposure cohorts
+#' Create the exposure cohorts
 #'
 #' @details
 #' This function will create the exposure cohorts following the definitions included in this package.
@@ -23,20 +23,20 @@
 #' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
 #'
 #' @export
-createClassCohorts <- function(connectionDetails,
+createExposureCohorts <- function(connectionDetails,
                              cdmDatabaseSchema,
                              cohortDatabaseSchema,
-                             tablePrefix = "legend",
+                             tablePrefix = "legendt2dm",
+                             indicationId = "class",
                              oracleTempSchema,
                              outputFolder,
                              databaseId,
                              filterExposureCohorts = NULL,
                              imputeExposureLengthWhenMissing = FALSE) {
 
-  ParallelLogger::logInfo("Creating class exposure cohorts")
+  ParallelLogger::logInfo("Creating ", indicationId, " exposure cohorts")
 
-  cohortTable <- paste(tablePrefix, "cohort", sep = "_")
-
+  cohortTable <- paste(tablePrefix, indicationId, "cohort", sep = "_")
 
   # Note: using connection when calling createCohortTable and instantiateCohortSet is pereferred, but requires this
   # fix in CohortDiagnostics to be released: https://github.com/OHDSI/CohortDiagnostics/commit/f4c920bc4feb5d701f1149ddd9cf7ca968be6a71
@@ -56,11 +56,11 @@ createClassCohorts <- function(connectionDetails,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
                                           createCohortTable = TRUE,
-                                          cohortToCreateFile = "settings/classCohortsToCreate.csv",
+                                          cohortToCreateFile = paste0("settings/", indicationId, "CohortsToCreate.csv"),
                                           generateInclusionStats = TRUE,
                                           inclusionStatisticsFolder = outputFolder)
 
-  ParallelLogger::logInfo("Counting class cohorts")
+  ParallelLogger::logInfo("Counting ", indicationId, " exposure cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
                                            "LegendT2dm",
                                            dbms = connectionDetails$dbms,
@@ -73,7 +73,7 @@ createClassCohorts <- function(connectionDetails,
   DatabaseConnector::disconnect(connection)
   counts$databaseId <- databaseId
   #counts <- addCohortNames(counts)
-  write.csv(counts, file.path(outputFolder, "classCohortCounts.csv"), row.names = FALSE)
+  write.csv(counts, file.path(outputFolder, indicationId, "cohortCounts.csv"), row.names = FALSE)
 }
 
 #' Create the outcome cohorts
@@ -104,7 +104,7 @@ createClassCohorts <- function(connectionDetails,
 createOutcomeCohorts <- function(connectionDetails,
                                cdmDatabaseSchema,
                                cohortDatabaseSchema,
-                               tablePrefix = "legend",
+                               tablePrefix = "legendt2dm",
                                oracleTempSchema,
                                outputFolder,
                                databaseId,
@@ -112,7 +112,7 @@ createOutcomeCohorts <- function(connectionDetails,
 
   ParallelLogger::logInfo("Creating outcome cohorts")
 
-  cohortTable <- paste(tablePrefix, "outcome", sep = "_")
+  cohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
 
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -159,7 +159,7 @@ createOutcomeCohorts <- function(connectionDetails,
   counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
 
   counts$databaseId <- databaseId
-  write.csv(counts, file.path(outputFolder, "outcomeCohortCounts.csv"), row.names = FALSE)
+  write.csv(counts, file.path(outputFolder, "outcome", "cohortCounts.csv"), row.names = FALSE)
 }
 
 loadNegativeControls <- function() {

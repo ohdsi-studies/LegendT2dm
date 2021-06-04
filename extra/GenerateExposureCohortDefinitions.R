@@ -392,8 +392,40 @@ classCohortsToCreate <- permutations %>%
   select(atlasId, atlasName, cohortId, name)
 
 readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
+
+# Make classTcosOfInterest.csv
+tarId <- "ot1"
+
+makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
+
+  baseTs <- permutations %>%
+    filter(tar == tarId,
+           age == ageId, sex == sexId, race == raceId, cvd == cvdId,
+           renal == renalId, met == metId)
+
+  tab <- as.data.frame(t(combn(baseTs$cohortId, m = 2)))
+  names(tab) <- c("targetId", "comparatorId")
+  tab$outcomeIds <- -1
+  tab$excludedCovariateConceptIds <- ""
+
+  return(tab)
+}
+
+classTcos <- rbind(
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "any")
+  # ,
+  # makeTCOs("ot1", "no", "any", "any", "any", "any", "any")
+)
+readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
+
+
 # readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
 # TODO Move to separate file
+
+
+
+
+
 
 # Generate ingredient-level cohorts
 permutations <- readr::read_csv("inst/settings/classComparisons.csv")
