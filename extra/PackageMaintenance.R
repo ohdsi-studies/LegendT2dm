@@ -94,6 +94,11 @@ if (FALSE) { # Do this once!
     schema = classSchema,
     zipFileName = "d:/LegendT2dmOutput_mdcr7/classCohortDiagnosticsExport/Results_MDCR.zip")
 
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = classSchema,
+    zipFileName = "d:/LegendT2dmOutput_optum_ehr7/classCohortDiagnosticsExport/Results_OptumEhr.zip")
+
   # Outcome
 
   outcomeSchema <- "legendt2dm_outcome_diagnostics"
@@ -110,4 +115,10 @@ if (FALSE) { # Do this once!
     connectionDetails = connectionDetails,
     schema = outcomeSchema,
     zipFileName = "d:/LegendT2dmOutput_mdcr7/outcomeCohortDiagnosticsExport/Results_MDCR.zip")
+
+  CohortDiagnostics::uploadResults(
+    connectionDetails = connectionDetails,
+    schema = outcomeSchema,
+    zipFileName = "d:/LegendT2dmOutput_optum_ehr7/outcomeCohortDiagnosticsExport/Results_OptumEhr.zip")
+
 }

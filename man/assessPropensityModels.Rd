@@ -12,6 +12,7 @@ assessPropensityModels(
   indicationId = "class",
   oracleTempSchema,
   outputFolder,
+  minCohortSize = 1000,
   sampleSize = 1000,
   maxCores = 4,
   databaseId
@@ -48,6 +49,9 @@ slashes (/)}
 available this can speed up the analyses.}
 
 \item{databaseId}{A short string for identifying the database (e.g. 'Synpuf').}
+
+\item{minCohortsSize}{Minimum number of people that have to be in each cohort to keep a pair of
+cohorts.}
 }
 \description{
 Assess propensity models

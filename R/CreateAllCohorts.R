@@ -34,6 +34,11 @@ createExposureCohorts <- function(connectionDetails,
                              filterExposureCohorts = NULL,
                              imputeExposureLengthWhenMissing = FALSE) {
 
+  indicationFolder <- file.path(outputFolder, indicationId)
+  if (!file.exists(indicationFolder)) {
+    dir.create(indicationFolder, recursive = TRUE)
+  }
+
   ParallelLogger::logInfo("Creating ", indicationId, " exposure cohorts")
 
   cohortTable <- paste(tablePrefix, indicationId, "cohort", sep = "_")
@@ -58,7 +63,7 @@ createExposureCohorts <- function(connectionDetails,
                                           createCohortTable = TRUE,
                                           cohortToCreateFile = paste0("settings/", indicationId, "CohortsToCreate.csv"),
                                           generateInclusionStats = TRUE,
-                                          inclusionStatisticsFolder = outputFolder)
+                                          inclusionStatisticsFolder = indicationFolder)
 
   ParallelLogger::logInfo("Counting ", indicationId, " exposure cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
@@ -73,7 +78,8 @@ createExposureCohorts <- function(connectionDetails,
   DatabaseConnector::disconnect(connection)
   counts$databaseId <- databaseId
   #counts <- addCohortNames(counts)
-  write.csv(counts, file.path(outputFolder, indicationId, "cohortCounts.csv"), row.names = FALSE)
+
+  write.csv(counts, file.path(indicationFolder, "cohortCounts.csv"), row.names = FALSE)
 }
 
 #' Create the outcome cohorts
@@ -110,6 +116,11 @@ createOutcomeCohorts <- function(connectionDetails,
                                databaseId,
                                filterOutcomeCohorts = NULL) {
 
+  outcomeFolder <- file.path(outputFolder, "outcome")
+  if (!file.exists(outcomeFolder)) {
+    dir.create(outcomeFolder, recursive = TRUE)
+  }
+
   ParallelLogger::logInfo("Creating outcome cohorts")
 
   cohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
@@ -132,7 +143,7 @@ createOutcomeCohorts <- function(connectionDetails,
                                           cohortToCreateFile = "settings/OutcomesOfInterest.csv",
                                           generateInclusionStats = FALSE,
                                           createCohortTable = TRUE,
-                                          inclusionStatisticsFolder = outputFolder)
+                                          inclusionStatisticsFolder = outcomeFolder)
 
   # Creating negative control outcome cohorts -------------------
   ParallelLogger::logInfo("Creating negative control outcome cohorts")
@@ -157,9 +168,9 @@ createOutcomeCohorts <- function(connectionDetails,
                                            study_cohort_table = cohortTable)
 
   counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
-
   counts$databaseId <- databaseId
-  write.csv(counts, file.path(outputFolder, "outcome", "cohortCounts.csv"), row.names = FALSE)
+
+  write.csv(counts, file.path(outcomeFolder, "cohortCounts.csv"), row.names = FALSE)
 }
 
 loadNegativeControls <- function() {
