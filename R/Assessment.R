@@ -52,6 +52,17 @@ assessPhenotypes <- function(connectionDetails,
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_FILE_LOGGER", silent = TRUE))
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_ERRORREPORT_LOGGER", silent = TRUE), add = TRUE)
 
+  writePairedCounts <- function(indicationId) {
+    tcos <- readr::read_csv(file = system.file("settings", paste0(indicationId, "TcosOfInterest.csv"),
+                                               package = "LegendT2dm"))
+    counts <- readr::read_csv(file = file.path(outputFolder, indicationId, "cohortCounts.csv")) %>% select(cohortDefinitionId, cohortCount)
+
+    tmp <- tcos %>%
+      left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = cohortCount) %>%
+      left_join(counts, by = c("comparatorId" = "cohortDefinitionId")) %>% rename(comparatorPairedPersons = cohortCount)
+
+    readr::write_csv(tmp, file = file.path(outputFolder, indicationId, "pairedExposureSummary.csv"))
+  }
 
   if (createExposureCohorts) {
     # Exposures ----------------------------------------------------------------------------------------
@@ -65,6 +76,8 @@ assessPhenotypes <- function(connectionDetails,
                           databaseId = databaseId,
                           filterExposureCohorts = filterExposureCohorts)
   }
+
+  writePairedCounts("class")
 
   if (createOutcomeCohorts) {
     # Outcomes ----------------------------------------------------------------------------------
@@ -129,6 +142,8 @@ assessPhenotypes <- function(connectionDetails,
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
 #'                               slashes (/)
+#' @param minCohortsSize         Minimum number of people that have to be in each cohort to keep a pair of
+#'                               cohorts.
 #' @param sampleSize             What is the maximum sample size for each exposure cohort?
 #' @param maxCores               How many parallel cores should be used? If more cores are made
 #'                               available this can speed up the analyses.
@@ -142,12 +157,14 @@ assessPropensityModels <- function(connectionDetails,
                                    indicationId = "class",
                                    oracleTempSchema,
                                    outputFolder,
+                                   minCohortSize = 1000,
                                    sampleSize = 1000,
                                    maxCores = 4,
                                    databaseId) {
 
-  pairedCohortTable <- paste(tablePrefix, tolower(indicationId), "pair_cohort", sep = "_")
+  originalCohortTable <- paste(tablePrefix, tolower(indicationId), "cohort", sep = "_")
   sampledCohortTable <- paste(tablePrefix, tolower(indicationId), "sample_cohort", sep = "_")
+
   indicationFolder <- file.path(outputFolder, indicationId)
   assessmentExportFolder <- file.path(indicationFolder, "assessmentOfPropensityScores")
   if (!file.exists(assessmentExportFolder)) {
@@ -161,23 +178,40 @@ assessPropensityModels <- function(connectionDetails,
                                            dbms = connectionDetails$dbms,
                                            oracleTempSchema = oracleTempSchema,
                                            cohort_database_schema = cohortDatabaseSchema,
-                                           paired_cohort_table = pairedCohortTable,
+                                           original_cohort_table = originalCohortTable,
                                            sampled_cohort_table = sampledCohortTable,
                                            sample_size = sampleSize)
   conn <- DatabaseConnector::connect(connectionDetails)
   DatabaseConnector::executeSql(conn, sql)
   DatabaseConnector::disconnect(conn)
 
-  filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId)
 
-  fetchAllDataFromServer(connectionDetails = connectionDetails,
-                         cdmDatabaseSchema = cdmDatabaseSchema,
-                         oracleTempSchema = oracleTempSchema,
-                         cohortDatabaseSchema = cohortDatabaseSchema,
-                         tablePrefix = tablePrefix,
-                         indicationId = indicationId,
-                         outputFolder = outputFolder,
-                         useSample = TRUE)
+  ParallelLogger::logInfo("Counting ", indicationId, " sampled exposure cohorts")
+  sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
+                                           "LegendT2dm",
+                                           dbms = connectionDetails$dbms,
+                                           oracleTempSchema = oracleTempSchema,
+                                           cdm_database_schema = cdmDatabaseSchema,
+                                           work_database_schema = cohortDatabaseSchema,
+                                           study_cohort_table = cohortTable)
+  connection <- DatabaseConnector::connect(connectionDetails)
+  counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
+  DatabaseConnector::disconnect(connection)
+  counts$databaseId <- databaseId
+  #counts <- addCohortNames(counts)
+  write.csv(counts, file.path(outputFolder, indicationId, "sampledCohortCounts.csv"), row.names = FALSE)
+
+
+  filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId, minCohortSize = minCohortSize)
+
+  # fetchAllDataFromServer(connectionDetails = connectionDetails,
+  #                        cdmDatabaseSchema = cdmDatabaseSchema,
+  #                        oracleTempSchema = oracleTempSchema,
+  #                        cohortDatabaseSchema = cohortDatabaseSchema,
+  #                        tablePrefix = tablePrefix,
+  #                        indicationId = indicationId,
+  #                        outputFolder = outputFolder,
+  #                        useSample = TRUE)
 
   # generateAllCohortMethodDataObjects(outputFolder = outputFolder,
   #                                    indicationId = indicationId,
