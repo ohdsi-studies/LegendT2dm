@@ -259,6 +259,26 @@ if (knitr::is_latex_output()) {
 # Data models
 
 This document describes the data models for storing the output of the `CohortDiagnostics` and `CohortMethod` study artifacts for the LEGEND-T2DM study.
+Table \@ref(tab:schema) provides the `schema` names.
+
+```{r schema, echo=FALSE, warning=FALSE}
+schema <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRUE, file = "
+  legendt2dm_class_diagnostics ; legendt2dm_class_results
+  legendt2dm_drug_diagnostics ; legendt2dm_drug_results
+  legendt2dm_outcome_diagnostics
+")
+
+tab <- kable(schema, col.names = c("Cohort diagnostics", "Study results"), 
+             linesep = "", booktabs = TRUE,
+             caption = "LEGEND-T2DM public study schema") 
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", 
+                        font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
 
 ## Fields with minimum values
 
@@ -342,14 +362,15 @@ for (table in tables) {
 }
 ```
 
-
 # Database access
 
 All `LegendT2dm` tables are located on OHDSI's public `PostgreSQL` server that is the backend for the apps on (https://data.ohdsi.org).
 Study PIs can provide read-only credentials that can be stored encrypted on individual computers.
-For this latter task, we recommend using the cross-platform `keyring` `R` package to securely store: `legendt2dmServer`, `legendt2dmDatabase`, `legendt2dmUser` and `legendt2dmPassword` and specifying connection details via:
+For this latter task, we recommend using the cross-platform `keyring` `R` package to securely store: `legendt2dmServer`, `legendt2dmDatabase`, `legendt2dmUser`, `legendt2dmPassword` and `legendT2dmDriverPath` and specifying connection details via:
 
-```{r, execute=FALSE}
+```{r, eval=FALSE}
+Sys.setenv(DATABASECONNECTOR_JAR_FOLDER = keyring::key_get("legendT2dmDriverPath"))
+
 legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
   server = paste(keyring::key_get("legendt2dmServer"),
@@ -358,6 +379,19 @@ legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("legendt2dmUser"),
   password = keyring::key_get("legendt2dmPassword"))
 ```
+
+# R Shiny
+
+To explore cohorts and their diagnostics through an R Shiny application, we use `CohortDiagnostics v2.1.0`.  The following code will load all `class` cohorts:
+
+```{r, eval=FALSE}
+CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = legendT2dmConnectionDetails,
+                                             resultsDatabaseSchema = "legendt2dm_class_diagnostics")
+```
+
+For `drug` and `outcome` cohorts, we use `resultsDatabaseSchema = "legendt2dm_drug_diagnostics"` and `resultsDatabaseSchema = "legendt2dm_outcome_diagnostics"` respectively.
+
+A useful `Cohort name` filter is `ot1, with prior met, any age, any sex, any race, any cv risk, any renal` (see Table \@ref(tab:category-codes)).
 
 # Definitions
 

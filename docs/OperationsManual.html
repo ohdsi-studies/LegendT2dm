@@ -3835,7 +3835,48 @@ observational period end
 </div>
 <div id="data-models" class="section level1">
 <h1><span class="header-section-number">5</span> Data models</h1>
-<p>This document describes the data models for storing the output of the <code>CohortDiagnostics</code> and <code>CohortMethod</code> study artifacts for the LEGEND-T2DM study.</p>
+<p>This document describes the data models for storing the output of the <code>CohortDiagnostics</code> and <code>CohortMethod</code> study artifacts for the LEGEND-T2DM study.
+Table <a href="#tab:schema">5.1</a> provides the <code>schema</code> names.</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:schema">Table 5.1: </span>LEGEND-T2DM public study schema
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Cohort diagnostics
+</th>
+<th style="text-align:left;">
+Study results
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+legendt2dm_class_diagnostics
+</td>
+<td style="text-align:left;">
+legendt2dm_class_results
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+legendt2dm_drug_diagnostics
+</td>
+<td style="text-align:left;">
+legendt2dm_drug_results
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+legendt2dm_outcome_diagnostics
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
 <div id="fields-with-minimum-values" class="section level2">
 <h2><span class="header-section-number">5.1</span> Fields with minimum values</h2>
 <p>Some fields contain patient counts or fractions that are easily converted to patient counts.
@@ -8487,8 +8528,10 @@ No
 <h1><span class="header-section-number">6</span> Database access</h1>
 <p>All <code>LegendT2dm</code> tables are located on OHDSI’s public <code>PostgreSQL</code> server that is the backend for the apps on (<a href="https://data.ohdsi.org" class="uri">https://data.ohdsi.org</a>).
 Study PIs can provide read-only credentials that can be stored encrypted on individual computers.
-For this latter task, we recommend using the cross-platform <code>keyring</code> <code>R</code> package to securely store: <code>legendt2dmServer</code>, <code>legendt2dmDatabase</code>, <code>legendt2dmUser</code> and <code>legendt2dmPassword</code> and specifying connection details via:</p>
-<pre class="r"><code>legendT2dmConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
+For this latter task, we recommend using the cross-platform <code>keyring</code> <code>R</code> package to securely store: <code>legendt2dmServer</code>, <code>legendt2dmDatabase</code>, <code>legendt2dmUser</code>, <code>legendt2dmPassword</code> and <code>legendT2dmDriverPath</code> and specifying connection details via:</p>
+<pre class="r"><code>Sys.setenv(DATABASECONNECTOR_JAR_FOLDER = keyring::key_get(&quot;legendT2dmDriverPath&quot;))
+
+legendT2dmConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
   dbms = &quot;postgresql&quot;,
   server = paste(keyring::key_get(&quot;legendt2dmServer&quot;),
                  keyring::key_get(&quot;legendt2dmDatabase&quot;),
@@ -8496,10 +8539,18 @@ For this latter task, we recommend using the cross-platform <code>keyring</code>
   user = keyring::key_get(&quot;legendt2dmUser&quot;),
   password = keyring::key_get(&quot;legendt2dmPassword&quot;))</code></pre>
 </div>
+<div id="r-shiny" class="section level1">
+<h1><span class="header-section-number">7</span> R Shiny</h1>
+<p>To explore cohorts and their diagnostics through an R Shiny application, we use <code>CohortDiagnostics v2.1.0</code>. The following code will load all <code>class</code> cohorts:</p>
+<pre class="r"><code>CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = legendT2dmConnectionDetails,
+                                             resultsDatabaseSchema = &quot;legendt2dm_class_diagnostics&quot;)</code></pre>
+<p>For <code>drug</code> and <code>outcome</code> cohorts, we use <code>resultsDatabaseSchema = &quot;legendt2dm_drug_diagnostics&quot;</code> and <code>resultsDatabaseSchema = &quot;legendt2dm_outcome_diagnostics&quot;</code> respectively.</p>
+<p>A useful <code>Cohort name</code> filter is <code>ot1, with prior met, any age, any sex, any race, any cv risk, any renal</code> (see Table <a href="#tab:category-codes">3.2</a>).</p>
+</div>
 <div id="definitions" class="section level1">
-<h1><span class="header-section-number">7</span> Definitions</h1>
+<h1><span class="header-section-number">8</span> Definitions</h1>
 <div id="orphan-concepts" class="section level2">
-<h2><span class="header-section-number">7.1</span> Orphan concepts</h2>
+<h2><span class="header-section-number">8.1</span> Orphan concepts</h2>
 <p>Orphan concepts are (source) concepts that likely should be included in a concept set, but aren’t, often because of vocabulary issues.
 This is a rough outline of the process:</p>
 <ul>
