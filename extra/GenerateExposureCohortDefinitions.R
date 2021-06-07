@@ -1,127 +1,15 @@
-# Make ExposuresOfInterest.csv
+# Generates:
+#   classCohortsToCreate.csv
+#   classTcosOfInterest.csv
+#
+# Requires at input:
+#   classGeneratorList.csv
+#   ExposuresOfInterest.csv
 library(dplyr)
 
 #baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
 baseUrlWebApi <- keyring::key_get("baseUrl")
 #baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
-
-function() {
-  exp <- readr::read_csv("inst/settings/ExposuresOfInterest.csv") %>% group_by(class) %>% arrange(class,name)
-
-  dpp4isConceptIds <- exp %>% filter(class == "DPP4Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-  glp1rasConceptIds <- exp %>% filter(class == "GLP1RAs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-  sglt2isConceptIds <- exp %>% filter(class == "SGLT2Is") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-  susConceptIds <- exp %>% filter(class == "SUs") %>% arrange(cohortId) %>% pull(cohortId) %>% paste0(collapse = ";")
-
-  exp[!is.na(exp$shortName) & exp$shortName == "DPP4Is", "includedConceptIds"] <- dpp4isConceptIds
-  exp[!is.na(exp$shortName) & exp$shortName == "GLP1RAs", "includedConceptIds"] <- glp1rasConceptIds
-  exp[!is.na(exp$shortName) & exp$shortName == "SGLT2Is", "includedConceptIds"] <- sglt2isConceptIds
-  exp[!is.na(exp$shortName) & exp$shortName == "SUs", "includedConceptIds"] <- susConceptIds
-
-  readr::write_csv(exp, "inst/settings/tmp.csv")
-
-  readr::read_csv("inst/settings/ExcludedIngredientConcepts.csv") %>% arrange(conceptId) %>% pull(conceptId) %>% paste0(collapse = ";")
-
-}
-
-function() {
-
-  idFn <- function(targetId, age, sex, race, cvd, renal, tar, met) {
-    cAge <- -1
-    if (age == "any") {
-      cAge <- 0
-    } else if (age == "younger") {
-      cAge <- 1
-    } else if (age == "middle") {
-      cAge <- 2
-    } else if (age == "older") {
-      cAge <- 3
-    } else {
-      stop("Unknown age")
-    }
-
-    cSex <- -1
-    if (sex == "any") {
-      cSex <- 0
-    } else if (sex == "female") {
-      cSex <- 1
-    } else if (sex == "male") {
-      cSex <- 2
-    } else {
-      stop("Unknown sex")
-    }
-
-    cRace <- -1
-    if (race == "any") {
-      cRace <- 0
-    } else if (race == "black") {
-      cRace <- 1
-    } else {
-      stop("Unknown race")
-    }
-
-    cCvd <- -1
-    if (cvd == "any") {
-      cCvd <- 0
-    } else if (cvd == "low") {
-      cCvd <- 1
-    } else if (cvd == "higher") {
-      cCvd <- 2
-    } else {
-      stop("Unknown cvd")
-    }
-
-    cRenal <- -1
-    if (renal == "any") {
-      cRenal <- 0
-    } else if (renal == "without") {
-      cRenal <- 1
-    } else if (renal == "with") {
-      cRenal <- 2
-    } else {
-      stop("Unknown renal")
-    }
-
-    cTar <- -1
-    if (tar == "ot1") {
-      cTar <- 1
-    } else if (tar == "ot2") {
-      cTar <- 2
-    } else {
-      stop("Unknown tar")
-    }
-
-    cMet <- -1
-    if (met == "with") {
-      cMet <- 1
-    } else if (met == "no") {
-      cMet <- 2
-    } else {
-      stop("Unknown met")
-    }
-
-    result <- paste0(targetId, cTar, cMet, cAge, cSex, cRace, cCvd, cRenal, collapse = "")
-
-    return(result)
-  }
-
-  #tab <- readr::read_csv("inst/settings/classComparisonsOld.csv")
-  # tab <- tab %>% mutate(met = "prior")
-  # tab2 <- tab %>% mutate(met = "none")
-  # tab <- rbind(tab, tab2)
-  #readr::write_csv(tab, "inst/settings/classComparisons.csv")
-
-  tab <- tab %>%
-   # mutate(targetId = targetId * 100,
-   #       comparator1Id = comparator1Id * 100,
-   #       comparator2Id = comparator2Id * 100,
-   #       comparator3Id = comparator3Id * 100) %>%
-    rowwise() %>%  mutate(cohortId = idFn(targetId, age, sex, race, cvd, renal, tar, met))
-}
-
-# OHDSI's public webAPI is down right now:
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(1774646, baseUrl = baseUrlPublic)
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(17111, baseUrl = baseUrlWebApi)
 
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, digits = 50)
@@ -134,8 +22,7 @@ baseCohort <- readRDS("baseCohort.rds")
 
 generateStats <- TRUE
 
-permutations <- readr::read_csv("inst/settings/classComparisons.csv")
-# permutations <- readr::read_csv("inst/settings/testComparisons.csv")
+permutations <- readr::read_csv("inst/settings/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
@@ -143,6 +30,17 @@ makeName <- function(permutation) {
   paste0(permutation$shortName, ": ", permutation$tar, ", ", permutation$met, " prior met, ",
          permutation$age, " age, ", permutation$sex, " sex, ", permutation$race, " race, ",
          permutation$cvd, " cv risk, ", permutation$renal, " renal")
+}
+
+makeShortName <- function(permutation) {
+  paste0(permutation$shortName,
+         ifelse(permutation$tar == "ot2", " ot2", ""),
+         ifelse(permutation$met == "no", " no-met", ""),
+         ifelse(permutation$age != "any", paste0(" ", permutation$age, "-age"), ""),
+         ifelse(permutation$sex != "any", paste0(" ", permutation$sex), ""),
+         ifelse(permutation$race != "any", " black", ""),
+         ifelse(permutation$cvd != "any", paste0(" ", permutation$cvd, "-cvr"), ""),
+         ifelse(permutation$renal != "any", paste0(" ", permutation$renal, "-rdz"), ""))
 }
 
 permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
@@ -376,7 +274,7 @@ permutations$sql <- allCohortsSql
 permutations <- permutations %>%
   mutate(name = paste0("ID", as.integer(cohortId)))
 
-permutations$atlasName <- makeName(permutations)
+permutations$atlasName <- makeShortName(permutations)
 
 for (i in 1:nrow(permutations)) {
   row <- permutations[i,]
@@ -394,8 +292,6 @@ classCohortsToCreate <- permutations %>%
 readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
 
 # Make classTcosOfInterest.csv
-tarId <- "ot1"
-
 makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
   baseTs <- permutations %>%
@@ -406,15 +302,37 @@ makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
   tab <- as.data.frame(t(combn(baseTs$cohortId, m = 2)))
   names(tab) <- c("targetId", "comparatorId")
   tab$outcomeIds <- -1
-  tab$excludedCovariateConceptIds <- ""
+  tab$excludedCovariateConceptIds <- NA
+
+  tab <- tab %>% inner_join(permutations %>% select(cohortId, atlasName) %>% rename(targetId = cohortId),
+                            by = "targetId") %>%
+    rename(targetName = atlasName)
+
+  tab <- tab %>% inner_join(permutations %>% select(cohortId, atlasName) %>% rename(comparatorId = cohortId),
+                            by = "comparatorId") %>%
+    rename(comparatorName = atlasName)
 
   return(tab)
 }
 
 classTcos <- rbind(
-  makeTCOs("ot1", "with", "any", "any", "any", "any", "any")
-  # ,
-  # makeTCOs("ot1", "no", "any", "any", "any", "any", "any")
+  # Order: tar, met, age, sex, race, cvd, renal
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "any"),
+  #
+  makeTCOs("ot1", "with", "younger", "any", "any", "any", "any"),
+  makeTCOs("ot1", "with", "middle", "any", "any", "any", "any"),
+  makeTCOs("ot1", "with", "older", "any", "any", "any", "any"),
+  #
+  makeTCOs("ot1", "with", "any", "female", "any", "any", "any"),
+  makeTCOs("ot1", "with", "any", "male", "any", "any", "any"),
+  #
+  makeTCOs("ot1", "with", "any", "any", "black", "any", "any"),
+  #
+  makeTCOs("ot1", "with", "any", "any", "any", "low", "any"),
+  makeTCOs("ot1", "with", "any", "any", "any", "higher", "any"),
+  #
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "without"),
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "with")
 )
 readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
 
@@ -428,7 +346,7 @@ readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
 
 
 # Generate ingredient-level cohorts
-permutations <- readr::read_csv("inst/settings/classComparisons.csv")
+permutations <- readr::read_csv("inst/settings/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
@@ -463,12 +381,6 @@ for (i in 1:nrow(permutationsForDrugs)) {
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
-# cohortsToCreate <- permutations %>% mutate(atlasId = cohortId) %>%
-#   select(atlasId, atlasName, cohortId, name)
-#
-# readr::write_csv(cohortsToCreate, file.path("inst/settings", "CohortsToCreate.csv"))
-
-#comparisons <- readr::read_csv("inst/settings/classComparisonsWithJson.csv")
 
 
 
