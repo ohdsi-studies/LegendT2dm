@@ -22,7 +22,7 @@ baseCohort <- readRDS("baseCohort.rds")
 
 generateStats <- TRUE
 
-permutations <- readr::read_csv("inst/settings/classGeneratorList.csv")
+permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
@@ -317,20 +317,22 @@ makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
 classTcos <- rbind(
   # Order: tar, met, age, sex, race, cvd, renal
-  makeTCOs("ot1", "with", "any", "any", "any", "any", "any"),
   #
+  # Main
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "any"),
+  # Age
   makeTCOs("ot1", "with", "younger", "any", "any", "any", "any"),
   makeTCOs("ot1", "with", "middle", "any", "any", "any", "any"),
   makeTCOs("ot1", "with", "older", "any", "any", "any", "any"),
-  #
+  # Sex
   makeTCOs("ot1", "with", "any", "female", "any", "any", "any"),
   makeTCOs("ot1", "with", "any", "male", "any", "any", "any"),
-  #
+  # Race
   makeTCOs("ot1", "with", "any", "any", "black", "any", "any"),
-  #
+  # CV risk
   makeTCOs("ot1", "with", "any", "any", "any", "low", "any"),
   makeTCOs("ot1", "with", "any", "any", "any", "higher", "any"),
-  #
+  # Renal dz
   makeTCOs("ot1", "with", "any", "any", "any", "any", "without"),
   makeTCOs("ot1", "with", "any", "any", "any", "any", "with")
 )
@@ -346,7 +348,7 @@ readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
 
 
 # Generate ingredient-level cohorts
-permutations <- readr::read_csv("inst/settings/classGeneratorList.csv")
+permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
