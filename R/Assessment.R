@@ -64,6 +64,10 @@ assessPhenotypes <- function(connectionDetails,
       left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = cohortCount) %>%
       left_join(counts, by = c("comparatorId" = "cohortDefinitionId")) %>% rename(comparatorPairedPersons = cohortCount)
 
+    tmp <- tmp %>%
+      mutate(targetPairedPersons = ifelse(is.na(targetPairedPersons), 0, targetPairedPersons)) %>%
+      mutate(comparatorPairedPersons = ifelse(is.na(comparatorPairedPersons), 0, comparatorPairedPersons))
+
     readr::write_csv(tmp, file = file.path(outputFolder, indicationId, "pairedExposureSummary.csv"))
   }
 
