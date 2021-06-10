@@ -15,12 +15,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ************************************************************************/
-{DEFAULT @cdm_database_schema = "cdm"}
-{DEFAULT @work_database_schema = "cdm"}
-{DEFAULT @study_cohort_table = "cohort"}
+{DEFAULT @cohort_database_schema = 'scratch.dbo'}
+{DEFAULT @cohort_table = 'cohort'}
 
-SELECT cohort_definition_id,
-	COUNT(*) AS cohort_count,
-	COUNT(DISTINCT subject_id) AS person_count
-FROM @work_database_schema.@study_cohort_table
-GROUP BY cohort_definition_id;
+--HINT DISTRIBUTE_ON_KEY(subject_id)
+SELECT ROW_NUMBER() OVER (
+		ORDER BY subject_id,
+			cohort_start_date
+		) AS row_id,
+	subject_id,
+	cohort_start_date,
+	cohort_end_date,
+	-1 AS cohort_definition_id
+INTO #exposure_cohorts
+FROM (
+	SELECT DISTINCT subject_id,
+		cohort_start_date,
+		cohort_end_date
+	FROM @cohort_database_schema.@cohort_table union_cohort
+	INNER JOIN #comparisons comparisons
+		ON union_cohort.cohort_definition_id = comparisons.cohort_definition_id
+	) tmp;

@@ -6,7 +6,7 @@
 \usage{
 generateAllCohortMethodDataObjects(
   outputFolder,
-  indicationId = "Depression",
+  indicationId = "legendt2dm",
   useSample = FALSE,
   maxCores = 4
 )
