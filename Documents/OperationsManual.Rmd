@@ -256,6 +256,15 @@ if (knitr::is_latex_output()) {
 }
 ```
 
+## `CohortMethod` function arguments
+
+```{r, createStudyPopulation, eval=FALSE}
+studyPop <- CohortMethod::createStudyPopulation(cohortMethodData = cmData,
+                                                removeDuplicateSubjects = "keep first", # But should never occur given exposure definitions
+                                                restrictToCommonPeriod = TRUE,
+                                                minDaysAtRisk = 0)
+
+```
 # Data models
 
 This document describes the data models for storing the output of the `CohortDiagnostics` and `CohortMethod` study artifacts for the LEGEND-T2DM study.

@@ -80,6 +80,8 @@ latex_table_font_size <- 8
 
 # TODO List {-}
 
+* Design issue:
+  - Add `restrictToCommonPeriod = TRUE`
 * Outcome definition questions:
   - Measured renal dysfx: Cr >= 3 or lower?
   - Glycemic control: A1c <= 7? how frequently?
