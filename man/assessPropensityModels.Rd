@@ -15,7 +15,8 @@ assessPropensityModels(
   minCohortSize = 1000,
   sampleSize = 1000,
   maxCores = 4,
-  databaseId
+  databaseId,
+  forceNewCmDataObjects = FALSE
 )
 }
 \arguments{
@@ -49,6 +50,8 @@ slashes (/)}
 available this can speed up the analyses.}
 
 \item{databaseId}{A short string for identifying the database (e.g. 'Synpuf').}
+
+\item{forceNewCmDataObjects}{Force recreation of CohortMethod data objects?}
 
 \item{minCohortsSize}{Minimum number of people that have to be in each cohort to keep a pair of
 cohorts.}

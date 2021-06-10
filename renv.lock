@@ -50,15 +50,16 @@
     },
     "CohortMethod": {
       "Package": "CohortMethod",
-      "Version": "3.1.1",
+      "Version": "4.1.0",
       "Source": "GitHub",
+      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
-      "RemoteRef": "v3.1.1",
-      "RemoteSha": "3517ea42f4070915efb7656ab50fde438d31f858",
-      "Hash": "bba7a998f327f7231dfb86dde1ff2ed2"
+      "RemoteRef": "HEAD",
+      "RemoteSha": "7eece8f9c1cdf23c7cc98f8bc43ada84ee906b36",
+      "Hash": "15c2c7f2b93040fa71ed9f8b3135132c"
     },
     "CompQuadForm": {
       "Package": "CompQuadForm",

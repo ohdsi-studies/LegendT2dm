@@ -54,8 +54,11 @@ assessPhenotypes <- function(connectionDetails,
 
   writePairedCounts <- function(indicationId) {
     tcos <- readr::read_csv(file = system.file("settings", paste0(indicationId, "TcosOfInterest.csv"),
-                                               package = "LegendT2dm"))
-    counts <- readr::read_csv(file = file.path(outputFolder, indicationId, "cohortCounts.csv")) %>% select(cohortDefinitionId, cohortCount)
+                                               package = "LegendT2dm"),
+                            col_types = readr::cols())
+    counts <- readr::read_csv(file = file.path(outputFolder, indicationId, "cohortCounts.csv"),
+                              col_types = readr::cols()) %>%
+      select(cohortDefinitionId, cohortCount)
 
     tmp <- tcos %>%
       left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = cohortCount) %>%
@@ -103,6 +106,10 @@ assessPhenotypes <- function(connectionDetails,
                                  databaseName = databaseName,
                                  databaseDescription = databaseDescription,
                                  minCellCount = minCellCount)
+
+    zipName <- file.path(outputFolder, "class", "cohortDiagnosticsExport",
+                         sprintf("Results_%s.zip", databaseId))
+    ParallelLogger::logInfo("Exposure diagnostics results are ready for sharing at:", zipName)
   }
 
   if (runOutcomeCohortDiagnostics) {
@@ -116,6 +123,10 @@ assessPhenotypes <- function(connectionDetails,
                                 databaseName = databaseName,
                                 databaseDescription = databaseDescription,
                                 minCellCount = minCellCount)
+
+    zipName <- file.path(outputFolder, "outcome", "cohortDiagnosticsExport",
+                         sprintf("Results_%s.zip", databaseId))
+    ParallelLogger::logInfo("Outcome diagnostics results are ready for sharing at:", zipName)
   }
 }
 
@@ -148,6 +159,7 @@ assessPhenotypes <- function(connectionDetails,
 #' @param maxCores               How many parallel cores should be used? If more cores are made
 #'                               available this can speed up the analyses.
 #' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
+#' @param forceNewCmDataObjects  Force recreation of CohortMethod data objects?
 #'
 #' @export
 assessPropensityModels <- function(connectionDetails,
@@ -160,7 +172,8 @@ assessPropensityModels <- function(connectionDetails,
                                    minCohortSize = 1000,
                                    sampleSize = 1000,
                                    maxCores = 4,
-                                   databaseId) {
+                                   databaseId,
+                                   forceNewCmDataObjects = FALSE) {
 
   originalCohortTable <- paste(tablePrefix, tolower(indicationId), "cohort", sep = "_")
   sampledCohortTable <- paste(tablePrefix, tolower(indicationId), "sample_cohort", sep = "_")
@@ -185,7 +198,6 @@ assessPropensityModels <- function(connectionDetails,
   DatabaseConnector::executeSql(conn, sql)
   DatabaseConnector::disconnect(conn)
 
-
   ParallelLogger::logInfo("Counting ", indicationId, " sampled exposure cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
                                            "LegendT2dm",
@@ -193,7 +205,7 @@ assessPropensityModels <- function(connectionDetails,
                                            oracleTempSchema = oracleTempSchema,
                                            cdm_database_schema = cdmDatabaseSchema,
                                            work_database_schema = cohortDatabaseSchema,
-                                           study_cohort_table = cohortTable)
+                                           study_cohort_table = sampledCohortTable)
   connection <- DatabaseConnector::connect(connectionDetails)
   counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
   DatabaseConnector::disconnect(connection)
@@ -201,154 +213,174 @@ assessPropensityModels <- function(connectionDetails,
   #counts <- addCohortNames(counts)
   write.csv(counts, file.path(outputFolder, indicationId, "sampledCohortCounts.csv"), row.names = FALSE)
 
-
   filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId, minCohortSize = minCohortSize)
 
-  # fetchAllDataFromServer(connectionDetails = connectionDetails,
-  #                        cdmDatabaseSchema = cdmDatabaseSchema,
-  #                        oracleTempSchema = oracleTempSchema,
-  #                        cohortDatabaseSchema = cohortDatabaseSchema,
-  #                        tablePrefix = tablePrefix,
-  #                        indicationId = indicationId,
-  #                        outputFolder = outputFolder,
-  #                        useSample = TRUE)
+  fetchAllDataFromServer(connectionDetails = connectionDetails,
+                         cdmDatabaseSchema = cdmDatabaseSchema,
+                         oracleTempSchema = oracleTempSchema,
+                         cohortDatabaseSchema = cohortDatabaseSchema,
+                         tablePrefix = tablePrefix,
+                         indicationId = indicationId,
+                         outputFolder = outputFolder,
+                         useSample = TRUE,
+                         forceNewObjects = forceNewCmDataObjects)
 
-  # generateAllCohortMethodDataObjects(outputFolder = outputFolder,
-  #                                    indicationId = indicationId,
-  #                                    useSample = TRUE)
-  #
-  # ParallelLogger::logInfo("Fitting propensity models on sampled data")
-  # fitPsModel <- function(i, exposureSummary, psCvThreads, indicationFolder) {
-  #   targetId <- exposureSummary$targetId[i]
-  #   comparatorId <- exposureSummary$comparatorId[i]
-  #   folderName <- file.path(indicationFolder,
-  #                           "cmSampleOutput",
-  #                           paste0("CmData_l1_t", targetId, "_c", comparatorId))
-  #   cmData <- CohortMethod::loadCohortMethodData(folderName)
-  #   studyPop <- CohortMethod::createStudyPopulation(cohortMethodData = cmData,
-  #                                                   removeDuplicateSubjects = "keep first",
-  #                                                   minDaysAtRisk = 0)
-  #   ps <- CohortMethod::createPs(cohortMethodData = cmData,
-  #                                population = studyPop,
-  #                                errorOnHighCorrelation = TRUE,
-  #                                stopOnError = FALSE,
-  #                                control = Cyclops::createControl(noiseLevel = "silent",
-  #                                                                 cvType = "auto",
-  #                                                                 tolerance = 2e-07,
-  #                                                                 cvRepetitions = 1,
-  #                                                                 startingVariance = 0.01,
-  #                                                                 seed = 123,
-  #                                                                 threads = psCvThreads))
-  #   fileName <- file.path(indicationFolder,
-  #                         "cmSampleOutput",
-  #                         paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
-  #   saveRDS(ps, fileName)
-  #   return(NULL)
-  # }
-  # createPsThreads <- max(1, round(maxCores/10))
-  # psCvThreads <- min(10, maxCores)
-  # exposureSummary <- read.csv(file.path(indicationFolder,
-  #                                       "pairedExposureSummaryFilteredBySize.csv"))
-  # cluster <- ParallelLogger::makeCluster(createPsThreads)
-  # ParallelLogger::clusterApply(cluster = cluster,
-  #                              fun = fitPsModel,
-  #                              x = 1:nrow(exposureSummary),
-  #                              exposureSummary = exposureSummary,
-  #                              psCvThreads = psCvThreads,
-  #                              indicationFolder = indicationFolder)
-  # ParallelLogger::stopCluster(cluster)
-  #
-  # ParallelLogger::logInfo("Fetching propensity models")
-  # getModel <- function(i, exposureSummary, indicationFolder) {
-  #   targetId <- exposureSummary$targetId[i]
-  #   comparatorId <- exposureSummary$comparatorId[i]
-  #   psFileName <- file.path(indicationFolder,
-  #                           "cmSampleOutput",
-  #                           paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
-  #   if (file.exists(psFileName)) {
-  #     ps <- readRDS(psFileName)
-  #     metaData <- attr(ps, "metaData")
-  #     if (is.null(metaData$psError)) {
-  #       folderName <- file.path(indicationFolder,
-  #                               "cmSampleOutput",
-  #                               paste0("CmData_l1_t", targetId, "_c", comparatorId))
-  #       cmData <- CohortMethod::loadCohortMethodData(folderName)
-  #       model <- CohortMethod::getPsModel(ps, cmData)
-  #       ff::close.ffdf(cmData$covariates)
-  #       ff::close.ffdf(cmData$covariateRef)
-  #       ff::close.ffdf(cmData$analysisRef)
-  #       # Truncate to first 25 covariates:
-  #       if (nrow(model) > 25) {
-  #         model <- model[1:25, ]
-  #       }
-  #     } else if (!is.null(metaData$psHighCorrelation)) {
-  #       model <- data.frame(coefficient = Inf,
-  #                           covariateId = metaData$psHighCorrelation$covariateId,
-  #                           covariateName = metaData$psHighCorrelation$covariateName)
-  #     } else {
-  #       model <- data.frame(coefficient = NA,
-  #                           covariateId = NA,
-  #                           covariateName = paste("Error:", metaData$psError))
-  #     }
-  #     targetName <- exposureSummary$targetName[i]
-  #     comparatorName <- exposureSummary$comparatorName[i]
-  #     model$targetId <- targetId
-  #     model$targetName <- targetName
-  #     model$comparatorId <- comparatorId
-  #     model$comparatorName <- comparatorName
-  #     model$comparison <- paste(targetName, comparatorName, sep = " vs. ")
-  #     return(model)
-  #   }
-  #   return(NULL)
-  # }
-  #
-  # data <- plyr::llply(1:nrow(exposureSummary),
-  #                     getModel,
-  #                     exposureSummary = exposureSummary,
-  #                     indicationFolder = indicationFolder,
-  #                     .progress = "text")
-  # data <- do.call("rbind", data)
-  # data$databaseId <- databaseId
-  # data$indicationId <- indicationId
-  # write.csv(data, file.path(assessmentExportFolder, "propensityModels.csv"), row.names = FALSE)
-  #
-  # ParallelLogger::logInfo("Computing AUCs")
-  # getAuc <- function(i, exposureSummary, indicationFolder) {
-  #   targetId <- exposureSummary$targetId[i]
-  #   comparatorId <- exposureSummary$comparatorId[i]
-  #   psFileName <- file.path(indicationFolder,
-  #                           "cmSampleOutput",
-  #                           paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
-  #   if (file.exists(psFileName)) {
-  #     ps <- readRDS(psFileName)
-  #     targetName <- exposureSummary$targetName[i]
-  #     comparatorName <- exposureSummary$comparatorName[i]
-  #     auc <- data.frame(auc = CohortMethod::computePsAuc(ps),
-  #                       targetId = targetId,
-  #                       targetName = targetName,
-  #                       comparatorId = comparatorId,
-  #                       comparatorName = comparatorName,
-  #                       comparison = paste(targetName, comparatorName, sep = " vs. "))
-  #     return(auc)
-  #   }
-  #   return(NULL)
-  # }
-  #
-  # data <- plyr::llply(1:nrow(exposureSummary),
-  #                     getAuc,
-  #                     exposureSummary = exposureSummary,
-  #                     indicationFolder = indicationFolder,
-  #                     .progress = "text")
-  # data <- do.call("rbind", data)
-  # data$databaseId <- databaseId
-  # data$indicationId <- indicationId
-  # write.csv(data, file.path(assessmentExportFolder, "aucs.csv"), row.names = FALSE)
-  #
-  # zipName <- file.path(assessmentExportFolder,
-  #                      sprintf("PropensityModelAssessment%s%s.zip", indicationId, databaseId))
-  # files <- list.files(assessmentExportFolder, pattern = ".*\\.csv$")
-  # oldWd <- setwd(assessmentExportFolder)
-  # on.exit(setwd(oldWd))
-  # DatabaseConnector::createZipFile(zipFile = zipName, files = files)
-  # ParallelLogger::logInfo("Results are ready for sharing at:", zipName)
+  generateAllCohortMethodDataObjects(outputFolder = outputFolder,
+                                     indicationId = indicationId,
+                                     useSample = TRUE)
+
+  ParallelLogger::logInfo("Fitting propensity models on sampled data")
+
+  fitPsModel <- function(i, exposureSummary, psCvThreads, indicationFolder) {
+    targetId <- exposureSummary$targetId[i]
+    comparatorId <- exposureSummary$comparatorId[i]
+
+    fileName <- file.path(indicationFolder,
+                          "cmSampleOutput",
+                          paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
+
+    if (!file.exists(fileName)) {
+      cmFileName <- file.path(indicationFolder,
+                              "cmSampleOutput",
+                              paste0("CmData_l1_t", targetId, "_c", comparatorId, ".zip"))
+      cmData <- CohortMethod::loadCohortMethodData(cmFileName)
+      studyPop <- CohortMethod::createStudyPopulation(cohortMethodData = cmData,
+                                                      removeDuplicateSubjects = "keep first",
+                                                      restrictToCommonPeriod = TRUE,
+                                                      minDaysAtRisk = 0)
+      ps <- CohortMethod::createPs(cohortMethodData = cmData,
+                                   population = studyPop,
+                                   errorOnHighCorrelation = TRUE,
+                                   stopOnError = FALSE,
+                                   control = Cyclops::createControl(noiseLevel = "silent",
+                                                                    cvType = "auto",
+                                                                    tolerance = 2e-07,
+                                                                    cvRepetitions = 1,
+                                                                    startingVariance = 0.01,
+                                                                    seed = 123,
+                                                                    threads = psCvThreads))
+
+      saveRDS(ps, fileName)
+    }
+    return(NULL)
+  }
+
+  createPsThreads <- max(1, round(maxCores/10))
+  psCvThreads <- min(10, maxCores)
+  exposureSummary <- read.csv(file.path(indicationFolder,
+                                        "pairedExposureSummaryFilteredBySize.csv"))
+
+  cluster <- ParallelLogger::makeCluster(createPsThreads)
+  ParallelLogger::clusterApply(cluster = cluster,
+                               fun = fitPsModel,
+                               x = 1:nrow(exposureSummary),
+                               exposureSummary = exposureSummary,
+                               psCvThreads = psCvThreads,
+                               indicationFolder = indicationFolder)
+  ParallelLogger::stopCluster(cluster)
+
+  ParallelLogger::logInfo("Fetching propensity models")
+
+  getModel <- function(i, exposureSummary, indicationFolder) {
+    targetId <- exposureSummary$targetId[i]
+    comparatorId <- exposureSummary$comparatorId[i]
+    psFileName <- file.path(indicationFolder,
+                            "cmSampleOutput",
+                            paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
+
+    if (file.exists(psFileName)) {
+      ps <- readRDS(psFileName)
+      metaData <- attr(ps, "metaData")
+
+      if (is.null(metaData$psError)) {
+        fileName <- file.path(indicationFolder,
+                              "cmSampleOutput",
+                              paste0("CmData_l1_t", targetId, "_c", comparatorId, ".zip"))
+        cmData <- CohortMethod::loadCohortMethodData(fileName)
+        model <- CohortMethod::getPsModel(ps, cmData)
+        Andromeda::close(cmData)
+
+        # Truncate to first 25 covariates:
+        if (nrow(model) > 25) {
+          model <- model[1:25, ]
+        }
+
+      } else if (!is.null(metaData$psHighCorrelation)) {
+        model <- tibble::tibble(coefficient = Inf,
+                                covariateId = metaData$psHighCorrelation$covariateId,
+                                covariateName = metaData$psHighCorrelation$covariateName)
+      } else {
+        model <- tibble::tibble(coefficient = NA,
+                                covariateId = NA,
+                                covariateName = paste("Error:", metaData$psError))
+      }
+
+      targetName <- exposureSummary$targetName[i]
+      comparatorName <- exposureSummary$comparatorName[i]
+      model$targetId <- targetId
+      model$targetName <- targetName
+      model$comparatorId <- comparatorId
+      model$comparatorName <- comparatorName
+      model$comparison <- paste(targetName, comparatorName, sep = " vs. ")
+      return(model)
+    } else {
+      return(NULL)
+    }
+  }
+
+  data <- plyr::llply(1:nrow(exposureSummary),
+                      getModel,
+                      exposureSummary = exposureSummary,
+                      indicationFolder = indicationFolder,
+                      .progress = "text")
+  data <- do.call("rbind", data)
+  data$databaseId <- databaseId
+  data$indicationId <- indicationId
+  write.csv(data, file.path(assessmentExportFolder, "psCovariateAssessment.csv"), row.names = FALSE)
+
+  ParallelLogger::logInfo("Computing AUCs")
+
+  getAuc <- function(i, exposureSummary, indicationFolder) {
+    targetId <- exposureSummary$targetId[i]
+    comparatorId <- exposureSummary$comparatorId[i]
+    targetName <- exposureSummary$targetName[i]
+    comparatorName <- exposureSummary$comparatorName[i]
+    psFileName <- file.path(indicationFolder,
+                            "cmSampleOutput",
+                            paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
+    if (file.exists(psFileName)) {
+      ps <- readRDS(psFileName)
+      targetName <- exposureSummary$targetName[i]
+      comparatorName <- exposureSummary$comparatorName[i]
+      ps <- CohortMethod:::computePreferenceScore(ps)
+      auc <- tibble::tibble(auc = CohortMethod::computePsAuc(ps),
+                            equipoise = mean(ps$preferenceScore >= 0.3 & ps$preferenceScore <= 0.7),
+                            targetId = targetId,
+                            targetName = targetName,
+                            comparatorId = comparatorId,
+                            comparatorName = comparatorName,
+                            comparison = paste(targetName, comparatorName, sep = " vs. "))
+      return(auc)
+    }
+    return(NULL)
+  }
+
+  data <- plyr::llply(1:nrow(exposureSummary),
+                      getAuc,
+                      exposureSummary = exposureSummary,
+                      indicationFolder = indicationFolder,
+                      .progress = "text")
+  data <- do.call("rbind", data)
+  data$databaseId <- databaseId
+  data$indicationId <- indicationId
+  names(data) <- SqlRender::camelCaseToSnakeCase(names(data))
+  write.csv(data, file.path(assessmentExportFolder, "psAucAssessment.csv"), row.names = FALSE)
+
+  zipName <- file.path(assessmentExportFolder,
+                       sprintf("propensityModelAssessment_%s.zip", databaseId))
+  files <- list.files(assessmentExportFolder, pattern = ".*\\.csv$")
+  oldWd <- setwd(assessmentExportFolder)
+  on.exit(setwd(oldWd))
+  DatabaseConnector::createZipFile(zipFile = zipName, files = files)
+  ParallelLogger::logInfo("Propensity score assessment results are ready for sharing at:", zipName)
 }

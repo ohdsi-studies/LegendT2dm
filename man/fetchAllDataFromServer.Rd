@@ -12,6 +12,7 @@ fetchAllDataFromServer(
   indicationId = "class",
   tablePrefix = "legendt2dm",
   useSample = FALSE,
+  forceNewObjects = FALSE,
   outputFolder
 )
 }
