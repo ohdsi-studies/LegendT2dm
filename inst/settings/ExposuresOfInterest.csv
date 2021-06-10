@@ -1,27 +1,27 @@
 type,name,cohortId,conceptId,class,shortName,order,includedConceptIds
-Drug,alogliptin,11,43013884,DPP4Is,NA,NA,NA
-Drug,linagliptin,12,40239216,DPP4Is,NA,NA,NA
-Drug,saxagliptin,13,40166035,DPP4Is,NA,NA,NA
-Drug,sitagliptin,14,1580747,DPP4Is,NA,NA,NA
-Drug,vildagliptin,15,19122137,DPP4Is,NA,NA,NA
-Drug,albiglutide,21,44816332,GLP1RAs,NA,NA,NA
-Drug,dulaglutide,22,45774435,GLP1RAs,NA,NA,NA
-Drug,exenatide,23,1583722,GLP1RAs,NA,NA,NA
-Drug,liraglutide,24,40170911,GLP1RAs,NA,NA,NA
-Drug,lixisenatide,25,44506754,GLP1RAs,NA,NA,NA
-Drug,semaglutide,26,793143,GLP1RAs,NA,NA,NA
-Drug,canagliflozin,31,43526465,SGLT2Is,NA,NA,NA
-Drug,dapagliflozin,32,44785829,SGLT2Is,NA,NA,NA
-Drug,empagliflozin,33,45774751,SGLT2Is,NA,NA,NA
-Drug,ertugliflozin,34,793293,SGLT2Is,NA,NA,NA
-Drug,chlorpropamide,41,1594973,SUs,NA,NA,NA
-Drug,glimepiride,42,1597756,SUs,NA,NA,NA
-Drug,glipizide,43,1560171,SUs,NA,NA,NA
-Drug,gliquidone,44,19097821,SUs,NA,NA,NA
-Drug,glyburide,45,1559684,SUs,NA,NA,NA
-Drug,tolazamide,46,1502809,SUs,NA,NA,NA
-Drug,tolbutamide,47,1502855,SUs,NA,NA,NA
-Drug class,DPP4 inhibitors,10,1,NA,DPP4Is,1,1580747;19122137;40166035;40239216;43013884
-Drug class,GLP-1 receptor agonists,20,2,NA,GLP1RAs,2,793143;1583722;40170911;44506754;44816332;45774435
-Drug class,SGLT2 inhibitors,30,3,NA,SGLT2Is,3,793293;43526465;44785829;45774751
-Drug class,Sulfonylureas,40,4,NA,SUs,4,1502809;1502855;1559684;1560171;1594973;1597756;19097821
+Drug,alogliptin,11,43013884,DPP4I,NA,NA,NA
+Drug,linagliptin,12,40239216,DPP4I,NA,NA,NA
+Drug,saxagliptin,13,40166035,DPP4I,NA,NA,NA
+Drug,sitagliptin,14,1580747,DPP4I,NA,NA,NA
+Drug,vildagliptin,15,19122137,DPP4I,NA,NA,NA
+Drug,albiglutide,21,44816332,GLP1RA,NA,NA,NA
+Drug,dulaglutide,22,45774435,GLP1RA,NA,NA,NA
+Drug,exenatide,23,1583722,GLP1RA,NA,NA,NA
+Drug,liraglutide,24,40170911,GLP1RA,NA,NA,NA
+Drug,lixisenatide,25,44506754,GLP1RA,NA,NA,NA
+Drug,semaglutide,26,793143,GLP1RA,NA,NA,NA
+Drug,canagliflozin,31,43526465,SGLT2I,NA,NA,NA
+Drug,dapagliflozin,32,44785829,SGLT2I,NA,NA,NA
+Drug,empagliflozin,33,45774751,SGLT2I,NA,NA,NA
+Drug,ertugliflozin,34,793293,SGLT2I,NA,NA,NA
+Drug,chlorpropamide,41,1594973,SU,NA,NA,NA
+Drug,glimepiride,42,1597756,SU,NA,NA,NA
+Drug,glipizide,43,1560171,SU,NA,NA,NA
+Drug,gliquidone,44,19097821,SU,NA,NA,NA
+Drug,glyburide,45,1559684,SU,NA,NA,NA
+Drug,tolazamide,46,1502809,SU,NA,NA,NA
+Drug,tolbutamide,47,1502855,SU,NA,NA,NA
+Drug class,DPP4 inhibitors,10,1,NA,DPP4I,1,1580747;19122137;40166035;40239216;43013884
+Drug class,GLP-1 receptor agonists,20,2,NA,GLP1RA,2,793143;1583722;40170911;44506754;44816332;45774435
+Drug class,SGLT2 inhibitors,30,3,NA,SGLT2I,3,793293;43526465;44785829;45774751
+Drug class,Sulfonylureas,40,4,NA,SU,4,1502809;1502855;1559684;1560171;1594973;1597756;19097821

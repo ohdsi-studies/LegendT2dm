@@ -1,177 +1,177 @@
 atlasId,atlasName,cohortId,name
-101100000,"DPP4Is: ot1, with prior met, any age, any sex, any race, any cv risk, any renal",101100000,class/ID101100000
-201100000,"GLP1RAs: ot1, with prior met, any age, any sex, any race, any cv risk, any renal",201100000,class/ID201100000
-301100000,"SGLT2Is: ot1, with prior met, any age, any sex, any race, any cv risk, any renal",301100000,class/ID301100000
-401100000,"SUs: ot1, with prior met, any age, any sex, any race, any cv risk, any renal",401100000,class/ID401100000
-101110000,"DPP4Is: ot1, with prior met, younger age, any sex, any race, any cv risk, any renal",101110000,class/ID101110000
-201110000,"GLP1RAs: ot1, with prior met, younger age, any sex, any race, any cv risk, any renal",201110000,class/ID201110000
-301110000,"SGLT2Is: ot1, with prior met, younger age, any sex, any race, any cv risk, any renal",301110000,class/ID301110000
-401110000,"SUs: ot1, with prior met, younger age, any sex, any race, any cv risk, any renal",401110000,class/ID401110000
-101120000,"DPP4Is: ot1, with prior met, middle age, any sex, any race, any cv risk, any renal",101120000,class/ID101120000
-201120000,"GLP1RAs: ot1, with prior met, middle age, any sex, any race, any cv risk, any renal",201120000,class/ID201120000
-301120000,"SGLT2Is: ot1, with prior met, middle age, any sex, any race, any cv risk, any renal",301120000,class/ID301120000
-401120000,"SUs: ot1, with prior met, middle age, any sex, any race, any cv risk, any renal",401120000,class/ID401120000
-101130000,"DPP4Is: ot1, with prior met, older age, any sex, any race, any cv risk, any renal",101130000,class/ID101130000
-201130000,"GLP1RAs: ot1, with prior met, older age, any sex, any race, any cv risk, any renal",201130000,class/ID201130000
-301130000,"SGLT2Is: ot1, with prior met, older age, any sex, any race, any cv risk, any renal",301130000,class/ID301130000
-401130000,"SUs: ot1, with prior met, older age, any sex, any race, any cv risk, any renal",401130000,class/ID401130000
-101100010,"DPP4Is: ot1, with prior met, any age, any sex, any race, low cv risk, any renal",101100010,class/ID101100010
-201100010,"GLP1RAs: ot1, with prior met, any age, any sex, any race, low cv risk, any renal",201100010,class/ID201100010
-301100010,"SGLT2Is: ot1, with prior met, any age, any sex, any race, low cv risk, any renal",301100010,class/ID301100010
-401100010,"SUs: ot1, with prior met, any age, any sex, any race, low cv risk, any renal",401100010,class/ID401100010
-101100020,"DPP4Is: ot1, with prior met, any age, any sex, any race, higher cv risk, any renal",101100020,class/ID101100020
-201100020,"GLP1RAs: ot1, with prior met, any age, any sex, any race, higher cv risk, any renal",201100020,class/ID201100020
-301100020,"SGLT2Is: ot1, with prior met, any age, any sex, any race, higher cv risk, any renal",301100020,class/ID301100020
-401100020,"SUs: ot1, with prior met, any age, any sex, any race, higher cv risk, any renal",401100020,class/ID401100020
-101101000,"DPP4Is: ot1, with prior met, any age, female sex, any race, any cv risk, any renal",101101000,class/ID101101000
-201101000,"GLP1RAs: ot1, with prior met, any age, female sex, any race, any cv risk, any renal",201101000,class/ID201101000
-301101000,"SGLT2Is: ot1, with prior met, any age, female sex, any race, any cv risk, any renal",301101000,class/ID301101000
-401101000,"SUs: ot1, with prior met, any age, female sex, any race, any cv risk, any renal",401101000,class/ID401101000
-101102000,"DPP4Is: ot1, with prior met, any age, male sex, any race, any cv risk, any renal",101102000,class/ID101102000
-201102000,"GLP1RAs: ot1, with prior met, any age, male sex, any race, any cv risk, any renal",201102000,class/ID201102000
-301102000,"SGLT2Is: ot1, with prior met, any age, male sex, any race, any cv risk, any renal",301102000,class/ID301102000
-401102000,"SUs: ot1, with prior met, any age, male sex, any race, any cv risk, any renal",401102000,class/ID401102000
-101100100,"DPP4Is: ot1, with prior met, any age, any sex, black race, any cv risk, any renal",101100100,class/ID101100100
-201100100,"GLP1RAs: ot1, with prior met, any age, any sex, black race, any cv risk, any renal",201100100,class/ID201100100
-301100100,"SGLT2Is: ot1, with prior met, any age, any sex, black race, any cv risk, any renal",301100100,class/ID301100100
-401100100,"SUs: ot1, with prior met, any age, any sex, black race, any cv risk, any renal",401100100,class/ID401100100
-101100001,"DPP4Is: ot1, with prior met, any age, any sex, any race, any cv risk, without renal",101100001,class/ID101100001
-201100001,"GLP1RAs: ot1, with prior met, any age, any sex, any race, any cv risk, without renal",201100001,class/ID201100001
-301100001,"SGLT2Is: ot1, with prior met, any age, any sex, any race, any cv risk, without renal",301100001,class/ID301100001
-401100001,"SUs: ot1, with prior met, any age, any sex, any race, any cv risk, without renal",401100001,class/ID401100001
-101100002,"DPP4Is: ot1, with prior met, any age, any sex, any race, any cv risk, with renal",101100002,class/ID101100002
-201100002,"GLP1RAs: ot1, with prior met, any age, any sex, any race, any cv risk, with renal",201100002,class/ID201100002
-301100002,"SGLT2Is: ot1, with prior met, any age, any sex, any race, any cv risk, with renal",301100002,class/ID301100002
-401100002,"SUs: ot1, with prior met, any age, any sex, any race, any cv risk, with renal",401100002,class/ID401100002
-102100000,"DPP4Is: ot2, with prior met, any age, any sex, any race, any cv risk, any renal",102100000,class/ID102100000
-202100000,"GLP1RAs: ot2, with prior met, any age, any sex, any race, any cv risk, any renal",202100000,class/ID202100000
-302100000,"SGLT2Is: ot2, with prior met, any age, any sex, any race, any cv risk, any renal",302100000,class/ID302100000
-402100000,"SUs: ot2, with prior met, any age, any sex, any race, any cv risk, any renal",402100000,class/ID402100000
-102110000,"DPP4Is: ot2, with prior met, younger age, any sex, any race, any cv risk, any renal",102110000,class/ID102110000
-202110000,"GLP1RAs: ot2, with prior met, younger age, any sex, any race, any cv risk, any renal",202110000,class/ID202110000
-302110000,"SGLT2Is: ot2, with prior met, younger age, any sex, any race, any cv risk, any renal",302110000,class/ID302110000
-402110000,"SUs: ot2, with prior met, younger age, any sex, any race, any cv risk, any renal",402110000,class/ID402110000
-102120000,"DPP4Is: ot2, with prior met, middle age, any sex, any race, any cv risk, any renal",102120000,class/ID102120000
-202120000,"GLP1RAs: ot2, with prior met, middle age, any sex, any race, any cv risk, any renal",202120000,class/ID202120000
-302120000,"SGLT2Is: ot2, with prior met, middle age, any sex, any race, any cv risk, any renal",302120000,class/ID302120000
-402120000,"SUs: ot2, with prior met, middle age, any sex, any race, any cv risk, any renal",402120000,class/ID402120000
-102130000,"DPP4Is: ot2, with prior met, older age, any sex, any race, any cv risk, any renal",102130000,class/ID102130000
-202130000,"GLP1RAs: ot2, with prior met, older age, any sex, any race, any cv risk, any renal",202130000,class/ID202130000
-302130000,"SGLT2Is: ot2, with prior met, older age, any sex, any race, any cv risk, any renal",302130000,class/ID302130000
-402130000,"SUs: ot2, with prior met, older age, any sex, any race, any cv risk, any renal",402130000,class/ID402130000
-102100010,"DPP4Is: ot2, with prior met, any age, any sex, any race, low cv risk, any renal",102100010,class/ID102100010
-202100010,"GLP1RAs: ot2, with prior met, any age, any sex, any race, low cv risk, any renal",202100010,class/ID202100010
-302100010,"SGLT2Is: ot2, with prior met, any age, any sex, any race, low cv risk, any renal",302100010,class/ID302100010
-402100010,"SUs: ot2, with prior met, any age, any sex, any race, low cv risk, any renal",402100010,class/ID402100010
-102100020,"DPP4Is: ot2, with prior met, any age, any sex, any race, higher cv risk, any renal",102100020,class/ID102100020
-202100020,"GLP1RAs: ot2, with prior met, any age, any sex, any race, higher cv risk, any renal",202100020,class/ID202100020
-302100020,"SGLT2Is: ot2, with prior met, any age, any sex, any race, higher cv risk, any renal",302100020,class/ID302100020
-402100020,"SUs: ot2, with prior met, any age, any sex, any race, higher cv risk, any renal",402100020,class/ID402100020
-102101000,"DPP4Is: ot2, with prior met, any age, female sex, any race, any cv risk, any renal",102101000,class/ID102101000
-202101000,"GLP1RAs: ot2, with prior met, any age, female sex, any race, any cv risk, any renal",202101000,class/ID202101000
-302101000,"SGLT2Is: ot2, with prior met, any age, female sex, any race, any cv risk, any renal",302101000,class/ID302101000
-402101000,"SUs: ot2, with prior met, any age, female sex, any race, any cv risk, any renal",402101000,class/ID402101000
-102102000,"DPP4Is: ot2, with prior met, any age, male sex, any race, any cv risk, any renal",102102000,class/ID102102000
-202102000,"GLP1RAs: ot2, with prior met, any age, male sex, any race, any cv risk, any renal",202102000,class/ID202102000
-302102000,"SGLT2Is: ot2, with prior met, any age, male sex, any race, any cv risk, any renal",302102000,class/ID302102000
-402102000,"SUs: ot2, with prior met, any age, male sex, any race, any cv risk, any renal",402102000,class/ID402102000
-102100100,"DPP4Is: ot2, with prior met, any age, any sex, black race, any cv risk, any renal",102100100,class/ID102100100
-202100100,"GLP1RAs: ot2, with prior met, any age, any sex, black race, any cv risk, any renal",202100100,class/ID202100100
-302100100,"SGLT2Is: ot2, with prior met, any age, any sex, black race, any cv risk, any renal",302100100,class/ID302100100
-402100100,"SUs: ot2, with prior met, any age, any sex, black race, any cv risk, any renal",402100100,class/ID402100100
-102100001,"DPP4Is: ot2, with prior met, any age, any sex, any race, any cv risk, without renal",102100001,class/ID102100001
-202100001,"GLP1RAs: ot2, with prior met, any age, any sex, any race, any cv risk, without renal",202100001,class/ID202100001
-302100001,"SGLT2Is: ot2, with prior met, any age, any sex, any race, any cv risk, without renal",302100001,class/ID302100001
-402100001,"SUs: ot2, with prior met, any age, any sex, any race, any cv risk, without renal",402100001,class/ID402100001
-102100002,"DPP4Is: ot2, with prior met, any age, any sex, any race, any cv risk, with renal",102100002,class/ID102100002
-202100002,"GLP1RAs: ot2, with prior met, any age, any sex, any race, any cv risk, with renal",202100002,class/ID202100002
-302100002,"SGLT2Is: ot2, with prior met, any age, any sex, any race, any cv risk, with renal",302100002,class/ID302100002
-402100002,"SUs: ot2, with prior met, any age, any sex, any race, any cv risk, with renal",402100002,class/ID402100002
-101200000,"DPP4Is: ot1, no prior met, any age, any sex, any race, any cv risk, any renal",101200000,class/ID101200000
-201200000,"GLP1RAs: ot1, no prior met, any age, any sex, any race, any cv risk, any renal",201200000,class/ID201200000
-301200000,"SGLT2Is: ot1, no prior met, any age, any sex, any race, any cv risk, any renal",301200000,class/ID301200000
-401200000,"SUs: ot1, no prior met, any age, any sex, any race, any cv risk, any renal",401200000,class/ID401200000
-101210000,"DPP4Is: ot1, no prior met, younger age, any sex, any race, any cv risk, any renal",101210000,class/ID101210000
-201210000,"GLP1RAs: ot1, no prior met, younger age, any sex, any race, any cv risk, any renal",201210000,class/ID201210000
-301210000,"SGLT2Is: ot1, no prior met, younger age, any sex, any race, any cv risk, any renal",301210000,class/ID301210000
-401210000,"SUs: ot1, no prior met, younger age, any sex, any race, any cv risk, any renal",401210000,class/ID401210000
-101220000,"DPP4Is: ot1, no prior met, middle age, any sex, any race, any cv risk, any renal",101220000,class/ID101220000
-201220000,"GLP1RAs: ot1, no prior met, middle age, any sex, any race, any cv risk, any renal",201220000,class/ID201220000
-301220000,"SGLT2Is: ot1, no prior met, middle age, any sex, any race, any cv risk, any renal",301220000,class/ID301220000
-401220000,"SUs: ot1, no prior met, middle age, any sex, any race, any cv risk, any renal",401220000,class/ID401220000
-101230000,"DPP4Is: ot1, no prior met, older age, any sex, any race, any cv risk, any renal",101230000,class/ID101230000
-201230000,"GLP1RAs: ot1, no prior met, older age, any sex, any race, any cv risk, any renal",201230000,class/ID201230000
-301230000,"SGLT2Is: ot1, no prior met, older age, any sex, any race, any cv risk, any renal",301230000,class/ID301230000
-401230000,"SUs: ot1, no prior met, older age, any sex, any race, any cv risk, any renal",401230000,class/ID401230000
-101200010,"DPP4Is: ot1, no prior met, any age, any sex, any race, low cv risk, any renal",101200010,class/ID101200010
-201200010,"GLP1RAs: ot1, no prior met, any age, any sex, any race, low cv risk, any renal",201200010,class/ID201200010
-301200010,"SGLT2Is: ot1, no prior met, any age, any sex, any race, low cv risk, any renal",301200010,class/ID301200010
-401200010,"SUs: ot1, no prior met, any age, any sex, any race, low cv risk, any renal",401200010,class/ID401200010
-101200020,"DPP4Is: ot1, no prior met, any age, any sex, any race, higher cv risk, any renal",101200020,class/ID101200020
-201200020,"GLP1RAs: ot1, no prior met, any age, any sex, any race, higher cv risk, any renal",201200020,class/ID201200020
-301200020,"SGLT2Is: ot1, no prior met, any age, any sex, any race, higher cv risk, any renal",301200020,class/ID301200020
-401200020,"SUs: ot1, no prior met, any age, any sex, any race, higher cv risk, any renal",401200020,class/ID401200020
-101201000,"DPP4Is: ot1, no prior met, any age, female sex, any race, any cv risk, any renal",101201000,class/ID101201000
-201201000,"GLP1RAs: ot1, no prior met, any age, female sex, any race, any cv risk, any renal",201201000,class/ID201201000
-301201000,"SGLT2Is: ot1, no prior met, any age, female sex, any race, any cv risk, any renal",301201000,class/ID301201000
-401201000,"SUs: ot1, no prior met, any age, female sex, any race, any cv risk, any renal",401201000,class/ID401201000
-101202000,"DPP4Is: ot1, no prior met, any age, male sex, any race, any cv risk, any renal",101202000,class/ID101202000
-201202000,"GLP1RAs: ot1, no prior met, any age, male sex, any race, any cv risk, any renal",201202000,class/ID201202000
-301202000,"SGLT2Is: ot1, no prior met, any age, male sex, any race, any cv risk, any renal",301202000,class/ID301202000
-401202000,"SUs: ot1, no prior met, any age, male sex, any race, any cv risk, any renal",401202000,class/ID401202000
-101200100,"DPP4Is: ot1, no prior met, any age, any sex, black race, any cv risk, any renal",101200100,class/ID101200100
-201200100,"GLP1RAs: ot1, no prior met, any age, any sex, black race, any cv risk, any renal",201200100,class/ID201200100
-301200100,"SGLT2Is: ot1, no prior met, any age, any sex, black race, any cv risk, any renal",301200100,class/ID301200100
-401200100,"SUs: ot1, no prior met, any age, any sex, black race, any cv risk, any renal",401200100,class/ID401200100
-101200001,"DPP4Is: ot1, no prior met, any age, any sex, any race, any cv risk, without renal",101200001,class/ID101200001
-201200001,"GLP1RAs: ot1, no prior met, any age, any sex, any race, any cv risk, without renal",201200001,class/ID201200001
-301200001,"SGLT2Is: ot1, no prior met, any age, any sex, any race, any cv risk, without renal",301200001,class/ID301200001
-401200001,"SUs: ot1, no prior met, any age, any sex, any race, any cv risk, without renal",401200001,class/ID401200001
-101200002,"DPP4Is: ot1, no prior met, any age, any sex, any race, any cv risk, with renal",101200002,class/ID101200002
-201200002,"GLP1RAs: ot1, no prior met, any age, any sex, any race, any cv risk, with renal",201200002,class/ID201200002
-301200002,"SGLT2Is: ot1, no prior met, any age, any sex, any race, any cv risk, with renal",301200002,class/ID301200002
-401200002,"SUs: ot1, no prior met, any age, any sex, any race, any cv risk, with renal",401200002,class/ID401200002
-102200000,"DPP4Is: ot2, no prior met, any age, any sex, any race, any cv risk, any renal",102200000,class/ID102200000
-202200000,"GLP1RAs: ot2, no prior met, any age, any sex, any race, any cv risk, any renal",202200000,class/ID202200000
-302200000,"SGLT2Is: ot2, no prior met, any age, any sex, any race, any cv risk, any renal",302200000,class/ID302200000
-402200000,"SUs: ot2, no prior met, any age, any sex, any race, any cv risk, any renal",402200000,class/ID402200000
-102210000,"DPP4Is: ot2, no prior met, younger age, any sex, any race, any cv risk, any renal",102210000,class/ID102210000
-202210000,"GLP1RAs: ot2, no prior met, younger age, any sex, any race, any cv risk, any renal",202210000,class/ID202210000
-302210000,"SGLT2Is: ot2, no prior met, younger age, any sex, any race, any cv risk, any renal",302210000,class/ID302210000
-402210000,"SUs: ot2, no prior met, younger age, any sex, any race, any cv risk, any renal",402210000,class/ID402210000
-102220000,"DPP4Is: ot2, no prior met, middle age, any sex, any race, any cv risk, any renal",102220000,class/ID102220000
-202220000,"GLP1RAs: ot2, no prior met, middle age, any sex, any race, any cv risk, any renal",202220000,class/ID202220000
-302220000,"SGLT2Is: ot2, no prior met, middle age, any sex, any race, any cv risk, any renal",302220000,class/ID302220000
-402220000,"SUs: ot2, no prior met, middle age, any sex, any race, any cv risk, any renal",402220000,class/ID402220000
-102230000,"DPP4Is: ot2, no prior met, older age, any sex, any race, any cv risk, any renal",102230000,class/ID102230000
-202230000,"GLP1RAs: ot2, no prior met, older age, any sex, any race, any cv risk, any renal",202230000,class/ID202230000
-302230000,"SGLT2Is: ot2, no prior met, older age, any sex, any race, any cv risk, any renal",302230000,class/ID302230000
-402230000,"SUs: ot2, no prior met, older age, any sex, any race, any cv risk, any renal",402230000,class/ID402230000
-102200010,"DPP4Is: ot2, no prior met, any age, any sex, any race, low cv risk, any renal",102200010,class/ID102200010
-202200010,"GLP1RAs: ot2, no prior met, any age, any sex, any race, low cv risk, any renal",202200010,class/ID202200010
-302200010,"SGLT2Is: ot2, no prior met, any age, any sex, any race, low cv risk, any renal",302200010,class/ID302200010
-402200010,"SUs: ot2, no prior met, any age, any sex, any race, low cv risk, any renal",402200010,class/ID402200010
-102200020,"DPP4Is: ot2, no prior met, any age, any sex, any race, higher cv risk, any renal",102200020,class/ID102200020
-202200020,"GLP1RAs: ot2, no prior met, any age, any sex, any race, higher cv risk, any renal",202200020,class/ID202200020
-302200020,"SGLT2Is: ot2, no prior met, any age, any sex, any race, higher cv risk, any renal",302200020,class/ID302200020
-402200020,"SUs: ot2, no prior met, any age, any sex, any race, higher cv risk, any renal",402200020,class/ID402200020
-102201000,"DPP4Is: ot2, no prior met, any age, female sex, any race, any cv risk, any renal",102201000,class/ID102201000
-202201000,"GLP1RAs: ot2, no prior met, any age, female sex, any race, any cv risk, any renal",202201000,class/ID202201000
-302201000,"SGLT2Is: ot2, no prior met, any age, female sex, any race, any cv risk, any renal",302201000,class/ID302201000
-402201000,"SUs: ot2, no prior met, any age, female sex, any race, any cv risk, any renal",402201000,class/ID402201000
-102202000,"DPP4Is: ot2, no prior met, any age, male sex, any race, any cv risk, any renal",102202000,class/ID102202000
-202202000,"GLP1RAs: ot2, no prior met, any age, male sex, any race, any cv risk, any renal",202202000,class/ID202202000
-302202000,"SGLT2Is: ot2, no prior met, any age, male sex, any race, any cv risk, any renal",302202000,class/ID302202000
-402202000,"SUs: ot2, no prior met, any age, male sex, any race, any cv risk, any renal",402202000,class/ID402202000
-102200100,"DPP4Is: ot2, no prior met, any age, any sex, black race, any cv risk, any renal",102200100,class/ID102200100
-202200100,"GLP1RAs: ot2, no prior met, any age, any sex, black race, any cv risk, any renal",202200100,class/ID202200100
-302200100,"SGLT2Is: ot2, no prior met, any age, any sex, black race, any cv risk, any renal",302200100,class/ID302200100
-402200100,"SUs: ot2, no prior met, any age, any sex, black race, any cv risk, any renal",402200100,class/ID402200100
-102200001,"DPP4Is: ot2, no prior met, any age, any sex, any race, any cv risk, without renal",102200001,class/ID102200001
-202200001,"GLP1RAs: ot2, no prior met, any age, any sex, any race, any cv risk, without renal",202200001,class/ID202200001
-302200001,"SGLT2Is: ot2, no prior met, any age, any sex, any race, any cv risk, without renal",302200001,class/ID302200001
-402200001,"SUs: ot2, no prior met, any age, any sex, any race, any cv risk, without renal",402200001,class/ID402200001
-102200002,"DPP4Is: ot2, no prior met, any age, any sex, any race, any cv risk, with renal",102200002,class/ID102200002
-202200002,"GLP1RAs: ot2, no prior met, any age, any sex, any race, any cv risk, with renal",202200002,class/ID202200002
-302200002,"SGLT2Is: ot2, no prior met, any age, any sex, any race, any cv risk, with renal",302200002,class/ID302200002
-402200002,"SUs: ot2, no prior met, any age, any sex, any race, any cv risk, with renal",402200002,class/ID402200002
+101100000,DPP4I,101100000,class/ID101100000
+201100000,GLP1RA,201100000,class/ID201100000
+301100000,SGLT2I,301100000,class/ID301100000
+401100000,SU,401100000,class/ID401100000
+101110000,DPP4I younger-age,101110000,class/ID101110000
+201110000,GLP1RA younger-age,201110000,class/ID201110000
+301110000,SGLT2I younger-age,301110000,class/ID301110000
+401110000,SU younger-age,401110000,class/ID401110000
+101120000,DPP4I middle-age,101120000,class/ID101120000
+201120000,GLP1RA middle-age,201120000,class/ID201120000
+301120000,SGLT2I middle-age,301120000,class/ID301120000
+401120000,SU middle-age,401120000,class/ID401120000
+101130000,DPP4I older-age,101130000,class/ID101130000
+201130000,GLP1RA older-age,201130000,class/ID201130000
+301130000,SGLT2I older-age,301130000,class/ID301130000
+401130000,SU older-age,401130000,class/ID401130000
+101100010,DPP4I low-cvr,101100010,class/ID101100010
+201100010,GLP1RA low-cvr,201100010,class/ID201100010
+301100010,SGLT2I low-cvr,301100010,class/ID301100010
+401100010,SU low-cvr,401100010,class/ID401100010
+101100020,DPP4I higher-cvr,101100020,class/ID101100020
+201100020,GLP1RA higher-cvr,201100020,class/ID201100020
+301100020,SGLT2I higher-cvr,301100020,class/ID301100020
+401100020,SU higher-cvr,401100020,class/ID401100020
+101101000,DPP4I female,101101000,class/ID101101000
+201101000,GLP1RA female,201101000,class/ID201101000
+301101000,SGLT2I female,301101000,class/ID301101000
+401101000,SU female,401101000,class/ID401101000
+101102000,DPP4I male,101102000,class/ID101102000
+201102000,GLP1RA male,201102000,class/ID201102000
+301102000,SGLT2I male,301102000,class/ID301102000
+401102000,SU male,401102000,class/ID401102000
+101100100,DPP4I black,101100100,class/ID101100100
+201100100,GLP1RA black,201100100,class/ID201100100
+301100100,SGLT2I black,301100100,class/ID301100100
+401100100,SU black,401100100,class/ID401100100
+101100001,DPP4I without-rdz,101100001,class/ID101100001
+201100001,GLP1RA without-rdz,201100001,class/ID201100001
+301100001,SGLT2I without-rdz,301100001,class/ID301100001
+401100001,SU without-rdz,401100001,class/ID401100001
+101100002,DPP4I with-rdz,101100002,class/ID101100002
+201100002,GLP1RA with-rdz,201100002,class/ID201100002
+301100002,SGLT2I with-rdz,301100002,class/ID301100002
+401100002,SU with-rdz,401100002,class/ID401100002
+102100000,DPP4I ot2,102100000,class/ID102100000
+202100000,GLP1RA ot2,202100000,class/ID202100000
+302100000,SGLT2I ot2,302100000,class/ID302100000
+402100000,SU ot2,402100000,class/ID402100000
+102110000,DPP4I ot2 younger-age,102110000,class/ID102110000
+202110000,GLP1RA ot2 younger-age,202110000,class/ID202110000
+302110000,SGLT2I ot2 younger-age,302110000,class/ID302110000
+402110000,SU ot2 younger-age,402110000,class/ID402110000
+102120000,DPP4I ot2 middle-age,102120000,class/ID102120000
+202120000,GLP1RA ot2 middle-age,202120000,class/ID202120000
+302120000,SGLT2I ot2 middle-age,302120000,class/ID302120000
+402120000,SU ot2 middle-age,402120000,class/ID402120000
+102130000,DPP4I ot2 older-age,102130000,class/ID102130000
+202130000,GLP1RA ot2 older-age,202130000,class/ID202130000
+302130000,SGLT2I ot2 older-age,302130000,class/ID302130000
+402130000,SU ot2 older-age,402130000,class/ID402130000
+102100010,DPP4I ot2 low-cvr,102100010,class/ID102100010
+202100010,GLP1RA ot2 low-cvr,202100010,class/ID202100010
+302100010,SGLT2I ot2 low-cvr,302100010,class/ID302100010
+402100010,SU ot2 low-cvr,402100010,class/ID402100010
+102100020,DPP4I ot2 higher-cvr,102100020,class/ID102100020
+202100020,GLP1RA ot2 higher-cvr,202100020,class/ID202100020
+302100020,SGLT2I ot2 higher-cvr,302100020,class/ID302100020
+402100020,SU ot2 higher-cvr,402100020,class/ID402100020
+102101000,DPP4I ot2 female,102101000,class/ID102101000
+202101000,GLP1RA ot2 female,202101000,class/ID202101000
+302101000,SGLT2I ot2 female,302101000,class/ID302101000
+402101000,SU ot2 female,402101000,class/ID402101000
+102102000,DPP4I ot2 male,102102000,class/ID102102000
+202102000,GLP1RA ot2 male,202102000,class/ID202102000
+302102000,SGLT2I ot2 male,302102000,class/ID302102000
+402102000,SU ot2 male,402102000,class/ID402102000
+102100100,DPP4I ot2 black,102100100,class/ID102100100
+202100100,GLP1RA ot2 black,202100100,class/ID202100100
+302100100,SGLT2I ot2 black,302100100,class/ID302100100
+402100100,SU ot2 black,402100100,class/ID402100100
+102100001,DPP4I ot2 without-rdz,102100001,class/ID102100001
+202100001,GLP1RA ot2 without-rdz,202100001,class/ID202100001
+302100001,SGLT2I ot2 without-rdz,302100001,class/ID302100001
+402100001,SU ot2 without-rdz,402100001,class/ID402100001
+102100002,DPP4I ot2 with-rdz,102100002,class/ID102100002
+202100002,GLP1RA ot2 with-rdz,202100002,class/ID202100002
+302100002,SGLT2I ot2 with-rdz,302100002,class/ID302100002
+402100002,SU ot2 with-rdz,402100002,class/ID402100002
+101200000,DPP4I no-met,101200000,class/ID101200000
+201200000,GLP1RA no-met,201200000,class/ID201200000
+301200000,SGLT2I no-met,301200000,class/ID301200000
+401200000,SU no-met,401200000,class/ID401200000
+101210000,DPP4I no-met younger-age,101210000,class/ID101210000
+201210000,GLP1RA no-met younger-age,201210000,class/ID201210000
+301210000,SGLT2I no-met younger-age,301210000,class/ID301210000
+401210000,SU no-met younger-age,401210000,class/ID401210000
+101220000,DPP4I no-met middle-age,101220000,class/ID101220000
+201220000,GLP1RA no-met middle-age,201220000,class/ID201220000
+301220000,SGLT2I no-met middle-age,301220000,class/ID301220000
+401220000,SU no-met middle-age,401220000,class/ID401220000
+101230000,DPP4I no-met older-age,101230000,class/ID101230000
+201230000,GLP1RA no-met older-age,201230000,class/ID201230000
+301230000,SGLT2I no-met older-age,301230000,class/ID301230000
+401230000,SU no-met older-age,401230000,class/ID401230000
+101200010,DPP4I no-met low-cvr,101200010,class/ID101200010
+201200010,GLP1RA no-met low-cvr,201200010,class/ID201200010
+301200010,SGLT2I no-met low-cvr,301200010,class/ID301200010
+401200010,SU no-met low-cvr,401200010,class/ID401200010
+101200020,DPP4I no-met higher-cvr,101200020,class/ID101200020
+201200020,GLP1RA no-met higher-cvr,201200020,class/ID201200020
+301200020,SGLT2I no-met higher-cvr,301200020,class/ID301200020
+401200020,SU no-met higher-cvr,401200020,class/ID401200020
+101201000,DPP4I no-met female,101201000,class/ID101201000
+201201000,GLP1RA no-met female,201201000,class/ID201201000
+301201000,SGLT2I no-met female,301201000,class/ID301201000
+401201000,SU no-met female,401201000,class/ID401201000
+101202000,DPP4I no-met male,101202000,class/ID101202000
+201202000,GLP1RA no-met male,201202000,class/ID201202000
+301202000,SGLT2I no-met male,301202000,class/ID301202000
+401202000,SU no-met male,401202000,class/ID401202000
+101200100,DPP4I no-met black,101200100,class/ID101200100
+201200100,GLP1RA no-met black,201200100,class/ID201200100
+301200100,SGLT2I no-met black,301200100,class/ID301200100
+401200100,SU no-met black,401200100,class/ID401200100
+101200001,DPP4I no-met without-rdz,101200001,class/ID101200001
+201200001,GLP1RA no-met without-rdz,201200001,class/ID201200001
+301200001,SGLT2I no-met without-rdz,301200001,class/ID301200001
+401200001,SU no-met without-rdz,401200001,class/ID401200001
+101200002,DPP4I no-met with-rdz,101200002,class/ID101200002
+201200002,GLP1RA no-met with-rdz,201200002,class/ID201200002
+301200002,SGLT2I no-met with-rdz,301200002,class/ID301200002
+401200002,SU no-met with-rdz,401200002,class/ID401200002
+102200000,DPP4I ot2 no-met,102200000,class/ID102200000
+202200000,GLP1RA ot2 no-met,202200000,class/ID202200000
+302200000,SGLT2I ot2 no-met,302200000,class/ID302200000
+402200000,SU ot2 no-met,402200000,class/ID402200000
+102210000,DPP4I ot2 no-met younger-age,102210000,class/ID102210000
+202210000,GLP1RA ot2 no-met younger-age,202210000,class/ID202210000
+302210000,SGLT2I ot2 no-met younger-age,302210000,class/ID302210000
+402210000,SU ot2 no-met younger-age,402210000,class/ID402210000
+102220000,DPP4I ot2 no-met middle-age,102220000,class/ID102220000
+202220000,GLP1RA ot2 no-met middle-age,202220000,class/ID202220000
+302220000,SGLT2I ot2 no-met middle-age,302220000,class/ID302220000
+402220000,SU ot2 no-met middle-age,402220000,class/ID402220000
+102230000,DPP4I ot2 no-met older-age,102230000,class/ID102230000
+202230000,GLP1RA ot2 no-met older-age,202230000,class/ID202230000
+302230000,SGLT2I ot2 no-met older-age,302230000,class/ID302230000
+402230000,SU ot2 no-met older-age,402230000,class/ID402230000
+102200010,DPP4I ot2 no-met low-cvr,102200010,class/ID102200010
+202200010,GLP1RA ot2 no-met low-cvr,202200010,class/ID202200010
+302200010,SGLT2I ot2 no-met low-cvr,302200010,class/ID302200010
+402200010,SU ot2 no-met low-cvr,402200010,class/ID402200010
+102200020,DPP4I ot2 no-met higher-cvr,102200020,class/ID102200020
+202200020,GLP1RA ot2 no-met higher-cvr,202200020,class/ID202200020
+302200020,SGLT2I ot2 no-met higher-cvr,302200020,class/ID302200020
+402200020,SU ot2 no-met higher-cvr,402200020,class/ID402200020
+102201000,DPP4I ot2 no-met female,102201000,class/ID102201000
+202201000,GLP1RA ot2 no-met female,202201000,class/ID202201000
+302201000,SGLT2I ot2 no-met female,302201000,class/ID302201000
+402201000,SU ot2 no-met female,402201000,class/ID402201000
+102202000,DPP4I ot2 no-met male,102202000,class/ID102202000
+202202000,GLP1RA ot2 no-met male,202202000,class/ID202202000
+302202000,SGLT2I ot2 no-met male,302202000,class/ID302202000
+402202000,SU ot2 no-met male,402202000,class/ID402202000
+102200100,DPP4I ot2 no-met black,102200100,class/ID102200100
+202200100,GLP1RA ot2 no-met black,202200100,class/ID202200100
+302200100,SGLT2I ot2 no-met black,302200100,class/ID302200100
+402200100,SU ot2 no-met black,402200100,class/ID402200100
+102200001,DPP4I ot2 no-met without-rdz,102200001,class/ID102200001
+202200001,GLP1RA ot2 no-met without-rdz,202200001,class/ID202200001
+302200001,SGLT2I ot2 no-met without-rdz,302200001,class/ID302200001
+402200001,SU ot2 no-met without-rdz,402200001,class/ID402200001
+102200002,DPP4I ot2 no-met with-rdz,102200002,class/ID102200002
+202200002,GLP1RA ot2 no-met with-rdz,202200002,class/ID202200002
+302200002,SGLT2I ot2 no-met with-rdz,302200002,class/ID302200002
+402200002,SU ot2 no-met with-rdz,402200002,class/ID402200002
