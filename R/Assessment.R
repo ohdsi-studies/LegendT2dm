@@ -52,24 +52,6 @@ assessPhenotypes <- function(connectionDetails,
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_FILE_LOGGER", silent = TRUE))
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_ERRORREPORT_LOGGER", silent = TRUE), add = TRUE)
 
-  writePairedCounts <- function(indicationId) {
-    tcos <- readr::read_csv(file = system.file("settings", paste0(indicationId, "TcosOfInterest.csv"),
-                                               package = "LegendT2dm"),
-                            col_types = readr::cols())
-    counts <- readr::read_csv(file = file.path(outputFolder, indicationId, "cohortCounts.csv"),
-                              col_types = readr::cols()) %>%
-      select(cohortDefinitionId, cohortCount)
-
-    tmp <- tcos %>%
-      left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = cohortCount) %>%
-      left_join(counts, by = c("comparatorId" = "cohortDefinitionId")) %>% rename(comparatorPairedPersons = cohortCount)
-
-    tmp <- tmp %>%
-      mutate(targetPairedPersons = ifelse(is.na(targetPairedPersons), 0, targetPairedPersons)) %>%
-      mutate(comparatorPairedPersons = ifelse(is.na(comparatorPairedPersons), 0, comparatorPairedPersons))
-
-    readr::write_csv(tmp, file = file.path(outputFolder, indicationId, "pairedExposureSummary.csv"))
-  }
 
   if (createExposureCohorts) {
     # Exposures ----------------------------------------------------------------------------------------

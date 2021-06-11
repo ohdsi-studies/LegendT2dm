@@ -72,6 +72,17 @@ grantPermission <- function(connectionDetails,schema) {
   DatabaseConnector::disconnect(connection)
 }
 
+createPsModelAssessmentTable <- function(connectionDetails, schema) {
+  sql <- paste0("SET search_path TO ", schema, ";")
+  connection <- DatabaseConnector::connect(connectionDetails)
+  DatabaseConnector::executeSql(connection, sql)
+  pathToSql <-
+    system.file("sql", "postgresql", "CreatePsAssessmentTables.sql", package = "LegendT2dm")
+  sql <- SqlRender::readSql(pathToSql)
+  DatabaseConnector::executeSql(connection, sql)
+  DatabaseConnector::disconnect(connection)
+}
+
 Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 
 # Create cohort diagnostics on remote database
@@ -80,7 +91,10 @@ if (FALSE) { # Do this once!
   # Class
 
   classSchema <- "legendt2dm_class_diagnostics"
-  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = classSchema)
+
+  # CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = classSchema)
+
+  createPsModelAssessmentTable(connectionDetails = connectionDetails, schema = classSchema)
 
   grantPermission(connectionDetails = connectionDetails, schema = classSchema)
 
@@ -99,7 +113,24 @@ if (FALSE) { # Do this once!
     schema = classSchema,
     zipFileName = "d:/LegendT2dmOutput_optum_ehr7/classCohortDiagnosticsExport/Results_OptumEhr.zip")
 
-  # Outcome
+#  #  PS Assessment
+#
+#   specification <- read.csv("inst/settings/PsAssessmentModelSpecs.csv")
+#
+#   LegendT2dm::uploadResults(
+#     connectionDetails = connectionDetails,
+#     schema = classSchema,
+#     convertFromCamelCase = TRUE,
+#     purgeSiteDataBeforeUploading = FALSE,
+#     zipFileName = "~/Dropbox/Projects/LegendT2dm_Diagnostics/CCAE/assessPropensityScoreExport/classPropensityModelAssessment_CCAE.zip",
+#     specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
+#   )
+
+  conn <- DatabaseConnector::connect(connectionDetails = connectionDetails)
+  sql <- "SELECT * FROM legendt2dm_class_diagnostics.ps_auc_assessment;"
+  tmp <- DatabaseConnector::querySql(conn, sql)
+  DatabaseConnector::disconnect(conn)
+   # Outcome
 
   outcomeSchema <- "legendt2dm_outcome_diagnostics"
   CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = outcomeSchema)
