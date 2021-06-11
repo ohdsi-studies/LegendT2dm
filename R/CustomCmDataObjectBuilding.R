@@ -268,6 +268,7 @@ fetchAllDataFromServer <- function(connectionDetails,
 generateAllCohortMethodDataObjects <- function(outputFolder,
                                                indicationId = "legendt2dm",
                                                useSample = FALSE,
+                                               restrictToOt1 = FALSE,
                                                maxCores = 4) {
     ParallelLogger::logInfo("Constructing CohortMethodData objects")
     indicationFolder <- file.path(outputFolder, indicationId)
@@ -289,7 +290,9 @@ generateAllCohortMethodDataObjects <- function(outputFolder,
         comparatorId <- exposureSummary$comparatorId[i]
         fileName <- file.path(folderName, paste0("CmData_l1_t", targetId, "_c", comparatorId, ".zip"))
 
-        if (!file.exists(fileName)) {
+        execute <- !restrictToOt1 || isOt1(targetId)
+
+        if (!file.exists(fileName) && execute) {
             cmData <- constructCohortMethodDataObject(targetId = targetId,
                                                       comparatorId = comparatorId,
                                                       indicationFolder = indicationFolder,
@@ -405,32 +408,22 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
 
         stop("Not yet implemented")
 
-        filterConcepts <- readRDS(file.path(indicationFolder, "filterConceps.rds"))
-        filterConcepts <- filterConcepts[filterConcepts$cohortId %in% c(targetId, comparatorId), ]
-        filterConceptIds <- unique(filterConcepts$filterConceptId)
-        if (length(filterConceptIds) == 0) {
-            covariateRef <- covariateData$covariateRef
-        } else {
-            idx <- ffbase::`%in%`(covariateData$covariateRef$conceptId, ff::as.ff(filterConceptIds))
-            covariateRef <- covariateData$covariateRef[!idx, ]
-            filterCovariateIds <- covariateData$covariateRef$covariateId[idx, ]
-            idx <- !ffbase::`%in%`(covariates$covariateId, filterCovariateIds)
-            covariates <- covariates[idx, ]
-        }
+        # filterConcepts <- readRDS(file.path(indicationFolder, "filterConceps.rds"))
+        # filterConcepts <- filterConcepts[filterConcepts$cohortId %in% c(targetId, comparatorId), ]
+        # filterConceptIds <- unique(filterConcepts$filterConceptId)
+        # if (length(filterConceptIds) == 0) {
+        #     covariateRef <- covariateData$covariateRef
+        # } else {
+        #     idx <- ffbase::`%in%`(covariateData$covariateRef$conceptId, ff::as.ff(filterConceptIds))
+        #     covariateRef <- covariateData$covariateRef[!idx, ]
+        #     filterCovariateIds <- covariateData$covariateRef$covariateId[idx, ]
+        #     idx <- !ffbase::`%in%`(covariates$covariateId, filterCovariateIds)
+        #     covariates <- covariates[idx, ]
+        # }
     }
 
     class(andromeda) <- "CohortMethodData"
     attr(class(andromeda), "package") <- "CohortMethod"
 
     return(andromeda)
-
-    # result <- list(cohorts = cohorts,
-    #                outcomes = outcomes,
-    #                covariates = covariates,
-    #                covariateRef = covariateRef,
-    #                analysisRef = ff::clone.ffdf(covariateData$analysisRef),
-    #                metaData = covariateData$metaData)
-    #
-    # class(result) <- "cohortMethodData"
-    # return(result)
 }

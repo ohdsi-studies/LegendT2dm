@@ -485,20 +485,6 @@
       "Repository": "CRAN",
       "Hash": "2cfe25650d69960c54e06840e4b5d8e4"
     },
-    "ff": {
-      "Package": "ff",
-      "Version": "4.0.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "4245cf6d031827f60397b8d03db44797"
-    },
-    "ffbase": {
-      "Package": "ffbase",
-      "Version": "0.13.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0a66723ee2690e09a61f676be029da63"
-    },
     "filelock": {
       "Package": "filelock",
       "Version": "1.0.2",

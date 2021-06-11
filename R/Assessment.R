@@ -159,6 +159,7 @@ assessPropensityModels <- function(connectionDetails,
                                    sampleSize = 1000,
                                    maxCores = 4,
                                    databaseId,
+                                   preferenceScoreBounds = c(0.3, 0.7),
                                    forceNewCmDataObjects = FALSE) {
 
   originalCohortTable <- paste(tablePrefix, tolower(indicationId), "cohort", sep = "_")
@@ -213,7 +214,8 @@ assessPropensityModels <- function(connectionDetails,
 
   generateAllCohortMethodDataObjects(outputFolder = outputFolder,
                                      indicationId = indicationId,
-                                     useSample = TRUE)
+                                     useSample = TRUE,
+                                     restrictToOt1 = TRUE)
 
   ParallelLogger::logInfo("Fitting propensity models on sampled data")
 
@@ -225,7 +227,7 @@ assessPropensityModels <- function(connectionDetails,
                           "cmSampleOutput",
                           paste0("Ps_t", targetId, "_c", comparatorId, ".rds"))
 
-    if (!file.exists(fileName)) {
+    if (!file.exists(fileName) && isOt1(targetId)) {
       cmFileName <- file.path(indicationFolder,
                               "cmSampleOutput",
                               paste0("CmData_l1_t", targetId, "_c", comparatorId, ".zip"))
@@ -340,7 +342,9 @@ assessPropensityModels <- function(connectionDetails,
       comparatorName <- exposureSummary$comparatorName[i]
       ps <- CohortMethod:::computePreferenceScore(ps)
       auc <- tibble::tibble(auc = CohortMethod::computePsAuc(ps),
-                            equipoise = mean(ps$preferenceScore >= 0.3 & ps$preferenceScore <= 0.7),
+                            equipoise = mean(
+                              ps$preferenceScore >= preferenceScoreBounds[1] &
+                                ps$preferenceScore <= preferenceScoreBounds[2]),
                             targetId = targetId,
                             targetName = targetName,
                             comparatorId = comparatorId,

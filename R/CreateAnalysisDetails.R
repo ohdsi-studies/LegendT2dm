@@ -2,7 +2,7 @@ createAnalysesDetails <- function(outputFolder) {
 
   # Dummy argument that is never used because data objects have already been created:
   getDbCmDataArgs <- CohortMethod::createGetDbCohortMethodDataArgs(
-    covariateSettings = FeatureExtraction::createCovariateSettings())
+    covariateSettings = FeatureExtraction::createCovariateSettings(useDemographicsGender = TRUE))
 
   createStudyPopArgsOnTreatment <- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
