@@ -16,6 +16,7 @@ assessPropensityModels(
   sampleSize = 1000,
   maxCores = 4,
   databaseId,
+  preferenceScoreBounds = c(0.3, 0.7),
   forceNewCmDataObjects = FALSE
 )
 }

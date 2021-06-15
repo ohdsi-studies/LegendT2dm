@@ -66,8 +66,8 @@ execute <- function(connectionDetails,
                     oracleTempSchema,
                     cohortDatabaseSchema,
                     outputFolder,
-                    indicationId = "Depression",
-                    tablePrefix = "legend",
+                    indicationId = "class",
+                    tablePrefix = "legendt2dm",
                     databaseId = "Unknown",
                     databaseName = "Unknown",
                     databaseDescription = "Unknown",
@@ -79,6 +79,7 @@ execute <- function(connectionDetails,
                     synthesizePositiveControls = FALSE,
                     generateAllCohortMethodDataObjects = TRUE,
                     runCohortMethod = TRUE,
+                    computeCovariateBalance = TRUE,
                     exportToCsv = TRUE,
                     filterExposureCohorts = NULL,
                     filterOutcomeCohorts = NULL,
@@ -171,12 +172,12 @@ execute <- function(connectionDetails,
     #                          indicationId = indicationId,
     #                          outputFolder = outputFolder)
     # }
-    #
-    # if (computeCovariateBalance) {
-    #     computeCovariateBalance(outputFolder = outputFolder,
-    #                             indicationId = indicationId,
-    #                             maxCores = maxCores)
-    # }
+
+    if (computeCovariateBalance) {
+        computeCovariateBalance(outputFolder = outputFolder,
+                                indicationId = indicationId,
+                                maxCores = maxCores)
+    }
 
     if (exportToCsv) {
         exportResults(indicationId = indicationId,
@@ -188,7 +189,7 @@ execute <- function(connectionDetails,
                       maxCores = maxCores)
     }
 
-    ParallelLogger::logFatal("Finished")
+    ParallelLogger::logInfo("Finished")
 }
 
 writePairedCounts <- function(indicationId) {

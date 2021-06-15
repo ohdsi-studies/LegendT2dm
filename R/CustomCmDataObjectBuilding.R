@@ -362,30 +362,29 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
 
     if (!useSample) {
 
-        stop("Not yet implemented")
-
         # Add injected outcomes (no signal injection when doing sampling)
-        injectionSummary <- read.csv(file.path(indicationFolder, "signalInjectionSummary.csv"),
-                                     stringsAsFactors = FALSE)
-        injectionSummary <- injectionSummary[injectionSummary$exposureId == targetId |
-                                                 injectionSummary$exposureId == comparatorId, ]
-        injectionSummary <- injectionSummary[injectionSummary$outcomesToInjectFile != "", ]
 
-        if (nrow(injectionSummary) > 0) {
-            # Add original (background) negative control outcomes
-            bgOutcomes <- merge(outcomes, injectionSummary[, c("outcomeId", "newOutcomeId")])
-            bgOutcomes$outcomeId <- bgOutcomes$newOutcomeId
-            outcomes <- rbind(outcomes, bgOutcomes[, colnames(outcomes)])
-
-            # Add additional outcomes
-            synthOutcomes <- lapply(injectionSummary$outcomesToInjectFile, readRDS)
-            synthOutcomes <- do.call("rbind", synthOutcomes)
-            colnames(synthOutcomes)[colnames(synthOutcomes) == "cohortStartDate"] <- "eventDate"
-            colnames(synthOutcomes)[colnames(synthOutcomes) == "cohortDefinitionId"] <- "outcomeId"
-            synthOutcomes <- merge(synthOutcomes, cohorts[, c("rowId", "subjectId", "cohortStartDate")])
-            synthOutcomes$daysToEvent <- synthOutcomes$eventDate - synthOutcomes$cohortStartDate
-            outcomes <- rbind(outcomes, synthOutcomes[, colnames(outcomes)])
-        }
+        # injectionSummary <- read.csv(file.path(indicationFolder, "signalInjectionSummary.csv"),
+        #                              stringsAsFactors = FALSE)
+        # injectionSummary <- injectionSummary[injectionSummary$exposureId == targetId |
+        #                                          injectionSummary$exposureId == comparatorId, ]
+        # injectionSummary <- injectionSummary[injectionSummary$outcomesToInjectFile != "", ]
+        #
+        # if (nrow(injectionSummary) > 0) {
+        #     # Add original (background) negative control outcomes
+        #     bgOutcomes <- merge(outcomes, injectionSummary[, c("outcomeId", "newOutcomeId")])
+        #     bgOutcomes$outcomeId <- bgOutcomes$newOutcomeId
+        #     outcomes <- rbind(outcomes, bgOutcomes[, colnames(outcomes)])
+        #
+        #     # Add additional outcomes
+        #     synthOutcomes <- lapply(injectionSummary$outcomesToInjectFile, readRDS)
+        #     synthOutcomes <- do.call("rbind", synthOutcomes)
+        #     colnames(synthOutcomes)[colnames(synthOutcomes) == "cohortStartDate"] <- "eventDate"
+        #     colnames(synthOutcomes)[colnames(synthOutcomes) == "cohortDefinitionId"] <- "outcomeId"
+        #     synthOutcomes <- merge(synthOutcomes, cohorts[, c("rowId", "subjectId", "cohortStartDate")])
+        #     synthOutcomes$daysToEvent <- synthOutcomes$eventDate - synthOutcomes$cohortStartDate
+        #     outcomes <- rbind(outcomes, synthOutcomes[, colnames(outcomes)])
+        # }
     }
 
     metaData$outcomeIds = distinct(andromeda$outcomes %>% select(.data$outcomeId)) %>%

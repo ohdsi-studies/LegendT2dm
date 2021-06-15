@@ -50,9 +50,17 @@ runCohortMethod <- function(outputFolder, indicationId = "Depression", databaseI
     # First run: OT1 and ITT
 
     ot1IttExposureSummary <- exposureSummary[isOt1(exposureSummary$targetId), ]
-    ot1IttTco <- CohortMethod::createTargetComparatorOutcomes(targetId = ot1ExposureSummary$targetId,
-                                                        comparatorId = ot1ExposureSummary$comparatorId,
-                                                        outcomeIds = outcomeIds)
+
+    ot1IttTcoList <- lapply(1:nrow(ot1IttExposureSummary), function(i) {
+        CohortMethod::createTargetComparatorOutcomes(targetId = ot1IttExposureSummary[i,]$targetId,
+                                                     comparatorId = ot1IttExposureSummary[i,]$comparatorId,
+                                                     outcomeIds = outcomeIds)
+    })
+
+
+    # ot1IttTco <- CohortMethod::createTargetComparatorOutcomes(targetId = ot1IttExposureSummary$targetId,
+    #                                                     comparatorId = ot1IttExposureSummary$comparatorId,
+    #                                                     outcomeIds = outcomeIds)
 
     ot1IttCmAnalysisList <- CohortMethod::loadCmAnalysisList(
         system.file("settings", "ot1IttCmAnalysisList.json", package = "LegendT2dm"))
@@ -67,7 +75,7 @@ runCohortMethod <- function(outputFolder, indicationId = "Depression", databaseI
                                 oracleTempSchema = NULL,
                                 cmAnalysisList = ot1IttCmAnalysisList,
                                 cdmVersion = 5,
-                                targetComparatorOutcomesList = ot1IttTco,
+                                targetComparatorOutcomesList = ot1IttTcoList,
                                 getDbCohortMethodDataThreads = 1,
                                 createStudyPopThreads = min(4, maxCores),
                                 createPsThreads = max(1, round(maxCores/10)),
@@ -97,11 +105,21 @@ runCohortMethod <- function(outputFolder, indicationId = "Depression", databaseI
     #                                             "cmOutput",
     #                                             "outcomeModelReference2.rds"))
 
+    outcomeModelReference <- cbind(outcomeModelReference1)
+
+    saveRDS(outcomeModelReference, file.path(indicationFolder,
+                                             "cmOutput",
+                                             "outcomeModelReference.rds"))
+
     ParallelLogger::logInfo("Summarizing results")
 
-    analysesSum <- CohortMethod::summarizeAnalyses(referenceTable = outcomeModelReference1,
-                                                   outputFolder = cmFolder)
-    write.csv(analysesSum, file.path(indicationFolder, "analysisSummary1.csv"), row.names = FALSE)
+    analysesSumFile <- file.path(indicationFolder, "analysisSummary.csv")
+
+    if (!file.exists(analysesSumFile)) {
+        analysesSum <- CohortMethod::summarizeAnalyses(referenceTable = outcomeModelReference,
+                                                       outputFolder = cmFolder)
+        write.csv(analysesSum,analysesSumFile, row.names = FALSE)
+    }
 
     # analysesSum <- CohortMethod::summarizeAnalyses(referenceTable = outcomeModelReference2,
     #                                                outputFolder = cmFolder)
@@ -122,3 +140,25 @@ makeOt1 <- Vectorize(
                          substring(string, 4, 9))
         as.integer(string)
     })
+
+getOutcomesOfInterest <- function(indicationId) {
+    pathToCsv <- system.file("settings", "OutcomesOfInterest.csv",
+                             package = "LegendT2dm")
+    outcomesOfInterest <- read.csv(pathToCsv, stringsAsFactors = FALSE)
+    return (outcomesOfInterest$cohortId)
+}
+
+getAllControls <- function(indicationId, outputFolder) {
+    allControlsFile <- file.path(outputFolder, indicationId, "AllControls.csv")
+    if (file.exists(allControlsFile)) {
+        # Positive controls must have been synthesized. Include both positive and negative controls.
+        allControls <- read.csv(allControlsFile)
+    } else {
+        # Include only negative controls
+        pathToCsv <- system.file("settings", "NegativeControls.csv", package = "LegendT2dm")
+        allControls <- read.csv(pathToCsv)
+        allControls$oldOutcomeId <- allControls$outcomeId
+        allControls$targetEffectSize <- rep(1, nrow(allControls))
+    }
+    return(allControls)
+}

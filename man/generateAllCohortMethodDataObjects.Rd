@@ -8,6 +8,7 @@ generateAllCohortMethodDataObjects(
   outputFolder,
   indicationId = "legendt2dm",
   useSample = FALSE,
+  restrictToOt1 = FALSE,
   maxCores = 4
 )
 }
