@@ -84,7 +84,7 @@ exportResults <- function(indicationId = "class",
 
     # Add all to zip file -------------------------------------------------------------------------------
     ParallelLogger::logInfo("Adding results to zip file")
-    zipName <- file.path(exportFolder, paste0("Results", indicationId, databaseId, ".zip"))
+    zipName <- file.path(exportFolder, paste0("Results", "_", indicationId, "_", databaseId, ".zip"))
     files <- list.files(exportFolder, pattern = ".*\\.csv$")
     oldWd <- setwd(exportFolder)
     on.exit(setwd(oldWd))
