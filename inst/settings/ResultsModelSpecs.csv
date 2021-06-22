@@ -2,7 +2,7 @@ tableName,fieldName,type,description,isRequired,primaryKey,emptyIsNa
 database,database_id,varchar,"Unique identifier for a database, e.g. ‘MDCD’",yes,yes,yes
 database,database_name,varchar,"Full name for the database, e.g. ‘Truven MarketScan Multi-state Medicaid (MDCD)’",yes,no,yes
 database,description,varchar,"Longer description, e.g. ‘Truven Health MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states ...'",yes,no,yes
-database,is_meta_analysis,integer, "Does the record pertain a meta-analysis across databases? (0=no, 1=yes)",yes,no,yes
+database,is_meta_analysis,int, "Does the record pertain a meta-analysis across databases? (0=no, 1=yes)",yes,no,yes
 exposure_summary,database_id,varchar,"Foreign key referencing the database",yes,yes,yes
 exposure_summary,exposure_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 exposure_summary,min_date,date,"Earliest date when the exposure was observed in the database",yes,no,yes
@@ -17,38 +17,38 @@ attrition,exposure_id,bigint,"Foreign key referencing the exposure_of_interest t
 attrition,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 attrition,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 attrition,outcome_id,bigint,"Foreign key referencing the outcome_of_interest table",yes,yes,yes
-attrition,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
-attrition,sequence_number,integer,"The place in the sequence of steps defining the final analysis cohort. 1 indicates the original exposed population without any inclusion criteria",yes,no,yes
+attrition,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+attrition,sequence_number,int,"The place in the sequence of steps defining the final analysis cohort. 1 indicates the original exposed population without any inclusion criteria",yes,no,yes
 attrition,description,varchar,"Description of the last restriction, e.g. 'Removing persons with the outcome prior'",yes,no,yes
-attrition,subjects,integer,"Number of subjects in the cohort",yes,no,yes
+attrition,subjects,int,"Number of subjects in the cohort",yes,no,yes
 covariate,database_id,varchar,"Foreign key referencing the database",yes,yes,yes
 covariate,covariate_id,bigint,"Unique identified for a covariate",yes,yes,yes
 covariate,comparator_name,varchar,"A name for a covariate, e.g. 'Age group: 20-25 years'",yes,no,yes
-covariate,covariate_analysis_id,integer,"Foreign key referencing the covariate_analysis table",yes,no,yes
-cm_follow_up_dist,database_id,Varchar,"Foreign key referencing the database",yes,yes,yes
+covariate,covariate_analysis_id,int,"Foreign key referencing the covariate_analysis table",yes,no,yes
+cm_follow_up_dist,database_id,varchar,"Foreign key referencing the database",yes,yes,yes
 cm_follow_up_dist,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 cm_follow_up_dist,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 cm_follow_up_dist,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome, or positive_control_outcome table",yes,yes,yes
-cm_follow_up_dist,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
-cm_follow_up_dist,target_min_days,integer,"Minimum number of observation days for a person",yes,no,yes
-cm_follow_up_dist,target_p10_days,integer,"10th percentile of number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,target_p25_days,integer,"25th percentile of number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,target_median_days,integer,"Median number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,target_p75_days,integer,"75th percentile of number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,target_p90_days,integer,"90th percentile of number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,target_max_days,integer,"Maximum number of observation days for a person in the target group",yes,no,yes
-cm_follow_up_dist,comparator_min_days,integer,"Minimum number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_p10_days,integer,"10th percentile of number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_p25_days,integer,"25th percentile of number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_median_days,integer,"Median number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_p75_days,integer,"75th percentile of number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_p90_days,integer,"90th percentile of number of observation days for a person in the comparator group",yes,no,yes
-cm_follow_up_dist,comparator_max_days,integer,"Maximum number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+cm_follow_up_dist,target_min_days,int,"Minimum number of observation days for a person",yes,no,yes
+cm_follow_up_dist,target_p10_days,int,"10th percentile of number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,target_p25_days,int,"25th percentile of number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,target_median_days,int,"Median number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,target_p75_days,int,"75th percentile of number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,target_p90_days,int,"90th percentile of number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,target_max_days,int,"Maximum number of observation days for a person in the target group",yes,no,yes
+cm_follow_up_dist,comparator_min_days,int,"Minimum number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_p10_days,int,"10th percentile of number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_p25_days,int,"25th percentile of number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_median_days,int,"Median number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_p75_days,int,"75th percentile of number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_p90_days,int,"90th percentile of number of observation days for a person in the comparator group",yes,no,yes
+cm_follow_up_dist,comparator_max_days,int,"Maximum number of observation days for a person in the comparator group",yes,no,yes
 cohort_method_results,database_id,varchar,"Foreign key referencing the database",yes,yes,yes
 cohort_method_results,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 cohort_method_results,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 cohort_method_results,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome, or positive_control_outcome table",yes,yes,yes
-cohort_method_results,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+cohort_method_results,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
 cohort_method_results,rr,float,"Estimated relative risk (hazard ratio)",yes,no,yes
 cohort_method_results,ci_95_lb,float,"Lower bound of the 95% confidence interval of the relative risk",yes,no,yes
 cohort_method_results,ci_95_ub,float,"Upper bound of the 95% confidence interval of the relative risk",yes,no,yes
@@ -56,12 +56,12 @@ cohort_method_results,p,float,"Two-sided p-value considering the null hypothesis
 cohort_method_results,i_2,float,"I^2 measure of between-database heterogeneity (for meta-analyses estimates only)",yes,no,yes
 cohort_method_results,log_rr,float,"Log of the relative risk",yes,no,yes
 cohort_method_results,se_log_rr,float,"Standard error of the log of the relative risk",yes,no,yes
-cohort_method_results,target_subjects,integer,"Number of subject in the target cohort",yes,no,yes
-cohort_method_results,comparator_subjects,integer,"Number of subject in the comparator cohort",yes,no,yes
-cohort_method_results,target_days,Integer,"Number of days observed in the target cohort",yes,no,yes
-cohort_method_results,comparator_days,Integer,"Number of days observed in the comparator cohort",yes,no,yes
-cohort_method_results,target_outcomes,integer,"Number of outcomes observed in the target cohort",yes,no,yes
-cohort_method_results,comparator_outcomes,integer,"Number of outcomes observed in the comparator cohort",yes,no,yes
+cohort_method_results,target_subjects,int,"Number of subject in the target cohort",yes,no,yes
+cohort_method_results,comparator_subjects,int,"Number of subject in the comparator cohort",yes,no,yes
+cohort_method_results,target_days,int,"Number of days observed in the target cohort",yes,no,yes
+cohort_method_results,comparator_days,int,"Number of days observed in the comparator cohort",yes,no,yes
+cohort_method_results,target_outcomes,int,"Number of outcomes observed in the target cohort",yes,no,yes
+cohort_method_results,comparator_outcomes,int,"Number of outcomes observed in the comparator cohort",yes,no,yes
 cohort_method_results,calibrated_p,float,"Calibrated p-value",yes,no,yes
 cohort_method_results,calibrated_rr,float,"Calibrated relative risk (hazard ratio)",yes,no,yes
 cohort_method_results,calibrated_ci_95_lb,float,"Lower bound of the calibrated 95% confidence interval of the relative risk",yes,no,yes
@@ -72,7 +72,7 @@ covariate_balance,database_id,varchar,"Foreign key referencing the database",yes
 covariate_balance,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 covariate_balance,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 covariate_balance,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest table",yes,yes,yes
-covariate_balance,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+covariate_balance,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
 covariate_balance,covariate_id,bigint,"Foreign key referencing the covariate table",yes,yes,yes
 covariate_balance,target_mean_before,float,"Mean value of the covariate in the target cohort before propensity score adjustment",yes,no,yes
 covariate_balance,comparator_mean_before,float,"Mean value of the covariate in the comparator cohort before propensity score adjustment",yes,no,yes
@@ -95,10 +95,10 @@ kaplan_meier_dist,database_id,varchar,"Foreign key referencing the database",yes
 kaplan_meier_dist,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 kaplan_meier_dist,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 kaplan_meier_dist,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest table",yes,yes,yes
-kaplan_meier_dist,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
-kaplan_meier_dist,time,integer,"Time in days since cohort start",yes,no,yes
-kaplan_meier_dist,target_at_risk,integer,"Number of subjects still at risk in the target cohort",yes,no,yes
-kaplan_meier_dist,comparator_at_risk,integer,"Number of subjects still at risk in the comparator cohort",yes,no,yes
+kaplan_meier_dist,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+kaplan_meier_dist,time,int,"Time in days since cohort start",yes,no,yes
+kaplan_meier_dist,target_at_risk,int,"Number of subjects still at risk in the target cohort",yes,no,yes
+kaplan_meier_dist,comparator_at_risk,int,"Number of subjects still at risk in the comparator cohort",yes,no,yes
 kaplan_meier_dist,target_survival,float,"Estimated survival fraction in the target cohort",yes,no,yes
 kaplan_meier_dist,target_survival_lb,float,"Lower bound of the 95% confidence interval of the survival fraction in the target cohort",yes,no,yes
 kaplan_meier_dist,target_survival_ub,float,"Upper bound of the 95% confidence interval of the survival fraction in the target cohort",yes,no,yes
@@ -108,7 +108,7 @@ kaplan_meier_dist,comparator_survival_ub,float,"Upper bound of the 95% confidenc
 likelihood_profile,targeti_d,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 likelihood_profile,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,no,yes
 likelihood_profile,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest table",yes,yes,yes
-likelihood_profile,analysis_id,integer,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
+likelihood_profile,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
 likelihood_profile,maxLogLikelihood,float,"Maximum of the log-likelihood profile function",yes,no,yes
 likelihood_profile,logHazardRatio,varchar,"Grid points of the log-likelihood profile function",yes,no,yes
 likelihood_profile,logLikelihood,varchar,"Log-likelihood (relative to maxLogLikelihood) of the log-likelihood profile function",yes,no,yes
