@@ -105,10 +105,10 @@ kaplan_meier_dist,target_survival_ub,float,"Upper bound of the 95% confidence in
 kaplan_meier_dist,comparator_survival,float,"Estimated survival fraction in the comparator cohort",yes,no,yes
 kaplan_meier_dist,comparator_survival_lb,float,"Lower bound of the 95% confidence interval of the survival fraction in the comparator cohort",yes,no,yes
 kaplan_meier_dist,comparator_survival_ub,float,"Upper bound of the 95% confidence interval of the survival fraction in the comparator cohort",yes,no,yes
-likelihood_profile,targeti_d,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
+likelihood_profile,target_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,yes,yes
 likelihood_profile,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",yes,no,yes
 likelihood_profile,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest table",yes,yes,yes
 likelihood_profile,analysis_id,int,"Foreign key referencing the cohort_method_analysis table",yes,yes,yes
-likelihood_profile,maxLogLikelihood,float,"Maximum of the log-likelihood profile function",yes,no,yes
-likelihood_profile,logHazardRatio,varchar,"Grid points of the log-likelihood profile function",yes,no,yes
-likelihood_profile,logLikelihood,varchar,"Log-likelihood (relative to maxLogLikelihood) of the log-likelihood profile function",yes,no,yes
+likelihood_profile,max_log_likelihood,float,"Maximum of the log-likelihood profile function",yes,no,yes
+likelihood_profile,log_hazard_ratio,varchar,"Grid points of the log-likelihood profile function",yes,no,yes
+likelihood_profile,log_likelihood,varchar,"Log-likelihood (relative to maxLogLikelihood) of the log-likelihood profile function",yes,no,yes

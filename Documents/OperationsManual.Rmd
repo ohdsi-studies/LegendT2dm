@@ -258,20 +258,27 @@ if (knitr::is_latex_output()) {
 
 ## Configuration files
 
+### Executable R scripts
+
   * `R/CreateAnalysisDetails.R`
-  * `baseCohort.json`
   * `extraGenerateExposureCohortDefinitions.R`
+  
+  * `baseCohort.json`
   * `inst/settings/classCohortsToCreate.csv`
     - `atlasId`, `atlasName`, `cohortId`, `name`
   * `inst/settings/classTcodOfInterest.csv`
     - `targetId`, `comparatorId`, `outcomeIds`, `excludedCovariateConceptIds` ,`targetName`, `comparatorName`
   * `inst/settings/ExposuresOfInterest.csv`
-    - `type`, `name`, `cohortId`, `conceptId`, `class`, `shortName`, `order`, ` `includedConceptIds`
+    - `type`, `name`, `cohortId`, `conceptId`, `class`, `shortName`, `order`,  `includedConceptIds`
   * `inst/settings/Indications.csv`
     - `indicationId`, `indicationName`, `filterConceptIds` , `positiveControlIdOffset`
   * `inst/settings/OutcomesOfInterest.csv`
     - `cohortId`, `atlasId`, `atlasName`, `name`, `description`, `cite`, `isNew`
 
+### Table specification files
+  * `inst/settings/PsAssessmentModelSpecs.csv`
+  * `inst/settings/resultsModelSpecs.csv`
+  
 
 ## `CohortMethod` function arguments
 
@@ -348,10 +355,10 @@ for (table in tables) {
 }
 ```
 
-## Study results data model
+## PS assessment data model
 
 ```{r echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-specifications <- readr::read_csv(system.file("settings/resultsModelSpecs.csv", package = "LegendT2dm")) 
+specifications <- readr::read_csv(system.file("settings/PsAssessmentModelSpecs.csv", package = "LegendT2dm")) 
 
 tables <- split(specifications, specifications$tableName)
 
@@ -359,8 +366,44 @@ for (table in tables) {
   header <- sprintf("### Table %s", table$tableName[1])
   
   table <- table %>% 
-    select(Field = .data$fieldName, Type = .data$type, Key = .data$primaryKey
-           # , Description = .data$description
+    select(Field = .data$fieldName, Type = .data$type, Key = .data$primaryKey,
+           Description = .data$description
+           ) %>%
+    kable(linesep = "", booktabs = TRUE, longtable = TRUE)
+  
+  if (knitr::is_latex_output()) {    
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
+                 column_spec(1, width = "10em") %>%
+                 column_spec(2, width = "5em") %>%
+                 column_spec(3, width = "3em") %>%
+                 column_spec(4, width = "16em"))
+  } else if (knitr::is_html_output()) {
+    writeLines("")
+    writeLines(header)
+    
+    writeLines(table %>% 
+                 kable_styling(bootstrap_options = "striped"))
+  } 
+}
+```
+
+## Study results data model
+
+```{r echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+specifications <- readr::read_csv(system.file("settings/ResultsModelSpecs.csv", package = "LegendT2dm")) 
+
+tables <- split(specifications, specifications$tableName)
+
+for (table in tables) {
+  header <- sprintf("### Table %s", table$tableName[1])
+  
+  table <- table %>% 
+    select(Field = .data$fieldName, Type = .data$type, Key = .data$primaryKey,
+           Description = .data$description
            ) %>%
     kable(linesep = "", booktabs = TRUE, longtable = TRUE)
   

@@ -1,5 +1,5 @@
-tableName,fieldName,type,isRequired,primaryKey,optional,emptyIsNa
-ps_auc_assessment,database_id,VARCHAR,Yes,Yes,No,Yes
-ps_auc_assessment,target_id,BIGINT,Yes,Yes,No,Yes
-ps_auc_assessment,comparator_id,BIGINT,Yes,Yes,No,Yes
-ps_auc_assessment,auc,NUMERIC,Yes,No,No,Yes
+tableName,fieldName,type,description,isRequired,primaryKey,optional,emptyIsNa
+ps_auc_assessment,database_id,varchar,"Foreign key referencing the database",Yes,Yes,No,Yes
+ps_auc_assessment,target_id,bigint,"Foreign key referencing the exposure_of_interest table",Yes,Yes,No,Yes
+ps_auc_assessment,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",Yes,Yes,No,Yes
+ps_auc_assessment,auc,float,"Area under the receiver-operator curve classifying subjects by their propensity score",Yes,No,No,Yes
