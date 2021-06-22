@@ -256,6 +256,23 @@ if (knitr::is_latex_output()) {
 }
 ```
 
+## Configuration files
+
+  * `R/CreateAnalysisDetails.R`
+  * `baseCohort.json`
+  * `extraGenerateExposureCohortDefinitions.R`
+  * `inst/settings/classCohortsToCreate.csv`
+    - `atlasId`, `atlasName`, `cohortId`, `name`
+  * `inst/settings/classTcodOfInterest.csv`
+    - `targetId`, `comparatorId`, `outcomeIds`, `excludedCovariateConceptIds` ,`targetName`, `comparatorName`
+  * `inst/settings/ExposuresOfInterest.csv`
+    - `type`, `name`, `cohortId`, `conceptId`, `class`, `shortName`, `order`, ` `includedConceptIds`
+  * `inst/settings/Indications.csv`
+    - `indicationId`, `indicationName`, `filterConceptIds` , `positiveControlIdOffset`
+  * `inst/settings/OutcomesOfInterest.csv`
+    - `cohortId`, `atlasId`, `atlasName`, `name`, `description`, `cite`, `isNew`
+
+
 ## `CohortMethod` function arguments
 
 ```{r, test, code=xfun::read_utf8("../R/CreateAnalysisDetails.R")}
