@@ -324,6 +324,7 @@ assessPropensityModels <- function(connectionDetails,
   data <- do.call("rbind", data)
   data$databaseId <- databaseId
   data$indicationId <- indicationId
+  names(data) <- SqlRender::camelCaseToSnakeCase(names(data))
   write.csv(data, file.path(assessmentExportFolder, "psCovariateAssessment.csv"), row.names = FALSE)
 
   ParallelLogger::logInfo("Computing AUCs")

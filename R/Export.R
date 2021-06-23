@@ -533,9 +533,8 @@ exportMainResults <- function(indicationId,
                                       comparatorId = reference$comparatorId[i],
                                       outcomeId = reference$outcomeId[i],
                                       analysisId = reference$analysisId[i],
-                                      maxLogLikelihood = max(profile),
-                                      logHazardRatio = as.numeric(names(profile)),
-                                      logLikelihood = profile - max(profile))
+                                      point = paste0(names(profile), collapse = ";"),
+                                      value = paste0(profile, collapse = ";"))
                 colnames(profile) <- SqlRender::camelCaseToSnakeCase(colnames(profile))
                 write.table(x = profile,
                             file = fileName,
