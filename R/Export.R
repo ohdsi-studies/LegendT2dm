@@ -75,8 +75,8 @@ exportResults <- function(indicationId = "class",
                       minCellCount = minCellCount,
                       maxCores = maxCores)
 
-    exportDiagnostics(
-                      outputFolder = file.path(outputFolder, indicationId),
+    exportDiagnostics(indicationId = indicationId,
+                      outputFolder = outputFolder,
                       exportFolder = exportFolder,
                       databaseId = databaseId,
                       minCellCount = minCellCount,
@@ -724,7 +724,8 @@ calibrateInteractions <- function(subset, negativeControls) {
     return(subset)
 }
 
-exportDiagnostics <- function(outputFolder,
+exportDiagnostics <- function(indicationId,
+                              outputFolder,
                               exportFolder,
                               databaseId,
                               minCellCount,
@@ -736,7 +737,7 @@ exportDiagnostics <- function(outputFolder,
         unlink(fileName)
     }
     first <- TRUE
-    balanceFolder <- file.path(outputFolder, "balance")
+    balanceFolder <- file.path(outputFolder, indicationId, "balance")
     files <- list.files(balanceFolder, pattern = "bal_.*.rds", full.names = TRUE)
     pb <- txtProgressBar(style = 3)
 
@@ -885,91 +886,90 @@ exportDiagnostics <- function(outputFolder,
     }
     close(pb)
 
-    # ParallelLogger::logInfo("- preference_score_dist table")
-    # reference <- readRDS(file.path(outputFolder, "cmOutput", "outcomeModelReference.rds"))
-    # preparePlot <- function(row, reference) {
-    #     idx <- reference$analysisId == row$analysisId &
-    #         reference$targetId == row$targetId &
-    #         reference$comparatorId == row$comparatorId
-    #     psFileName <- file.path(outputFolder,
-    #                             "cmOutput",
-    #                             reference$sharedPsFile[idx][1])
-    #     if (file.exists(psFileName)) {
-    #         ps <- readRDS(psFileName)
-    #         if (min(ps$propensityScore) < max(ps$propensityScore)) {
-    #             ps <- CohortMethod:::computePreferenceScore(ps)
-    #
-    #             d1 <- density(ps$preferenceScore[ps$treatment == 1], from = 0, to = 1, n = 100)
-    #             d0 <- density(ps$preferenceScore[ps$treatment == 0], from = 0, to = 1, n = 100)
-    #
-    #             result <- tibble::tibble(databaseId = databaseId,
-    #                                      targetId = row$targetId,
-    #                                      comparatorId = row$comparatorId,
-    #                                      analysisId = row$analysisId,
-    #                                      preferenceScore = d1$x,
-    #                                      targetDensity = d1$y,
-    #                                      comparatorDensity = d0$y)
-    #             return(result)
-    #         }
-    #     }
-    #     return(NULL)
-    # }
-    # subset <- unique(reference[reference$sharedPsFile != "",
-    #                            c("targetId", "comparatorId", "analysisId")])
-    # data <- plyr::llply(split(subset, 1:nrow(subset)),
-    #                     preparePlot,
-    #                     reference = reference,
-    #                     .progress = "text")
-    # data <- do.call("rbind", data)
-    # fileName <- file.path(exportFolder, "preference_score_dist.csv")
-    # if (!is.null(data)) {
-    #     colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-    # }
-    # readr::write_csv(data, fileName)
-    #
-    #
-    # ParallelLogger::logInfo("- propensity_model table")
-    # getPsModel <- function(row, reference) {
-    #     idx <- reference$analysisId == row$analysisId &
-    #         reference$targetId == row$targetId &
-    #         reference$comparatorId == row$comparatorId
-    #     psFileName <- file.path(outputFolder,
-    #                             "cmOutput",
-    #                             reference$sharedPsFile[idx][1])
-    #     if (file.exists(psFileName)) {
-    #         ps <- readRDS(psFileName)
-    #         metaData <- attr(ps, "metaData")
-    #         if (is.null(metaData$psError)) {
-    #             cmDataFile <- file.path(outputFolder,
-    #                                     "cmOutput",
-    #                                     reference$cohortMethodDataFile[idx][1])
-    #             cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
-    #             model <- CohortMethod::getPsModel(ps, cmData)
-    #             model$covariateId[is.na(model$covariateId)] <- 0
-    #             Andromeda::close(cmData)
-    #             model$databaseId <- databaseId
-    #             model$targetId <- row$targetId
-    #             model$comparatorId <- row$comparatorId
-    #             model$analysisId <- row$analysisId
-    #             model <- model[, c("databaseId", "targetId", "comparatorId", "analysisId", "covariateId", "coefficient")]
-    #             return(model)
-    #         }
-    #     }
-    #     return(NULL)
-    # }
-    # subset <- unique(reference[reference$sharedPsFile != "",
-    #                            c("targetId", "comparatorId", "analysisId")])
-    # data <- plyr::llply(split(subset, 1:nrow(subset)),
-    #                     getPsModel,
-    #                     reference = reference,
-    #                     .progress = "text")
-    # data <- do.call("rbind", data)
-    # fileName <- file.path(exportFolder, "propensity_model.csv")
-    # if (!is.null(data)) {
-    #     colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-    # }
-    # readr::write_csv(data, fileName)
+    ParallelLogger::logInfo("- preference_score_dist table")
+    reference <- readRDS(file.path(outputFolder, "cmOutput", "outcomeModelReference.rds"))
+    preparePlot <- function(row, reference) {
+        idx <- reference$analysisId == row$analysisId &
+            reference$targetId == row$targetId &
+            reference$comparatorId == row$comparatorId
+        psFileName <- file.path(outputFolder,
+                                "cmOutput",
+                                reference$sharedPsFile[idx][1])
+        if (file.exists(psFileName)) {
+            ps <- readRDS(psFileName)
+            if (min(ps$propensityScore) < max(ps$propensityScore)) {
+                ps <- CohortMethod:::computePreferenceScore(ps)
 
+                d1 <- density(ps$preferenceScore[ps$treatment == 1], from = 0, to = 1, n = 100)
+                d0 <- density(ps$preferenceScore[ps$treatment == 0], from = 0, to = 1, n = 100)
+
+                result <- tibble::tibble(databaseId = databaseId,
+                                         targetId = row$targetId,
+                                         comparatorId = row$comparatorId,
+                                         analysisId = row$analysisId,
+                                         preferenceScore = d1$x,
+                                         targetDensity = d1$y,
+                                         comparatorDensity = d0$y)
+                return(result)
+            }
+        }
+        return(NULL)
+    }
+    subset <- unique(reference[reference$sharedPsFile != "",
+                               c("targetId", "comparatorId", "analysisId")])
+    data <- plyr::llply(split(subset, 1:nrow(subset)),
+                        preparePlot,
+                        reference = reference,
+                        .progress = "text")
+    data <- do.call("rbind", data)
+    fileName <- file.path(exportFolder, "preference_score_dist.csv")
+    if (!is.null(data)) {
+        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+    }
+    readr::write_csv(data, fileName)
+
+
+    ParallelLogger::logInfo("- propensity_model table")
+    getPsModel <- function(row, reference) {
+        idx <- reference$analysisId == row$analysisId &
+            reference$targetId == row$targetId &
+            reference$comparatorId == row$comparatorId
+        psFileName <- file.path(outputFolder,
+                                "cmOutput",
+                                reference$sharedPsFile[idx][1])
+        if (file.exists(psFileName)) {
+            ps <- readRDS(psFileName)
+            metaData <- attr(ps, "metaData")
+            if (is.null(metaData$psError)) {
+                cmDataFile <- file.path(outputFolder,
+                                        "cmOutput",
+                                        reference$cohortMethodDataFile[idx][1])
+                cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
+                model <- CohortMethod::getPsModel(ps, cmData)
+                model$covariateId[is.na(model$covariateId)] <- 0
+                Andromeda::close(cmData)
+                model$databaseId <- databaseId
+                model$targetId <- row$targetId
+                model$comparatorId <- row$comparatorId
+                model$analysisId <- row$analysisId
+                model <- model[, c("databaseId", "targetId", "comparatorId", "analysisId", "covariateId", "coefficient")]
+                return(model)
+            }
+        }
+        return(NULL)
+    }
+    subset <- unique(reference[reference$sharedPsFile != "",
+                               c("targetId", "comparatorId", "analysisId")])
+    data <- plyr::llply(split(subset, 1:nrow(subset)),
+                        getPsModel,
+                        reference = reference,
+                        .progress = "text")
+    data <- do.call("rbind", data)
+    fileName <- file.path(exportFolder, "propensity_model.csv")
+    if (!is.null(data)) {
+        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+    }
+    readr::write_csv(data, fileName)
 
     ParallelLogger::logInfo("- kaplan_meier_dist table")
     ParallelLogger::logInfo("  Computing KM curves")
