@@ -1,0 +1,76 @@
+---
+title: "Propensity Score Model Assessment"
+author: "Marc A. Suchard"
+date: "23 June 2021"
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+    transition: 0
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(DT)
+```
+
+## Class-vs-class data experiment
+
+Available data sources:
+
+- CCAE
+- MDCR 
+- OptumEHR (_only_ main and female-stratum)
+
+Results are *now* available on `legend_t2dm_class_diagnostics`
+
+RMarkdown file `PsModelAssessment.Rmd` (in `LegendT2dm` repo) generates this document using the OHDSI public DB server
+
+```{r load_from_database, include=FALSE}
+Sys.setenv(DATABASECONNECTOR_JAR_FOLDER = keyring::key_get("legendT2dmDriverPath"))
+
+legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("legendt2dmServer"),
+                 keyring::key_get("legendt2dmDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("legendt2dmUser"),
+  password = keyring::key_get("legendt2dmPassword"))
+
+con <- DatabaseConnector::connect(legendT2dmConnectionDetails)
+auc <- DatabaseConnector::querySql(con, sql = "SELECT * FROM legendt2dm_class_diagnostics.ps_auc_assessment;", snakeCaseToCamelCase = TRUE)
+ps <- DatabaseConnector::querySql(con, sql = "SELECT * FROM legendt2dm_class_diagnostics.ps_covariate_assessment;", snakeCaseToCamelCase = TRUE)
+DatabaseConnector::disconnect(con)
+
+auc <- auc %>% mutate(auc = sprintf("%1.4f", auc),
+                      equipoise = sprintf("%1.2f", equipoise)) %>%
+  select(auc, equipoise, comparison, databaseId)
+
+ps <- ps %>% mutate(sign = ifelse(coefficient >= 0, "+", "-"),
+                    absCoef = sprintf("%1.2f", abs(coefficient))) %>%
+  select(absCoef, covariateName, comparison, databaseId) 
+
+```
+  
+## Propensity score AUC and equipoise
+
+AUC close to (but not less than) 0.5 is best
+
+Equipoise computed for [0.3 - 0.7] interval
+  
+```{r auc}
+datatable(auc, rownames = FALSE,
+          options = list(order = list(2, 'desc')))
+```
+
+## Most separable covariates
+
+Note: `index year: 2013`, `BD PEN NEEDLE` and `INSULIN AND ANALOGUES`
+
+```{r covariates}
+datatable(ps, rownames = FALSE,
+          options = list(order = list(2, 'desc'),
+                         pageLength = 5))
+```
