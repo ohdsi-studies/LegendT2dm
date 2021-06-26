@@ -74,3 +74,38 @@ datatable(ps, rownames = FALSE,
           options = list(order = list(2, 'desc'),
                          pageLength = 5))
 ```
+## Negative controls
+
+LEGEND-HTN list: 76 
+- Some are _questionable_ for T2DM (eg, wrist joint pain, vaginitis, amputated foot) 
+- Some are gender biased (eg, endometriosis, irregular periods, bbnormal cervical smear)
+
+```{r, htn_negatives, echo=FALSE}
+nc <- read.csv("../inst/settings/NegativeControls.csv") %>% select(name)
+
+datatable(nc, rownames = FALSE,
+          options = list(pageLength = 5))
+
+```
+## Negative controls
+
+New list from Anna and Patrick:
+
+- From `CEM` (literature, labelingm spontaneous reports)
+- ~200 (http://atlas-demo.ohdsi.org/#/conceptset/1868831/expression) then sorted by frequency
+- manual review, leaving 46
+
+
+```{r, t2dm_negatives, echo=FALSE}
+nc <- read.csv("../inst/settings/NegativeControlsV2.csv") %>% select(name)
+
+datatable(nc, rownames = FALSE,
+          options = list(pageLength = 5))
+
+```
+
+## Outcomes with clinical measurements
+
+Glycemic control (HbA1c)
+
+Measured renal dysfunction (used in LEGEND-HTN)

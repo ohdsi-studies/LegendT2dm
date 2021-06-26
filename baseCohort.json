@@ -228,6 +228,35 @@
 "Count":                                                   0,
 "IsDistinct": false 
 } 
+},
+{
+ "Criteria": {
+ "DrugEra": {
+ "CodesetId":                                                   6,
+"EraLength": {
+ "Value":                                                  30,
+"Op": "gt" 
+} 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
 } 
 ],
 "DemographicCriteriaList": [
@@ -1182,6 +1211,23 @@
 "DOMAIN_ID": "Drug",
 "VOCABULARY_ID": "ATC",
 "CONCEPT_CLASS_ID": "ATC 3rd" 
+},
+"isExcluded": false,
+"includeDescendants": true,
+"includeMapped": false 
+},
+{
+ "concept": {
+ "CONCEPT_ID":                                            19078608,
+"CONCEPT_NAME": "insulin, protamine zinc, beef-pork 100 UNT/ML Injectable Suspension",
+"STANDARD_CONCEPT": "S",
+"STANDARD_CONCEPT_CAPTION": "Standard",
+"INVALID_REASON": "V",
+"INVALID_REASON_CAPTION": "Valid",
+"CONCEPT_CODE": "311053",
+"DOMAIN_ID": "Drug",
+"VOCABULARY_ID": "RxNorm",
+"CONCEPT_CLASS_ID": "Clinical Drug" 
 },
 "isExcluded": false,
 "includeDescendants": true,
@@ -3392,14 +3438,17 @@
 },
 {
  "DrugExposure": {
- "CodesetId":                                                   6,
+ "CodesetId":                                                   5,
 "DrugTypeExclude": false 
 } 
 },
 {
- "DrugExposure": {
- "CodesetId":                                                   5,
-"DrugTypeExclude": false 
+ "DrugEra": {
+ "CodesetId":                                                   6,
+"EraLength": {
+ "Value":                                                  30,
+"Op": "gt" 
+} 
 } 
 } 
 ],
