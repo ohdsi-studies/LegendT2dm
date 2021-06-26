@@ -788,7 +788,11 @@ exportDiagnostics <- function(indicationId,
                                "beforeMatchingStdDiff",
                                "afterMatchingMeanTarget",
                                "afterMatchingMeanComparator",
-                               "afterMatchingStdDiff")]
+                               "afterMatchingStdDiff",
+                               "beforeMatchingSumTarget",
+                               "beforeMatchingSumComparator",
+                               "afterMatchingSumTarget",
+                               "afterMatchingSumComparator")]
         colnames(balance) <- c("databaseId",
                                "targetId",
                                "comparatorId",
@@ -801,7 +805,11 @@ exportDiagnostics <- function(indicationId,
                                "stdDiffBefore",
                                "targetMeanAfter",
                                "comparatorMeanAfter",
-                               "stdDiffAfter")
+                               "stdDiffAfter",
+                               "targetSumBefore",
+                               "comparatorSumBefore",
+                               "targetSumAfter",
+                               "comparatorSumAfter")
         balance$targetMeanBefore[is.na(balance$targetMeanBefore)] <- 0
         balance$comparatorMeanBefore[is.na(balance$comparatorMeanBefore)] <- 0
         balance$stdDiffBefore <- round(balance$stdDiffBefore, 3)
@@ -809,17 +817,23 @@ exportDiagnostics <- function(indicationId,
         balance$comparatorMeanAfter[is.na(balance$comparatorMeanAfter)] <- 0
         balance$stdDiffAfter <- round(balance$stdDiffAfter, 3)
 
-        balance$targetSizeBefore <- inferredTargetBeforeSize
-        balance$targetSizeBefore[is.na(inferredTargetBeforeSize)] <- 0
+        # balance$targetSizeBefore <- inferredTargetBeforeSize
+        # balance$targetSizeBefore[is.na(inferredTargetBeforeSize)] <- 0
+        #
+        # balance$comparatorSizeBefore <- inferredComparatorBeforeSize
+        # balance$comparatorSizeBefore[is.na(inferredComparatorBeforeSize)] <- 0
+        #
+        # balance$targetSizeAfter <- inferredTargetAfterSize
+        # balance$targetSizeAfter[is.na(inferredTargetAfterSize)] <- 0
+        #
+        # balance$comparatorSizeAfter <- inferredComparatorAfterSize
+        # balance$comparatorSizeAfter[is.na(inferredComparatorAfterSize)] <- 0
 
-        balance$comparatorSizeBefore <- inferredComparatorBeforeSize
-        balance$comparatorSizeBefore[is.na(inferredComparatorBeforeSize)] <- 0
 
-        balance$targetSizeAfter <- inferredTargetAfterSize
-        balance$targetSizeAfter[is.na(inferredTargetAfterSize)] <- 0
-
-        balance$comparatorSizeAfter <- inferredComparatorAfterSize
-        balance$comparatorSizeAfter[is.na(inferredComparatorAfterSize)] <- 0
+        balance$targetSumBefore[is.na(balance$targetSumBefore)] <- 0
+        balance$comparatorSumBefore[is.na(balance$comparatorSumBefore)] <- 0
+        balance$targetSumAfter[is.na(balance$targetSumAfter)] <- 0
+        balance$comparatorSumAfter[is.na(balance$comparatorSumAfter)] <- 0
 
         balance <- enforceMinCellValue(balance,
                                        "targetMeanBefore",
@@ -839,19 +853,19 @@ exportDiagnostics <- function(indicationId,
                                        TRUE)
 
         balance <- enforceMinCellValue(balance,
-                                       "targetSizeBefore",
+                                       "targetSumBefore",
                                        minCellCount,
                                        TRUE)
         balance <- enforceMinCellValue(balance,
-                                       "targetSizeAfter",
+                                       "targetSumAfter",
                                        minCellCount,
                                        TRUE)
         balance <- enforceMinCellValue(balance,
-                                       "comparatorSizeBefore",
+                                       "comparatorSumBefore",
                                        minCellCount,
                                        TRUE)
         balance <- enforceMinCellValue(balance,
-                                       "comparatorSizeAfter",
+                                       "comparatorSumAfter",
                                        minCellCount,
                                        TRUE)
 
@@ -860,14 +874,14 @@ exportDiagnostics <- function(indicationId,
         balance$targetMeanAfter <- round(balance$targetMeanAfter, 3)
         balance$comparatorMeanAfter <- round(balance$comparatorMeanAfter, 3)
 
-        # balance <- balance[balance$targetMeanBefore != 0 & balance$comparatorMeanBefore != 0 & balance$targetMeanAfter !=
-        #                        0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
-        #                        0, ]
+        balance <- balance[balance$targetMeanBefore != 0 & balance$comparatorMeanBefore != 0 & balance$targetMeanAfter !=
+                               0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
+                               0, ]
 
-        balance$targetSizeBefore <- round(balance$targetSizeBefore, 0)
-        balance$comparatorSizeBefore <- round(balance$comparatorSizeBefore, 0)
-        balance$targetSizeAfter <- round(balance$targetSizeAfter, 0)
-        balance$comparatorSizeAfter <- round(balance$comparatorSizeAfter, 0)
+        # balance$targetSizeBefore <- round(balance$targetSizeBefore, 0)
+        # balance$comparatorSizeBefore <- round(balance$comparatorSizeBefore, 0)
+        # balance$targetSizeAfter <- round(balance$targetSizeAfter, 0)
+        # balance$comparatorSizeAfter <- round(balance$comparatorSizeAfter, 0)
 
         balance <- balance[!is.na(balance$targetId), ]
         colnames(balance) <- SqlRender::camelCaseToSnakeCase(colnames(balance))
@@ -887,12 +901,12 @@ exportDiagnostics <- function(indicationId,
     close(pb)
 
     ParallelLogger::logInfo("- preference_score_dist table")
-    reference <- readRDS(file.path(outputFolder, "cmOutput", "outcomeModelReference.rds"))
+    reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
     preparePlot <- function(row, reference) {
         idx <- reference$analysisId == row$analysisId &
             reference$targetId == row$targetId &
             reference$comparatorId == row$comparatorId
-        psFileName <- file.path(outputFolder,
+        psFileName <- file.path(outputFolder, indicationId,
                                 "cmOutput",
                                 reference$sharedPsFile[idx][1])
         if (file.exists(psFileName)) {
@@ -934,14 +948,14 @@ exportDiagnostics <- function(indicationId,
         idx <- reference$analysisId == row$analysisId &
             reference$targetId == row$targetId &
             reference$comparatorId == row$comparatorId
-        psFileName <- file.path(outputFolder,
+        psFileName <- file.path(outputFolder, indicationId,
                                 "cmOutput",
                                 reference$sharedPsFile[idx][1])
         if (file.exists(psFileName)) {
             ps <- readRDS(psFileName)
             metaData <- attr(ps, "metaData")
             if (is.null(metaData$psError)) {
-                cmDataFile <- file.path(outputFolder,
+                cmDataFile <- file.path(outputFolder, indicationId,
                                         "cmOutput",
                                         reference$cohortMethodDataFile[idx][1])
                 cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
@@ -973,7 +987,7 @@ exportDiagnostics <- function(indicationId,
 
     ParallelLogger::logInfo("- kaplan_meier_dist table")
     ParallelLogger::logInfo("  Computing KM curves")
-    reference <- readRDS(file.path(outputFolder, "cmOutput", "outcomeModelReference.rds"))
+    reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
     outcomesOfInterest <- getOutcomesOfInterest()
     reference <- reference[reference$outcomeId %in% outcomesOfInterest, ]
     reference <- reference[, c("strataFile",
@@ -992,7 +1006,7 @@ exportDiagnostics <- function(indicationId,
     ParallelLogger::clusterApply(cluster,
                                  tasks,
                                  prepareKm,
-                                 outputFolder = outputFolder,
+                                 outputFolder = file.path(outputFolder, indicationId),
                                  tempFolder = tempFolder,
                                  databaseId = databaseId,
                                  minCellCount = minCellCount)

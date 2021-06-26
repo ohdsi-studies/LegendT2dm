@@ -322,10 +322,15 @@ assessPropensityModels <- function(connectionDetails,
                       indicationFolder = indicationFolder,
                       .progress = "text")
   data <- do.call("rbind", data)
+
+  # Fix intercept covariateId
+  areIntercept <- which(data$covariateName == "(Intercept)")
+  data$covariateId[areIntercept] <- 0
+
   data$databaseId <- databaseId
   data$indicationId <- indicationId
   names(data) <- SqlRender::camelCaseToSnakeCase(names(data))
-  write.csv(data, file.path(assessmentExportFolder, "psCovariateAssessment.csv"), row.names = FALSE)
+  write.csv(data, file.path(assessmentExportFolder, "ps_covariate_assessment.csv"), row.names = FALSE)
 
   ParallelLogger::logInfo("Computing AUCs")
 
@@ -365,7 +370,7 @@ assessPropensityModels <- function(connectionDetails,
   data$databaseId <- databaseId
   data$indicationId <- indicationId
   names(data) <- SqlRender::camelCaseToSnakeCase(names(data))
-  write.csv(data, file.path(assessmentExportFolder, "psAucAssessment.csv"), row.names = FALSE)
+  write.csv(data, file.path(assessmentExportFolder, "ps_auc_assessment.csv"), row.names = FALSE)
 
   zipName <- file.path(assessmentExportFolder,
                        sprintf("propensityModelAssessment_%s.zip", databaseId))
