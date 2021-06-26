@@ -1,6 +1,6 @@
 # Copyright 2021 Observational Health Data Sciences and Informatics
 #
-# This file is part of CohortDiagnostics
+# This file is part of LegendT2dm
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,119 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+#' Create a SQL file to construct data model tables on a database server.
+#'
+#' @details
+#' Only PostgreSQL servers are supported.
+#'
+#' @param specifications Specifications data table
+#' @param fileName       Output name for SQL file
+#' @param tab            Tab characters to use
+#'
+#' @export
+grantPermissionOnServer <- function(connectionDetails,
+                                    schema,
+                                    user = "legendt2dm_readonly") {
+  sql <- paste0("grant select on all tables in schema ", schema, " to ", user, ";")
+  connection <- DatabaseConnector::connect(connectionDetails)
+  DatabaseConnector::executeSql(connection, sql)
+  DatabaseConnector::disconnect(connection)
+}
+
+#' Create a SQL file to construct data model tables on a database server.
+#'
+#' @details
+#' Only PostgreSQL servers are supported.
+#'
+#' @param specifications Specifications data table
+#' @param fileName       Output name for SQL file
+#' @param tab            Tab characters to use
+#'
+#' @export
+createDataModelSqlFile <- function(specifications,
+                                   fileName,
+                                   tab = "    ") {
+
+  zz <- file(fileName, open = "wt")
+  capture.output({
+    tables <- split(specifications, specifications$tableName)
+
+    writeLines("-- Drop old tables if exists\n")
+    for (table in tables) {
+      writeLines(sprintf("DROP TABLE IF EXISTS %s;", table$tableName[1]))
+    }
+
+    writeLines("\n-- Create tables\n")
+
+    for (table in tables) {
+
+      writeLines(sprintf("CREATE TABLE %s (", table$tableName[1]))
+
+      write.table(table %>% mutate(notNull = ifelse(tolower(isRequired) == "yes", "NOT NULL", ""),
+                                   type = toupper(type),
+                                   tab = tab) %>%
+                    select(tab, fieldName, type, notNull),
+                  quote = FALSE, row.names = FALSE, col.names = FALSE, eol = ",\n")
+
+      keys <- paste(table %>% filter(tolower(primaryKey) == "yes") %>% pull(fieldName), collapse = ", ")
+      writeLines(sprintf("%s PRIMARY KEY(%s)", tab, keys))
+      writeLines(");\n")
+    }
+  }, file = zz, type = "output")
+  close(zz)
+}
+
+# file.show(fileName)
+
+#' Create the data model tables on a database server.
+#'
+#' @details
+#' Only PostgreSQL servers are supported.
+#'
+#' @param schema         The schema on the postgres server where the tables will be created.
+#'
+#' @export
+createDataModelOnServer <- function(connection = NULL,
+                                    connectionDetails = NULL,
+                                    schema,
+                                    sqlFileName,
+                                    package = "LegendT2dm") {
+  if (is.null(connection)) {
+    if (!is.null(connectionDetails)) {
+      connection <- DatabaseConnector::connect(connectionDetails)
+      on.exit(DatabaseConnector::disconnect(connection))
+    } else {
+      stop("No connection or connectionDetails provided.")
+    }
+  }
+  schemas <- unlist(
+    DatabaseConnector::querySql(
+      connection,
+      "SELECT schema_name FROM information_schema.schemata;",
+      snakeCaseToCamelCase = TRUE
+    )[, 1]
+  )
+  if (!tolower(schema) %in% tolower(schemas)) {
+    stop(
+      "Schema '",
+      schema,
+      "' not found on database. Only found these schemas: '",
+      paste(schemas, collapse = "', '"),
+      "'"
+    )
+  }
+  DatabaseConnector::executeSql(
+    connection,
+    sprintf("SET search_path TO %s;", schema),
+    progressBar = FALSE,
+    reportOverallTime = FALSE
+  )
+  pathToSql <-
+    system.file("sql", "postgresql", sqlFileName, package = package)
+  sql <- SqlRender::readSql(pathToSql)
+  DatabaseConnector::executeSql(connection, sql)
+}
 
 fixTableMetadataForBackwardCompatibility <- function(table, tableName) {
   if (tableName %in% c("cohort", "phenotype_description")) {
@@ -160,7 +273,7 @@ checkAndFixDataTypes <-
               expectedType
             )
           )
-          table <- mutate_at(table, i, as.Date)
+          table <- mutate_at(table, i, as.Date, origin = "1970-01-01")
         }
       }
     }
@@ -210,6 +323,15 @@ appendNewRows <-
     return(dplyr::bind_rows(data, newData))
   }
 
+naToEmpty <- function(x) {
+  x[is.na(x)] <- ""
+  return(x)
+}
+
+naToZero <- function(x) {
+  x[is.na(x)] <- 0
+  return(x)
+}
 
 #' Upload results to the database server.
 #'
@@ -219,32 +341,59 @@ appendNewRows <-
 #' Set the POSTGRES_PATH environmental variable to the path to the folder containing the psql executable to enable
 #' bulk upload (recommended).
 #'
-#' @param connectionDetails   An object of type \code{connectionDetails} as created using the
+#' @param connectionDetails   Object of type \code{connectionDetails} as created using the
 #'                            \code{\link[DatabaseConnector]{createConnectionDetails}} function in the
 #'                            DatabaseConnector package.
-#' @param schema         The schema on the postgres server where the tables have been created.
-#' @param zipFileName    The name of the zip file.
+#' @param schema         Schema on the postgres server where the tables have been created.
+#' @param zipFileName    Name of single or vector of multiple zip files.
 #' @param forceOverWriteOfSpecifications  If TRUE, specifications of the phenotypes, cohort definitions, and analysis
 #'                       will be overwritten if they already exist on the database. Only use this if these specifications
 #'                       have changed since the last upload.
 #' @param purgeSiteDataBeforeUploading If TRUE, before inserting data for a specific databaseId all the data for
 #'                       that site will be dropped. This assumes the input zip file contains the full data for that
 #'                       data site.
-#' @param tempFolder     A folder on the local file system where the zip files are extracted to. Will be cleaned
+#' @param tempFolder     Folder on the local file system where the zip files are extracted to. Will be cleaned
 #'                       up when the function is finished. Can be used to specify a temp folder on a drive that
 #'                       has sufficient space if the default system temp space is too limited.
 #'
 #' @import dplyr
 #'
 #' @export
-uploadResults <- function(connectionDetails,
-                          schema,
-                          zipFileName,
-                          specifications,
-                          forceOverWriteOfSpecifications = FALSE,
-                          purgeSiteDataBeforeUploading = TRUE,
-                          convertFromCamelCase = FALSE,
-                          tempFolder = tempdir()) {
+uploadResultsToDatabase <- function(connectionDetails,
+                                    schema,
+                                    zipFileName,
+                                    specifications,
+                                    forceOverWriteOfSpecifications = FALSE,
+                                    purgeSiteDataBeforeUploading = FALSE,
+                                    convertFromCamelCase = FALSE,
+                                    tempFolder = tempdir()) {
+
+  if (length(zipFileName) > 1) {
+    for (i in 1:length(zipFileName)) {
+      uploadResultsToDatabaseImpl(connectionDetails = connectionDetails,
+                                  schema = schema,
+                                  zipFileName = zipFileName[i],
+                                  specifications = specifications,
+                                  forceOverWriteOfSpecifications = forceOverWriteOfSpecifications,
+                                  purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
+                                  convertFromCamelCase = convertFromCamelCase,
+                                  tempFolder = file.path(tempFolder, i))
+    }
+  } else {
+    uploadResultsToDatabaseImpl(connectionDetails = connectionDetails,
+                                schema = schema,
+                                zipFileName = zipFileName,
+                                specifications = specifications,
+                                forceOverWriteOfSpecifications = forceOverWriteOfSpecifications,
+                                purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
+                                convertFromCamelCase = convertFromCamelCase,
+                                tempFolder = tempFolder)
+  }
+}
+
+uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, specifications,
+                                        forceOverWriteOfSpecifications, purgeSiteDataBeforeUploading,
+                                        convertFromCamelCase, tempFolder) {
   start <- Sys.time()
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -351,7 +500,7 @@ uploadResults <- function(connectionDetails,
           filter(
             .data$tableName == env$tableName &
               .data$emptyIsNa == "No" &
-              .data$type %in% c("int", "bigint", "float")
+              .data$type %in% c("int", "bigint", "float", "numeric")
           ) %>%
           select(.data$fieldName) %>%
           pull()

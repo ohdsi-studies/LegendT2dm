@@ -7,13 +7,15 @@
 #   ExposuresOfInterest.csv
 library(dplyr)
 
-#baseUrlPublic <- keyring::key_get("ohdsiBaseUrl")
 baseUrlWebApi <- keyring::key_get("baseUrl")
-#baseUrlWebApi <- "http://atlas.ohdsi.org:80/WebAPI"
 
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, digits = 50)
 # SqlRender::writeSql(baseCohortJson, targetFile = "baseCohort.json")
+# saveRDS(baseCohort, file = "baseCohort.rds")
+
+# json <- SqlRender::readSql("baseCohort.json")
+# baseCohort <- RJSONIO::fromJSON(json, digits = 50)
 # saveRDS(baseCohort, file = "baseCohort.rds")
 
 # Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5, PriorMet == 6, NoMet == 7
@@ -262,7 +264,7 @@ allCohortsJson <-
   do.call("rbind",
           lapply(1:nrow(permutations), function(i) {
             cohortDefinition <- permuteTC(baseCohort, permutations[i,])
-            cohortJson <- RJSONIO::toJSON(cohortDefinition$expression, indent = 2, digits = 10)
+            cohortJson <- RJSONIO::toJSON(cohortDefinition$expression, indent = 2, digits = 12)
             return(cohortJson)
           }))
 

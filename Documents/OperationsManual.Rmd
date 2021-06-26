@@ -317,7 +317,6 @@ When the value falls below this minimum, it is replaced with the negative value 
 For example, if the minimum subject count is 5, and the actual count is 2, the value stored in the data model will be -5, which could be represented as '\<5' to the user. 
 Note that the value 0 is permissible, as it identifies no persons.
 
-
 ## Cohort diagnostics data model
 
 ```{r echo=FALSE, results="asis", warning=FALSE, message=FALSE}
