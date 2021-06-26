@@ -928,6 +928,42 @@ exportDiagnostics <- function(indicationId,
     }
     readr::write_csv(data, fileName)
 
+    ParallelLogger::logInfo("- ps_auc_assessment table")
+
+    getAuc <- function(row, reference) {
+        idx <- reference$analysisId == row$analysisId &
+            reference$targetId == row$targetId &
+            reference$comparatorId == row$comparatorId
+        psFileName <- file.path(outputFolder,
+                                "cmOutput",
+                                reference$sharedPsFile[idx][1])
+        if (file.exists(psFileName)) {
+            ps <- readRDS(psFileName)
+            ps <- CohortMethod:::computePreferenceScore(ps)
+            auc <- tibble::tibble(auc = CohortMethod::computePsAuc(ps),
+                                  equipoise = mean(
+                                      ps$preferenceScore >= 0.3 &
+                                          ps$preferenceScore <= 0.7),
+                                  targetId = row$targetId,
+                                  comparatorId = row$comparatorId,
+                                  analysisId = row$analysisId)
+            return(auc)
+        }
+        return(NULL)
+    }
+
+    subset <- unique(reference[reference$sharedPsFile != "",
+                               c("targetId", "comparatorId", "analysisId")])
+    data <- plyr::llply(split(subset, 1:nrow(subset)),
+                        getAuc,
+                        reference = reference,
+                        .progress = "text")
+    data <- do.call("rbind", data)
+    fileName <- file.path(exportFolder, "ps_auc_assessment.csv")
+    if (!is.null(data)) {
+        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+    }
+    readr::write_csv(data, fileName)
 
     ParallelLogger::logInfo("- propensity_model table")
     getPsModel <- function(row, reference) {

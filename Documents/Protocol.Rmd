@@ -82,9 +82,12 @@ latex_table_font_size <- 8
 
 * Design issue:
   - Add `restrictToCommonPeriod = TRUE`
+  - Exclude prior insulin drug era
+  - Censor at insulin drug era
 * Outcome definition questions:
   - Measured renal dysfx: Cr >= 3 or lower?
   - Glycemic control: A1c <= 7? how frequently?
+  - Modify language
 * Review of all outcome cohorts, but particularly marked "Need Review"
 
 # List of Abbreviations
