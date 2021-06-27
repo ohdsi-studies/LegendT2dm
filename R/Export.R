@@ -948,7 +948,7 @@ exportDiagnostics <- function(indicationId,
         idx <- reference$analysisId == row$analysisId &
             reference$targetId == row$targetId &
             reference$comparatorId == row$comparatorId
-        psFileName <- file.path(outputFolder,
+        psFileName <- file.path(outputFolder, indicationId,
                                 "cmOutput",
                                 reference$sharedPsFile[idx][1])
         if (file.exists(psFileName)) {
