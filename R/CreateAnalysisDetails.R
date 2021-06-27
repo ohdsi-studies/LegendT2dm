@@ -55,15 +55,15 @@ createAnalysesDetails <- function(outputFolder) {
 
   cmAnalysis1 <- CohortMethod::createCmAnalysis(
     analysisId = 1,
-    description = "Unadjusted",
+    description = "Unadjusted, on-treatment1",
     getDbCohortMethodDataArgs = getDbCmDataArgs,
-    createStudyPopArgs = createStudyPopArgsItt,
+    createStudyPopArgs = createStudyPopArgsOnTreatment,
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
 
   cmAnalysis2 <- CohortMethod::createCmAnalysis(
     analysisId = 2,
-    description = "PS matching, on-treatment",
+    description = "PS matching, on-treatment1",
     getDbCohortMethodDataArgs = getDbCmDataArgs,
     createStudyPopArgs = createStudyPopArgsOnTreatment,
     createPs = TRUE,
@@ -75,6 +75,26 @@ createAnalysesDetails <- function(outputFolder) {
 
   cmAnalysis3 <- CohortMethod::createCmAnalysis(
     analysisId = 3,
+    description = "PS stratification, on-treatment1",
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsOnTreatment,
+    createPs = TRUE,
+    createPsArgs = createPsArgs,
+    stratifyByPs = TRUE,
+    stratifyByPsArgs = stratifyByPsArgs,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
+
+  cmAnalysis4 <- CohortMethod::createCmAnalysis(
+    analysisId = 4,
+    description = "Unadjusted, intent-to-treat",
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsItt,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+
+  cmAnalysis5 <- CohortMethod::createCmAnalysis(
+    analysisId = 5,
     description = "PS matching, intent-to-treat",
     getDbCohortMethodDataArgs = getDbCmDataArgs,
     createStudyPopArgs = createStudyPopArgsItt,
@@ -85,20 +105,8 @@ createAnalysesDetails <- function(outputFolder) {
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
 
-  cmAnalysis4 <- CohortMethod::createCmAnalysis(
-    analysisId = 4,
-    description = "PS stratification, on-treatment",
-    getDbCohortMethodDataArgs = getDbCmDataArgs,
-    createStudyPopArgs = createStudyPopArgsOnTreatment,
-    createPs = TRUE,
-    createPsArgs = createPsArgs,
-    stratifyByPs = TRUE,
-    stratifyByPsArgs = stratifyByPsArgs,
-    fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
-
-  cmAnalysis5 <- CohortMethod::createCmAnalysis(
-    analysisId = 5,
+  cmAnalysis6 <- CohortMethod::createCmAnalysis(
+    analysisId = 6,
     description = "PS stratification, intent-to-treat",
     getDbCohortMethodDataArgs = getDbCmDataArgs,
     createStudyPopArgs = createStudyPopArgsItt,
@@ -109,11 +117,44 @@ createAnalysesDetails <- function(outputFolder) {
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3,
-                                        cmAnalysis4, cmAnalysis5),
-                                   file.path(outputFolder, "ot1IttCmAnalysisList.json"))
+  cmAnalysis7 <- CohortMethod::createCmAnalysis(
+    analysisId = 7,
+    description = "Unadjusted, on-treatment2",
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsOnTreatment,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, # ITT removed to avoid duplicate analysis with OT1
-                                        cmAnalysis4),
+  cmAnalysis8 <- CohortMethod::createCmAnalysis(
+    analysisId = 8,
+    description = "PS matching, on-treatment2",
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsOnTreatment,
+    createPs = TRUE,
+    createPsArgs = createPsArgs,
+    matchOnPs = TRUE,
+    matchOnPsArgs = matchOnPsArgs,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+
+  cmAnalysis9 <- CohortMethod::createCmAnalysis(
+    analysisId = 9,
+    description = "PS stratification, on-treatment2",
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsOnTreatment,
+    createPs = TRUE,
+    createPsArgs = createPsArgs,
+    stratifyByPs = TRUE,
+    stratifyByPsArgs = stratifyByPsArgs,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
+
+  CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3),
+                                   file.path(outputFolder, "ot1CmAnalysisList.json"))
+
+  CohortMethod::saveCmAnalysisList(list(cmAnalysis4, cmAnalysis5, cmAnalysis6),
+                                   file.path(outputFolder, "ittCmAnalysisList.json"))
+
+  CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
                                    file.path(outputFolder, "ot2CmAnalysisList.json"))
 }

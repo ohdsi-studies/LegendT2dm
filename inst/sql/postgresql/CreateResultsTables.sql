@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS negative_control_outcome;
 DROP TABLE IF EXISTS outcome_of_interest;
 DROP TABLE IF EXISTS preference_score_dist;
 DROP TABLE IF EXISTS propensity_model;
+DROP TABLE IF EXISTS ps_auc_assessment;
 
 -- Create tables
 
@@ -221,5 +222,15 @@ CREATE TABLE propensity_model (
      covariate_id BIGINT NOT NULL,
      coefficient NUMERIC NOT NULL,
      PRIMARY KEY(database_id, target_id, comparator_id, analysis_id, covariate_id)
+);
+
+CREATE TABLE ps_auc_assessment (
+     database_id VARCHAR(255) NOT NULL,
+     target_id BIGINT NOT NULL,
+     comparator_id BIGINT NOT NULL,
+     auc NUMERIC NOT NULL,
+     equipoise NUMERIC NOT NULL,
+     comparison TEXT ,
+     PRIMARY KEY(database_id, target_id, comparator_id)
 );
 
