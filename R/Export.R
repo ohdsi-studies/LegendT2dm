@@ -964,7 +964,8 @@ exportDiagnostics <- function(indicationId,
                                           ps$preferenceScore <= 0.7),
                                   targetId = row$targetId,
                                   comparatorId = row$comparatorId,
-                                  analysisId = row$analysisId)
+                                  analysisId = row$analysisId,
+                                  databaseId = databaseId)
             return(auc)
         }
         return(NULL)
