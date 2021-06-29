@@ -147,15 +147,40 @@ createOutcomeCohorts <- function(connectionDetails,
 
   # Creating negative control outcome cohorts -------------------
   ParallelLogger::logInfo("Creating negative control outcome cohorts")
-  negativeControls <- loadNegativeControls()
-  sql <- SqlRender::loadRenderTranslateSql("NegativeControlOutcomes.sql",
+  # negativeControls <- loadNegativeControls()
+  # sql <- SqlRender::loadRenderTranslateSql("NegativeControlOutcomes.sql",
+  #                                          "LegendT2dm",
+  #                                          dbms = connectionDetails$dbms,
+  #                                          cdm_database_schema = cdmDatabaseSchema,
+  #                                          cohort_database_schema = cohortDatabaseSchema,
+  #                                          cohort_table = cohortTable,
+  #                                          outcome_ids = unique(negativeControls$conceptId))
+  # DatabaseConnector::executeSql(connection, sql)
+  pathToCsv <- system.file("settings", "NegativeControls.csv", package = "LegendT2dm")
+  negativeControls <- read.csv(pathToCsv)
+  data <- negativeControls[, c("conceptId", "cohortId")]
+  colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+  DatabaseConnector::insertTable(connection = conn,
+                                 tableName = "#negative_controls",
+                                 data = data,
+                                 dropTableIfExists = TRUE,
+                                 createTable = TRUE,
+                                 tempTable = TRUE,
+                                 oracleTempSchema = oracleTempSchema)
+  sql <- SqlRender::loadRenderTranslateSql("NegativeControls.sql",
                                            "LegendT2dm",
                                            dbms = connectionDetails$dbms,
+                                           oracleTempSchema = oracleTempSchema,
                                            cdm_database_schema = cdmDatabaseSchema,
-                                           cohort_database_schema = cohortDatabaseSchema,
-                                           cohort_table = cohortTable,
-                                           outcome_ids = unique(negativeControls$conceptId))
-  DatabaseConnector::executeSql(connection, sql)
+                                           target_database_schema = cohortDatabaseSchema,
+                                           target_cohort_table = outcomeCohortTable)
+  DatabaseConnector::executeSql(conn, sql)
+
+  sql <- "TRUNCATE TABLE #negative_controls; DROP TABLE #negative_controls;"
+  sql <- SqlRender::translateSql(sql = sql,
+                                 targetDialect = connectionDetails$dbms,
+                                 oracleTempSchema = oracleTempSchema)$sql
+  DatabaseConnector::executeSql(conn, sql, progressBar = FALSE, reportOverallTime = FALSE)
 
   # Count cohort sizes
   ParallelLogger::logInfo("Counting outcome cohorts")
