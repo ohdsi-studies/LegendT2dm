@@ -46,12 +46,12 @@ createAnalysesDetails <- function(outputFolder) {
   fitOutcomeModelArgsMarginal <- CohortMethod::createFitOutcomeModelArgs(
     modelType = "cox",
     stratified = FALSE,
-    profileGrid = seq(log(0.1), log(10), length.out = 1000))
+    profileBounds = c(log(0.1), log(10)))
 
   fitOutcomeModelArgsConditional <- CohortMethod::createFitOutcomeModelArgs(
     modelType = "cox",
     stratified = TRUE,
-    profileGrid = seq(log(0.1), log(10), length.out = 1000))
+    profileBounds = c(log(0.1), log(10)))
 
   cmAnalysis1 <- CohortMethod::createCmAnalysis(
     analysisId = 1,
