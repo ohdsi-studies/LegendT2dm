@@ -160,7 +160,7 @@ createOutcomeCohorts <- function(connectionDetails,
   negativeControls <- read.csv(pathToCsv)
   data <- negativeControls[, c("conceptId", "cohortId")]
   colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-  DatabaseConnector::insertTable(connection = conn,
+  DatabaseConnector::insertTable(connection = connection,
                                  tableName = "#negative_controls",
                                  data = data,
                                  dropTableIfExists = TRUE,
@@ -173,14 +173,14 @@ createOutcomeCohorts <- function(connectionDetails,
                                            oracleTempSchema = oracleTempSchema,
                                            cdm_database_schema = cdmDatabaseSchema,
                                            target_database_schema = cohortDatabaseSchema,
-                                           target_cohort_table = outcomeCohortTable)
-  DatabaseConnector::executeSql(conn, sql)
+                                           target_cohort_table = cohortTable)
+  DatabaseConnector::executeSql(connection, sql)
 
   sql <- "TRUNCATE TABLE #negative_controls; DROP TABLE #negative_controls;"
-  sql <- SqlRender::translateSql(sql = sql,
-                                 targetDialect = connectionDetails$dbms,
-                                 oracleTempSchema = oracleTempSchema)$sql
-  DatabaseConnector::executeSql(conn, sql, progressBar = FALSE, reportOverallTime = FALSE)
+  sql <- SqlRender::translate(sql = sql,
+                              targetDialect = connectionDetails$dbms,
+                              oracleTempSchema = oracleTempSchema)
+  DatabaseConnector::executeSql(connection, sql, progressBar = FALSE, reportOverallTime = FALSE)
 
   # Count cohort sizes
   ParallelLogger::logInfo("Counting outcome cohorts")
