@@ -41,7 +41,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -58,7 +58,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -75,7 +75,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -92,7 +92,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -109,7 +109,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -126,7 +126,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					},
 					{
@@ -143,7 +143,7 @@
 							"CONCEPT_CLASS_ID" : "Lab Test"
 						},
 						"isExcluded" : false,
-						"includeDescendants" : false,
+						"includeDescendants" : true,
 						"includeMapped" : false
 					}
 				]

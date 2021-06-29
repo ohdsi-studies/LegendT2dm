@@ -73,7 +73,7 @@ UNION  select c.concept_id
 ) C UNION ALL 
 SELECT 7 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (376713,439847,432923)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (376713,439847,432923,43530727,4148906)
 
 ) I
 ) C UNION ALL 
@@ -337,12 +337,6 @@ select @target_cohort_id as cohort_definition_id, person_id, start_date, end_dat
 FROM #final_cohort CO
 ;
 
-
--- BEGIN: Censored Stats
-
-delete from @results_database_schema.cohort_censor_stats where cohort_definition_id = @target_cohort_id;
-
--- END: Censored Stats
 
 
 

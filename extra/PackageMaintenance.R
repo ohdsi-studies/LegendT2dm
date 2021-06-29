@@ -30,7 +30,7 @@ ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/Outco
                                                 baseUrl = baseUrl,
                                                 insertTableSql = FALSE,
                                                 insertCohortCreationR = FALSE,
-                                                generateStats = TRUE,
+                                                generateStats = FALSE,
                                                 packageName = "LegendT2dm")
 
 

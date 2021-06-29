@@ -7,14 +7,20 @@ CREATE TABLE #Codesets (
 INSERT INTO #Codesets (codeset_id, concept_id)
 SELECT 0 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4234104,4286349)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4234104)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (4234104,4286349)
+  and ca.ancestor_concept_id in (4234104)
   and c.invalid_reason is null
 
 ) I
+LEFT JOIN
+(
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (4300445,4263325,4031007,442179,37312586,138825,4304266,4064057,141374,4031006,439096,4070156,4290728,4241471,36674412,4293437,4066470,4119822,4033832,37116482,37116483,4290729,4239682,4242265,36715275,4230340,4300796,141650,4301164,4299673,4234867,36715367,4308081,42709861,4112749,4300444,4031005,4116197,4299672,4080922,4293560,4293562,4300794,4300795,4293563,4293561,37110331,4006157,37110590,4292224,4293593,4290732,42537710,4318376,42537712,42537711,4290730,4298594,4298593,4270722,42539382,42709860,4080921,4176424,4223992,4204365,4195589,4278846,4297664,4296207,4066838,4031625,4185267,4031162,4217502,4296189,4033831,4031004,4296206)
+
+) E ON I.concept_id = E.concept_id
+WHERE E.concept_id is null
 ) C
 ;
 
@@ -173,12 +179,6 @@ select @target_cohort_id as cohort_definition_id, person_id, start_date, end_dat
 FROM #final_cohort CO
 ;
 
-
--- BEGIN: Censored Stats
-
-delete from @results_database_schema.cohort_censor_stats where cohort_definition_id = @target_cohort_id;
-
--- END: Censored Stats
 
 
 
