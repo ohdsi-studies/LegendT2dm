@@ -8,7 +8,7 @@ Maintainer: Marc A. Suchard <msuchard@ucla.edu>
 Description: Large-Scale Evidence Generation and Evaluation in a Network of Databases
     for Type 2 Diabetes
 Depends:
-    R (>= 3.6),
+    R (>= 4.0),
     DatabaseConnector (>= 3.0.0)
 Imports:
     Cyclops (>= 3.0),

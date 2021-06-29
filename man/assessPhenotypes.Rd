@@ -8,7 +8,7 @@ assessPhenotypes(
   connectionDetails,
   cdmDatabaseSchema,
   cohortDatabaseSchema,
-  tablePrefix = "legend",
+  tablePrefix = "legend_t2dm",
   oracleTempSchema,
   outputFolder,
   sampleSize = 1e+05,
@@ -16,9 +16,12 @@ assessPhenotypes(
   databaseId,
   databaseName = databaseId,
   databaseDescription = databaseId,
-  createCohorts = TRUE,
-  runCohortDiagnostics = TRUE,
-  filterExposureCohorts = NULL
+  createExposureCohorts = TRUE,
+  runExposureCohortDiagnostics = TRUE,
+  createOutcomeCohorts = TRUE,
+  runOutcomeCohortDiagnostics = TRUE,
+  filterExposureCohorts = NULL,
+  filterOutcomeCohorts = NULL
 )
 }
 \arguments{

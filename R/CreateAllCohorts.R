@@ -1,4 +1,4 @@
-#' Create the class exposure cohorts
+#' Create the exposure cohorts
 #'
 #' @details
 #' This function will create the exposure cohorts following the definitions included in this package.
@@ -23,29 +23,34 @@
 #' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
 #'
 #' @export
-createClassCohorts <- function(connectionDetails,
+createExposureCohorts <- function(connectionDetails,
                              cdmDatabaseSchema,
                              cohortDatabaseSchema,
-                             tablePrefix = "legend",
+                             tablePrefix = "legendt2dm",
+                             indicationId = "class",
                              oracleTempSchema,
                              outputFolder,
                              databaseId,
                              filterExposureCohorts = NULL,
                              imputeExposureLengthWhenMissing = FALSE) {
 
-  ParallelLogger::logInfo("Creating class exposure cohorts")
+  indicationFolder <- file.path(outputFolder, indicationId)
+  if (!file.exists(indicationFolder)) {
+    dir.create(indicationFolder, recursive = TRUE)
+  }
 
-  cohortTable <- paste(tablePrefix, "cohort", sep = "_")
+  ParallelLogger::logInfo("Creating ", indicationId, " exposure cohorts")
 
+  cohortTable <- paste(tablePrefix, indicationId, "cohort", sep = "_")
 
   # Note: using connection when calling createCohortTable and instantiateCohortSet is pereferred, but requires this
   # fix in CohortDiagnostics to be released: https://github.com/OHDSI/CohortDiagnostics/commit/f4c920bc4feb5d701f1149ddd9cf7ca968be6a71
   # connection <- DatabaseConnector::connect(connectionDetails)
   # on.exit(DatabaseConnector::disconnect(connection))
 
-  CohortDiagnostics::createCohortTable(connectionDetails = connectionDetails,
-                                       cohortDatabaseSchema = cohortDatabaseSchema,
-                                       cohortTable = cohortTable)
+  # CohortDiagnostics:::createCohortTable(connectionDetails = connectionDetails,
+  #                                      cohortDatabaseSchema = cohortDatabaseSchema,
+  #                                      cohortTable = cohortTable)
 
   ParallelLogger::logInfo("- Populating table ", cohortTable)
 
@@ -55,11 +60,12 @@ createClassCohorts <- function(connectionDetails,
                                           oracleTempSchema = oracleTempSchema,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
-                                          cohortToCreateFile = "settings/classCohortsToCreate.csv",
+                                          createCohortTable = TRUE,
+                                          cohortToCreateFile = paste0("settings/", indicationId, "CohortsToCreate.csv"),
                                           generateInclusionStats = TRUE,
-                                          inclusionStatisticsFolder = outputFolder)
+                                          inclusionStatisticsFolder = indicationFolder)
 
-  ParallelLogger::logInfo("Counting class cohorts")
+  ParallelLogger::logInfo("Counting ", indicationId, " exposure cohorts")
   sql <- SqlRender::loadRenderTranslateSql("GetCounts.sql",
                                            "LegendT2dm",
                                            dbms = connectionDetails$dbms,
@@ -72,7 +78,8 @@ createClassCohorts <- function(connectionDetails,
   DatabaseConnector::disconnect(connection)
   counts$databaseId <- databaseId
   #counts <- addCohortNames(counts)
-  write.csv(counts, file.path(outputFolder, "classCohortCounts.csv"), row.names = FALSE)
+
+  write.csv(counts, file.path(indicationFolder, "cohortCounts.csv"), row.names = FALSE)
 }
 
 #' Create the outcome cohorts
@@ -103,22 +110,27 @@ createClassCohorts <- function(connectionDetails,
 createOutcomeCohorts <- function(connectionDetails,
                                cdmDatabaseSchema,
                                cohortDatabaseSchema,
-                               tablePrefix = "legend",
+                               tablePrefix = "legendt2dm",
                                oracleTempSchema,
                                outputFolder,
                                databaseId,
                                filterOutcomeCohorts = NULL) {
 
+  outcomeFolder <- file.path(outputFolder, "outcome")
+  if (!file.exists(outcomeFolder)) {
+    dir.create(outcomeFolder, recursive = TRUE)
+  }
+
   ParallelLogger::logInfo("Creating outcome cohorts")
 
-  cohortTable <- paste(tablePrefix, "outcome", sep = "_")
+  cohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
 
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
 
-  CohortDiagnostics::createCohortTable(connection = connection,
-                                       cohortDatabaseSchema = cohortDatabaseSchema,
-                                       cohortTable = cohortTable)
+  # CohortDiagnostics:::createCohortTable(connection = connection,
+  #                                      cohortDatabaseSchema = cohortDatabaseSchema,
+  #                                      cohortTable = cohortTable)
 
   ParallelLogger::logInfo("- Populating table ", cohortTable)
 
@@ -129,20 +141,46 @@ createOutcomeCohorts <- function(connectionDetails,
                                           cohortTable = cohortTable,
                                           packageName = "LegendT2dm",
                                           cohortToCreateFile = "settings/OutcomesOfInterest.csv",
-                                          generateInclusionStats = TRUE,
-                                          inclusionStatisticsFolder = outputFolder)
+                                          generateInclusionStats = FALSE,
+                                          createCohortTable = TRUE,
+                                          inclusionStatisticsFolder = outcomeFolder)
 
   # Creating negative control outcome cohorts -------------------
   ParallelLogger::logInfo("Creating negative control outcome cohorts")
-  negativeControls <- loadNegativeControls()
-  sql <- SqlRender::loadRenderTranslateSql("NegativeControlOutcomes.sql",
+  # negativeControls <- loadNegativeControls()
+  # sql <- SqlRender::loadRenderTranslateSql("NegativeControlOutcomes.sql",
+  #                                          "LegendT2dm",
+  #                                          dbms = connectionDetails$dbms,
+  #                                          cdm_database_schema = cdmDatabaseSchema,
+  #                                          cohort_database_schema = cohortDatabaseSchema,
+  #                                          cohort_table = cohortTable,
+  #                                          outcome_ids = unique(negativeControls$conceptId))
+  # DatabaseConnector::executeSql(connection, sql)
+  pathToCsv <- system.file("settings", "NegativeControls.csv", package = "LegendT2dm")
+  negativeControls <- read.csv(pathToCsv)
+  data <- negativeControls[, c("conceptId", "cohortId")]
+  colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+  DatabaseConnector::insertTable(connection = connection,
+                                 tableName = "#negative_controls",
+                                 data = data,
+                                 dropTableIfExists = TRUE,
+                                 createTable = TRUE,
+                                 tempTable = TRUE,
+                                 oracleTempSchema = oracleTempSchema)
+  sql <- SqlRender::loadRenderTranslateSql("NegativeControls.sql",
                                            "LegendT2dm",
                                            dbms = connectionDetails$dbms,
+                                           oracleTempSchema = oracleTempSchema,
                                            cdm_database_schema = cdmDatabaseSchema,
-                                           cohort_database_schema = cohortDatabaseSchema,
-                                           cohort_table = cohortTable,
-                                           outcome_ids = unique(negativeControls$conceptId))
+                                           target_database_schema = cohortDatabaseSchema,
+                                           target_cohort_table = cohortTable)
   DatabaseConnector::executeSql(connection, sql)
+
+  sql <- "TRUNCATE TABLE #negative_controls; DROP TABLE #negative_controls;"
+  sql <- SqlRender::translate(sql = sql,
+                              targetDialect = connectionDetails$dbms,
+                              oracleTempSchema = oracleTempSchema)
+  DatabaseConnector::executeSql(connection, sql, progressBar = FALSE, reportOverallTime = FALSE)
 
   # Count cohort sizes
   ParallelLogger::logInfo("Counting outcome cohorts")
@@ -155,9 +193,9 @@ createOutcomeCohorts <- function(connectionDetails,
                                            study_cohort_table = cohortTable)
 
   counts <- DatabaseConnector::querySql(connection, sql, snakeCaseToCamelCase = TRUE)
-
   counts$databaseId <- databaseId
-  write.csv(counts, file.path(outputFolder, "outcomeCohortCounts.csv"), row.names = FALSE)
+
+  write.csv(counts, file.path(outcomeFolder, "cohortCounts.csv"), row.names = FALSE)
 }
 
 loadNegativeControls <- function() {
