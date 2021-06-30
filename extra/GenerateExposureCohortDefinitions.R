@@ -10,7 +10,7 @@ library(dplyr)
 baseUrlWebApi <- keyring::key_get("baseUrl")
 
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
-# baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, digits = 50)
+# baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, indent = 2, digits = 50)
 # SqlRender::writeSql(baseCohortJson, targetFile = "baseCohort.json")
 # saveRDS(baseCohort, file = "baseCohort.rds")
 
@@ -218,9 +218,13 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     cohort$expression$InclusionRules[[met]]$expression$Type <- "AT_MOST"
     cohort$expression$InclusionRules[[met]]$expression$Count <- 0
     cohort$expression$InclusionRules[[met + 1]] <- NULL
+    delta <- delta + 1
   } else {
     stop("Unknown metformin type")
   }
+
+  insulin <- 8 - delta
+  cohort$expression$InclusionRules[[insulin]]$description <- NULL
 
   if (permutation$tar == "ot1") {
     cohort$expression$CensoringCriteria <- list()
@@ -379,7 +383,7 @@ permutationsForDrugs$json <-
 
 for (i in 1:nrow(permutationsForDrugs)) {
   row <- permutationsForDrugs[i,]
-  # sqlFileName <- file.path("inst/sql/sql_server/class", paste(row$name, "sql", sep = "."))
+  # sqlFileName <- file.path("inst/sql/sql_server/drug", paste(row$name, "sql", sep = "."))
   # SqlRender::writeSql(row$sql, sqlFileName)
   jsonFileName <- file.path("inst/cohorts/drug", paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)

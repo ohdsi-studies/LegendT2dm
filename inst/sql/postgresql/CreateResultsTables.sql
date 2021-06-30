@@ -228,9 +228,9 @@ CREATE TABLE ps_auc_assessment (
      database_id VARCHAR(255) NOT NULL,
      target_id BIGINT NOT NULL,
      comparator_id BIGINT NOT NULL,
+     analysis_id INTEGER NOT NULL,
      auc NUMERIC NOT NULL,
      equipoise NUMERIC NOT NULL,
-     comparison TEXT ,
-     PRIMARY KEY(database_id, target_id, comparator_id)
+     PRIMARY KEY(database_id, target_id, comparator_id, analysis_id)
 );
 
