@@ -18,7 +18,7 @@ UNION  select c.concept_id
 ) C UNION ALL 
 SELECT 9 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (199074)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (199074,2109394,2109400,2109395,42737025)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id

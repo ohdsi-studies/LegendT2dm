@@ -50,16 +50,16 @@
     },
     "CohortMethod": {
       "Package": "CohortMethod",
-      "Version": "4.1.0",
+      "Version": "4.2.0",
       "Source": "GitHub",
       "Remotes": "ohdsi/FeatureExtraction",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "7eece8f9c1cdf23c7cc98f8bc43ada84ee906b36",
-      "Hash": "15c2c7f2b93040fa71ed9f8b3135132c"
+      "RemoteRef": "develop",
+      "RemoteSha": "bc649d33b6b5c1c2ea91208394587b84b068b21e",
+      "Hash": "da4c38742ef941669830d9ffed44d76e"
     },
     "CompQuadForm": {
       "Package": "CompQuadForm",
@@ -70,10 +70,10 @@
     },
     "Cyclops": {
       "Package": "Cyclops",
-      "Version": "3.1.1",
+      "Version": "3.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "81bd5ccf40ac7821910b185d360e8b2e"
+      "Hash": "2bc88b32343150d9c4a4b943f007d034"
     },
     "DBI": {
       "Package": "DBI",
@@ -477,13 +477,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "77bd60a6157420d4ffa93b27cf6a58b8"
-    },
-    "fastmatch": {
-      "Package": "fastmatch",
-      "Version": "1.1-0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "2cfe25650d69960c54e06840e4b5d8e4"
     },
     "filelock": {
       "Package": "filelock",

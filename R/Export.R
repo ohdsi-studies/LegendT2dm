@@ -149,11 +149,13 @@ exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId)
 
     tempFileName <- tempfile()
 
-    ot1IttCmAnalysisListFile <- system.file("settings", "ot1IttCmAnalysisList.json", package = "LegendT2dm")
+    ot1CmAnalysisListFile <- system.file("settings", "ot1CmAnalysisList.json", package = "LegendT2dm")
+    ittCmAnalysisListFile <- system.file("settings", "ittCmAnalysisList.json", package = "LegendT2dm")
     ot2CmAnalysisListFile <- system.file("settings", "ot2CmAnalysisList.json", package = "LegendT2dm")
 
-        ot1IttCmAnalysisList <- CohortMethod::loadCmAnalysisList(ot1IttCmAnalysisListFile)
-        ot2CmAnalysisList <- CohortMethod::loadCmAnalysisList(ot2CmAnalysisListFile)
+    ot1CmAnalysisList <- CohortMethod::loadCmAnalysisList(ot1CmAnalysisListFile)
+    ittCmAnalysisList <- CohortMethod::loadCmAnalysisList(ittCmAnalysisListFile)
+    # ot2CmAnalysisList <- CohortMethod::loadCmAnalysisList(ot2CmAnalysisListFile)
 
     cmAnalysisToRow <- function(cmAnalysis) {
         ParallelLogger::saveSettingsToJson(cmAnalysis, tempFileName)
@@ -163,7 +165,9 @@ exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId)
         return(row)
     }
 
-    cmAnalysisList <- c(ot1IttCmAnalysisList, ot2CmAnalysisList)
+    cmAnalysisList <- c(ot1CmAnalysisList, ittCmAnalysisList
+                        # , ot2CmAnalysisList
+                            )
 
     cohortMethodAnalysis <- lapply(cmAnalysisList, cmAnalysisToRow)
     cohortMethodAnalysis <- do.call("rbind", cohortMethodAnalysis)

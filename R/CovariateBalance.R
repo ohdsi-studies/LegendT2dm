@@ -44,12 +44,12 @@ computeCovariateBalance <- function(indicationId = "legendt2dm",
     }
     # Using ITT study population, stratification, and matching arguments:
     cmAnalysisListFile <- system.file("settings",
-                                      "ot1IttCmAnalysisList.json",
+                                      "ittCmAnalysisList.json",
                                       package = "LegendT2dm")
     cmAnalysisList <- CohortMethod::loadCmAnalysisList(cmAnalysisListFile)
 
     matchingId <- 2
-    stratificationId <- 4
+    stratificationId <- 3
 
     studyPopArgs <- cmAnalysisList[[matchingId]]$createStudyPopArgs
 
@@ -120,8 +120,8 @@ computeBalance <- function(subset,
                             subset$cohortMethodDataFile[1])
     cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
 
-    matchingId <- 2
-    stratificationId <- 4
+    matchingId <- 5 # ITT matching
+    stratificationId <- 6 # ITT stratification
 
     # if (!any(!is.na(subset$cmDataFolderCt))) {
     #     ParallelLogger::logDebug("Not computing balance for matching")
@@ -166,7 +166,7 @@ computeBalance <- function(subset,
                                                 subset$targetId[1],
                                                 "_c",
                                                 subset$comparatorId[1],
-                                                "_a4.rds")) # analysisId == stratification
+                                                "_a6.rds")) # analysisId == ITT stratification
     if (!file.exists(fileName)) {
         ParallelLogger::logTrace("Creating stratified balance file " , fileName)
         balance <- CohortMethod::computeCovariateBalance(population = stratifiedPop,
@@ -180,7 +180,7 @@ computeBalance <- function(subset,
                                                     subset$targetId[1],
                                                     "_c",
                                                     subset$comparatorId[1],
-                                                    "_a2.rds")) # analysisId == matching
+                                                    "_a5.rds")) # analysisId == ITT matching
         if (!file.exists(fileName)) {
             ParallelLogger::logTrace("Creating matched balance file " , fileName)
             matchedPop <- CohortMethod::matchOnPs(population = studyPop,
