@@ -57,6 +57,7 @@ csl: jamia.csl
 ---
 
 ```{r setup, include=FALSE}
+library(LegendT2dm)
 knitr::opts_chunk$set(echo = TRUE)
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
@@ -766,120 +767,6 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 # (APPENDIX) Appendix {-}
 
 # Exposure Cohort Definitions
-
-```{r test, echo=FALSE}
-
-printConceptSet <- function(conceptSet) {
-
-  markdown <- CirceR::conceptSetPrintFriendly(conceptSet)
-  rows <- unlist(strsplit(markdown, "\\r\\n"))
-  rows <- gsub("^\\|", "", rows)
-  header <- rows[1]
-  data <- readr::read_delim(paste(rows[c(2,4:(length(rows)-2))], 
-                                  collapse = '\n'), delim = '|',)
-  
-  header <- gsub("###", "### Concept:", header)
-  
-  tab <- data %>% mutate_if(is.numeric, format, digits = 10) %>% kable(linesep = "", booktabs = TRUE, longtable = TRUE)
-  
-  if (knitr::is_latex_output()) {    
-    writeLines(header)
-    
-    writeLines(tab %>% 
-      kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
-      column_spec(1, width = "5em") %>%
-      column_spec(2, width = "20em"))   
-  } else if (knitr::is_html_output()) {
-    writeLines(header)
-    
-    writeLines(tab %>% 
-      kable_styling(bootstrap_options = "striped"))
-  } else {
-    writeLines(markdown)
-  }
-}
-
-printCohortClose <- function() {
-  writeLines("")
-  if (knitr::is_html_output()) {
-     writeLines("<hr style=\"border:2px solid gray\"> </hr>")
-  } else {
-    writeLines("------")
-  }
-  writeLines("")
-}
-
-printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL, 
-                                                 withConcepts = TRUE,
-                                                 withClosing = TRUE) {
-  
-  if (is.null(obj)) {
-    obj <- CirceR::cohortExpressionFromJson(json)
-  }
-
-  writeLines(paste("##", name, "\n"))
-  
-  # Print main definition
-  markdown <- CirceR::cohortPrintFriendly(obj)
-  
-  markdown <- gsub("criteria:\\r\\n ", "criteria:\\\r\\\n\\\r\\\n ", markdown)
-  markdown <- gsub("old.\\r\\n\\r\\n", "old.\\\r\\\n", markdown)
-  
-  markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
-  markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
-  
-  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria", markdown)
-  markdown <- gsub("#### \\d+.", "*", markdown)
-  
-  rows <- unlist(strsplit(markdown, "\\r\\n")) 
-  rows <- gsub("^   ", "", rows)
-  markdown <- paste(rows, collapse = "\n")
-  
-  writeLines(markdown)
-
-  # Print concept sets
-  
-  if (withConcepts) {
-    lapply(obj$conceptSets, printConceptSet)
-  }
-  
-  if (withClosing) {
-    printCohortClose()
-  }
-}
-
-printCohortDefinition <- function(info) {
-  json <- SqlRender::readSql(info$jsonFileName)
-  printCohortDefinitionFromNameAndJson(info$name, json)
-}
-
-printInclusionCriteria <- function(obj, removeDescription = FALSE) {
-  
-  markdown <- CirceR::cohortPrintFriendly(obj)
-  markdown <- sub(".*### Inclusion Criteria", "", markdown)
-  markdown <- sub("### Cohort Exit.*", "", markdown)
-  markdown <- gsub("### \\d+.", "##", markdown)
-  markdown <- gsub("criteria:\\r\\n ", "criteria:\\\r\\\n\\\r\\\n ", markdown)
-  
-  rows <- unlist(strsplit(markdown, "\\r\\n")) 
-  rows <- gsub("^   ", "", rows)
-  markdown <- paste(rows, collapse = "\n")
-  
-  writeLines(markdown)
-}
-
-printExitCriteria <- function(obj) {
-  
-  markdown <- CirceR::cohortPrintFriendly(obj)
-  markdown <- sub(".*### Cohort Exit", "", markdown)
-  markdown <- sub("### Cohort Eras.*", "", markdown)
-  markdown <- sub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
-  markdown <- sub("following events:", "following events:\\\r\\\n", markdown)
-  
-  writeLines(markdown)
-}
-
-```
 
 ```{r base-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 baseCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101100000.json", package = "LegendT2dm"))
