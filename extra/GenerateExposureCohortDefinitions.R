@@ -36,6 +36,11 @@ makeName <- function(permutation) {
 
 makeShortName <- function(permutation) {
   paste0(permutation$shortName,
+         ifelse(permutation$age == "any" &
+                  permutation$sex == "any" &
+                  permutation$race == "any" &
+                  permutation$cvd == "any" &
+                  permutation$renal == "any", " main", ""),
          ifelse(permutation$tar == "ot2", " ot2", ""),
          ifelse(permutation$met == "no", " no-met", ""),
          ifelse(permutation$age != "any", paste0(" ", permutation$age, "-age"), ""),

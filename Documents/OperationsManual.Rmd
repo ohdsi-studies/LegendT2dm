@@ -81,7 +81,7 @@ latex_table_font_size <- 8
 
 # TODO List {-}
 
-* Item
+* Update analysis plan matrix table to match `*CmAnalysisLists.json` files
 
 # List of Abbreviations
 
