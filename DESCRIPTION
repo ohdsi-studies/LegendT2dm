@@ -21,7 +21,6 @@ Imports:
     ParallelLogger (>= 2.0.0),
     CohortDiagnostics (>= 1.1.0),
     CirceR (>= 0.0.1),
-    PhenotypeLibrary (>= 0.0.1),
     readr (>= 1.4.0),
     plyr,
     dplyr,
