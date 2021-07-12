@@ -81,7 +81,7 @@ latex_table_font_size <- 8
 
 # TODO List {-}
 
-* Item
+* Update analysis plan matrix table to match `*CmAnalysisLists.json` files
 
 # List of Abbreviations
 
@@ -521,4 +521,19 @@ This is a rough outline of the process:
 * Filter those concepts to those that are not in the original set of concepts (i.e. orphans).
 * Restrict the set of orphan concepts to those that appear in the CDM database as either source concept or standard concept.
 
+# HOWTOs
+
+## Render human-readable cohort definition
+
+The `LegendT2dm` provides functions to render cohort definitions into `Rmarkdown` for output to PDF or HTML.
+Here is an example of rendering the complete definition for new-users of SGLT2 inhibitors:
+
+```{r, render_cohort, results="asis", eval=FALSE}
+cohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID301100000.json", 
+                                             package = "LegendT2dm"))
+
+LegendT2dm::printCohortDefinitionFromNameAndJson(
+  name = "Class-vs-Class Exposure (SGLT2 New-User) Cohort / OT1",
+  json = cohortJson)
+```
 
