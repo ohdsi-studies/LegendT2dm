@@ -3128,8 +3128,25 @@ Type 2 diabetes mellitus
 </tbody>
 </table>
 </div>
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">2</span> Getting Started</h1>
+<p>LEGEND-T2DM consists of several <code>R</code> packages available on <a href="https://github.com/ohdsi-studies" class="uri">https://github.com/ohdsi-studies</a>:</p>
+<ul>
+<li><code>LegendT2dm</code> and</li>
+<li><code>LegendT2dmEvidenceExplore</code></li>
+</ul>
+<p>that depend themselves on a large number of packages from Hades (add link).
+To gracefully handle these dependencies, LEGEND-T2DM uses <code>renv</code> through a version-controlled <code>renv.lock</code> file to specify each package.
+To install <code>LegendT2dm</code> and all of its dependencies, we first “pull” the lastest source from <code>github</code>:</p>
+<pre><code>git clone https://github.com/ohdsi-studies/LegendT2dm</code></pre>
+<p>then from within an <code>R</code> or <code>Rstudio</code> terms, we active <code>renv</code>:</p>
+<pre class="r"><code>install.packages(&quot;renv&quot;) # Only necessary once
+renv::activate()
+renv::restore()</code></pre>
+<p>after which one can now build and install the final <code>LegendT2dm</code> package.</p>
+</div>
 <div id="exposure-cohort-counts" class="section level1">
-<h1><span class="header-section-number">2</span> Exposure Cohort Counts</h1>
+<h1><span class="header-section-number">3</span> Exposure Cohort Counts</h1>
 <p>For the <strong>Class-vs-Class Study</strong>, we will construct
 <span class="math display">\[
 \begin{aligned}
@@ -3164,13 +3181,13 @@ For the <strong>Heterogeneity Study</strong>, we will stratify each of these coh
 additional definitions, results in <span class="math inline">\((16 + 88) \times 10 = 1040\)</span> further cohort definitions.</p>
 </div>
 <div id="exposure-cohort-id-key" class="section level1">
-<h1><span class="header-section-number">3</span> Exposure Cohort ID Key</h1>
+<h1><span class="header-section-number">4</span> Exposure Cohort ID Key</h1>
 <p>This section documents internal coding used across the three studies to label cohort definitions and their SQL representation. Each cohort carries 9-digit identifier
 <span class="math display">\[ \text{ID}\ [DD][T][M][A][S][R][C][K] \]</span>
-where Table <a href="#tab:drug-codes">3.1</a> reports the target 2-digit drug codes <span class="math inline">\(DD\)</span> and Table <a href="#tab:category-codes">3.2</a> lists the codes for time-at-risk <span class="math inline">\(T\)</span>, metformin <span class="math inline">\(M\)</span>, age <span class="math inline">\(A\)</span>, sex <span class="math inline">\(S\)</span>, race <span class="math inline">\(R\)</span>, cardiovascular <span class="math inline">\(C\)</span> and renal (kidney) <span class="math inline">\(K\)</span> categories.</p>
+where Table <a href="#tab:drug-codes">4.1</a> reports the target 2-digit drug codes <span class="math inline">\(DD\)</span> and Table <a href="#tab:category-codes">4.2</a> lists the codes for time-at-risk <span class="math inline">\(T\)</span>, metformin <span class="math inline">\(M\)</span>, age <span class="math inline">\(A\)</span>, sex <span class="math inline">\(S\)</span>, race <span class="math inline">\(R\)</span>, cardiovascular <span class="math inline">\(C\)</span> and renal (kidney) <span class="math inline">\(K\)</span> categories.</p>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:drug-codes">Table 3.1: </span>2-Digit Drug Codes
+<span id="tab:drug-codes">Table 4.1: </span>2-Digit Drug Codes
 </caption>
 <thead>
 <tr>
@@ -3395,7 +3412,7 @@ Sulfonylureas
 </table>
 <table style="NAborder-bottom: 0; margin-left: auto; margin-right: auto;" class="table table-striped">
 <caption>
-<span id="tab:category-codes">Table 3.2: </span>Other Cohort Category Codes
+<span id="tab:category-codes">Table 4.2: </span>Other Cohort Category Codes
 </caption>
 <thead>
 <tr>
@@ -3675,11 +3692,11 @@ with
 </table>
 </div>
 <div id="analysis-plan-matrix" class="section level1">
-<h1><span class="header-section-number">4</span> Analysis Plan Matrix</h1>
-<p>For each comparison within each study, we will execute the 7 <code>CohortMethod</code> analysis plans in Table <a href="#tab:plan-matrix">4.1</a>.</p>
+<h1><span class="header-section-number">5</span> Analysis Plan Matrix</h1>
+<p>For each comparison within each study, we will execute the 7 <code>CohortMethod</code> analysis plans in Table <a href="#tab:plan-matrix">5.1</a>.</p>
 <table style="NAborder-bottom: 0; margin-left: auto; margin-right: auto;" class="table table-striped">
 <caption>
-<span id="tab:plan-matrix">Table 4.1: </span>CohortMethod analysis descriptions
+<span id="tab:plan-matrix">Table 5.1: </span>CohortMethod analysis descriptions
 </caption>
 <thead>
 <tr>
@@ -3833,20 +3850,20 @@ observational period end
 </tfoot>
 </table>
 <div id="configuration-files" class="section level2">
-<h2><span class="header-section-number">4.1</span> Configuration files</h2>
+<h2><span class="header-section-number">5.1</span> Configuration files</h2>
 <p>The LEGEND-T2DM studies depend on several configuration files.
 We directly provide some of these files, while others we generate through executable <code>R</code> scripts before distributing study packages.</p>
 <div id="executable-r-scripts" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Executable R scripts</h3>
+<h3><span class="header-section-number">5.1.1</span> Executable R scripts</h3>
 <ul>
 <li><code>R/CreateAnalysisDetails.R</code></li>
 <li><code>extra/GenerateExposureCohortDefinitions.R</code></li>
 </ul>
 </div>
 <div id="file-dependencies" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> File dependencies</h3>
+<h3><span class="header-section-number">5.1.2</span> File dependencies</h3>
 <div id="for-all-legend-t2dm-studies" class="section level4">
-<h4><span class="header-section-number">4.1.2.1</span> For all LEGEND-T2DM studies</h4>
+<h4><span class="header-section-number">5.1.2.1</span> For all LEGEND-T2DM studies</h4>
 <ul>
 <li><p><code>baseCohort.json</code> : Base cohort object that we programmatically manipulate to generate all <code>class</code> and <code>drug</code> exposure cohorts</p></li>
 <li><p><code>inst/settings/ExposuresOfInterest.csv</code> : List of <code>RxNorm</code> concepts for individual <code>drug</code> ingredient and <code>Drug class</code> specifications for all exposure cohorts. File columns:</p>
@@ -3880,7 +3897,7 @@ We directly provide some of these files, while others we generate through execut
 </ul>
 </div>
 <div id="for-class-studies" class="section level4">
-<h4><span class="header-section-number">4.1.2.2</span> For <code>class</code> studies</h4>
+<h4><span class="header-section-number">5.1.2.2</span> For <code>class</code> studies</h4>
 <p>The following files are generated by <code>extra/GenerateExposureCohortDefinitions.R</code>:</p>
 <ul>
 <li><code>inst/settings/classCohortsToCreate.csv</code> : List of exposure cohorts to create, including both main and <code>heterogeneity</code> study-stratified cohorts. File columns:
@@ -3903,7 +3920,7 @@ We directly provide some of these files, while others we generate through execut
 </div>
 </div>
 <div id="table-specification-files" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Table specification files</h3>
+<h3><span class="header-section-number">5.1.3</span> Table specification files</h3>
 <p>The following files specify the diagnostics and results data models on the public Postgresql server:</p>
 <ul>
 <li><p><code>inst/settings/PsAssessmentModelSpecs.csv</code> : Propensity score assessment additions to the <code>legendt2dm_*_diagnostics</code> schema</p>
@@ -3920,7 +3937,7 @@ We directly provide some of these files, while others we generate through execut
 </div>
 </div>
 <div id="cohortmethod-function-arguments" class="section level2">
-<h2><span class="header-section-number">4.2</span> <code>CohortMethod</code> function arguments</h2>
+<h2><span class="header-section-number">5.2</span> <code>CohortMethod</code> function arguments</h2>
 <pre class="r"><code>createAnalysesDetails &lt;- function(outputFolder) {
 
   # Dummy argument that is never used because data objects have already been created:
@@ -4084,12 +4101,12 @@ We directly provide some of these files, while others we generate through execut
 </div>
 </div>
 <div id="data-models" class="section level1">
-<h1><span class="header-section-number">5</span> Data models</h1>
+<h1><span class="header-section-number">6</span> Data models</h1>
 <p>This document describes the data models for storing the output of the <code>CohortDiagnostics</code> and <code>CohortMethod</code> study artifacts for the LEGEND-T2DM study.
-Table <a href="#tab:schema">5.1</a> provides the <code>schema</code> names.</p>
+Table <a href="#tab:schema">6.1</a> provides the <code>schema</code> names.</p>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:schema">Table 5.1: </span>LEGEND-T2DM public study schema
+<span id="tab:schema">Table 6.1: </span>LEGEND-T2DM public study schema
 </caption>
 <thead>
 <tr>
@@ -4128,7 +4145,7 @@ legendt2dm_outcome_diagnostics
 </tbody>
 </table>
 <div id="fields-with-minimum-values" class="section level2">
-<h2><span class="header-section-number">5.1</span> Fields with minimum values</h2>
+<h2><span class="header-section-number">6.1</span> Fields with minimum values</h2>
 <p>Some fields contain patient counts or fractions that are easily converted to patient counts.
 To prevent identifiability, these fields are subject to a minimum value.
 When the value falls below this minimum, it is replaced with the negative value of the minimum.
@@ -4136,9 +4153,9 @@ For example, if the minimum subject count is 5, and the actual count is 2, the v
 Note that the value 0 is permissible, as it identifies no persons.</p>
 </div>
 <div id="cohort-diagnostics-data-model" class="section level2">
-<h2><span class="header-section-number">5.2</span> Cohort diagnostics data model</h2>
+<h2><span class="header-section-number">6.2</span> Cohort diagnostics data model</h2>
 <div id="table-analysis_ref" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> Table analysis_ref</h3>
+<h3><span class="header-section-number">6.2.1</span> Table analysis_ref</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4235,7 +4252,7 @@ No
 </table>
 </div>
 <div id="table-cohort" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> Table cohort</h3>
+<h3><span class="header-section-number">6.2.2</span> Table cohort</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4299,7 +4316,7 @@ No
 </table>
 </div>
 <div id="table-cohort_count" class="section level3">
-<h3><span class="header-section-number">5.2.3</span> Table cohort_count</h3>
+<h3><span class="header-section-number">6.2.3</span> Table cohort_count</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4363,7 +4380,7 @@ Yes
 </table>
 </div>
 <div id="table-cohort_overlap" class="section level3">
-<h3><span class="header-section-number">5.2.4</span> Table cohort_overlap</h3>
+<h3><span class="header-section-number">6.2.4</span> Table cohort_overlap</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4515,7 +4532,7 @@ Yes
 </table>
 </div>
 <div id="table-concept" class="section level3">
-<h3><span class="header-section-number">5.2.5</span> Table concept</h3>
+<h3><span class="header-section-number">6.2.5</span> Table concept</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4645,7 +4662,7 @@ No
 </table>
 </div>
 <div id="table-concept_ancestor" class="section level3">
-<h3><span class="header-section-number">5.2.6</span> Table concept_ancestor</h3>
+<h3><span class="header-section-number">6.2.6</span> Table concept_ancestor</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4709,7 +4726,7 @@ No
 </table>
 </div>
 <div id="table-concept_relationship" class="section level3">
-<h3><span class="header-section-number">5.2.7</span> Table concept_relationship</h3>
+<h3><span class="header-section-number">6.2.7</span> Table concept_relationship</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4795,7 +4812,7 @@ No
 </table>
 </div>
 <div id="table-concept_sets" class="section level3">
-<h3><span class="header-section-number">5.2.8</span> Table concept_sets</h3>
+<h3><span class="header-section-number">6.2.8</span> Table concept_sets</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4870,7 +4887,7 @@ No
 </table>
 </div>
 <div id="table-concept_synonym" class="section level3">
-<h3><span class="header-section-number">5.2.9</span> Table concept_synonym</h3>
+<h3><span class="header-section-number">6.2.9</span> Table concept_synonym</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4923,7 +4940,7 @@ Yes
 </table>
 </div>
 <div id="table-covariate_ref" class="section level3">
-<h3><span class="header-section-number">5.2.10</span> Table covariate_ref</h3>
+<h3><span class="header-section-number">6.2.10</span> Table covariate_ref</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4987,7 +5004,7 @@ No
 </table>
 </div>
 <div id="table-covariate_value" class="section level3">
-<h3><span class="header-section-number">5.2.11</span> Table covariate_value</h3>
+<h3><span class="header-section-number">6.2.11</span> Table covariate_value</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5073,7 +5090,7 @@ Yes
 </table>
 </div>
 <div id="table-covariate_value_dist" class="section level3">
-<h3><span class="header-section-number">5.2.12</span> Table covariate_value_dist</h3>
+<h3><span class="header-section-number">6.2.12</span> Table covariate_value_dist</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5236,7 +5253,7 @@ Yes
 </table>
 </div>
 <div id="table-database" class="section level3">
-<h3><span class="header-section-number">5.2.13</span> Table database</h3>
+<h3><span class="header-section-number">6.2.13</span> Table database</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5300,7 +5317,7 @@ No
 </table>
 </div>
 <div id="table-domain" class="section level3">
-<h3><span class="header-section-number">5.2.14</span> Table domain</h3>
+<h3><span class="header-section-number">6.2.14</span> Table domain</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5353,7 +5370,7 @@ No
 </table>
 </div>
 <div id="table-incidence_rate" class="section level3">
-<h3><span class="header-section-number">5.2.15</span> Table incidence_rate</h3>
+<h3><span class="header-section-number">6.2.15</span> Table incidence_rate</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5461,7 +5478,7 @@ Yes
 </table>
 </div>
 <div id="table-included_source_concept" class="section level3">
-<h3><span class="header-section-number">5.2.16</span> Table included_source_concept</h3>
+<h3><span class="header-section-number">6.2.16</span> Table included_source_concept</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5547,7 +5564,7 @@ No
 </table>
 </div>
 <div id="table-inclusion_rule_stats" class="section level3">
-<h3><span class="header-section-number">5.2.17</span> Table inclusion_rule_stats</h3>
+<h3><span class="header-section-number">6.2.17</span> Table inclusion_rule_stats</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5655,7 +5672,7 @@ Yes
 </table>
 </div>
 <div id="table-index_event_breakdown" class="section level3">
-<h3><span class="header-section-number">5.2.18</span> Table index_event_breakdown</h3>
+<h3><span class="header-section-number">6.2.18</span> Table index_event_breakdown</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5752,7 +5769,7 @@ Yes
 </table>
 </div>
 <div id="table-metadata" class="section level3">
-<h3><span class="header-section-number">5.2.19</span> Table metadata</h3>
+<h3><span class="header-section-number">6.2.19</span> Table metadata</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5805,7 +5822,7 @@ No
 </table>
 </div>
 <div id="table-orphan_concept" class="section level3">
-<h3><span class="header-section-number">5.2.20</span> Table orphan_concept</h3>
+<h3><span class="header-section-number">6.2.20</span> Table orphan_concept</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5891,7 +5908,7 @@ No
 </table>
 </div>
 <div id="table-phenotype_description" class="section level3">
-<h3><span class="header-section-number">5.2.21</span> Table phenotype_description</h3>
+<h3><span class="header-section-number">6.2.21</span> Table phenotype_description</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5955,7 +5972,7 @@ No
 </table>
 </div>
 <div id="table-relationship" class="section level3">
-<h3><span class="header-section-number">5.2.22</span> Table relationship</h3>
+<h3><span class="header-section-number">6.2.22</span> Table relationship</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6041,7 +6058,7 @@ Yes
 </table>
 </div>
 <div id="table-resolved_concepts" class="section level3">
-<h3><span class="header-section-number">5.2.23</span> Table resolved_concepts</h3>
+<h3><span class="header-section-number">6.2.23</span> Table resolved_concepts</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6105,7 +6122,7 @@ Yes
 </table>
 </div>
 <div id="table-temporal_analysis_ref" class="section level3">
-<h3><span class="header-section-number">5.2.24</span> Table temporal_analysis_ref</h3>
+<h3><span class="header-section-number">6.2.24</span> Table temporal_analysis_ref</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6180,7 +6197,7 @@ No
 </table>
 </div>
 <div id="table-temporal_covariate_ref" class="section level3">
-<h3><span class="header-section-number">5.2.25</span> Table temporal_covariate_ref</h3>
+<h3><span class="header-section-number">6.2.25</span> Table temporal_covariate_ref</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6244,7 +6261,7 @@ No
 </table>
 </div>
 <div id="table-temporal_covariate_value" class="section level3">
-<h3><span class="header-section-number">5.2.26</span> Table temporal_covariate_value</h3>
+<h3><span class="header-section-number">6.2.26</span> Table temporal_covariate_value</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6341,7 +6358,7 @@ Yes
 </table>
 </div>
 <div id="table-temporal_covariate_value_dist" class="section level3">
-<h3><span class="header-section-number">5.2.27</span> Table temporal_covariate_value_dist</h3>
+<h3><span class="header-section-number">6.2.27</span> Table temporal_covariate_value_dist</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6504,7 +6521,7 @@ No
 </table>
 </div>
 <div id="table-temporal_time_ref" class="section level3">
-<h3><span class="header-section-number">5.2.28</span> Table temporal_time_ref</h3>
+<h3><span class="header-section-number">6.2.28</span> Table temporal_time_ref</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6557,7 +6574,7 @@ No
 </table>
 </div>
 <div id="table-time_distribution" class="section level3">
-<h3><span class="header-section-number">5.2.29</span> Table time_distribution</h3>
+<h3><span class="header-section-number">6.2.29</span> Table time_distribution</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6720,7 +6737,7 @@ Yes
 </table>
 </div>
 <div id="table-time_series" class="section level3">
-<h3><span class="header-section-number">5.2.30</span> Table time_series</h3>
+<h3><span class="header-section-number">6.2.30</span> Table time_series</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6839,7 +6856,7 @@ No
 </table>
 </div>
 <div id="table-visit_context" class="section level3">
-<h3><span class="header-section-number">5.2.31</span> Table visit_context</h3>
+<h3><span class="header-section-number">6.2.31</span> Table visit_context</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6914,7 +6931,7 @@ Yes
 </table>
 </div>
 <div id="table-vocabulary" class="section level3">
-<h3><span class="header-section-number">5.2.32</span> Table vocabulary</h3>
+<h3><span class="header-section-number">6.2.32</span> Table vocabulary</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6990,9 +7007,9 @@ Yes
 </div>
 </div>
 <div id="ps-assessment-data-model" class="section level2">
-<h2><span class="header-section-number">5.3</span> PS assessment data model</h2>
+<h2><span class="header-section-number">6.3</span> PS assessment data model</h2>
 <div id="table-ps_auc_assessment" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Table ps_auc_assessment</h3>
+<h3><span class="header-section-number">6.3.1</span> Table ps_auc_assessment</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -7099,7 +7116,7 @@ Name of comparison
 </table>
 </div>
 <div id="table-ps_covariate_assessment" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Table ps_covariate_assessment</h3>
+<h3><span class="header-section-number">6.3.2</span> Table ps_covariate_assessment</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -7221,9 +7238,9 @@ Regression coefficient for covariate
 </div>
 </div>
 <div id="study-results-data-model" class="section level2">
-<h2><span class="header-section-number">5.4</span> Study results data model</h2>
+<h2><span class="header-section-number">6.4</span> Study results data model</h2>
 <div id="table-attrition" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Table attrition</h3>
+<h3><span class="header-section-number">6.4.1</span> Table attrition</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -7372,7 +7389,7 @@ Number of subjects in the cohort
 </table>
 </div>
 <div id="table-cm_follow_up_dist" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> Table cm_follow_up_dist</h3>
+<h3><span class="header-section-number">6.4.2</span> Table cm_follow_up_dist</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -7661,7 +7678,7 @@ Maximum number of observation days for a person in the comparator group
 </table>
 </div>
 <div id="table-cohort_method_analysis" class="section level3">
-<h3><span class="header-section-number">5.4.3</span> Table cohort_method_analysis</h3>
+<h3><span class="header-section-number">6.4.3</span> Table cohort_method_analysis</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -7726,7 +7743,7 @@ CohortMethod JSON object specifying the analysis
 </table>
 </div>
 <div id="table-cohort_method_result" class="section level3">
-<h3><span class="header-section-number">5.4.4</span> Table cohort_method_result</h3>
+<h3><span class="header-section-number">6.4.4</span> Table cohort_method_result</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8085,7 +8102,7 @@ Standard error of the log of the calibrated relative risk
 </table>
 </div>
 <div id="table-comparison_summary" class="section level3">
-<h3><span class="header-section-number">5.4.5</span> Table comparison_summary</h3>
+<h3><span class="header-section-number">6.4.5</span> Table comparison_summary</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8178,7 +8195,7 @@ Latest date when both target and comparator were observed in the database
 </table>
 </div>
 <div id="table-covariate" class="section level3">
-<h3><span class="header-section-number">5.4.6</span> Table covariate</h3>
+<h3><span class="header-section-number">6.4.6</span> Table covariate</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8271,7 +8288,7 @@ Name for a covariate, e.g. ‘Age group: 20-25 years’
 </table>
 </div>
 <div id="table-covariate_analysis" class="section level3">
-<h3><span class="header-section-number">5.4.7</span> Table covariate_analysis</h3>
+<h3><span class="header-section-number">6.4.7</span> Table covariate_analysis</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8336,7 +8353,7 @@ Name for a covariate
 </table>
 </div>
 <div id="table-covariate_balance" class="section level3">
-<h3><span class="header-section-number">5.4.8</span> Table covariate_balance</h3>
+<h3><span class="header-section-number">6.4.8</span> Table covariate_balance</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8527,7 +8544,7 @@ Standardized difference of the means between the target and comparator cohort af
 </table>
 </div>
 <div id="table-database-1" class="section level3">
-<h3><span class="header-section-number">5.4.9</span> Table database</h3>
+<h3><span class="header-section-number">6.4.9</span> Table database</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8662,7 +8679,7 @@ Does the record pertain a meta-analysis across databases? (0=no, 1=yes)
 </table>
 </div>
 <div id="table-exposure_of_interest" class="section level3">
-<h3><span class="header-section-number">5.4.10</span> Table exposure_of_interest</h3>
+<h3><span class="header-section-number">6.4.10</span> Table exposure_of_interest</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8727,7 +8744,7 @@ OHDSI JSON cohort definition for constructing the exposure
 </table>
 </div>
 <div id="table-exposure_summary" class="section level3">
-<h3><span class="header-section-number">5.4.11</span> Table exposure_summary</h3>
+<h3><span class="header-section-number">6.4.11</span> Table exposure_summary</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8806,7 +8823,7 @@ Earliest date when the exposure was observed in the database
 </table>
 </div>
 <div id="table-kaplan_meier_dist" class="section level3">
-<h3><span class="header-section-number">5.4.12</span> Table kaplan_meier_dist</h3>
+<h3><span class="header-section-number">6.4.12</span> Table kaplan_meier_dist</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9025,7 +9042,7 @@ Upper bound of the 95% confidence interval of the survival fraction in the compa
 </table>
 </div>
 <div id="table-likelihood_profile" class="section level3">
-<h3><span class="header-section-number">5.4.13</span> Table likelihood_profile</h3>
+<h3><span class="header-section-number">6.4.13</span> Table likelihood_profile</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9132,7 +9149,7 @@ Values of the log-likelihood profile function as a semicolon-delimited list
 </table>
 </div>
 <div id="table-negative_control_outcome" class="section level3">
-<h3><span class="header-section-number">5.4.14</span> Table negative_control_outcome</h3>
+<h3><span class="header-section-number">6.4.14</span> Table negative_control_outcome</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9197,7 +9214,7 @@ Name for the outcome, e.g. ‘Ingrown nail’
 </table>
 </div>
 <div id="table-outcome_of_interest" class="section level3">
-<h3><span class="header-section-number">5.4.15</span> Table outcome_of_interest</h3>
+<h3><span class="header-section-number">6.4.15</span> Table outcome_of_interest</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9276,7 +9293,7 @@ OHDSI JSON cohort definition for constructing the outcome
 </table>
 </div>
 <div id="table-preference_score_dist" class="section level3">
-<h3><span class="header-section-number">5.4.16</span> Table preference_score_dist</h3>
+<h3><span class="header-section-number">6.4.16</span> Table preference_score_dist</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9397,7 +9414,7 @@ Distribution density for the comparator cohort at the given preference score
 </table>
 </div>
 <div id="table-propensity_model" class="section level3">
-<h3><span class="header-section-number">5.4.17</span> Table propensity_model</h3>
+<h3><span class="header-section-number">6.4.17</span> Table propensity_model</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9504,7 +9521,7 @@ Coefficient (beta) for the covariate in the propensity model
 </table>
 </div>
 <div id="table-ps_auc_assessment-1" class="section level3">
-<h3><span class="header-section-number">5.4.18</span> Table ps_auc_assessment</h3>
+<h3><span class="header-section-number">6.4.18</span> Table ps_auc_assessment</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9613,7 +9630,7 @@ No
 </div>
 </div>
 <div id="database-access" class="section level1">
-<h1><span class="header-section-number">6</span> Database access</h1>
+<h1><span class="header-section-number">7</span> Database access</h1>
 <p>All <code>LegendT2dm</code> tables are located on OHDSI’s public <code>PostgreSQL</code> server that is the backend for the apps on (<a href="https://data.ohdsi.org" class="uri">https://data.ohdsi.org</a>).
 Study PIs can provide read-only credentials that can be stored encrypted on individual computers.
 For this latter task, we recommend using the cross-platform <code>keyring</code> <code>R</code> package to securely store: <code>legendt2dmServer</code>, <code>legendt2dmDatabase</code>, <code>legendt2dmUser</code>, <code>legendt2dmPassword</code> and <code>legendT2dmDriverPath</code> and specifying connection details via:</p>
@@ -9628,17 +9645,17 @@ legendT2dmConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
   password = keyring::key_get(&quot;legendt2dmPassword&quot;))</code></pre>
 </div>
 <div id="r-shiny" class="section level1">
-<h1><span class="header-section-number">7</span> R Shiny</h1>
+<h1><span class="header-section-number">8</span> R Shiny</h1>
 <p>To explore cohorts and their diagnostics through an R Shiny application, we use <code>CohortDiagnostics v2.1.0</code>. The following code will load all <code>class</code> cohorts:</p>
 <pre class="r"><code>CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = legendT2dmConnectionDetails,
                                              resultsDatabaseSchema = &quot;legendt2dm_class_diagnostics&quot;)</code></pre>
 <p>For <code>drug</code> and <code>outcome</code> cohorts, we use <code>resultsDatabaseSchema = &quot;legendt2dm_drug_diagnostics&quot;</code> and <code>resultsDatabaseSchema = &quot;legendt2dm_outcome_diagnostics&quot;</code> respectively.</p>
-<p>A useful <code>Cohort name</code> filter is <code>ot1, with prior met, any age, any sex, any race, any cv risk, any renal</code> (see Table <a href="#tab:category-codes">3.2</a>).</p>
+<p>A useful <code>Cohort name</code> filter is <code>ot1, with prior met, any age, any sex, any race, any cv risk, any renal</code> (see Table <a href="#tab:category-codes">4.2</a>).</p>
 </div>
 <div id="definitions" class="section level1">
-<h1><span class="header-section-number">8</span> Definitions</h1>
+<h1><span class="header-section-number">9</span> Definitions</h1>
 <div id="orphan-concepts" class="section level2">
-<h2><span class="header-section-number">8.1</span> Orphan concepts</h2>
+<h2><span class="header-section-number">9.1</span> Orphan concepts</h2>
 <p>Orphan concepts are (source) concepts that likely should be included in a concept set, but aren’t, often because of vocabulary issues.
 This is a rough outline of the process:</p>
 <ul>
@@ -9651,9 +9668,9 @@ This is a rough outline of the process:</p>
 </div>
 </div>
 <div id="howtos" class="section level1">
-<h1><span class="header-section-number">9</span> HOWTOs</h1>
+<h1><span class="header-section-number">10</span> HOWTOs</h1>
 <div id="render-human-readable-cohort-definition" class="section level2">
-<h2><span class="header-section-number">9.1</span> Render human-readable cohort definition</h2>
+<h2><span class="header-section-number">10.1</span> Render human-readable cohort definition</h2>
 <p>The <code>LegendT2dm</code> provides functions to render cohort definitions into <code>Rmarkdown</code> for output to PDF or HTML.
 Here is an example of rendering the complete definition for new-users of SGLT2 inhibitors:</p>
 <pre class="r"><code>cohortJson &lt;- SqlRender::readSql(system.file(&quot;cohorts&quot;, &quot;class&quot;, &quot;ID301100000.json&quot;, 

@@ -111,6 +111,31 @@ if (knitr::is_latex_output()) {
 }
 ```
 
+# Getting Started
+
+LEGEND-T2DM consists of several `R` packages available on https://github.com/ohdsi-studies:
+
+- `LegendT2dm` and
+- `LegendT2dmEvidenceExplore`
+
+that depend themselves on a large number of packages from Hades (add link).
+To gracefully handle these dependencies, LEGEND-T2DM uses `renv` through a version-controlled `renv.lock` file to specify each package.
+To install `LegendT2dm` and all of its dependencies, we first "pull" the lastest source from `github`:
+
+```
+git clone https://github.com/ohdsi-studies/LegendT2dm
+```
+
+then from within an `R` or `Rstudio` terms, we active `renv`:
+
+```{r, eval=FALSE}
+install.packages("renv") # Only necessary once
+renv::activate()
+renv::restore()
+```
+
+after which one can now build and install the final `LegendT2dm` package.
+
 # Exposure Cohort Counts
 
 For the **Class-vs-Class Study**, we will construct
