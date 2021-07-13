@@ -39,14 +39,14 @@
       "Package": "CohortDiagnostics",
       "Version": "2.1.0",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "93e8915b504318300c68a565945dd17807a88567",
-      "Hash": "61f75b79aecdcd7d31d05978693f2979"
+      "RemoteRef": "va_patch",
+      "RemoteSha": "cd7e865e8f32b8c40889a96f6f5be97782dc952a",
+      "Hash": "ce020b40da405d7a70e1afe19c4b3d6f"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
@@ -152,18 +152,6 @@
       "RemoteRef": "HEAD",
       "RemoteSha": "feaa03f8178b8f0652ad25244c7a0b7d01fe6f07",
       "Hash": "97aaa5cd0d4c0c641a7a4d0e119d104e"
-    },
-    "PhenotypeLibrary": {
-      "Package": "PhenotypeLibrary",
-      "Version": "0.0.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "PhenotypeLibrary",
-      "RemoteUsername": "OHDSI",
-      "RemoteRef": "master",
-      "RemoteSha": "33f3c4118d2609eef617122acd37f2b980447541",
-      "Hash": "624f70e600048fb5ab354711adb27912"
     },
     "R6": {
       "Package": "R6",
