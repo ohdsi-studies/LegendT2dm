@@ -56,6 +56,8 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   c2Id <- floor(permutation$comparator2Id / 10)
   c3Id <- floor(permutation$comparator3Id / 10)
 
+  delta <- 0
+
   # Remove unused alternative within-class
   if (ingredientLevel) {
 
@@ -98,21 +100,48 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     tId <- classId
 
   } else {
-    cohort$expression$AdditionalCriteria$CriteriaList[[8]] <- NULL
+    cohort$expression$InclusionRules[[1]] <- NULL
+    delta <- delta + 1
     cohort$expression$ConceptSets[[15]] <- NULL
     tId <- floor(permutation$targetId / 10)
   }
 
   cohort$expression$PrimaryCriteria$CriteriaList[[1]]$DrugExposure$CodesetId <- tId
-  cohort$expression$AdditionalCriteria$CriteriaList[[1]]$Criteria$DrugExposure$CodesetId <- c1Id
-  cohort$expression$AdditionalCriteria$CriteriaList[[2]]$Criteria$DrugExposure$CodesetId <- c2Id
-  cohort$expression$AdditionalCriteria$CriteriaList[[3]]$Criteria$DrugExposure$CodesetId <- c3Id
 
+  # cohort$expression$AdditionalCriteria$CriteriaList[[1]]$Criteria$DrugExposure$CodesetId <- c1Id
+  # cohort$expression$AdditionalCriteria$CriteriaList[[2]]$Criteria$DrugExposure$CodesetId <- c2Id
+  # cohort$expression$AdditionalCriteria$CriteriaList[[3]]$Criteria$DrugExposure$CodesetId <- c3Id
+
+  target <- 2 - delta - 1
+  cohort$expression$InclusionRules[[target + tId]] <- NULL
   cohort$expression$EndStrategy$CustomEra[1] <- tId
+  delta <- delta + 1
 
-  delta <- 0
+  # AdditionalCriteria: [1,2,3] other drug classes
+  # [4]: codesetId 12 (type 2 diabetes mellitus)
+  # [5]: codesetId 11 (type 1 diabetes mellitus)
+  # [6]: codesetId 10 (2nd diabetes mellitus)
+  # [7]: codesetId 5 (other anti-diabetes)
+  # [8]: codesetId 15 (other drugs in class) if not null
+  # end ...
 
-  age <- 1 - delta
+
+  # Want to move: [1,2,3,7,8]
+
+  # moveList <- c(cohort$expression$AdditionalCriteria$CriteriaList[[1]],
+  #               cohort$expression$AdditionalCriteria$CriteriaList[[2]],
+  #               cohort$expression$AdditionalCriteria$CriteriaList[[3]],
+  #               cohort$expression$AdditionalCriteria$CriteriaList[[7]])
+  #
+  # if (length(cohort$expression$AdditionalCriteria$CriteriaList) == 8) {
+  #   moveList <- c(moveList, cohort$expression$AdditionalCriteria$CriteriaList[[8]])
+  # }
+  #
+  # cohort$expression$AdditionalCriteria$CriteriaList <- list(cohort$expression$AdditionalCriteria$CriteriaList[[4]],
+  #                                                           cohort$expression$AdditionalCriteria$CriteriaList[[5]],
+  #                                                           cohort$expression$AdditionalCriteria$CriteriaList[[6]])
+
+  age <- 7 - delta
   if (permutation$age == "younger") {
     cohort$expression$InclusionRules[[age]]$name <- "Lower age group"
     cohort$expression$InclusionRules[[age]]$description <- NULL
@@ -135,7 +164,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown age type")
   }
 
-  sex <- 2 - delta
+  sex <- 8 - delta
   if (permutation$sex == "female") {
     cohort$expression$InclusionRules[[sex]]$name <- "Female stratum"
     cohort$expression$InclusionRules[[sex]]$description <- NULL
@@ -153,7 +182,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown sex type")
   }
 
-  race <- 3 - delta
+  race <- 9 - delta
   if (permutation$race == "black") {
     cohort$expression$InclusionRules[[race]]$name <- "Race stratum"
     cohort$expression$InclusionRules[[race]]$description <- NULL
@@ -164,7 +193,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown race type")
   }
 
-  cvd <- 4 - delta
+  cvd <- 10 - delta
   if (permutation$cvd == "low") {
     cohort$expression$InclusionRules[[cvd]]$name <- "Low cardiovascular risk"
     cohort$expression$InclusionRules[[cvd]]$description <- NULL
@@ -192,7 +221,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown CVD risk type")
   }
 
-  renal <- 5 - delta
+  renal <- 11 - delta
   if (permutation$renal == "without") {
     cohort$expression$InclusionRules[[renal]]$name <- "Without renal impairment"
     cohort$expression$InclusionRules[[renal]]$description <- NULL
@@ -208,7 +237,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown renal type")
   }
 
-  met <- 6 - delta
+  met <- 12 - delta
   if (permutation$met == "with") {
     # Do nothing
     cohort$expression$InclusionRules[[met]]$description <- NULL
@@ -228,7 +257,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
     stop("Unknown metformin type")
   }
 
-  insulin <- 8 - delta
+  insulin <- 13 - delta
   cohort$expression$InclusionRules[[insulin]]$description <- NULL
 
   if (permutation$tar == "ot1") {

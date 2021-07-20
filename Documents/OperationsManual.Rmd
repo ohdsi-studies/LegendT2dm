@@ -250,6 +250,23 @@ if (knitr::is_latex_output()) {
 }
 ```
 
+Here are useful `regex` masks for the different strata
+
+```{r, echo=FALSE, message=FALSE}
+mask <- readr::read_csv(system.file("settings", "masks.csv", package = "LegendT2dm"))
+
+tab <- kable(mask, booktabs = TRUE, linesep = "",
+             caption = "Regex masks for strata") 
+# %>% 
+  # footnote(general = footnote, general_title = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
 # Analysis Plan Matrix
 
 For each comparison within each study, we will execute the 7 `CohortMethod` analysis plans in Table \@ref(tab:plan-matrix).

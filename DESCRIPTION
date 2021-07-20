@@ -25,7 +25,8 @@ Imports:
     plyr,
     dplyr,
     meta,
-    diffr
+    diffr,
+    purrr
 Suggests:
     testthat,
     ROhdsiWebApi,

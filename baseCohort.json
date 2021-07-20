@@ -23,84 +23,6 @@
 "CriteriaList": [
  {
  "Criteria": {
- "DrugExposure": {
- "CodesetId":                                                   1,
-"DrugTypeExclude": false 
-} 
-},
-"StartWindow": {
- "Start": {
- "Coeff":                                                  -1 
-},
-"End": {
- "Days":                                                   0,
-"Coeff":                                                   1 
-},
-"UseIndexEnd": false,
-"UseEventEnd": false 
-},
-"RestrictVisit": false,
-"IgnoreObservationPeriod": true,
-"Occurrence": {
- "Type":                                                   0,
-"Count":                                                   0,
-"IsDistinct": false 
-} 
-},
-{
- "Criteria": {
- "DrugExposure": {
- "CodesetId":                                                   2,
-"DrugTypeExclude": false 
-} 
-},
-"StartWindow": {
- "Start": {
- "Coeff":                                                  -1 
-},
-"End": {
- "Days":                                                   0,
-"Coeff":                                                   1 
-},
-"UseIndexEnd": false,
-"UseEventEnd": false 
-},
-"RestrictVisit": false,
-"IgnoreObservationPeriod": true,
-"Occurrence": {
- "Type":                                                   0,
-"Count":                                                   0,
-"IsDistinct": false 
-} 
-},
-{
- "Criteria": {
- "DrugExposure": {
- "CodesetId":                                                   3,
-"DrugTypeExclude": false 
-} 
-},
-"StartWindow": {
- "Start": {
- "Coeff":                                                  -1 
-},
-"End": {
- "Days":                                                   0,
-"Coeff":                                                   1 
-},
-"UseIndexEnd": false,
-"UseEventEnd": false 
-},
-"RestrictVisit": false,
-"IgnoreObservationPeriod": true,
-"Occurrence": {
- "Type":                                                   0,
-"Count":                                                   0,
-"IsDistinct": false 
-} 
-},
-{
- "Criteria": {
  "ConditionOccurrence": {
  "CodesetId":                                                  12,
 "ConditionTypeExclude": false 
@@ -156,58 +78,6 @@
  "ConditionOccurrence": {
  "CodesetId":                                                  10,
 "ConditionTypeExclude": false 
-} 
-},
-"StartWindow": {
- "Start": {
- "Coeff":                                                  -1 
-},
-"End": {
- "Days":                                                   0,
-"Coeff":                                                   1 
-},
-"UseIndexEnd": false,
-"UseEventEnd": false 
-},
-"RestrictVisit": false,
-"IgnoreObservationPeriod": true,
-"Occurrence": {
- "Type":                                                   0,
-"Count":                                                   0,
-"IsDistinct": false 
-} 
-},
-{
- "Criteria": {
- "DrugExposure": {
- "CodesetId":                                                   5,
-"DrugTypeExclude": false 
-} 
-},
-"StartWindow": {
- "Start": {
- "Coeff":                                                  -1 
-},
-"End": {
- "Days":                                                   0,
-"Coeff":                                                   1 
-},
-"UseIndexEnd": false,
-"UseEventEnd": false 
-},
-"RestrictVisit": false,
-"IgnoreObservationPeriod": true,
-"Occurrence": {
- "Type":                                                   0,
-"Count":                                                   0,
-"IsDistinct": false 
-} 
-},
-{
- "Criteria": {
- "DrugExposure": {
- "CodesetId":                                                  15,
-"DrugTypeExclude": false 
 } 
 },
 "StartWindow": {
@@ -2970,6 +2840,222 @@
 },
 "InclusionRules": [
  {
+ "name": "No prior with-in class exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                  15,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
+ "name": "No prior DPP4 inhibitor exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                   1,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
+ "name": "No prior GLP-1 receptor agonist exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                   2,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
+ "name": "No prior SGLT-2 inhibitor exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                   3,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
+ "name": "No prior SU exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                   4,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
+ "name": "No prior other anti-diabetic exposure",
+"expression": {
+ "Type": "ALL",
+"CriteriaList": [
+ {
+ "Criteria": {
+ "DrugExposure": {
+ "CodesetId":                                                   5,
+"DrugTypeExclude": false 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Coeff":                                                  -1 
+},
+"End": {
+ "Days":                                                   0,
+"Coeff":                                                  -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":                                                   0,
+"Count":                                                   0,
+"IsDistinct": false 
+} 
+} 
+],
+"DemographicCriteriaList": [],
+"Groups": [] 
+} 
+},
+{
  "name": "Middle age group",
 "description": "Limit age",
 "expression": {
