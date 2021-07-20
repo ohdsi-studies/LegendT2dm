@@ -65,6 +65,10 @@ createDataModelSqlFile(specifications = read.csv("inst/settings/PsAssessmentMode
                        fileName = "inst/sql/postgresql/CreatePsAssessmentTables.sql")
 
 
+createDataModelSqlFile(specifications = read.csv(system.file("settings", "resultsDataModelSpecification.csv", package = "CohortDiagnostics")),
+                       fileName = "inst/sql/postgresql/CreateCohortDiagnosticsTables.sql")
+
+
 ### Manage OHDSI Postgres server
 connectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
@@ -74,24 +78,6 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("ohdsiPostgresUser"),
   password = keyring::key_get("ohdsiPostgresPassword"))
 
-# grantPermission <- function(connectionDetails,schema) {
-#   sql <- paste0("grant select on all tables in schema ", schema, " to legendt2dm_readonly;")
-#   connection <- DatabaseConnector::connect(connectionDetails)
-#   DatabaseConnector::executeSql(connection, sql)
-#   DatabaseConnector::disconnect(connection)
-# }
-
-# createPsModelAssessmentTable <- function(connectionDetails, schema) {
-#   sql <- paste0("SET search_path TO ", schema, ";")
-#   connection <- DatabaseConnector::connect(connectionDetails)
-#   DatabaseConnector::executeSql(connection, sql)
-#   pathToSql <-
-#     system.file("sql", "postgresql", "CreatePsAssessmentTables.sql", package = "LegendT2dm")
-#   sql <- SqlRender::readSql(pathToSql)
-#   DatabaseConnector::executeSql(connection, sql)
-#   DatabaseConnector::disconnect(connection)
-# }
-
 Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 
 # Create cohort diagnostics on remote database
@@ -100,12 +86,11 @@ if (FALSE) { # Do this once!
   # Class diagnostics
 
   classSchema <- "legendt2dm_class_diagnostics"
+  LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+                                      schema = classSchema,
+                                      sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
-  # CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = classSchema)
-
-  createPsModelAssessmentTable(connectionDetails = connectionDetails, schema = classSchema)
-
-  grantPermissionOnServer(connectionDetails = connectionDetails, schema = classSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = classSchema)
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
@@ -145,9 +130,11 @@ if (FALSE) { # Do this once!
   # Outcome
 
   outcomeSchema <- "legendt2dm_outcome_diagnostics"
-  CohortDiagnostics::createResultsDataModel(connectionDetails = connectionDetails, schema = outcomeSchema)
+  LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+                                      schema = outcomeSchema,
+                                      sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
-  grantPermissionOnServer(connectionDetails = connectionDetails, schema = outcomeSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = outcomeSchema)
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
@@ -178,7 +165,11 @@ if (FALSE) { # Do this once!
     schema = classResultsSchema,
     convertFromCamelCase = TRUE,
     purgeSiteDataBeforeUploading = FALSE,
-    zipFileName = "~/Dropbox/Projects/LegendT2dm_Results/MDCR/Results_class_MDCR.zip",
+    zipFileName = c(
+      "~/Dropbox/Projects/LegendT2dm_Results/MDCR/Results_class_MDCR.zip"
+      # ,
+      # "~/Dropbox/Projects/LegendT2dm_Results/CCAE/Results_class_CCAE.zip"
+    ),
     specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
   )
 
