@@ -49,8 +49,8 @@ longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
 params:
-  date: '2020-09-24'
-  version: 0.0.99
+  date: '2021-07-26'
+  version: 1.0.0
 subtitle: 'Version: `r params$version`'
 link-citations: true
 csl: jamia.csl
@@ -79,17 +79,7 @@ pdf2png <- function(path) {
 latex_table_font_size <- 8
 ```
 
-# TODO List {-}
-
-* Design issue:
-  - Add `restrictToCommonPeriod = TRUE`
-  - Exclude prior insulin drug era
-  - Censor at insulin drug era
-* Outcome definition questions:
-  - Measured renal dysfx: Cr >= 3 or lower?
-  - Glycemic control: A1c <= 7? how frequently?
-  - Modify language
-* Review of all outcome cohorts, but particularly marked "Need Review"
+<!-- # TODO List {-} -->
 
 # List of Abbreviations
 
@@ -152,7 +142,7 @@ if (knitr::is_latex_output()) {
 This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
 **GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
 **PBR** and **MJS** are employees of Janssen Research and Development and shareholders in John & Johnson.
-**MAS** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
+**MAS** receives grant funding from the US National Institutes of Health, the US Department of Veterans Affairs and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
 
 # Abstract
 
@@ -332,18 +322,15 @@ For each study, we will employ an active comparator, new-user cohort design [@Yo
 New-user cohort design is advocated as the primary design to be considered for comparative effectiveness and drug safety [@Schneeweiss2010-my; @Gagne2012-at; @Johnson2013-db].
 By identifying patients who start a new treatment course and using therapy initiation as the start of follow-up, the new-user design models an randomized controlled trial (RCT) where treatment commences at the index study visit.
 Exploiting such an index date allows a clear separation of baseline patient characteristics that occur prior to index date and are usable as covariates in the analysis without concern of inadvertently introducing mediator variables that arise between exposure and outcome [@Schneeweiss2007-am]. 
-Excluding prevalent users as those without a sufficient washout period prior to first exposure occurrence further reduces bias due to balancing mediators on the causal pathway, time-varying hazards, and depletion of susceptibles.
-[@Johnson2013-db; @Suissa2017-lv]. 
+Excluding prevalent users as those without a sufficient washout period prior to first exposure occurrence further reduces bias due to balancing mediators on the causal pathway, time-varying hazards, and depletion of susceptibles [@Johnson2013-db; @Suissa2017-lv]. 
 Our systematic framework across studies further will address residual confounding, publication bias, and p-hacking using data-driven, large-scale propensity adjustment for measured confounding [@Tian2018-xy], a large set of negative control outcome experiments to address unmeasured and systematic bias
 [@Schuemie2014-bv; @Schuemie2016-km; @Schuemie2018-hq], and full disclosure of hypotheses tested [@Schuemie2018-zi].
 Figure \@ref(fig:study-schematic) illustrates our design for all studies that the following sections describe in more detail.
 
-```{r study-schematic, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Some cool caption', fig.pos='H'}
+```{r study-schematic, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Schematic of LEGEND-T2DM new-user cohort design for the Class-vs-Class, Drug-vs-Drug and Heterogeneity studies.', fig.pos='H'}
 if (knitr::is_latex_output()) {
   knitr::include_graphics("StudySchematic.pdf")
 } else {
-  #img <- magick::image_read_pdf("StudySchematic.pdf")
-  #magick::image_write(img, "StudySchematic.png", format = "png")
   knitr::include_graphics("StudySchematic.png")  
 }
 ```
@@ -416,7 +403,7 @@ Consistent with an idealized target trial for T2DM therapy and cardiovascular ri
 
 * T2DM diagnosis and no Type 1 or secondary diabetes mellitus diagnosis before the index date;
 * At least 1 year of observation time before the index date (to improve new-user sensitivity); and
-* No prior drug exposure to a comparator second-line or other antihyperglycemic agent (i.e. thiazolidinediones, acarbose, acetohexamide, bromocriptine, glibornuride, miglitol and nateglinide) or insulin before index date.
+* No prior drug exposure to a comparator second-line or other antihyperglycemic agent (i.e. thiazolidinediones, acarbose, acetohexamide, bromocriptine, glibornuride, miglitol and nateglinide) or $>$ 30 days insulin exposure before index date.
 
 We will construct and compare separately cohorts patients either with
 
@@ -465,7 +452,7 @@ These factors will include:
 
 * Age (18 - 44 / 45 - 64 / $\ge$ 65 at the index date)
 * Gender (women / men)
-* Race (African American or black / white)
+* Race (African American or black)
 * Cardiovascular risk (low or moderate/high, via established cardiovascular disease at the index date)
 * Renal impairment (at the index date)
 
@@ -480,11 +467,11 @@ Appendix \@ref(atlas-subgroups) presents complete OHDSI `ATLAS` specifications f
 We will validate exposure cohorts and aggregate drug utilization using comprehensive cohort characterization tools against both claims and EHR data sources.
 Chief among these tools stands OHDSI’s `CohortDiagnostic` package ([github](https://ohdsi.github.io/CohortDiagnostics/)).
 For any cohort and data source mapped to OMOP CDM, this package systematically generates incidence new-user rates (stratified by age, gender, and calendar year), cohort characteristics (all comorbidities, drug use, procedures, health utilization) and the actual codes found in the data triggering the various rules in the cohort definitions.
-This can allow researchers and stakeholders to understand the heterogeneity of source coding for exposures and health outcomes as well as the impact of various inclusion criteria on overall cohort counts (details described in \@ref{sample-size}).
+This can allow researchers and stakeholders to understand the heterogeneity of source coding for exposures and health outcomes as well as the impact of various inclusion criteria on overall cohort counts (details described in Section \@ref(sample-size)).
 
 ## Outcomes
 
-Across all data sources and pairwise exposure cohorts, we will assess relative risks of **TODO #** cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
+Across all data sources and pairwise exposure cohorts, we will assess relative risks of 32 cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
 Primary outcomes of interest are: 
 
 * 3-point major adverse cardiovascular events (MACE), including acute myocardial infarction, stroke, and sudden cardiac death, and
@@ -517,9 +504,8 @@ To assess across-source consistency and general clinical validity, we will chara
 ```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
 outcomes <- read.csv(system.file("settings/OutcomesOfInterest.csv",
                                  package = "LegendT2dm")) %>% 
-  select(atlasName,description,cite,isNew) %>%
-  mutate(isNew = ifelse(isNew == "yes", "yes", ""))
-colnames(outcomes) <- c("Phenotype", "Brief logical description", "Supporting references", "Needs review?")
+  select(atlasName,description,cite) 
+colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
 if (knitr::is_latex_output()) {
   convertCitationToLatex <- function(cite) {
@@ -586,11 +572,11 @@ We will:
 
 * Exclude patients who have experienced the outcome prior to their index date,
 * Stratify and variable-ratio match patients by PS, and 
-* Use (conditional) Cox proportional hazards models 
+* Use Cox proportional hazards models 
 
 to estimate hazard ratios (HRs) between alternative target and comparator treatments for the risk of each outcome in each data source.
 The regression will condition on the PS strata/matching-unit with treatment allocation as the sole explanatory variable and censor patients at the end of their time-at-risk (TAR) or data source observation period.
-We will prefer stratification over matching if both sufficiently balance patients (see **TODO**), as the former optimizes patient inclusions and thus generalizability.
+We will prefer stratification over matching if both sufficiently balance patients (see Section \@ref(sample-size)), as the former optimizes patient inclusions and thus generalizability.
 
 We will execute each comparison using three different TAR definitions, reflecting different and important causal contrasts:
 
@@ -612,12 +598,17 @@ Residual study bias from unmeasured and systematic sources often remains in obse
 For each comparison-outcome effect, we will conduct negative control (falsification) outcome experiments, where the null hypothesis of no effect is believed to be true, using approximately 100 controls identified through a data-rich algorithm [@Voss2017-nv] and validated in LEGEND-HTN [@Suchard2019-gq]. 
 Using the empirical null distributions from these experiments, we will calibrate each study effect HR estimate, its 95% CI and the $p$-value to reject the null hypothesis of no differential effect [@Schuemie2018-hq].
 We will declare an HR as significantly different from no effect when its calibrated $p < 0.05$ without correcting for multiple testing.
-Finally, blinded to all trial results, study investigators will evaluate study diagnostics for all comparisons to assess if they were likely to yield unbiased estimates (Section \@ref{sample-size}).
+Finally, blinded to all trial results, study investigators will evaluate study diagnostics for all comparisons to assess if they were likely to yield unbiased estimates (Section \@ref(sample-size)).
 
 ### Sensitivity analyses and missingness
 
 Because of the potential confounding effect of glycemic control at baseline between treatment choice and outcomes and to better understand the impact of limited glucose level measurements on effectiveness and safety estimation that arises in administrative claims and some EHR data, we will perform pre-specified sensitivity analyses for all studies within data sources that contain reliable glucose or hemoglobin A1c measurements.
 Within a study, for each exposure pair, we will first rebuild PS models where we additionally include baseline glucose or hemoglobin A1c measurements as patient characteristics, stratify or match patients under the new PS models that directly adjust for potential glycemic confounding and then estimate effectiveness and safety HRs.  
+
+A limitation of the Cox model is that no doubly robust procedure is believed to exist for estimating HRs, due to their non-collapsibility [@dukes2019doubly]. 
+Doubly robust procedures combine baseline patient characteristic-adjusted outcome and PS models to control for confounding and, in theory, remain unbiased when either (but not necessarily both) model is correctly specified [@funk2011doubly].
+Doubly robust procedures do exist for hazard differences [@dukes2019doubly,@martinussen2011estimation] and we will validate the appropriateness of our univariable Cox modeling by comparing estimate differences under an additive hazards model [@aalen1989linear] with and without doubly robust-adjustment [@wang2017doubly].  
+In practice, however, neither the outcome nor PS model is correctly specified, leading to systematic error in the observational setting.
 
 Missing data of potential concern are patient demographics (gender, age, race)  for our inclusion criteria.
 We will include only individuals whose baseline eligibility can be characterized that will most notably influence race subgroup assessments in the **Heterogeneity Study**.
@@ -921,217 +912,3 @@ invisible(readr::read_csv(system.file("settings/OutcomesOfInterest.csv", package
       )
     )))
 ```
-
-
-
-# Implemented Details
-
-## Exposure Cohort Counts
-
-For the **Class-vs-Class Study**, we will construct
-$$
-\begin{aligned}
-& (4 \text{ drug-class targets})\ \times \\
-& (2 \text{ On-treatment censoring types})\ \times \\
-& (2 \text{ Prior metformin-use choices}) \\
-& = 16
-\end{aligned}
-$$
-exposure cohort definitions.
-Likewise, for the **Drug-vs-Drug Study**, we will construct
-$$
-\begin{aligned}
-& (22 \text{ drug-ingredient targets})\ \times \\
-& (2 \text{ On-treatment censoring types})\ \times \\
-& (2 \text{ Prior metformin-use choices}) \\
-& = 88
-\end{aligned}
-$$
-exposure cohort definitions.
-For the **Heterogeneity Study**, we will stratify each of these cohort definitions into
-$$
-\begin{aligned}
-& 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\ 
-& 2 \text{ (sex: female / male) } + \\ 
-& 1 \text{ (race: Black) } + \\ 
-& 2 \text{ (cardiovascular risk: lower / higher) } + \\ 
-& 2 \text{ (renal impairment: with/without) } \\ 
-& = 10
-\end{aligned}
-$$
-additional definitions, results in $(16 + 88) \times 10 = 1040$ further cohort definitions.
-
-## Exposure Cohort ID Key
-
-This section documents internal coding used across the three studies to label cohort definitions and their SQL representation.  Each cohort carries 9-digit identifier
-$$ \text{ID}\ [DD][T][M][A][S][R][C][K] $$
-where Table \@ref(tab:drug-codes) reports the target 2-digit drug codes $DD$ and Table \@ref(tab:category-codes) lists the codes for time-at-risk $T$, metformin $M$, age $A$, sex $S$, race $R$, cardiovascular $C$ and renal (kidney) $K$ categories.
-
-```{r drug-codes, echo=FALSE, message=FALSE, warning=FALSE}
-addTab <- function(name, cohortId) {
-  if (cohortId %% 10 != 0) {
-    paste0("\\ \\ \\ \\ ", name)
-  } else {
-    name
-  }
-}
-
-drugCodes <- exposures  %>% arrange(cohortId) %>%
-  rowwise() %>%
-  mutate(name = addTab(name, cohortId)) %>%
-  select(name, cohortId) %>%
-  rename(Drug = name, "2-digit Code" = cohortId)
-
-tab <- kable(drugCodes, booktabs = TRUE, linesep = "",
-             caption = "2-Digit Drug Codes") %>% 
-  column_spec(1, width = "10em") %>%
-  column_spec(2, width = "30em")
-
-if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
-} else {
-  tab %>% kable_styling(bootstrap_options = "striped")
-}
-```
-
-```{r category-codes, echo=FALSE, warning=FALSE, message=FALSE}
-categoryCodes <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
-  Category; Value; 1-digit Code
-  Time-at-risk; 
-  ; ITT/OT1; 1
-  ; OT2; 2
-  Metformin; 
-  ; prior; 1
-  ; none; 2
-  Age ;
-  ; any; 0
-  ; younger; 1
-  ; middle; 2
-  ; older; 3
-  Sex ;
-  ; any; 0
-  ; female; 1
-  ; male; 2
-  Race ;
-  ; any; 0
-  ; Black; 1
-  Cardiovascular risk ;
-  ; any; 0
-  ; low; 1
-  ; higher; 2
-  Renal disease ;
-  ; any; 0
-  ; without; 1
-  ; with; 2
-")
-
-footnote <- c("ITT: intent-to-treat; OT1: on-treatment-1; OT2: on-treatment-2")
-
-tab <- kable(categoryCodes, booktabs = TRUE, linesep = "",
-             caption = "Other Cohort Category Codes") %>% 
-  footnote(general = footnote, general_title = "")
-
-if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
-} else {
-  tab %>% kable_styling(bootstrap_options = "striped")
-}
-```
-
-## Analysis Plan Matrix
-
-For each comparison within each study, we will execute the 7 `CohortMethod` analysis plans in Table \@ref(tab:plan-matrix).
-
-```{r, plan-matrix, echo=FALSE, warning=FALSE}
-design <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
-  ID; PS-covariates; PS-adjustment; Outcome model; Risk-window end
-  1; ; ; Cox; observational period
-  2; FE defaults; 1-to-1 match; Cox (conditional); target exposure end
-  3; FE defaults; 1-to-1 match; Cox (conditional); target exposure end or escalation
-  4; FE defaults; 1-to-1 match; Cox (conditional); observation period end
-  5; FE defaults; 5 strata; Cox (conditional); target exposure end
-  6; FE defaults; 5 strata; Cox (conditional); target exposure end or escalation
-  7; FE defaults; 5 strata; Cox (conditional); observational period end
-")
-
-footnote <- c("FE: FeatureExtraction package (365 days long-term, 180 days medium-term and 30 days short-term look-back)", 
-              "PS: Propensity score")
-
-tab <- kable(design, linesep = "", booktabs = TRUE,
-             caption = "CohortMethod analysis descriptions") %>% 
-  footnote(general = footnote, general_title = "")
-  
-
-if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
-} else {
-  tab %>% kable_styling(bootstrap_options = "striped")
-}
-```
-
-<!--
-# Additional Outcomes to Evaluate {#addition-outcomes}
-
-* Which additional outcomes from the table below from LEGEND-HTN are also relevant for T2DM?
-
-```{r additional-oucomes, echo=FALSE, warning=FALSE}
-htn_outcomes <- read.csv("LegendHtnTable.csv") %>% select(name)
-htn_outcomes$columns <- rep(c(1,2,3,4), nrow(htn_outcomes))[1:nrow(htn_outcomes)]
-
-add.col <- function(df, new.col) {
-  n.row <- dim(df)[1]
-  length(new.col) <- n.row
-  cbind(df, new.col)
-}
-
-htn_outcomes <- data.frame(label1 = htn_outcomes %>% filter(columns == 1) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 2) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 3) %>% select(name) %>% pull()) %>%
-  add.col(htn_outcomes %>% filter(columns == 4) %>% select(name) %>% pull())
-names(htn_outcomes) <- c()
-
-tab <- kable(htn_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
-      caption = "All LEGEND-HTN outcomes") %>%
-  kable_styling(bootstrap_options = "striped", latex_options = "striped")
-if (knitr::is_latex_output()) {
-  tab %>%
-    column_spec(1, width = "13em") %>%
-    column_spec(2, width = "13em") %>%
-    column_spec(3, width = "13em") %>%
-    column_spec(4, width = "13em") %>%
-    kable_styling(font_size = latex_table_font_size)
-} else {
-  tab
-}
-```
-
-* Which additional outcomes from the table below from the PhenotypeLibrary are also relevant for T2DM?
-
-```{r pl-outcomes, echo=FALSE, warning=FALSE}
-pl_outcomes <- read.csv("PhenotypeLibraryDescriptions.csv") %>% select(phenotypeName)
-pl_outcomes$columns <- rep(c(1,2,3,4), nrow(pl_outcomes))[1:nrow(pl_outcomes)]
-
-
-
-pl_outcomes <- data.frame(label1 = pl_outcomes %>% filter(columns == 1) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 2) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 3) %>% select(phenotypeName) %>% pull()) %>%
-  add.col(pl_outcomes %>% filter(columns == 4) %>% select(phenotypeName) %>% pull())
-
-names(pl_outcomes) <- c()
-
-tab <- kable(pl_outcomes, booktabs = TRUE, linesep = "", longtable = TRUE,
-      caption = "All PhenotypeLibrary outcomes") %>%
-  kable_styling(bootstrap_options = "striped", latex_options = "striped")
-if (knitr::is_latex_output()) {
-  tab %>%
-    column_spec(1, width = "13em") %>%
-    column_spec(2, width = "13em") %>%
-    column_spec(3, width = "13em") %>%
-    column_spec(4, width = "13em") %>%
-    kable_styling(font_size = latex_table_font_size)
-} else {
-  tab
-}
-```
--->
