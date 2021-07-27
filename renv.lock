@@ -29,31 +29,31 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "CirceR",
       "RemoteUsername": "ohdsi",
-      "RemoteRef": "HEAD",
+      "RemoteRepo": "CirceR",
+      "RemoteRef": "master",
       "RemoteSha": "dc8d462560a22e962f75e5604282e383410afa08",
-      "Hash": "3a7afaece32bb7e2135d655ffe107666"
+      "Hash": "f133b36ef31a70e0e5a88c7176627948"
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
       "Version": "2.1.0",
       "Source": "GitHub",
-      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
+      "RemoteRepo": "CohortDiagnostics",
       "RemoteRef": "va_patch",
-      "RemoteSha": "cd7e865e8f32b8c40889a96f6f5be97782dc952a",
-      "Hash": "ce020b40da405d7a70e1afe19c4b3d6f"
+      "RemoteSha": "47cc274404dac79ab077cc83e9c58dd13ea47af6",
+      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
+      "Hash": "44f51e4ab08c97dcddb9354ed4ac3f74"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
       "Version": "4.2.0",
       "Source": "GitHub",
-      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteType": "github",
+      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
@@ -139,7 +139,8 @@
       "RemoteRef": "master",
       "RemoteSha": "789cbd675906d2de53e44cd18e55d70154d149bf",
       "RemoteHost": "api.github.com",
-      "Hash": "7dd9b207efa562f57df42b65b6adc348"
+      "Remotes": "ohdsi/FeatureExtraction",
+      "Hash": "f7bcaf68930902a0a8c84d983f10ecd9"
     },
     "ParallelLogger": {
       "Package": "ParallelLogger",
@@ -180,11 +181,11 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "ohdsi",
       "RemoteRepo": "ROhdsiWebApi",
-      "RemoteUsername": "OHDSI",
       "RemoteRef": "master",
       "RemoteSha": "db363a4e5d77dfa1a68267a9e1e4697ec46c02f1",
-      "Hash": "eff88cfec19c1918d19accb8fe5aaf81"
+      "Hash": "ab79e9838e3e3c818e497f948606bc08"
     },
     "RSQLite": {
       "Package": "RSQLite",
