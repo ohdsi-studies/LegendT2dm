@@ -127,9 +127,9 @@ if (knitr::is_latex_output()) {
 parties <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
   Investigator; Institution/Affiliation
   George Hripcsak; Department of Biomedical Informatics, Columbia University, New York, NY, USA
-  Rohan Khera; Department of Medicine, Yale University, New Haven, CT, USA
-  Harlan M. Krumholz; Department of Medicine, Yale University, New Haven, CT, USA
-  Yuan Lu; Department of Medicine, Yale University, New Haven, CT, USA
+  Rohan Khera; Department of Internal Medicine, Yale University, New Haven, CT, USA
+  Harlan M. Krumholz; Department of Internal Medicine, Yale University, New Haven, CT, USA
+  Yuan Lu; Department of Internal Medicine, Yale University, New Haven, CT, USA
   Patrick B. Ryan; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
   Martijn J. Schuemie; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
   Marc A. Suchard *; Department of Biostatistics, University of California, Los Angeles, Los Angeles, CA, USA
@@ -151,6 +151,7 @@ if (knitr::is_latex_output()) {
 
 This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
 **GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
+**RK** receives grant funding from the US National Institutes of Health.
 **PBR** and **MJS** are employees of Janssen Research and Development and shareholders in John & Johnson.
 **MAS** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
 
