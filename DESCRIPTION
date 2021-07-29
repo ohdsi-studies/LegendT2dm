@@ -26,6 +26,7 @@ Imports:
     dplyr,
     meta,
     diffr,
+    LegendT2dmEvidenceExplorer,
     purrr
 Suggests:
     testthat,

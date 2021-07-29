@@ -115,6 +115,18 @@
       "RemoteSha": "7e615050508bd1915e8437cf98fceacacbda4b9c",
       "Hash": "232fe80c9c662c227b614c3cf6050464"
     },
+    "LegendT2dmEvidenceExplorer": {
+      "Package": "LegendT2dmEvidenceExplorer",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "LegendT2dmEvidenceExplorer",
+      "RemoteUsername": "ohdsi-studies",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "50876d5b8986e8113578477d689b16a4097c5e1e",
+      "Hash": "bf23514702cd8ecea7b8263f1e201616"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-54",
@@ -263,6 +275,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9addc7e2c5954eca5719928131fed98c"
+    },
+    "bookdown": {
+      "Package": "bookdown",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8fb0b67dfdf9d751fc93cb0036def3cc"
     },
     "boot": {
       "Package": "boot",
@@ -614,6 +633,13 @@
       "Repository": "CRAN",
       "Hash": "98138e0994d41508c7a6b84a0600cfcb"
     },
+    "kableExtra": {
+      "Package": "kableExtra",
+      "Version": "1.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "49b625e6aabe4c5f091f5850aba8ff78"
+    },
     "keyring": {
       "Package": "keyring",
       "Version": "1.2.0",
@@ -957,6 +983,13 @@
       "Repository": "CRAN",
       "Hash": "4be3f3f9f5b3c5e5faeef41e55f6d9bc"
     },
+    "rvest": {
+      "Package": "rvest",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1db38d6f40e3e09527797ca4226a1b5b"
+    },
     "sass": {
       "Package": "sass",
       "Version": "0.4.0",
@@ -970,6 +1003,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6f76f71042411426ec8df6c54f34e6dd"
+    },
+    "selectr": {
+      "Package": "selectr",
+      "Version": "0.4-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
     },
     "sessioninfo": {
       "Package": "sessioninfo",
@@ -1040,6 +1080,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "f4d706b25d640dbaeb56d9c9b6ce9a22"
+    },
+    "svglite": {
+      "Package": "svglite",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8fb6188960bf0f90996ce52f9c2106ac"
     },
     "sys": {
       "Package": "sys",
@@ -1152,6 +1199,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "20c45f1d511a3f730b7b469f4d11e104"
+    },
+    "webshot": {
+      "Package": "webshot",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e99d80ad34457a4853674e89d5e806de"
     },
     "whisker": {
       "Package": "whisker",
