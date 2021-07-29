@@ -2939,8 +2939,34 @@
  "Coeff":            -1 
 },
 "End": {
- "Days":             0,
+ "Days":            30,
 "Coeff":            -1 
+},
+"UseIndexEnd": false,
+"UseEventEnd": false 
+},
+"RestrictVisit": false,
+"IgnoreObservationPeriod": true,
+"Occurrence": {
+ "Type":             0,
+"Count":             0,
+"IsDistinct": false 
+} 
+},
+{
+ "Criteria": {
+ "DrugEra": {
+ "CodesetId":             6 
+} 
+},
+"StartWindow": {
+ "Start": {
+ "Days":            30,
+"Coeff":            -1 
+},
+"End": {
+ "Days":             0,
+"Coeff":             1 
 },
 "UseIndexEnd": false,
 "UseEventEnd": false 
