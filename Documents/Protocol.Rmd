@@ -152,6 +152,7 @@ if (knitr::is_latex_output()) {
 This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
 **GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
 **RK** receives grant funding from the US National Institutes of Health.
+**HMK** receives grants from the US Food & Drug Administration, Medtronics and Janssen Research and Development, is co-founder of HugoHealth and chairs the Cardiac Scientific Advisory Board for UnitedHealth.
 **PBR** and **MJS** are employees of Janssen Research and Development and shareholders in John & Johnson.
 **MAS** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
 
@@ -240,7 +241,7 @@ The emergence of drugs targeting the sodium-glucose co-transporter-2 (SGLT2) and
 A series of large randomized clinical trials designed to evaluate the cardiovascular safety of SGLT2 inhibitors and GLP1 receptor agonists found that use of many of these agents led to a reduction in major adverse cardiovascular events, including myocardial infarction, hospitalization for heart failure, and cardiovascular mortality [@Zinman2015-ps; @Neal2017-gs; @Marso2016-zg; @Marso2016-yk].
 However, other T2DM drugs widely used before the introduction of these novel agents, such as sulfonylureas, did not undergo similarly comprehensive trials to evaluate their cardiovascular efficacy or safety.
 Moreover, direct comparisons of newer agents with dipeptidyl peptidase-4 (DPP4) inhibitors, with neutral effects on major cardiovascular outcomes [@Scirica2013-gl; @White2013-zl; @Green2015-pv; @Rosenstock2019-cp], have not been conducted. 
-Nevertheless, DPP4 inhibitors and sulfonylureas continue to be used in clinical practice and are recommended as second line T2DM agents in national clinical practice guidelines.
+Nevertheless, DPP4 inhibitors and sulfonylureas continue to be used in clinical practice and are recommended as second-line T2DM agents in national clinical practice guidelines.
 
 Several challenges remain in formulating T2DM treatment recommendations based on existing evidence [@Cefalu2018-mu].
 First, trials of novel agents did not pursue head-to-head comparisons to older agents and were instead designed as additive treatments on the background of commonly used T2DM agents.
@@ -257,18 +258,18 @@ This lack of consensus about the best approach provides an opportunity for syste
 
 # Study Objectives
 
-To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of second-line T2DM glucose-lowering agents. Specifically, these studies aim
+To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of second-line T2DM glucose-lowering agents. Specifically, these studies aim:
 
 1. To determine, through systematic evaluation, the comparative effectiveness of traditionally second-line T2DM agents, SGLT2 inhibitors and GLP1 receptor agonists, with each other and with DPP4 inhibitors and sulfonylureas, for cardiovascular outcomes.
 2. To determine, through systematic evaluation, the comparative safety of traditionally second-line T2DM agents among patients with T2DM.
-3. To assess heterogeneity in effectiveness and safety of traditionally second-line T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.  
+3. To assess heterogeneity in effectiveness and safety of traditionally second-line T2DM agents among key patient subgroups. Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.  
 
 # Research Methods
 
 LEGEND-T2DM will execute three systematic, large-scale observational studies of second-line T2DM agents to estimate the relative risks of cardiovascular effectiveness and safety outcomes.
 
 1. The **Class-vs-Class Study** will provide all pairwise comparisons between the four major T2DM agent classes to evaluate their comparative effects on cardiovascular risk  (Objective 1) and patient-centered safety outcomes (Objective 2);  
-2. The **Drug-vs-Drug Study** will furnish head-to-head pairwise comparisons between individual agents within and across classes (both Ovjectives 1 and 2); and 
+2. The **Drug-vs-Drug Study** will furnish head-to-head pairwise comparisons between individual agents within and across classes (both Objectives 1 and 2); and 
 3. The **Heterogeneity Study** will refine these comparisons for T2DM patients for important subgroups (Objective 3).   
 In contrast to a single comparison approach, LEGEND-T2DM will provide a comprehensive view of the findings and their consistency across populations, drugs, and outcomes.
 We will model each study on our successful collaborative research evaluating the comparative effectiveness of antihypertensives recently published in _The Lancet_ [@Suchard2019-gq].
