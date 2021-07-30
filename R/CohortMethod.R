@@ -136,7 +136,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     # Should re-use shared propensity score models
 
     psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
-                             "^Ps_l1_s1_p2_t.*rds", full.names = TRUE, ignore.case = TRUE)
+                             # "^Ps_l1_s1_p2_t.*rds",  # copies both shared and outcome-specific populations
+                             "^Ps_l1_s1_p2_t\\d*_c\\d*.rds", # copies just shared ps model
+                             full.names = TRUE, ignore.case = TRUE)
     file.copy(from = psFileList,
               to = file.path(indicationFolder, "cmOutput", "Run_2"),
               copy.date = TRUE)
