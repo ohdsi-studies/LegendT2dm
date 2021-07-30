@@ -179,7 +179,72 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     # Third run: OT2
 
-    # Provide symbolic links for CmData_*.zip
+    ParallelLogger::logInfo("Executing CohortMethod for OT2 analyses")
+
+    ot2ExposureSummary <- exposureSummary[!isOt1(exposureSummary$targetId), ]
+    cmFolder3 <- file.path(indicationFolder, "cmOutput", "Run_3")
+    if (!dir.exists(cmFolder3)) {
+        dir.create(cmFolder3)
+    }
+
+    copyCmDataFiles(ot2ExposureSummary,
+                    file.path(indicationFolder, "cmOutput"),
+                    cmFolder3)
+
+    # Should re-use shared propensity score models (after relabeling)
+
+    psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
+                             "^Ps_l1_s1_p2_t.*rds", # TODO Update
+                             full.names = TRUE, ignore.case = TRUE)
+
+    lapply(psFileList, function(sourceFile) {
+        sourceTargetId <-  sub("_c*", "", sub(".*_t", "", sourceFile))
+        sourceComparatorId <- sub(".rds", sub(".*_c", sourceFile))
+        destinationTargetId <- makeOt2(sourceTargetId)
+        destinationComparatorId <- makeOt2(sourceComparatorId)
+        destinationFile <- sub("Run_1", "Run_3",
+                               sub(sourceTargetId, destinationTargetId,
+                                   sub(sourceComparatorId, destinationComparatorId, sourceFile)))
+        file.copy(from = sourceFile,
+                  to = destinationFile,
+                  copy.date = TRUE)
+    })
+
+    ot2TcoList <- lapply(1:nrow(ot2ExposureSummary), function(i) {
+        CohortMethod::createTargetComparatorOutcomes(targetId = ot2ExposureSummary[i,]$targetId,
+                                                     comparatorId = ot2ExposureSummary[i,]$comparatorId,
+                                                     outcomeIds = outcomeIds)
+    })
+
+    ot2CmAnalysisList <- CohortMethod::loadCmAnalysisList(
+        system.file("settings", "ot2CmAnalysisList.json", package = "LegendT2dm"))
+
+    CohortMethod::runCmAnalyses(connectionDetails = NULL,
+                                cdmDatabaseSchema = NULL,
+                                exposureDatabaseSchema = NULL,
+                                exposureTable = NULL,
+                                outcomeDatabaseSchema = NULL,
+                                outcomeTable = NULL,
+                                outputFolder = cmFolder3,
+                                oracleTempSchema = NULL,
+                                cmAnalysisList = ot2CmAnalysisList,
+                                cdmVersion = 5,
+                                targetComparatorOutcomesList = ot2TcoList,
+                                getDbCohortMethodDataThreads = 1,
+                                createStudyPopThreads = min(4, maxCores),
+                                createPsThreads = max(1, round(maxCores/10)),
+                                psCvThreads = min(10, maxCores),
+                                trimMatchStratifyThreads = min(10, maxCores),
+                                prefilterCovariatesThreads = min(5, maxCores),
+                                fitOutcomeModelThreads = min(10, maxCores),
+                                outcomeCvThreads = min(10, maxCores),
+                                refitPsForEveryOutcome = FALSE,
+                                refitPsForEveryStudyPopulation = TRUE,
+                                prefilterCovariates = TRUE,
+                                outcomeIdsOfInterest = hois$cohortId)
+
+    deleteCmDataFiles(ot2ExposureSummary,
+                      cmFolder3)
 
 
     # Create analysis summaries -------------------------------------------------------------------
@@ -189,7 +254,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     outcomeModelReference2 <- readRDS(file.path(indicationFolder,
                                                 "cmOutput", "Run_2",
                                                 "outcomeModelReference.rds"))
-
+    outcomeModelReference3 <- readRDS(file.path(indicationFolder,
+                                                "cmOutput", "Run_3",
+                                                "outcomeModelReference.rds"))
 
     appendPrefix <- function(omr, prefix) {
         omr <- omr %>% rowwise() %>%
@@ -210,8 +277,11 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     outcomeModelReference1 <- appendPrefix(outcomeModelReference1, "Run_1")
     outcomeModelReference2 <- appendPrefix(outcomeModelReference2, "Run_2")
+    outcomeModelReference3 <- appendPrefix(outcomeModelReference2, "Run_3")
 
-    outcomeModelReference <- rbind(outcomeModelReference1, outcomeModelReference2)
+    outcomeModelReference <- rbind(outcomeModelReference1,
+                                   outcomeModelReference2,
+                                   outcomeModelReference3)
 
     saveRDS(outcomeModelReference, file.path(indicationFolder,
                                              "cmOutput",
@@ -239,6 +309,15 @@ makeOt1 <- Vectorize(
         string <- as.character(id)
         string <- paste0(substring(string, 1, 2),
                          "1",
+                         substring(string, 4, 9))
+        as.integer(string)
+    })
+
+makeOt2 <- Vectorize(
+    FUN = function(id) {
+        string <- as.character(id)
+        string <- paste0(substring(string, 1, 2),
+                         "2",
                          substring(string, 4, 9))
         as.integer(string)
     })
