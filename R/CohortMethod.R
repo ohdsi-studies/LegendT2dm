@@ -181,6 +181,8 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     # Third run: OT2
 
+    if (FALSE) {
+
     ParallelLogger::logInfo("Executing CohortMethod for OT2 analyses")
 
     ot2ExposureSummary <- exposureSummary[!isOt1(exposureSummary$targetId), ]
@@ -248,6 +250,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     deleteCmDataFiles(ot2ExposureSummary,
                       cmFolder3)
 
+    } # if (FALSE)
 
     # Create analysis summaries -------------------------------------------------------------------
     outcomeModelReference1 <- readRDS(file.path(indicationFolder,
@@ -256,9 +259,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     outcomeModelReference2 <- readRDS(file.path(indicationFolder,
                                                 "cmOutput", "Run_2",
                                                 "outcomeModelReference.rds"))
-    outcomeModelReference3 <- readRDS(file.path(indicationFolder,
-                                                "cmOutput", "Run_3",
-                                                "outcomeModelReference.rds"))
+    # outcomeModelReference3 <- readRDS(file.path(indicationFolder,
+    #                                             "cmOutput", "Run_3",
+    #                                             "outcomeModelReference.rds"))
 
     appendPrefix <- function(omr, prefix) {
         omr <- omr %>% rowwise() %>%
@@ -279,11 +282,11 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     outcomeModelReference1 <- appendPrefix(outcomeModelReference1, "Run_1")
     outcomeModelReference2 <- appendPrefix(outcomeModelReference2, "Run_2")
-    outcomeModelReference3 <- appendPrefix(outcomeModelReference2, "Run_3")
+    # outcomeModelReference3 <- appendPrefix(outcomeModelReference2, "Run_3")
 
     outcomeModelReference <- rbind(outcomeModelReference1,
-                                   outcomeModelReference2,
-                                   outcomeModelReference3)
+                                   outcomeModelReference2) #,
+                                   #outcomeModelReference3)
 
     saveRDS(outcomeModelReference, file.path(indicationFolder,
                                              "cmOutput",
