@@ -29,31 +29,31 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "CirceR",
       "RemoteUsername": "ohdsi",
-      "RemoteRef": "HEAD",
+      "RemoteRepo": "CirceR",
+      "RemoteRef": "master",
       "RemoteSha": "dc8d462560a22e962f75e5604282e383410afa08",
-      "Hash": "3a7afaece32bb7e2135d655ffe107666"
+      "Hash": "f133b36ef31a70e0e5a88c7176627948"
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
       "Version": "2.1.0",
       "Source": "GitHub",
-      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
+      "RemoteRepo": "CohortDiagnostics",
       "RemoteRef": "va_patch",
-      "RemoteSha": "cd7e865e8f32b8c40889a96f6f5be97782dc952a",
-      "Hash": "ce020b40da405d7a70e1afe19c4b3d6f"
+      "RemoteSha": "47cc274404dac79ab077cc83e9c58dd13ea47af6",
+      "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
+      "Hash": "44f51e4ab08c97dcddb9354ed4ac3f74"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
       "Version": "4.2.0",
       "Source": "GitHub",
-      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteType": "github",
+      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
@@ -115,6 +115,18 @@
       "RemoteSha": "7e615050508bd1915e8437cf98fceacacbda4b9c",
       "Hash": "232fe80c9c662c227b614c3cf6050464"
     },
+    "LegendT2dmEvidenceExplorer": {
+      "Package": "LegendT2dmEvidenceExplorer",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "LegendT2dmEvidenceExplorer",
+      "RemoteUsername": "ohdsi-studies",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "50876d5b8986e8113578477d689b16a4097c5e1e",
+      "Hash": "bf23514702cd8ecea7b8263f1e201616"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-54",
@@ -139,7 +151,8 @@
       "RemoteRef": "master",
       "RemoteSha": "789cbd675906d2de53e44cd18e55d70154d149bf",
       "RemoteHost": "api.github.com",
-      "Hash": "7dd9b207efa562f57df42b65b6adc348"
+      "Remotes": "ohdsi/FeatureExtraction",
+      "Hash": "f7bcaf68930902a0a8c84d983f10ecd9"
     },
     "ParallelLogger": {
       "Package": "ParallelLogger",
@@ -180,11 +193,11 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "ohdsi",
       "RemoteRepo": "ROhdsiWebApi",
-      "RemoteUsername": "OHDSI",
       "RemoteRef": "master",
       "RemoteSha": "db363a4e5d77dfa1a68267a9e1e4697ec46c02f1",
-      "Hash": "eff88cfec19c1918d19accb8fe5aaf81"
+      "Hash": "ab79e9838e3e3c818e497f948606bc08"
     },
     "RSQLite": {
       "Package": "RSQLite",
@@ -262,6 +275,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9addc7e2c5954eca5719928131fed98c"
+    },
+    "bookdown": {
+      "Package": "bookdown",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8fb0b67dfdf9d751fc93cb0036def3cc"
     },
     "boot": {
       "Package": "boot",
@@ -613,6 +633,13 @@
       "Repository": "CRAN",
       "Hash": "98138e0994d41508c7a6b84a0600cfcb"
     },
+    "kableExtra": {
+      "Package": "kableExtra",
+      "Version": "1.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "49b625e6aabe4c5f091f5850aba8ff78"
+    },
     "keyring": {
       "Package": "keyring",
       "Version": "1.2.0",
@@ -956,6 +983,13 @@
       "Repository": "CRAN",
       "Hash": "4be3f3f9f5b3c5e5faeef41e55f6d9bc"
     },
+    "rvest": {
+      "Package": "rvest",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1db38d6f40e3e09527797ca4226a1b5b"
+    },
     "sass": {
       "Package": "sass",
       "Version": "0.4.0",
@@ -969,6 +1003,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6f76f71042411426ec8df6c54f34e6dd"
+    },
+    "selectr": {
+      "Package": "selectr",
+      "Version": "0.4-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
     },
     "sessioninfo": {
       "Package": "sessioninfo",
@@ -1039,6 +1080,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "f4d706b25d640dbaeb56d9c9b6ce9a22"
+    },
+    "svglite": {
+      "Package": "svglite",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8fb6188960bf0f90996ce52f9c2106ac"
     },
     "sys": {
       "Package": "sys",
@@ -1151,6 +1199,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "20c45f1d511a3f730b7b469f4d11e104"
+    },
+    "webshot": {
+      "Package": "webshot",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e99d80ad34457a4853674e89d5e806de"
     },
     "whisker": {
       "Package": "whisker",

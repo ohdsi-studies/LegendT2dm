@@ -14,10 +14,6 @@ baseUrlWebApi <- keyring::key_get("baseUrl")
 # SqlRender::writeSql(baseCohortJson, targetFile = "baseCohort.json")
 # saveRDS(baseCohort, file = "baseCohort.rds")
 
-# json <- SqlRender::readSql("baseCohort.json")
-# baseCohort <- RJSONIO::fromJSON(json, digits = 50)
-# saveRDS(baseCohort, file = "baseCohort.rds")
-
 # Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5, PriorMet == 6, NoMet == 7
 
 baseCohort <- readRDS("baseCohort.rds")

@@ -2,8 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
+
+.Rprofile
+renv
+
 .DS_Store
+
 extra/Credentials.R
+
 
 Documents/Protocol.aux
 Documents/Protocol.html
