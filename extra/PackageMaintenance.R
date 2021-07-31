@@ -64,10 +64,10 @@ createDataModelSqlFile(specifications = read.csv("inst/settings/ResultsModelSpec
 createDataModelSqlFile(specifications = read.csv("inst/settings/PsAssessmentModelSpecs.csv"),
                        fileName = "inst/sql/postgresql/CreatePsAssessmentTables.sql")
 
-
-createDataModelSqlFile(specifications = read.csv(system.file("settings", "resultsDataModelSpecification.csv", package = "CohortDiagnostics")),
+createDataModelSqlFile(specifications = read.csv(system.file("settings",
+                                                             "resultsDataModelSpecification.csv",
+                                                             package = "CohortDiagnostics")),
                        fileName = "inst/sql/postgresql/CreateCohortDiagnosticsTables.sql")
-
 
 ### Manage OHDSI Postgres server
 connectionDetails <- DatabaseConnector::createConnectionDetails(
@@ -88,9 +88,13 @@ if (FALSE) { # Do this once!
   classSchema <- "legendt2dm_class_diagnostics"
   LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
                                       schema = classSchema,
+
                                       sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
-  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = classSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legendt2dm_readonly", schema = classSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legend", schema = classSchema)
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
@@ -114,7 +118,10 @@ if (FALSE) { # Do this once!
                                       schema = classPsSchema,
                                       sqlFileName = "CreatePsAssessmentTables.sql")
 
-  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = classPsSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legendt2dm_readonly", schema = classPsSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legend", schema = classPsSchema)
 
   LegendT2dm::uploadResultsToDatabase(
     connectionDetails = connectionDetails,
@@ -134,7 +141,10 @@ if (FALSE) { # Do this once!
                                       schema = outcomeSchema,
                                       sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
-  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = outcomeSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legend", schema = outcomeSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legendt2dm_readonly", schema = outcomeSchema)
 
   CohortDiagnostics::uploadResults(
     connectionDetails = connectionDetails,
@@ -158,7 +168,10 @@ if (FALSE) { # Do this once!
                                       schema = classResultsSchema,
                                       sqlFileName = "CreateResultsTables.sql")
 
-  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails, schema = classResultsSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legend", schema = classResultsSchema)
+  LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                      user = "legendt2dm_readonly", schema = classResultsSchema)
 
   LegendT2dm::uploadResultsToDatabase(
     connectionDetails = connectionDetails,

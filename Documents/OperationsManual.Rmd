@@ -64,17 +64,16 @@ library(kableExtra)
 library(dplyr)
 options(knitr.kable.NA = "")
 
-pdf2png <- function(path) {
-  # only do the conversion for non-LaTeX output
-  if (knitr::is_latex_output()) {
-    return(path)
-  }
-  path2 <- xfun::with_ext(path, "png")
-  img <- magick::image_read_pdf(path)
-  magick::image_write(img, path2, format = "png")
-  path2
-}
-
+# pdf2png <- function(path) {
+#   # only do the conversion for non-LaTeX output
+#   if (knitr::is_latex_output()) {
+#     return(path)
+#   }
+#   path2 <- xfun::with_ext(path, "png")
+#   img <- magick::image_read_pdf(path)
+#   magick::image_write(img, path2, format = "png")
+#   path2
+# }
 
 latex_table_font_size <- 8
 ```
@@ -539,16 +538,33 @@ legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
 
 # R Shiny
 
-To explore cohorts and their diagnostics through an R Shiny application, we use `CohortDiagnostics v2.1.0`.  The following code will load all `class` cohorts:
+## Exposure and outcome cohort characteristics and diagnostics
+
+To explore cohorts and their diagnostics through an R Shiny application, we use the `LegendT2dmCohortExplorer` package.  
+The following code will load all `class` cohorts:
 
 ```{r, eval=FALSE}
-CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = legendT2dmConnectionDetails,
-                                             resultsDatabaseSchema = "legendt2dm_class_diagnostics")
+LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "class",
+                                               connectionDetails = legendT2dmConnectionDetails)
 ```
 
-For `drug` and `outcome` cohorts, we use `resultsDatabaseSchema = "legendt2dm_drug_diagnostics"` and `resultsDatabaseSchema = "legendt2dm_outcome_diagnostics"` respectively.
+Use `cohorts = "drug"` and `cohorts = "outcome"` to explore the Drug-vs-Drug Study exposure and outcome cohorts, respectively.
+This Shiny applications is based on `CohortDiagnostics v2.1` and it is also possible to explore cohorts using local files by specifying the `dataFolder` argument.
 
-A useful `Cohort name` filter is `ot1, with prior met, any age, any sex, any race, any cv risk, any renal` (see Table \@ref(tab:category-codes)).
+A useful `Cohort name` filter is `main(` (see Table \@ref(tab:category-codes)).
+
+## Comparative effectivess and safety evidence
+
+To explore the comparative effectiveness and safety evidence through an R Shiny application, we use the `LegendT2dmEvidenceExplorer` package.
+The following code will load all `class` cohort comparison evidence:
+
+```{r, eval=FALSE}
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(cohorts = "class",
+                                                   connectionDetails = legendT2dmConnectionDetails)
+```
+
+Use `cohorts = "drug"` to explore the `drug` cohort comparison evidence.
+It is also possible explore evidence using local files by specifying the `dataFolder` argument.
 
 # Definitions
 
