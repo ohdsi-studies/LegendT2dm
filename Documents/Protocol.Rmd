@@ -82,6 +82,7 @@ latex_table_font_size <- 8
 # TODO List {-}
 
 * Add negative control list (and change language slightly)
+* Limited PS model
 
 # List of Abbreviations
 
@@ -599,7 +600,12 @@ Here, our recent research shows that as the number of data sources increases, th
 To counter this, we will also apply a Bayesian meta-analysis model [@Higgins2009-cm; @schuemie2021combining] that neither assumes normality nor requires patient-level data sharing by building on composite likelihood methods [@Varin2011-gc] and enables us to introduce appropriate overlap weights between data sources.
 
 Residual study bias from unmeasured and systematic sources often remains in observational studies even after controlling for measured confounding through PS-adjustment [@Schuemie2014-bv; @Schuemie2016-km].
-For each comparison-outcome effect, we will conduct negative control (falsification) outcome experiments, where the null hypothesis of no effect is believed to be true, using approximately 100 controls identified through a data-rich algorithm [@Voss2017-nv] and validated in LEGEND-HTN [@Suchard2019-gq].
+For each comparison-outcome effect, we will conduct negative control (falsification) outcome experiments, where the null hypothesis of no effect is believed to be true, using
+approximately 100 controls.
+We identified these controls through a data-rich algorithm [@Voss2017-nv] that identifies prevalent OMOP condition concept occurrences that lack evidence of association with exposures in published literature, drug-product labeling and spontaneous reports, and were then adjudicated by clinical review.
+We previously validated 60 of the controls in LEGEND-HTN [@Suchard2019-gq].
+Appendix \@ref(negative-controls) lists these negative controls and their OMOP condition concept IDs.
+
 Using the empirical null distributions from these experiments, we will calibrate each study effect HR estimate, its 95% CI and the $p$-value to reject the null hypothesis of no differential effect [@Schuemie2018-hq].
 We will declare an HR as significantly different from no effect when its calibrated $p < 0.05$ without correcting for multiple testing.
 Finally, blinded to all trial results, study investigators will evaluate study diagnostics for all comparisons to assess if they were likely to yield unbiased estimates (Section \@ref(sample-size)).
@@ -915,4 +921,26 @@ invisible(readr::read_csv(system.file("settings/OutcomesOfInterest.csv", package
            jsonFileName = system.file("cohorts", paste0(fileName, ".json"), package = "LegendT2dm")
       )
     )))
+```
+
+# Negative Control Concepts {#negative-controls}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+negative_controls <- readr::read_csv(system.file("settings/NegativeControls.csv", package = "LegendT2dm")) %>%
+  select(name, conceptId) %>% arrange(name)
+
+colnames(negative_controls) <- c("", "Concept ID")
+
+tab <- kable(negative_controls, booktabs = TRUE, linesep = "",
+      caption = "Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "40em") %>%
+    column_spec(2, width = "15em") %>%
+    kable_styling(font_size = latex_table_font_size)
+} else {
+  tab
+}
 ```

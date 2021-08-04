@@ -3015,6 +3015,7 @@ Large-scale evidence generation and evaluation across a network of databases for
 <h1>TODO List</h1>
 <ul>
 <li>Add negative control list (and change language slightly)</li>
+<li>Limited PS model</li>
 </ul>
 </div>
 <div id="list-of-abbreviations" class="section level1">
@@ -4347,8 +4348,12 @@ This assumption fails when outcomes are rare as we expect for some safety events
 Here, our recent research shows that as the number of data sources increases, the non-normality effect increases to where coverage of 95% confidence intervals (CIs) can be as low as 5%.
 To counter this, we will also apply a Bayesian meta-analysis model <span class="citation">[<a href="#ref-Higgins2009-cm" role="doc-biblioref">109</a>,<a href="#ref-schuemie2021combining" role="doc-biblioref">110</a>]</span> that neither assumes normality nor requires patient-level data sharing by building on composite likelihood methods <span class="citation">[<a href="#ref-Varin2011-gc" role="doc-biblioref">111</a>]</span> and enables us to introduce appropriate overlap weights between data sources.</p>
 <p>Residual study bias from unmeasured and systematic sources often remains in observational studies even after controlling for measured confounding through PS-adjustment <span class="citation">[<a href="#ref-Schuemie2014-bv" role="doc-biblioref">32</a>,<a href="#ref-Schuemie2016-km" role="doc-biblioref">33</a>]</span>.
-For each comparison-outcome effect, we will conduct negative control (falsification) outcome experiments, where the null hypothesis of no effect is believed to be true, using approximately 100 controls identified through a data-rich algorithm <span class="citation">[<a href="#ref-Voss2017-nv" role="doc-biblioref">112</a>]</span> and validated in LEGEND-HTN <span class="citation">[<a href="#ref-Suchard2019-gq" role="doc-biblioref">22</a>]</span>.
-Using the empirical null distributions from these experiments, we will calibrate each study effect HR estimate, its 95% CI and the <span class="math inline">\(p\)</span>-value to reject the null hypothesis of no differential effect <span class="citation">[<a href="#ref-Schuemie2018-hq" role="doc-biblioref">34</a>]</span>.
+For each comparison-outcome effect, we will conduct negative control (falsification) outcome experiments, where the null hypothesis of no effect is believed to be true, using
+approximately 100 controls.
+We identified these controls through a data-rich algorithm <span class="citation">[<a href="#ref-Voss2017-nv" role="doc-biblioref">112</a>]</span> that identifies prevalent OMOP condition concept occurrences that lack evidence of association with exposures in published literature, drug-product labeling and spontaneous reports, and were then adjudicated by clinical review.
+We previously validated 60 of the controls in LEGEND-HTN <span class="citation">[<a href="#ref-Suchard2019-gq" role="doc-biblioref">22</a>]</span>.
+Appendix <a href="#negative-controls">C</a> lists these negative controls and their OMOP condition concept IDs.</p>
+<p>Using the empirical null distributions from these experiments, we will calibrate each study effect HR estimate, its 95% CI and the <span class="math inline">\(p\)</span>-value to reject the null hypothesis of no differential effect <span class="citation">[<a href="#ref-Schuemie2018-hq" role="doc-biblioref">34</a>]</span>.
 We will declare an HR as significantly different from no effect when its calibrated <span class="math inline">\(p &lt; 0.05\)</span> without correcting for multiple testing.
 Finally, blinded to all trial results, study investigators will evaluate study diagnostics for all comparisons to assess if they were likely to yield unbiased estimates (Section <a href="#sample-size">9</a>).</p>
 </div>
@@ -20909,6 +20914,849 @@ NO
 </hr>
 </div>
 </div>
+</div>
+<div id="negative-controls" class="section level1">
+<h1><span class="header-section-number">C</span> Negative Control Concepts</h1>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-2">Table C.1: </span>Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Concept ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Abnormal posture
+</td>
+<td style="text-align:right;">
+439935
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Abnormal pupil
+</td>
+<td style="text-align:right;">
+436409
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Abrasion and/or friction burn of multiple sites
+</td>
+<td style="text-align:right;">
+443585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Abrasion and/or friction burn of trunk without infection
+</td>
+<td style="text-align:right;">
+199192
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Absence of breast
+</td>
+<td style="text-align:right;">
+4088290
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Absent kidney
+</td>
+<td style="text-align:right;">
+4092879
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acquired hallux valgus
+</td>
+<td style="text-align:right;">
+75911
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acquired keratoderma
+</td>
+<td style="text-align:right;">
+137951
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Anal and rectal polyp
+</td>
+<td style="text-align:right;">
+73241
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Anomaly of jaw size
+</td>
+<td style="text-align:right;">
+45757682
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Benign paroxysmal positional vertigo
+</td>
+<td style="text-align:right;">
+81878
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bizarre personal appearance
+</td>
+<td style="text-align:right;">
+4216219
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Burn of forearm
+</td>
+<td style="text-align:right;">
+133655
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cachexia
+</td>
+<td style="text-align:right;">
+134765
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calcaneal spur
+</td>
+<td style="text-align:right;">
+73560
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cannabis abuse
+</td>
+<td style="text-align:right;">
+434327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Changes in skin texture
+</td>
+<td style="text-align:right;">
+140842
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chondromalacia of patella
+</td>
+<td style="text-align:right;">
+81378
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cocaine abuse
+</td>
+<td style="text-align:right;">
+432303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colostomy present
+</td>
+<td style="text-align:right;">
+4201390
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Complication due to Crohn’s disease
+</td>
+<td style="text-align:right;">
+46269889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Complication of gastrostomy
+</td>
+<td style="text-align:right;">
+434675
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Contact dermatitis
+</td>
+<td style="text-align:right;">
+134438
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Contusion of knee
+</td>
+<td style="text-align:right;">
+78619
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Crohn’s disease
+</td>
+<td style="text-align:right;">
+201606
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Derangement of knee
+</td>
+<td style="text-align:right;">
+76786
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Developmental delay
+</td>
+<td style="text-align:right;">
+436077
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deviated nasal septum
+</td>
+<td style="text-align:right;">
+377910
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Difficulty sleeping
+</td>
+<td style="text-align:right;">
+4115402
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Disproportion of reconstructed breast
+</td>
+<td style="text-align:right;">
+45757370
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Effects of hunger
+</td>
+<td style="text-align:right;">
+433111
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Endometriosis
+</td>
+<td style="text-align:right;">
+433527
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Epidermoid cyst
+</td>
+<td style="text-align:right;">
+4170770
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Epidermoid cyst
+</td>
+<td style="text-align:right;">
+4170770
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Exhaustion due to excessive exertion
+</td>
+<td style="text-align:right;">
+437448
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Feces contents abnormal
+</td>
+<td style="text-align:right;">
+4092896
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Feces contents abnormal
+</td>
+<td style="text-align:right;">
+4092896
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Foreign body in ear
+</td>
+<td style="text-align:right;">
+374801
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Foreign body in orifice
+</td>
+<td style="text-align:right;">
+259995
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Foreskin deficient
+</td>
+<td style="text-align:right;">
+4096540
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Galactosemia
+</td>
+<td style="text-align:right;">
+439788
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ganglion cyst
+</td>
+<td style="text-align:right;">
+40481632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ganglion cyst
+</td>
+<td style="text-align:right;">
+40481632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genetic disorder carrier
+</td>
+<td style="text-align:right;">
+4168318
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hammer toe
+</td>
+<td style="text-align:right;">
+433577
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hereditary thrombophilia
+</td>
+<td style="text-align:right;">
+4231770
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High risk sexual behavior
+</td>
+<td style="text-align:right;">
+4012570
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Homocystinuria
+</td>
+<td style="text-align:right;">
+4012934
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Impacted cerumen
+</td>
+<td style="text-align:right;">
+374375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Impacted cerumen
+</td>
+<td style="text-align:right;">
+374375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Impingement syndrome of shoulder region
+</td>
+<td style="text-align:right;">
+4344500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Inadequate sleep hygiene
+</td>
+<td style="text-align:right;">
+40481897
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ingrowing nail
+</td>
+<td style="text-align:right;">
+139099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Injury of knee
+</td>
+<td style="text-align:right;">
+444132
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jellyfish poisoning
+</td>
+<td style="text-align:right;">
+4265896
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kwashiorkor
+</td>
+<td style="text-align:right;">
+432593
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lagophthalmos
+</td>
+<td style="text-align:right;">
+381021
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Late effect of contusion
+</td>
+<td style="text-align:right;">
+434203
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Late effect of motor vehicle accident
+</td>
+<td style="text-align:right;">
+438329
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lipid storage disease
+</td>
+<td style="text-align:right;">
+4027782
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lymphangioma
+</td>
+<td style="text-align:right;">
+433997
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Macular drusen
+</td>
+<td style="text-align:right;">
+4083487
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Malingering
+</td>
+<td style="text-align:right;">
+4051630
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marfan’s syndrome
+</td>
+<td style="text-align:right;">
+258540
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mechanical complication of internal orthopedic device
+</td>
+<td style="text-align:right;">
+432798
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Melena
+</td>
+<td style="text-align:right;">
+4103703
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Minimal cognitive impairment
+</td>
+<td style="text-align:right;">
+439795
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nicotine dependence
+</td>
+<td style="text-align:right;">
+4209423
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nicotine dependence
+</td>
+<td style="text-align:right;">
+4209423
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Noise effects on inner ear
+</td>
+<td style="text-align:right;">
+377572
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-toxic multinodular goiter
+</td>
+<td style="text-align:right;">
+136368
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nonspecific tuberculin test reaction
+</td>
+<td style="text-align:right;">
+40480893
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nonspecific tuberculin test reaction
+</td>
+<td style="text-align:right;">
+40480893
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Opioid abuse
+</td>
+<td style="text-align:right;">
+438130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Opioid abuse
+</td>
+<td style="text-align:right;">
+438130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Opioid intoxication
+</td>
+<td style="text-align:right;">
+4299094
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Passing flatus
+</td>
+<td style="text-align:right;">
+4091513
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Physiological development failure
+</td>
+<td style="text-align:right;">
+437092
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poisoning by tranquilizer
+</td>
+<td style="text-align:right;">
+433951
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Postviral fatigue syndrome
+</td>
+<td style="text-align:right;">
+4202045
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Presbyopia
+</td>
+<td style="text-align:right;">
+373478
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Problem related to lifestyle
+</td>
+<td style="text-align:right;">
+46286594
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Problem related to lifestyle
+</td>
+<td style="text-align:right;">
+46286594
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychalgia
+</td>
+<td style="text-align:right;">
+439790
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ptotic breast
+</td>
+<td style="text-align:right;">
+81634
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Regular astigmatism
+</td>
+<td style="text-align:right;">
+380706
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Senile hyperkeratosis
+</td>
+<td style="text-align:right;">
+141932
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Social exclusion
+</td>
+<td style="text-align:right;">
+4019836
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Somatic dysfunction of lumbar region
+</td>
+<td style="text-align:right;">
+36713918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Splinter of face without major open wound
+</td>
+<td style="text-align:right;">
+443172
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sprain of ankle
+</td>
+<td style="text-align:right;">
+81151
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strain of rotator cuff capsule
+</td>
+<td style="text-align:right;">
+72748
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Symbolic dysfunction
+</td>
+<td style="text-align:right;">
+432436
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tear film insufficiency
+</td>
+<td style="text-align:right;">
+378427
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tobacco dependence syndrome
+</td>
+<td style="text-align:right;">
+437264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tooth loss
+</td>
+<td style="text-align:right;">
+433244
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Toxic effect of lead compound
+</td>
+<td style="text-align:right;">
+436876
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Toxic effect of tobacco and nicotine
+</td>
+<td style="text-align:right;">
+440612
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tracheostomy present
+</td>
+<td style="text-align:right;">
+4201387
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unsatisfactory tooth restoration
+</td>
+<td style="text-align:right;">
+45757285
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Verruca vulgaris
+</td>
+<td style="text-align:right;">
+140641
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wrist joint pain
+</td>
+<td style="text-align:right;">
+4115367
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wristdrop
+</td>
+<td style="text-align:right;">
+440193
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
