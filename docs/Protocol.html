@@ -3011,13 +3011,8 @@ Large-scale evidence generation and evaluation across a network of databases for
 </div>
 
 
-<div id="todo-list" class="section level1 unnumbered">
-<h1>TODO List</h1>
-<ul>
-<li>Add negative control list (and change language slightly)</li>
-<li>Limited PS model</li>
-</ul>
-</div>
+<!-- # TODO List {-} -->
+<!-- * Limited PS model -->
 <div id="list-of-abbreviations" class="section level1">
 <h1><span class="header-section-number">1</span> List of Abbreviations</h1>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
@@ -11089,7 +11084,8 @@ NO
 <h3><span class="header-section-number">B.5.1</span> Cohort Entry Events</h3>
 <p>People enter the cohort when observing any of the following:</p>
 <ol style="list-style-type: decimal">
-<li>measurements of ‘HbA1c_v2’, numeric value &lt;= 7.</li>
+<li><p>measurements of ‘HbA1c_v2’, numeric value &lt;= 7; unit: “percent”.</p></li>
+<li><p>measurements of ‘HbA1c_v2’, numeric value &lt;= 53; unit: “millimole per mole”.</p></li>
 </ol>
 <p>Limit qualifying entry events to the earliest event per person.</p>
 </div>
@@ -11502,8 +11498,10 @@ NO
 <h3><span class="header-section-number">B.7.1</span> Cohort Entry Events</h3>
 <p>People enter the cohort when observing any of the following:</p>
 <ol style="list-style-type: decimal">
-<li><p>measurements of ‘Creatinine measurement [Mass/volume]’, numeric value &gt; 3; unit: “milligram per deciliter”.</p></li>
-<li><p>measurements of ‘Creatinine measurement [Moles/volume = 88.4 x Mass/volume]’, numeric value &gt; 265.2; unit: “micromole/liter”.</p></li>
+<li><p>measurements of ‘Creatinine measurement’, numeric value &gt; 3; unit: “milligram per deciliter”.</p></li>
+<li><p>measurements of ‘Creatinine measurement’, numeric value &gt; 265; unit: “micromole/liter”.</p></li>
+<li><p>measurements of ‘Creatinine measurement’, numeric value &gt; 0.265; unit: “millimole per liter”.</p></li>
+<li><p>measurements of ‘Creatinine measurement’, numeric value &gt; 3; unit: “milligram”.</p></li>
 </ol>
 <p>Limit cohort entry events to the earliest event per person.</p>
 </div>
@@ -11515,8 +11513,8 @@ NO
 <h3><span class="header-section-number">B.7.3</span> Cohort Eras</h3>
 <p>Entry events will be combined into cohort eras if they are within 0 days of each other.</p>
 </div>
-<div id="concept-creatinine-measurement-massvolume" class="section level3">
-<h3><span class="header-section-number">B.7.4</span> Concept: Creatinine measurement [Mass/volume]</h3>
+<div id="concept-creatinine-measurement" class="section level3">
+<h3><span class="header-section-number">B.7.4</span> Concept: Creatinine measurement</h3>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -11590,38 +11588,6 @@ YES
 NO
 </td>
 </tr>
-</tbody>
-</table>
-</div>
-<div id="concept-creatinine-measurement-molesvolume-88.4-x-massvolume" class="section level3">
-<h3><span class="header-section-number">B.7.5</span> Concept: Creatinine measurement [Moles/volume = 88.4 x Mass/volume]</h3>
-<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Concept ID
-</th>
-<th style="text-align:left;">
-Concept Name
-</th>
-<th style="text-align:left;">
-Code
-</th>
-<th style="text-align:left;">
-Vocabulary
-</th>
-<th style="text-align:left;">
-Excluded
-</th>
-<th style="text-align:left;">
-Descendants
-</th>
-<th style="text-align:left;">
-Mapped
-</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td style="text-align:left;">
 3020564
@@ -21197,14 +21163,6 @@ Epidermoid cyst
 </tr>
 <tr>
 <td style="text-align:left;">
-Epidermoid cyst
-</td>
-<td style="text-align:right;">
-4170770
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Exhaustion due to excessive exertion
 </td>
 <td style="text-align:right;">
@@ -21445,7 +21403,7 @@ Marfan’s syndrome
 </tr>
 <tr>
 <td style="text-align:left;">
-Mechanical complication of internal orthopedic device
+Mechanical complication of internal orthopedic device, implant AND/OR graft
 </td>
 <td style="text-align:right;">
 432798

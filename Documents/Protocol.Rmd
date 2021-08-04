@@ -79,10 +79,9 @@ options(knitr.kable.NA = "")
 latex_table_font_size <- 8
 ```
 
-# TODO List {-}
+<!-- # TODO List {-} -->
 
-* Add negative control list (and change language slightly)
-* Limited PS model
+<!-- * Limited PS model -->
 
 # List of Abbreviations
 
