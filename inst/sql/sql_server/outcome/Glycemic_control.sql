@@ -40,6 +40,22 @@ JOIN #Codesets codesets on ((m.measurement_concept_id = codesets.concept_id and 
 ) C
 
 WHERE C.value_as_number <= 7.0000
+AND C.unit_concept_id in (8554)
+-- End Measurement Criteria
+
+UNION ALL
+-- Begin Measurement Criteria
+select C.person_id, C.measurement_id as event_id, C.measurement_date as start_date, DATEADD(d,1,C.measurement_date) as END_DATE,
+       C.visit_occurrence_id, C.measurement_date as sort_date
+from 
+(
+  select m.* 
+  FROM @cdm_database_schema.MEASUREMENT m
+JOIN #Codesets codesets on ((m.measurement_concept_id = codesets.concept_id and codesets.codeset_id = 0))
+) C
+
+WHERE C.value_as_number <= 53.0000
+AND C.unit_concept_id in (9579)
 -- End Measurement Criteria
 
   ) E

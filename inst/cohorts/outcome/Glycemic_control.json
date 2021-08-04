@@ -9,7 +9,45 @@
 					"ValueAsNumber" : {
 						"Value" : 7,
 						"Op" : "lte"
-					}
+					},
+					"Unit" : [
+						{
+							"CONCEPT_ID" : 8554,
+							"CONCEPT_NAME" : "percent",
+							"STANDARD_CONCEPT" : null,
+							"STANDARD_CONCEPT_CAPTION" : "Unknown",
+							"INVALID_REASON" : null,
+							"INVALID_REASON_CAPTION" : "Unknown",
+							"CONCEPT_CODE" : "%",
+							"DOMAIN_ID" : "Unit",
+							"VOCABULARY_ID" : "UCUM",
+							"CONCEPT_CLASS_ID" : null
+						}
+					]
+				}
+			},
+			{
+				"Measurement" : {
+					"CodesetId" : 0,
+					"MeasurementTypeExclude" : false,
+					"ValueAsNumber" : {
+						"Value" : 53,
+						"Op" : "lte"
+					},
+					"Unit" : [
+						{
+							"CONCEPT_ID" : 9579,
+							"CONCEPT_NAME" : "millimole per mole",
+							"STANDARD_CONCEPT" : null,
+							"STANDARD_CONCEPT_CAPTION" : "Unknown",
+							"INVALID_REASON" : null,
+							"INVALID_REASON_CAPTION" : "Unknown",
+							"CONCEPT_CODE" : "mmol/mol",
+							"DOMAIN_ID" : "Unit",
+							"VOCABULARY_ID" : "UCUM",
+							"CONCEPT_CLASS_ID" : null
+						}
+					]
 				}
 			}
 		],

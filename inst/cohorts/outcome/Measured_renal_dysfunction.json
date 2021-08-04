@@ -28,10 +28,10 @@
 			},
 			{
 				"Measurement" : {
-					"CodesetId" : 1,
+					"CodesetId" : 0,
 					"MeasurementTypeExclude" : false,
 					"ValueAsNumber" : {
-						"Value" : 265.19999999999998863132,
+						"Value" : 265,
 						"Op" : "gt"
 					},
 					"Unit" : [
@@ -49,6 +49,54 @@
 						}
 					]
 				}
+			},
+			{
+				"Measurement" : {
+					"CodesetId" : 0,
+					"MeasurementTypeExclude" : false,
+					"ValueAsNumber" : {
+						"Value" : 0.26500000000000001332268,
+						"Op" : "gt"
+					},
+					"Unit" : [
+						{
+							"CONCEPT_ID" : 8753,
+							"CONCEPT_NAME" : "millimole per liter",
+							"STANDARD_CONCEPT" : null,
+							"STANDARD_CONCEPT_CAPTION" : "Unknown",
+							"INVALID_REASON" : null,
+							"INVALID_REASON_CAPTION" : "Unknown",
+							"CONCEPT_CODE" : "mmol/L",
+							"DOMAIN_ID" : "Unit",
+							"VOCABULARY_ID" : "UCUM",
+							"CONCEPT_CLASS_ID" : null
+						}
+					]
+				}
+			},
+			{
+				"Measurement" : {
+					"CodesetId" : 0,
+					"MeasurementTypeExclude" : false,
+					"ValueAsNumber" : {
+						"Value" : 3,
+						"Op" : "gt"
+					},
+					"Unit" : [
+						{
+							"CONCEPT_ID" : 8576,
+							"CONCEPT_NAME" : "milligram",
+							"STANDARD_CONCEPT" : null,
+							"STANDARD_CONCEPT_CAPTION" : "Unknown",
+							"INVALID_REASON" : null,
+							"INVALID_REASON_CAPTION" : "Unknown",
+							"CONCEPT_CODE" : "mg",
+							"DOMAIN_ID" : "Unit",
+							"VOCABULARY_ID" : "UCUM",
+							"CONCEPT_CLASS_ID" : null
+						}
+					]
+				}
 			}
 		],
 		"ObservationWindow" : {
@@ -62,7 +110,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 0,
-			"name" : "Creatinine measurement [Mass/volume]",
+			"name" : "Creatinine measurement",
 			"expression" : {
 				"items" : [
 					{
@@ -98,15 +146,7 @@
 						"isExcluded" : false,
 						"includeDescendants" : true,
 						"includeMapped" : false
-					}
-				]
-			}
-		},
-		{
-			"id" : 1,
-			"name" : "Creatinine measurement [Moles/volume = 88.4 x Mass/volume]",
-			"expression" : {
-				"items" : [
+					},
 					{
 						"concept" : {
 							"CONCEPT_ID" : 3020564,
