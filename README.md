@@ -97,7 +97,8 @@ How to run
 	```r
 	uploadFeasbilitityResults(outputFolder, privateKeyFileName = "<file>", userName = "<name>")
 	```
-where ```<file>``` and ```<name<``` are the credentials provided to you personally by the study coordinator.
+
+    where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
 
 License
 =======
