@@ -34,70 +34,68 @@ cem,438130,1032,Opioid abuse
 cem,4299094,1033,Opioid intoxication
 cem,437092,1034,Physiological development failure
 cem,433951,1035,Poisoning by tranquilizer
-cem,46286594,1036,Problem related to lifestyle
-cem,4019836,1037,Social exclusion
-cem,432436,1038,Symbolic dysfunction
-cem,433244,1039,Tooth loss
-cem,436876,1040,Toxic effect of lead compound
-cem,440612,1041,Toxic effect of tobacco and nicotine
-cem,4201387,1042,Tracheostomy present
-cem,45757285,1043,Unsatisfactory tooth restoration
-htn,436409,1044,Abnormal pupil
-htn,199192,1045,Abrasion and/or friction burn of trunk without infection
-htn,4088290,1046,Absence of breast
-htn,75911,1047,Acquired hallux valgus
-htn,137951,1048,Acquired keratoderma
-htn,73241,1049,Anal and rectal polyp
-htn,133655,1050,Burn of forearm
-htn,73560,1051,Calcaneal spur
-htn,434327,1052,Cannabis abuse
-htn,140842,1053,Changes in skin texture
-htn,81378,1054,Chondromalacia of patella
-htn,432303,1055,Cocaine abuse
-htn,46269889,1056,Complication due to Crohn's disease
-htn,134438,1057,Contact dermatitis
-htn,78619,1058,Contusion of knee
-htn,201606,1059,Crohn's disease
-htn,76786,1060,Derangement of knee
-htn,4115402,1061,Difficulty sleeping
-htn,45757370,1062,Disproportion of reconstructed breast
-htn,433111,1063,Effects of hunger
-htn,433527,1064,Endometriosis
-htn,4092896,1065,Feces contents abnormal
-htn,259995,1066,Foreign body in orifice
-htn,40481632,1067,Ganglion cyst
-htn,433577,1068,Hammer toe
-htn,4231770,1069,Hereditary thrombophilia
-htn,4012570,1070,High risk sexual behavior
-htn,4012934,1071,Homocystinuria
-htn,374375,1072,Impacted cerumen
-htn,4344500,1073,Impingement syndrome of shoulder region
-htn,139099,1074,Ingrowing nail
-htn,444132,1075,Injury of knee
-htn,432593,1076,Kwashiorkor
-htn,434203,1077,Late effect of contusion
-htn,438329,1078,Late effect of motor vehicle accident
-htn,4083487,1079,Macular drusen
-htn,4103703,1080,Melena
-htn,4209423,1081,Nicotine dependence
-htn,377572,1082,Noise effects on inner ear
-htn,136368,1083,Non-toxic multinodular goiter
-htn,40480893,1084,Nonspecific tuberculin test reaction
-htn,438130,1085,Opioid abuse
-htn,4091513,1086,Passing flatus
-htn,4202045,1087,Postviral fatigue syndrome
-htn,373478,1088,Presbyopia
-htn,46286594,1089,Problem related to lifestyle
-htn,439790,1090,Psychalgia
-htn,81634,1091,Ptotic breast
-htn,380706,1092,Regular astigmatism
-htn,141932,1093,Senile hyperkeratosis
-htn,36713918,1094,Somatic dysfunction of lumbar region
-htn,443172,1095,Splinter of face without major open wound
-htn,81151,1096,Sprain of ankle
-htn,72748,1097,Strain of rotator cuff capsule
-htn,378427,1098,Tear film insufficiency
-htn,437264,1099,Tobacco dependence syndrome
-htn,140641,1100,Verruca vulgaris
-htn,4115367,1101,Wrist joint pain
-htn,440193,1102,Wristdrop
+cem,4019836,1036,Social exclusion
+cem,432436,1037,Symbolic dysfunction
+cem,433244,1038,Tooth loss
+cem,436876,1039,Toxic effect of lead compound
+cem,440612,1040,Toxic effect of tobacco and nicotine
+cem,4201387,1041,Tracheostomy present
+cem,45757285,1042,Unsatisfactory tooth restoration
+htn,436409,1043,Abnormal pupil
+htn,199192,1044,Abrasion and/or friction burn of trunk without infection
+htn,4088290,1045,Absence of breast
+htn,75911,1046,Acquired hallux valgus
+htn,137951,1047,Acquired keratoderma
+htn,73241,1048,Anal and rectal polyp
+htn,133655,1049,Burn of forearm
+htn,73560,1050,Calcaneal spur
+htn,434327,1051,Cannabis abuse
+htn,140842,1052,Changes in skin texture
+htn,81378,1053,Chondromalacia of patella
+htn,432303,1054,Cocaine abuse
+htn,46269889,1055,Complication due to Crohn's disease
+htn,134438,1056,Contact dermatitis
+htn,78619,1057,Contusion of knee
+htn,201606,1058,Crohn's disease
+htn,76786,1059,Derangement of knee
+htn,4115402,1060,Difficulty sleeping
+htn,45757370,1061,Disproportion of reconstructed breast
+htn,433111,1062,Effects of hunger
+htn,433527,1063,Endometriosis
+htn,4092896,1064,Feces contents abnormal
+htn,259995,1065,Foreign body in orifice
+htn,40481632,1066,Ganglion cyst
+htn,433577,1067,Hammer toe
+htn,4231770,1068,Hereditary thrombophilia
+htn,4012570,1069,High risk sexual behavior
+htn,4012934,1070,Homocystinuria
+htn,374375,1071,Impacted cerumen
+htn,4344500,1072,Impingement syndrome of shoulder region
+htn,139099,1073,Ingrowing nail
+htn,444132,1074,Injury of knee
+htn,432593,1075,Kwashiorkor
+htn,434203,1076,Late effect of contusion
+htn,438329,1077,Late effect of motor vehicle accident
+htn,4083487,1078,Macular drusen
+htn,4103703,1079,Melena
+htn,4209423,1080,Nicotine dependence
+htn,377572,1081,Noise effects on inner ear
+htn,136368,1082,Non-toxic multinodular goiter
+htn,40480893,1083,Nonspecific tuberculin test reaction
+htn,438130,1084,Opioid abuse
+htn,4091513,1085,Passing flatus
+htn,4202045,1086,Postviral fatigue syndrome
+htn,373478,1087,Presbyopia
+htn,439790,1088,Psychalgia
+htn,81634,1089,Ptotic breast
+htn,380706,1090,Regular astigmatism
+htn,141932,1091,Senile hyperkeratosis
+htn,36713918,1092,Somatic dysfunction of lumbar region
+htn,443172,1093,Splinter of face without major open wound
+htn,81151,1094,Sprain of ankle
+htn,72748,1095,Strain of rotator cuff capsule
+htn,378427,1096,Tear film insufficiency
+htn,437264,1097,Tobacco dependence syndrome
+htn,140641,1098,Verruca vulgaris
+htn,4115367,1099,Wrist joint pain
+htn,440193,1100,Wristdrop
