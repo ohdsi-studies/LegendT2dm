@@ -3698,13 +3698,13 @@ with
 <thead>
 <tr>
 <th style="text-align:left;">
-label
+tag
 </th>
 <th style="text-align:left;">
 mask
 </th>
 <th style="text-align:left;">
-radioButton
+label
 </th>
 </tr>
 </thead>
@@ -3714,7 +3714,7 @@ radioButton
 ittOt1
 </td>
 <td style="text-align:left;">
-??1??????
+..1……
 </td>
 <td style="text-align:left;">
 </td>
@@ -3724,7 +3724,7 @@ ittOt1
 ot2
 </td>
 <td style="text-align:left;">
-??2??????
+..2……
 </td>
 <td style="text-align:left;">
 </td>
@@ -3734,7 +3734,7 @@ ot2
 priorMet
 </td>
 <td style="text-align:left;">
-???1?????
+…1…..
 </td>
 <td style="text-align:left;">
 </td>
@@ -3744,9 +3744,20 @@ priorMet
 noMet
 </td>
 <td style="text-align:left;">
-???2?????
+…2…..
 </td>
 <td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+any
+</td>
+<td style="text-align:left;">
+….00000
+</td>
+<td style="text-align:left;">
+all subjects
 </td>
 </tr>
 <tr>
@@ -3754,7 +3765,7 @@ noMet
 younger
 </td>
 <td style="text-align:left;">
-????10000
+….10000
 </td>
 <td style="text-align:left;">
 18 - 44 yo
@@ -3765,7 +3776,7 @@ younger
 middle
 </td>
 <td style="text-align:left;">
-????20000
+….20000
 </td>
 <td style="text-align:left;">
 45 - 64 yo
@@ -3776,7 +3787,7 @@ middle
 older
 </td>
 <td style="text-align:left;">
-????30000
+….30000
 </td>
 <td style="text-align:left;">
 ≥ 65 yo
@@ -3787,7 +3798,7 @@ older
 female
 </td>
 <td style="text-align:left;">
-????01000
+….01000
 </td>
 <td style="text-align:left;">
 female
@@ -3798,7 +3809,7 @@ female
 male
 </td>
 <td style="text-align:left;">
-????02000
+….02000
 </td>
 <td style="text-align:left;">
 male
@@ -3809,7 +3820,7 @@ male
 black
 </td>
 <td style="text-align:left;">
-????00100
+….00100
 </td>
 <td style="text-align:left;">
 Black
@@ -3820,7 +3831,7 @@ Black
 lowCv
 </td>
 <td style="text-align:left;">
-????00010
+….00010
 </td>
 <td style="text-align:left;">
 low CV risk
@@ -3831,7 +3842,7 @@ low CV risk
 higherCv
 </td>
 <td style="text-align:left;">
-????00020
+….00020
 </td>
 <td style="text-align:left;">
 higher CV risk
@@ -3842,7 +3853,7 @@ higher CV risk
 withoutRd
 </td>
 <td style="text-align:left;">
-????00001
+….00001
 </td>
 <td style="text-align:left;">
 without RD
@@ -3853,7 +3864,7 @@ without RD
 withRd
 </td>
 <td style="text-align:left;">
-????00002
+….00002
 </td>
 <td style="text-align:left;">
 with RD
@@ -3901,7 +3912,7 @@ Risk-window end
 Cox
 </td>
 <td style="text-align:left;">
-observational period
+target exposure end
 </td>
 </tr>
 <tr>
@@ -3912,7 +3923,7 @@ observational period
 FE defaults
 </td>
 <td style="text-align:left;">
-1-to-1 match
+variable match
 </td>
 <td style="text-align:left;">
 Cox (conditional)
@@ -3929,13 +3940,13 @@ target exposure end
 FE defaults
 </td>
 <td style="text-align:left;">
-1-to-1 match
+5 strata
 </td>
 <td style="text-align:left;">
 Cox (conditional)
 </td>
 <td style="text-align:left;">
-target exposure end or escalation
+target exposure end
 </td>
 </tr>
 <tr>
@@ -3943,16 +3954,14 @@ target exposure end or escalation
 4
 </td>
 <td style="text-align:left;">
-FE defaults
 </td>
 <td style="text-align:left;">
-1-to-1 match
 </td>
 <td style="text-align:left;">
-Cox (conditional)
+Cox
 </td>
 <td style="text-align:left;">
-observation period end
+observational period end
 </td>
 </tr>
 <tr>
@@ -3963,13 +3972,13 @@ observation period end
 FE defaults
 </td>
 <td style="text-align:left;">
-5 strata
+variable match
 </td>
 <td style="text-align:left;">
 Cox (conditional)
 </td>
 <td style="text-align:left;">
-target exposure end
+observational period end
 </td>
 </tr>
 <tr>
@@ -3986,12 +3995,44 @@ FE defaults
 Cox (conditional)
 </td>
 <td style="text-align:left;">
-target exposure end or escalation
+observational period end
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
 7
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cox
+</td>
+<td style="text-align:left;">
+target exposure end or escalation
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+FE defaults
+</td>
+<td style="text-align:left;">
+variable match
+</td>
+<td style="text-align:left;">
+Cox (conditional)
+</td>
+<td style="text-align:left;">
+target exposure end or escalation
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
 </td>
 <td style="text-align:left;">
 FE defaults
@@ -4003,7 +4044,7 @@ FE defaults
 Cox (conditional)
 </td>
 <td style="text-align:left;">
-observational period end
+target exposure end or escalation
 </td>
 </tr>
 </tbody>
@@ -9817,11 +9858,25 @@ legendT2dmConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
 </div>
 <div id="r-shiny" class="section level1">
 <h1><span class="header-section-number">8</span> R Shiny</h1>
-<p>To explore cohorts and their diagnostics through an R Shiny application, we use <code>CohortDiagnostics v2.1.0</code>. The following code will load all <code>class</code> cohorts:</p>
-<pre class="r"><code>CohortDiagnostics::launchDiagnosticsExplorer(connectionDetails = legendT2dmConnectionDetails,
-                                             resultsDatabaseSchema = &quot;legendt2dm_class_diagnostics&quot;)</code></pre>
-<p>For <code>drug</code> and <code>outcome</code> cohorts, we use <code>resultsDatabaseSchema = &quot;legendt2dm_drug_diagnostics&quot;</code> and <code>resultsDatabaseSchema = &quot;legendt2dm_outcome_diagnostics&quot;</code> respectively.</p>
-<p>A useful <code>Cohort name</code> filter is <code>ot1, with prior met, any age, any sex, any race, any cv risk, any renal</code> (see Table <a href="#tab:category-codes">4.2</a>).</p>
+<div id="exposure-and-outcome-cohort-characteristics-and-diagnostics" class="section level2">
+<h2><span class="header-section-number">8.1</span> Exposure and outcome cohort characteristics and diagnostics</h2>
+<p>To explore cohorts and their diagnostics through an R Shiny application, we use the <code>LegendT2dmCohortExplorer</code> package.<br />
+The following code will load all <code>class</code> cohorts:</p>
+<pre class="r"><code>LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = &quot;class&quot;,
+                                               connectionDetails = legendT2dmConnectionDetails)</code></pre>
+<p>Use <code>cohorts = &quot;drug&quot;</code> and <code>cohorts = &quot;outcome&quot;</code> to explore the Drug-vs-Drug Study exposure and outcome cohorts, respectively.
+This Shiny applications is based on <code>CohortDiagnostics v2.1</code> and it is also possible to explore cohorts using local files by specifying the <code>dataFolder</code> argument.</p>
+<p>A useful <code>Cohort name</code> filter is <code>main(</code> (see Table <a href="#tab:category-codes">4.2</a>).</p>
+</div>
+<div id="comparative-effectivess-and-safety-evidence" class="section level2">
+<h2><span class="header-section-number">8.2</span> Comparative effectivess and safety evidence</h2>
+<p>To explore the comparative effectiveness and safety evidence through an R Shiny application, we use the <code>LegendT2dmEvidenceExplorer</code> package.
+The following code will load all <code>class</code> cohort comparison evidence:</p>
+<pre class="r"><code>LegendT2dmEvidenceExplorer::launchEvidenceExplorer(cohorts = &quot;class&quot;,
+                                                   connectionDetails = legendT2dmConnectionDetails)</code></pre>
+<p>Use <code>cohorts = &quot;drug&quot;</code> to explore the <code>drug</code> cohort comparison evidence.
+It is also possible explore evidence using local files by specifying the <code>dataFolder</code> argument.</p>
+</div>
 </div>
 <div id="definitions" class="section level1">
 <h1><span class="header-section-number">9</span> Definitions</h1>
