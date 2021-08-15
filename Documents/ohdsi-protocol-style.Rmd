@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+author: "Marc A. Suchard"
+date: "8/15/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE)
+library(kableExtra)
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) {
+    "latex"
+  } else if (knitr::is_html_output()) {
+    "html"
+  } else {
+    "pipe"
+  }
+})
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Including Tables
+```{r table, echo=FALSE}
+abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRUE, file = "
+  CDM; Common data model
+  DPP4; Dipeptidyl peptidase-4
+  GLP1; Glucagon-like peptide-1
+  IRB; Institutional review board
+  LEGEND; Large-scale Evidence Generation and Evaluation across a Network of Databases
+  MACE; Major adverse cardiovascular event
+  MDRR; Minimum detectable risk ratio
+  OHDSI; Observational Health Data Science and Informatics
+  OMOP; Observational Medical Outcomes Partnership
+  PS; Propensity score
+  RCT; Randomized controlled trial
+  SGLT2; Sodium-glucose co-transporter-2
+  T2DM; Type 2 diabetes mellitus
+")
+
+kable(abbreviations, col.names = NULL, linesep = "", booktabs = TRUE)
+```

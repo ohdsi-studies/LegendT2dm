@@ -4,6 +4,8 @@ title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluatio
 fontsize: 12pt
 geometry: margin=1in
 output:
+  word_document:
+    reference_docx: ohdsi-protocol-style.docx
   bookdown::html_document2:
     df_print: paged
     toc: yes
@@ -58,12 +60,21 @@ csl: jamia.csl
 
 ```{r setup, include=FALSE}
 library(LegendT2dm)
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 #knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
 library(dplyr)
 options(knitr.kable.NA = "")
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) {
+    "latex"
+  } else if (knitr::is_html_output()) {
+    "html"
+  } else {
+    "pipe"
+  }
+})
 
 # pdf2png <- function(path) {
 #   # only do the conversion for non-LaTeX output
@@ -509,7 +520,6 @@ To assess across-source consistency and general clinical validity, we will chara
 outcomes <- read.csv(system.file("settings/OutcomesOfInterest.csv",
                                  package = "LegendT2dm")) %>%
   select(atlasName,description,cite)
-colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
 if (knitr::is_latex_output()) {
   convertCitationToLatex <- function(cite) {
@@ -526,6 +536,8 @@ if (knitr::is_latex_output()) {
   }
   outcomes$cite <- sapply(outcomes$cite, convertCitationToLatex)
 }
+
+colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
 tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
       caption = "LEGEND-T2DM study outcomes") %>%
