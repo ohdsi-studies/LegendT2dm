@@ -22,6 +22,7 @@ Imports:
     CohortDiagnostics (>= 1.1.0),
     CirceR (>= 0.0.1),
     readr (>= 1.4.0),
+    tibble,
     plyr,
     dplyr,
     meta,
@@ -42,8 +43,7 @@ Suggests:
     pool,
     tidyr,
     ggiraph,
-    stringr,
-    purrr
+    stringr
 Remotes:
     ohdsi/FeatureExtraction,
     ohdsi/CohortMethod,

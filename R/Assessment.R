@@ -10,6 +10,9 @@
 #' @param cdmDatabaseSchema      Schema name where your patient-level data in OMOP CDM format resides.
 #'                               Note that for SQL Server, this should include both the database and
 #'                               schema name, for example 'cdm_data.dbo'.
+#' @param vocabularyDatabaseSchema   Schema name where your vocabulary tables in OMOP CDM format resides.
+#'                               Note that for SQL Server, this should include both the database and
+#'                               schema name, for example 'cdm_data.dbo'.
 #' @param cohortDatabaseSchema   Schema name where intermediate data can be stored. You will need to
 #'                               have write priviliges in this schema. Note that for SQL Server, this
 #'                               should include both the database and schema name, for example
@@ -28,6 +31,7 @@
 #' @export
 assessPhenotypes <- function(connectionDetails,
                              cdmDatabaseSchema,
+                             vocabularyDatabaseSchema = cdmDatabaseSchema,
                              cohortDatabaseSchema,
                              tablePrefix = "legend_t2dm",
                              oracleTempSchema,
@@ -57,6 +61,7 @@ assessPhenotypes <- function(connectionDetails,
     # Exposures ----------------------------------------------------------------------------------------
     createExposureCohorts(connectionDetails = connectionDetails,
                           cdmDatabaseSchema = cdmDatabaseSchema,
+                          vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                           cohortDatabaseSchema = cohortDatabaseSchema,
                           tablePrefix = tablePrefix,
                           indicationId = "class",
@@ -72,6 +77,7 @@ assessPhenotypes <- function(connectionDetails,
     # Outcomes ----------------------------------------------------------------------------------
     createOutcomeCohorts(connectionDetails = connectionDetails,
                          cdmDatabaseSchema = cdmDatabaseSchema,
+                         vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                          cohortDatabaseSchema = cohortDatabaseSchema,
                          tablePrefix = tablePrefix,
                          oracleTempSchema = oracleTempSchema,
@@ -83,6 +89,7 @@ assessPhenotypes <- function(connectionDetails,
   if (runExposureCohortDiagnostics) {
     runExposureCohortDiagnostics(connectionDetails,
                                  cdmDatabaseSchema,
+                                 vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                                  cohortDatabaseSchema,
                                  tablePrefix = tablePrefix,
                                  indicationId = "class",
@@ -101,6 +108,7 @@ assessPhenotypes <- function(connectionDetails,
   if (runOutcomeCohortDiagnostics) {
     runOutcomeCohortDiagnostics(connectionDetails,
                                 cdmDatabaseSchema,
+                                vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                                 cohortDatabaseSchema,
                                 tablePrefix = tablePrefix,
                                 oracleTempSchema = oracleTempSchema,

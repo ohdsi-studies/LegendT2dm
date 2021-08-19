@@ -7,6 +7,7 @@
 createExposureCohorts(
   connectionDetails,
   cdmDatabaseSchema,
+  vocabularyDatabaseSchema = cdmDatabaseSchema,
   cohortDatabaseSchema,
   tablePrefix = "legendt2dm",
   indicationId = "class",

@@ -7,6 +7,7 @@
 assessPhenotypes(
   connectionDetails,
   cdmDatabaseSchema,
+  vocabularyDatabaseSchema = cdmDatabaseSchema,
   cohortDatabaseSchema,
   tablePrefix = "legend_t2dm",
   oracleTempSchema,
@@ -30,6 +31,10 @@ assessPhenotypes(
 the DatabaseConnector package.}
 
 \item{cdmDatabaseSchema}{Schema name where your patient-level data in OMOP CDM format resides.
+Note that for SQL Server, this should include both the database and
+schema name, for example 'cdm_data.dbo'.}
+
+\item{vocabularyDatabaseSchema}{Schema name where your vocabulary tables in OMOP CDM format resides.
 Note that for SQL Server, this should include both the database and
 schema name, for example 'cdm_data.dbo'.}
 

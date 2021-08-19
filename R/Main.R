@@ -27,6 +27,9 @@
 #'                                             format resides. Note that for SQL Server, this should
 #'                                             include both the database and schema name, for example
 #'                                             'cdm_data.dbo'.
+#' @param vocabularyDatabaseSchema             Schema name where your vocabulary tables in OMOP CDM format resides.
+#'                                             Note that for SQL Server, this should include both the database and
+#'                                             schema name, for example 'cdm_data.dbo'.
 #' @param oracleTempSchema                     Should be used in Oracle to specify a schema where the
 #'                                             user has write priviliges for storing temporary tables.
 #' @param cohortDatabaseSchema                 Schema name where intermediate data can be stored. You
@@ -63,6 +66,7 @@
 #' @export
 execute <- function(connectionDetails,
                     cdmDatabaseSchema,
+                    vocabularyDatabaseSchema = cdmDatabaseSchema,
                     oracleTempSchema,
                     cohortDatabaseSchema,
                     outputFolder,
@@ -101,6 +105,7 @@ execute <- function(connectionDetails,
     if (createExposureCohorts) {
         createExposureCohorts(connectionDetails = connectionDetails,
                               cdmDatabaseSchema = cdmDatabaseSchema,
+                              vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                               cohortDatabaseSchema = cohortDatabaseSchema,
                               tablePrefix = tablePrefix,
                               indicationId = indicationId,
@@ -116,6 +121,7 @@ execute <- function(connectionDetails,
     if (createOutcomeCohorts) {
         createOutcomeCohorts(connectionDetails = connectionDetails,
                              cdmDatabaseSchema = cdmDatabaseSchema,
+                             vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                              cohortDatabaseSchema = cohortDatabaseSchema,
                              tablePrefix = tablePrefix,
                              oracleTempSchema = oracleTempSchema,

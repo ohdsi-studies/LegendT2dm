@@ -7,6 +7,7 @@
 execute(
   connectionDetails,
   cdmDatabaseSchema,
+  vocabularyDatabaseSchema = cdmDatabaseSchema,
   oracleTempSchema,
   cohortDatabaseSchema,
   outputFolder,
@@ -40,6 +41,10 @@ function in the DatabaseConnector package.}
 format resides. Note that for SQL Server, this should
 include both the database and schema name, for example
 'cdm_data.dbo'.}
+
+\item{vocabularyDatabaseSchema}{Schema name where your vocabulary tables in OMOP CDM format resides.
+Note that for SQL Server, this should include both the database and
+schema name, for example 'cdm_data.dbo'.}
 
 \item{oracleTempSchema}{Should be used in Oracle to specify a schema where the
 user has write priviliges for storing temporary tables.}
