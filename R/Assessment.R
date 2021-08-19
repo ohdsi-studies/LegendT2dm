@@ -26,7 +26,6 @@
 #' @param minCellCount           The minimum cell count for fields contains person counts or fractions.
 #' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
 #'
-#' @importFrom dplyr `%>%` pull select left_join rename
 #'
 #' @export
 assessPhenotypes <- function(connectionDetails,

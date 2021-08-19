@@ -18,6 +18,7 @@
 "_PACKAGE"
 
 #' @import DatabaseConnector
+#' @import dplyr
 #' @importFrom stats aggregate density pnorm qnorm quantile
 #' @importFrom utils capture.output read.csv setTxtProgressBar txtProgressBar write.csv write.table
 

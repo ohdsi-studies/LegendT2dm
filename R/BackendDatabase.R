@@ -356,7 +356,6 @@ naToZero <- function(x) {
 #'                       up when the function is finished. Can be used to specify a temp folder on a drive that
 #'                       has sufficient space if the default system temp space is too limited.
 #'
-#' @import dplyr
 #'
 #' @export
 uploadResultsToDatabase <- function(connectionDetails,

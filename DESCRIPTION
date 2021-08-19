@@ -6,7 +6,11 @@ Author: Marc A. Suchard [aut, cre],
     Patrick B. Ryan [aut]
 Maintainer: Marc A. Suchard <msuchard@ucla.edu>
 Description: Large-Scale Evidence Generation and Evaluation in a Network of Databases
-    for Type 2 Diabetes
+    for Type 2 Diabetes (LEGEND-T2DM) studies the comparative effectiveness and safety
+    of second-line T2DM agents.  This systematic, large-scale data experiment follows 
+    Open Science principles and aims to deliver reliable and actionable healthcare 
+    information for T2DM stakeholders, including patients, their care-givers and 
+    physicians.
 Depends:
     R (>= 4.0),
     DatabaseConnector (>= 3.0.0)
@@ -27,10 +31,10 @@ Imports:
     dplyr,
     meta,
     diffr,
-    LegendT2dmEvidenceExplorer,
-    bookdown,
-    kableExtra,
-    purrr
+    purrr,
+    survival,
+    RJSONIO,
+    zip
 Suggests:
     testthat,
     ROhdsiWebApi,
@@ -43,7 +47,11 @@ Suggests:
     pool,
     tidyr,
     ggiraph,
-    stringr
+    stringr,
+    LegendT2dmEvidenceExplorer,
+    knitr,
+    bookdown,
+    kableExtra
 Remotes:
     ohdsi/FeatureExtraction,
     ohdsi/CohortMethod,

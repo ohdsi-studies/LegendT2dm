@@ -2,3 +2,7 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+Documents
+docs
+extra
+ignore

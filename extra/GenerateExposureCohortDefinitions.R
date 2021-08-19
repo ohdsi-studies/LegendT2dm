@@ -11,12 +11,12 @@ baseUrlWebApi <- keyring::key_get("baseUrl")
 
 # baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, indent = 2, digits = 50)
-# SqlRender::writeSql(baseCohortJson, targetFile = "baseCohort.json")
-# saveRDS(baseCohort, file = "baseCohort.rds")
+# SqlRender::writeSql(baseCohortJson, targetFile = "inst/settings/baseCohort.json")
+# saveRDS(baseCohort, file = "inst/settings/baseCohort.rds")
 
 # Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5, PriorMet == 6, NoMet == 7
 
-baseCohort <- readRDS("baseCohort.rds")
+baseCohort <- readRDS("inst/settings/baseCohort.rds")
 
 generateStats <- TRUE
 

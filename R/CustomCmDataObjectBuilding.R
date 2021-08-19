@@ -261,7 +261,6 @@ fetchAllDataFromServer <- function(connectionDetails,
 #' @param maxCores       How many parallel cores should be used? If more cores are made available this
 #'                       can speed up the analyses.
 #'
-#' @importFrom dplyr `%>%` inner_join distinct arrange select
 #' @importFrom tibble tibble
 #'
 #' @export

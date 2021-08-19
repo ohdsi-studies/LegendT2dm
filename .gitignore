@@ -10,7 +10,6 @@ renv
 
 extra/Credentials.R
 
-
 Documents/Protocol.aux
 Documents/Protocol.html
 Documents/Protocol.log
@@ -20,3 +19,5 @@ Documents/Protocol.tex
 Documents/Protocol.toc
 Documents/Protocol_files/
 Documents/OperationsManual.html
+
+ignore
