@@ -265,18 +265,18 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     appendPrefix <- function(omr, prefix) {
         omr <- omr %>% rowwise() %>%
-            mutate(studyPopFile = ifelse(studyPopFile != "",
-                                         paste0(prefix, "/", studyPopFile), "")) %>%
-            mutate(sharedPsFile = ifelse(sharedPsFile != "",
-                                         paste0(prefix, "/", sharedPsFile), "")) %>%
-            mutate(psFile = ifelse(psFile != "",
-                                   paste0(prefix, "/", psFile), "")) %>%
-            mutate(strataFile = ifelse(strataFile != "",
-                                       paste0(prefix, "/", strataFile), "")) %>%
-            mutate(prefilteredCovariatesFile = ifelse(prefilteredCovariatesFile != "",
-                                                      paste0(prefix, "/", prefilteredCovariatesFile), "")) %>%
-            mutate(outcomeModelFile = ifelse(outcomeModelFile != "",
-                                             paste0(prefix, "/", outcomeModelFile), ""))
+            mutate(studyPopFile = ifelse(.data$studyPopFile != "",
+                                         paste0(prefix, "/", .data$studyPopFile), "")) %>%
+            mutate(sharedPsFile = ifelse(.data$sharedPsFile != "",
+                                         paste0(prefix, "/", .data$sharedPsFile), "")) %>%
+            mutate(psFile = ifelse(.data$psFile != "",
+                                   paste0(prefix, "/", .data$psFile), "")) %>%
+            mutate(strataFile = ifelse(.data$strataFile != "",
+                                       paste0(prefix, "/", .data$strataFile), "")) %>%
+            mutate(prefilteredCovariatesFile = ifelse(.data$prefilteredCovariatesFile != "",
+                                                      paste0(prefix, "/", .data$prefilteredCovariatesFile), "")) %>%
+            mutate(outcomeModelFile = ifelse(.data$outcomeModelFile != "",
+                                             paste0(prefix, "/", .data$outcomeModelFile), ""))
         return(omr)
     }
 

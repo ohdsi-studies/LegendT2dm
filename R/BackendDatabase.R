@@ -63,13 +63,13 @@ createDataModelSqlFile <- function(specifications,
 
       writeLines(sprintf("CREATE TABLE %s (", table$tableName[1]))
 
-      write.table(table %>% mutate(notNull = ifelse(tolower(isRequired) == "yes", "NOT NULL", ""),
-                                   type = toupper(type),
+      write.table(table %>% mutate(notNull = ifelse(tolower(.data$isRequired) == "yes", "NOT NULL", ""),
+                                   type = toupper(.data$type),
                                    tab = tab) %>%
-                    select(tab, fieldName, type, notNull),
+                    select(.data$tab, .data$fieldName, .data$type, .data$notNull),
                   quote = FALSE, row.names = FALSE, col.names = FALSE, eol = ",\n")
 
-      keys <- paste(table %>% filter(tolower(primaryKey) == "yes") %>% pull(fieldName), collapse = ", ")
+      keys <- paste(table %>% filter(tolower(.data$primaryKey) == "yes") %>% pull(.data$fieldName), collapse = ", ")
       writeLines(sprintf("%s PRIMARY KEY(%s)", tab, keys))
       writeLines(");\n")
     }
@@ -210,7 +210,7 @@ checkAndFixDataTypes <-
   function(table,
            tableName,
            zipFileName,
-           specifications = getResultsDataModelSpecifications()) {
+           specifications) {
     tableSpecs <- specifications %>%
       filter(.data$tableName == !!tableName)
 
@@ -284,7 +284,7 @@ checkAndFixDuplicateRows <-
   function(table,
            tableName,
            zipFileName,
-           specifications = getResultsDataModelSpecifications()) {
+           specifications) {
     primaryKeys <- specifications %>%
       dplyr::filter(.data$tableName == !!tableName &
                       .data$primaryKey == "Yes") %>%
@@ -310,7 +310,7 @@ appendNewRows <-
   function(data,
            newData,
            tableName,
-           specifications = getResultsDataModelSpecifications()) {
+           specifications) {
     if (nrow(data) > 0) {
       primaryKeys <- specifications %>%
         dplyr::filter(.data$tableName == !!tableName &

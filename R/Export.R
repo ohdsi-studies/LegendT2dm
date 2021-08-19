@@ -100,14 +100,14 @@ swapColumnContents <- function(df, column1 = "targetId", column2 = "comparatorId
 }
 
 
-getAsymAnalysisIds <- function() {
-    cmAnalysisListFile <- system.file("settings",
-                                      sprintf("cmAnalysisListAsym%s.json", indicationId),
-                                      package = "Legend")
-    cmAnalysisListAsym <- CohortMethod::loadCmAnalysisList(cmAnalysisListFile)
-    analysisIds <- as.vector(unlist(ParallelLogger::selectFromList(cmAnalysisListAsym, "analysisId")))
-    return(analysisIds)
-}
+# getAsymAnalysisIds <- function() {
+#     cmAnalysisListFile <- system.file("settings",
+#                                       sprintf("cmAnalysisListAsym%s.json", indicationId),
+#                                       package = "Legend")
+#     cmAnalysisListAsym <- CohortMethod::loadCmAnalysisList(cmAnalysisListFile)
+#     analysisIds <- as.vector(unlist(ParallelLogger::selectFromList(cmAnalysisListAsym, "analysisId")))
+#     return(analysisIds)
+# }
 
 
 enforceMinCellValue <- function(data, fieldName, minValues, silent = FALSE) {

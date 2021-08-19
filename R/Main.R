@@ -115,7 +115,7 @@ execute <- function(connectionDetails,
                               filterExposureCohorts = filterExposureCohorts,
                               imputeExposureLengthWhenMissing = imputeExposureLengthWhenMissing)
 
-        writePairedCounts(indicationId)
+        writePairedCounts(outputFolder = outputFolder, indicationId = indicationId)
         filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId)
     }
     if (createOutcomeCohorts) {
@@ -198,21 +198,22 @@ execute <- function(connectionDetails,
     ParallelLogger::logInfo("Finished")
 }
 
-writePairedCounts <- function(indicationId) {
+writePairedCounts <- function(indicationId, outputFolder) {
+
     tcos <- readr::read_csv(file = system.file("settings", paste0(indicationId, "TcosOfInterest.csv"),
                                                package = "LegendT2dm"),
                             col_types = readr::cols())
     counts <- readr::read_csv(file = file.path(outputFolder, indicationId, "cohortCounts.csv"),
                               col_types = readr::cols()) %>%
-        select(cohortDefinitionId, cohortCount)
+        select(.data$cohortDefinitionId, .data$cohortCount)
 
     tmp <- tcos %>%
-        left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = cohortCount) %>%
-        left_join(counts, by = c("comparatorId" = "cohortDefinitionId")) %>% rename(comparatorPairedPersons = cohortCount)
+        left_join(counts, by = c("targetId" = "cohortDefinitionId")) %>% rename(targetPairedPersons = .data$cohortCount) %>%
+        left_join(counts, by = c("comparatorId" = "cohortDefinitionId")) %>% rename(comparatorPairedPersons = .data$cohortCount)
 
     tmp <- tmp %>%
-        mutate(targetPairedPersons = ifelse(is.na(targetPairedPersons), 0, targetPairedPersons)) %>%
-        mutate(comparatorPairedPersons = ifelse(is.na(comparatorPairedPersons), 0, comparatorPairedPersons))
+        mutate(targetPairedPersons = ifelse(is.na(.data$targetPairedPersons), 0, .data$targetPairedPersons)) %>%
+        mutate(comparatorPairedPersons = ifelse(is.na(.data$comparatorPairedPersons), 0, .data$comparatorPairedPersons))
 
     readr::write_csv(tmp, file = file.path(outputFolder, indicationId, "pairedExposureSummary.csv"))
 }

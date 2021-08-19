@@ -140,7 +140,7 @@ computeBalance <- function(subset,
     # }
 
     psFile <- file.path(indicationFolder, "cmOutput",
-                        (subset %>% filter(analysisId == stratificationId) %>% pull(sharedPsFile))[1])
+                        (subset %>% filter(analysisId == stratificationId) %>% pull(.data$sharedPsFile))[1])
     ps <- readRDS(psFile)
 
     # Compute balance when stratifying. Not specific to one outcome, so create hypothetical study

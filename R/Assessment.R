@@ -71,7 +71,7 @@ assessPhenotypes <- function(connectionDetails,
                           filterExposureCohorts = filterExposureCohorts)
   }
 
-  writePairedCounts("class")
+  writePairedCounts(outputFolder = outputFolder, indicationId = "class")
 
   if (createOutcomeCohorts) {
     # Outcomes ----------------------------------------------------------------------------------

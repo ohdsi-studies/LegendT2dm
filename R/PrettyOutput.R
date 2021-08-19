@@ -55,7 +55,8 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
 }
 
 #' @export
-printConceptSet <- function(conceptSet) {
+printConceptSet <- function(conceptSet,
+                            latexTableFontSize = 8) {
 
   markdown <- CirceR::conceptSetPrintFriendly(conceptSet)
   rows <- unlist(strsplit(markdown, "\\r\\n"))
@@ -66,20 +67,20 @@ printConceptSet <- function(conceptSet) {
 
   header <- gsub("###", "### Concept:", header)
 
-  tab <- data %>% mutate_if(is.numeric, format, digits = 10) %>% kable(linesep = "", booktabs = TRUE, longtable = TRUE)
+  tab <- data %>% mutate_if(is.numeric, format, digits = 10) %>% knitr::kable(linesep = "", booktabs = TRUE, longtable = TRUE)
 
   if (knitr::is_latex_output()) {
     writeLines(header)
 
     writeLines(tab %>%
-                 kable_styling(latex_options = "striped", font_size = latex_table_font_size) %>%
-                 column_spec(1, width = "5em") %>%
-                 column_spec(2, width = "20em"))
+                 kableExtra::kable_styling(latex_options = "striped", font_size = latexTableFontSize) %>%
+                 kableExtra::column_spec(1, width = "5em") %>%
+                 kableExtra::column_spec(2, width = "20em"))
   } else if (knitr::is_html_output()) {
     writeLines(header)
 
     writeLines(tab %>%
-                 kable_styling(bootstrap_options = "striped"))
+                 kableExtra::kable_styling(bootstrap_options = "striped"))
   } else {
     writeLines(markdown)
   }
