@@ -91,7 +91,7 @@ computeCovariateBalance <- function(indicationId = "legendt2dm",
     d <- split(d, paste(d$targetId, d$comparatorId))
     ParallelLogger::clusterApply(cluster = cluster,
                                  x = d,
-                                 fun = LegendT2dm:::computeBalance,
+                                 fun = computeBalance,
                                  studyPopArgs = studyPopArgs,
                                  stratifyByPsArgs = stratifyByPsArgs,
                                  matchOnPsArgs = matchOnPsArgs,
