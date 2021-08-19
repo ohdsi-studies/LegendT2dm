@@ -40,6 +40,8 @@ priviliges for storing temporary tables.}
 \item{useSample}{Use the sampled cohort table instead of the main cohort table (for PS
 model feasibility).}
 
+\item{forceNewObjects}{Force recreation of \code{CohortMethod} data objects?}
+
 \item{outputFolder}{Schema name where intermediate data can be stored. You will need to
 have write priviliges in this schema. Note that for SQL Server, this
 should include both the database and schema name, for example

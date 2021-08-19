@@ -59,7 +59,10 @@
 #'                                             data and injected signals?
 #' @param runCohortMethod                      Run the CohortMethod package to produce the outcome
 #'                                             models?
+#' @param computeCovariateBalance              Report covariate balance statistics across comparisons?
 #' @param exportToCsv                          Export all results to CSV files?
+#' @param filterExposureCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
+#' @param filterOutcomeCohorts   Options subset of outcome cohorts to use; \code{NULL} implies all.
 #' @param maxCores                             How many parallel cores should be used? If more cores
 #'                                             are made available this can speed up the analyses.
 #'

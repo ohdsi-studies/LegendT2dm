@@ -56,6 +56,24 @@ slashes (/)}
 \item{minCellCount}{The minimum cell count for fields contains person counts or fractions.}
 
 \item{databaseId}{A short string for identifying the database (e.g. 'Synpuf').}
+
+\item{databaseName}{Full name for the database.}
+
+\item{databaseDescription}{Brief description of population in database}
+
+\item{createExposureCohorts}{Boolean: execute exposure cohort instantiation? \code{FALSE} will
+attempt to re-use the cohort table in \code{cohortDatabaseSchema}}
+
+\item{runExposureCohortDiagnostics}{Boolean: execute cohort diagnostics on exposure cohorts?}
+
+\item{createOutcomeCohorts}{Boolean: execute outcome cohort instantiation? \code{FALSE} will
+attempt to re-use the cohort table in \code{cohortDatabaseSchema}}
+
+\item{runOutcomeCohortDiagnostics}{Boolean: execute cohort diagnostics on outcome cohorts?}
+
+\item{filterExposureCohorts}{Optional subset of exposure cohorts to use; \code{NULL} implies all.}
+
+\item{filterOutcomeCohorts}{Options subset of outcome cohorts to use; \code{NULL} implies all.}
 }
 \description{
 Assess propensity models

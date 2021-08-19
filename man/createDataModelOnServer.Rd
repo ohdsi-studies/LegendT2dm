@@ -13,7 +13,22 @@ createDataModelOnServer(
 )
 }
 \arguments{
+\item{connection}{An object of type \code{connection} as created using the
+\code{\link[DatabaseConnector]{connect}} function in the
+DatabaseConnector package. Can be left NULL if \code{connectionDetails}
+is provided, in which case a new connection will be opened at the start
+of the function, and closed when the function finishes.}
+
+\item{connectionDetails}{An object of type \code{connectionDetails} as created using the
+\code{\link[DatabaseConnector]{createConnectionDetails}} function in the
+DatabaseConnector package. Can be left NULL if \code{connection} is
+provided.}
+
 \item{schema}{The schema on the postgres server where the tables will be created.}
+
+\item{sqlFileName}{File name of table creation SQL within \code{package}.}
+
+\item{package}{Package name containing the \code{sqlFileName} file.}
 }
 \description{
 Create the data model tables on a database server.

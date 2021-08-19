@@ -35,6 +35,7 @@
 #' @param tablePrefix            A prefix to be used for all table names created for this study.
 #' @param useSample              Use the sampled cohort table instead of the main cohort table (for PS
 #'                               model feasibility).
+#' @param forceNewObjects        Force recreation of \code{CohortMethod} data objects?
 #' @param outputFolder           Schema name where intermediate data can be stored. You will need to
 #'                               have write priviliges in this schema. Note that for SQL Server, this
 #'                               should include both the database and schema name, for example
@@ -258,6 +259,7 @@ fetchAllDataFromServer <- function(connectionDetails,
 #' @param indicationId   A string denoting the indicationId.
 #' @param useSample      Use the sampled cohort table instead of the main cohort table (for PS model
 #'                       feasibility).
+#' @param restrictToOt1  Limit \code{CohortMethod} data objects to only comparisons that use On-Treatment-1?
 #' @param maxCores       How many parallel cores should be used? If more cores are made available this
 #'                       can speed up the analyses.
 #'

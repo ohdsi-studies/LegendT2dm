@@ -45,6 +45,9 @@ priviliges for storing temporary tables.}
 \item{outputFolder}{Name of local folder to place results; make sure to use forward
 slashes (/)}
 
+\item{minCohortSize}{Minimum number of people that have to be in each cohort to keep a pair of
+cohorts.}
+
 \item{sampleSize}{What is the maximum sample size for each exposure cohort?}
 
 \item{maxCores}{How many parallel cores should be used? If more cores are made
@@ -52,10 +55,10 @@ available this can speed up the analyses.}
 
 \item{databaseId}{A short string for identifying the database (e.g. 'Synpuf').}
 
-\item{forceNewCmDataObjects}{Force recreation of CohortMethod data objects?}
+\item{preferenceScoreBounds}{Preference score bounds to use when reporting proportion of subjects in
+empirical clinical equipoise.}
 
-\item{minCohortsSize}{Minimum number of people that have to be in each cohort to keep a pair of
-cohorts.}
+\item{forceNewCmDataObjects}{Force recreation of \code{CohortMethod} data objects?}
 }
 \description{
 Assess propensity models

@@ -2,7 +2,7 @@
 % Please edit documentation in R/BackendDatabase.R
 \name{grantPermissionOnServer}
 \alias{grantPermissionOnServer}
-\title{Create a SQL file to construct data model tables on a database server.}
+\title{Grant read-permission on server}
 \usage{
 grantPermissionOnServer(
   connectionDetails,
@@ -11,14 +11,17 @@ grantPermissionOnServer(
 )
 }
 \arguments{
-\item{specifications}{Specifications data table}
+\item{connectionDetails}{An object of type \code{connectionDetails} as created using the
+\code{\link[DatabaseConnector]{createConnectionDetails}} function in the
+DatabaseConnector package. Can be left NULL if \code{connection} is
+provided.}
 
-\item{fileName}{Output name for SQL file}
+\item{schema}{Schema name for read-permission}
 
-\item{tab}{Tab characters to use}
+\item{user}{User name for read-permission}
 }
 \description{
-Create a SQL file to construct data model tables on a database server.
+Grant read-permission on server
 }
 \details{
 Only PostgreSQL servers are supported.

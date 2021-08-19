@@ -24,6 +24,8 @@ DatabaseConnector package.}
 
 \item{zipFileName}{Name of single or vector of multiple zip files.}
 
+\item{specifications}{Specification of results tables}
+
 \item{forceOverWriteOfSpecifications}{If TRUE, specifications of the phenotypes, cohort definitions, and analysis
 will be overwritten if they already exist on the database. Only use this if these specifications
 have changed since the last upload.}
@@ -31,6 +33,8 @@ have changed since the last upload.}
 \item{purgeSiteDataBeforeUploading}{If TRUE, before inserting data for a specific databaseId all the data for
 that site will be dropped. This assumes the input zip file contains the full data for that
 data site.}
+
+\item{convertFromCamelCase}{Convert column names from camelCase to snake_case when uploading?                       .}
 
 \item{tempFolder}{Folder on the local file system where the zip files are extracted to. Will be cleaned
 up when the function is finished. Can be used to specify a temp folder on a drive that

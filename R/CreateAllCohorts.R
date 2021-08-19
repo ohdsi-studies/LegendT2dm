@@ -9,6 +9,9 @@
 #' @param cdmDatabaseSchema      Schema name where your patient-level data in OMOP CDM format resides.
 #'                               Note that for SQL Server, this should include both the database and
 #'                               schema name, for example 'cdm_data.dbo'.
+#' @param vocabularyDatabaseSchema   Schema name where your vocabulary tables in OMOP CDM format resides.
+#'                               Note that for SQL Server, this should include both the database and
+#'                               schema name, for example 'cdm_data.dbo'.
 #' @param cohortDatabaseSchema   Schema name where intermediate data can be stored. You will need to
 #'                               have write priviliges in this schema. Note that for SQL Server, this
 #'                               should include both the database and schema name, for example
@@ -20,6 +23,8 @@
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
 #'                               slashes (/)
+#' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
+#' @param filterExposureCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
 #' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
 #'
 #' @export
@@ -95,18 +100,20 @@ createExposureCohorts <- function(connectionDetails,
 #' @param cdmDatabaseSchema      Schema name where your patient-level data in OMOP CDM format resides.
 #'                               Note that for SQL Server, this should include both the database and
 #'                               schema name, for example 'cdm_data.dbo'.
+#' @param vocabularyDatabaseSchema   Schema name where your vocabulary tables in OMOP CDM format resides.
+#'                               Note that for SQL Server, this should include both the database and
+#'                               schema name, for example 'cdm_data.dbo'.
 #' @param cohortDatabaseSchema   Schema name where intermediate data can be stored. You will need to
 #'                               have write priviliges in this schema. Note that for SQL Server, this
 #'                               should include both the database and schema name, for example
 #'                               'cdm_data.dbo'.
 #' @param tablePrefix            A prefix to be used for all table names created for this study.
-#' @param indicationId           A string denoting the indicationId for which the exposure cohorts
-#'                               should be created.
 #' @param oracleTempSchema       Should be used in Oracle to specify a schema where the user has write
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
 #'                               slashes (/)
-#' @param imputeExposureLengthWhenMissing  For PanTher: impute length of drug exposures when the length is missing?
+#' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
+#' @param filterOutcomeCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
 #'
 #' @export
 createOutcomeCohorts <- function(connectionDetails,

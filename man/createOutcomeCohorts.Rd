@@ -25,6 +25,10 @@ the DatabaseConnector package.}
 Note that for SQL Server, this should include both the database and
 schema name, for example 'cdm_data.dbo'.}
 
+\item{vocabularyDatabaseSchema}{Schema name where your vocabulary tables in OMOP CDM format resides.
+Note that for SQL Server, this should include both the database and
+schema name, for example 'cdm_data.dbo'.}
+
 \item{cohortDatabaseSchema}{Schema name where intermediate data can be stored. You will need to
 have write priviliges in this schema. Note that for SQL Server, this
 should include both the database and schema name, for example
@@ -38,10 +42,9 @@ priviliges for storing temporary tables.}
 \item{outputFolder}{Name of local folder to place results; make sure to use forward
 slashes (/)}
 
-\item{indicationId}{A string denoting the indicationId for which the exposure cohorts
-should be created.}
+\item{databaseId}{A short string for identifying the database (e.g. 'Synpuf').}
 
-\item{imputeExposureLengthWhenMissing}{For PanTher: impute length of drug exposures when the length is missing?}
+\item{filterOutcomeCohorts}{Optional subset of exposure cohorts to use; \code{NULL} implies all.}
 }
 \description{
 Create the outcome cohorts

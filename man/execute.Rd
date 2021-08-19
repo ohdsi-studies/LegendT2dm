@@ -91,7 +91,13 @@ data and injected signals?}
 \item{runCohortMethod}{Run the CohortMethod package to produce the outcome
 models?}
 
+\item{computeCovariateBalance}{Report covariate balance statistics across comparisons?}
+
 \item{exportToCsv}{Export all results to CSV files?}
+
+\item{filterExposureCohorts}{Optional subset of exposure cohorts to use; \code{NULL} implies all.}
+
+\item{filterOutcomeCohorts}{Options subset of outcome cohorts to use; \code{NULL} implies all.}
 
 \item{maxCores}{How many parallel cores should be used? If more cores
 are made available this can speed up the analyses.}

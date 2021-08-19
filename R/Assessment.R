@@ -25,7 +25,16 @@
 #' @param sampleSize             What is the maximum sample size across exposure cohorts?
 #' @param minCellCount           The minimum cell count for fields contains person counts or fractions.
 #' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
-#'
+#' @param databaseName           Full name for the database.
+#' @param databaseDescription    Brief description of population in database
+#' @param createExposureCohorts  Boolean: execute exposure cohort instantiation? \code{FALSE} will
+#'                               attempt to re-use the cohort table in \code{cohortDatabaseSchema}
+#' @param createOutcomeCohorts   Boolean: execute outcome cohort instantiation? \code{FALSE} will
+#'                               attempt to re-use the cohort table in \code{cohortDatabaseSchema}
+#' @param runExposureCohortDiagnostics Boolean: execute cohort diagnostics on exposure cohorts?
+#' @param runOutcomeCohortDiagnostics Boolean: execute cohort diagnostics on outcome cohorts?
+#' @param filterExposureCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
+#' @param filterOutcomeCohorts   Options subset of outcome cohorts to use; \code{NULL} implies all.
 #'
 #' @export
 assessPhenotypes <- function(connectionDetails,
@@ -146,13 +155,15 @@ assessPhenotypes <- function(connectionDetails,
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
 #'                               slashes (/)
-#' @param minCohortsSize         Minimum number of people that have to be in each cohort to keep a pair of
+#' @param minCohortSize          Minimum number of people that have to be in each cohort to keep a pair of
 #'                               cohorts.
 #' @param sampleSize             What is the maximum sample size for each exposure cohort?
 #' @param maxCores               How many parallel cores should be used? If more cores are made
 #'                               available this can speed up the analyses.
 #' @param databaseId             A short string for identifying the database (e.g. 'Synpuf').
-#' @param forceNewCmDataObjects  Force recreation of CohortMethod data objects?
+#' @param preferenceScoreBounds  Preference score bounds to use when reporting proportion of subjects in
+#'                               empirical clinical equipoise.
+#' @param forceNewCmDataObjects  Force recreation of \code{CohortMethod} data objects?
 #'
 #' @export
 assessPropensityModels <- function(connectionDetails,

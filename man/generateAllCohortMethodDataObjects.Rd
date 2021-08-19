@@ -20,6 +20,8 @@ generateAllCohortMethodDataObjects(
 \item{useSample}{Use the sampled cohort table instead of the main cohort table (for PS model
 feasibility).}
 
+\item{restrictToOt1}{Limit \code{CohortMethod} data objects to only comparisons that use On-Treatment-1?}
+
 \item{maxCores}{How many parallel cores should be used? If more cores are made available this
 can speed up the analyses.}
 }
