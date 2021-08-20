@@ -78,9 +78,9 @@ options(knitr.kable.NA = "")
 latex_table_font_size <- 8
 ```
 
-# TODO List {-}
+<!-- # TODO List {-} -->
 
-* Update analysis plan matrix table to match `*CmAnalysisLists.json` files
+<!-- * item -->
 
 # List of Abbreviations
 
@@ -114,8 +114,9 @@ if (knitr::is_latex_output()) {
 
 LEGEND-T2DM consists of several `R` packages available on https://github.com/ohdsi-studies:
 
-- `LegendT2dm` and
-- `LegendT2dmEvidenceExplore`
+- `LegendT2dm` 
+- `LegendT2dmCohortExplorer` and
+- `LegendT2dmEvidenceExplorer`
 
 that depend themselves on a large number of packages from Hades (add link).
 To gracefully handle these dependencies, LEGEND-T2DM uses `renv` through a version-controlled `renv.lock` file to specify each package.
