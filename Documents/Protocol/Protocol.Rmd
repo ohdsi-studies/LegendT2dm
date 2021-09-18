@@ -1,0 +1,186 @@
+---
+title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluation
+  across a network of databases for type 2 diabetes mellitus\n"
+fontsize: 12pt
+geometry: margin=1in
+output:
+  bookdown::html_document2:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    number_sections: yes
+    number_tables: yes
+    css: style.css
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    includes:
+      before_body: title.tex
+  word_document:
+    reference_docx: ohdsi-protocol-style.docx
+header-includes:
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{header.tex}
+longtable: yes
+mainfont: Arial
+bibliography: Protocol.bib
+params:
+  date: '2021-07-26'
+  version: 1.0.0
+subtitle: 'Version: `r params$version`'
+link-citations: yes
+csl: jamia.csl
+---
+
+```{r setup, include=FALSE}
+library(LegendT2dm)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
+library(dplyr)
+options(knitr.kable.NA = "")
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) {
+    "latex"
+  } else if (knitr::is_html_output()) {
+    "html"
+  } else {
+    "pipe"
+  }
+})
+
+# pdf2png <- function(path) {
+#   # only do the conversion for non-LaTeX output
+#   if (knitr::is_latex_output()) {
+#     return(path)
+#   }
+#   path2 <- xfun::with_ext(path, "png")
+#   img <- magick::image_read_pdf(path)
+#   magick::image_write(img, path2, format = "png")
+#   path2
+# }
+
+latex_table_font_size <- 8
+```
+
+<!-- # TODO List {-} -->
+
+<!-- * Limited PS model -->
+
+# List of Abbreviations
+
+```{r child = "Abbreviations.Rmd"}
+```
+
+# Responsible Parties
+
+## Investigators
+
+```{r parties, echo=FALSE}
+parties <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Investigator; Institution/Affiliation
+  George Hripcsak; Department of Biomedical Informatics, Columbia University, New York, NY, USA
+  Rohan Khera; Department of Internal Medicine, Yale University, New Haven, CT, USA
+  Harlan M. Krumholz; Department of Internal Medicine, Yale University, New Haven, CT, USA
+  Yuan Lu; Department of Internal Medicine, Yale University, New Haven, CT, USA
+  Patrick B. Ryan; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
+  Martijn J. Schuemie; Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
+  Marc A. Suchard *; Department of Biostatistics, University of California, Los Angeles, Los Angeles, CA, USA
+")
+
+tab <- kable(parties, booktabs = TRUE, linesep = "") %>%
+  column_spec(1, width = "10em") %>%
+  column_spec(2, width = "30em") %>%
+  footnote(general = "* Principal Investigator", general_title = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+## Disclosures
+
+```{r child = "Disclosures.Rmd"}
+```
+
+# Abstract
+
+```{r child = "Abstract.Rmd"}
+```
+
+# Amendments and Updates
+
+```{r amendments, echo=FALSE}
+amendments <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Number; Date; Section of study protocol; Amendment or update; Reason
+  None;;;;
+")
+
+tab <- kable(amendments, booktabs = TRUE, linesep = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+# Milestones
+
+```{r dates, echo=FALSE}
+dates <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+  Milestone; Planned / actual date
+  EU PAS Registration;
+  Start of analysis;
+  End of analysis;
+  Results presentation;
+")
+
+tab <- kable(dates, booktabs = TRUE, linesep = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+```{r child = "MainText.Rmd"}
+```
+
+# References {-}
+
+<div id="refs"></div>
+
+# (APPENDIX) Appendix {-}
+
+```{r child = "Appendix.Rmd"}
+```

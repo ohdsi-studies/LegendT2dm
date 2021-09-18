@@ -1,0 +1,6 @@
+This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
+**GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
+**RK** receives grant funding from the US National Institutes of Health.
+**HMK** receives grants from the US Food & Drug Administration, Medtronics and Janssen Research and Development, is co-founder of HugoHealth and chairs the Cardiac Scientific Advisory Board for UnitedHealth.
+**PBR** and **MJS** are employees of Janssen Research and Development and shareholders in John & Johnson.
+**MAS** receives grant funding from the US National Institutes of Health, the US Department of Veterans Affairs and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.

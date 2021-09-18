@@ -1,0 +1,38 @@
+**Background and Significance**: Type 2 diabetes mellitus (T2DM) is a major cause of morbidity and mortality globally and is associated with an elevated risk of cardiovascular events.
+Therapeutic options for T2DM have expanded over the last decade with the emergence of sodium-glucose co-transporter-2 (SGLT2) inhibitors and glucagon-like peptide-1 (GLP1) receptor agonists, which reduced the risk of major cardiovascular events in randomized controlled trials (RCTs).
+Cardiovascular evidence for older second-line agents, such as sulfonylureas, and direct head-to-head comparisons, including with dipeptidyl peptidase 4 (DPP4) inhibitors, are lacking, leaving a critical gap in our understanding of the relative effects of T2DM agents on cardiovascular risk and on patient-centered safety outcomes.
+
+**Study Aims**: To determine real-world comparative effectiveness and safety of traditionally second-line T2DM agents using health information encompassing millions of patients with T2DM, with a focus on individuals at moderate cardiovascular risk and other key subgroups.
+
+**Study Description**: We will conduct three large-scale, systematic, observational studies to make pairwise comparisons of all SGLT2 inhibitor, GLP1 receptor agonist, DPP4 inhibitor and sulfonylurea agents at the drug-, class- and population subgroup-level within our proposed Large-Scale Evidence Generations Across a Network of Databases for T2DM (LEGEND-T2DM) initiative.
+LEGEND-T2DM will leverage the Observational Health Data Science and Informatics (OHDSI) community that provides access to a standing global network of administrative claims and electronic health record (EHR) data sources.
+The 13 data sources already committed to LEGEND-T2DM cover $>$ 190 million patients in the US and about 50 million internationally, and include two academic medical centers, IBM MarketScan and Optum databases, and the US Department of Veterans Affairs.
+LEGEND-T2DM will study:
+
+* **Population**: Adult, T2DM patients who newly initiate a traditionally second-line T2DM agent, including individuals with and without established cardiovascular disease
+
+Preliminary work in our data sources reveals > 1 million such new-users of SGLT2 inhibitors, GLP1 receptor agonists, DPP4 inhibitors or sulfonylureas with no prior, observed use of other second-line agents to best emulate the idealized RCT one would aim to run if it were practical, to compare:
+
+* **Comparators**:
+  - SGLT2 inhibitors: canagliflozin, dapagliflozin, empagliflozin, ertugliflozin
+  - GLP1 receptor agonists: albiglutide, dulaglutide, exenatide, liraglutide, lixisenatide, semaglutide
+  - DPP4 inhibitors: alogliptin, linagliptin, saxagliptin, sitagliptin, vildagliptin
+  - Sulfonylureas: chlorpropamide, glimepiride, glipizide, gliquidone, glyburide, tolazamide, tolbutamide
+
+LEGEND-T2DM will execute all pairwise class-vs-class and drug-vs-drug comparisons in each data source that meet a minimum patient count of 1,000 per arm and extensive study diagnostics that assess reliability and generalizability through cohort balance and equipoise to examine the relative risk of cardiovascular and safety outcomes:
+
+* **Outcomes**:
+  - Primary: 3- and 4-point major adverse cardiovascular events
+  - Secondary effectiveness: Acute myocardial infarction, acute renal failure, glycemic control, hospitalization for heart failure, measured renal dysfunction, stroke, sudden cardiac death
+  - Secondary safety: Abnormal weight gain or loss, acute pancreatitis, bladder cancer, diabetic ketoacidosis, genitourinary infection, diarrhea, nausea or vomiting, edema, hypoglycemia, hypotension, joint pain, lower extremity amputation, thyroid tumor, and up to 28 additional stakeholder-guided drug side-effects
+
+For each data source and comparison, LEGEND-T2DM will employ a state-of-the-art design:
+
+* **Design**: Observational: active-comparator, new-user cohort study
+
+and committed LEGEND-T2DM data sources provide:
+
+* **Timeframe**: Up to 6-year (SGLT2 inhibitors) to 20-year (sulfonylureas) follow-up for all outcomes
+
+Our systematic framework will address residual confounding, publication bias and $p$-hacking using data-driven, large-scale propensity adjustment for measured confounding, a large set of negative control outcome experiments to address unmeasured and systematic bias, prespecification and full disclosure of hypotheses tested and their results. These approaches capitalize on mature OHDSI open source resources and a large body of clinical and quantitative research that the LEGEND-T2DM investigators originated and continue to drive.
+Finally, LEGEND-T2DM is dedicated to open science and transparency and will publicly share all our analytic code from reproducible cohort definitions through turn-key software, enabling other research groups to leverage our methods, data, and results in order to verify and extend our findings.
