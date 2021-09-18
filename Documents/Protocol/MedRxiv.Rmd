@@ -1,0 +1,106 @@
+---
+title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluation
+  across a network of databases for type 2 diabetes mellitus\n"
+fontsize: 12pt
+geometry: margin=1in
+output:
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    toc: false
+    number_sections: yes
+    includes:
+      before_body: title.tex
+header-includes:
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{header.tex}
+- \renewcommand{\and}{\\}
+longtable: yes
+mainfont: Arial
+bibliography: Protocol.bib
+params:
+  date: '2021-07-26'
+  version: 1.0.0
+# subtitle: 'Version: `r params$version`'
+link-citations: yes
+csl: jamia.csl
+author: "Rohan Khera$^{1}$, list all here, person$^{2}$, person, person,\\and person, and Marc A. Suchard$^{3}$"
+---
+
+```{r setup, include=FALSE}
+library(LegendT2dm)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+library(dplyr)
+options(knitr.kable.NA = "")
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) {
+    "latex"
+  } else if (knitr::is_html_output()) {
+    "html"
+  } else {
+    "pipe"
+  }
+})
+
+latex_table_font_size <- 8
+```
+
+$^{1}$ Here  
+$^{2}$ There  
+$^{3}$ Somewhere else
+
+## Disclosures {-}
+
+```{r child = "Disclosures.Rmd"}
+```
+
+\clearpage
+
+# List of Abbreviations {-}
+
+```{r child = "Abbreviations.Rmd"}
+```
+
+# Abstract {-}
+
+```{r child = "Abstract.Rmd"}
+```
+
+
+
+```{r child = "MainText.Rmd"}
+```
+
+# References {-}
+
+<div id="refs"></div>
+
+# (APPENDIX) Appendix {-}
+
+```{r child = "Appendix.Rmd"}
+```

@@ -18,7 +18,8 @@ abbreviations <- readr::read_delim(col_names = FALSE, delim = ";", trim_ws = TRU
 tab <- kable(abbreviations, col.names = NULL, linesep = "", booktabs = TRUE)
 
 if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), 
+                        font_size = latex_table_font_size)
 } else {
   tab %>% kable_styling(bootstrap_options = "striped")
 }
