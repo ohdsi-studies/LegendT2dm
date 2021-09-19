@@ -10,14 +10,30 @@ renv
 
 extra/Credentials.R
 
-Documents/Protocol.aux
-Documents/Protocol.html
-Documents/Protocol.log
-Documents/Protocol.out
-Documents/Protocol.pdf
-Documents/Protocol.tex
-Documents/Protocol.toc
-Documents/Protocol_files/
+Documents/Protocol/Protocol.html
+Documents/Protocol/Protocol.pdf
+Documents/Protocol/Protocol.tex
+Documents/Protocol/Protocol_files/
 Documents/OperationsManual.html
+
+Documents/Protocol/BmjOpen.tex
+Documents/Protocol/BmjOpen.pdf
+Documents/Protocol/BmjOpen_files/
+
+Documents/Protocol/MedRxiv.tex
+Documents/Protocol/MedRxiv.pdf
+Documents/Protocol/MedRxiv_files/
+
+*.out
+*.toc
+*.fff
+*.ttt
+*.log
+*.aux
+
+MedRxiv.pdf
+BmjOpen.pdf
+Protocol.html
+Protocol.pdf
 
 ignore
