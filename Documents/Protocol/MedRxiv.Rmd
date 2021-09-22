@@ -70,8 +70,8 @@ options(knitr.table.format = function() {
 latex_table_font_size <- 8
 ```
 
-$^{1}$ Here  
-$^{2}$ There  
+$^{1}$ Here
+$^{2}$ There
 $^{3}$ Somewhere else
 
 ## Disclosures {-}
@@ -88,7 +88,7 @@ $^{3}$ Somewhere else
 
 # Abstract {-}
 
-```{r child = "Abstract.Rmd"}
+```{r child = "ShorterAbstract.Rmd"}
 ```
 
 
