@@ -1,0 +1,15 @@
+**Background**:
+Therapeutic options for type 2 diabetes mellitus (T2DM) have expanded over the last decade with the emergence of sodium-glucose co-transporter-2 (SGLT2) inhibitors and glucagon-like peptide-1 (GLP1) receptor agonists, which reduced the risk of major cardiovascular events in randomized controlled trials (RCTs).
+Cardiovascular evidence for older second-line agents, such as sulfonylureas, and direct head-to-head comparisons, including with dipeptidyl peptidase 4 (DPP4) inhibitors, are lacking, leaving a critical gap in our understanding of the relative effects of T2DM agents on cardiovascular risk and on patient-centered safety outcomes.
+
+**Methods and Analysis**:
+The Large-Scale Evidence Generations Across a Network of Databases for T2DM (LEGEND-T2DM) initiative is a series of systematic, large-scale, multinational, real-world comparative cardiovascular effectiveness and safety studies of all 4 major second-line anti-hyperglycemic agents including SGLT2 inhibitor, GLP1 receptor agonist, DPP4 inhibitor and sulfonylureas.
+LEGEND-T2DM will leverage the Observational Health Data Science and Informatics (OHDSI) community that provides access to a global network of administrative claims and electronic health record (EHR) data sources.
+Committed data partners represent 190 million patients in the US and about 50 million internationally. LEGEND-T2DM will identify all adult, T2DM patients who newly initiate a traditionally second-line T2DM agent, including individuals with and without established cardiovascular disease.
+Using an active comparator, new-user cohort design, LEGEND-T2DM will execute all pairwise class-vs-class and drug-vs-drug comparisons in each data source that meet a minimum patient count of 1,000 per arm and extensive study diagnostics that assess reliability and generalizability through cohort balance and equipoise to examine the relative risk of cardiovascular and safety outcomes.
+The primary cardiovascular outcomes include a 3-point and a 4-point composite of major adverse cardiovascular events, and series of safety outcomes.
+The study will pursue data-driven, large-scale propensity adjustment for measured confounding, a large set of negative control outcome experiments to address unmeasured and systematic bias.
+
+**Ethics and Dissemination**:
+The study ensures data safety through a federated analytic approach and follows research best practices, including prespecification and full disclosure of hypotheses tested and their results.
+LEGEND-T2DM is dedicated to open science and transparency and will publicly share all our analytic code from reproducible cohort definitions through turn-key software, enabling other research groups to leverage our methods, data, and results in order to verify and extend our findings.
