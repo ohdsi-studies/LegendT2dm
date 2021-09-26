@@ -47,7 +47,7 @@ params:
 # subtitle: 'Version: `r params$version`'
 link-citations: yes
 csl: jamia.csl
-author: "Rohan Khera$^{1}$, list all here, person$^{2}$, person, person,\\and person, and Marc A. Suchard$^{3}$"
+author: "Rohan Khera MD MS$^{1,2}$, Martijn J Scheumie PhD,$^{3}$ Yuan Lu ScD,$^{1,2}$, Anna Ostropolets MD,$^{4}$ Fan Bu PhD,$^{5}$  Akihiko (Aki) Nishimura,$^{6}$, Ruijun Chen MD,$^{7}$  George Hripcsak MD MS,$^{4,8}$  Patrick B Ryan PhD,$^{3,4}$, Harlan M Krumholz MD SM,$^{1,2}$ Marc A Suchard MD PhD$^{5,9}$"
 ---
 
 ```{r setup, include=FALSE}
@@ -70,9 +70,15 @@ options(knitr.table.format = function() {
 latex_table_font_size <- 8
 ```
 
-$^{1}$ Here
-$^{2}$ There
-$^{3}$ Somewhere else
+$^{1}$ Section of Cardiovascular Medicine, Department of Internal Medicine, Yale School of Medicine, New Haven, CT
+$^{2}$ Center for Outcomes Research and Evaluation, Yale-New Haven Hospital, New Haven, CT
+$^{3}$ Epidemiology Analytics, Janssen Research and Development, Titusville, NJ
+$^{4}$ Department of Biomedical Informatics, Columbia University Medical Center, New York, NY
+$^{5}$ Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
+$^{6}$ Department of Biostatistics, Johns Hopkins University, Baltimore, MD
+$^{7}$ Department of Translational Data Science and Informatics, Geisinger, Danville, PA
+$^{8}$ NewYork-Presbyterian Hospital, New York, NY
+$^{9}$ Department of Biostatistics, Fielding School of Public Health, University of California, Los Angeles, CA
 
 ## Disclosures {-}
 
