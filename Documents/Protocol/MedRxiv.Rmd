@@ -83,7 +83,7 @@ latex_table_font_size <- 8
 1. Section of Cardiovascular Medicine, Department of Internal Medicine, Yale School of Medicine, New Haven, CT
 2. Center for Outcomes Research and Evaluation, Yale-New Haven Hospital, New Haven, CT
 3. Epidemiology Analytics, Janssen Research and Development, Titusville, NJ
-4. Department of Biostatistics, Fielding School of Public Health, University of California, Los Angeles, CA
+4. Department of Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles, CA
 5. Department of Biomedical Informatics, Columbia University Medical Center, New York, NY
 6. Department of Translational Data Science and Informatics, Geisinger, Danville, PA
 7. New York-Presbyterian Hospital, New York, NY
