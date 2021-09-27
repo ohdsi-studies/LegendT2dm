@@ -82,9 +82,11 @@ printConceptSet <- function(conceptSet,
   markdown <- CirceR::conceptSetPrintFriendly(conceptSet)
   rows <- unlist(strsplit(markdown, "\\r\\n"))
   rows <- gsub("^\\|", "", rows)
+  rows <- gsub("\\|$", "", rows)
   header <- rows[1]
   data <- readr::read_delim(paste(rows[c(2,4:(length(rows)-2))],
-                                  collapse = '\n'), delim = '|',)
+                                  collapse = '\n'),
+                            delim = '|', col_types = "ccccccc")
 
   header <- gsub("###", "### Concept:", header)
 
