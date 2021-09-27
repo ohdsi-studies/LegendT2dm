@@ -162,7 +162,7 @@ negative_controls <- readr::read_csv(system.file("settings/NegativeControls.csv"
 
 colnames(negative_controls) <- c("", "Concept ID")
 
-tab <- kable(negative_controls, booktabs = TRUE, linesep = "",
+tab <- kable(negative_controls, booktabs = TRUE, linesep = "", longtable = TRUE,
       caption = "Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID") %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped")
 
@@ -170,7 +170,10 @@ if (knitr::is_latex_output()) {
   tab %>%
     column_spec(1, width = "40em") %>%
     column_spec(2, width = "15em") %>%
-    kable_styling(font_size = latex_table_font_size)
+    kable_styling(font_size = latex_table_font_size,
+                  latex_options = c("repeat_header"),
+                  repeat_header_continued = "\\textit{(Continued on Next Page...)}")  
+  
 } else {
   tab
 }

@@ -274,14 +274,30 @@ We will also study second-line T2DM drug side-effects and safety concerns highli
 <!-- While we list many patient-centered outcomes as "exploratory" in the table, we use this term to highlight those that are less likely to achieve high statistical power across all data sources due to lower event rates. -->
 We will employ the same level of systematic rigor in studying outcomes regardless of their primary or secondary label.
 
-A majority of outcome definitions have been previously implemented and validated in our own work [@Suchard2019-gq; @You_undated-fz; @Ryan2018-ci; @Wang2017-su; @Weinstein2020-ic; @Yuan2018-am] based heavily on prior development by others (see references in Table \@ref(tab:outcome-table)).
-To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.
-
-```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
+```{r outcome-prep, echo=FALSE, warning=FALSE}
 outcomes <- read.csv(system.file("settings/OutcomesOfInterest.csv",
                                  package = "LegendT2dm")) %>%
-  select(atlasName,description,cite)
+  select(atlasName,description,cite,hyperlink)
 
+stripCitation <- function(cite) {
+  if (cite != "") {
+    tmp <- substring(cite, 2, nchar(cite) - 1)
+    citeList <- strsplit(tmp, ";")
+    #paste(unlist(citeList), collapse = ";")
+    citeList
+  } else { 
+    NULL
+  }
+}
+
+citeList <- unlist(sapply(outcomes$cite, stripCitation))
+names(citeList) <- NULL
+citeList <- unique(citeList)
+
+citeList <- paste("[",
+                  paste(citeList, collapse = ";")
+                  ,"]", collapse = "")
+  
 if (knitr::is_latex_output()) {
   convertCitationToLatex <- function(cite) {
     if (cite != "") {
@@ -295,12 +311,19 @@ if (knitr::is_latex_output()) {
     }
     cite
   }
-  outcomes$cite <- sapply(outcomes$cite, convertCitationToLatex)
+  outcomes$cite <- outcomes$hyperlink
 }
 
+outcomes <- outcomes %>% select(-hyperlink)
+```
+
+A majority of outcome definitions have been previously implemented and validated in our own work [@Suchard2019-gq; @You_undated-fz; @Ryan2018-ci; @Wang2017-su; @Weinstein2020-ic; @Yuan2018-am] based heavily on prior development by others (see references in Table \@ref(tab:outcome-table) `r citeList`).
+To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.
+
+```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
 colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
-tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
+tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE, longtable = TRUE,
       caption = "LEGEND-T2DM study outcomes") %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
   pack_rows("Cardiovascular outcomes", 1, 2, latex_align = "c", indent = FALSE)  %>%
@@ -308,9 +331,11 @@ tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
 
 if (knitr::is_latex_output()) {
   tab %>%
-    column_spec(3, width = "25em") %>%
-    column_spec(4, width = "10em") %>%
-    kable_styling(font_size = latex_table_font_size)
+    column_spec(2, width = "32em") %>%
+    # column_spec(3, width = "10em") %>%
+    kable_styling(font_size = latex_table_font_size,
+                  latex_options = c("repeat_header"),
+                  repeat_header_continued = "\\textit{(Continued on Next Page...)}")
 } else {
   tab
 }
