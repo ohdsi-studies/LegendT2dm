@@ -119,6 +119,10 @@ latex_table_font_size <- 8
 
 <div id="refs"></div>
 
+\clearpage
+
+\centerline{\Huge Appendix}
+
 # (APPENDIX) Appendix {-}
 
 ```{r child = "Appendix.Rmd"}
