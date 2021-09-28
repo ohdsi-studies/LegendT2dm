@@ -38,6 +38,7 @@ header-includes:
 - \usepackage{setspace}\doublespacing
 - \usepackage{lineno}\linenumbers
 - \usepackage[nolists]{endfloat}
+- \DeclareDelayedFloatFlavour*{longtable}{table}
 longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
