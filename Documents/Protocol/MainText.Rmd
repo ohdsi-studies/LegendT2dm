@@ -323,7 +323,8 @@ To assess across-source consistency and general clinical validity, we will chara
 ```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
 colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
-tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE, longtable = TRUE,
+tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE, 
+             longtable = (is.null(params$avoidLongTable) || (params$avoidLongTable == FALSE)),
       caption = "LEGEND-T2DM study outcomes") %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
   pack_rows("Cardiovascular outcomes", 1, 2, latex_align = "c", indent = FALSE)  %>%
@@ -340,7 +341,6 @@ if (knitr::is_latex_output()) {
   tab
 }
 ```
-
 
 ## Analysis
 

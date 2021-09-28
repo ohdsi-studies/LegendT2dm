@@ -45,6 +45,7 @@ bibliography: Protocol.bib
 params:
   date: ''
   version: 1.0.0
+  avoidLongTable: TRUE
 # subtitle: 'Version: `r params$version`'
 link-citations: yes
 csl: jamia.csl
