@@ -1,6 +1,6 @@
 ---
-title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluation
-  across a network of databases for type 2 diabetes mellitus\n"
+# title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluation
+#   across a network of databases for type 2 diabetes mellitus\n"
 fontsize: 12pt
 geometry: margin=1in
 output:
@@ -42,12 +42,12 @@ longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
 params:
-  date: '2021-07-26'
+  date: ''
   version: 1.0.0
 # subtitle: 'Version: `r params$version`'
 link-citations: yes
 csl: jamia.csl
-author: "Rohan Khera$^{1}$, list all here, person$^{2}$, person, person,\\and person, and Marc A. Suchard$^{3}$"
+# author: "Rohan Khera$^{1}$, list all here, person$^{2}$, person, person,\\and person, and Marc A. Suchard$^{3}$"
 ---
 
 ```{r setup, include=FALSE}
@@ -70,27 +70,25 @@ options(knitr.table.format = function() {
 latex_table_font_size <- 8
 ```
 
-$^{1}$ Here  
-$^{2}$ There  
-$^{3}$ Somewhere else
+```{r child = "BmjTitlePage.Rmd"}
+```
 
 ## Disclosures {-}
 
 ```{r child = "Disclosures.Rmd"}
 ```
 
-\clearpage
-
 # List of Abbreviations {-}
 
 ```{r child = "Abbreviations.Rmd"}
 ```
 
+\clearpage
+
 # Abstract {-}
 
 ```{r child = "Abstract.Rmd"}
 ```
-
 
 
 ```{r child = "MainText.Rmd"}

@@ -1,0 +1,35 @@
+\centerline{\Huge RESEARCH PROTOCOL}
+
+<br>
+
+\begin{center}
+{\Huge Large-scale evidence generation and evaluation across a network of databases for type 2 diabetes mellitus}
+\end{center}
+
+<br>
+
+\begin{center}
+  Rohan Khera MD MS\ $^{\tiny{\text{1,2}}}$ \and
+  Martijn J Scheumie PhD\ $^{\tiny{\text{3,4}}}$ \and
+  Yuan Lu ScD\ $^{\tiny{\text{1,2}}}$ \and
+  Anna Ostropolets MD\ $^{\tiny{\text{5}}}$ \and
+  Ruijun Chen MD\ $^{\tiny{\text{6}}}$  \and
+  George Hripcsak MD MS\ $^{\tiny{\text{5,7}}}$ \and
+  Patrick B Ryan PhD\ $^{\tiny{\text{3,5}}}$, \and
+  Harlan M Krumholz MD SM\ $^{\tiny{\text{1,2}}}$ \and
+  Marc A Suchard MD PhD\ $^{\tiny{\text{4,8,9}}}$
+\end{center}
+
+\footnotesize
+
+1. Section of Cardiovascular Medicine, Department of Internal Medicine, Yale School of Medicine, New Haven, CT
+2. Center for Outcomes Research and Evaluation, Yale-New Haven Hospital, New Haven, CT
+3. Epidemiology Analytics, Janssen Research and Development, Titusville, NJ
+4. Department of Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles, CA
+5. Department of Biomedical Informatics, Columbia University Medical Center, New York, NY
+6. Department of Translational Data Science and Informatics, Geisinger, Danville, PA
+7. New York-Presbyterian Hospital, New York, NY
+8. Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
+9. Department of Human Genetics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
+
+\normalsize
