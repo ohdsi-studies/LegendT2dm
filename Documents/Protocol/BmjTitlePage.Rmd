@@ -33,6 +33,6 @@
 7. New York-Presbyterian Hospital, New York, NY
 8. Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
 9. Department of Human Genetics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
-10. VA Informatics and Computing Infrastructure, Department of Veterans Affairs, Salt Lake City, UT
+10. VA Informatics and Computing Infrastructure, US Department of Veterans Affairs, Salt Lake City, UT
 
 \normalsize
