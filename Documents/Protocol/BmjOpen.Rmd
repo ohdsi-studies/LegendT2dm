@@ -80,11 +80,6 @@ latex_table_font_size <- 8
 ```{r child = "Disclosures.Rmd"}
 ```
 
-# List of Abbreviations {-}
-
-```{r child = "Abbreviations.Rmd"}
-```
-
 \clearpage
 
 # Abstract {-}
