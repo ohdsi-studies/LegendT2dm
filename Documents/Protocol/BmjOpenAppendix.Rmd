@@ -35,8 +35,6 @@ header-includes:
 - \renewcommand{\and}{\\}
 - \usepackage{setspace}\doublespacing
 - \usepackage{lineno}\linenumbers
-- \usepackage[nolists]{endfloat}
-- \DeclareDelayedFloatFlavour*{longtable}{table}
 longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
@@ -67,33 +65,6 @@ options(knitr.table.format = function() {
 
 latex_table_font_size <- 8
 ```
-
-```{r child = "BmjTitlePage.Rmd"}
-```
-
-## Disclosures {-}
-
-```{r child = "Disclosures.Rmd"}
-```
-
-\clearpage
-
-# Abstract {-}
-
-```{r child = "Abstract.Rmd"}
-```
-
-
-```{r child = "MainText.Rmd"}
-```
-
-# References {-}
-
-<div id="refs"></div>
-
-\clearpage
-\processdelayedfloats
-\clearpage
 
 # (APPENDIX) Appendix {-}
 

@@ -606,7 +606,7 @@ If possible, LEGEND-T2DM publications should be drafted in `Rmarkdown` with `*.R
 Initial drafting can begin in a private repository, but final versions should end up in `ohdsi-studies/LegendT2dm/Documents`.
 Currently, we have the following documents:
 
-* `Protocol/Protocol.Rmd`: official protocol registered (soon) in ENCAPP
+* `Protocol/Protocol.Rmd`: official protocol registered (soon) with EU PASS
 * `Protocol/MedRvix.Rmd`: reformatted protocol for `medRvix`, available at: (add url)
 * `Protocol/BmjOpen.Rmd`: reformatted protocol for BMJOpen (to be submitted)
 

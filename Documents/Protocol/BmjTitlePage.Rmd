@@ -1,4 +1,6 @@
-\centerline{\Huge RESEARCH PROTOCOL}
+\begin{center}
+  {\Huge RESEARCH PROTOCOL}
+\end{center}
 
 <br>
 
@@ -17,7 +19,7 @@
   George Hripcsak MD MS\ $^{\tiny{\text{5,7}}}$ \and
   Patrick B Ryan PhD\ $^{\tiny{\text{3,5}}}$, \and
   Harlan M Krumholz MD SM\ $^{\tiny{\text{1,2}}}$ \and
-  Marc A Suchard MD PhD\ $^{\tiny{\text{4,8,9}}}$
+  Marc A Suchard MD PhD\ $^{\tiny{\text{4,8,9,10}}}$
 \end{center}
 
 \footnotesize
@@ -31,5 +33,6 @@
 7. New York-Presbyterian Hospital, New York, NY
 8. Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
 9. Department of Human Genetics, David Geffen School of Medicine at UCLA, University of California, Los Angeles, CA
+10. VA Informatics and Computing Infrastructure, Department of Veterans Affairs, Salt Lake City, UT
 
 \normalsize
