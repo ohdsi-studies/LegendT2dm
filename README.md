@@ -30,11 +30,12 @@ How to run
 2. Open your study package in RStudio. Use the following code to install all the dependencies:
 
 	```r
+	install.packages("renv")
 	renv::active()
 	renv::restore()
 	```
 
-3. In RStudio, select 'Build' then 'Install and Restart' to build the package.
+3. In RStudio, select 'Build' then 'Install and Restart' to install the `LegendT2dm` package.
 
 4. Once installed, you can execute the feasibility assessment partion of the study by modifying and using the code below. For your convenience, this code is also provided under `extras/CodeToRun.R`:
 
