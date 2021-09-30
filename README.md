@@ -8,7 +8,7 @@ Large-scale Evidence Generation and Evaluation across a Network of Databases for
 - Tags: **-**
 - Study lead: **Marc A. Suchard**
 - Study lead forums tag: **[msuchard](https://forums.ohdsi.org/u/msuchard)**
-- Study start date: **-**
+- Study start date: **1 October 2021**
 - Study end date: **-**
 - Protocol: **[HTML document](https://ohdsi-studies.github.io/LegendT2dm/Protocol.html)**
 - Publications: **-**
@@ -18,7 +18,7 @@ Requirements
 ============
 
 - A database in [Common Data Model version 5](https://github.com/OHDSI/CommonDataModel) in one of these platforms: SQL Server, Oracle, PostgreSQL, IBM Netezza, Apache Impala, Amazon RedShift, Google BigQuery, or Microsoft APS.
-- R version 4.0.3 or newer
+- R version 4.0.5
 - On Windows: [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 - [Java](http://java.com)
 - 100 GB of free disk space
@@ -100,43 +100,48 @@ How to run
 5. Upload the files ```class/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
-  uploadPhenotypeResults(cohort = "class",
-                         outputFolder, privateKeyFileName = "<file>", userName = "<name>")
-  uploadPhenotypeResults(cohort = "outcome",
-                         outputFolder, privateKeyFileName = "<file>", userName = "<name>")
-  ```
-    where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
+	uploadPhenotypeResults(cohort = "class",
+	                       outputFolder, privateKeyFileName = "<file>", userName = "<name>"
+	uploadPhenotypeResults(cohort = "outcome",
+	                       outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+  	```
+  	
+	where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
   
 6. View your cohort diagnostics locally via:
 
-  ```r
-  CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, "class/cohortDiagnosticsExport"))
-  LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "class",
-                                                 dataFolder = file.path(outputFolder, "class/cohortDiagnosticsExport"))
+	```r
+	CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, 
+	                                                                   "class/cohortDiagnosticsExport"))
+	LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "class",
+	                                               dataFolder = file.path(outputFolder, 
+						                              "class/cohortDiagnosticsExport"))
 
-  CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, "outcome/cohortDiagnosticsExport"))
-  LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "outcome",
-                                                 dataFolder = file.path(outputFolder, "outcome/cohortDiagnosticsExport"))
+	CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, 
+	                                                                   "outcome/cohortDiagnosticsExport"))
+	LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "outcome",
+	                                               dataFolder = file.path(outputFolder, 
+						                              "outcome/cohortDiagnosticsExport"))
 	```
 
 7. Complete the feasibility assessment by constructing sample-restricted propensity models: 
-  ```r
-  assessPropensityModels(connectionDetails = connectionDetails,
-                       cdmDatabaseSchema = cdmDatabaseSchema,
-                       oracleTempSchema = oracleTempSchema,
-                       cohortDatabaseSchema = cohortDatabaseSchema,
-                       outputFolder = outputFolder,
-                       indicationId = "class",
-                       tablePrefix = tablePrefix,
-                       databaseId = databaseId,
-                       maxCores = maxCores)
-  ```
-  and uploading the file ```class/assessmentOfPropensityScores/propensityModelAssessment_<DatabaseId>.zip``` in the output folder to the study coordinator:
+  	```r
+	assessPropensityModels(connectionDetails = connectionDetails,
+	                       cdmDatabaseSchema = cdmDatabaseSchema,
+	                       oracleTempSchema = oracleTempSchema,
+	                       cohortDatabaseSchema = cohortDatabaseSchema,
+	                       outputFolder = outputFolder,
+	                       indicationId = "class",
+	                       tablePrefix = tablePrefix,
+	                       databaseId = databaseId,
+	                       maxCores = maxCores)
+	```
+  	and uploading the file ```class/assessmentOfPropensityScores/propensityModelAssessment_<DatabaseId>.zip``` in the output folder to the study coordinator:
   
-  ```r
-    uploadPsAssessmentResults(cohort = "class",
-                              outputFolder, privateKeyFileName = "<file>", userName = "<name>")
-  ```
+	```r
+  	uploadPsAssessmentResults(cohort = "class",
+	                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+	```
 
 License
 =======
@@ -148,4 +153,4 @@ Development
 
 ### Development status
 
-In development
+Collecting cohort diagnostics from data partners.
