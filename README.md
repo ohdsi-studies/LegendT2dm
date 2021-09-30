@@ -100,10 +100,43 @@ How to run
 4. Upload the files ```class/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
-	uploadFeasbilitityResults(outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+  uploadPhenotypeResults(cohort = "class",
+                         outputFolder, privateKeyFileName = "<file>", userName = "<name")
+  uploadPhenotypeResults(cohort = "outcome",
+                         outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+  ```
+    where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
+  
+5. View your cohort diagnostics locally via:
+
+  ```r
+  CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, "class/cohortDiagnosticsExport"))
+  LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "class",
+                                                 dataFolder = file.path(outputFolder, "class/cohortDiagnosticsExport"))
+
+  CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, "outcome/cohortDiagnosticsExport"))
+  LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = "outcome",
+                                                 dataFolder = file.path(outputFolder, "outcome/cohortDiagnosticsExport"))
 	```
 
-    where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
+6. Complete the feasibility assessment by constructing sample-restricted propensity models: 
+  ```r
+  assessPropensityModels(connectionDetails = connectionDetails,
+                       cdmDatabaseSchema = cdmDatabaseSchema,
+                       oracleTempSchema = oracleTempSchema,
+                       cohortDatabaseSchema = cohortDatabaseSchema,
+                       outputFolder = outputFolder,
+                       indicationId = "class",
+                       tablePrefix = tablePrefix,
+                       databaseId = databaseId,
+                       maxCores = maxCores)
+  ```
+  and uploading the file ```class/assessmentOfPropensityScores/propensityModelAssessment_<DatabaseId>.zip``` in the output folder to the study coordinator:
+  
+  ```r
+    uploadPsAssessmentResults(cohort = "class",
+                              outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+  ```
 
 License
 =======

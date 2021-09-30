@@ -55,16 +55,16 @@ library(kableExtra)
 library(dplyr)
 options(knitr.kable.NA = "")
 
-pdf2png <- function(path) {
-  # only do the conversion for non-LaTeX output
-  if (knitr::is_latex_output()) {
-    return(path)
-  }
-  path2 <- xfun::with_ext(path, "png")
-  img <- magick::image_read_pdf(path)
-  magick::image_write(img, path2, format = "png")
-  path2
-}
+# pdf2png <- function(path) {
+#   # only do the conversion for non-LaTeX output
+#   if (knitr::is_latex_output()) {
+#     return(path)
+#   }
+#   path2 <- xfun::with_ext(path, "png")
+#   img <- magick::image_read_pdf(path)
+#   magick::image_write(img, path2, format = "png")
+#   path2
+# }
 
 
 latex_table_font_size <- 8

@@ -115,6 +115,18 @@
       "RemoteSha": "7e615050508bd1915e8437cf98fceacacbda4b9c",
       "Hash": "232fe80c9c662c227b614c3cf6050464"
     },
+    "LegendT2dmCohortExplorer": {
+      "Package": "LegendT2dmCohortExplorer",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "LegendT2dmCohortExplorer",
+      "RemoteUsername": "ohdsi-studies",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "1f3a5eed965694e3d5a32a3847a2adba10981c7f",
+      "Hash": "c659b1f7a2bcf50945438aa1ff76021f"
+    },
     "LegendT2dmEvidenceExplorer": {
       "Package": "LegendT2dmEvidenceExplorer",
       "Version": "0.1.0",
@@ -153,6 +165,30 @@
       "RemoteHost": "api.github.com",
       "Remotes": "ohdsi/FeatureExtraction",
       "Hash": "f7bcaf68930902a0a8c84d983f10ecd9"
+    },
+    "OhdsiRTools": {
+      "Package": "OhdsiRTools",
+      "Version": "1.10.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "OhdsiRTools",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "6da158e8ae99bf174419b7b9121f2896d61a6d67",
+      "Hash": "c1ae7a94d9843dd0643c594d97556a2f"
+    },
+    "OhdsiSharing": {
+      "Package": "OhdsiSharing",
+      "Version": "0.2.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "OhdsiSharing",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "8778421042e74e8824c00a58cf63bedfbfeb54aa",
+      "Hash": "2fdcab21ec86f128e22aa5c88b66cbe1"
     },
     "ParallelLogger": {
       "Package": "ParallelLogger",
@@ -353,6 +389,13 @@
       "Repository": "CRAN",
       "Hash": "e2e3e46ab3c217313bc77a9eb364d128"
     },
+    "codetools": {
+      "Package": "codetools",
+      "Version": "0.2-18",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "019388fc48e48b3da0d3a76ff94608a8"
+    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.0-1",
@@ -492,6 +535,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "38ec653c2613bed60052ba3787bd8a2c"
+    },
+    "formatR": {
+      "Package": "formatR",
+      "Version": "1.11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2590a6a868515a69f258640a51b724c9"
     },
     "fs": {
       "Package": "fs",
