@@ -101,13 +101,13 @@ How to run
 
 	```r
   uploadPhenotypeResults(cohort = "class",
-                         outputFolder, privateKeyFileName = "<file>", userName = "<name")
+                         outputFolder, privateKeyFileName = "<file>", userName = "<name>")
   uploadPhenotypeResults(cohort = "outcome",
                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
   ```
     where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
   
-5. View your cohort diagnostics locally via:
+6. View your cohort diagnostics locally via:
 
   ```r
   CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, "class/cohortDiagnosticsExport"))
@@ -119,7 +119,7 @@ How to run
                                                  dataFolder = file.path(outputFolder, "outcome/cohortDiagnosticsExport"))
 	```
 
-6. Complete the feasibility assessment by constructing sample-restricted propensity models: 
+7. Complete the feasibility assessment by constructing sample-restricted propensity models: 
   ```r
   assessPropensityModels(connectionDetails = connectionDetails,
                        cdmDatabaseSchema = cdmDatabaseSchema,
