@@ -40,18 +40,23 @@ How to run
 
 	```r
 	library(LegendT2dm)
-
+	
+	Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="s:/DatabaseDrivers")
+	
+	# Run-once: set-up your database driver
+	DatabaseConnector::downloadJdbcDrivers(dbms = "postgresql")
+	
 	# Optional: specify where the temporary files (used by the Andromeda package) will be created:
-	options(andromedaTempFolder = "s:/andromedaTemp")
+	options(andromedaTempFolder = "s:/AndromedaTemp")
 
 	# Maximum number of cores to be used:
-	maxCores <- parallel::detectCores()
+	maxCores <- min(4, parallel::detectCores()) # Or more depending on your hardware
 
 	# Minimum cell count when exporting data:
 	minCellCount <- 5
 
 	# The folder where the study intermediate and result files will be written:
-	outputFolder <- "c:/LegendT2dmStudy"
+	outputFolder <- "s:/LegendT2dmStudy"
 
 	# Details for connecting to the server:
 	# See ?DatabaseConnector::createConnectionDetails for help
