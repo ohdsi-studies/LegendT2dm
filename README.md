@@ -36,7 +36,7 @@ How to run
 
 3. In RStudio, select 'Build' then 'Install and Restart' to build the package.
 
-3. Once installed, you can execute the feasibility assessment partion of the study by modifying and using the code below. For your convenience, this code is also provided under `extras/CodeToRun.R`:
+4. Once installed, you can execute the feasibility assessment partion of the study by modifying and using the code below. For your convenience, this code is also provided under `extras/CodeToRun.R`:
 
 	```r
 	library(LegendT2dm)
@@ -97,7 +97,7 @@ How to run
 
 	```
 
-4. Upload the files ```class/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` in the output folder to the study coordinator:
+5. Upload the files ```class/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
   uploadPhenotypeResults(cohort = "class",
