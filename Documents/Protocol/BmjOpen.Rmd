@@ -71,21 +71,30 @@ latex_table_font_size <- 8
 ```{r child = "BmjTitlePage.Rmd"}
 ```
 
-## Disclosures {-}
-
-```{r child = "Disclosures.Rmd"}
-```
-
 \clearpage
 
 # Abstract {-}
 
-```{r child = "Abstract.Rmd"}
+```{r child = "ShorterAbstract.Rmd"}
 ```
 
+\clearpage
+
+# Article Summary {-}
+
+```{r child = "BMJOpenArticleSummary.Rmd"}
+```
+
+\clearpage
 
 ```{r child = "MainText.Rmd"}
 ```
+
+## Acknowledgements {-}
+
+```{r child = "BMJOpenAcknowledgements.Rmd"}
+```
+
 
 # References {-}
 
