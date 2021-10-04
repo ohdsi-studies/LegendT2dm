@@ -2,6 +2,8 @@
 fontsize: 12pt
 geometry: margin=1in
 output:
+  word_document:
+    reference_docx: bmj-open-style.docx
   bookdown::pdf_document2:
     keep_tex: yes
     latex_engine: xelatex
