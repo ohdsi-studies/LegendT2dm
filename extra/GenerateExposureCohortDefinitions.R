@@ -354,6 +354,7 @@ makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 classTcos <- rbind(
   # Order: tar, met, age, sex, race, cvd, renal
   #
+  # OT1
   # Main
   makeTCOs("ot1", "with", "any", "any", "any", "any", "any"),
   # Age
@@ -370,7 +371,26 @@ classTcos <- rbind(
   makeTCOs("ot1", "with", "any", "any", "any", "higher", "any"),
   # Renal dz
   makeTCOs("ot1", "with", "any", "any", "any", "any", "without"),
-  makeTCOs("ot1", "with", "any", "any", "any", "any", "with")
+  makeTCOs("ot1", "with", "any", "any", "any", "any", "with"),
+  #
+  # OT2
+  # Main
+  makeTCOs("ot2", "with", "any", "any", "any", "any", "any"),
+  # Age
+  makeTCOs("ot2", "with", "younger", "any", "any", "any", "any"),
+  makeTCOs("ot2", "with", "middle", "any", "any", "any", "any"),
+  makeTCOs("ot2", "with", "older", "any", "any", "any", "any"),
+  # Sex
+  makeTCOs("ot2", "with", "any", "female", "any", "any", "any"),
+  makeTCOs("ot2", "with", "any", "male", "any", "any", "any"),
+  # Race
+  makeTCOs("ot2", "with", "any", "any", "black", "any", "any"),
+  # CV risk
+  makeTCOs("ot2", "with", "any", "any", "any", "low", "any"),
+  makeTCOs("ot2", "with", "any", "any", "any", "higher", "any"),
+  # Renal dz
+  makeTCOs("ot2", "with", "any", "any", "any", "any", "without"),
+  makeTCOs("ot2", "with", "any", "any", "any", "any", "with")
 )
 readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
 

@@ -52,8 +52,11 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                                   sprintf("CmData_l1_t%s_c%s.zip",
                                           exposures[i,]$targetId,
                                           exposures[i,]$comparatorId))
-            file.copy(fileName, destination, copy.date = TRUE)
-
+            success <- file.copy(fileName, destination, overwrite = TRUE,
+                                 copy.date = TRUE)
+            if (!success) {
+                stop("Error copying file: ", fileName)
+            }
         })
     }
 
@@ -179,9 +182,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     deleteCmDataFiles(ot1ExposureSummary,
                       cmFolder2)
 
-    # Third run: OT2
-
     if (FALSE) {
+
+    # Third run: OT2
 
     ParallelLogger::logInfo("Executing CohortMethod for OT2 analyses")
 
@@ -196,23 +199,25 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                     cmFolder3)
 
     # Should re-use shared propensity score models (after relabeling)
+    # TODO This currently does not work because (I believe) personSeqIds do not match across cohorts
+    # TODO Figure out how to link subjects
 
-    psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
-                             "^Ps_l1_s1_p2_t.*rds", # TODO Update
-                             full.names = TRUE, ignore.case = TRUE)
-
-    lapply(psFileList, function(sourceFile) {
-        sourceTargetId <-  sub("_c*", "", sub(".*_t", "", sourceFile))
-        sourceComparatorId <- sub(".rds", sub(".*_c", sourceFile))
-        destinationTargetId <- makeOt2(sourceTargetId)
-        destinationComparatorId <- makeOt2(sourceComparatorId)
-        destinationFile <- sub("Run_1", "Run_3",
-                               sub(sourceTargetId, destinationTargetId,
-                                   sub(sourceComparatorId, destinationComparatorId, sourceFile)))
-        file.copy(from = sourceFile,
-                  to = destinationFile,
-                  copy.date = TRUE)
-    })
+    # psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
+    #                          "^Ps_l1_s1_p2_t.*rds", # TODO Update
+    #                          full.names = TRUE, ignore.case = TRUE)
+    #
+    # lapply(psFileList, function(sourceFile) {
+    #     sourceTargetId <-  sub("_c.*", "", sub(".*_t", "", sourceFile))
+    #     sourceComparatorId <- sub(".rds", "", sub(".*_c", "", sourceFile))
+    #     destinationTargetId <- makeOt2(sourceTargetId)
+    #     destinationComparatorId <- makeOt2(sourceComparatorId)
+    #     destinationFile <- sub("Run_1", "Run_3",
+    #                            sub(sourceTargetId, destinationTargetId,
+    #                                sub(sourceComparatorId, destinationComparatorId, sourceFile)))
+    #     file.copy(from = sourceFile,
+    #               to = destinationFile,
+    #               copy.date = TRUE)
+    # })
 
     ot2TcoList <- lapply(1:nrow(ot2ExposureSummary), function(i) {
         CohortMethod::createTargetComparatorOutcomes(targetId = ot2ExposureSummary[i,]$targetId,
@@ -250,7 +255,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     deleteCmDataFiles(ot2ExposureSummary,
                       cmFolder3)
 
-    } # if (FALSE)
+    }
 
     # Create analysis summaries -------------------------------------------------------------------
     outcomeModelReference1 <- readRDS(file.path(indicationFolder,
@@ -286,7 +291,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     outcomeModelReference <- rbind(outcomeModelReference1,
                                    outcomeModelReference2) #,
-                                   #outcomeModelReference3)
+                                   # outcomeModelReference3)
 
     saveRDS(outcomeModelReference, file.path(indicationFolder,
                                              "cmOutput",

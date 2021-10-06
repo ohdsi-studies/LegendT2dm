@@ -71,6 +71,7 @@ execute <- function(connectionDetails,
                     databaseId = "Unknown",
                     databaseName = "Unknown",
                     databaseDescription = "Unknown",
+                    minCohortSize = 1000,
                     minCellCount = 5,
                     imputeExposureLengthWhenMissing = FALSE,
                     createExposureCohorts = TRUE,
@@ -109,10 +110,12 @@ execute <- function(connectionDetails,
                               databaseId = databaseId,
                               filterExposureCohorts = filterExposureCohorts,
                               imputeExposureLengthWhenMissing = imputeExposureLengthWhenMissing)
-
-        writePairedCounts(indicationId)
-        filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId)
     }
+
+    writePairedCounts(indicationId)
+    filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId,
+                                minCohortSize = minCohortSize)
+
     if (createOutcomeCohorts) {
         createOutcomeCohorts(connectionDetails = connectionDetails,
                              cdmDatabaseSchema = cdmDatabaseSchema,
