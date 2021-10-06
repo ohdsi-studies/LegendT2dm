@@ -156,6 +156,8 @@ invisible(readr::read_csv(system.file("settings/OutcomesOfInterest.csv", package
 
 # Negative Control Concepts {#negative-controls}
 
+\captionsetup{labelformat=empty}
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 negative_controls <- readr::read_csv(system.file("settings/NegativeControls.csv", package = "LegendT2dm")) %>%
   select(name, conceptId) %>% arrange(name)
