@@ -24,7 +24,7 @@ LEGEND-T2DM will execute all pairwise class-vs-class and drug-vs-drug comparison
 * **Outcomes**:
   - Primary: 3- and 4-point major adverse cardiovascular events
   - Secondary effectiveness: Acute myocardial infarction, acute renal failure, glycemic control, hospitalization for heart failure, measured renal dysfunction, stroke, sudden cardiac death
-  - Secondary safety: Abnormal weight gain or loss, acute pancreatitis, bladder cancer, diabetic ketoacidosis, genitourinary infection, diarrhea, nausea or vomiting, edema, hypoglycemia, hypotension, joint pain, lower extremity amputation, thyroid tumor, and up to 28 additional stakeholder-guided drug side-effects
+  - Secondary safety: Abnormal weight gain or loss, acute pancreatitis, all-cause mortality, bladder cancer, bone fracture, breast cancer, diabetic ketoacidosis, diarrhea, genitourinary infection, hyperkalemia, hypoglycemia, hypoglycemia, hypotension, joint pain, lower extremity amputation, nausea, peripheral edema, photosensitivity, renal cancer, thyroid tumor, venous thromboembolism, vomiting
 
 For each data source and comparison, LEGEND-T2DM will employ a state-of-the-art design:
 

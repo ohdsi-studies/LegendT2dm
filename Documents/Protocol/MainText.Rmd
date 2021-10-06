@@ -41,7 +41,8 @@ We will model each study on our successful collaborative research evaluating the
 Table \@ref(tab:drug-table) list the four major T2DM agent classes and the individual agents licensed in the U.S. within each class.
 We will examine all ${4 \choose 2} = 6$ class-wise comparisons and all ${5 + 6 + 4 + 7 \choose 2} = 231$ ingredient-wise comparisons.
 
-For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes listed in Table \@ref(tab:outcome-table).
+For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes described in Section \@ref(outcomes).
+<!-- listed in Table \@ref(tab:outcome-table). -->
 
 <!-- Acute pancreatitis -->
 <!-- Cancer -->
@@ -245,7 +246,7 @@ Chief among these tools stands OHDSI’s `CohortDiagnostic` package ([github](ht
 For any cohort and data source mapped to OMOP CDM, this package systematically generates incidence new-user rates (stratified by age, gender, and calendar year), cohort characteristics (all comorbidities, drug use, procedures, health utilization) and the actual codes found in the data triggering the various rules in the cohort definitions.
 This can allow researchers and stakeholders to understand the heterogeneity of source coding for exposures and health outcomes as well as the impact of various inclusion criteria on overall cohort counts (details described in Section \@ref(sample-size)).
 
-## Outcomes
+## Outcomes {#outcomes}
 
 Across all data sources and pairwise exposure cohorts, we will assess relative risks of 32 cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
 Primary outcomes of interest are:
@@ -513,7 +514,8 @@ if (knitr::is_latex_output()) {
   tab %>%
     column_spec(1, width = "15em") %>%
     column_spec(2, width = "40em") %>%
-    kable_styling(font_size = latex_table_font_size)
+    kable_styling(latex_options = c("striped","hold_position"), 
+                  font_size = latex_table_font_size)
 } else {
   tab
 }

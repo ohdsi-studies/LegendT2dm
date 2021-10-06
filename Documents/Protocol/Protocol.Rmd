@@ -4,6 +4,13 @@ title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluatio
 fontsize: 12pt
 geometry: margin=1in
 output:
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    includes:
+      before_body: title.tex
   bookdown::html_document2:
     df_print: paged
     toc: yes
@@ -12,13 +19,6 @@ output:
     number_sections: yes
     number_tables: yes
     css: style.css
-  bookdown::pdf_document2:
-    keep_tex: yes
-    latex_engine: xelatex
-    md_extensions: +raw_attribute
-    number_sections: yes
-    includes:
-      before_body: title.tex
   word_document:
     reference_docx: ohdsi-protocol-style.docx
 header-includes:
@@ -50,11 +50,11 @@ longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
 params:
-  date: '2021-07-26'
+  date: '2021-09-30'
   version: 1.0.0
 subtitle: 'Version: `r params$version`'
 link-citations: yes
-csl: jamia.csl
+csl: bmj.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -98,6 +98,8 @@ latex_table_font_size <- 8
 ```{r child = "Abbreviations.Rmd"}
 ```
 
+\clearpage
+
 # Responsible Parties
 
 ## Investigators
@@ -116,11 +118,12 @@ parties <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file
 
 tab <- kable(parties, booktabs = TRUE, linesep = "") %>%
   column_spec(1, width = "10em") %>%
-  column_spec(2, width = "30em") %>%
+  column_spec(2, width = "35em") %>%
   footnote(general = "* Principal Investigator", general_title = "")
 
 if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"),
+                        font_size = latex_table_font_size)
 } else {
   tab %>% kable_styling(bootstrap_options = "striped")
 }
@@ -131,10 +134,14 @@ if (knitr::is_latex_output()) {
 ```{r child = "Disclosures.Rmd"}
 ```
 
+\clearpage
+
 # Abstract
 
 ```{r child = "Abstract.Rmd"}
 ```
+
+\clearpage
 
 # Amendments and Updates
 
@@ -147,7 +154,7 @@ amendments <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, f
 tab <- kable(amendments, booktabs = TRUE, linesep = "")
 
 if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), font_size = latex_table_font_size)
 } else {
   tab %>% kable_styling(bootstrap_options = "striped")
 }
@@ -167,7 +174,7 @@ dates <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file =
 tab <- kable(dates, booktabs = TRUE, linesep = "")
 
 if (knitr::is_latex_output()) {
-  tab %>% kable_styling(latex_options = "striped", font_size = latex_table_font_size)
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), font_size = latex_table_font_size)
 } else {
   tab %>% kable_styling(bootstrap_options = "striped")
 }
@@ -176,9 +183,15 @@ if (knitr::is_latex_output()) {
 ```{r child = "MainText.Rmd"}
 ```
 
+\clearpage
+
 # References {-}
 
 <div id="refs"></div>
+
+\clearpage
+
+\centerline{\Huge Appendix}
 
 # (APPENDIX) Appendix {-}
 
