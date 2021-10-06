@@ -1,0 +1,15 @@
+## Author contributions:
+RK and MAS conceived the research and drafted the proposal in consultation with MJS, YL, AO, RC, GH, PBR, and HMK, who provided critical feedback on the research proposal.
+
+## Funding Statement:
+The proposal was partially funded through the National Institutes of Health grants K23 HL153775 and R01 LM006910 and an Intergovernmental Personnel Act agreement with the US Department of Veterans Affairs.  
+The funders had no role in the design and conduct of the proposal; preparation, review, or approval of the manuscript; and decision to submit the manuscript for publication.
+
+## Competing interest statement
+This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
+**RK** is a founder of Evidence2Health, and receives grant funding from the US National Institutes of Health.
+**MJS** and **PBR** are employees of Janssen Research and Development and shareholders in John & Johnson.
+**GH** receives grant funding from the US National Institutes of Health and the US Food & Drug Administration and contracts from Janssen Research and Development.
+**HMK** receives grants from the US Food & Drug Administration, Medtronics and Janssen Research and Development, is co-founder of HugoHealth and chairs the Cardiac Scientific Advisory Board for UnitedHealth.
+**MAS** receives grant funding from the US National Institutes of Health, the US Department of Veterans Affairs and the US Food & Drug Administration and contracts from Janssen Research and Development and IQVIA.
+

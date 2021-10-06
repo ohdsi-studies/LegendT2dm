@@ -285,7 +285,7 @@ stripCitation <- function(cite) {
     citeList <- strsplit(tmp, ";")
     #paste(unlist(citeList), collapse = ";")
     citeList
-  } else { 
+  } else {
     NULL
   }
 }
@@ -297,7 +297,7 @@ citeList <- unique(citeList)
 citeList <- paste("[",
                   paste(citeList, collapse = ";")
                   ,"]", collapse = "")
-  
+
 if (knitr::is_latex_output()) {
   convertCitationToLatex <- function(cite) {
     if (cite != "") {
@@ -323,7 +323,7 @@ To assess across-source consistency and general clinical validity, we will chara
 ```{r outcome-table, echo=FALSE, warning=FALSE, results='asis'}
 colnames(outcomes) <- c("Phenotype", "Brief logical description", "Prior development")
 
-tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE, 
+tab <- kable(outcomes, booktabs = TRUE, linesep = "", escape = FALSE,
              longtable = (is.null(params$avoidLongTable) || (params$avoidLongTable == FALSE)),
       caption = "LEGEND-T2DM study outcomes") %>%
   kable_styling(bootstrap_options = "striped", latex_options = "striped") %>%
@@ -540,7 +540,7 @@ This protocol will link to open source code for all steps to generating diagnost
 Such transparency is possible because we will construct our studies on top of the OHDSI toolstack of open source software tools that are community developed and rigorously tested [@Schuemie2020-wx].
 We will publicly host LEGEND-T2DM source code at (https://github.com/ohdsi-studies/LegendT2dm), allowing public contribution and review, and free re-use for anyone’s future research.
 
-## Continous sharing of results
+## Continuous sharing of results
 
 LEGEND-T2DM embodies a new approach to generating evidence from healthcare data that overcome weaknesses in the current process of answering and publishing (or not) one question at a time.
 Generating evidence for thousands of research and control questions using a systematic process enables us to not only evaluate that process and the coherence and consistency of the evidence, but also to avoid $p$-hacking and publication bias [@Schuemie2018-zi].
