@@ -16,6 +16,7 @@ execute(
   databaseId = "Unknown",
   databaseName = "Unknown",
   databaseDescription = "Unknown",
+  minCohortSize = 1000,
   minCellCount = 5,
   imputeExposureLengthWhenMissing = FALSE,
   createExposureCohorts = TRUE,

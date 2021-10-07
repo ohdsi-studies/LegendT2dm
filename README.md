@@ -98,7 +98,7 @@ How to run
 
 	```
 
-5. Upload the files ```class/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_<DatabaseId>.zip``` in the output folder to the study coordinator:
+5. Upload the files ```class/cohortDiagnosticsExport/Results_class_exposures_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_outcomes_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
 	uploadPhenotypeResults(cohort = "class",
@@ -137,7 +137,7 @@ How to run
 	                       databaseId = databaseId,
 	                       maxCores = maxCores)
 	```
-  	and uploading the file ```class/assessmentOfPropensityScores/propensityModelAssessment_<DatabaseId>.zip``` in the output folder to the study coordinator:
+  	and uploading the file ```class/assessmentOfPropensityScores/Results_class_ps_<DatabaseId>.zip``` in the output folder to the study coordinator:
   
 	```r
   	uploadPsAssessmentResults(cohort = "class",

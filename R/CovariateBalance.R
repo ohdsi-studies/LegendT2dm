@@ -76,6 +76,7 @@ computeCovariateBalance <- function(indicationId = "legendt2dm",
 
     d <- merge(exposureSummary[, c("targetId", "comparatorId")],
                outcomeModelReference)
+    d <- d[isOt1(d$targetId),] # Restrict to OT1/ITT cohorts
 
     rm(exposureSummary)
     rm(outcomeModelReference)

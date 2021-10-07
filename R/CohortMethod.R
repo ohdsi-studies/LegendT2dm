@@ -182,7 +182,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     deleteCmDataFiles(ot1ExposureSummary,
                       cmFolder2)
 
-    if (FALSE) {
+    if (TRUE) {
 
     # Third run: OT2
 
@@ -202,22 +202,22 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     # TODO This currently does not work because (I believe) personSeqIds do not match across cohorts
     # TODO Figure out how to link subjects
 
-    # psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
-    #                          "^Ps_l1_s1_p2_t.*rds", # TODO Update
-    #                          full.names = TRUE, ignore.case = TRUE)
-    #
-    # lapply(psFileList, function(sourceFile) {
-    #     sourceTargetId <-  sub("_c.*", "", sub(".*_t", "", sourceFile))
-    #     sourceComparatorId <- sub(".rds", "", sub(".*_c", "", sourceFile))
-    #     destinationTargetId <- makeOt2(sourceTargetId)
-    #     destinationComparatorId <- makeOt2(sourceComparatorId)
-    #     destinationFile <- sub("Run_1", "Run_3",
-    #                            sub(sourceTargetId, destinationTargetId,
-    #                                sub(sourceComparatorId, destinationComparatorId, sourceFile)))
-    #     file.copy(from = sourceFile,
-    #               to = destinationFile,
-    #               copy.date = TRUE)
-    # })
+    psFileList <- list.files(file.path(indicationFolder, "cmOutput", "Run_1"),
+                             "^Ps_l1_s1_p2_t.*rds", # TODO Update
+                             full.names = TRUE, ignore.case = TRUE)
+
+    lapply(psFileList, function(sourceFile) {
+        sourceTargetId <-  sub("_c.*", "", sub(".*_t", "", sourceFile))
+        sourceComparatorId <- sub(".rds", "", sub(".*_c", "", sourceFile))
+        destinationTargetId <- makeOt2(sourceTargetId)
+        destinationComparatorId <- makeOt2(sourceComparatorId)
+        destinationFile <- sub("Run_1", "Run_3",
+                               sub(sourceTargetId, destinationTargetId,
+                                   sub(sourceComparatorId, destinationComparatorId, sourceFile)))
+        file.copy(from = sourceFile,
+                  to = destinationFile,
+                  copy.date = TRUE)
+    })
 
     ot2TcoList <- lapply(1:nrow(ot2ExposureSummary), function(i) {
         CohortMethod::createTargetComparatorOutcomes(targetId = ot2ExposureSummary[i,]$targetId,
@@ -255,7 +255,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     deleteCmDataFiles(ot2ExposureSummary,
                       cmFolder3)
 
-    }
+    } # if(FALSE) end
 
     # Create analysis summaries -------------------------------------------------------------------
     outcomeModelReference1 <- readRDS(file.path(indicationFolder,
@@ -264,9 +264,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     outcomeModelReference2 <- readRDS(file.path(indicationFolder,
                                                 "cmOutput", "Run_2",
                                                 "outcomeModelReference.rds"))
-    # outcomeModelReference3 <- readRDS(file.path(indicationFolder,
-    #                                             "cmOutput", "Run_3",
-    #                                             "outcomeModelReference.rds"))
+    outcomeModelReference3 <- readRDS(file.path(indicationFolder,
+                                                "cmOutput", "Run_3",
+                                                "outcomeModelReference.rds"))
 
     appendPrefix <- function(omr, prefix) {
         omr <- omr %>% rowwise() %>%
@@ -287,11 +287,11 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     outcomeModelReference1 <- appendPrefix(outcomeModelReference1, "Run_1")
     outcomeModelReference2 <- appendPrefix(outcomeModelReference2, "Run_2")
-    # outcomeModelReference3 <- appendPrefix(outcomeModelReference2, "Run_3")
+    outcomeModelReference3 <- appendPrefix(outcomeModelReference3, "Run_3")
 
     outcomeModelReference <- rbind(outcomeModelReference1,
-                                   outcomeModelReference2) #,
-                                   # outcomeModelReference3)
+                                   outcomeModelReference2,
+                                   outcomeModelReference3)
 
     saveRDS(outcomeModelReference, file.path(indicationFolder,
                                              "cmOutput",

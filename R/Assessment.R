@@ -18,6 +18,8 @@
 #'                               should include both the database and schema name, for example
 #'                               'cdm_data.dbo'.
 #' @param tablePrefix            A prefix to be used for all table names created for this study.
+#' @param indicationId           A string denoting the indicationId for which the exposure cohorts
+#'                               should be created; should be 'class' or 'drug'
 #' @param oracleTempSchema       Should be used in Oracle to specify a schema where the user has write
 #'                               priviliges for storing temporary tables.
 #' @param outputFolder           Name of local folder to place results; make sure to use forward
@@ -42,6 +44,7 @@ assessPhenotypes <- function(connectionDetails,
                              vocabularyDatabaseSchema = cdmDatabaseSchema,
                              cohortDatabaseSchema,
                              tablePrefix = "legend_t2dm",
+                             indicationId = "class",
                              oracleTempSchema,
                              outputFolder,
                              sampleSize = 1e+05,
@@ -64,6 +67,8 @@ assessPhenotypes <- function(connectionDetails,
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_FILE_LOGGER", silent = TRUE))
   on.exit(ParallelLogger::unregisterLogger("DEFAULT_ERRORREPORT_LOGGER", silent = TRUE), add = TRUE)
 
+  ParallelLogger::logInfo(sprintf("Starting assessPhenotypes() for LEGEND-T2DM %s-vs-%s studies",
+                                  indicationId, indicationId))
 
   if (createExposureCohorts) {
     # Exposures ----------------------------------------------------------------------------------------
@@ -72,14 +77,14 @@ assessPhenotypes <- function(connectionDetails,
                           vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                           cohortDatabaseSchema = cohortDatabaseSchema,
                           tablePrefix = tablePrefix,
-                          indicationId = "class",
+                          indicationId = indicationId,
                           oracleTempSchema = oracleTempSchema,
                           outputFolder = outputFolder,
                           databaseId = databaseId,
                           filterExposureCohorts = filterExposureCohorts)
   }
 
-  writePairedCounts(outputFolder = outputFolder, indicationId = "class")
+  writePairedCounts(outputFolder = outputFolder, indicationId = indicationId)
 
   if (createOutcomeCohorts) {
     # Outcomes ----------------------------------------------------------------------------------
@@ -100,7 +105,7 @@ assessPhenotypes <- function(connectionDetails,
                                  vocabularyDatabaseSchema = vocabularyDatabaseSchema,
                                  cohortDatabaseSchema,
                                  tablePrefix = tablePrefix,
-                                 indicationId = "class",
+                                 indicationId = indicationId,
                                  oracleTempSchema = oracleTempSchema,
                                  outputFolder = outputFolder,
                                  databaseId = databaseId,
@@ -108,8 +113,8 @@ assessPhenotypes <- function(connectionDetails,
                                  databaseDescription = databaseDescription,
                                  minCellCount = minCellCount)
 
-    zipName <- file.path(outputFolder, "class", "cohortDiagnosticsExport",
-                         sprintf("Results_%s.zip", databaseId))
+    zipName <- file.path(outputFolder, indicationId, "cohortDiagnosticsExport",
+                         sprintf("Results_%s_exposures_%s.zip", indicationId, databaseId))
     ParallelLogger::logInfo("Exposure diagnostics results are ready for sharing at:", zipName)
   }
 
@@ -127,9 +132,12 @@ assessPhenotypes <- function(connectionDetails,
                                 minCellCount = minCellCount)
 
     zipName <- file.path(outputFolder, "outcome", "cohortDiagnosticsExport",
-                         sprintf("Results_%s.zip", databaseId))
+                         sprintf("Results_outcomes_%s.zip", databaseId))
     ParallelLogger::logInfo("Outcome diagnostics results are ready for sharing at:", zipName)
   }
+
+  ParallelLogger::logInfo(sprintf("Finished assessPhenotypes() for LEGEND-T2DM %s-vs-%s studies",
+                                  indicationId, indicationId))
 }
 
 #' Assess propensity models
@@ -189,6 +197,9 @@ assessPropensityModels <- function(connectionDetails,
     dir.create(assessmentExportFolder, recursive = TRUE)
   }
   ParallelLogger::addDefaultFileLogger(file.path(indicationFolder, "logAssesPropensityModels.txt"))
+
+  ParallelLogger::logInfo(sprintf("Starting assessPropensityModels() for LEGEND-T2DM %s-vs-%s studies",
+                                  indicationId, indicationId))
 
   ParallelLogger::logInfo("Sampling cohorts for propensity model feasibility")
   sql <- SqlRender::loadRenderTranslateSql("SampleCohortsForPsFeasibility.sql",
@@ -391,10 +402,13 @@ assessPropensityModels <- function(connectionDetails,
   write.csv(data, file.path(assessmentExportFolder, "ps_auc_assessment.csv"), row.names = FALSE)
 
   zipName <- file.path(assessmentExportFolder,
-                       sprintf("propensityModelAssessment_%s.zip", databaseId))
+                       sprintf("Results_%s_ps_%s.zip", indicationId, databaseId))
   files <- list.files(assessmentExportFolder, pattern = ".*\\.csv$")
   oldWd <- setwd(assessmentExportFolder)
   on.exit(setwd(oldWd))
   DatabaseConnector::createZipFile(zipFile = zipName, files = files)
   ParallelLogger::logInfo("Propensity score assessment results are ready for sharing at:", zipName)
+
+  ParallelLogger::logInfo(sprintf("Finished assessPropensityModels() for LEGEND-T2DM %s-vs-%s studies",
+                                  ))
 }

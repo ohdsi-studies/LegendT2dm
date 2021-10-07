@@ -10,6 +10,7 @@ assessPhenotypes(
   vocabularyDatabaseSchema = cdmDatabaseSchema,
   cohortDatabaseSchema,
   tablePrefix = "legend_t2dm",
+  indicationId = "class",
   oracleTempSchema,
   outputFolder,
   sampleSize = 1e+05,
@@ -44,6 +45,9 @@ should include both the database and schema name, for example
 'cdm_data.dbo'.}
 
 \item{tablePrefix}{A prefix to be used for all table names created for this study.}
+
+\item{indicationId}{A string denoting the indicationId for which the exposure cohorts
+should be created; should be 'class' or 'drug'}
 
 \item{oracleTempSchema}{Should be used in Oracle to specify a schema where the user has write
 priviliges for storing temporary tables.}

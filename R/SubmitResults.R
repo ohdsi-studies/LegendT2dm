@@ -20,7 +20,7 @@
 #' This function uploads the 'Results<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
 #' which contains (zipped) CSV files. You can send the zip file from a different computer than the one on which is was created.
 #'
-#' @param cohort               Specifies which set of cohorts to upload
+#' @param cohorts              Specifies which set of cohorts to upload
 #' @param privateKeyFileName   A character string denoting the path to the RSA private key provided by the study coordinator.
 #' @param userName             A character string containing the user name provided by the study coordinator.
 #' @param outputFolder         Name of local folder to place results; make sure to use forward slashes
@@ -28,8 +28,8 @@
 #'                             performance.
 #'
 #' @export
-uploadPhenotypeResults <- function(cohort, outputFolder, privateKeyFileName, userName) {
-  fileName <- list.files(outputFolder, cohort, "cohortDiagnosticsExport", "Results.*.zip$", full.names = TRUE)
+uploadPhenotypeResults <- function(cohorts, outputFolder, privateKeyFileName, userName) {
+  fileName <- list.files(outputFolder, cohorts, "cohortDiagnosticsExport", "Results.*.zip$", full.names = TRUE)
   if (length(fileName) == 0) {
     stop("Could not find results file in folder. Did you run (and complete) execute?")
   }
@@ -38,7 +38,7 @@ uploadPhenotypeResults <- function(cohort, outputFolder, privateKeyFileName, use
   }
   OhdsiSharing::sftpUploadFile(privateKeyFileName = privateKeyFileName,
                                userName = userName,
-                               remoteFolder = paste0("LegendT2dm_", cohort, "_diagnostics"),
+                               remoteFolder = paste0("LegendT2dm_", cohorts, "_diagnostics"),
                                fileName = fileName)
   ParallelLogger::logInfo("Finished uploading")
 }
@@ -49,7 +49,7 @@ uploadPhenotypeResults <- function(cohort, outputFolder, privateKeyFileName, use
 #' This function uploads the 'Results<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
 #' which contains (zipped) CSV files. You can send the zip file from a different computer than the one on which is was created.
 #'
-#' @param cohort               Specifies which set of cohorts to upload
+#' @param cohorts              Specifies which set of cohorts to upload
 #' @param privateKeyFileName   A character string denoting the path to the RSA private key provided by the study coordinator.
 #' @param userName             A character string containing the user name provided by the study coordinator.
 #' @param outputFolder         Name of local folder to place results; make sure to use forward slashes
@@ -58,8 +58,8 @@ uploadPhenotypeResults <- function(cohort, outputFolder, privateKeyFileName, use
 #'
 #' @export
 #'
-uploadPsAssessmentResults <- function(cohort, outputFolder, privateKeyFileName, userName) {
-  fileName <- list.files(outputFolder, cohort, "assessmentOfPropensityScores", "propensityModelAssessment.*.zip$", full.names = TRUE)
+uploadPsAssessmentResults <- function(cohorts, outputFolder, privateKeyFileName, userName) {
+  fileName <- list.files(outputFolder, cohorts, "assessmentOfPropensityScores", "Results.*.zip$", full.names = TRUE)
   if (length(fileName) == 0) {
     stop("Could not find results file in folder. Did you run (and complete) execute?")
   }
@@ -68,7 +68,7 @@ uploadPsAssessmentResults <- function(cohort, outputFolder, privateKeyFileName, 
   }
   OhdsiSharing::sftpUploadFile(privateKeyFileName = privateKeyFileName,
                                userName = userName,
-                               remoteFolder = paste0("LegendT2dm_", cohort, "_ps"),
+                               remoteFolder = paste0("LegendT2dm_", cohorts, "_ps"),
                                fileName = fileName)
   ParallelLogger::logInfo("Finished uploading")
 }

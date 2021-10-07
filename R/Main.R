@@ -106,6 +106,9 @@ execute <- function(connectionDetails,
     sink(sinkFile, split = TRUE)
     on.exit(sink(), add = TRUE)
 
+    ParallelLogger::logInfo(sprintf("Starting execute() for LEGEND-T2DM %s-vs-%s studies",
+                                    indicationId, indicationId))
+
     if (createExposureCohorts) {
         createExposureCohorts(connectionDetails = connectionDetails,
                               cdmDatabaseSchema = cdmDatabaseSchema,
@@ -120,7 +123,7 @@ execute <- function(connectionDetails,
                               imputeExposureLengthWhenMissing = imputeExposureLengthWhenMissing)
     }
 
-    writePairedCounts(indicationId)
+    writePairedCounts(outputFolder = outputFolder, indicationId = indicationId)
     filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId,
                                 minCohortSize = minCohortSize)
 
@@ -201,10 +204,11 @@ execute <- function(connectionDetails,
                       maxCores = maxCores)
     }
 
-    ParallelLogger::logInfo("Finished")
+    ParallelLogger::logInfo(sprintf("Finished execute() for LEGEND-T2DM %s-vs-%s studies",
+                                    indicationId, indicationId))
 }
 
-writePairedCounts <- function(indicationId, outputFolder) {
+writePairedCounts <- function(outputFolder, indicationId) {
 
     tcos <- readr::read_csv(file = system.file("settings", paste0(indicationId, "TcosOfInterest.csv"),
                                                package = "LegendT2dm"),
