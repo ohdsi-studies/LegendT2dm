@@ -3006,7 +3006,7 @@ div.tocify {
 <h1 class="title toc-ignore"><div class="line-block">RESEARCH PROTOCOL<br />
 <br />
 Large-scale evidence generation and evaluation across a network of databases for type 2 diabetes mellitus</div></h1>
-<h3 class="subtitle">Version: 1.0.0</h3>
+<h3 class="subtitle">Version: 1.0.1</h3>
 
 </div>
 
@@ -3123,6 +3123,7 @@ Type 2 diabetes mellitus
 </tr>
 </tbody>
 </table>
+
 </div>
 <div id="responsible-parties" class="section level1">
 <h1><span class="header-section-number">2</span> Responsible Parties</h1>
@@ -3144,7 +3145,7 @@ Institution/Affiliation
 <td style="text-align:left;width: 10em; ">
 George Hripcsak
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Department of Biomedical Informatics, Columbia University, New York, NY, USA
 </td>
 </tr>
@@ -3152,7 +3153,7 @@ Department of Biomedical Informatics, Columbia University, New York, NY, USA
 <td style="text-align:left;width: 10em; ">
 Rohan Khera
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Department of Internal Medicine, Yale University, New Haven, CT, USA
 </td>
 </tr>
@@ -3160,7 +3161,7 @@ Department of Internal Medicine, Yale University, New Haven, CT, USA
 <td style="text-align:left;width: 10em; ">
 Harlan M. Krumholz
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Department of Internal Medicine, Yale University, New Haven, CT, USA
 </td>
 </tr>
@@ -3168,7 +3169,7 @@ Department of Internal Medicine, Yale University, New Haven, CT, USA
 <td style="text-align:left;width: 10em; ">
 Yuan Lu
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Department of Internal Medicine, Yale University, New Haven, CT, USA
 </td>
 </tr>
@@ -3176,7 +3177,7 @@ Department of Internal Medicine, Yale University, New Haven, CT, USA
 <td style="text-align:left;width: 10em; ">
 Patrick B. Ryan
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
 </td>
 </tr>
@@ -3184,7 +3185,7 @@ Observational Health Data Analytics, Janssen Research and Development, Titusvill
 <td style="text-align:left;width: 10em; ">
 Martijn J. Schuemie
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Observational Health Data Analytics, Janssen Research and Development, Titusville, NJ, USA
 </td>
 </tr>
@@ -3192,7 +3193,7 @@ Observational Health Data Analytics, Janssen Research and Development, Titusvill
 <td style="text-align:left;width: 10em; ">
 Marc A. Suchard *
 </td>
-<td style="text-align:left;width: 30em; ">
+<td style="text-align:left;width: 35em; ">
 Department of Biostatistics, University of California, Los Angeles, Los Angeles, CA, USA
 </td>
 </tr>
@@ -3209,11 +3210,12 @@ Department of Biostatistics, University of California, Los Angeles, Los Angeles,
 <div id="disclosures" class="section level2">
 <h2><span class="header-section-number">2.2</span> Disclosures</h2>
 <p>This study is undertaken within Observational Health Data Sciences and Informatics (OHDSI), an open collaboration.
+<strong>RK</strong> is a founder of Evidence2Health, and receives grant funding from the US National Institutes of Health.
+<strong>MJS</strong> and <strong>PBR</strong> are employees of Janssen Research and Development and shareholders in John &amp; Johnson.
 <strong>GH</strong> receives grant funding from the US National Institutes of Health and the US Food &amp; Drug Administration and contracts from Janssen Research and Development.
-<strong>RK</strong> receives grant funding from the US National Institutes of Health.
 <strong>HMK</strong> receives grants from the US Food &amp; Drug Administration, Medtronics and Janssen Research and Development, is co-founder of HugoHealth and chairs the Cardiac Scientific Advisory Board for UnitedHealth.
-<strong>PBR</strong> and <strong>MJS</strong> are employees of Janssen Research and Development and shareholders in John &amp; Johnson.
 <strong>MAS</strong> receives grant funding from the US National Institutes of Health, the US Department of Veterans Affairs and the US Food &amp; Drug Administration and contracts from Janssen Research and Development and IQVIA.</p>
+
 </div>
 </div>
 <div id="abstract" class="section level1">
@@ -3245,7 +3247,7 @@ LEGEND-T2DM will study:</p>
 <ul>
 <li>Primary: 3- and 4-point major adverse cardiovascular events</li>
 <li>Secondary effectiveness: Acute myocardial infarction, acute renal failure, glycemic control, hospitalization for heart failure, measured renal dysfunction, stroke, sudden cardiac death</li>
-<li>Secondary safety: Abnormal weight gain or loss, acute pancreatitis, bladder cancer, diabetic ketoacidosis, genitourinary infection, diarrhea, nausea or vomiting, edema, hypoglycemia, hypotension, joint pain, lower extremity amputation, thyroid tumor, and up to 28 additional stakeholder-guided drug side-effects</li>
+<li>Secondary safety: Abnormal weight gain or loss, acute pancreatitis, all-cause mortality, bladder cancer, bone fracture, breast cancer, diabetic ketoacidosis, diarrhea, genitourinary infection, hyperkalemia, hypoglycemia, hypoglycemia, hypotension, joint pain, lower extremity amputation, nausea, peripheral edema, photosensitivity, renal cancer, thyroid tumor, venous thromboembolism, vomiting</li>
 </ul></li>
 </ul>
 <p>For each data source and comparison, LEGEND-T2DM will employ a state-of-the-art design:</p>
@@ -3258,13 +3260,14 @@ LEGEND-T2DM will study:</p>
 </ul>
 <p>Our systematic framework will address residual confounding, publication bias and <span class="math inline">\(p\)</span>-hacking using data-driven, large-scale propensity adjustment for measured confounding, a large set of negative control outcome experiments to address unmeasured and systematic bias, prespecification and full disclosure of hypotheses tested and their results. These approaches capitalize on mature OHDSI open source resources and a large body of clinical and quantitative research that the LEGEND-T2DM investigators originated and continue to drive.
 Finally, LEGEND-T2DM is dedicated to open science and transparency and will publicly share all our analytic code from reproducible cohort definitions through turn-key software, enabling other research groups to leverage our methods, data, and results in order to verify and extend our findings.</p>
+
 </div>
 <div id="amendments-and-updates" class="section level1">
 <h1><span class="header-section-number">4</span> Amendments and Updates</h1>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:right;">
 Number
 </th>
 <th style="text-align:left;">
@@ -3283,16 +3286,20 @@ Reason
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-None
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:left;">
+7-Oct-2021
 </td>
 <td style="text-align:left;">
+Milestones
 </td>
 <td style="text-align:left;">
+Update
 </td>
 <td style="text-align:left;">
+Add EU PAS #43551 registration date
 </td>
 </tr>
 </tbody>
@@ -3314,9 +3321,10 @@ Planned / actual date
 <tbody>
 <tr>
 <td style="text-align:left;">
-EU PAS Registration
+EU PAS registration
 </td>
 <td style="text-align:left;">
+01-Oct-2021 / 07-Oct-2021
 </td>
 </tr>
 <tr>
@@ -3324,6 +3332,7 @@ EU PAS Registration
 Start of analysis
 </td>
 <td style="text-align:left;">
+01-Nov-2021
 </td>
 </tr>
 <tr>
@@ -3384,7 +3393,8 @@ We will model each study on our successful collaborative research evaluating the
 </ol>
 <p>Table <a href="#tab:drug-table">8.1</a> list the four major T2DM agent classes and the individual agents licensed in the U.S. within each class.
 We will examine all <span class="math inline">\({4 \choose 2} = 6\)</span> class-wise comparisons and all <span class="math inline">\({5 + 6 + 4 + 7 \choose 2} = 231\)</span> ingredient-wise comparisons.</p>
-<p>For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes listed in Table <a href="#tab:outcome-table">8.3</a>.</p>
+<p>For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes described in Section <a href="#outcomes">8.5</a>.
+<!-- listed in Table \@ref(tab:outcome-table). --></p>
 <!-- Acute pancreatitis -->
 <!-- Cancer -->
 <!--             Bladder -->
@@ -3917,7 +3927,7 @@ Primary outcomes of interest are:</p>
 </ul>
 <!-- While we list many patient-centered outcomes as "exploratory" in the table, we use this term to highlight those that are less likely to achieve high statistical power across all data sources due to lower event rates. -->
 <p>We will employ the same level of systematic rigor in studying outcomes regardless of their primary or secondary label.</p>
-<p>A majority of outcome definitions have been previously implemented and validated in our own work <span class="citation">[<a href="#ref-Suchard2019-gq" role="doc-biblioref">22</a>,<a href="#ref-Ryan2018-ci" role="doc-biblioref">44</a>–<a href="#ref-Yuan2018-am" role="doc-biblioref">48</a>]</span> based heavily on prior development by others (see references in Table <a href="#tab:outcome-table">8.3</a>).
+<p>A majority of outcome definitions have been previously implemented and validated in our own work <span class="citation">[<a href="#ref-Suchard2019-gq" role="doc-biblioref">22</a>,<a href="#ref-Ryan2018-ci" role="doc-biblioref">44</a>–<a href="#ref-Yuan2018-am" role="doc-biblioref">48</a>]</span> based heavily on prior development by others (see references in Table <a href="#tab:outcome-table">8.3</a> <span class="citation">[<a href="#ref-Ryan2018-ci" role="doc-biblioref">44</a>–<a href="#ref-Ammann2018b" role="doc-biblioref">101</a>]</span>).
 To assess across-source consistency and general clinical validity, we will characterize outcome incidence, stratified by age, sex and index year for each data source.</p>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -3983,7 +3993,7 @@ Acute renal failure
 Condition record of acute renal failure during an inpatient or ER visit
 </td>
 <td style="text-align:left;">
-<span class="citation">[<a href="#ref-Afzal2013-uz" role="doc-biblioref">68</a>–<a href="#ref-Rhee2015-mm" role="doc-biblioref">75</a>]</span>
+<span class="citation">[<a href="#ref-Weinstein2020-ic" role="doc-biblioref">47</a>,<a href="#ref-Afzal2013-uz" role="doc-biblioref">68</a>–<a href="#ref-Rhee2015-mm" role="doc-biblioref">75</a>]</span>
 </td>
 </tr>
 <tr>
@@ -4569,8 +4579,8 @@ This protocol will link to open source code for all steps to generating diagnost
 Such transparency is possible because we will construct our studies on top of the OHDSI toolstack of open source software tools that are community developed and rigorously tested <span class="citation">[<a href="#ref-Schuemie2020-wx" role="doc-biblioref">25</a>]</span>.
 We will publicly host LEGEND-T2DM source code at (<a href="https://github.com/ohdsi-studies/LegendT2dm" class="uri">https://github.com/ohdsi-studies/LegendT2dm</a>), allowing public contribution and review, and free re-use for anyone’s future research.</p>
 </div>
-<div id="continous-sharing-of-results" class="section level2">
-<h2><span class="header-section-number">13.2</span> Continous sharing of results</h2>
+<div id="continuous-sharing-of-results" class="section level2">
+<h2><span class="header-section-number">13.2</span> Continuous sharing of results</h2>
 <p>LEGEND-T2DM embodies a new approach to generating evidence from healthcare data that overcome weaknesses in the current process of answering and publishing (or not) one question at a time.
 Generating evidence for thousands of research and control questions using a systematic process enables us to not only evaluate that process and the coherence and consistency of the evidence, but also to avoid <span class="math inline">\(p\)</span>-hacking and publication bias <span class="citation">[<a href="#ref-Schuemie2018-zi" role="doc-biblioref">35</a>]</span>.
 We will store and openly communicate all of these results as they become available using a user-friendly web-based app that serves up all descriptive statistics, study diagnostics and effect estimates for each cohort comparison and outcome.
@@ -4586,40 +4596,41 @@ We will also prepare multiple scientific publications for clinical, informatics 
 <p>We believe in sharing our findings that will guide clinical care with the general public.
 LEGEND-T2DM will use social-media (Twitter) to facilitate this.
 With dedicated support from the OHDSI communications specialist, we will deliver regular press releases at key project stages, distributed via the extensive media networks of UCLA, Columbia and Yale.</p>
+
 </div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs">
 <div id="ref-Lo2018-ca">
-<p>1 Lo C, Toyama T, Wang Y <em>et al.</em> Insulin and glucose-lowering agents for treating people with diabetes and chronic kidney disease. <em>Cochrane database of systematic reviews</em> 2018.</p>
+<p>1 Lo C, Toyama T, Wang Y <em>et al.</em> Insulin and glucose-lowering agents for treating people with diabetes and chronic kidney disease. <em>Cochrane Database of Systematic Reviews</em> 2018.</p>
 </div>
 <div id="ref-North2019-xn">
-<p>2 North EJ, Newman JD. Review of cardiovascular outcomes trials of sodium-glucose cotransporter-2 inhibitors and glucagon-like peptide-1 receptor agonists. <em>Current opinion in cardiology</em> 2019;<strong>34</strong>:687–92.</p>
+<p>2 North EJ, Newman JD. Review of cardiovascular outcomes trials of sodium-glucose cotransporter-2 inhibitors and glucagon-like peptide-1 receptor agonists. <em>Current Opinion in Cardiology</em> 2019;<strong>34</strong>:687–92.</p>
 </div>
 <div id="ref-Zinman2015-ps">
-<p>3 Zinman B, Wanner C, Lachin JM <em>et al.</em> Empagliflozin, cardiovascular outcomes, and mortality in type 2 diabetes. <em>The New England journal of medicine</em> 2015;<strong>373</strong>:2117–28.</p>
+<p>3 Zinman B, Wanner C, Lachin JM <em>et al.</em> Empagliflozin, cardiovascular outcomes, and mortality in type 2 diabetes. <em>The New England Journal of Medicine</em> 2015;<strong>373</strong>:2117–28.</p>
 </div>
 <div id="ref-Neal2017-gs">
-<p>4 Neal B, Perkovic V, Mahaffey KW <em>et al.</em> Canagliflozin and cardiovascular and renal events in type 2 diabetes. <em>The New England journal of medicine</em> 2017;<strong>377</strong>:644–57.</p>
+<p>4 Neal B, Perkovic V, Mahaffey KW <em>et al.</em> Canagliflozin and cardiovascular and renal events in type 2 diabetes. <em>The New England Journal of Medicine</em> 2017;<strong>377</strong>:644–57.</p>
 </div>
 <div id="ref-Marso2016-zg">
-<p>5 Marso SP, Daniels GH, Brown-Frandsen K <em>et al.</em> Liraglutide and cardiovascular outcomes in type 2 diabetes. <em>The New England journal of medicine</em> 2016;<strong>375</strong>:311–22.</p>
+<p>5 Marso SP, Daniels GH, Brown-Frandsen K <em>et al.</em> Liraglutide and cardiovascular outcomes in type 2 diabetes. <em>The New England Journal of Medicine</em> 2016;<strong>375</strong>:311–22.</p>
 </div>
 <div id="ref-Marso2016-yk">
-<p>6 Marso SP, Bain SC, Consoli A <em>et al.</em> Semaglutide and cardiovascular outcomes in patients with type 2 diabetes. <em>The New England journal of medicine</em> 2016;<strong>375</strong>:1834–44.</p>
+<p>6 Marso SP, Bain SC, Consoli A <em>et al.</em> Semaglutide and cardiovascular outcomes in patients with type 2 diabetes. <em>The New England Journal of Medicine</em> 2016;<strong>375</strong>:1834–44.</p>
 </div>
 <div id="ref-Scirica2013-gl">
-<p>7 Scirica BM, Bhatt DL, Braunwald E <em>et al.</em> Saxagliptin and cardiovascular outcomes in patients with type 2 diabetes mellitus. <em>The New England journal of medicine</em> 2013;<strong>369</strong>:1317–26.</p>
+<p>7 Scirica BM, Bhatt DL, Braunwald E <em>et al.</em> Saxagliptin and cardiovascular outcomes in patients with type 2 diabetes mellitus. <em>The New England Journal of Medicine</em> 2013;<strong>369</strong>:1317–26.</p>
 </div>
 <div id="ref-White2013-zl">
-<p>8 White WB, Cannon CP, Heller SR <em>et al.</em> Alogliptin after acute coronary syndrome in patients with type 2 diabetes. <em>The New England journal of medicine</em> 2013;<strong>369</strong>:1327–35.</p>
+<p>8 White WB, Cannon CP, Heller SR <em>et al.</em> Alogliptin after acute coronary syndrome in patients with type 2 diabetes. <em>The New England Journal of Medicine</em> 2013;<strong>369</strong>:1327–35.</p>
 </div>
 <div id="ref-Green2015-pv">
-<p>9 Green JB, Bethel MA, Armstrong PW <em>et al.</em> Effect of sitagliptin on cardiovascular outcomes in type 2 diabetes. <em>The New England journal of medicine</em> 2015;<strong>373</strong>:232–42.</p>
+<p>9 Green JB, Bethel MA, Armstrong PW <em>et al.</em> Effect of sitagliptin on cardiovascular outcomes in type 2 diabetes. <em>The New England Journal of Medicine</em> 2015;<strong>373</strong>:232–42.</p>
 </div>
 <div id="ref-Rosenstock2019-cp">
-<p>10 Rosenstock J, Kahn SE, Johansen OE <em>et al.</em> Effect of linagliptin vs glimepiride on major adverse cardiovascular outcomes in patients with type 2 diabetes: The CAROLINA randomized clinical trial. <em>JAMA: the journal of the American Medical Association</em> 2019.</p>
+<p>10 Rosenstock J, Kahn SE, Johansen OE <em>et al.</em> Effect of linagliptin vs glimepiride on major adverse cardiovascular outcomes in patients with type 2 diabetes: The CAROLINA randomized clinical trial. <em>JAMA: The Journal of the American Medical Association</em> 2019.</p>
 </div>
 <div id="ref-Cefalu2018-mu">
 <p>11 Cefalu WT, Kaul S, Gerstein HC <em>et al.</em> Cardiovascular outcomes trials in type 2 diabetes: Where do we go from here? Reflections from aDiabetes CareEditors’ expert forum. Diabetes Care. 2018;<strong>41</strong>:14–31.</p>
@@ -4628,10 +4639,10 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>12 Palmer SC, Tendal B, Mustafa RA <em>et al.</em> Sodium-glucose cotransporter protein-2 (SGLT-2) inhibitors and glucagon-like peptide-1 (GLP-1) receptor agonists for type 2 diabetes: Systematic review and network meta-analysis of randomised controlled trials. <em>BMJ</em> 2021;<strong>372</strong>:m4573.</p>
 </div>
 <div id="ref-Qiu2021-sb">
-<p>13 Qiu M, Ding L-L, Wei X-B <em>et al.</em> Comparative efficacy of glucagon-like peptide 1 receptor agonists and sodium glucose cotransporter 2 inhibitors for prevention of major adverse cardiovascular events in type 2 diabetes: A network meta-analysis. <em>Journal of cardiovascular pharmacology</em> 2021;<strong>77</strong>:34–7.</p>
+<p>13 Qiu M, Ding L-L, Wei X-B <em>et al.</em> Comparative efficacy of glucagon-like peptide 1 receptor agonists and sodium glucose cotransporter 2 inhibitors for prevention of major adverse cardiovascular events in type 2 diabetes: A network meta-analysis. <em>Journal of Cardiovascular Pharmacology</em> 2021;<strong>77</strong>:34–7.</p>
 </div>
 <div id="ref-Yamada2021-hw">
-<p>14 Yamada T, Wakabayashi M, Bhalla A <em>et al.</em> Cardiovascular and renal outcomes with SGLT-2 inhibitors versus GLP-1 receptor agonists in patients with type 2 diabetes mellitus and chronic kidney disease: A systematic review and network meta-analysis. <em>Cardiovascular diabetology</em> 2021;<strong>20</strong>:14.</p>
+<p>14 Yamada T, Wakabayashi M, Bhalla A <em>et al.</em> Cardiovascular and renal outcomes with SGLT-2 inhibitors versus GLP-1 receptor agonists in patients with type 2 diabetes mellitus and chronic kidney disease: A systematic review and network meta-analysis. <em>Cardiovascular Diabetology</em> 2021;<strong>20</strong>:14.</p>
 </div>
 <div id="ref-Puhan2014-ov">
 <p>15 Puhan MA, Schünemann HJ, Murad MH <em>et al.</em> A GRADE working group approach for rating the quality of treatment effect estimates from network meta-analysis. <em>BMJ</em> 2014;<strong>349</strong>:g5630.</p>
@@ -4640,52 +4651,52 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>16 Brignardello-Petersen R, Izcovich A, Rochwerg B <em>et al.</em> GRADE approach to drawing conclusions from a network meta-analysis using a partially contextualised framework. <em>BMJ</em> 2020;<strong>371</strong>:m3907.</p>
 </div>
 <div id="ref-McCoy2019-hu">
-<p>17 McCoy RG, Dykhoff HJ, Sangaralingham L <em>et al.</em> Adoption of new Glucose-Lowering medications in the U.S.-The case of SGLT2 inhibitors: Nationwide cohort study. <em>Diabetes technology &amp; therapeutics</em> 2019;<strong>21</strong>:702–12.</p>
+<p>17 McCoy RG, Dykhoff HJ, Sangaralingham L <em>et al.</em> Adoption of new Glucose-Lowering medications in the U.S.-The case of SGLT2 inhibitors: Nationwide cohort study. <em>Diabetes Technology &amp; Therapeutics</em> 2019;<strong>21</strong>:702–12.</p>
 </div>
 <div id="ref-Curtis2018-zg">
-<p>18 Curtis HJ, Dennis JM, Shields BM <em>et al.</em> Time trends and geographical variation in prescribing of drugs for diabetes in england from 1998 to 2017. <em>Diabetes, obesity &amp; metabolism</em> 2018;<strong>20</strong>:2159–68.</p>
+<p>18 Curtis HJ, Dennis JM, Shields BM <em>et al.</em> Time trends and geographical variation in prescribing of drugs for diabetes in england from 1998 to 2017. <em>Diabetes, Obesity &amp; Metabolism</em> 2018;<strong>20</strong>:2159–68.</p>
 </div>
 <div id="ref-Arnold2017-fo">
-<p>19 Arnold SV, Inzucchi SE, Tang F <em>et al.</em> Real-world use and modeled impact of glucose-lowering therapies evaluated in recent cardiovascular outcomes trials: An NCDR research to practice project. <em>European journal of preventive cardiology</em> 2017;<strong>24</strong>:1637–45.</p>
+<p>19 Arnold SV, Inzucchi SE, Tang F <em>et al.</em> Real-world use and modeled impact of glucose-lowering therapies evaluated in recent cardiovascular outcomes trials: An NCDR research to practice project. <em>European Journal of Preventive Cardiology</em> 2017;<strong>24</strong>:1637–45.</p>
 </div>
 <div id="ref-Dave2020-ql">
-<p>20 Dave CV, Schneeweiss S, Wexler DJ <em>et al.</em> Trends in clinical characteristics and prescribing preferences for SGLT2 inhibitors and GLP-1 receptor agonists, 2013-2018. <em>Diabetes care</em> 2020;<strong>43</strong>:921–4.</p>
+<p>20 Dave CV, Schneeweiss S, Wexler DJ <em>et al.</em> Trends in clinical characteristics and prescribing preferences for SGLT2 inhibitors and GLP-1 receptor agonists, 2013-2018. <em>Diabetes Care</em> 2020;<strong>43</strong>:921–4.</p>
 </div>
 <div id="ref-Le2020-lh">
-<p>21 Le P, Chaitoff A, Misra-Hebert AD <em>et al.</em> Use of antihyperglycemic medications in U.S. Adults: An analysis of the national health and nutrition examination survey. <em>Diabetes care</em> 2020;<strong>43</strong>:1227–33.</p>
+<p>21 Le P, Chaitoff A, Misra-Hebert AD <em>et al.</em> Use of antihyperglycemic medications in U.S. Adults: An analysis of the national health and nutrition examination survey. <em>Diabetes Care</em> 2020;<strong>43</strong>:1227–33.</p>
 </div>
 <div id="ref-Suchard2019-gq">
 <p>22 Suchard MA, Schuemie MJ, Krumholz HM <em>et al.</em> Comprehensive comparative effectiveness and safety of first-line antihypertensive drug classes: A systematic, multinational, large-scale analysis. <em>The Lancet</em> 2019;<strong>394</strong>:1816–26.</p>
 </div>
 <div id="ref-Yoshida2015-ln">
-<p>23 Yoshida K, Solomon DH, Kim SC. Active-comparator design and new-user design in observational studies. <em>Nature reviews Rheumatology</em> 2015;<strong>11</strong>:437–41.</p>
+<p>23 Yoshida K, Solomon DH, Kim SC. Active-comparator design and new-user design in observational studies. <em>Nature Reviews Rheumatology</em> 2015;<strong>11</strong>:437–41.</p>
 </div>
 <div id="ref-Ryan2013-wq">
-<p>24 Ryan PB, Schuemie MJ, Gruber S <em>et al.</em> Empirical performance of a new user cohort method: Lessons for developing a risk identification and analysis system. <em>Drug safety: an international journal of medical toxicology and drug experience</em> 2013;<strong>36 Suppl 1</strong>:S59–72.</p>
+<p>24 Ryan PB, Schuemie MJ, Gruber S <em>et al.</em> Empirical performance of a new user cohort method: Lessons for developing a risk identification and analysis system. <em>Drug Safety: An International Journal of Medical Toxicology and Drug Experience</em> 2013;<strong>36 Suppl 1</strong>:S59–72.</p>
 </div>
 <div id="ref-Schuemie2020-wx">
 <p>25 Schuemie MJ, Cepeda MS, Suchard MA <em>et al.</em> How confident are we about observational findings in health care: A benchmark study. <em>Harvard Data Science Review</em> 2020;<strong>2</strong>.</p>
 </div>
 <div id="ref-Schneeweiss2010-my">
-<p>26 Schneeweiss S. A basic study design for expedited safety signal evaluation based on electronic healthcare data. <em>Pharmacoepidemiology and drug safety</em> 2010;<strong>19</strong>:858–68.</p>
+<p>26 Schneeweiss S. A basic study design for expedited safety signal evaluation based on electronic healthcare data. <em>Pharmacoepidemiology and Drug Safety</em> 2010;<strong>19</strong>:858–68.</p>
 </div>
 <div id="ref-Gagne2012-at">
-<p>27 Gagne JJ, Fireman B, Ryan PB <em>et al.</em> Design considerations in an active medical product safety monitoring system. <em>Pharmacoepidemiology and drug safety</em> 2012;<strong>21 Suppl 1</strong>:32–40.</p>
+<p>27 Gagne JJ, Fireman B, Ryan PB <em>et al.</em> Design considerations in an active medical product safety monitoring system. <em>Pharmacoepidemiology and Drug Safety</em> 2012;<strong>21 Suppl 1</strong>:32–40.</p>
 </div>
 <div id="ref-Johnson2013-db">
-<p>28 Johnson ES, Bartman BA, Briesacher BA <em>et al.</em> The incident user design in comparative effectiveness research. <em>Pharmacoepidemiology and drug safety</em> 2013;<strong>22</strong>:1–6.</p>
+<p>28 Johnson ES, Bartman BA, Briesacher BA <em>et al.</em> The incident user design in comparative effectiveness research. <em>Pharmacoepidemiology and Drug Safety</em> 2013;<strong>22</strong>:1–6.</p>
 </div>
 <div id="ref-Schneeweiss2007-am">
-<p>29 Schneeweiss S, Patrick AR, Stürmer T <em>et al.</em> Increasing levels of restriction in pharmacoepidemiologic database studies of elderly and comparison with randomized trial results. <em>Medical care</em> 2007;<strong>45</strong>:S131–42.</p>
+<p>29 Schneeweiss S, Patrick AR, Stürmer T <em>et al.</em> Increasing levels of restriction in pharmacoepidemiologic database studies of elderly and comparison with randomized trial results. <em>Medical Care</em> 2007;<strong>45</strong>:S131–42.</p>
 </div>
 <div id="ref-Suissa2017-lv">
 <p>30 Suissa S, Moodie EEM, Dell’Aniello S. Prevalent new-user cohort designs for comparative drug effect studies by time-conditional propensity scores. Pharmacoepidemiology and Drug Safety. 2017;<strong>26</strong>:459–68.</p>
 </div>
 <div id="ref-Tian2018-xy">
-<p>31 Tian Y, Schuemie MJ, Suchard MA. Evaluating large-scale propensity score performance through real-world and synthetic data experiments. <em>International journal of epidemiology</em> 2018;<strong>47</strong>:2005–14.</p>
+<p>31 Tian Y, Schuemie MJ, Suchard MA. Evaluating large-scale propensity score performance through real-world and synthetic data experiments. <em>International Journal of Epidemiology</em> 2018;<strong>47</strong>:2005–14.</p>
 </div>
 <div id="ref-Schuemie2014-bv">
-<p>32 Schuemie MJ, Ryan PB, DuMouchel W <em>et al.</em> Interpreting observational studies: Why empirical calibration is needed to correct p-values. <em>Statistics in medicine</em> 2014;<strong>33</strong>:209–18.</p>
+<p>32 Schuemie MJ, Ryan PB, DuMouchel W <em>et al.</em> Interpreting observational studies: Why empirical calibration is needed to correct p-values. <em>Statistics in Medicine</em> 2014;<strong>33</strong>:209–18.</p>
 </div>
 <div id="ref-Schuemie2016-km">
 <p>33 Schuemie MJ, Hripcsak G, Ryan PB <em>et al.</em> Robust empirical calibration of p -values using observational data. Statistics in Medicine. 2016;<strong>35</strong>:3883–8.</p>
@@ -4694,25 +4705,25 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>34 Schuemie MJ, Hripcsak G, Ryan PB <em>et al.</em> Empirical confidence interval calibration for population-level effect estimation studies in observational healthcare data. <em>Proceedings of the National Academy of Sciences of the United States of America</em> 2018;<strong>115</strong>:2571–7.</p>
 </div>
 <div id="ref-Schuemie2018-zi">
-<p>35 Schuemie MJ, Ryan PB, Hripcsak G <em>et al.</em> Improving reproducibility by using high-throughput observational studies with empirical calibration. <em>Philosophical transactions Series A, Mathematical, physical, and engineering sciences</em> 2018;<strong>376</strong>.</p>
+<p>35 Schuemie MJ, Ryan PB, Hripcsak G <em>et al.</em> Improving reproducibility by using high-throughput observational studies with empirical calibration. <em>Philosophical Transactions Series A, Mathematical, Physical, and Engineering Sciences</em> 2018;<strong>376</strong>.</p>
 </div>
 <div id="ref-Graham2010-pg">
-<p>36 Graham DJ, Ouellet-Hellstrom R, MaCurdy TE <em>et al.</em> Risk of acute myocardial infarction, stroke, heart failure, and death in elderly medicare patients treated with rosiglitazone or pioglitazone. <em>JAMA: the journal of the American Medical Association</em> 2010;<strong>304</strong>:411–8.</p>
+<p>36 Graham DJ, Ouellet-Hellstrom R, MaCurdy TE <em>et al.</em> Risk of acute myocardial infarction, stroke, heart failure, and death in elderly medicare patients treated with rosiglitazone or pioglitazone. <em>JAMA: The Journal of the American Medical Association</em> 2010;<strong>304</strong>:411–8.</p>
 </div>
 <div id="ref-Turner2014-oq">
-<p>37 Turner RM, Kwok CS, Chen-Turner C <em>et al.</em> Thiazolidinediones and associated risk of bladder cancer: A systematic review and meta-analysis. <em>British journal of clinical pharmacology</em> 2014;<strong>78</strong>:258–73.</p>
+<p>37 Turner RM, Kwok CS, Chen-Turner C <em>et al.</em> Thiazolidinediones and associated risk of bladder cancer: A systematic review and meta-analysis. <em>British Journal of Clinical Pharmacology</em> 2014;<strong>78</strong>:258–73.</p>
 </div>
 <div id="ref-Hernan2016-ab">
-<p>38 Hernán MA, Robins JM. Using big data to emulate a target trial when a randomized trial is not available. <em>American journal of epidemiology</em> 2016;<strong>183</strong>:758–64.</p>
+<p>38 Hernán MA, Robins JM. Using big data to emulate a target trial when a randomized trial is not available. <em>American Journal of Epidemiology</em> 2016;<strong>183</strong>:758–64.</p>
 </div>
 <div id="ref-Hernan2019-ie">
 <p>39 Hernán, Miguel. Antihyperglycemic therapy and cardiovascular risk: Design and emulation of a target trial using healthcare databases. Patient-Centered Outcomes Research Institute 2019. </p>
 </div>
 <div id="ref-American_Diabetes_Association2018-yz">
-<p>40 American Diabetes Association. 8. Pharmacologic approaches to glycemic treatment: Standards of medical care in diabetes-2018. <em>Diabetes care</em> 2018;<strong>41</strong>:S73–85.</p>
+<p>40 American Diabetes Association. 8. Pharmacologic approaches to glycemic treatment: Standards of medical care in diabetes-2018. <em>Diabetes Care</em> 2018;<strong>41</strong>:S73–85.</p>
 </div>
 <div id="ref-Nathan2013-cu">
-<p>41 Nathan DM, Buse JB, Kahn SE <em>et al.</em> Rationale and design of the glycemia reduction approaches in diabetes: A comparative effectiveness study (GRADE). <em>Diabetes care</em> 2013;<strong>36</strong>:2254–61.</p>
+<p>41 Nathan DM, Buse JB, Kahn SE <em>et al.</em> Rationale and design of the glycemia reduction approaches in diabetes: A comparative effectiveness study (GRADE). <em>Diabetes Care</em> 2013;<strong>36</strong>:2254–61.</p>
 </div>
 <div id="ref-Association2020-ic">
 <p>42 Association AD, American Diabetes Association. 9. Pharmacologic approaches to glycemic treatment: Standards of medical care in diabetes—2020. Diabetes Care. 2020;<strong>43</strong>:S98–S110.</p>
@@ -4721,121 +4732,121 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>43 Schuemie MJ, Ryan PB, Pratt N <em>et al.</em> Large-Scale evidence generation and evaluation across a network of databases (LEGEND): Assessing validity using hypertension as a case study. <em>Journal of the American Medical Informatics Association</em>;<strong>ocaa124</strong>.</p>
 </div>
 <div id="ref-Ryan2018-ci">
-<p>44 Ryan PB, Buse JB, Schuemie MJ <em>et al.</em> Comparative effectiveness of canagliflozin, SGLT2 inhibitors and non-SGLT2 inhibitors on the risk of hospitalization for heart failure and amputation in patients with type 2 diabetes mellitus: A real-world meta-analysis of 4 observational databases (OBSERVE-4D). <em>Diabetes, obesity &amp; metabolism</em> 2018;<strong>20</strong>:2585–2597. doi: 10.1111/dom.13424. Epub 2018 Jun 25.</p>
+<p>44 Ryan PB, Buse JB, Schuemie MJ <em>et al.</em> Comparative effectiveness of canagliflozin, SGLT2 inhibitors and non-SGLT2 inhibitors on the risk of hospitalization for heart failure and amputation in patients with type 2 diabetes mellitus: A real-world meta-analysis of 4 observational databases (OBSERVE-4D). <em>Diabetes, Obesity &amp; Metabolism</em> 2018;<strong>20</strong>:2585–2597. doi: 10.1111/dom.13424. Epub 2018 Jun 25.</p>
 </div>
 <div id="ref-You_undated-fz">
 <p>45 You SC, Rho Y, Bikdeli B <em>et al.</em> Association of ticagrelor versus clopidogrel with net adverse clinical events in patients with acute coronary syndrome undergoing percutaneous coronary intervention in clinical practice. <em>Journal of the American Medical Association</em>;in press.</p>
 </div>
 <div id="ref-Wang2017-su">
-<p>46 Wang Y, Desai M, Ryan PB <em>et al.</em> Incidence of diabetic ketoacidosis among patients with type 2 diabetes mellitus treated with SGLT2 inhibitors and other antihyperglycemic agents. <em>Diabetes research and clinical practice</em> 2017;<strong>128</strong>:83–90.</p>
+<p>46 Wang Y, Desai M, Ryan PB <em>et al.</em> Incidence of diabetic ketoacidosis among patients with type 2 diabetes mellitus treated with SGLT2 inhibitors and other antihyperglycemic agents. <em>Diabetes Research and Clinical Practice</em> 2017;<strong>128</strong>:83–90.</p>
 </div>
 <div id="ref-Weinstein2020-ic">
-<p>47 Weinstein RB, Ryan PB, Berlin JA <em>et al.</em> Channeling bias in the analysis of risk of myocardial infarction, stroke, gastrointestinal bleeding, and acute renal failure with the use of paracetamol compared with ibuprofen. <em>Drug safety: an international journal of medical toxicology and drug experience</em> 2020.</p>
+<p>47 Weinstein RB, Ryan PB, Berlin JA <em>et al.</em> Channeling bias in the analysis of risk of myocardial infarction, stroke, gastrointestinal bleeding, and acute renal failure with the use of paracetamol compared with ibuprofen. <em>Drug Safety: An International Journal of Medical Toxicology and Drug Experience</em> 2020.</p>
 </div>
 <div id="ref-Yuan2018-am">
-<p>48 Yuan Z, DeFalco FJ, Ryan PB <em>et al.</em> Risk of lower extremity amputations in people with type 2 diabetes mellitus treated with sodium-glucose co-transporter-2 inhibitors in the USA: A retrospective cohort study. <em>Diabetes, obesity &amp; metabolism</em> 2018;<strong>20</strong>:582–9.</p>
+<p>48 Yuan Z, DeFalco FJ, Ryan PB <em>et al.</em> Risk of lower extremity amputations in people with type 2 diabetes mellitus treated with sodium-glucose co-transporter-2 inhibitors in the USA: A retrospective cohort study. <em>Diabetes, Obesity &amp; Metabolism</em> 2018;<strong>20</strong>:582–9.</p>
 </div>
 <div id="ref-Ammann2018-kh">
-<p>49 Ammann EM, Schweizer ML, Robinson JG <em>et al.</em> Chart validation of inpatient ICD-9-CM administrative diagnosis codes for acute myocardial infarction (AMI) among intravenous immune globulin (IGIV) users in the sentinel distributed database. <em>Pharmacoepidemiology and drug safety</em> 2018;<strong>27</strong>:398–404. doi: 10.1002/pds.4398. Epub 2018 Feb 15.</p>
+<p>49 Ammann EM, Schweizer ML, Robinson JG <em>et al.</em> Chart validation of inpatient ICD-9-CM administrative diagnosis codes for acute myocardial infarction (AMI) among intravenous immune globulin (IGIV) users in the sentinel distributed database. <em>Pharmacoepidemiology and Drug Safety</em> 2018;<strong>27</strong>:398–404. doi: 10.1002/pds.4398. Epub 2018 Feb 15.</p>
 </div>
 <div id="ref-Floyd2016-ch">
-<p>50 Floyd JS, Blondon M, Moore KP <em>et al.</em> Validation of methods for assessing cardiovascular disease using electronic health data in a cohort of veterans with diabetes. <em>Pharmacoepidemiology and drug safety</em> 2016;<strong>25</strong>:467–71. doi: 10.1002/pds.3921. Epub 2015 Nov 11.</p>
+<p>50 Floyd JS, Blondon M, Moore KP <em>et al.</em> Validation of methods for assessing cardiovascular disease using electronic health data in a cohort of veterans with diabetes. <em>Pharmacoepidemiology and Drug Safety</em> 2016;<strong>25</strong>:467–71. doi: 10.1002/pds.3921. Epub 2015 Nov 11.</p>
 </div>
 <div id="ref-Rubbo2015-rh">
-<p>51 Rubbo B, Fitzpatrick NK, Denaxas S <em>et al.</em> Use of electronic health records to ascertain, validate and phenotype acute myocardial infarction: A systematic review and recommendations. <em>International journal of cardiology</em> 2015;<strong>187:705-11.</strong>:10.1016/j.ijcard.2015.03.075. Epub 2015 Mar 5.</p>
+<p>51 Rubbo B, Fitzpatrick NK, Denaxas S <em>et al.</em> Use of electronic health records to ascertain, validate and phenotype acute myocardial infarction: A systematic review and recommendations. <em>International Journal of Cardiology</em> 2015;<strong>187:705-11.</strong>:10.1016/j.ijcard.2015.03.075. Epub 2015 Mar 5.</p>
 </div>
 <div id="ref-Singh2018-jg">
-<p>52 Singh S, Fouayzi H, Anzuoni K <em>et al.</em> Diagnostic algorithms for cardiovascular death in administrative claims databases: A systematic review. <em>Drug safety: an international journal of medical toxicology and drug experience</em> 2018;<strong>23</strong>:018–0754.</p>
+<p>52 Singh S, Fouayzi H, Anzuoni K <em>et al.</em> Diagnostic algorithms for cardiovascular death in administrative claims databases: A systematic review. <em>Drug Safety: An International Journal of Medical Toxicology and Drug Experience</em> 2018;<strong>23</strong>:018–0754.</p>
 </div>
 <div id="ref-Wahl2010-ii">
-<p>53 Wahl PM, Rodgers K, Schneeweiss S <em>et al.</em> Validation of claims-based diagnostic and procedure codes for cardiovascular and gastrointestinal serious adverse events in a commercially-insured population. <em>Pharmacoepidemiology and drug safety</em> 2010;<strong>19</strong>:596–603. doi: 10.1002/pds.1924.</p>
+<p>53 Wahl PM, Rodgers K, Schneeweiss S <em>et al.</em> Validation of claims-based diagnostic and procedure codes for cardiovascular and gastrointestinal serious adverse events in a commercially-insured population. <em>Pharmacoepidemiology and Drug Safety</em> 2010;<strong>19</strong>:596–603. doi: 10.1002/pds.1924.</p>
 </div>
 <div id="ref-Normand1995-ag">
-<p>54 Normand SL, Morris CN, Fung KS <em>et al.</em> Development and validation of a claims based index for adjusting for risk of mortality: The case of acute myocardial infarction. <em>Journal of clinical epidemiology</em> 1995;<strong>48</strong>:229–43.</p>
+<p>54 Normand SL, Morris CN, Fung KS <em>et al.</em> Development and validation of a claims based index for adjusting for risk of mortality: The case of acute myocardial infarction. <em>Journal of Clinical Epidemiology</em> 1995;<strong>48</strong>:229–43.</p>
 </div>
 <div id="ref-Andrade2012-sp">
-<p>55 Andrade SE, Harrold LR, Tjia J <em>et al.</em> A systematic review of validated methods for identifying cerebrovascular accident or transient ischemic attack using administrative data. <em>Pharmacoepidemiology and drug safety</em> 2012;<strong>21</strong>:100–28. doi: 10.1002/pds.2312.</p>
+<p>55 Andrade SE, Harrold LR, Tjia J <em>et al.</em> A systematic review of validated methods for identifying cerebrovascular accident or transient ischemic attack using administrative data. <em>Pharmacoepidemiology and Drug Safety</em> 2012;<strong>21</strong>:100–28. doi: 10.1002/pds.2312.</p>
 </div>
 <div id="ref-Park2016-wa">
-<p>56 Park TH, Choi JC. Validation of stroke and thrombolytic therapy in korean national health insurance claim data. <em>Journal of clinical neurology</em> 2016;<strong>12</strong>:42–8. doi: 10.3988/jcn.2016.12.1.42. Epub 2015 Sep 11.</p>
+<p>56 Park TH, Choi JC. Validation of stroke and thrombolytic therapy in korean national health insurance claim data. <em>Journal of Clinical Neurology</em> 2016;<strong>12</strong>:42–8. doi: 10.3988/jcn.2016.12.1.42. Epub 2015 Sep 11.</p>
 </div>
 <div id="ref-Gon2017-rp">
-<p>57 Gon Y, Kabata D, Yamamoto K <em>et al.</em> Validation of an algorithm that determines stroke diagnostic code accuracy in a japanese hospital-based cancer registry using electronic medical records. <em>BMC medical informatics and decision making</em> 2017;<strong>17</strong>:157. doi: 10.1186/s12911–017–0554–x.</p>
+<p>57 Gon Y, Kabata D, Yamamoto K <em>et al.</em> Validation of an algorithm that determines stroke diagnostic code accuracy in a japanese hospital-based cancer registry using electronic medical records. <em>BMC Medical Informatics and Decision Making</em> 2017;<strong>17</strong>:157. doi: 10.1186/s12911–017–0554–x.</p>
 </div>
 <div id="ref-Sung2016-xi">
-<p>58 Sung SF, Hsieh CY, Lin HJ <em>et al.</em> Validation of algorithms to identify stroke risk factors in patients with acute ischemic stroke, transient ischemic attack, or intracerebral hemorrhage in an administrative claims database. <em>International journal of cardiology</em> 2016;<strong>215:277-82.</strong>:10.1016/j.ijcard.2016.04.069. Epub 2016 Apr 14.</p>
+<p>58 Sung SF, Hsieh CY, Lin HJ <em>et al.</em> Validation of algorithms to identify stroke risk factors in patients with acute ischemic stroke, transient ischemic attack, or intracerebral hemorrhage in an administrative claims database. <em>International Journal of Cardiology</em> 2016;<strong>215:277-82.</strong>:10.1016/j.ijcard.2016.04.069. Epub 2016 Apr 14.</p>
 </div>
 <div id="ref-Tu2013-qv">
-<p>59 Tu K, Wang M, Young J <em>et al.</em> Validity of administrative data for identifying patients who have had a stroke or transient ischemic attack using EMRALD as a reference standard. <em>The Canadian journal of cardiology</em> 2013;<strong>29</strong>:1388–94. doi: 10.1016/j.cjca.2013.07.676. Epub 2013 Sep 26.</p>
+<p>59 Tu K, Wang M, Young J <em>et al.</em> Validity of administrative data for identifying patients who have had a stroke or transient ischemic attack using EMRALD as a reference standard. <em>The Canadian Journal of Cardiology</em> 2013;<strong>29</strong>:1388–94. doi: 10.1016/j.cjca.2013.07.676. Epub 2013 Sep 26.</p>
 </div>
 <div id="ref-Yuan2017-wm">
-<p>60 Yuan Z, Voss EA, DeFalco FJ <em>et al.</em> Risk prediction for ischemic stroke and transient ischemic attack in patients without atrial fibrillation: A retrospective cohort study. <em>Journal of stroke and cerebrovascular diseases: the official journal of National Stroke Association</em> 2017;<strong>26</strong>:1721–1731. doi: 10.1016/j.jstrokecerebrovasdis.2017.03.036. Epub 2017 Apr 6.</p>
+<p>60 Yuan Z, Voss EA, DeFalco FJ <em>et al.</em> Risk prediction for ischemic stroke and transient ischemic attack in patients without atrial fibrillation: A retrospective cohort study. <em>Journal of Stroke and Cerebrovascular Diseases: The Official Journal of National Stroke Association</em> 2017;<strong>26</strong>:1721–1731. doi: 10.1016/j.jstrokecerebrovasdis.2017.03.036. Epub 2017 Apr 6.</p>
 </div>
 <div id="ref-Hennessy2010-gn">
-<p>61 Hennessy S, Leonard CE, Freeman CP <em>et al.</em> Validation of diagnostic codes for outpatient-originating sudden cardiac death and ventricular arrhythmia in medicaid and medicare claims data. <em>Pharmacoepidemiology and drug safety</em> 2010;<strong>19</strong>:555–62. doi: 10.1002/pds.1869.</p>
+<p>61 Hennessy S, Leonard CE, Freeman CP <em>et al.</em> Validation of diagnostic codes for outpatient-originating sudden cardiac death and ventricular arrhythmia in medicaid and medicare claims data. <em>Pharmacoepidemiology and Drug Safety</em> 2010;<strong>19</strong>:555–62. doi: 10.1002/pds.1869.</p>
 </div>
 <div id="ref-Kaspar2018-ol">
-<p>62 Kaspar M, Fette G, Guder G <em>et al.</em> Underestimated prevalence of heart failure in hospital inpatients: A comparison of ICD codes and discharge letter information. <em>Clinical research in cardiology: official journal of the German Cardiac Society</em> 2018;<strong>107</strong>:778–787. doi: 10.1007/s00392–018–1245–z.Epub 2018 Apr 17.</p>
+<p>62 Kaspar M, Fette G, Guder G <em>et al.</em> Underestimated prevalence of heart failure in hospital inpatients: A comparison of ICD codes and discharge letter information. <em>Clinical Research in Cardiology: Official Journal of the German Cardiac Society</em> 2018;<strong>107</strong>:778–787. doi: 10.1007/s00392–018–1245–z.Epub 2018 Apr 17.</p>
 </div>
 <div id="ref-Feder2018-nj">
-<p>63 Feder SL, Redeker NS, Jeon S <em>et al.</em> Validation of the ICD-9 diagnostic code for palliative care in patients hospitalized with heart failure within the veterans health administration. <em>The American journal of hospice &amp; palliative care</em> 2018;<strong>35</strong>:959–965. doi: 10.1177/1049909117747519. Epub 2017 Dec 18.</p>
+<p>63 Feder SL, Redeker NS, Jeon S <em>et al.</em> Validation of the ICD-9 diagnostic code for palliative care in patients hospitalized with heart failure within the veterans health administration. <em>The American Journal of Hospice &amp; Palliative Care</em> 2018;<strong>35</strong>:959–965. doi: 10.1177/1049909117747519. Epub 2017 Dec 18.</p>
 </div>
 <div id="ref-Rosenman2014-vv">
 <p>64 Rosenman M, He J, Martin J <em>et al.</em> Database queries for hospitalizations for acute congestive heart failure: Flexible methods and validation based on set theory. <em>Journal of the American Medical Informatics Association: JAMIA</em> 2014;<strong>21</strong>:345–52. doi: 10.1136/amiajnl–2013–001942.Epub 2013 Oct 10.</p>
 </div>
 <div id="ref-Voors2017-rd">
-<p>65 Voors AA, Ouwerkerk W, Zannad F <em>et al.</em> Development and validation of multivariable models to predict mortality and hospitalization in patients with heart failure. <em>European journal of heart failure</em> 2017;<strong>19</strong>:627–634. doi: 10.1002/ejhf.785. Epub 2017 Mar 1.</p>
+<p>65 Voors AA, Ouwerkerk W, Zannad F <em>et al.</em> Development and validation of multivariable models to predict mortality and hospitalization in patients with heart failure. <em>European Journal of Heart Failure</em> 2017;<strong>19</strong>:627–634. doi: 10.1002/ejhf.785. Epub 2017 Mar 1.</p>
 </div>
 <div id="ref-Floyd2016-fi">
-<p>66 Floyd JS, Wellman R, Fuller S <em>et al.</em> Use of electronic health data to estimate heart failure events in a Population-Based cohort with CKD. <em>Clinical journal of the American Society of Nephrology: CJASN</em> 2016;<strong>11</strong>:1954–1961. doi: 10.2215/CJN.03900416. Epub 2016 Aug 9.</p>
+<p>66 Floyd JS, Wellman R, Fuller S <em>et al.</em> Use of electronic health data to estimate heart failure events in a Population-Based cohort with CKD. <em>Clinical Journal of the American Society of Nephrology: CJASN</em> 2016;<strong>11</strong>:1954–1961. doi: 10.2215/CJN.03900416. Epub 2016 Aug 9.</p>
 </div>
 <div id="ref-Gini2016-gf">
-<p>67 Gini R, Schuemie MJ, Mazzaglia G <em>et al.</em> Automatic identification of type 2 diabetes, hypertension, ischaemic heart disease, heart failure and their levels of severity from italian general practitioners’ electronic medical records: A validation study. <em>BMJ open</em> 2016;<strong>6</strong>:e012413. doi: 10.1136/bmjopen–2016–012413.</p>
+<p>67 Gini R, Schuemie MJ, Mazzaglia G <em>et al.</em> Automatic identification of type 2 diabetes, hypertension, ischaemic heart disease, heart failure and their levels of severity from italian general practitioners’ electronic medical records: A validation study. <em>BMJ Open</em> 2016;<strong>6</strong>:e012413. doi: 10.1136/bmjopen–2016–012413.</p>
 </div>
 <div id="ref-Afzal2013-uz">
-<p>68 Afzal Z, Schuemie MJ, Blijderveen JC van <em>et al.</em> Improving sensitivity of machine learning methods for automated case identification from free-text electronic medical records. <em>BMC medical informatics and decision making</em> 2013;<strong>13:30.</strong>:10.1186/1472–6947–13–30.</p>
+<p>68 Afzal Z, Schuemie MJ, Blijderveen JC van <em>et al.</em> Improving sensitivity of machine learning methods for automated case identification from free-text electronic medical records. <em>BMC Medical Informatics and Decision Making</em> 2013;<strong>13:30.</strong>:10.1186/1472–6947–13–30.</p>
 </div>
 <div id="ref-Lenihan2013-id">
-<p>69 Lenihan CR, Montez-Rath ME, Mora Mangano CT <em>et al.</em> Trends in acute kidney injury, associated use of dialysis, and mortality after cardiac surgery, 1999 to 2008. <em>The Annals of thoracic surgery</em> 2013;<strong>95</strong>:20–8. doi: 10.1016/j.athoracsur.2012.05.131. Epub 2012 Dec 25.</p>
+<p>69 Lenihan CR, Montez-Rath ME, Mora Mangano CT <em>et al.</em> Trends in acute kidney injury, associated use of dialysis, and mortality after cardiac surgery, 1999 to 2008. <em>The Annals of Thoracic Surgery</em> 2013;<strong>95</strong>:20–8. doi: 10.1016/j.athoracsur.2012.05.131. Epub 2012 Dec 25.</p>
 </div>
 <div id="ref-Winkelmayer2005-jh">
-<p>70 Winkelmayer WC, Schneeweiss S, Mogun H <em>et al.</em> Identification of individuals with CKD from medicare claims data: A validation study. <em>American journal of kidney diseases: the official journal of the National Kidney Foundation</em> 2005;<strong>46</strong>:225–32. doi: 10.1053/j.ajkd.2005.04.029.</p>
+<p>70 Winkelmayer WC, Schneeweiss S, Mogun H <em>et al.</em> Identification of individuals with CKD from medicare claims data: A validation study. <em>American Journal of Kidney Diseases: The Official Journal of the National Kidney Foundation</em> 2005;<strong>46</strong>:225–32. doi: 10.1053/j.ajkd.2005.04.029.</p>
 </div>
 <div id="ref-Grams2014-zx">
-<p>71 Grams ME, Waikar SS, MacMahon B <em>et al.</em> Performance and limitations of administrative data in the identification of AKI. <em>Clinical journal of the American Society of Nephrology: CJASN</em> 2014;<strong>9</strong>:682–9. doi: 10.2215/CJN.07650713. Epub 2014 Jan 23.</p>
+<p>71 Grams ME, Waikar SS, MacMahon B <em>et al.</em> Performance and limitations of administrative data in the identification of AKI. <em>Clinical Journal of the American Society of Nephrology: CJASN</em> 2014;<strong>9</strong>:682–9. doi: 10.2215/CJN.07650713. Epub 2014 Jan 23.</p>
 </div>
 <div id="ref-Arnold2018-rq">
-<p>72 Arnold J, Ng KP, Sims D <em>et al.</em> Incidence and impact on outcomes of acute kidney injury after a stroke: A systematic review and meta-analysis. <em>BMC nephrology</em> 2018;<strong>19</strong>:283. doi: 10.1186/s12882–018–1085–0.</p>
+<p>72 Arnold J, Ng KP, Sims D <em>et al.</em> Incidence and impact on outcomes of acute kidney injury after a stroke: A systematic review and meta-analysis. <em>BMC Nephrology</em> 2018;<strong>19</strong>:283. doi: 10.1186/s12882–018–1085–0.</p>
 </div>
 <div id="ref-Sutherland2015-ya">
-<p>73 Sutherland SM, Byrnes JJ, Kothari M <em>et al.</em> AKI in hospitalized children: Comparing the pRIFLE, AKIN, and KDIGO definitions. <em>Clinical journal of the American Society of Nephrology: CJASN</em> 2015;<strong>10</strong>:554–61. doi: 10.2215/CJN.01900214. Epub 2015 Feb 3.</p>
+<p>73 Sutherland SM, Byrnes JJ, Kothari M <em>et al.</em> AKI in hospitalized children: Comparing the pRIFLE, AKIN, and KDIGO definitions. <em>Clinical Journal of the American Society of Nephrology: CJASN</em> 2015;<strong>10</strong>:554–61. doi: 10.2215/CJN.01900214. Epub 2015 Feb 3.</p>
 </div>
 <div id="ref-Waikar2006-uq">
 <p>74 Waikar SS, Wald R, Chertow GM <em>et al.</em> Validity of international classification of diseases, ninth revision, clinical modification codes for acute renal failure. <em>Journal of the American Society of Nephrology: JASN</em> 2006;<strong>17</strong>:1688–94. doi: 10.1681/ASN.2006010073. Epub 2006 Apr 26.</p>
 </div>
 <div id="ref-Rhee2015-mm">
-<p>75 Rhee C, Murphy MV, Li L <em>et al.</em> Improving documentation and coding for acute organ dysfunction biases estimates of changing sepsis severity and burden: A retrospective study. <em>Critical care / the Society of Critical Care Medicine</em> 2015;<strong>19:338.</strong>:10.1186/s13054–015–1048–9.</p>
+<p>75 Rhee C, Murphy MV, Li L <em>et al.</em> Improving documentation and coding for acute organ dysfunction biases estimates of changing sepsis severity and burden: A retrospective study. <em>Critical Care / the Society of Critical Care Medicine</em> 2015;<strong>19:338.</strong>:10.1186/s13054–015–1048–9.</p>
 </div>
 <div id="ref-Vashisht2018-qk">
-<p>76 Vashisht R, Jung K, Schuler A <em>et al.</em> Association of hemoglobin a1c levels with use of sulfonylureas, dipeptidyl peptidase 4 inhibitors, and thiazolidinediones in patients with type 2 diabetes treated with metformin: Analysis from the observational health data sciences and informatics initiative. <em>JAMA network open</em> 2018;<strong>1</strong>:e181755–5.</p>
+<p>76 Vashisht R, Jung K, Schuler A <em>et al.</em> Association of hemoglobin a1c levels with use of sulfonylureas, dipeptidyl peptidase 4 inhibitors, and thiazolidinediones in patients with type 2 diabetes treated with metformin: Analysis from the observational health data sciences and informatics initiative. <em>JAMA Network Open</em> 2018;<strong>1</strong>:e181755–5.</p>
 </div>
 <div id="ref-Broder2016-qq">
-<p>77 Broder MS, Chang E, Cherepanov D <em>et al.</em> Identification of potential markers for cushing disease. <em>Endocrine practice: official journal of the American College of Endocrinology and the American Association of Clinical Endocrinologists</em> 2016;<strong>22</strong>:567–74. doi: 10.4158/EP15914.OR. Epub 2016 Jan 20.</p>
+<p>77 Broder MS, Chang E, Cherepanov D <em>et al.</em> Identification of potential markers for cushing disease. <em>Endocrine Practice: Official Journal of the American College of Endocrinology and the American Association of Clinical Endocrinologists</em> 2016;<strong>22</strong>:567–74. doi: 10.4158/EP15914.OR. Epub 2016 Jan 20.</p>
 </div>
 <div id="ref-Williams2017-zb">
-<p>78 Williams BA. The clinical epidemiology of fatigue in newly diagnosed heart failure. <em>BMC cardiovascular disorders</em> 2017;<strong>17</strong>:122. doi: 10.1186/s12872–017–0555–9.</p>
+<p>78 Williams BA. The clinical epidemiology of fatigue in newly diagnosed heart failure. <em>BMC Cardiovascular Disorders</em> 2017;<strong>17</strong>:122. doi: 10.1186/s12872–017–0555–9.</p>
 </div>
 <div id="ref-Yabe2015-da">
-<p>79 Yabe D, Kuwata H, Kaneko M <em>et al.</em> Use of the japanese health insurance claims database to assess the risk of acute pancreatitis in patients with diabetes: Comparison of DPP-4 inhibitors with other oral antidiabetic drugs. <em>Diabetes, obesity &amp; metabolism</em> 2015;<strong>17</strong>:430–4. doi: 10.1111/dom.12381. Epub 2014 Sep 17.</p>
+<p>79 Yabe D, Kuwata H, Kaneko M <em>et al.</em> Use of the japanese health insurance claims database to assess the risk of acute pancreatitis in patients with diabetes: Comparison of DPP-4 inhibitors with other oral antidiabetic drugs. <em>Diabetes, Obesity &amp; Metabolism</em> 2015;<strong>17</strong>:430–4. doi: 10.1111/dom.12381. Epub 2014 Sep 17.</p>
 </div>
 <div id="ref-Dore2013-km">
-<p>80 Dore DD, Hussein M, Hoffman C <em>et al.</em> A pooled analysis of exenatide use and risk of acute pancreatitis. <em>Current medical research and opinion</em> 2013;<strong>29</strong>:1577–86. doi: 10.1185/03007995.2013.838550. Epub 2013 Sep 13.</p>
+<p>80 Dore DD, Hussein M, Hoffman C <em>et al.</em> A pooled analysis of exenatide use and risk of acute pancreatitis. <em>Current Medical Research and Opinion</em> 2013;<strong>29</strong>:1577–86. doi: 10.1185/03007995.2013.838550. Epub 2013 Sep 13.</p>
 </div>
 <div id="ref-Dore2011-gx">
-<p>81 Dore DD, Chaudhry S, Hoffman C <em>et al.</em> Stratum-specific positive predictive values of claims for acute pancreatitis among commercial health insurance plan enrollees with diabetes mellitus. <em>Pharmacoepidemiology and drug safety</em> 2011;<strong>20</strong>:209–13. doi: 10.1002/pds.2077. Epub 2010 Dec 23.</p>
+<p>81 Dore DD, Chaudhry S, Hoffman C <em>et al.</em> Stratum-specific positive predictive values of claims for acute pancreatitis among commercial health insurance plan enrollees with diabetes mellitus. <em>Pharmacoepidemiology and Drug Safety</em> 2011;<strong>20</strong>:209–13. doi: 10.1002/pds.2077. Epub 2010 Dec 23.</p>
 </div>
 <div id="ref-Chen2017-bb">
-<p>82 Chen HJ, Wang JJ, Tsay WI <em>et al.</em> Epidemiology and outcome of acute pancreatitis in end-stage renal disease dialysis patients: A 10-year national cohort study. <em>Nephrology, dialysis, transplantation: official publication of the European Dialysis and Transplant Association - European Renal Association</em> 2017;<strong>32</strong>:1731–1736. doi: 10.1093/ndt/gfw400.</p>
+<p>82 Chen HJ, Wang JJ, Tsay WI <em>et al.</em> Epidemiology and outcome of acute pancreatitis in end-stage renal disease dialysis patients: A 10-year national cohort study. <em>Nephrology, Dialysis, Transplantation: Official Publication of the European Dialysis and Transplant Association - European Renal Association</em> 2017;<strong>32</strong>:1731–1736. doi: 10.1093/ndt/gfw400.</p>
 </div>
 <div id="ref-Ooba2013">
 <p>83 Ooba N, Setoguchi S, Ando T <em>et al.</em> Claims-based definition of death in japanese claims database: Validity and implications. <em>PLoS One</em> 2013;<strong>8</strong>:e66116. doi: 10.1371/journal.pone.0066116. Print 2013.</p>
@@ -4850,13 +4861,13 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>86 Buono JL, Mathur K, Averitt AJ <em>et al.</em> Economic burden of irritable bowel syndrome with diarrhea: Retrospective analysis of a U.S. Commercially insured population. <em>J Manag Care Spec Pharm</em> 2017;<strong>23</strong>:453–460. doi: 10.18553/jmcp.2016.16138. Epub 2016 Nov 21.</p>
 </div>
 <div id="ref-Krishnarajah2016-af">
-<p>87 Krishnarajah G, Duh MS, Korves C <em>et al.</em> Public health impact of complete and incomplete rotavirus vaccination among commercially and medicaid insured children in the united states. <em>PloS one</em> 2016;<strong>11</strong>:e0145977. doi: 10.1371/journal.pone.0145977. eCollection 2016.</p>
+<p>87 Krishnarajah G, Duh MS, Korves C <em>et al.</em> Public health impact of complete and incomplete rotavirus vaccination among commercially and medicaid insured children in the united states. <em>PloS One</em> 2016;<strong>11</strong>:e0145977. doi: 10.1371/journal.pone.0145977. eCollection 2016.</p>
 </div>
 <div id="ref-Panozzo2014-tt">
-<p>88 Panozzo CA, Becker-Dreps S, Pate V <em>et al.</em> Direct, indirect, total, and overall effectiveness of the rotavirus vaccines for the prevention of gastroenteritis hospitalizations in privately insured US children, 2007-2010. <em>American journal of epidemiology</em> 2014;<strong>179</strong>:895–909. doi: 10.1093/aje/kwu001. Epub 2014 Feb 26.</p>
+<p>88 Panozzo CA, Becker-Dreps S, Pate V <em>et al.</em> Direct, indirect, total, and overall effectiveness of the rotavirus vaccines for the prevention of gastroenteritis hospitalizations in privately insured US children, 2007-2010. <em>American Journal of Epidemiology</em> 2014;<strong>179</strong>:895–909. doi: 10.1093/aje/kwu001. Epub 2014 Feb 26.</p>
 </div>
 <div id="ref-Nichols2017-ah">
-<p>89 Nichols GA, Brodovicz KG, Kimes TM <em>et al.</em> Prevalence and incidence of urinary tract and genital infections among patients with and without type 2 diabetes. <em>Journal of diabetes and its complications</em> 2017;<strong>31</strong>:1587–91.</p>
+<p>89 Nichols GA, Brodovicz KG, Kimes TM <em>et al.</em> Prevalence and incidence of urinary tract and genital infections among patients with and without type 2 diabetes. <em>Journal of Diabetes and Its Complications</em> 2017;<strong>31</strong>:1587–91.</p>
 </div>
 <div id="ref-Abbas2015">
 <p>90 Abbas S, Ihle P, Harder S <em>et al.</em> Risk of hyperkalemia and combined use of spironolactone and long-term ACE inhibitor/angiotensin receptor blocker therapy in heart failure using real-life data: A population- and insurance-based cohort. <em>Pharmacoepidemiol Drug Saf</em> 2015;<strong>24</strong>:406–13. doi: 10.1002/pds.3748. Epub 2015 Feb 12.</p>
@@ -4871,13 +4882,13 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>93 Leonard CE, Han X, Brensinger CM <em>et al.</em> Comparative risk of serious hypoglycemia with oral antidiabetic monotherapy: A retrospective cohort study. <em>Pharmacoepidemiology and Drug Safety</em> 2018;<strong>27</strong>:9–18.</p>
 </div>
 <div id="ref-Chrischilles2001-ak">
-<p>94 Chrischilles E, Rubenstein L, Chao J <em>et al.</em> Initiation of nonselective alpha1-antagonist therapy and occurrence of hypotension-related adverse events among men with benign prostatic hyperplasia: A retrospective cohort study. <em>Clinical therapeutics</em> 2001;<strong>23</strong>:727–43.</p>
+<p>94 Chrischilles E, Rubenstein L, Chao J <em>et al.</em> Initiation of nonselective alpha1-antagonist therapy and occurrence of hypotension-related adverse events among men with benign prostatic hyperplasia: A retrospective cohort study. <em>Clinical Therapeutics</em> 2001;<strong>23</strong>:727–43.</p>
 </div>
 <div id="ref-Goldstein2003-mx">
-<p>95 Goldstein JL, Zhao SZ, Burke TA <em>et al.</em> Incidence of outpatient physician claims for upper gastrointestinal symptoms among new users of celecoxib, ibuprofen, and naproxen in an insured population in the united states. <em>The American journal of gastroenterology</em> 2003;<strong>98</strong>:2627–34. doi: 10.1111/j.1572–0241.2003.08722.x.</p>
+<p>95 Goldstein JL, Zhao SZ, Burke TA <em>et al.</em> Incidence of outpatient physician claims for upper gastrointestinal symptoms among new users of celecoxib, ibuprofen, and naproxen in an insured population in the united states. <em>The American Journal of Gastroenterology</em> 2003;<strong>98</strong>:2627–34. doi: 10.1111/j.1572–0241.2003.08722.x.</p>
 </div>
 <div id="ref-Donga2017-vh">
-<p>96 Donga PZ, Bilir SP, Little G <em>et al.</em> Comparative treatment-related adverse event cost burden in immune thrombocytopenic purpura. <em>Journal of medical economics</em> 2017;<strong>20</strong>:1200–1206. doi: 10.1080/13696998.2017.1370425. Epub 2017 Sep 8.</p>
+<p>96 Donga PZ, Bilir SP, Little G <em>et al.</em> Comparative treatment-related adverse event cost burden in immune thrombocytopenic purpura. <em>Journal of Medical Economics</em> 2017;<strong>20</strong>:1200–1206. doi: 10.1080/13696998.2017.1370425. Epub 2017 Sep 8.</p>
 </div>
 <div id="ref-Marrett2016-rr">
 <p>97 Marrett E, Kwong WJ, Frech F <em>et al.</em> Health care utilization and costs associated with nausea and vomiting in patients receiving oral Immediate-Release opioids for outpatient acute pain management. <em>Pain Ther</em> 2016;<strong>5</strong>:215–226. doi: 10.1007/s40122–016–0057–y.Epub 2016 Oct 4.</p>
@@ -4901,19 +4912,19 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>103 Schneeweiss S, Rassen JA, Glynn RJ <em>et al.</em> High-dimensional propensity score adjustment in studies of treatment effects using health care claims data. <em>Epidemiology</em> 2009;<strong>20</strong>:512.</p>
 </div>
 <div id="ref-Hernan2012-kz">
-<p>104 Hernán MA, Hernández-Dı́az S. Beyond the intention-to-treat in comparative effectiveness research. <em>Clinical trials</em> 2012;<strong>9</strong>:48–55.</p>
+<p>104 Hernán MA, Hernández-Dı́az S. Beyond the intention-to-treat in comparative effectiveness research. <em>Clinical Trials</em> 2012;<strong>9</strong>:48–55.</p>
 </div>
 <div id="ref-Murray2018-zf">
-<p>105 Murray EJ, Caniglia EC, Swanson SA <em>et al.</em> Patients and investigators prefer measures of absolute risk in subgroups for pragmatic randomized trials. <em>Journal of clinical epidemiology</em> 2018;<strong>103</strong>:10–21.</p>
+<p>105 Murray EJ, Caniglia EC, Swanson SA <em>et al.</em> Patients and investigators prefer measures of absolute risk in subgroups for pragmatic randomized trials. <em>Journal of Clinical Epidemiology</em> 2018;<strong>103</strong>:10–21.</p>
 </div>
 <div id="ref-Hernan2017-qp">
-<p>106 Hernán MA, Robins JM. Per-Protocol analyses of pragmatic trials. <em>The New England journal of medicine</em> 2017;<strong>377</strong>:1391–8.</p>
+<p>106 Hernán MA, Robins JM. Per-Protocol analyses of pragmatic trials. <em>The New England Journal of Medicine</em> 2017;<strong>377</strong>:1391–8.</p>
 </div>
 <div id="ref-DerSimonian1986-co">
-<p>107 DerSimonian R, Laird N. Meta-analysis in clinical trials. <em>Controlled clinical trials</em> 1986;<strong>7</strong>:177–88.</p>
+<p>107 DerSimonian R, Laird N. Meta-analysis in clinical trials. <em>Controlled Clinical Trials</em> 1986;<strong>7</strong>:177–88.</p>
 </div>
 <div id="ref-Gronsbell2020-sr">
-<p>108 Gronsbell J, Hong C, Nie L <em>et al.</em> Exact inference for the random-effect model for metaâanalyses with rare events. <em>Statistics in medicine</em> 2020;<strong>39</strong>:252–64.</p>
+<p>108 Gronsbell J, Hong C, Nie L <em>et al.</em> Exact inference for the random-effect model for meta-analyses with rare events. <em>Statistics in Medicine</em> 2020;<strong>39</strong>:252–64.</p>
 </div>
 <div id="ref-Higgins2009-cm">
 <p>109 Higgins JPT, Thompson SG, Spiegelhalter DJ. A re-evaluation of random-effects meta-analysis. <em>Journal of the Royal Statistical Society Series A,</em> 2009;<strong>172</strong>:137–59.</p>
@@ -4925,25 +4936,25 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>111 Varin C, Reid N, Firth D. An overview of composite likelihood methods. <em>Statistica Sinica</em> 2011.</p>
 </div>
 <div id="ref-Voss2017-nv">
-<p>112 Voss EA, Boyce RD, Ryan PB <em>et al.</em> Accuracy of an automated knowledge base for identifying drug adverse reactions. <em>Journal of biomedical informatics</em> 2017;<strong>66</strong>:72–81.</p>
+<p>112 Voss EA, Boyce RD, Ryan PB <em>et al.</em> Accuracy of an automated knowledge base for identifying drug adverse reactions. <em>Journal of Biomedical Informatics</em> 2017;<strong>66</strong>:72–81.</p>
 </div>
 <div id="ref-dukes2019doubly">
 <p>113 Dukes O, Martinussen T, Tchetgen Tchetgen EJ <em>et al.</em> On doubly robust estimation of the hazard difference. <em>Biometrics</em> 2019;<strong>75</strong>:100–9.</p>
 </div>
 <div id="ref-funk2011doubly">
-<p>114 Funk MJ, Westreich D, Wiesen C <em>et al.</em> Doubly robust estimation of causal effects. <em>American journal of epidemiology</em> 2011;<strong>173</strong>:761–7.</p>
+<p>114 Funk MJ, Westreich D, Wiesen C <em>et al.</em> Doubly robust estimation of causal effects. <em>American Journal of Epidemiology</em> 2011;<strong>173</strong>:761–7.</p>
 </div>
 <div id="ref-martinussen2011estimation">
 <p>115 Martinussen T, Vansteelandt S, Gerster M <em>et al.</em> Estimation of direct effects for survival data by using the aalen additive hazards model. <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 2011;<strong>73</strong>:773–88.</p>
 </div>
 <div id="ref-aalen1989linear">
-<p>116 Aalen OO. A linear regression model for the analysis of life times. <em>Statistics in medicine</em> 1989;<strong>8</strong>:907–25.</p>
+<p>116 Aalen OO. A linear regression model for the analysis of life times. <em>Statistics in Medicine</em> 1989;<strong>8</strong>:907–25.</p>
 </div>
 <div id="ref-wang2017doubly">
 <p>117 Wang Y, Lee M, Liu P <em>et al.</em> Doubly robust additive hazards models to estimate effects of a continuous exposure on survival. <em>Epidemiology (Cambridge, Mass)</em> 2017;<strong>28</strong>:771.</p>
 </div>
 <div id="ref-Austin2009-af">
-<p>118 Austin PC. Balance diagnostics for comparing the distribution of baseline covariates between treatment groups in propensity-score matched samples. <em>Statistics in medicine</em> 2009;<strong>28</strong>:3083–107.</p>
+<p>118 Austin PC. Balance diagnostics for comparing the distribution of baseline covariates between treatment groups in propensity-score matched samples. <em>Statistics in Medicine</em> 2009;<strong>28</strong>:3083–107.</p>
 </div>
 <div id="ref-Schuemie_undated-mx">
 <p>119 Schuemie MJ, Ryan PB, Pratt N <em>et al.</em> Large-Scale evidence generation and evaluation across a network of databases (LEGEND): Principles and methods. <em>Journal of the American Medical Informatics Association</em>;<strong>ocaa103</strong>.</p>
@@ -4952,15 +4963,17 @@ With dedicated support from the OHDSI communications specialist, we will deliver
 <p>120 Lipsitch M, Tchetgen Tchetgen E, Cohen T. Negative controls: A tool for detecting confounding and bias in observational studies. <em>Epidemiology</em> 2010;<strong>21</strong>:383–8.</p>
 </div>
 <div id="ref-Hripcsak2020-gz">
-<p>121 Hripcsak G, Suchard MA, Shea S <em>et al.</em> Comparison of cardiovascular and safety outcomes of chlorthalidone vs hydrochlorothiazide to treat hypertension. <em>JAMA internal medicine</em> 2020.</p>
+<p>121 Hripcsak G, Suchard MA, Shea S <em>et al.</em> Comparison of cardiovascular and safety outcomes of chlorthalidone vs hydrochlorothiazide to treat hypertension. <em>JAMA Internal Medicine</em> 2020.</p>
 </div>
 <div id="ref-Schuemie2019-ay">
-<p>122 Schuemie MJ, Ryan PB, Man KKC <em>et al.</em> A plea to stop using the case-control design in retrospective database studies. <em>Statistics in medicine</em> 2019;<strong>38</strong>:4199–208.</p>
+<p>122 Schuemie MJ, Ryan PB, Man KKC <em>et al.</em> A plea to stop using the case-control design in retrospective database studies. <em>Statistics in Medicine</em> 2019;<strong>38</strong>:4199–208.</p>
 </div>
 <div id="ref-Woelfle2011-ss">
-<p>123 Woelfle M, Olliaro P, Todd MH. Open science is a research accelerator. <em>Nature chemistry</em> 2011;<strong>3</strong>:745–8.</p>
+<p>123 Woelfle M, Olliaro P, Todd MH. Open science is a research accelerator. <em>Nature Chemistry</em> 2011;<strong>3</strong>:745–8.</p>
 </div>
 </div>
+
+
 </div>
 <div id="appendix-appendix" class="section level1 unnumbered">
 <h1>Appendix</h1>
@@ -12847,7 +12860,7 @@ NO
 Aortocoronary artery bypass graft
 </td>
 <td style="text-align:left;">
-67166004.00
+67166004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12870,7 +12883,7 @@ NO
 Aortocoronary artery bypass graft with prosthesis
 </td>
 <td style="text-align:left;">
-8876004.00
+8876004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12893,7 +12906,7 @@ NO
 Aortocoronary artery bypass graft with saphenous vein graft
 </td>
 <td style="text-align:left;">
-3546002.00
+3546002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12916,7 +12929,7 @@ NO
 Aortocoronary artery bypass graft with three vein grafts
 </td>
 <td style="text-align:left;">
-405599002.00
+405599002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12939,7 +12952,7 @@ NO
 Aortocoronary artery bypass graft with two vein grafts
 </td>
 <td style="text-align:left;">
-405598005.00
+405598005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12962,7 +12975,7 @@ NO
 Aortocoronary artery bypass graft with vein graft
 </td>
 <td style="text-align:left;">
-17073005.00
+17073005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -12985,7 +12998,7 @@ NO
 Aortocoronary bypass grafting
 </td>
 <td style="text-align:left;">
-309814006.00
+309814006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13008,7 +13021,7 @@ NO
 Aortocoronary bypass of four or more coronary arteries
 </td>
 <td style="text-align:left;">
-10190003.00
+10190003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13031,7 +13044,7 @@ NO
 Aortocoronary bypass of one coronary artery
 </td>
 <td style="text-align:left;">
-29819009.00
+29819009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13054,7 +13067,7 @@ NO
 Aortocoronary bypass of three coronary arteries
 </td>
 <td style="text-align:left;">
-14323007.00
+14323007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13077,7 +13090,7 @@ NO
 Aortocoronary bypass of two coronary arteries
 </td>
 <td style="text-align:left;">
-90487008.00
+90487008
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13100,7 +13113,7 @@ NO
 Arterial Grafting for Coronary Artery Bypass
 </td>
 <td style="text-align:left;">
-1006216.00
+1006216
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13123,7 +13136,7 @@ NO
 Carotid-subclavian artery bypass graft with vein
 </td>
 <td style="text-align:left;">
-59012002.00
+59012002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13146,7 +13159,7 @@ NO
 Coronary artery bypass graft
 </td>
 <td style="text-align:left;">
-232717009.00
+232717009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13169,7 +13182,7 @@ NO
 Coronary artery bypass graft x 1
 </td>
 <td style="text-align:left;">
-232719007.00
+232719007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13192,7 +13205,7 @@ NO
 Coronary artery bypass graft, anastomosis of artery of thorax to coronary artery
 </td>
 <td style="text-align:left;">
-119565001.00
+119565001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13215,7 +13228,7 @@ NO
 Coronary artery bypass grafts greater than 5
 </td>
 <td style="text-align:left;">
-232724005.00
+232724005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13238,7 +13251,7 @@ NO
 Coronary artery bypass grafts x 2
 </td>
 <td style="text-align:left;">
-232720001.00
+232720001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13261,7 +13274,7 @@ NO
 Coronary artery bypass grafts x 3
 </td>
 <td style="text-align:left;">
-232721002.00
+232721002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13284,7 +13297,7 @@ NO
 Coronary artery bypass grafts x 4
 </td>
 <td style="text-align:left;">
-232722009.00
+232722009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13307,7 +13320,7 @@ NO
 Coronary artery bypass grafts x 5
 </td>
 <td style="text-align:left;">
-232723004.00
+232723004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13330,7 +13343,7 @@ NO
 Coronary artery bypass with autogenous graft of internal mammary artery, single graft
 </td>
 <td style="text-align:left;">
-359601003.00
+359601003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13353,7 +13366,7 @@ NO
 Coronary artery bypass with autogenous graft, five grafts
 </td>
 <td style="text-align:left;">
-82247006.00
+82247006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13376,7 +13389,7 @@ NO
 Coronary artery bypass with autogenous graft, four grafts
 </td>
 <td style="text-align:left;">
-39202005.00
+39202005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13399,7 +13412,7 @@ NO
 Coronary artery bypass with autogenous graft, three grafts
 </td>
 <td style="text-align:left;">
-10326007.00
+10326007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13422,7 +13435,7 @@ NO
 Coronary artery bypass with autogenous graft, two grafts
 </td>
 <td style="text-align:left;">
-74371005.00
+74371005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13445,7 +13458,7 @@ NO
 Coronary artery bypass, using arterial graft(s)
 </td>
 <td style="text-align:left;">
-1006217.00
+1006217
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13468,7 +13481,7 @@ NO
 Coronary artery bypass, using arterial graft(s); 2 coronary arterial grafts
 </td>
 <td style="text-align:left;">
-33534.00
+33534
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13491,7 +13504,7 @@ NO
 Coronary artery bypass, using arterial graft(s); 3 coronary arterial grafts
 </td>
 <td style="text-align:left;">
-33535.00
+33535
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13514,7 +13527,7 @@ NO
 Coronary artery bypass, using arterial graft(s); 4 or more coronary arterial grafts
 </td>
 <td style="text-align:left;">
-33536.00
+33536
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13537,7 +13550,7 @@ NO
 Coronary artery bypass, using arterial graft(s); single arterial graft
 </td>
 <td style="text-align:left;">
-33533.00
+33533
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13560,7 +13573,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s)
 </td>
 <td style="text-align:left;">
-1006208.00
+1006208
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13583,7 +13596,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); 2 venous grafts (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33518.00
+33518
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13606,7 +13619,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); 3 venous grafts (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33519.00
+33519
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13629,7 +13642,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); 4 venous grafts (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33521.00
+33521
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13652,7 +13665,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); 5 venous grafts (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33522.00
+33522
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13675,7 +13688,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); 6 or more venous grafts (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33523.00
+33523
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13698,7 +13711,7 @@ NO
 Coronary artery bypass, using venous graft(s) and arterial graft(s); single vein graft (List separately in addition to code for primary procedure)
 </td>
 <td style="text-align:left;">
-33517.00
+33517
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13721,7 +13734,7 @@ NO
 Coronary artery bypass, vein only
 </td>
 <td style="text-align:left;">
-1006200.00
+1006200
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13744,7 +13757,7 @@ NO
 Coronary artery bypass, vein only; 2 coronary venous grafts
 </td>
 <td style="text-align:left;">
-33511.00
+33511
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13767,7 +13780,7 @@ NO
 Coronary artery bypass, vein only; 3 coronary venous grafts
 </td>
 <td style="text-align:left;">
-33512.00
+33512
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13790,7 +13803,7 @@ NO
 Coronary artery bypass, vein only; 4 coronary venous grafts
 </td>
 <td style="text-align:left;">
-33513.00
+33513
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13813,7 +13826,7 @@ NO
 Coronary artery bypass, vein only; 5 coronary venous grafts
 </td>
 <td style="text-align:left;">
-33514.00
+33514
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13836,7 +13849,7 @@ NO
 Coronary artery bypass, vein only; 6 or more coronary venous grafts
 </td>
 <td style="text-align:left;">
-33516.00
+33516
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13859,7 +13872,7 @@ NO
 Coronary artery bypass, vein only; single coronary venous graft
 </td>
 <td style="text-align:left;">
-33510.00
+33510
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13905,7 +13918,7 @@ NO
 Internal mammary-coronary artery bypass graft
 </td>
 <td style="text-align:left;">
-119564002.00
+119564002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13951,7 +13964,7 @@ NO
 Single internal mammary-coronary artery bypass
 </td>
 <td style="text-align:left;">
-359597003.00
+359597003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -13974,7 +13987,7 @@ NO
 Venous Grafting Only for Coronary Artery Bypass
 </td>
 <td style="text-align:left;">
-1006199.00
+1006199
 </td>
 <td style="text-align:left;">
 CPT4
@@ -13997,7 +14010,7 @@ NO
 Revision of bypass for coronary artery
 </td>
 <td style="text-align:left;">
-175036008.00
+175036008
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -14020,7 +14033,7 @@ NO
 Off-pump coronary artery bypass
 </td>
 <td style="text-align:left;">
-418824004.00
+418824004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15875,7 +15888,7 @@ Mapped
 Urinary tract infectious disease
 </td>
 <td style="text-align:left;">
-6.85660050e+07
+68566005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15898,7 +15911,7 @@ NO
 Pyuria
 </td>
 <td style="text-align:left;">
-4.80000100e+06
+4800001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15921,7 +15934,7 @@ NO
 Genitourinary tract infection in pregnancy
 </td>
 <td style="text-align:left;">
-2.67204006e+08
+267204006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15944,7 +15957,7 @@ NO
 Bacteriuria
 </td>
 <td style="text-align:left;">
-6.13730060e+07
+61373006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15967,7 +15980,7 @@ NO
 Chronic obstructive pyelonephritis
 </td>
 <td style="text-align:left;">
-2.36379002e+08
+236379002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -15990,7 +16003,7 @@ NO
 Cystitis
 </td>
 <td style="text-align:left;">
-3.88220070e+07
+38822007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16013,7 +16026,7 @@ NO
 Abscess of prostate
 </td>
 <td style="text-align:left;">
-8.72500500e+06
+8725005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16036,7 +16049,7 @@ NO
 Chronic radiation cystitis
 </td>
 <td style="text-align:left;">
-2.36629009e+08
+236629009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16059,7 +16072,7 @@ NO
 Prostatitis
 </td>
 <td style="text-align:left;">
-9.71300200e+06
+9713002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16082,7 +16095,7 @@ NO
 Sterile pyuria
 </td>
 <td style="text-align:left;">
-2.75742001e+08
+275742001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16105,7 +16118,7 @@ NO
 Syphilis of kidney
 </td>
 <td style="text-align:left;">
-5.95300010e+07
+59530001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16128,7 +16141,7 @@ NO
 Mumps nephritis
 </td>
 <td style="text-align:left;">
-1.71210060e+07
+17121006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16151,7 +16164,7 @@ NO
 Diphtheria tubulointerstitial nephropathy
 </td>
 <td style="text-align:left;">
-1.08607100e+15
+1086071000119103
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16174,7 +16187,7 @@ NO
 Asymptomatic bacteriuria
 </td>
 <td style="text-align:left;">
-7.20406004e+08
+720406004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16197,7 +16210,7 @@ NO
 Diphtheritic cystitis
 </td>
 <td style="text-align:left;">
-4.82780010e+07
+48278001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16220,7 +16233,7 @@ NO
 Irradiation cystitis
 </td>
 <td style="text-align:left;">
-1.12510000e+07
+11251000
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16243,7 +16256,7 @@ NO
 Neonatal urinary tract infection
 </td>
 <td style="text-align:left;">
-1.23010090e+07
+12301009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16266,7 +16279,7 @@ NO
 Nongonococcal urethritis
 </td>
 <td style="text-align:left;">
-8.46190010e+07
+84619001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16289,7 +16302,7 @@ NO
 Non-infective cystitis
 </td>
 <td style="text-align:left;">
-2.36623005e+08
+236623005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16312,7 +16325,7 @@ NO
 Reactive arthritis triad
 </td>
 <td style="text-align:left;">
-6.72240070e+07
+67224007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16335,7 +16348,7 @@ NO
 Urethral abscess
 </td>
 <td style="text-align:left;">
-6.72770020e+07
+67277002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16358,7 +16371,7 @@ NO
 Urethral stricture due to infection
 </td>
 <td style="text-align:left;">
-8.03750020e+07
+80375002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16381,7 +16394,7 @@ NO
 Cystitis associated with another disorder
 </td>
 <td style="text-align:left;">
-1.97845000e+08
+197845000
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16404,7 +16417,7 @@ NO
 Hemorrhagic cystitis
 </td>
 <td style="text-align:left;">
-8.76960040e+07
+87696004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16427,7 +16440,7 @@ NO
 Infections of urethra in pregnancy
 </td>
 <td style="text-align:left;">
-1.99206009e+08
+199206009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16450,7 +16463,7 @@ NO
 Acute cystitis - culture-negative
 </td>
 <td style="text-align:left;">
-2.36624004e+08
+236624004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16473,7 +16486,7 @@ NO
 Chronic cystitis - culture negative
 </td>
 <td style="text-align:left;">
-2.36626002e+08
+236626002
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16496,7 +16509,7 @@ NO
 Recurrent cystitis - culture-negative
 </td>
 <td style="text-align:left;">
-2.36625003e+08
+236625003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16519,7 +16532,7 @@ NO
 Viral infection by site
 </td>
 <td style="text-align:left;">
-3.12130009e+08
+312130009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16542,7 +16555,7 @@ NO
 Fungal infection by site
 </td>
 <td style="text-align:left;">
-3.12146001e+08
+312146001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16565,7 +16578,7 @@ NO
 Tuberculosis
 </td>
 <td style="text-align:left;">
-5.67170010e+07
+56717001
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16588,7 +16601,7 @@ NO
 Disease caused by parasite
 </td>
 <td style="text-align:left;">
-1.73220070e+07
+17322007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16611,7 +16624,7 @@ NO
 Protozoal infectious disorders
 </td>
 <td style="text-align:left;">
-1.00370720e+07
+10037072
 </td>
 <td style="text-align:left;">
 MedDRA
@@ -16634,7 +16647,7 @@ NO
 Gonorrhea
 </td>
 <td style="text-align:left;">
-1.56280030e+07
+15628003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -16657,7 +16670,7 @@ NO
 Chlamydial infections
 </td>
 <td style="text-align:left;">
-1.00085610e+07
+10008561
 </td>
 <td style="text-align:left;">
 MedDRA
@@ -17434,7 +17447,7 @@ Mapped
 Amputation of ankle
 </td>
 <td style="text-align:left;">
-397218006.00
+397218006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17480,7 +17493,7 @@ NO
 Amputation, leg, through tibia and fibula
 </td>
 <td style="text-align:left;">
-27880.00
+27880
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17503,7 +17516,7 @@ NO
 Amputation, foot; midtarsal (eg, Chopart type procedure)
 </td>
 <td style="text-align:left;">
-28800.00
+28800
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17526,7 +17539,7 @@ NO
 Amputation, foot; transmetatarsal
 </td>
 <td style="text-align:left;">
-28805.00
+28805
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17549,7 +17562,7 @@ NO
 Amputation, metatarsal, with toe, single
 </td>
 <td style="text-align:left;">
-28810.00
+28810
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17572,7 +17585,7 @@ NO
 Amputation, toe; metatarsophalangeal joint
 </td>
 <td style="text-align:left;">
-28820.00
+28820
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17595,7 +17608,7 @@ NO
 Amputation, toe; interphalangeal joint
 </td>
 <td style="text-align:left;">
-28825.00
+28825
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17618,7 +17631,7 @@ NO
 Amputation, ankle, through malleoli of tibia and fibula (eg, Syme, Pirogoff type procedures), with plastic closure and resection of nerves
 </td>
 <td style="text-align:left;">
-27888.00
+27888
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17641,7 +17654,7 @@ NO
 Amputation, leg, through tibia and fibula; with immediate fitting technique including application of first cast
 </td>
 <td style="text-align:left;">
-27881.00
+27881
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17664,7 +17677,7 @@ NO
 Amputation of leg through tibia and fibula
 </td>
 <td style="text-align:left;">
-88312006.00
+88312006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17687,7 +17700,7 @@ NO
 Amputation, leg, through tibia and fibula; open, circular (guillotine)
 </td>
 <td style="text-align:left;">
-27882.00
+27882
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17710,7 +17723,7 @@ NO
 Amputation of the foot
 </td>
 <td style="text-align:left;">
-180030006.00
+180030006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17756,7 +17769,7 @@ NO
 Amputation of toe
 </td>
 <td style="text-align:left;">
-371186005.00
+371186005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17779,7 +17792,7 @@ NO
 Amputation through foot
 </td>
 <td style="text-align:left;">
-211570009.00
+211570009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17825,7 +17838,7 @@ NO
 Amputation through metatarsal bones
 </td>
 <td style="text-align:left;">
-265739006.00
+265739006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17848,7 +17861,7 @@ NO
 Amputation, leg, through tibia and fibula; re-amputation
 </td>
 <td style="text-align:left;">
-27886.00
+27886
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17917,7 +17930,7 @@ NO
 Midtarsal amputation of foot
 </td>
 <td style="text-align:left;">
-209724005.00
+209724005
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -17963,7 +17976,7 @@ NO
 Amputation, leg, through tibia and fibula; secondary closure or scar revision
 </td>
 <td style="text-align:left;">
-27884.00
+27884
 </td>
 <td style="text-align:left;">
 CPT4
@@ -17986,7 +17999,7 @@ NO
 Amputation of lower limb
 </td>
 <td style="text-align:left;">
-397117006.00
+397117006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20324,7 +20337,7 @@ Mapped
 Amniotic fluid embolism
 </td>
 <td style="text-align:left;">
-17263003.0
+17263003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20347,7 +20360,7 @@ NO
 Antepartum deep vein thrombosis
 </td>
 <td style="text-align:left;">
-49956009.0
+49956009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20370,7 +20383,7 @@ NO
 Budd-Chiari syndrome
 </td>
 <td style="text-align:left;">
-82385007.0
+82385007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20393,7 +20406,7 @@ NO
 Cerebral venous thrombosis in pregnancy
 </td>
 <td style="text-align:left;">
-200259003.0
+200259003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20416,7 +20429,7 @@ NO
 Obstetric air pulmonary embolism
 </td>
 <td style="text-align:left;">
-200286003.0
+200286003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20439,7 +20452,7 @@ NO
 Obstetric blood-clot pulmonary embolism
 </td>
 <td style="text-align:left;">
-200299000.0
+200299000
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20462,7 +20475,7 @@ NO
 Obstetric pulmonary embolism
 </td>
 <td style="text-align:left;">
-200284000.0
+200284000
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20485,7 +20498,7 @@ NO
 Obstetric pyemic and septic pulmonary embolism
 </td>
 <td style="text-align:left;">
-267284008.0
+267284008
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20508,7 +20521,7 @@ NO
 Phlebitis and thrombophlebitis of intracranial sinuses
 </td>
 <td style="text-align:left;">
-192753009.0
+192753009
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20531,7 +20544,7 @@ NO
 Portal vein thrombosis
 </td>
 <td style="text-align:left;">
-17920008.0
+17920008
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20554,7 +20567,7 @@ NO
 Postpartum deep phlebothrombosis
 </td>
 <td style="text-align:left;">
-56272000.0
+56272000
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20577,7 +20590,7 @@ NO
 Pulmonary embolism
 </td>
 <td style="text-align:left;">
-59282003.0
+59282003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20600,7 +20613,7 @@ NO
 Pulmonary infarction
 </td>
 <td style="text-align:left;">
-64662007.0
+64662007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20623,7 +20636,7 @@ NO
 Septic thrombophlebitis
 </td>
 <td style="text-align:left;">
-439731006.0
+439731006
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20646,7 +20659,7 @@ NO
 Thrombosed hemorrhoids
 </td>
 <td style="text-align:left;">
-75955007.0
+75955007
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20669,7 +20682,7 @@ NO
 Thrombosis of retinal vein
 </td>
 <td style="text-align:left;">
-46085004.0
+46085004
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20692,7 +20705,7 @@ NO
 Venous thrombosis
 </td>
 <td style="text-align:left;">
-111293003.0
+111293003
 </td>
 <td style="text-align:left;">
 SNOMED
@@ -20883,9 +20896,10 @@ NO
 </div>
 <div id="negative-controls" class="section level1">
 <h1><span class="header-section-number">C</span> Negative Control Concepts</h1>
+
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-2">Table C.1: </span>Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID
+<span id="tab:unnamed-chunk-7">Table C.1: </span>Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID
 </caption>
 <thead>
 <tr>
@@ -21535,22 +21549,6 @@ Presbyopia
 </td>
 <td style="text-align:right;">
 373478
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Problem related to lifestyle
-</td>
-<td style="text-align:right;">
-46286594
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Problem related to lifestyle
-</td>
-<td style="text-align:right;">
-46286594
 </td>
 </tr>
 <tr>

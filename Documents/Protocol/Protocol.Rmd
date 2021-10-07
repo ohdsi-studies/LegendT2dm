@@ -4,13 +4,6 @@ title: "| RESEARCH PROTOCOL\n| \n| Large-scale evidence generation and evaluatio
 fontsize: 12pt
 geometry: margin=1in
 output:
-  bookdown::pdf_document2:
-    keep_tex: yes
-    latex_engine: xelatex
-    md_extensions: +raw_attribute
-    number_sections: yes
-    includes:
-      before_body: title.tex
   bookdown::html_document2:
     df_print: paged
     toc: yes
@@ -19,6 +12,13 @@ output:
     number_sections: yes
     number_tables: yes
     css: style.css
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    includes:
+      before_body: title.tex
   word_document:
     reference_docx: ohdsi-protocol-style.docx
 header-includes:
@@ -50,8 +50,8 @@ longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
 params:
-  date: '2021-09-30'
-  version: 1.0.0
+  date: '07-Oct-2021'
+  version: 1.0.1
 subtitle: 'Version: `r params$version`'
 link-citations: yes
 csl: bmj.csl
@@ -148,7 +148,7 @@ if (knitr::is_latex_output()) {
 ```{r amendments, echo=FALSE}
 amendments <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
   Number; Date; Section of study protocol; Amendment or update; Reason
-  None;;;;
+  1; 7-Oct-2021; Milestones; Update; Add EU PAS #43551 registration date
 ")
 
 tab <- kable(amendments, booktabs = TRUE, linesep = "")
@@ -165,8 +165,8 @@ if (knitr::is_latex_output()) {
 ```{r dates, echo=FALSE}
 dates <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
   Milestone; Planned / actual date
-  EU PAS Registration;
-  Start of analysis;
+  EU PAS registration; 01-Oct-2021 / 07-Oct-2021
+  Start of analysis; 01-Nov-2021 
   End of analysis;
   Results presentation;
 ")
