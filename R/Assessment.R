@@ -113,8 +113,13 @@ assessPhenotypes <- function(connectionDetails,
                                  databaseDescription = databaseDescription,
                                  minCellCount = minCellCount)
 
+    oldZipName <- file.path(outputFolder, indicationId, "cohortDiagnosticsExport",
+                            sprintf("Results_%s.zip", databaseId))
+
     zipName <- file.path(outputFolder, indicationId, "cohortDiagnosticsExport",
                          sprintf("Results_%s_exposures_%s.zip", indicationId, databaseId))
+    file.rename(oldZipName, zipName)
+
     ParallelLogger::logInfo("Exposure diagnostics results are ready for sharing at:", zipName)
   }
 
@@ -131,8 +136,13 @@ assessPhenotypes <- function(connectionDetails,
                                 databaseDescription = databaseDescription,
                                 minCellCount = minCellCount)
 
+    oldZipName <- file.path(outputFolder, "outcome", "cohortDiagnosticsExport",
+                            sprintf("Results_%s.zip", databaseId))
+
     zipName <- file.path(outputFolder, "outcome", "cohortDiagnosticsExport",
                          sprintf("Results_outcomes_%s.zip", databaseId))
+    file.rename(oldZipName, zipName)
+
     ParallelLogger::logInfo("Outcome diagnostics results are ready for sharing at:", zipName)
   }
 
@@ -410,5 +420,5 @@ assessPropensityModels <- function(connectionDetails,
   ParallelLogger::logInfo("Propensity score assessment results are ready for sharing at:", zipName)
 
   ParallelLogger::logInfo(sprintf("Finished assessPropensityModels() for LEGEND-T2DM %s-vs-%s studies",
-                                  ))
+                                  indicationId, indicationId))
 }
