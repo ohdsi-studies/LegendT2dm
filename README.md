@@ -8,7 +8,7 @@ Large-scale Evidence Generation and Evaluation across a Network of Databases for
 - Tags: **-**
 - Study lead: **Marc A. Suchard**
 - Study lead forums tag: **[msuchard](https://forums.ohdsi.org/u/msuchard)**
-- Study start date: **1 October 2021**
+- Study start date: **1 November 2021**
 - Study end date: **-**
 - Protocol: **[HTML document](https://ohdsi-studies.github.io/LegendT2dm/Protocol.html)**
 - Publications: **-**
