@@ -31,7 +31,7 @@ How to run
 
 	```r
 	install.packages("renv")
-	renv::active()
+	renv::activate()
 	renv::restore()
 	```
 
