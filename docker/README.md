@@ -6,7 +6,7 @@
 - Open a terminal
 - Clone `LengedT2DM` by typing `git clone https://github.com/ohdsi-studies/LegendT2dm.git`
 - Go into the docker subfolder `cd LengedT2DM/docker`
-- Run the container by using the auxiliary python script `Rscript run_docker.R`. Please change the variables `local_folder` and `gcloud_local_folder`. **If you are not using gcloud you can safely remove lines 5 and 15**
+- Run the container by using the auxiliary script `Rscript run_docker.R`. Please change the variables `local_folder` and `gcloud_local_folder`. **If you are not using gcloud you can safely remove lines 5 and 15**
 - Open a tab in your preferred brower and type `localhost:9001`. This will open an Rstudio server instance running locally.
 - Type the username and password. By default both are `ohdsi`. you can change that inside the `run_docker.R`
 - Once in RStudio change the directory to `/workdir/workdir`
