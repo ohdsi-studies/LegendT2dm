@@ -14,7 +14,7 @@
 
 ## File Description
 
-- **Dockerfile**: This file contains the steps performed to create the docker image on `jdposa/legend_t2dm:0.3`. The image is based on an image created by Odysseus Inc `rocker/rstudio:4.0.5`. This dockerfile contains the installation of libsodium an OS library required to run the R sodium package. 
+- **Dockerfile**: This file contains the steps performed to create the docker image on `jdposa/legend_t2dm:0.4`. The image is based on an image created by Odysseus Inc `rocker/rstudio:4.0.5`. This dockerfile contains the installation of libsodium an OS library required to run the R sodium package. 
 - **build.R**: Small R script to build the Dockerfile and create the docker image. 
 - **install_renv_lock.R**: Small R script to use the renv.lock file to create an R library that contains everything eneded for the study.
 - **install_additional_packages.R**: Small R Script to install any additional packages besides what it is inside the `renv.lock` file. As of now includes a small package to ease the creation of teh conneciton string when using bigquery. Also it builds the `LengedT2DM` package programatically. If anyone needs to install any other dependency not covered in renv.lock, this is the space to do so. 
