@@ -23,3 +23,4 @@
 - **testRun.R**: This small R Script is meant to test the Docker container by running a small SQL against the Bigquery Public Synpuf dataset formatted as an OMOP-CDM v5.3.1
 
 
+NOTE: To build the image the `renv.lock` file from the main folder needs to be copied to the `docker` folder.
