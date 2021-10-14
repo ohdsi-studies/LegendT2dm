@@ -3,7 +3,7 @@ study_package_directory <- "/workdir/LegendT2dm"
 r_env_cache_folder <- "/workdir/renv_cache"
 renv_package_version <- '0.13.2'
 renv_vesion <- "v5"
-r_version <- "R-4.1"
+r_version <- "R-4.0"
 linux_version <- "x86_64-pc-linux-gnu"
 renv_final_path <- paste(r_env_cache_folder,
                          renv_vesion,
@@ -16,7 +16,7 @@ setwd(working_directory)
 
 
 jsonPath <- "/workdir/gcloud/application_default_credentials.json"
-bqDriverPath <- "/workdir/workdir/SimbaJDBCDriverforGoogleBigQuery42_1.2.19.1023"
+bqDriverPath <- "/workdir/workdir/bq_jdbc"
 project_id <- "allennlp"
 dataset_id <- "jdposada_explore"
 
