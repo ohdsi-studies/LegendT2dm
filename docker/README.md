@@ -18,7 +18,7 @@
 - **build.R**: Small R script to build the Dockerfile and create the docker image. 
 - **install_renv_lock.R**: Small R script to use the renv.lock file to create an R library that contains everything eneded for the study.
 - **install_additional_packages.R**: Small R Script to install any additional packages besides what it is inside the `renv.lock` file. As of now includes a small package to ease the creation of teh conneciton string when using bigquery. Also it builds the `LengedT2DM` package programatically. If anyone needs to install any other dependency not covered in renv.lock, this is the space to do so. 
-- **renv.lock**: this is a modified version of the `renv.lock` file from teh study. This was needed to bump Rcpp version to `1.0.7` given compatibilities issues with some pckages while running `renv::restore()`
+- **renv.lock**: This is a copy of the file found in the main folder of this repo.
 - **run_docker.R**: Small R script to download and run the Docker image creating a container named `rstudio-ohdsi`. This small script can be modified in a way that the user could mount a directory of their chosing and specify the forwarded port used to launch RStudio.
 - **testRun.R**: This small R Script is meant to test the Docker container by running a small SQL against the Bigquery Public Synpuf dataset formatted as an OMOP-CDM v5.3.1
 
