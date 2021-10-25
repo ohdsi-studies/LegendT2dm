@@ -2,14 +2,19 @@
 fontsize: 12pt
 geometry: margin=1in
 output:
-  word_document:
-    reference_docx: bmj-open-style.docx
+  html_document:
+    toc: no
+    df_print: paged
   bookdown::pdf_document2:
     keep_tex: yes
     latex_engine: xelatex
     md_extensions: +raw_attribute
-    toc: false
+    toc: no
     number_sections: yes
+  word_document:
+    reference_docx: bmj-open-style.docx
+  pdf_document:
+    toc: no
 header-includes:
 - \usepackage[numbers,sort&compress]{natbib}
 - \usepackage{booktabs}
@@ -45,7 +50,7 @@ bibliography: Protocol.bib
 params:
   date: ''
   version: 1.0.0
-  avoidLongTable: TRUE
+  avoidLongTable: yes
 link-citations: yes
 csl: jamia.csl
 ---
@@ -89,7 +94,7 @@ latex_table_font_size <- 8
 
 \clearpage
 
-```{r child = "MainText.Rmd"}
+```{r child = "BMJOpenMainText.Rmd"}
 ```
 
 ## Acknowledgements {-}

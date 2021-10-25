@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Rationale and Background
 
 The landscape of therapeutic options for type 2 diabetes mellitus (T2DM) has been dramatically transformed over the last decade [@Lo2018-ca].
@@ -437,7 +442,7 @@ These diagnostics will include
 
 We will define cohorts to stand in empirical equipoise if the majority of patients carry preference scores between 0.3 and 0.7 and to achieve balance if all after-adjustment characteristics return absolute standardized mean differences $<$ 0.1 [@Austin2009-af].
 
-# Strengths and Limitations {#strengths-limitations}
+# Strengths and Limitations of this study {#strengths-limitations}
 
 ## Strengths
 
@@ -528,33 +533,36 @@ In these types of databases, it is not usually possible to link (i.e., identify 
 Thus, the minimum criteria for reporting an adverse event (i.e., identifiable patient, identifiable reporter, a suspect product and event) are not available and adverse events are not reportable as individual adverse event reports.
 The study results will be assessed for medically important findings.
 
-# Plans for Disseminating and Communicating Study Results
+# Patient and Public Involvement
+No patient was involved in the study. 
+
+## Plans for Disseminating and Communicating Study Results
 
 Open science aims to make scientific research, including its data process and software, and its dissemination, through publication and presentation, accessible to all levels of an inquiring society, amateur or professional [@Woelfle2011-ss] and is a governing principle of LEGEND-T2DM.
 Open science delivers reproducible, transparent and reliable evidence.
 All aspects of LEGEND-T2DM (except private patient data) will be open and we will actively encourage other interested researchers, clinicians and patients to participate.
 This differs fundamentally from traditional studies that rarely open their analytic tools or share all result artifacts, and inform the community about hard-to-verify conclusions at completion.
 
-## Transparent and re-usable research tools
+### Transparent and re-usable research tools
 
 We will publicly register this protocol and announce its availability for feedback from stakeholders, the OHDSI community and within clinical professional societies.
 This protocol will link to open source code for all steps to generating diagnostics, effect estimates, figures and tables.
 Such transparency is possible because we will construct our studies on top of the OHDSI toolstack of open source software tools that are community developed and rigorously tested [@Schuemie2020-wx].
 We will publicly host LEGEND-T2DM source code at (https://github.com/ohdsi-studies/LegendT2dm), allowing public contribution and review, and free re-use for anyone’s future research.
 
-## Continuous sharing of results
+### Continuous sharing of results
 
 LEGEND-T2DM embodies a new approach to generating evidence from healthcare data that overcome weaknesses in the current process of answering and publishing (or not) one question at a time.
 Generating evidence for thousands of research and control questions using a systematic process enables us to not only evaluate that process and the coherence and consistency of the evidence, but also to avoid $p$-hacking and publication bias [@Schuemie2018-zi].
 We will store and openly communicate all of these results as they become available using a user-friendly web-based app that serves up all descriptive statistics, study diagnostics and effect estimates for each cohort comparison and outcome.
 Open access to this app will be through a general public facing LEGEND-T2DM webpage.
 
-## Scientific meetings and publications
+### Scientific meetings and publications
 
 We will deliver multiple presentations annually at scientific venues including the annual meetings of the American Diabetes Association, American College of Cardiology, American Heart Association and American Medical Informatics Association.
 We will also prepare multiple scientific publications for clinical, informatics and statistical journals.
 
-## General public
+### General public
 
 We believe in sharing our findings that will guide clinical care with the general public.
 LEGEND-T2DM will use social-media (Twitter) to facilitate this.
