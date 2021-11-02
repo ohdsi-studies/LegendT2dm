@@ -45,8 +45,8 @@
       "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
       "RemoteRef": "va_patch",
-      "RemoteSha": "2541925628d8f37f42c0f6a201866431971b1375",
-      "Hash": "231d4f1acbcb4a548b1543011ffc8741"
+      "RemoteSha": "8b9ccc1ac7fd749230c28b41c3c27c5b4a03a847",
+      "Hash": "db593df5c7e428de91b4720fcb6ac18e"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
