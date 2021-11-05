@@ -101,9 +101,9 @@ How to run
 5. Upload the files ```class/cohortDiagnosticsExport/Results_class_exposures_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_outcomes_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
-	uploadPhenotypeResults(cohort = "class",
+	uploadPhenotypeResults(cohorts = "class",
 	                       outputFolder, privateKeyFileName = "<file>", userName = "<name>"
-	uploadPhenotypeResults(cohort = "outcome",
+	uploadPhenotypeResults(cohorts = "outcome",
 	                       outputFolder, privateKeyFileName = "<file>", userName = "<name>")
   	```
   	
@@ -140,7 +140,7 @@ How to run
   	and uploading the file ```class/assessmentOfPropensityScores/Results_class_ps_<DatabaseId>.zip``` in the output folder to the study coordinator:
   
 	```r
-  	uploadPsAssessmentResults(cohort = "class",
+  	uploadPsAssessmentResults(cohorts = "class",
 	                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
 	```
 
