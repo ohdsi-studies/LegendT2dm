@@ -29,7 +29,8 @@
 #'
 #' @export
 uploadPhenotypeResults <- function(cohorts, outputFolder, privateKeyFileName, userName) {
-  fileName <- list.files(outputFolder, cohorts, "cohortDiagnosticsExport", "Results.*.zip$", full.names = TRUE)
+  fileName <- list.files(file.path(outputFolder, cohorts, "cohortDiagnosticsExport"),
+                         "Results.*.zip$", full.names = TRUE)
   if (length(fileName) == 0) {
     stop("Could not find results file in folder. Did you run (and complete) execute?")
   }
@@ -59,7 +60,8 @@ uploadPhenotypeResults <- function(cohorts, outputFolder, privateKeyFileName, us
 #' @export
 #'
 uploadPsAssessmentResults <- function(cohorts, outputFolder, privateKeyFileName, userName) {
-  fileName <- list.files(outputFolder, cohorts, "assessmentOfPropensityScores", "Results.*.zip$", full.names = TRUE)
+  fileName <- list.files(file.path(outputFolder, cohorts, "assessmentOfPropensityScores"),
+                         "Results.*.zip$", full.names = TRUE)
   if (length(fileName) == 0) {
     stop("Could not find results file in folder. Did you run (and complete) execute?")
   }
