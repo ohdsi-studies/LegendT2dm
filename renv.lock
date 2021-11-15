@@ -32,8 +32,8 @@
       "RemoteUsername": "ohdsi",
       "RemoteRepo": "CirceR",
       "RemoteRef": "master",
-      "RemoteSha": "dc8d462560a22e962f75e5604282e383410afa08",
-      "Hash": "f133b36ef31a70e0e5a88c7176627948"
+      "RemoteSha": "eb27c4bd43f02c68a8bce6a01e02f9fe2b923b5c",
+      "Hash": "3a0c224991e1ee5daa6e6ac0c9722553"
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
@@ -45,8 +45,8 @@
       "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
       "RemoteRef": "va_patch",
-      "RemoteSha": "2541925628d8f37f42c0f6a201866431971b1375",
-      "Hash": "231d4f1acbcb4a548b1543011ffc8741"
+      "RemoteSha": "80ea4d0cf02759d66192109ce55c6f5ad0382874",
+      "Hash": "a92bb41b7e30b89c2ba2026f69f5c6e5"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
@@ -225,15 +225,15 @@
     },
     "ROhdsiWebApi": {
       "Package": "ROhdsiWebApi",
-      "Version": "1.2.0",
+      "Version": "1.2.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "ohdsi",
       "RemoteRepo": "ROhdsiWebApi",
       "RemoteRef": "master",
-      "RemoteSha": "db363a4e5d77dfa1a68267a9e1e4697ec46c02f1",
-      "Hash": "ab79e9838e3e3c818e497f948606bc08"
+      "RemoteSha": "5eba1e59c3d466fb862cd3f0a6c536c2e401bbb4",
+      "Hash": "d0dcdbd089fa6aefa8c386512c208778"
     },
     "RSQLite": {
       "Package": "RSQLite",

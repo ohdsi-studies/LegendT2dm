@@ -1,5 +1,5 @@
 image_tag <- "jdposa/legend_t2dm:0.4"
-local_folder <-  <YOUr LOCAL FOLDER HERE>
+local_folder <-  <YOUR LOCAL FOLDER HERE>
 gcloud_local_folder <- <YOUR LOCAL GCLOUD FOLDER HERE>
 user <- "ohdsi"
 password <- "ohdsi"

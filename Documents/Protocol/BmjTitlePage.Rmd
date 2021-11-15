@@ -39,11 +39,9 @@
 
 \normalsize
 
-Corresponding author: 
-Marc A Suchard, MD PhD   
-6558 Gonda Building, 695 Charles E. Young Drive   
-South Los Angeles, CA 90095-1766    
-Email: msuchard@ucla.edu   
+Corresponding author:
+Marc A Suchard, MD PhD
+6558 Gonda Building, 695 Charles E. Young Drive
+South Los Angeles, CA 90095-1766
+Email: msuchard@ucla.edu
 Tel (310) 825-7442; Fax (310) 825-8685
-
-
