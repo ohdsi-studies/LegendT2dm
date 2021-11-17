@@ -11,4 +11,4 @@ ps_covariate_assessment,database_id,varchar(255),Foreign key referencing the dat
 ps_covariate_assessment,covariate_id,bigint,Foreign key referencing the covariate table,Yes,Yes,No,No
 ps_covariate_assessment,comparison,text,Name of comparison,No,No,No,Yes
 ps_covariate_assessment,covariate_name,text,Name of the covariate,No,No,No,Yes
-ps_covariate_assessment,coefficient,numeric,Regression coefficient for covariate,Yes,No,No,Yes
+ps_covariate_assessment,coefficient,numeric,Regression coefficient for covariate,No,No,No,Yes
