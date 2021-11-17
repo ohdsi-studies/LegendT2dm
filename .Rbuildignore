@@ -7,3 +7,4 @@ docs
 extra
 ignore
 docker
+.renvignore
