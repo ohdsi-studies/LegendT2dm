@@ -37,7 +37,7 @@
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
-      "Version": "2.1.0",
+      "Version": "2.1.3",
       "Source": "GitHub",
       "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\nohdsi/CirceR",
       "RemoteType": "github",
@@ -45,8 +45,8 @@
       "RemoteRepo": "CohortDiagnostics",
       "RemoteUsername": "OHDSI",
       "RemoteRef": "va_patch",
-      "RemoteSha": "80ea4d0cf02759d66192109ce55c6f5ad0382874",
-      "Hash": "a92bb41b7e30b89c2ba2026f69f5c6e5"
+      "RemoteSha": "6728929d815e8ca32fd05ddef1d6ba374d6928c3",
+      "Hash": "5ba943b7fd5dec51b99452fb3f744593"
     },
     "CohortMethod": {
       "Package": "CohortMethod",
