@@ -1,3 +1,11 @@
+LegendT2dm 1.0.2
+=======================
+
+Changes:
+
+1. Patch `CohortDiagnostics` to exploiting cast `cohortConceptIds` to 32-bit for BigQuery
+
+
 LegendT2dm 1.0.1
 =======================
 
