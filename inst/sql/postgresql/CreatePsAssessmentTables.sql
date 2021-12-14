@@ -22,7 +22,7 @@ CREATE TABLE ps_covariate_assessment (
      covariate_id BIGINT NOT NULL,
      comparison TEXT ,
      covariate_name TEXT ,
-     coefficient NUMERIC NOT NULL,
+     coefficient NUMERIC ,
      PRIMARY KEY(target_id, comparator_id, database_id, covariate_id)
 );
 
