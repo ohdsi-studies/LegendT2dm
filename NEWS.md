@@ -1,3 +1,10 @@
+LegendT2dm 1.0.4
+=======================
+
+Changes:
+
+1. Fix custom data pull
+
 LegendT2dm 1.0.2
 =======================
 
