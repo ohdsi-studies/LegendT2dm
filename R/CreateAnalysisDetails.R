@@ -18,7 +18,7 @@ createAnalysesDetails <- function(outputFolder) {
     removeSubjectsWithPriorOutcome = TRUE,
     minDaysAtRisk = 1,
     riskWindowStart = 1,
-    riskWindowEnd = 9999,
+    riskWindowEnd = 99999,
     startAnchor = "cohort start",
     endAnchor = "cohort end")
 

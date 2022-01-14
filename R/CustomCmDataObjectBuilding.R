@@ -104,8 +104,12 @@ fetchAllDataFromServer <- function(connectionDetails,
                                              dbms = connectionDetails$dbms,
                                              oracleTempSchema = oracleTempSchema,
                                              cohort_database_schema = cohortDatabaseSchema,
+                                             # cdm_database_schema = cdmDatabaseSchema,
                                              cohort_table = cohortTable)
     DatabaseConnector::executeSql(conn, sql, progressBar = FALSE, reportOverallTime = FALSE)
+
+    # allExposureCohorts <- DatabaseConnector::querySql(conn, sql = "SELECT * FROM #exposure_cohorts;")
+    # saveRDS(allExposureCohorts, "backup.rds")
 
     # Drop comparisons temp table ----------------------------------------------------------------
     sql <- "TRUNCATE TABLE #comparisons; DROP TABLE #comparisons;"
@@ -138,9 +142,6 @@ fetchAllDataFromServer <- function(connectionDetails,
                                                             covariateSettings = covariateSettings,
                                                             aggregated = FALSE)
         FeatureExtraction::saveCovariateData(covariates, covariatesFolder)
-
-        allExposureCohorts <- DatabaseConnector::querySql(conn, sql = "SELECT * FROM #exposure_cohorts;")
-        saveRDS(allExposureCohorts, "backup.rds")
     }
 
     # Retrieve cohorts -------------------------------------------------------------------------
@@ -152,7 +153,7 @@ fetchAllDataFromServer <- function(connectionDetails,
     getCohorts <- function(i) {
         targetId <- exposureSummary$targetId[i]
         comparatorId <- exposureSummary$comparatorId[i]
-        fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".rds"))
+        fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".zip"))
         if (!file.exists(fileName) || forceNewObjects) {
             renderedSql <- SqlRender::loadRenderTranslateSql("CreateCohorts.sql",
                                                              packageName = "CohortMethod",
@@ -166,11 +167,13 @@ fetchAllDataFromServer <- function(connectionDetails,
                                                              comparator_id = comparatorId,
                                                              study_start_date = "",
                                                              study_end_date = "",
-                                                             first_only = FALSE,
-                                                             remove_duplicate_subjects = FALSE,
+                                                             first_only = TRUE,
+                                                             remove_duplicate_subjects = "keep first",  # TODO Check change "FALSE"
                                                              washout_period = 0,
                                                              restrict_to_common_period = FALSE)
             DatabaseConnector::executeSql(conn, renderedSql)
+
+            andromeda <- Andromeda::andromeda()
 
             cohortSql <- SqlRender::loadRenderTranslateSql("GetCohorts.sql",
                                                            packageName = "LegendT2dm",
@@ -179,57 +182,81 @@ fetchAllDataFromServer <- function(connectionDetails,
                                                            cdm_version = 5,
                                                            target_id = targetId,
                                                            sampled = FALSE)
-            cohorts <- DatabaseConnector::querySql(conn, cohortSql, snakeCaseToCamelCase = TRUE)
-            ParallelLogger::logDebug("Fetched cohort total rows in target is ", sum(cohorts$treatment), ", total rows in comparator is ", sum(!cohorts$treatment))
-            saveRDS(cohorts, fileName)
+            DatabaseConnector::querySqlToAndromeda(conn, cohortSql,
+                                                              andromeda, "cohorts",
+                                                              snakeCaseToCamelCase = TRUE)
+            # ParallelLogger::logDebug("Fetched cohort total rows in target is ", sum(cohorts$treatment), ", total rows in comparator is ", sum(!cohorts$treatment))
+            # saveRDS(cohorts, fileName)
+            # ParallelLogger::logDebug("Saved ", fileName)
+
+            # fileName <- file.path(cohortsFolder, paste0("outcomes_t", targetId, "_c", comparatorId, ".rds"))
+            outcomeCohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
+            outcomeSql <- SqlRender::loadRenderTranslateSql("GetOutcomes.sql",
+                                                            packageName = "LegendT2dm",
+                                                            dbms = connectionDetails$dbms,
+                                                            tempEmulationSchema = oracleTempSchema,
+                                                            cdm_database_schema = cdmDatabaseSchema,
+                                                            outcome_database_schema = cohortDatabaseSchema,
+                                                            outcome_table = outcomeCohortTable,
+                                                            outcome_ids = outcomeIds,
+                                                            cdm_version = 5,
+                                                            sampled = FALSE)
+            DatabaseConnector::querySqlToAndromeda(conn, outcomeSql,
+                                                               andromeda, "outcomes",
+                                                               snakeCaseToCamelCase = TRUE)
+            # ParallelLogger::logDebug("Fetched outcomes total count is ", nrow(outcomes))
+            # saveRDS(list(cohorts = cohorts, outcomes = outcomes), fileName)
+            Andromeda::saveAndromeda(andromeda, fileName)
+            ParallelLogger::logDebug("Saved ", fileName)
         }
+
         return(NULL)
     }
     plyr::llply(1:nrow(exposureSummary), getCohorts, .progress = "text")
     delta <- Sys.time() - start
     writeLines(paste("Retrieving cohorts took", signif(delta, 3), attr(delta, "units")))
 
-    # Create single file with unique rowId - cohort definition ID combinations:
-    allCohorts <- data.frame()
-    for (i in 1:nrow(exposureSummary)) {
-        targetId <- exposureSummary$targetId[i]
-        comparatorId <- exposureSummary$comparatorId[i]
-        fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".rds"))
-        cohorts <- readRDS(fileName)
-        idxTarget <- !(cohorts$rowId %in% allCohorts$rowId[allCohorts$cohortId == targetId]) & cohorts$treatment ==
-            1
-        idxComparator <- !(cohorts$rowId %in% allCohorts$rowId[allCohorts$cohortId == comparatorId]) &
-            cohorts$treatment == 0
-        if (any(idxTarget) | any(idxComparator)) {
-            cohorts$cohortId <- targetId
-            cohorts$cohortId[cohorts$treatment == 0] <- comparatorId
-            cohorts$treatment <- NULL
-            allCohorts <- rbind(allCohorts, cohorts[idxTarget | idxComparator, ])
-        }
-    }
-    saveRDS(allCohorts, file.path(cohortsFolder, "allCohorts.rds"))
+    # # Create single file with unique rowId - cohort definition ID combinations:
+    # allCohorts <- data.frame()
+    # for (i in 1:nrow(exposureSummary)) {
+    #     targetId <- exposureSummary$targetId[i]
+    #     comparatorId <- exposureSummary$comparatorId[i]
+    #     fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".rds"))
+    #     cohorts <- readRDS(fileName)
+    #     idxTarget <- !(cohorts$rowId %in% allCohorts$rowId[allCohorts$cohortId == targetId]) & cohorts$treatment ==
+    #         1
+    #     idxComparator <- !(cohorts$rowId %in% allCohorts$rowId[allCohorts$cohortId == comparatorId]) &
+    #         cohorts$treatment == 0
+    #     if (any(idxTarget) | any(idxComparator)) {
+    #         cohorts$cohortId <- targetId
+    #         cohorts$cohortId[cohorts$treatment == 0] <- comparatorId
+    #         cohorts$treatment <- NULL
+    #         allCohorts <- rbind(allCohorts, cohorts[idxTarget | idxComparator, ])
+    #     }
+    # }
+    # saveRDS(allCohorts, file.path(cohortsFolder, "allCohorts.rds"))
 
     # Retrieve outcomes -------------------------------------------------------------------
-    ParallelLogger::logInfo("Retrieving outcomes")
-
-    if (!file.exists(outcomesFolder) || forceNewObjects) {
-        outcomeCohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
-        sql <- SqlRender::loadRenderTranslateSql("GetOutcomes.sql",
-                                                 "LegendT2dm",
-                                                 dbms = connectionDetails$dbms,
-                                                 oracleTempSchema = oracleTempSchema,
-                                                 cdm_database_schema = cdmDatabaseSchema,
-                                                 outcome_database_schema = cohortDatabaseSchema,
-                                                 outcome_table = outcomeCohortTable,
-                                                 outcome_ids = outcomeIds)
-
-        outcomes <- Andromeda::andromeda()
-        DatabaseConnector::querySqlToAndromeda(conn, sql,
-                                               andromeda = outcomes,
-                                               andromedaTableName = "outcomes",
-                                               snakeCaseToCamelCase = TRUE)
-        Andromeda::saveAndromeda(outcomes, fileName = outcomesFolder)
-    }
+    # ParallelLogger::logInfo("Retrieving outcomes")
+    #
+    # if (!file.exists(outcomesFolder) || forceNewObjects) {
+    #     outcomeCohortTable <- paste(tablePrefix, "outcome", "cohort", sep = "_")
+    #     sql <- SqlRender::loadRenderTranslateSql("GetOutcomes.sql",
+    #                                              "LegendT2dm",
+    #                                              dbms = connectionDetails$dbms,
+    #                                              oracleTempSchema = oracleTempSchema,
+    #                                              cdm_database_schema = cdmDatabaseSchema,
+    #                                              outcome_database_schema = cohortDatabaseSchema,
+    #                                              outcome_table = outcomeCohortTable,
+    #                                              outcome_ids = outcomeIds)
+    #
+    #     outcomes <- Andromeda::andromeda()
+    #     DatabaseConnector::querySqlToAndromeda(conn, sql,
+    #                                            andromeda = outcomes,
+    #                                            andromedaTableName = "outcomes",
+    #                                            snakeCaseToCamelCase = TRUE)
+    #     Andromeda::saveAndromeda(outcomes, fileName = outcomesFolder)
+    # }
 
     #
     # # Retrieve filter concepts ---------------------------------------------------------
@@ -331,12 +358,17 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
     }
     # copying cohorts
     ParallelLogger::logTrace("Copying cohorts")
-    fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".rds"))
-    cohorts <- readRDS(fileName)
-    targetPersons <- length(unique(cohorts$personSeqId[cohorts$treatment == 1]))
-    comparatorPersons <- length(unique(cohorts$personSeqId[cohorts$treatment == 0]))
-    targetExposures <- length(cohorts$personSeqId[cohorts$treatment == 1])
-    comparatorExposures <- length(cohorts$personSeqId[cohorts$treatment == 0])
+
+    fileName <- file.path(cohortsFolder, paste0("cohorts_t", targetId, "_c", comparatorId, ".zip"))
+    andromeda <- Andromeda::loadAndromeda(fileName)
+    targetPersons <- length(unique(andromeda$cohorts %>% filter(.data$treatment == 1) %>%
+                                       select(.data$personSeqId) %>% pull()))
+    comparatorPersons <- length(unique(andromeda$cohorts %>% filter(.data$treatment == 0) %>%
+                                           select(.data$personSeqId) %>% pull()))
+    targetExposures <- length(andromeda$cohorts %>% filter(.data$treatment == 1) %>%
+                                  select(.data$personSeqId) %>% pull())
+    comparatorExposures <- length(andromeda$cohorts %>% filter(.data$treatment == 0) %>%
+                                      select(.data$personSeqId) %>% pull())
 
     counts <- tibble(description = "Starting cohorts",
                      targetPersons = targetPersons,
@@ -352,14 +384,14 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
                      comparatorId = comparatorId,
                      attrition = counts)
 
-    # Subsetting outcomes
-    ParallelLogger::logTrace("Subsetting outcomes")
-
-    andromeda <- Andromeda::loadAndromeda(outcomesFolder) %>% Andromeda::copyAndromeda()
-    andromeda$cohorts <- cohorts
-
-    andromeda$outcomes <- andromeda$outcomes %>%
-        inner_join(andromeda$cohorts %>% select(.data$rowId), by = "rowId")
+    # # Subsetting outcomes
+    # ParallelLogger::logTrace("Subsetting outcomes")
+    #
+    # andromeda <- Andromeda::loadAndromeda(outcomesFolder) %>% Andromeda::copyAndromeda()
+    # andromeda$cohorts <- cohorts
+    #
+    # andromeda$outcomes <- andromeda$outcomes %>%
+    #     inner_join(andromeda$cohorts %>% select(.data$rowId), by = "rowId")
 
     if (!useSample) {
 

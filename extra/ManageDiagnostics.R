@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
 
 ### Manage OHDSI Postgres server
 connectionDetails <- DatabaseConnector::createConnectionDetails(
@@ -69,6 +70,31 @@ CohortDiagnostics::uploadResults(
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_class_exposures_Germany_DA.zip")
 
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_class_exposures_Australia_LPD.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_class_exposures_France_LPD.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_class_exposures_US_Open_Claims.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/gj0iqfy3_Results_class_exposures_CUIMC.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/tkq5la4h_Results_class_exposures_UK-IMRD.zip")
+
 # Outcome diagnostics
 
 outcomeSchema <- "legendt2dm_outcome_diagnostics"
@@ -111,6 +137,31 @@ CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
   schema = outcomeSchema,
   zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_outcomes_Germany_DA.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_outcomes_Australia_LPD.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_outcomes_France_LPD.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_IQVIA/Results_outcomes_US_Open_Claims.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/urvmnap2_Results_outcomes_CUIMC.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/1kb6ezdp_Results_outcomes_UK-IMRD.zip")
 
 # PS Assessment
 

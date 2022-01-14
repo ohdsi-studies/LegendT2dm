@@ -38,7 +38,7 @@
       "maxDaysAtRisk": 99999,
       "riskWindowStart": 1,
       "startAnchor": "cohort start",
-      "riskWindowEnd": 9999,
+      "riskWindowEnd": 99999,
       "endAnchor": "cohort end",
       "censorAtNewRiskWindow": false,
       "attr_class": "args"
@@ -137,7 +137,7 @@
       "maxDaysAtRisk": 99999,
       "riskWindowStart": 1,
       "startAnchor": "cohort start",
-      "riskWindowEnd": 9999,
+      "riskWindowEnd": 99999,
       "endAnchor": "cohort end",
       "censorAtNewRiskWindow": false,
       "attr_class": "args"
@@ -283,7 +283,7 @@
       "maxDaysAtRisk": 99999,
       "riskWindowStart": 1,
       "startAnchor": "cohort start",
-      "riskWindowEnd": 9999,
+      "riskWindowEnd": 99999,
       "endAnchor": "cohort end",
       "censorAtNewRiskWindow": false,
       "attr_class": "args"

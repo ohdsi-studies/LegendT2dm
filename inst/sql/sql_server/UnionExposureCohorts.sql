@@ -18,6 +18,9 @@ limitations under the License.
 {DEFAULT @cohort_database_schema = 'scratch.dbo'}
 {DEFAULT @cohort_table = 'cohort'}
 
+IF OBJECT_ID('tempdb..#exposure_cohorts', 'U') IS NOT NULL
+	DROP TABLE #exposure_cohorts;
+
 --HINT DISTRIBUTE_ON_KEY(subject_id)
 SELECT ROW_NUMBER() OVER (
 		ORDER BY subject_id,
@@ -25,14 +28,15 @@ SELECT ROW_NUMBER() OVER (
 		) AS row_id,
 	subject_id,
 	cohort_start_date,
-	cohort_end_date,
+	-1 AS cohort_end_date,
 	-1 AS cohort_definition_id
 INTO #exposure_cohorts
 FROM (
 	SELECT DISTINCT subject_id,
-		cohort_start_date,
-		cohort_end_date
+		cohort_start_date
 	FROM @cohort_database_schema.@cohort_table union_cohort
 	INNER JOIN #comparisons comparisons
 		ON union_cohort.cohort_definition_id = comparisons.cohort_definition_id
-	) tmp;
+) tmp;
+
+

@@ -123,6 +123,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                       cmFolder1)
 
     # Second run: OT1
+    if (TRUE) {
 
     ParallelLogger::logInfo("Executing CohortMethod for OT1 analyses")
 
@@ -181,6 +182,8 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     deleteCmDataFiles(ot1ExposureSummary,
                       cmFolder2)
+
+    }
 
     if (TRUE) {
 
