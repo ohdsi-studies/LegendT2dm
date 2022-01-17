@@ -1,8 +1,16 @@
-createAnalysesDetails <- function(outputFolder) {
+createAnalysesDetails <- function(outputFolder,
+                                  asUnitTest = FALSE) {
 
-  # Dummy argument that is never used because data objects have already been created:
+  # TODO This is still code-duplicated with CustomCmDataObjectBuilding.R lines 122 - 129
+  # TODO getDbCmDataArgs is currently only used in the unit-tests; fix
+  ingredientConceptIds <- read.csv(system.file("settings", "ExposuresOfInterest.csv",
+                                               package = "LegendT2dm")) %>%
+    filter(type == "Drug") %>% select(conceptId) %>% pull()
+
   getDbCmDataArgs <- CohortMethod::createGetDbCohortMethodDataArgs(
-    covariateSettings = FeatureExtraction::createCovariateSettings(useDemographicsGender = TRUE))
+    covariateSettings = FeatureExtraction::createDefaultCovariateSettings(
+      excludedCovariateConceptIds = ingredientConceptIds,
+      addDescendantsToExclude = TRUE))
 
   createStudyPopArgsOnTreatment <- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
@@ -149,12 +157,18 @@ createAnalysesDetails <- function(outputFolder) {
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3),
-                                   file.path(outputFolder, "ot1CmAnalysisList.json"))
+  if (asUnitTest) {
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3,
+                                          cmAnalysis4, cmAnalysis5, cmAnalysis6),
+                                     file.path(outputFolder, "cmAnalysisList.json"))
+  } else {
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3),
+                                     file.path(outputFolder, "ot1CmAnalysisList.json"))
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis4, cmAnalysis5, cmAnalysis6),
-                                   file.path(outputFolder, "ittCmAnalysisList.json"))
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis4, cmAnalysis5, cmAnalysis6),
+                                     file.path(outputFolder, "ittCmAnalysisList.json"))
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
-                                   file.path(outputFolder, "ot2CmAnalysisList.json"))
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
+                                     file.path(outputFolder, "ot2CmAnalysisList.json"))
+  }
 }
