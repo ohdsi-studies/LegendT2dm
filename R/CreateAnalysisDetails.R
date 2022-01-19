@@ -15,7 +15,7 @@ createAnalysesDetails <- function(outputFolder,
   createStudyPopArgsOnTreatment <- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
     removeSubjectsWithPriorOutcome = TRUE,
-    minDaysAtRisk = 1,
+    minDaysAtRisk = 0,
     riskWindowStart = 1,
     riskWindowEnd = 0,
     startAnchor = "cohort start",
@@ -24,7 +24,7 @@ createAnalysesDetails <- function(outputFolder,
   createStudyPopArgsItt <- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
     removeSubjectsWithPriorOutcome = TRUE,
-    minDaysAtRisk = 1,
+    minDaysAtRisk = 0,
     riskWindowStart = 1,
     riskWindowEnd = 99999,
     startAnchor = "cohort start",
@@ -37,6 +37,8 @@ createAnalysesDetails <- function(outputFolder,
       tolerance = 2e-07,
       cvRepetitions = 1,
       startingVariance = 0.01,
+      resetCoefficients = TRUE, # To maintain reproducibility
+                                # irrespective of multi-threading
       seed = 123),
     stopOnError = FALSE,
     maxCohortSizeForFitting = 1e+05)

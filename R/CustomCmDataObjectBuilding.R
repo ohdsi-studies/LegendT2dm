@@ -430,9 +430,10 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
     covariateData <- FeatureExtraction::loadCovariateData(covariatesFolder)
 
     andromeda$analysisRef <- covariateData$analysisRef
-    andromeda$covariateRef <- covariateData$covariateRef
     andromeda$covariates <- covariateData$covariates %>%
         inner_join(andromeda$cohorts %>% select(.data$rowId), by = "rowId", copy = TRUE)
+    andromeda$covariateRef <- covariateData$covariateRef %>%
+        inner_join(andromeda$covariates %>% distinct(.data$covariateId), by = "covariateId", copy = TRUE)
 
     # Filtering covariates
     if (FALSE) {   # TODO: Not yet implemented
