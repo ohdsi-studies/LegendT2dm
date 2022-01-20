@@ -82,6 +82,10 @@ exportResults <- function(indicationId = "class",
                       minCellCount = minCellCount,
                       maxCores = maxCores)
 
+    exportDateTime(indicationId = indicationId,
+                   databaseId = databaseId,
+                   exportFolder = exportFolder)
+
     # Add all to zip file -------------------------------------------------------------------------------
     ParallelLogger::logInfo("Adding results to zip file")
     zipName <- file.path(exportFolder, paste0("Results_", indicationId, "_study_", databaseId, ".zip"))
@@ -454,6 +458,10 @@ exportMetadata <- function(indicationId,
                                c(0, 0.1, 0.25, 0.5, 0.85, 0.9, 1))
         comparatorDist <- quantile(strataPop$survivalTime[strataPop$treatment == 0],
                                    c(0, 0.1, 0.25, 0.5, 0.85, 0.9, 1))
+
+        numZeroTarget <- sum(strataPop$survivalTime[strataPop$treatment == 1] == 0)
+        numZeroComparator <- sum(strataPop$survivalTime[strataPop$treatment == 0] == 0)
+
         row <- tibble::tibble(target_id = reference$targetId[i],
                               comparator_id = reference$comparatorId[i],
                               outcome_id = reference$outcomeId[i],
@@ -465,13 +473,15 @@ exportMetadata <- function(indicationId,
                               target_p75_days = targetDist[5],
                               target_p90_days = targetDist[6],
                               target_max_days = targetDist[7],
+                              target_zero_days = numZeroTarget,
                               comparator_min_days = comparatorDist[1],
                               comparator_p10_days = comparatorDist[2],
                               comparator_p25_days = comparatorDist[3],
                               comparator_median_days = comparatorDist[4],
                               comparator_p75_days = comparatorDist[5],
                               comparator_p90_days = comparatorDist[6],
-                              comparator_max_days = comparatorDist[7])
+                              comparator_max_days = comparatorDist[7],
+                              comparator_zero_days = numZeroComparator)
         return(row)
     }
     outcomesOfInterest <- getOutcomesOfInterest(indicationId)
@@ -727,6 +737,30 @@ calibrateInteractions <- function(subset, negativeControls) {
     }
     return(subset)
 }
+
+exportDateTime <- function(indicationId,
+                           databaseId,
+                           exportFolder) {
+    ParallelLogger::logInfo("Exporting results date/time")
+    ParallelLogger::logInfo("- results_date_time table")
+    fileName <- file.path(exportFolder, "results_date_time.csv")
+    if (file.exists(fileName)) {
+        unlink(fileName)
+    }
+    dateTime <- data.frame(
+        indicationId = c(indicationId),
+        databaseId = c(databaseId),
+        dateTime = c(Sys.time()))
+
+    colnames(dateTime) <- SqlRender::camelCaseToSnakeCase(colnames(dateTime))
+    write.table(x = dateTime,
+                file = fileName,
+                row.names = FALSE,
+                sep = ",",
+                dec = ".",
+                qmethod = "double")
+}
+
 
 exportDiagnostics <- function(indicationId,
                               outputFolder,
@@ -1144,17 +1178,17 @@ prepareKaplanMeier <- function(population) {
     } else {
         population$stratumSizeT <- 1
         strataSizesT <- aggregate(stratumSizeT ~ stratumId, population[population$treatment == 1, ], sum)
-        if (max(strataSizesT$stratumSizeT) == 1) {
-            # variable ratio matching: use propensity score to compute IPTW
-            if (is.null(population$propensityScore)) {
-                stop("Variable ratio matching detected, but no propensity score found")
-            }
-            weights <- aggregate(propensityScore ~ stratumId, population, mean)
-            if (max(weights$propensityScore) > 0.99999) {
-                return(NULL)
-            }
-            weights$weight <- weights$propensityScore / (1 - weights$propensityScore)
-        } else {
+        # if (max(strataSizesT$stratumSizeT) == 1) {
+        #     # variable ratio matching: use propensity score to compute IPTW
+        #     if (is.null(population$propensityScore)) {
+        #         stop("Variable ratio matching detected, but no propensity score found")
+        #     }
+        #     weights <- aggregate(propensityScore ~ stratumId, population, mean)
+        #     if (max(weights$propensityScore) > 0.99999) {
+        #         return(NULL)
+        #     }
+        #     weights$weight <- weights$propensityScore / (1 - weights$propensityScore)
+        # } else {
             # stratification: infer probability of treatment from subject counts
             strataSizesC <- aggregate(stratumSizeT ~ stratumId, population[population$treatment == 0, ], sum)
             colnames(strataSizesC)[2] <- "stratumSizeC"
@@ -1164,7 +1198,7 @@ prepareKaplanMeier <- function(population) {
                 return(NULL)
             }
             weights$weight <- weights$stratumSizeT/weights$stratumSizeC
-        }
+        # }
         population <- merge(population, weights[, c("stratumId", "weight")])
         population$weight[population$treatment == 1] <- 1
         idx <- population$treatment == 1

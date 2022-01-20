@@ -246,7 +246,7 @@
     "fitOutcomeModel": true,
     "fitOutcomeModelArgs": {
       "modelType": "cox",
-      "stratified": false,
+      "stratified": true,
       "useCovariates": false,
       "inversePtWeighting": false,
       "estimator": "ate",

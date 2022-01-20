@@ -81,7 +81,7 @@ createAnalysesDetails <- function(outputFolder,
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis3 <- CohortMethod::createCmAnalysis(
     analysisId = 3,
@@ -113,7 +113,7 @@ createAnalysesDetails <- function(outputFolder,
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis6 <- CohortMethod::createCmAnalysis(
     analysisId = 6,
@@ -145,7 +145,7 @@ createAnalysesDetails <- function(outputFolder,
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis9 <- CohortMethod::createCmAnalysis(
     analysisId = 9,

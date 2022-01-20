@@ -36,6 +36,7 @@
 #' @param useSample              Use the sampled cohort table instead of the main cohort table (for PS
 #'                               model feasibility).
 #' @param forceNewObjects        Force recreation of \code{CohortMethod} data objects?
+#' @param studyEndDate           Optionally specify a study end date
 #' @param outputFolder           Schema name where intermediate data can be stored. You will need to
 #'                               have write priviliges in this schema. Note that for SQL Server, this
 #'                               should include both the database and schema name, for example
@@ -50,6 +51,7 @@ fetchAllDataFromServer <- function(connectionDetails,
                                    tablePrefix = "legendt2dm",
                                    useSample = FALSE,
                                    forceNewObjects = FALSE,
+                                   studyEndDate = "",
                                    outputFolder) {
 
     # For efficiency reasons, we fetch all necessary data from the server in one go. We take the union
@@ -166,7 +168,7 @@ fetchAllDataFromServer <- function(connectionDetails,
                                                              target_id = targetId,
                                                              comparator_id = comparatorId,
                                                              study_start_date = "",
-                                                             study_end_date = "",
+                                                             study_end_date = studyEndDate,
                                                              first_only = TRUE,
                                                              remove_duplicate_subjects = "keep first",  # TODO Check change "FALSE"
                                                              washout_period = 0,

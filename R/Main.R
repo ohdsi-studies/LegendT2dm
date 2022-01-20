@@ -49,6 +49,7 @@
 #' @param databaseDescription                  A short description (several sentences) of the database.
 #' @param minCellCount                         The minimum cell count for fields contains person counts
 #'                                             or fractions when exporting to CSV.
+#' @param studyEndDate                         Optional study end date for EHRs
 #' @param imputeExposureLengthWhenMissing      For OptumEHR: impute length of drug exposures when the
 #'                                             length is missing?
 #' @param createExposureCohorts                Create the tables with the exposure cohorts?
@@ -81,6 +82,7 @@ execute <- function(connectionDetails,
                     minCohortSize = 1000,
                     minCellCount = 5,
                     imputeExposureLengthWhenMissing = FALSE,
+                    studyEndDate = "",
                     createExposureCohorts = TRUE,
                     createOutcomeCohorts = TRUE,
                     fetchAllDataFromServer = TRUE,
@@ -146,6 +148,7 @@ execute <- function(connectionDetails,
                                tablePrefix = tablePrefix,
                                indicationId = indicationId,
                                outputFolder = outputFolder,
+                               studyEndDate = studyEndDate,
                                useSample = FALSE)
     }
     if (synthesizePositiveControls) {
