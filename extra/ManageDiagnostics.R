@@ -189,5 +189,3 @@ LegendT2dm::uploadResultsToDatabase(
     "d:/LegendT2dmOutput_IQVIA//Results_class_ps_Germany_DA.zip"),
   specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
 )
-
-

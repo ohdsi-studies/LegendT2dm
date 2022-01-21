@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS outcome_of_interest;
 DROP TABLE IF EXISTS preference_score_dist;
 DROP TABLE IF EXISTS propensity_model;
 DROP TABLE IF EXISTS ps_auc_assessment;
+DROP TABLE IF EXISTS results_date_time;
 
 -- Create tables
 
@@ -41,19 +42,21 @@ CREATE TABLE cm_follow_up_dist (
      outcome_id BIGINT NOT NULL,
      analysis_id INTEGER NOT NULL,
      target_min_days INTEGER NOT NULL,
-     target_p_10_days INTEGER NOT NULL,
-     target_p_25_days INTEGER NOT NULL,
+     target_p10_days INTEGER NOT NULL,
+     target_p25_days INTEGER NOT NULL,
      target_median_days INTEGER NOT NULL,
-     target_p_75_days INTEGER NOT NULL,
-     target_p_90_days INTEGER NOT NULL,
+     target_p75_days INTEGER NOT NULL,
+     target_p90_days INTEGER NOT NULL,
      target_max_days INTEGER NOT NULL,
+     target_zero_days INTEGER NOT NULL,
      comparator_min_days INTEGER NOT NULL,
-     comparator_p_10_days INTEGER NOT NULL,
-     comparator_p_25_days INTEGER NOT NULL,
+     comparator_p10_days INTEGER NOT NULL,
+     comparator_p25_days INTEGER NOT NULL,
      comparator_median_days INTEGER NOT NULL,
-     comparator_p_75_days INTEGER NOT NULL,
-     comparator_p_90_days INTEGER NOT NULL,
+     comparator_p75_days INTEGER NOT NULL,
+     comparator_p90_days INTEGER NOT NULL,
      comparator_max_days INTEGER NOT NULL,
+     comparator_zero_days INTEGER NOT NULL,
      PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
@@ -232,5 +235,11 @@ CREATE TABLE ps_auc_assessment (
      auc NUMERIC NOT NULL,
      equipoise NUMERIC NOT NULL,
      PRIMARY KEY(database_id, target_id, comparator_id, analysis_id)
+);
+
+CREATE TABLE results_date_time (
+     database_id VARCHAR(255) NOT NULL,
+     date_time VARCHAR(255) NOT NULL,
+     PRIMARY KEY(database_id)
 );
 

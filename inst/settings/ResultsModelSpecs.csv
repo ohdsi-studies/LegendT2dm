@@ -39,19 +39,21 @@ cm_follow_up_dist,comparator_id,bigint,Foreign key referencing the exposure_of_i
 cm_follow_up_dist,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
 cm_follow_up_dist,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
 cm_follow_up_dist,target_min_days,integer,Minimum number of observation days for a person,Yes,No,No,Yes
-cm_follow_up_dist,target_p_10_days,integer,10th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p_25_days,integer,25th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
+cm_follow_up_dist,target_p10_days,integer,10th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
+cm_follow_up_dist,target_p25_days,integer,25th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
 cm_follow_up_dist,target_median_days,integer,Median number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p_75_days,integer,75th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p_90_days,integer,90th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
+cm_follow_up_dist,target_p75_days,integer,75th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
+cm_follow_up_dist,target_p90_days,integer,90th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
 cm_follow_up_dist,target_max_days,integer,Maximum number of observation days for a person in the target group,Yes,No,No,Yes
+cm_follow_up_dist,target_zero_days,integer,Number of persons with 0 observation days in the target group,Yes,No,No,Yes
 cm_follow_up_dist,comparator_min_days,integer,Minimum number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p_10_days,integer,10th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p_25_days,integer,25th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,comparator_p10_days,integer,10th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,comparator_p25_days,integer,25th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
 cm_follow_up_dist,comparator_median_days,integer,Median number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p_75_days,integer,75th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p_90_days,integer,90th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,comparator_p75_days,integer,75th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,comparator_p90_days,integer,90th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
 cm_follow_up_dist,comparator_max_days,integer,Maximum number of observation days for a person in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,comparator_zero_days,integer,Number of persons with 0 observation days in the comparator group,Yes,No,No,Yes
 cohort_method_result,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 cohort_method_result,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 cohort_method_result,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
@@ -140,3 +142,5 @@ ps_auc_assessment,comparator_id,bigint,"Foreign key referencing the exposure_of_
 ps_auc_assessment,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
 ps_auc_assessment,auc,numeric,"Area under the receiver-operator curve classifying subjects by their propensity score",Yes,No,No,Yes
 ps_auc_assessment,equipoise,numeric,"%-subjects with preference scores between 0.3 and 0.7",Yes,No,No,Yes
+results_date_time,database_id,varchar(255),"Foreign key referencing the database",Yes,Yes,No,Yes
+results_date_time,date_time,varchar(255),"Date and time when results were compiled",Yes,No,No,Yes
