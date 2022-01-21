@@ -11,7 +11,7 @@ output:
     toc_float: yes
     number_sections: yes
     number_tables: yes
-    css: "style.css"
+    css: "../Protocol/style.css"
   bookdown::pdf_document2:
     keep_tex: yes
     latex_engine: xelatex
@@ -44,16 +44,16 @@ header-includes:
 - \usepackage{hyperref}
 - \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 - \newcommand{\footerDate}{`r params$date`}
-- \input{header.tex}
+- \input{../Protocol/header.tex}
 longtable: yes
 mainfont: Arial
-bibliography: Protocol.bib
+bibliography: ../Protocol/Protocol.bib
 params:
   date: '2020-09-24'
   version: 0.0.99
 subtitle: 'Version: `r params$version`'
 link-citations: true
-csl: jamia.csl
+csl: ../Protocol/jamia.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -382,7 +382,7 @@ and to `uploadResultsToDatabase` to upload diagnostics and results to the public
 
 ## `CohortMethod` function arguments
 
-```{r, test, code=xfun::read_utf8("../R/CreateAnalysisDetails.R")}
+```{r, test, code=xfun::read_utf8("../../R/CreateAnalysisDetails.R")}
 ```
 
 # Data models

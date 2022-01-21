@@ -3011,8 +3011,16 @@ Large-scale evidence generation and evaluation across a network of databases for
 </div>
 
 
-<!-- # TODO List {-} -->
+<div id="todo-list" class="section level1 unnumbered">
+<h1>TODO List</h1>
+<ul>
+<li>Fix export of ps_assessment to remove NULL coefficients</li>
+<li>Make corresponding SQL column NOT NULL again</li>
+<li>IIT end of obs period for VA</li>
+<li>HbA1c control (remove earliest event and remove subject prior to outcome)</li>
+</ul>
 <!-- * item -->
+</div>
 <div id="list-of-abbreviations" class="section level1">
 <h1><span class="header-section-number">1</span> List of Abbreviations</h1>
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
@@ -3167,11 +3175,11 @@ exposure cohort definitions.
 For the <strong>Heterogeneity Study</strong>, we will stratify each of these cohort definitions into
 <span class="math display">\[
 \begin{aligned}
-&amp; 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\ 
-&amp; 2 \text{ (sex: female / male) } + \\ 
-&amp; 1 \text{ (race: Black) } + \\ 
-&amp; 2 \text{ (cardiovascular risk: lower / higher) } + \\ 
-&amp; 2 \text{ (renal impairment: with/without) } \\ 
+&amp; 3 \text{ (age: 18-44 / 45-64 /}\ge\text{65) } + \\
+&amp; 2 \text{ (sex: female / male) } + \\
+&amp; 1 \text{ (race: Black) } + \\
+&amp; 2 \text{ (cardiovascular risk: lower / higher) } + \\
+&amp; 2 \text{ (renal impairment: with/without) } \\
 &amp; = 10
 \end{aligned}
 \]</span>
@@ -4147,16 +4155,24 @@ We directly provide some of these files, while others we generate through execut
 </div>
 <div id="cohortmethod-function-arguments" class="section level2">
 <h2><span class="header-section-number">5.2</span> <code>CohortMethod</code> function arguments</h2>
-<pre class="r"><code>createAnalysesDetails &lt;- function(outputFolder) {
+<pre class="r"><code>createAnalysesDetails &lt;- function(outputFolder,
+                                  asUnitTest = FALSE) {
 
-  # Dummy argument that is never used because data objects have already been created:
+  # TODO This is still code-duplicated with CustomCmDataObjectBuilding.R lines 122 - 129
+  # TODO getDbCmDataArgs is currently only used in the unit-tests; fix
+  ingredientConceptIds &lt;- read.csv(system.file(&quot;settings&quot;, &quot;ExposuresOfInterest.csv&quot;,
+                                               package = &quot;LegendT2dm&quot;)) %&gt;%
+    filter(type == &quot;Drug&quot;) %&gt;% select(conceptId) %&gt;% pull()
+
   getDbCmDataArgs &lt;- CohortMethod::createGetDbCohortMethodDataArgs(
-    covariateSettings = FeatureExtraction::createCovariateSettings(useDemographicsGender = TRUE))
+    covariateSettings = FeatureExtraction::createDefaultCovariateSettings(
+      excludedCovariateConceptIds = ingredientConceptIds,
+      addDescendantsToExclude = TRUE))
 
   createStudyPopArgsOnTreatment &lt;- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
     removeSubjectsWithPriorOutcome = TRUE,
-    minDaysAtRisk = 1,
+    minDaysAtRisk = 0,
     riskWindowStart = 1,
     riskWindowEnd = 0,
     startAnchor = &quot;cohort start&quot;,
@@ -4165,9 +4181,9 @@ We directly provide some of these files, while others we generate through execut
   createStudyPopArgsItt &lt;- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
     removeSubjectsWithPriorOutcome = TRUE,
-    minDaysAtRisk = 1,
+    minDaysAtRisk = 0,
     riskWindowStart = 1,
-    riskWindowEnd = 9999,
+    riskWindowEnd = 99999,
     startAnchor = &quot;cohort start&quot;,
     endAnchor = &quot;cohort end&quot;)
 
@@ -4178,6 +4194,8 @@ We directly provide some of these files, while others we generate through execut
       tolerance = 2e-07,
       cvRepetitions = 1,
       startingVariance = 0.01,
+      resetCoefficients = TRUE, # To maintain reproducibility
+                                # irrespective of multi-threading
       seed = 123),
     stopOnError = FALSE,
     maxCohortSizeForFitting = 1e+05)
@@ -4220,7 +4238,7 @@ We directly provide some of these files, while others we generate through execut
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis3 &lt;- CohortMethod::createCmAnalysis(
     analysisId = 3,
@@ -4252,7 +4270,7 @@ We directly provide some of these files, while others we generate through execut
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis6 &lt;- CohortMethod::createCmAnalysis(
     analysisId = 6,
@@ -4284,7 +4302,7 @@ We directly provide some of these files, while others we generate through execut
     matchOnPs = TRUE,
     matchOnPsArgs = matchOnPsArgs,
     fitOutcomeModel = TRUE,
-    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
   cmAnalysis9 &lt;- CohortMethod::createCmAnalysis(
     analysisId = 9,
@@ -4298,14 +4316,20 @@ We directly provide some of these files, while others we generate through execut
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3),
-                                   file.path(outputFolder, &quot;ot1CmAnalysisList.json&quot;))
+  if (asUnitTest) {
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3,
+                                          cmAnalysis4, cmAnalysis5, cmAnalysis6),
+                                     file.path(outputFolder, &quot;cmAnalysisList.json&quot;))
+  } else {
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3),
+                                     file.path(outputFolder, &quot;ot1CmAnalysisList.json&quot;))
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis4, cmAnalysis5, cmAnalysis6),
-                                   file.path(outputFolder, &quot;ittCmAnalysisList.json&quot;))
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis4, cmAnalysis5, cmAnalysis6),
+                                     file.path(outputFolder, &quot;ittCmAnalysisList.json&quot;))
 
-  CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
-                                   file.path(outputFolder, &quot;ot2CmAnalysisList.json&quot;))
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
+                                     file.path(outputFolder, &quot;ot2CmAnalysisList.json&quot;))
+  }
 }</code></pre>
 </div>
 </div>
@@ -7703,7 +7727,7 @@ Minimum number of observation days for a person
 </tr>
 <tr>
 <td style="text-align:left;">
-target_p_10_days
+target_p10_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7717,7 +7741,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-target_p_25_days
+target_p25_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7745,7 +7769,7 @@ Median number of observation days for a person in the target group
 </tr>
 <tr>
 <td style="text-align:left;">
-target_p_75_days
+target_p75_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7759,7 +7783,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-target_p_90_days
+target_p90_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7787,6 +7811,20 @@ Maximum number of observation days for a person in the target group
 </tr>
 <tr>
 <td style="text-align:left;">
+target_zero_days
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+Number of persons with 0 observation days in the target group
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 comparator_min_days
 </td>
 <td style="text-align:left;">
@@ -7801,7 +7839,7 @@ Minimum number of observation days for a person in the comparator group
 </tr>
 <tr>
 <td style="text-align:left;">
-comparator_p_10_days
+comparator_p10_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7815,7 +7853,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-comparator_p_25_days
+comparator_p25_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7843,7 +7881,7 @@ Median number of observation days for a person in the comparator group
 </tr>
 <tr>
 <td style="text-align:left;">
-comparator_p_75_days
+comparator_p75_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7857,7 +7895,7 @@ No
 </tr>
 <tr>
 <td style="text-align:left;">
-comparator_p_90_days
+comparator_p90_days
 </td>
 <td style="text-align:left;">
 integer
@@ -7881,6 +7919,20 @@ No
 </td>
 <td style="text-align:left;">
 Maximum number of observation days for a person in the comparator group
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+comparator_zero_days
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+Number of persons with 0 observation days in the comparator group
 </td>
 </tr>
 </tbody>
@@ -9836,6 +9888,57 @@ No
 </tbody>
 </table>
 </div>
+<div id="table-results_date_time" class="section level3">
+<h3><span class="header-section-number">6.4.19</span> Table results_date_time</h3>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Field
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Key
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+database_id
+</td>
+<td style="text-align:left;">
+varchar(255)
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Foreign key referencing the database
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date_time
+</td>
+<td style="text-align:left;">
+varchar(255)
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+Date and time when results were compiled
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div id="database-access" class="section level1">
@@ -9857,7 +9960,7 @@ legendT2dmConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
 <h1><span class="header-section-number">8</span> R Shiny</h1>
 <div id="exposure-and-outcome-cohort-characteristics-and-diagnostics" class="section level2">
 <h2><span class="header-section-number">8.1</span> Exposure and outcome cohort characteristics and diagnostics</h2>
-<p>To explore cohorts and their diagnostics through an R Shiny application, we use the <code>LegendT2dmCohortExplorer</code> package.<br />
+<p>To explore cohorts and their diagnostics through an R Shiny application, we use the <code>LegendT2dmCohortExplorer</code> package.
 The following code will load all <code>class</code> cohorts:</p>
 <pre class="r"><code>LegendT2dmCohortExplorer::launchCohortExplorer(cohorts = &quot;class&quot;,
                                                connectionDetails = legendT2dmConnectionDetails)</code></pre>
@@ -9896,12 +9999,31 @@ This is a rough outline of the process:</p>
 <h2><span class="header-section-number">10.1</span> Render human-readable cohort definition</h2>
 <p>The <code>LegendT2dm</code> provides functions to render cohort definitions into <code>Rmarkdown</code> for output to PDF or HTML.
 Here is an example of rendering the complete definition for new-users of SGLT2 inhibitors:</p>
-<pre class="r"><code>cohortJson &lt;- SqlRender::readSql(system.file(&quot;cohorts&quot;, &quot;class&quot;, &quot;ID301100000.json&quot;, 
+<pre class="r"><code>cohortJson &lt;- SqlRender::readSql(system.file(&quot;cohorts&quot;, &quot;class&quot;, &quot;ID301100000.json&quot;,
                                              package = &quot;LegendT2dm&quot;))
 
 LegendT2dm::printCohortDefinitionFromNameAndJson(
   name = &quot;Class-vs-Class Exposure (SGLT2 New-User) Cohort / OT1&quot;,
   json = cohortJson)</code></pre>
+</div>
+</div>
+<div id="dissemination" class="section level1">
+<h1><span class="header-section-number">11</span> Dissemination</h1>
+<div id="publications" class="section level2">
+<h2><span class="header-section-number">11.1</span> Publications</h2>
+<p>If possible, LEGEND-T2DM publications should be drafted in <code>Rmarkdown</code> with <code>*.Rmd</code> source files version-controlled on <code>github</code>.
+Initial drafting can begin in a private repository, but final versions should end up in <code>ohdsi-studies/LegendT2dm/Documents</code>.
+Currently, we have the following documents:</p>
+<ul>
+<li><code>Protocol/Protocol.Rmd</code>: official protocol registered (soon) with EU PASS</li>
+<li><code>Protocol/MedRvix.Rmd</code>: reformatted protocol for <code>medRvix</code>, available at: (add url)</li>
+<li><code>Protocol/BmjOpen.Rmd</code>: reformatted protocol for BMJOpen (to be submitted)</li>
+</ul>
+</div>
+<div id="presentations" class="section level2">
+<h2><span class="header-section-number">11.2</span> Presentations</h2>
+<p>Nothing yet.
+We have a cultural war here between <code>PowerPoint</code>, <code>latex</code> and <code>Rmarkdown</code>.</p>
 </div>
 </div>
 
