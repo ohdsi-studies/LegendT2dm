@@ -1,12 +1,14 @@
 
-executeSingleCmRun(message,
-                   folder,
-                   exposureSummary,
-                   cmAnalysisListFile,
-                   outcomeIds,
-                   outcomeIdsOfInterest,
-                   copyPsFileFolder = "",
-                   convertPsFileNames = FALSE) {
+executeSingleCmRun <- function(message,
+                               folder,
+                               exposureSummary,
+                               cmAnalysisListFile,
+                               outcomeIds,
+                               outcomeIdsOfInterest,
+                               copyPsFileFolder = "",
+                               convertPsFileNames = FALSE,
+                               indicationFolder,
+                               maxCores) {
 
   copyCmDataFiles <- function(exposures, source, destination) {
     lapply(1:nrow(exposures), function(i) {
@@ -70,11 +72,13 @@ executeSingleCmRun(message,
                   to = destinationFile,
                   copy.date = TRUE)
       })
+      ParallelLogger::logInfo(paste0("*** Copied and renamed ", length(psFileList), " PS files"))
 
     } else {
       file.copy(from = psFileList,
                 to = runCmFolder,
                 copy.date = TRUE)
+      ParallelLogger::logInfo(paste0("*** Copied ", length(psFileList), " PS files"))
     }
   }
 
@@ -104,5 +108,5 @@ executeSingleCmRun(message,
                               prefilterCovariates = TRUE,
                               outcomeIdsOfInterest = outcomeIdsOfInterest)
 
-  deleteCmDataFiles(runExposureSummary, runCmFolder)
+  deleteCmDataFiles(exposureSummary, runCmFolder)
 }

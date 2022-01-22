@@ -11,10 +11,10 @@
   "Packages": {
     "Andromeda": {
       "Package": "Andromeda",
-      "Version": "0.4.1",
+      "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8dcc8e84af90526e01dcfd9c18fbb59c"
+      "Hash": "770d773d049662d2d1d13780f6f5e11c"
     },
     "BH": {
       "Package": "BH",
@@ -32,8 +32,8 @@
       "RemoteUsername": "ohdsi",
       "RemoteRepo": "CirceR",
       "RemoteRef": "master",
-      "RemoteSha": "eb27c4bd43f02c68a8bce6a01e02f9fe2b923b5c",
-      "Hash": "3a0c224991e1ee5daa6e6ac0c9722553"
+      "RemoteSha": "dc8d462560a22e962f75e5604282e383410afa08",
+      "Hash": "f133b36ef31a70e0e5a88c7176627948"
     },
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
@@ -50,16 +50,16 @@
     },
     "CohortMethod": {
       "Package": "CohortMethod",
-      "Version": "4.2.0",
+      "Version": "4.2.2",
       "Source": "GitHub",
+      "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
       "RemoteType": "github",
-      "Remotes": "ohdsi/FeatureExtraction",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
       "RemoteRef": "develop",
-      "RemoteSha": "bc649d33b6b5c1c2ea91208394587b84b068b21e",
-      "Hash": "da4c38742ef941669830d9ffed44d76e"
+      "RemoteSha": "fa14f60c2e46f5098a20dbc93741611446ff710e",
+      "Hash": "18c1e74859ed889850440428654b0576"
     },
     "CompQuadForm": {
       "Package": "CompQuadForm",
@@ -225,15 +225,15 @@
     },
     "ROhdsiWebApi": {
       "Package": "ROhdsiWebApi",
-      "Version": "1.2.1",
+      "Version": "1.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "ohdsi",
       "RemoteRepo": "ROhdsiWebApi",
       "RemoteRef": "master",
-      "RemoteSha": "5eba1e59c3d466fb862cd3f0a6c536c2e401bbb4",
-      "Hash": "d0dcdbd089fa6aefa8c386512c208778"
+      "RemoteSha": "db363a4e5d77dfa1a68267a9e1e4697ec46c02f1",
+      "Hash": "ab79e9838e3e3c818e497f948606bc08"
     },
     "RSQLite": {
       "Package": "RSQLite",
