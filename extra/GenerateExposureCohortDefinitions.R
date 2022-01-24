@@ -9,7 +9,7 @@ library(dplyr)
 
 baseUrlWebApi <- keyring::key_get("baseUrl")
 
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "http://atlas-covid19.ohdsi.org/WebAPI")
+# baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "https://atlas-covid19.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, indent = 2, digits = 50)
 # SqlRender::writeSql(baseCohortJson, targetFile = "inst/settings/baseCohort.json")
 # saveRDS(baseCohort, file = "inst/settings/baseCohort.rds")
@@ -408,19 +408,24 @@ permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
 permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
-permutations <- permutations %>% filter(cohortId == 101100000)
+# permutations <- permutations %>% filter(cohortId == 101100000)
+# classId <- 10
 
-classId <- 10
-drugsForClass <- exposuresOfInterestTable %>% filter(cohortId > classId, cohortId < (classId + 10)) %>% mutate(classId = classId)
-permutationsForDrugs <- drugsForClass %>% left_join(permutations, by = c("classId" ="targetId")) %>%
-  mutate(targetId = cohortId.x,
-         cohortId = cohortId.y,
-         includedConceptIds = conceptId,
-         shortName = name) %>%
-  select(-type, -shortName.x, -order, -includedConceptIds, -conceptId, -cohortId.x, -cohortId.y, -shortName.y) %>%
-  rowwise() %>%
-  mutate(cohortId = as.integer(sub(paste0("^",classId), targetId, cohortId))) %>%
-  mutate(name = paste0("ID", as.integer(cohortId)))
+createPermutationsForDrugs <- function(classId){
+  drugsForClass <- exposuresOfInterestTable %>% filter(cohortId > classId, cohortId < (classId + 10)) %>% mutate(classId = classId)
+  permutationsForDrugs <- drugsForClass %>% left_join(permutations, by = c("classId" ="targetId")) %>%
+    mutate(targetId = cohortId.x,
+           cohortId = cohortId.y,
+           includedConceptIds = conceptId,
+           shortName = name) %>%
+    select(-type, -shortName.x, -order, -includedConceptIds, -conceptId, -cohortId.x, -cohortId.y, -shortName.y) %>%
+    rowwise() %>%
+    mutate(cohortId = as.integer(sub(paste0("^",classId), targetId, cohortId))) %>%
+    mutate(name = paste0("ID", as.integer(cohortId)))
+}
+
+classIds <- c(10, 20, 30, 40)
+permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>% bind_rows()
 
 permutationsForDrugs$json <-
   do.call("rbind",
@@ -431,15 +436,99 @@ permutationsForDrugs$json <-
             #return(cohortDefinition)
           }))
 
+permutationsForDrugs$sql <-
+  do.call("rbind",
+          lapply(1:nrow(permutationsForDrugs), function(i) {
+            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,])
+            cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
+                                                    baseUrlWebApi,
+                                                    generateStats = generateStats)
+          }))
+
+cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[1,])
+
 for (i in 1:nrow(permutationsForDrugs)) {
   row <- permutationsForDrugs[i,]
-  # sqlFileName <- file.path("inst/sql/sql_server/drug", paste(row$name, "sql", sep = "."))
-  # SqlRender::writeSql(row$sql, sqlFileName)
+  sqlFileName <- file.path("inst/sql/sql_server/drug", paste(row$name, "sql", sep = "."))
+  SqlRender::writeSql(row$sql, sqlFileName)
   jsonFileName <- file.path("inst/cohorts/drug", paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
+permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
+printCohortDefinitionFromNameAndJson(name = "DDP4I any",
+                                     json = permutationsForDrugs$json[1])
+printCohortDefinitionFromNameAndJson(name = "DDP4I younger",
+                                     json = permutationsForDrugs$json[2])
+printCohortDefinitionFromNameAndJson(name = "DDP4I older",
+                                     json = permutationsForDrugs$json[3])
 
 
+#make drug-level TCOs
 
+makeTCOsDrug <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
+  baseTs <- permutationsForDrugs %>%
+    filter(tar == tarId,
+           age == ageId, sex == sexId, race == raceId, cvd == cvdId,
+           renal == renalId, met == metId)
+
+  tab <- as.data.frame(t(combn(baseTs$cohortId, m = 2)))
+  names(tab) <- c("targetId", "comparatorId")
+  tab$outcomeIds <- -1
+  tab$excludedCovariateConceptIds <- NA
+
+  tab <- tab %>% inner_join(permutationsForDrugs %>% select(cohortId, atlasName) %>% rename(targetId = cohortId),
+                            by = "targetId") %>%
+    rename(targetName = atlasName)
+
+  tab <- tab %>% inner_join(permutationsForDrugs %>% select(cohortId, atlasName) %>% rename(comparatorId = cohortId),
+                            by = "comparatorId") %>%
+    rename(comparatorName = atlasName)
+
+  return(tab)
+}
+
+drugTcos <- rbind(
+  # Order: tar, met, age, sex, race, cvd, renal
+  #
+  # OT1
+  # Main
+  makeTCOsDrug("ot1", "with", "any", "any", "any", "any", "any"),
+  # Age
+  makeTCOsDrug("ot1", "with", "younger", "any", "any", "any", "any"),
+  makeTCOsDrug("ot1", "with", "middle", "any", "any", "any", "any"),
+  makeTCOsDrug("ot1", "with", "older", "any", "any", "any", "any"),
+  # Sex
+  makeTCOsDrug("ot1", "with", "any", "female", "any", "any", "any"),
+  makeTCOsDrug("ot1", "with", "any", "male", "any", "any", "any"),
+  # Race
+  makeTCOsDrug("ot1", "with", "any", "any", "black", "any", "any"),
+  # CV risk
+  makeTCOsDrug("ot1", "with", "any", "any", "any", "low", "any"),
+  makeTCOsDrug("ot1", "with", "any", "any", "any", "higher", "any"),
+  # Renal dz
+  makeTCOsDrug("ot1", "with", "any", "any", "any", "any", "without"),
+  makeTCOsDrug("ot1", "with", "any", "any", "any", "any", "with"),
+  #
+  # OT2
+  # Main
+  makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "any"),
+  # Age
+  makeTCOsDrug("ot2", "with", "younger", "any", "any", "any", "any"),
+  makeTCOsDrug("ot2", "with", "middle", "any", "any", "any", "any"),
+  makeTCOsDrug("ot2", "with", "older", "any", "any", "any", "any"),
+  # Sex
+  makeTCOsDrug("ot2", "with", "any", "female", "any", "any", "any"),
+  makeTCOsDrug("ot2", "with", "any", "male", "any", "any", "any"),
+  # Race
+  makeTCOsDrug("ot2", "with", "any", "any", "black", "any", "any"),
+  # CV risk
+  makeTCOsDrug("ot2", "with", "any", "any", "any", "low", "any"),
+  makeTCOsDrug("ot2", "with", "any", "any", "any", "higher", "any"),
+  # Renal dz
+  makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "without"),
+  makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "with")
+)
+
+readr::write_csv(drugTcos, "inst/settings/drugTcosOfInterest.csv")
