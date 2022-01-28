@@ -82,7 +82,7 @@ covariate_balance,database_id,varchar(255),Foreign key referencing the database,
 covariate_balance,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 covariate_balance,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 covariate_balance,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,No
-covariate_balance,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,No
+covariate_balance,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
 covariate_balance,covariate_id,bigint,Foreign key referencing the covariate table,Yes,Yes,No,Yes
 covariate_balance,target_mean_before,numeric,Mean value of the covariate in the target cohort before propensity score adjustment,Yes,No,No,Yes
 covariate_balance,comparator_mean_before,numeric,Mean value of the covariate in the comparator cohort before propensity score adjustment,Yes,No,No,Yes

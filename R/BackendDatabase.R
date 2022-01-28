@@ -232,7 +232,7 @@ checkAndFixDataTypes <-
       fieldName <- names(observedTypes)[i]
       expectedType <-
         gsub("\\(.*\\)", "", tolower(tableSpecs$type[tableSpecs$fieldName == fieldName]))
-      if (expectedType == "bigint" || expectedType == "float") {
+      if (expectedType == "bigint" || expectedType == "float" || expectedType == "numeric") {
         if (observedTypes[i] != "numeric" && observedTypes[i] != "double") {
           ParallelLogger::logDebug(
             sprintf(
@@ -244,7 +244,10 @@ checkAndFixDataTypes <-
               expectedType
             )
           )
-          table <- mutate_at(table, i, as.numeric)
+          table <- mutate_at(table, i, function(x) {
+              y <- as.numeric(x)
+              ifelse(is.infinite(y), NA, y)
+            })
         }
       } else if (expectedType == "int") {
         if (observedTypes[i] != "integer") {
