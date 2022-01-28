@@ -186,6 +186,11 @@ LegendT2dm::uploadResultsToDatabase(
     "d:/LegendT2dmOutput_mdcd1/class/assessmentOfPropensityScores/Results_class_ps_MDCD.zip",
     "d:/LegendT2dmOutput_mdcr1/class/assessmentOfPropensityScores/Results_class_ps_MDCR.zip",
     "d:/LegendT2dmOutput_ccae1/class/assessmentOfPropensityScores/Results_class_ps_CCAE.zip",
-    "d:/LegendT2dmOutput_IQVIA//Results_class_ps_Germany_DA.zip"),
+    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_Germany_DA.zip",
+    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_France_LPD.zip",
+    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_US_Open_Claims.zip",
+    "d:/LegendT2dmOutput_SFTP/8fjt16zl_Results_class_ps_CUIMC.zip",
+    "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip"
+    ),
   specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
 )

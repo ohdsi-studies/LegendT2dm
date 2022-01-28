@@ -639,40 +639,36 @@ exportMainResults <- function(indicationId,
 }
 
 calibrate <- function(subset, allControls) {
-    ncs <- subset[subset$outcomeId %in% allControls$outcomeId[allControls$targetEffectSize == 1], ]
+    ncs <- subset[subset$outcomeId %in% allControls$cohortId[allControls$targetEffectSize == 1], ]
     ncs <- ncs[!is.na(ncs$seLogRr), ]
     if (nrow(ncs) > 5) {
+        set.seed(123)
         null <- EmpiricalCalibration::fitMcmcNull(ncs$logRr, ncs$seLogRr)
         calibratedP <- EmpiricalCalibration::calibrateP(null = null,
                                                         logRr = subset$logRr,
                                                         seLogRr = subset$seLogRr)
-        subset$calibratedP <- calibratedP$p
-    } else {
-        subset$calibratedP <- rep(NA, nrow(subset))
-    }
-    pcs <- subset[subset$outcomeId %in% allControls$outcomeId[allControls$targetEffectSize != 1], ]
-    pcs <- pcs[!is.na(pcs$seLogRr), ]
-    if (nrow(pcs) > 5) {
-        controls <- merge(subset, allControls[, c("targetId", "comparatorId", "outcomeId", "targetEffectSize")])
-        model <- EmpiricalCalibration::fitSystematicErrorModel(logRr = controls$logRr,
-                                                               seLogRr = controls$seLogRr,
-                                                               trueLogRr = log(controls$targetEffectSize),
-                                                               estimateCovarianceMatrix = FALSE)
+
+        # Update from LEGEND-HTN.  Now calibrating effect and CI based on negative-control distribution
+        model <- EmpiricalCalibration::convertNullToErrorModel(null)
         calibratedCi <- EmpiricalCalibration::calibrateConfidenceInterval(logRr = subset$logRr,
                                                                           seLogRr = subset$seLogRr,
-                                                                          model = model)
-        subset$calibratedRr <- exp(calibratedCi$logRr)
-        subset$calibratedCi95Lb <- exp(calibratedCi$logLb95Rr)
-        subset$calibratedCi95Ub <- exp(calibratedCi$logUb95Rr)
+                                                                          model = model,
+                                                                          ciWidth = 0.95)
+        subset$calibratedP <- calibratedP$p
         subset$calibratedLogRr <- calibratedCi$logRr
         subset$calibratedSeLogRr <- calibratedCi$seLogRr
+        subset$calibratedCi95Lb <- exp(calibratedCi$logLb95Rr)
+        subset$calibratedCi95Ub <- exp(calibratedCi$logUb95Rr)
+        subset$calibratedRr <- exp(calibratedCi$logRr)
     } else {
+        subset$calibratedP <- rep(NA, nrow(subset))
         subset$calibratedRr <- rep(NA, nrow(subset))
         subset$calibratedCi95Lb <- rep(NA, nrow(subset))
         subset$calibratedCi95Ub <- rep(NA, nrow(subset))
         subset$calibratedLogRr <- rep(NA, nrow(subset))
         subset$calibratedSeLogRr <- rep(NA, nrow(subset))
     }
+
     subset$i2 <- rep(NA, nrow(subset))
     subset <- subset[, c("targetId",
                          "comparatorId",
@@ -727,6 +723,7 @@ calibrateInteractions <- function(subset, negativeControls) {
     ncs <- subset[subset$outcomeId %in% negativeControls$outcomeId, ]
     ncs <- ncs[!is.na(pull(ncs, .data$seLogRrr)), ]
     if (nrow(ncs) > 5) {
+        set.seed(123)
         null <- EmpiricalCalibration::fitMcmcNull(ncs$logRrr, ncs$seLogRrr)
         calibratedP <- EmpiricalCalibration::calibrateP(null = null,
                                                         logRr = subset$logRrr,
