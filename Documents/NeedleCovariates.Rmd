@@ -1,0 +1,138 @@
+---
+title: "Finding needle `conceptId`s"
+author: "Jin Zhou"
+date: "1 February 2022"
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+    transition: 0
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(DT)
+```
+
+## Extracting needles from `covariate_ref` table
+
+```{r initialize, include=FALSE}
+Sys.setenv(DATABASECONNECTOR_JAR_FOLDER = keyring::key_get("legendT2dmDriverPath")) # NOTE to Jin: you need to set these key-chain variables for your computer
+
+legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("legendt2dmServer"),
+                 keyring::key_get("legendt2dmDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("legendt2dmUser"),
+  password = keyring::key_get("legendt2dmPassword"))
+```
+  
+```{r needles_covariate_ref}
+con <- DatabaseConnector::connect(legendT2dmConnectionDetails)
+covariates <- DatabaseConnector::querySql(con, sql = "SELECT DISTINCT covariate_id, covariate_name, concept_id FROM legendt2dm_class_diagnostics.covariate_ref;", snakeCaseToCamelCase = TRUE)
+DatabaseConnector::disconnect(con)
+
+covariates <- covariates %>% mutate(covariateName = toupper(covariateName))
+matchNeedle <- grep(pattern = "NEEDLE", covariates$covariateName)
+matchDevice <- grep(pattern = "DEVICE_EXPOSURE", covariates$covariateName)
+matches <- intersect(matchNeedle, matchDevice)
+needles <- covariates[matches,]
+```
+
+Table contains `r nrow(covariates)` distinct `covariateId`s.  
+
+Of these, `r length(matches)` contain `DEVICE_EXPOSURE` and `NEEDLE`.
+
+And, `r length(unique(needles$conceptId))` unique `concept_id` codes.
+
+## Needle covariateIds from `covariate_ref` table`
+
+```{r needles_covariate_ref_table}
+datatable(needles, rownames = FALSE,
+          options = list(order = list(2, 'desc')))
+```
+## Limiting to `PEN NEEDLE`
+
+```{r needles_pen}
+matchNeedle <- grep(pattern = "PEN NEEDLE", covariates$covariateName)
+matchDevice <- grep(pattern = "DEVICE_EXPOSURE", covariates$covariateName)
+matches <- intersect(matchNeedle, matchDevice)
+penNeedles <- covariates[matches,]
+
+datatable(penNeedles, rownames = FALSE,
+          options = list(order = list(2, 'desc')))
+```
+## Limiting to `PEN NEEDLE` `conceptId`s
+
+```{r pen_needle_concepts, echo=TRUE}
+sort(unique(penNeedles$conceptId))
+```
+
+## Limiting to `NOVO NEEDLE`
+
+```{r needles_novo}
+matchNovo <- grep(pattern = "NOVO", covariates$covariateName)
+matchNeedle <- grep(pattern = "NEEDLE", covariates$covariateName)
+matchDevice <- grep(pattern = "DEVICE_EXPOSURE", covariates$covariateName)
+matches <- intersect(matchNovo, intersect(matchNeedle, matchDevice))
+novoNeedles <- covariates[matches,]
+
+datatable(novoNeedles, rownames = FALSE,
+          options = list(order = list(2, 'desc')))
+```
+## Limiting to `NOVO NEEDLE`
+
+```{r novo_table, echo=TRUE}
+sort(unique(novoNeedles$conceptId))
+```
+
+## Extracting needles from fitted PS models
+
+```{r needles_ps_covariate_assessment}
+con <- DatabaseConnector::connect(legendT2dmConnectionDetails)
+psCovariates <- DatabaseConnector::querySql(con, sql = "
+  SELECT DISTINCT ps_covariate_assessment.covariate_id, ps_covariate_assessment.covariate_name, concept_id 
+  FROM legendt2dm_class_diagnostics.ps_covariate_assessment
+  INNER JOIN legendt2dm_class_diagnostics.covariate_ref
+  ON covariate_ref.covariate_id = ps_covariate_assessment.covariate_id;", snakeCaseToCamelCase = TRUE)
+DatabaseConnector::disconnect(con)
+
+psCovariates <- psCovariates %>% mutate(covariateName = toupper(covariateName))
+psMatchNeedle <- grep(pattern = "NEEDLE", psCovariates$covariateName)
+psNeedles <- psCovariates[psMatchNeedle,]
+```
+
+Fitted PS models contain `r nrow(psCovariates)` distinct `covariateId`s.  
+
+Of these, `r length(psMatchNeedle)` contain `NEEDLE`.
+
+And, `r length(unique(psNeedles$conceptId))` unique `concept_id` codes.
+
+## Needle `covariateId` from fitted PS models
+
+```{r needles_ps_covariate_assessment_table}
+datatable(psNeedles, rownames = FALSE,
+          options = list(order = list(2, 'desc')))
+```
+
+## Current fitted PS model `conceptId`s to exclude
+
+```{r report, echo=TRUE}
+sort(unique(psNeedles$conceptId))
+```
+
+## Current `conceptId`s to exclude
+
+```{r report_full, echo=TRUE}
+exclude <- sort(unique(c(penNeedles$conceptId,novoNeedles$conceptId)))
+exclude
+```
+
+```{r, echo=TRUE}
+paste(exclude, collapse = ";")
+```
+
+Limitations: would like to include VA results before modifying package

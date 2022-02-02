@@ -1,7 +1,7 @@
 ---
 title: "Propensity Score Model Assessment"
 author: "Marc A. Suchard"
-date: "23 June 2021"
+date: "27 January 2022"
 output: 
   ioslides_presentation:
     widescreen: true
@@ -21,8 +21,16 @@ library(DT)
 Available data sources:
 
 - CCAE
-- MDCR 
-- OptumEHR (_only_ main and female-stratum)
+- MDCR
+- MDCD
+- OptumDOD
+- OptumEHR
+- Germany_DA
+- Australia_LPD
+- France_LPD
+- CUIMC
+- UK_IMRD
+- OpenClaims
 
 Results are *now* available on `legend_t2dm_class_diagnostics`
 
@@ -97,12 +105,13 @@ New list from Anna and Patrick:
 
 
 ```{r, t2dm_negatives, echo=FALSE}
-nc <- read.csv("../inst/settings/NegativeControlsV2.csv") %>% select(name)
-
-datatable(nc, rownames = FALSE,
-          options = list(pageLength = 5))
+# nc <- read.csv("../inst/settings/NegativeControlsV2.csv") %>% select(name)
+# 
+# datatable(nc, rownames = FALSE,
+#           options = list(pageLength = 5))
 
 ```
+
 
 ## Outcomes with clinical measurements
 
