@@ -73,6 +73,15 @@ datatable(auc, rownames = FALSE,
           options = list(order = list(2, 'desc')))
 ```
 
+## PS diangostics from VA-OMOP
+
+Several highly-separable `conceptId`s emerge (vs GLP1RAs):
+
+* `4203722` - Patient encounter procedure ($\infty$)
+* `44924604` - Novofine needles
+* `2514610` - Medication therapy management service(s) provided by a pharmacist
+* `710054` - Qualified nonphysician health care professional online digital assessment and management
+
 ## Most separable covariates
 
 Note: `index year: 2013`, `BD PEN NEEDLE` and `INSULIN AND ANALOGUES`

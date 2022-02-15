@@ -20,13 +20,14 @@ createAnalysesDetails <- function(outputFolder,
 
   # TODO This is still code-duplicated with CustomCmDataObjectBuilding.R lines 122 - 129
   # TODO getDbCmDataArgs is currently only used in the unit-tests; fix
-  ingredientConceptIds <- read.csv(system.file("settings", "ExposuresOfInterest.csv",
-                                               package = "LegendT2dm")) %>%
-    filter(type == "Drug") %>% select(conceptId) %>% pull()
+  pathToCsv <- system.file("settings", "Indications.csv", package = "LegendT2dm")
+  indications <- read.csv(pathToCsv)
+  filterConceptIds <- as.character(indications$filterConceptIds[indications$indicationId == "class"])
+  filterConceptIds <- as.numeric(strsplit(filterConceptIds, split = ";")[[1]])
 
   getDbCmDataArgs <- CohortMethod::createGetDbCohortMethodDataArgs(
     covariateSettings = FeatureExtraction::createDefaultCovariateSettings(
-      excludedCovariateConceptIds = ingredientConceptIds,
+      excludedCovariateConceptIds = filterConceptIds,
       addDescendantsToExclude = TRUE))
 
   createStudyPopArgsOnTreatment <- CohortMethod::createCreateStudyPopulationArgs(
