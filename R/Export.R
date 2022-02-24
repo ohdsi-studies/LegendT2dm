@@ -748,7 +748,8 @@ exportDateTime <- function(indicationId,
     dateTime <- data.frame(
         indicationId = c(indicationId),
         databaseId = c(databaseId),
-        dateTime = c(Sys.time()))
+        dateTime = c(Sys.time()),
+        packageVersion = packageVersion("LegendT2dm"))
 
     colnames(dateTime) <- SqlRender::camelCaseToSnakeCase(colnames(dateTime))
     write.table(x = dateTime,

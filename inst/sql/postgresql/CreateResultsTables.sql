@@ -240,6 +240,7 @@ CREATE TABLE ps_auc_assessment (
 CREATE TABLE results_date_time (
      database_id VARCHAR(255) NOT NULL,
      date_time VARCHAR(255) NOT NULL,
+     package_version VARCHAR(255) NOT NULL,
      PRIMARY KEY(database_id)
 );
 

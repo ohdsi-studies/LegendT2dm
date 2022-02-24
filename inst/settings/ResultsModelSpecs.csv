@@ -144,3 +144,4 @@ ps_auc_assessment,auc,numeric,"Area under the receiver-operator curve classifyin
 ps_auc_assessment,equipoise,numeric,"%-subjects with preference scores between 0.3 and 0.7",Yes,No,No,Yes
 results_date_time,database_id,varchar(255),"Foreign key referencing the database",Yes,Yes,No,Yes
 results_date_time,date_time,varchar(255),"Date and time when results were compiled",Yes,No,No,Yes
+results_date_time,package_version,varchar(255), "LegendT2dm package version",Yes,No,No,Yes
