@@ -95,6 +95,18 @@ CohortDiagnostics::uploadResults(
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/tkq5la4h_Results_class_exposures_UK-IMRD.zip")
 
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/x8db42kr_Results_class_exposures_HK-HA-DM.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/56d4ju1v_Results_class_exposures_SG_KTPH.zip")
+
+# TODO Add VA
+
 # Outcome diagnostics
 
 outcomeSchema <- "legendt2dm_outcome_diagnostics"
@@ -163,6 +175,18 @@ CohortDiagnostics::uploadResults(
   schema = outcomeSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/1kb6ezdp_Results_outcomes_UK-IMRD.zip")
 
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/5kjc7zg0_Results_outcomes_HK-HA-DM.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = outcomeSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/4ouldb7r_Results_outcomes_SG_KTPH.zip")
+
+# TODO Add VA
+
 # PS Assessment
 
 classPsSchema <- "legendt2dm_class_diagnostics"
@@ -184,13 +208,15 @@ LegendT2dm::uploadResultsToDatabase(
     "d:/LegendT2dmOutput_optum_ehr1/class/assessmentOfPropensityScores/Results_class_ps_OptumEHR.zip",
     "d:/LegendT2dmOutput_optum_dod1/class/assessmentOfPropensityScores/Results_class_ps_OptumDod.zip",
     "d:/LegendT2dmOutput_mdcd1/class/assessmentOfPropensityScores/Results_class_ps_MDCD.zip",
-    "d:/LegendT2dmOutput_mdcr1/class/assessmentOfPropensityScores/Results_class_ps_MDCR.zip",
+    "d:/LegendT2dmOutput_mdcr3/class/assessmentOfPropensityScores/Results_class_ps_MDCR.zip",
     "d:/LegendT2dmOutput_ccae1/class/assessmentOfPropensityScores/Results_class_ps_CCAE.zip",
     "d:/LegendT2dmOutput_IQVIA/Results_class_ps_Germany_DA.zip",
     "d:/LegendT2dmOutput_IQVIA/Results_class_ps_France_LPD.zip",
     "d:/LegendT2dmOutput_IQVIA/Results_class_ps_US_Open_Claims.zip",
     "d:/LegendT2dmOutput_SFTP/8fjt16zl_Results_class_ps_CUIMC.zip",
-    "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip"
+    "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip",
+    "d:/LegendT2dmOutput_SFTP/yu12zpk5_Results_class_ps_HK-HA-DM.zip"
+    # TODO Add VA
     ),
   specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
 )

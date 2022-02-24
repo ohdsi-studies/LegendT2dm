@@ -45,6 +45,6 @@ LegendT2dm::uploadResultsToDatabase(
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = FALSE,
   zipFileName = c(
-    "d:/LegendT2dmOutput_mdcr2/class/export/Results_class_study_MDCR.zip"),
+    "d:/LegendT2dmOutput_mdcr3/class/export/Results_class_study_MDCR.zip"),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
