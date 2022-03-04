@@ -14,6 +14,9 @@ maxCores <- min(4, parallel::detectCores()) # Or more depending on your hardware
 # Minimum cell count when exporting data:
 minCellCount <- 5
 
+# Patch for Oracle (if necessary)
+oracleTempSchema <- NULL
+
 # The folder where the study intermediate and result files will be written:
 outputFolder <- "s:/LegendT2dmStudy"
 
