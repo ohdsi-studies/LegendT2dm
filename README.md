@@ -144,6 +144,38 @@ How to run
 	                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
 	```
 
+8. To prepare to execute the class-vs-class comparative effectiveness and safety (CES) study, first update your `LegendT2dm` to version `>= 1.1.1`.  You can accomplish this via a `git pull` in RStudio and then select 'Build' and 'Install and Restart'.  To check you package version:
+  	```
+  	packageVersion("LegendT2dm")
+  	```
+
+9. Execute the class-vs-class CES study via:
+	```
+	execute(connectionDetails = connectionDetails,
+        	cdmDatabaseSchema = cdmDatabaseSchema,
+        	oracleTempSchema = oracleTempSchema,
+        	cohortDatabaseSchema = cohortDatabaseSchema,
+        	outputFolder = outputFolder,
+        	indicationId = "class",
+        	databaseId = databaseId,
+        	databaseName = databaseName,
+        	databaseDescription = databaseDescription,
+        	tablePrefix = tablePrefix,
+        	createExposureCohorts = FALSE, # It is not necessary to re-generate the exposure cohorts
+        	createOutcomeCohorts = TRUE,   # It is necessary to re-generate the outcome cohorts
+        	fetchAllDataFromServer = TRUE,
+        	generateAllCohortMethodDataObjects = TRUE,
+        	runCohortMethod = TRUE,
+        	computeCovariateBalance = TRUE,
+        	exportToCsv = TRUE,
+        	maxCores = maxCores)
+	```
+	and upload the file ```class/export/Results_class_study_<DatabaseId>.zip``` in the output folder to the study coordinator:
+	```
+	uploadStudyResults(cohorts = "class",
+	                   outputFolder, privateKeyFileName = "<file>", userName = "<name>")
+	```
+
 License
 =======
 The `LegendT2dm` package is licensed under Apache License 2.0

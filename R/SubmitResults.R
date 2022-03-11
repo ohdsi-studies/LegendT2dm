@@ -17,7 +17,7 @@
 #' Upload cohort diagnostic results to OHDSI server
 #'
 #' @details
-#' This function uploads the 'Results<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
+#' This function uploads the 'Results_<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
 #' which contains (zipped) CSV files. You can send the zip file from a different computer than the one on which is was created.
 #'
 #' @param cohorts              Specifies which set of cohorts to upload
@@ -47,7 +47,7 @@ uploadPhenotypeResults <- function(cohorts, outputFolder, privateKeyFileName, us
 #' Upload propensity score assessment results to OHDSI server
 #'
 #' @details
-#' This function uploads the 'Results<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
+#' This function uploads the 'Results_<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
 #' which contains (zipped) CSV files. You can send the zip file from a different computer than the one on which is was created.
 #'
 #' @param cohorts              Specifies which set of cohorts to upload
@@ -71,6 +71,37 @@ uploadPsAssessmentResults <- function(cohorts, outputFolder, privateKeyFileName,
   OhdsiSharing::sftpUploadFile(privateKeyFileName = privateKeyFileName,
                                userName = userName,
                                remoteFolder = paste0("LegendT2dm_", cohorts, "_ps"),
+                               fileName = fileName)
+  ParallelLogger::logInfo("Finished uploading")
+}
+
+#' Upload the study results to OHDSI server
+#'
+#' @details
+#' This function uploads the 'Results_<databaseId>.zip' to the OHDSI SFTP server. Before sending, you can inspect the zip file,
+#' which contains (zipped) CSV files. You can send the zip file from a different computer than the one on which is was created.
+#'
+#' @param cohorts              Specifies which set of cohorts to upload
+#' @param privateKeyFileName   A character string denoting the path to the RSA private key provided by the study coordinator.
+#' @param userName             A character string containing the user name provided by the study coordinator.
+#' @param outputFolder         Name of local folder to place results; make sure to use forward slashes
+#'                             (/). Do not use a folder on a network drive since this greatly impacts
+#'                             performance.
+#'
+#' @export
+#'
+uploadStudyResults <- function(cohorts, outputFolder, privateKeyFileName, userName) {
+  fileName <- list.files(file.path(outputFolder, cohorts, "export"),
+                         "Results.*.zip$", full.names = TRUE)
+  if (length(fileName) == 0) {
+    stop("Could not find results file in folder. Did you run (and complete) execute?")
+  }
+  if (length(fileName) == 0) {
+    stop("Multiple results files found. Don't know which one to upload")
+  }
+  OhdsiSharing::sftpUploadFile(privateKeyFileName = privateKeyFileName,
+                               userName = userName,
+                               remoteFolder = paste0("LegendT2dm_", cohorts, "_study"),
                                fileName = fileName)
   ParallelLogger::logInfo("Finished uploading")
 }
