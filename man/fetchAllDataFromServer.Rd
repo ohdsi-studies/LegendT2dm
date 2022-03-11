@@ -13,6 +13,7 @@ fetchAllDataFromServer(
   tablePrefix = "legendt2dm",
   useSample = FALSE,
   forceNewObjects = FALSE,
+  studyEndDate = "",
   outputFolder
 )
 }
@@ -41,6 +42,8 @@ priviliges for storing temporary tables.}
 model feasibility).}
 
 \item{forceNewObjects}{Force recreation of \code{CohortMethod} data objects?}
+
+\item{studyEndDate}{Optionally specify a study end date}
 
 \item{outputFolder}{Schema name where intermediate data can be stored. You will need to
 have write priviliges in this schema. Note that for SQL Server, this
