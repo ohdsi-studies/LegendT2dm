@@ -19,6 +19,7 @@ execute(
   minCohortSize = 1000,
   minCellCount = 5,
   imputeExposureLengthWhenMissing = FALSE,
+  studyEndDate = "",
   createExposureCohorts = TRUE,
   createOutcomeCohorts = TRUE,
   fetchAllDataFromServer = TRUE,
@@ -77,6 +78,8 @@ or fractions when exporting to CSV.}
 
 \item{imputeExposureLengthWhenMissing}{For OptumEHR: impute length of drug exposures when the
 length is missing?}
+
+\item{studyEndDate}{Optional study end date for EHRs}
 
 \item{createExposureCohorts}{Create the tables with the exposure cohorts?}
 
