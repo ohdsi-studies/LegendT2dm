@@ -14,6 +14,9 @@ maxCores <- min(4, parallel::detectCores()) # Or more depending on your hardware
 # Minimum cell count when exporting data:
 minCellCount <- 5
 
+# Patch for Oracle (if necessary)
+oracleTempSchema <- NULL
+
 # The folder where the study intermediate and result files will be written:
 outputFolder <- "s:/LegendT2dmStudy"
 
@@ -90,11 +93,9 @@ execute(connectionDetails = connectionDetails,
         databaseName = databaseName,
         databaseDescription = databaseDescription,
         tablePrefix = tablePrefix,
-        imputeExposureLengthWhenMissing = FALSE,
-        createExposureCohorts = FALSE,
-        createOutcomeCohorts = FALSE,
+        createExposureCohorts = FALSE, # It is not necessary to re-generate the exposure cohorts
+        createOutcomeCohorts = TRUE, # It is necessary to re-generate the outcome cohorts
         fetchAllDataFromServer = TRUE,
-        synthesizePositiveControls = FALSE,
         generateAllCohortMethodDataObjects = TRUE,
         runCohortMethod = TRUE,
         computeCovariateBalance = TRUE,
