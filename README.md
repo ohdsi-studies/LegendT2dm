@@ -144,7 +144,7 @@ How to run
 	                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
 	```
 
-8. To prepare to execute the class-vs-class comparative effectiveness and safety (CES) study, first update your `LegendT2dm` to version `>= 1.1.1`.  You can accomplish this via a `git pull` in RStudio and then select 'Build' and 'Install and Restart'.  To check you package version:
+8. To prepare to execute the class-vs-class comparative effectiveness and safety (CES) study, first update your `LegendT2dm` to version `>= 1.1.1`.  You can accomplish this via a `git pull` in RStudio and then select 'Build' and 'Install and Restart'.  To check your package version:
   	```
   	packageVersion("LegendT2dm")
   	```
