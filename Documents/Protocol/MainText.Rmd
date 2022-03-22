@@ -370,6 +370,7 @@ This process engineers a large set of predefined baseline patient characteristic
 Construction of condition, drug, procedures and observations include occurrences within 365, 180 and 30 days prior to index date and are aggregated at several SNOMED (conditions) and ingredient/ATC class (drugs) levels.
 Other demographic measures include comorbidity risk scores (Charlson, DCSI, CHADS2, CHAD2VASc).
 From prior work, feature counts have ranged in the 1,000s - 10,000s, and these large-scale PS models have outperformed hdPS [@Schneeweiss2009-im] in simulation and real-world examples [@Tian2018-xy].
+Given the subcutaneous route of administration of GLP1RAs compared with other drugs administered orally, device codes that represent needles and associated health management encounters, will be excluded from propensity score construction.
 
 We will:
 
@@ -378,6 +379,7 @@ We will:
 * Use Cox proportional hazards models
 
 to estimate hazard ratios (HRs) between alternative target and comparator treatments for the risk of each outcome in each data source.
+In addition, we will perform a sensitivity analysis that does not exclude individuals who previously experienced a glycemic control outcome before the index date.
 The regression will condition on the PS strata/matching-unit with treatment allocation as the sole explanatory variable and censor patients at the end of their time-at-risk (TAR) or data source observation period.
 We will prefer stratification over matching if both sufficiently balance patients (see Section \@ref(sample-size)), as the former optimizes patient inclusions and thus generalizability.
 
