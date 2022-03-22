@@ -50,8 +50,8 @@ longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
 params:
-  date: '07-Oct-2021'
-  version: 1.0.1
+  date: '3-Mar-2022'
+  version: 1.1.0
 subtitle: 'Version: `r params$version`'
 link-citations: yes
 csl: bmj.csl
@@ -148,7 +148,8 @@ if (knitr::is_latex_output()) {
 ```{r amendments, echo=FALSE}
 amendments <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
   Number; Date; Section of study protocol; Amendment or update; Reason
-  1; 7-Oct-2021; Milestones; Update; Add EU PAS #43551 registration date
+  1; 7-Oct-2021; Milestones; Update; Add EU PAS #43551 registration date.
+  2; 3-Mar-2022; Analysis; Amendment; Exclude subcutaneous injection device codes in propensity score. Add glycemic control sensitivity analysis.
 ")
 
 tab <- kable(amendments, booktabs = TRUE, linesep = "")
