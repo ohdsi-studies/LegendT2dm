@@ -26,6 +26,7 @@ execute(
   synthesizePositiveControls = FALSE,
   generateAllCohortMethodDataObjects = TRUE,
   runCohortMethod = TRUE,
+  runSections = c(1:6),
   computeCovariateBalance = TRUE,
   exportToCsv = TRUE,
   filterExposureCohorts = NULL,
@@ -105,6 +106,8 @@ models?}
 
 \item{maxCores}{How many parallel cores should be used? If more cores
 are made available this can speed up the analyses.}
+
+\item{runSpecificSections}{Run specific sections through CohortMethod}
 }
 \description{
 Execute OHDSI LEGEND study

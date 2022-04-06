@@ -28,7 +28,7 @@
 #'                       can speed up the analyses.
 #'
 #' @export
-runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4) {
+runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4, runSections) {
 
     # Tell CohortMethod to minimize files sizes by dropping unneeded columns:
     options("minimizeFileSizes" = TRUE)
@@ -43,77 +43,88 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
     negativeControls <- read.csv(pathToCsv)
 
     # First run: ITT
-    executeSingleCmRun(message = "ITT analyses",
-                       folder = "Run_1",
-                       exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ittCmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = hois$cohortId,
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (1 %in% runSections) {
+        executeSingleCmRun(message = "ITT analyses",
+                           folder = "Run_1",
+                           exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ittCmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = hois$cohortId,
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     # Second run: OT1
-    executeSingleCmRun(message = "OT1 analyses",
-                       folder = "Run_2",
-                       exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ot1CmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = hois$cohortId,
-                       copyPsFileFolder = "Run_1",
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (2 %in% runSections) {
+        executeSingleCmRun(message = "OT1 analyses",
+                           folder = "Run_2",
+                           exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ot1CmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = hois$cohortId,
+                           copyPsFileFolder = "Run_1",
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     # Third run: OT2
-    executeSingleCmRun(message = "OT2 analyses",
-                       folder = "Run_3",
-                       exposureSummary = exposureSummary[!isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ot2CmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = hois$cohortId,
-                       copyPsFileFolder = "Run_1",
-                       convertPsFileNames = TRUE,
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (3 %in% runSections) {
+        executeSingleCmRun(message = "OT2 analyses",
+                           folder = "Run_3",
+                           exposureSummary = exposureSummary[!isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ot2CmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(hois$cohortId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = hois$cohortId,
+                           copyPsFileFolder = "Run_1",
+                           convertPsFileNames = TRUE,
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     glycemicId <- 5
 
     # Fourth run: ITT
-    executeSingleCmRun(message = "ITT-PO analyses",
-                       folder = "Run_4",
-                       exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ittPoCmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = glycemicId,
-                       copyPsFileFolder = "Run_1",
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (4 %in% runSections) {
+        executeSingleCmRun(message = "ITT-PO analyses",
+                           folder = "Run_4",
+                           exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ittPoCmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = glycemicId,
+                           copyPsFileFolder = "Run_1",
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     # Fifth run: OT1
-    executeSingleCmRun(message = "OT1-PO analyses",
-                       folder = "Run_5",
-                       exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ot1PoCmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = glycemicId,
-                       copyPsFileFolder = "Run_1",
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (5 %in% runSections) {
+        executeSingleCmRun(message = "OT1-PO analyses",
+                           folder = "Run_5",
+                           exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ot1PoCmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = glycemicId,
+                           copyPsFileFolder = "Run_1",
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     # Sixth run: OT2
-    executeSingleCmRun(message = "OT2-PO analyses",
-                       folder = "Run_6",
-                       exposureSummary = exposureSummary[!isOt1(exposureSummary$targetId), ],
-                       cmAnalysisList = system.file("settings", "ot2PoCmAnalysisList.json", package = "LegendT2dm"),
-                       outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
-                       outcomeIdsOfInterest = glycemicId,
-                       copyPsFileFolder = "Run_1",
-                       convertPsFileNames = TRUE,
-                       indicationFolder = indicationFolder,
-                       maxCores = maxCores)
+    if (6 %in% runSections) {
+        executeSingleCmRun(message = "OT2-PO analyses",
+                           folder = "Run_6",
+                           exposureSummary = exposureSummary[!isOt1(exposureSummary$targetId), ],
+                           cmAnalysisList = system.file("settings", "ot2PoCmAnalysisList.json", package = "LegendT2dm"),
+                           outcomeIds = unique(c(glycemicId, negativeControls$cohortId)),
+                           outcomeIdsOfInterest = glycemicId,
+                           copyPsFileFolder = "Run_1",
+                           convertPsFileNames = TRUE,
+                           indicationFolder = indicationFolder,
+                           maxCores = maxCores)
+    }
 
     # Create analysis summaries -------------------------------------------------------------------
-    outcomeModelReference <- saveCombinedOutcomeModelReference(folders = c("Run_1", "Run_2", "Run_3",
-                                                                           "Run_4", "Run_5", "Run_6"),
+    outcomeModelReference <- saveCombinedOutcomeModelReference(folders = c(paste0("Run_", runSections)),
                                                                indicationFolder = indicationFolder)
 
     ParallelLogger::logInfo("Summarizing results")

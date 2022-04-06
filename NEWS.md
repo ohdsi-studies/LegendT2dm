@@ -1,4 +1,12 @@
+LegendT2dm 1.1.2
+=======================
+
+Changes:
+
+1. Add option to execute only `Run_1`
+
 LegendT2dm 1.1.0
+=======================
 
 Changes:
 
@@ -23,7 +31,6 @@ LegendT2dm 1.0.2
 Changes:
 
 1. Patch `CohortDiagnostics` to exploit cast `cohortConceptIds` to 32-bit for BigQuery
-
 
 LegendT2dm 1.0.1
 =======================
