@@ -10,6 +10,7 @@ exportResults(
   databaseId,
   databaseName,
   databaseDescription,
+  runSections,
   minCellCount = 5,
   maxCores
 )
@@ -27,6 +28,8 @@ performance.}
 \item{databaseName}{The full name of the database.}
 
 \item{databaseDescription}{A short description (several sentences) of the database.}
+
+\item{runSections}{Run specific sections through CohortMethod}
 
 \item{minCellCount}{The minimum cell count for fields contains person counts or fractions.}
 

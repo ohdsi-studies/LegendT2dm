@@ -60,7 +60,7 @@
 #'                                             data and injected signals?
 #' @param runCohortMethod                      Run the CohortMethod package to produce the outcome
 #'                                             models?
-#' @param runSpecificSections                  Run specific sections through CohortMethod
+#' @param runSections                          Run specific sections through CohortMethod
 #' @param computeCovariateBalance              Report covariate balance statistics across comparisons?
 #' @param exportToCsv                          Export all results to CSV files?
 #' @param filterExposureCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
@@ -207,6 +207,7 @@ execute <- function(connectionDetails,
                       databaseName = databaseName,
                       databaseDescription = databaseDescription,
                       minCellCount = minCellCount,
+                      runSections = runSections,
                       maxCores = maxCores)
     }
 

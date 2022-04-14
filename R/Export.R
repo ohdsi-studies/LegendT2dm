@@ -28,6 +28,7 @@
 #' @param databaseName          The full name of the database.
 #' @param databaseDescription   A short description (several sentences) of the database.
 #' @param minCellCount          The minimum cell count for fields contains person counts or fractions.
+#' @param runSections                          Run specific sections through CohortMethod
 #' @param maxCores              How many parallel cores should be used? If more cores are made
 #'                              available this can speed up the analyses.
 #'
@@ -37,6 +38,7 @@ exportResults <- function(indicationId = "class",
                           databaseId,
                           databaseName,
                           databaseDescription,
+                          runSections,
                           minCellCount = 5,
                           maxCores) {
     indicationFolder <- file.path(outputFolder, indicationId)
@@ -48,7 +50,8 @@ exportResults <- function(indicationId = "class",
     exportAnalyses(indicationId = indicationId,
                    outputFolder = outputFolder,
                    exportFolder = exportFolder,
-                   databaseId = databaseId)
+                   databaseId = databaseId,
+                   runSections = runSections)
 
     exportExposures(indicationId = indicationId,
                     outputFolder = outputFolder,
@@ -147,16 +150,18 @@ enforceMinCellValue <- function(data, fieldName, minValues, silent = FALSE) {
 #     write.csv(indicationTable, fileName, row.names = FALSE)
 # }
 
-exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId) {
+exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId, runSections) {
     ParallelLogger::logInfo("Exporting analyses")
     ParallelLogger::logInfo("- cohort_method_analysis table")
 
     tempFileName <- tempfile()
 
-    loadList <- function(fileName) {
-      CohortMethod::loadCmAnalysisList(system.file("settings",
-                                                   fileName,
-                                                   package = "LegendT2dm"))
+    loadList <- function(fileName, test = TRUE) {
+      if (test) {
+        CohortMethod::loadCmAnalysisList(system.file("settings",
+                                                     fileName,
+                                                     package = "LegendT2dm"))
+      }
     }
 
     cmAnalysisToRow <- function(cmAnalysis) {
@@ -167,12 +172,14 @@ exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId)
         return(row)
     }
 
-    cmAnalysisList <- c(loadList("ot1CmAnalysisList.json"),
-                        loadList("ittCmAnalysisList.json"),
-                        loadList("ot2CmAnalysisList.json"),
-                        loadList("ot1PoCmAnalysisList.json"),
-                        loadList("ittPoCmAnalysisList.json"),
-                        loadList("ot2PoCmAnalysisList.json"))
+    cmAnalysisList <- c(
+      loadList("ittCmAnalysisList.json", 1 %in% runSections),
+      loadList("ot1CmAnalysisList.json", 2 %in% runSections),
+      loadList("ot2CmAnalysisList.json", 3 %in% runSections),
+      loadList("ittPoCmAnalysisList.json", 4 %in% runSections),
+      loadList("ot1PoCmAnalysisList.json", 5 %in% runSections),
+      loadList("ot2PoCmAnalysisList.json", 6 %in% runSections)
+    )
 
     cohortMethodAnalysis <- lapply(cmAnalysisList, cmAnalysisToRow)
     cohortMethodAnalysis <- do.call("rbind", cohortMethodAnalysis)

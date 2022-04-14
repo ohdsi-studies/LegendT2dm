@@ -96,6 +96,8 @@ data and injected signals?}
 \item{runCohortMethod}{Run the CohortMethod package to produce the outcome
 models?}
 
+\item{runSections}{Run specific sections through CohortMethod}
+
 \item{computeCovariateBalance}{Report covariate balance statistics across comparisons?}
 
 \item{exportToCsv}{Export all results to CSV files?}
@@ -106,8 +108,6 @@ models?}
 
 \item{maxCores}{How many parallel cores should be used? If more cores
 are made available this can speed up the analyses.}
-
-\item{runSpecificSections}{Run specific sections through CohortMethod}
 }
 \description{
 Execute OHDSI LEGEND study
