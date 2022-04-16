@@ -46,8 +46,20 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
   markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
 
-  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria", markdown)
-  markdown <- gsub("#### \\d+.", "*", markdown)
+  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
+
+  convert_to_roman_num <- function(digit_str) {
+    stopifnot(length(digit_str) == 1)
+    romanized <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")[as.integer(digit_str)]
+    return(romanized)
+  }
+  markdown <- stringr::str_replace_all(
+    markdown, "#### (\\d+).",
+    function(matched_str) {
+      digit <- stringr::str_extract(matched_str, stringr::regex("\\d+"))
+      paste0("#### ", convert_to_roman_num(digit), ".")
+    }
+  )
 
   rows <- unlist(strsplit(markdown, "\\r\\n"))
   rows <- gsub("^   ", "", rows)
