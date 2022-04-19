@@ -49,9 +49,13 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
 
   convert_to_roman_num <- function(digit_str) {
-    stopifnot(length(digit_str) == 1)
-    romanized <- c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")[as.integer(digit_str)]
-    return(romanized)
+    second_digit <- stopIfAboveForty(digit_str)
+    first_digit <- as.integer(stringr::str_sub(digit_str, start = -1))
+    romanized_str <- paste0(
+      paste(rep("X", second_digit), collapse = ''),
+      c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")[first_digit]
+    )
+    return(romanized_str)
   }
   markdown <- stringr::str_replace_all(
     markdown, "#### (\\d+).",
@@ -76,6 +80,27 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   if (withClosing) {
     printCohortClose()
   }
+}
+
+#' Does the given string of digit(s) indicate value larger than 40.
+#'
+#' @description
+#' Check if string of digit(s) indicate value larger than 40. If not,
+#' return the second digit. If single digit, returns 0.
+stopIfAboveForty <- function(digit_str) {
+  num_digits <- nchar(digit_str)
+  if (num_digits >= 2) {
+    second_digit_and_above <- as.integer(substr(digit_str, 1, num_digits - 1))
+    if (second_digit_and_above >= 4) {
+      stop(paste("Additional cohort inclusion criteria numbered >= 40 detected.",
+                 "The current cohort definition formatter does not support this."))
+    } else {
+      second_digit <- second_digit_and_above
+    }
+  } else {
+    second_digit <- 0
+  }
+  return(second_digit)
 }
 
 
