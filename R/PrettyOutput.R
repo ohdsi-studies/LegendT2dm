@@ -48,6 +48,7 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
 
   markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
 
+  markdown <- unnumberAdditionalCriteria(markdown)
   convert_to_roman_num <- function(digit_str) {
     second_digit <- stopIfAboveForty(digit_str)
     first_digit <- as.integer(stringr::str_sub(digit_str, start = -1))
@@ -80,6 +81,14 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   if (withClosing) {
     printCohortClose()
   }
+}
+
+unnumberAdditionalCriteria <- function(markdown) {
+  markdown <- stringr::str_replace_all(
+    markdown, "#### (\\d+).(.*)",
+    function(matched_str) { paste(matched_str, "{-}") }
+  )
+  return(markdown)
 }
 
 #' Does the given string of digit(s) indicate value larger than 40.
