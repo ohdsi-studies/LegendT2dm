@@ -49,7 +49,7 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
 
   markdown <- unnumberAdditionalCriteria(markdown)
-  convert_to_roman_num <- function(digit_str) {
+  as.roman <- function(digit_str) {
     second_digit <- stopIfAboveForty(digit_str)
     first_digit <- as.integer(stringr::str_sub(digit_str, start = -1))
     romanized_str <- paste0(
@@ -62,7 +62,7 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
     markdown, "#### (\\d+).",
     function(matched_str) {
       digit <- stringr::str_extract(matched_str, stringr::regex("\\d+"))
-      paste0("#### ", convert_to_roman_num(digit), ".")
+      paste0("#### ", as.roman(digit), ".")
     }
   )
 
