@@ -74,6 +74,7 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   }
 }
 
+#' Find the subsections corresponding to additional criteria and unnumber them.
 unnumberAdditionalCriteria <- function(markdown) {
   markdown <- stringr::str_replace_all(
     markdown, "#### (\\d+).(.*)",
@@ -93,7 +94,7 @@ as.roman <- function(digit_str) {
   return(romanized_str)
 }
 
-#' Does the given string of digit(s) indicate value larger than 40.
+#' Does the given string of digit(s) indicate value larger than 40?
 #'
 #' @description
 #' Check if string of digit(s) indicate value larger than 40. If not,
