@@ -49,20 +49,11 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
 
   markdown <- unnumberAdditionalCriteria(markdown)
-  as.roman <- function(digit_str) {
-    second_digit <- stopIfAboveForty(digit_str)
-    first_digit <- as.integer(stringr::str_sub(digit_str, start = -1))
-    romanized_str <- paste0(
-      paste(rep("X", second_digit), collapse = ''),
-      c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")[first_digit]
-    )
-    return(romanized_str)
-  }
   markdown <- stringr::str_replace_all(
     markdown, "#### (\\d+).",
     function(matched_str) {
       digit <- stringr::str_extract(matched_str, stringr::regex("\\d+"))
-      paste0("#### ", as.roman(digit), ".")
+      paste0("#### ", LegendT2dm:::as.roman(digit), ".")
     }
   )
 
@@ -91,6 +82,17 @@ unnumberAdditionalCriteria <- function(markdown) {
   return(markdown)
 }
 
+#' Convert a string of an integer < 40 to a string of a corresponding roman numeral.
+as.roman <- function(digit_str) {
+  second_digit <- stopIfAboveForty(digit_str)
+  first_digit <- as.integer(stringr::str_sub(digit_str, start = -1))
+  romanized_str <- paste0(
+    paste(rep("X", second_digit), collapse = ''),
+    c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")[first_digit]
+  )
+  return(romanized_str)
+}
+
 #' Does the given string of digit(s) indicate value larger than 40.
 #'
 #' @description
@@ -111,7 +113,6 @@ stopIfAboveForty <- function(digit_str) {
   }
   return(second_digit)
 }
-
 
 #' Print concept set
 #'
