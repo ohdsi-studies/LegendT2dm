@@ -46,8 +46,16 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   markdown <- gsub("The person exits the cohort", "\\\r\\\nThe person also exists the cohort", markdown)
   markdown <- gsub("following events:", "following events:\\\r\\\n", markdown)
 
-  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria", markdown)
-  markdown <- gsub("#### \\d+.", "*", markdown)
+  markdown <- sub("### Inclusion Criteria", "### Additional Inclusion Criteria\n", markdown)
+
+  markdown <- unnumberAdditionalCriteria(markdown)
+  markdown <- stringr::str_replace_all(
+    markdown, "#### (\\d+).",
+    function(matched_str) {
+      digit <- stringr::str_extract(matched_str, stringr::regex("\\d+"))
+      paste0("#### ", utils::as.roman(digit), ".")
+    }
+  )
 
   rows <- unlist(strsplit(markdown, "\\r\\n"))
   rows <- gsub("^   ", "", rows)
@@ -66,6 +74,14 @@ printCohortDefinitionFromNameAndJson <- function(name, json = NULL, obj = NULL,
   }
 }
 
+#' Find the subsections corresponding to additional criteria and unnumber them.
+unnumberAdditionalCriteria <- function(markdown) {
+  markdown <- stringr::str_replace_all(
+    markdown, "#### (\\d+).(.*)",
+    function(matched_str) { paste(matched_str, "{-}") }
+  )
+  return(markdown)
+}
 
 #' Print concept set
 #'
