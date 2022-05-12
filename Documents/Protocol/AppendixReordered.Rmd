@@ -1,0 +1,188 @@
+# Exposure Cohort Definitions
+
+```{r base-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+baseCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101100000.json", package = "LegendT2dm"))
+baseCohort <- RJSONIO::fromJSON(baseCohortJson)
+
+baseCohort$ConceptSets <- baseCohort$ConceptSets[-c(8, 9, 13, 14)] # remove CVD, renal and alternative targets
+baseCohortJson <- RJSONIO::toJSON(baseCohort, digits = 50)
+
+printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (DPP4 New-User) Cohort / OT1 {#class-cohort}",
+                                     json = baseCohortJson)
+```
+
+\clearpage
+
+## Metformin Use Modifier {#prior-metformin}
+
+```{r met-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+metCohortJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200000.json", package = "LegendT2dm"))
+obj <- RJSONIO::fromJSON(metCohortJson)
+obj$InclusionRules[[1]] <- NULL # alt 1
+obj$InclusionRules[[1]] <- NULL # alt 2
+obj$InclusionRules[[1]] <- NULL # alt 3
+obj$InclusionRules[[1]] <- NULL # anti-diabetic
+
+obj$InclusionRules[[2]] <- NULL
+metCohortJson <- RJSONIO::toJSON(obj, digits = 50)
+
+metCohort <- CirceR::cohortExpressionFromJson(metCohortJson)
+
+printInclusionCriteria(metCohort, removeDescription = FALSE)
+```
+
+```{r drug-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+drugCohortJson <- SqlRender::readSql(system.file("cohorts", "drug", "ID111100000.json", package = "LegendT2dm"))
+drugCohort <- CirceR::cohortExpressionFromJson(drugCohortJson)
+
+printCohortDefinitionFromNameAndJson(name = "Drug-vs-Drug Exposure (Alogliptin New-User) Cohort / OT1 {#drug-cohort}",
+                                     json = drugCohortJson, withConcepts = FALSE)
+
+printConceptSet(drugCohort$conceptSets[[1]])
+printConceptSet(drugCohort$conceptSets[[15]])
+printCohortClose()
+
+```
+
+\clearpage
+
+## Heterogenity Study Inclusion Criteria {#atlas-subgroups}
+
+```{r heterogenity-cohort1, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+removeMetforminAndInsulin <- function(json) {
+  obj <- RJSONIO::fromJSON(json)
+  obj$InclusionRules[[1]] <- NULL # alt 1
+  obj$InclusionRules[[1]] <- NULL # alt 2
+  obj$InclusionRules[[1]] <- NULL # alt 3
+  obj$InclusionRules[[1]] <- NULL # anti-diabetic
+
+  obj$InclusionRules[[2]] <- NULL
+  obj$InclusionRules[[2]] <- NULL
+  RJSONIO::toJSON(obj, digits = 50)
+}
+
+# Age
+youngerJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101210000.json", package = "LegendT2dm"))
+youngerCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(youngerJson))
+printInclusionCriteria(youngerCohort)
+
+middleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101220000.json", package = "LegendT2dm"))
+middleCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(middleJson))
+printInclusionCriteria(middleCohort)
+
+olderJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101230000.json", package = "LegendT2dm"))
+olderCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(olderJson))
+printInclusionCriteria(olderCohort)
+```
+
+```{r heterogenity-cohort2, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Sex
+femaleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101201000.json", package = "LegendT2dm"))
+femaleCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(femaleJson))
+printInclusionCriteria(femaleCohort)
+
+maleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101202000.json", package = "LegendT2dm"))
+maleCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(maleJson))
+printInclusionCriteria(maleCohort)
+```
+
+```{r heterogenity-cohort-race, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Race
+blackJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200100.json", package = "LegendT2dm"))
+blackCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(blackJson))
+printInclusionCriteria(blackCohort)
+```
+
+```{r heterogenity-cohort3, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# CVD
+lowCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200010.json", package = "LegendT2dm"))
+lowCvdCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(lowCvdJson))
+
+printInclusionCriteria(lowCvdCohort)
+
+highCvdJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200020.json", package = "LegendT2dm"))
+highCvdCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(highCvdJson))
+
+printInclusionCriteria(highCvdCohort)
+
+printConceptSet(lowCvdCohort$conceptSets[[8]])
+printConceptSet(lowCvdCohort$conceptSets[[9]])
+printCohortClose()
+```
+
+```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# Renal
+noRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200001.json", package = "LegendT2dm"))
+noRenalCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(noRenalJson))
+
+printInclusionCriteria(noRenalCohort)
+
+withRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200002.json", package = "LegendT2dm"))
+
+cohort <- RJSONIO::fromJSON(withRenalJson)
+
+withRenalCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(withRenalJson))
+
+printInclusionCriteria(withRenalCohort)
+
+printConceptSet(withRenalCohort$conceptSets[[13]])
+printCohortClose()
+```
+
+## Escalation Exit Criteria {#escalation-cohort}
+
+```{r escalation-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+ot2CohortJson <- SqlRender::readSql(system.file("cohorts", "class","ID102100000.json", package = "LegendT2dm"))
+ot2Cohort <- CirceR::cohortExpressionFromJson(ot2CohortJson)
+
+# printCohortDefinitionFromNameAndJson(name = "Class-vs-Class Exposure (GLP1 New-User) Cohort / OT2",
+#                                      json = ot2CohortJson, withConcepts = FALSE, withClosing = FALSE)
+
+printExitCriteria(ot2Cohort)
+printConceptSet(ot2Cohort$conceptSets[[14]])
+printCohortClose()
+```
+
+<!-- drug-cohort was here -->
+
+# Outcome Cohort Definitions
+
+```{r, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+invisible(readr::read_csv(system.file("settings/OutcomesOfInterest.csv", package = "LegendT2dm")) %>%
+  mutate(text = atlasName, fileName = name) %>%
+  select(text, fileName) %>%
+  rowwise() %>%
+  mutate(
+    output = printCohortDefinition(
+      list(name = text,
+           jsonFileName = system.file("cohorts", paste0(fileName, ".json"), package = "LegendT2dm")
+      )
+    )))
+```
+
+# Negative Control Concepts {#negative-controls}
+
+\captionsetup{labelformat=empty}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+negative_controls <- readr::read_csv(system.file("settings/NegativeControls.csv", package = "LegendT2dm")) %>%
+  select(name, conceptId) %>% arrange(name)
+
+colnames(negative_controls) <- c("", "Concept ID")
+
+tab <- kable(negative_controls, booktabs = TRUE, linesep = "", longtable = TRUE,
+      caption = "Negative outcome controls specified through condition occurrences that map to (a descendent of) the indicated concept ID") %>%
+  kable_styling(bootstrap_options = "striped", latex_options = "striped")
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "40em") %>%
+    column_spec(2, width = "15em") %>%
+    kable_styling(font_size = latex_table_font_size,
+                  latex_options = c("repeat_header"),
+                  repeat_header_continued = "\\textit{(Continued on Next Page...)}")  
+  
+} else {
+  tab
+}
+```

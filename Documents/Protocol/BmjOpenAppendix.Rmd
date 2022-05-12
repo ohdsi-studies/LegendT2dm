@@ -34,7 +34,7 @@ header-includes:
 - \newcommand{\footerDate}{`r params$date`}
 - \renewcommand{\and}{\\}
 - \usepackage{setspace}\doublespacing
-- \usepackage{lineno}\linenumbers
+- \usepackage{lineno}
 longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
@@ -74,5 +74,5 @@ latex_table_font_size <- 8
 \setcounter{page}{1}
 \singlespace
 
-```{r child = "Appendix.Rmd"}
+```{r child = "AppendixReordered.Rmd"}
 ```
