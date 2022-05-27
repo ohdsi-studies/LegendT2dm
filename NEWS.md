@@ -1,3 +1,10 @@
+LegendT2dm 1.1.3
+=======================
+
+Changes:
+
+1. Fix `analysisSummary.csv` when using multiple runs
+
 LegendT2dm 1.1.2
 =======================
 
