@@ -131,11 +131,9 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
 
     analysesSumFile <- file.path(indicationFolder, "analysisSummary.csv")
 
-    if (!file.exists(analysesSumFile)) {
-        analysesSum <- CohortMethod::summarizeAnalyses(referenceTable = outcomeModelReference,
-                                                       outputFolder =  file.path(indicationFolder, "cmOutput"))
-        write.csv(analysesSum, analysesSumFile, row.names = FALSE)
-    }
+    analysesSum <- CohortMethod::summarizeAnalyses(referenceTable = outcomeModelReference,
+                                                   outputFolder =  file.path(indicationFolder, "cmOutput"))
+    write.csv(analysesSum, analysesSumFile, row.names = FALSE)
 }
 
 saveCombinedOutcomeModelReference <- function(folders,
