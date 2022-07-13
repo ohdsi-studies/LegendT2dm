@@ -48,3 +48,24 @@ LegendT2dm::uploadResultsToDatabase(
     "d:/LegendT2dmOutput_mdcr3/class/export/Results_class_study_MDCR.zip"),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
+
+imrdZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/5w17o2h3_Results_class_study_UK-IMRD.zip"
+
+LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = imrdZipFile,
+                                       dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd")
+
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd")
+
+model <- readRDS("/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd/propensity_model_UK-IMRD.rds")
+
+
+# SIDIAP
+
+sidiapZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/ouy7l9at_Results_class_study_SIDIAP.zip"
+
+LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = sidiapZipFile,
+                                       dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
+
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
+
+
