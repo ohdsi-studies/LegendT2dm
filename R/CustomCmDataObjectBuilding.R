@@ -432,8 +432,29 @@ constructCohortMethodDataObject <- function(targetId, comparatorId, indicationFo
     covariateData <- FeatureExtraction::loadCovariateData(covariatesFolder)
 
     andromeda$analysisRef <- covariateData$analysisRef
-    andromeda$covariates <- covariateData$covariates %>%
-        inner_join(andromeda$cohorts %>% select(.data$rowId), by = "rowId", copy = TRUE)
+
+    # OLD CODE
+    # andromeda$covariates <- covariateData$covariates %>%
+    #     inner_join(andromeda$cohorts %>% select(.data$rowId), by = "rowId", copy = TRUE)
+
+    # NEW CODE (start)
+    rowIds <- andromeda$cohorts %>% pull(.data$rowId)
+
+    subsetCovariates <- function(batch) {
+      subset <- batch %>% filter(.data$rowId %in% rowIds)
+
+      if ("covariates" %in% names(andromeda)) {
+        Andromeda::appendToTable(andromeda$covariates, subset)
+      } else {
+        andromeda$covariates <- subset
+      }
+
+      return(NULL)
+    }
+
+    invisible(Andromeda::batchApply(covariateData$covariates, subsetCovariates, batchSize = 1e+07))
+    # NEW CODE (end)
+
     andromeda$covariateRef <- covariateData$covariateRef %>%
         inner_join(andromeda$covariates %>% distinct(.data$covariateId), by = "covariateId", copy = TRUE)
 
