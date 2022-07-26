@@ -52,8 +52,8 @@
       "Package": "CohortMethod",
       "Version": "4.2.2",
       "Source": "GitHub",
-      "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
       "RemoteType": "github",
+      "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
@@ -129,15 +129,15 @@
     },
     "LegendT2dmEvidenceExplorer": {
       "Package": "LegendT2dmEvidenceExplorer",
-      "Version": "0.1.0",
+      "Version": "0.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "LegendT2dmEvidenceExplorer",
       "RemoteUsername": "ohdsi-studies",
       "RemoteRef": "HEAD",
-      "RemoteSha": "50876d5b8986e8113578477d689b16a4097c5e1e",
-      "Hash": "bf23514702cd8ecea7b8263f1e201616"
+      "RemoteSha": "81911a1ce1b3411ae60e0ae133f31233440d1656",
+      "Hash": "801bea4976734903edce9b1f07a6d25e"
     },
     "MASS": {
       "Package": "MASS",
