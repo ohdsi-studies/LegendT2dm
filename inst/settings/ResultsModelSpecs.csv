@@ -68,8 +68,8 @@ cohort_method_result,log_rr,numeric,Log of the relative risk,No,No,No,Yes
 cohort_method_result,se_log_rr,numeric,Standard error of the log of the relative risk,No,No,No,Yes
 cohort_method_result,target_subjects,integer,Number of subject in the target cohort,No,No,No,Yes
 cohort_method_result,comparator_subjects,integer,Number of subject in the comparator cohort,No,No,No,Yes
-cohort_method_result,target_days,integer,Number of days observed in the target cohort,No,No,No,Yes
-cohort_method_result,comparator_days,integer,Number of days observed in the comparator cohort,No,No,No,Yes
+cohort_method_result,target_days,bigint,Number of days observed in the target cohort,No,No,No,Yes
+cohort_method_result,comparator_days,bigint,Number of days observed in the comparator cohort,No,No,No,Yes
 cohort_method_result,target_outcomes,integer,Number of outcomes observed in the target cohort,No,No,No,Yes
 cohort_method_result,comparator_outcomes,integer,Number of outcomes observed in the comparator cohort,No,No,No,Yes
 cohort_method_result,calibrated_p,numeric,Calibrated p-value,No,No,No,Yes

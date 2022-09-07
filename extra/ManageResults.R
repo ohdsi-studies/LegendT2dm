@@ -43,18 +43,18 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
-  purgeSiteDataBeforeUploading = FALSE,
+  purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
-    "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
-    "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
-    "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
-    "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
+    # "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
+    # "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
+    # "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
+    # "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
+    # "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
+    "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
     ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
 
-<<<<<<< Updated upstream
 imrdZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/5w17o2h3_Results_class_study_UK-IMRD.zip"
 
 LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = imrdZipFile,
@@ -75,7 +75,6 @@ LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = sidiapZipFile,
 LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
 
 
-=======
 
 ## Display local results
 
@@ -143,4 +142,4 @@ ccae <- readRDS(file.path(shinyOutput, "covariate_balance_t101100000_c201100000_
 
 
 readRDS(file.path(imrdShinyOutput, paste0("results_date_time_", "UK-IMRD", ".rds")))
->>>>>>> Stashed changes
+

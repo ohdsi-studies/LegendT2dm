@@ -1,3 +1,10 @@
+LegendT2dm 1.1.4
+=======================
+
+Changes:
+
+1. Change `Inf` numeric values to `NA` for upload to database (TODO: Fix)
+
 LegendT2dm 1.1.3
 =======================
 

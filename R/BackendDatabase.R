@@ -229,10 +229,16 @@ checkAndFixDataTypes <-
 
     observedTypes <- sapply(table, class)
     for (i in 1:length(observedTypes)) {
+
       fieldName <- names(observedTypes)[i]
       expectedType <-
         gsub("\\(.*\\)", "", tolower(tableSpecs$type[tableSpecs$fieldName == fieldName]))
       if (expectedType == "bigint" || expectedType == "float" || expectedType == "numeric") {
+
+        if (expectedType == "numeric") {
+          table[which(table[,i] == Inf), i] <- NA # TODO Update
+        }
+
         if (observedTypes[i] != "numeric" && observedTypes[i] != "double") {
           ParallelLogger::logDebug(
             sprintf(
