@@ -105,7 +105,30 @@ CohortDiagnostics::uploadResults(
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/56d4ju1v_Results_class_exposures_SG_KTPH.zip")
 
-# TODO Add VA, JHU, HIC, SIDIAP
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/fixed_Results_class_exposures_HIC-Dundee.zip")
+
+ CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/0z4r1kpn_Results_class_exposures_JHM.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/9gkhynbo_Results_class_exposures_VA-OMOP.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/db46ulzp_Results_class_exposures_SIDIAP.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/go15dnyv_Results_class_exposures_STARR.zip")
 
 # Outcome diagnostics
 
@@ -185,7 +208,7 @@ CohortDiagnostics::uploadResults(
   schema = outcomeSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/4ouldb7r_Results_outcomes_SG_KTPH.zip")
 
-# TODO Add VA, JHU, HIC, SIDIAP
+# TODO Add VA, JHU, HIC, SIDIAP, STARR
 
 # PS Assessment
 
@@ -215,8 +238,10 @@ LegendT2dm::uploadResultsToDatabase(
     "d:/LegendT2dmOutput_IQVIA/Results_class_ps_US_Open_Claims.zip",
     "d:/LegendT2dmOutput_SFTP/8fjt16zl_Results_class_ps_CUIMC.zip",
     "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip",
-    "d:/LegendT2dmOutput_SFTP/yu12zpk5_Results_class_ps_HK-HA-DM.zip"
-    # TODO Add VA, JHU, HIC, SIDIAP
+    "d:/LegendT2dmOutput_SFTP/yu12zpk5_Results_class_ps_HK-HA-DM.zip",
+    "d:/LegendT2dmOutput_SFTP/9knopym8_Results_class_ps_VA-OMOP.zip",
+    "d:/LegendT2dmOutput_SFTP/a9o8izgx_Results_class_ps_SIDIAP.zip"
+    # TODO Add JHU, HIC, STARR
     ),
   specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
 )

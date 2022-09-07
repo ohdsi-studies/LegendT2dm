@@ -45,10 +45,16 @@ LegendT2dm::uploadResultsToDatabase(
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = FALSE,
   zipFileName = c(
-    "d:/LegendT2dmOutput_mdcr3/class/export/Results_class_study_MDCR.zip"),
+    "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
+    "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
+    "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
+    "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
+    "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
+    ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
 
+<<<<<<< Updated upstream
 imrdZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/5w17o2h3_Results_class_study_UK-IMRD.zip"
 
 LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = imrdZipFile,
@@ -69,3 +75,72 @@ LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = sidiapZipFile,
 LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
 
 
+=======
+
+## Display local results
+
+zipFileName = c(
+  "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
+  "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
+  "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
+  "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
+  "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
+#  ,"d:/LegendT2dmOutput_SFTP/Results_class_study_US_Open_Claims.zip"
+)
+
+shinyOutput <- "d:/LegendT2dmOutput_shiny"
+lapply(zipFileName, function(file) {
+  prepareForEvidenceExplorer(resultsZipFile = file,
+                             dataFolder = shinyOutput)
+})
+
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = shinyOutput,
+                                                   blind = TRUE)
+
+# Open_Claims
+ocShinyOutput <- "d:/LegendT2dmOutput_shiny_oc"
+prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_US_Open_Claims.zip",
+                             dataFolder = ocShinyOutput)
+
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = ocShinyOutput,
+                                                   blind = TRUE)
+
+# CUIMC
+cuimcShinyOutput <- "d:/LegendT2dmOutput_shiny_cuimc"
+prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_CUIMC.zip",
+                           dataFolder = cuimcShinyOutput)
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = cuimcShinyOutput,
+                                                   blind = TRUE)
+
+# IMRD
+imrdShinyOutput <- "d:/LegendT2dmOutput_shiny_imrd"
+prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/5w17o2h3_Results_class_study_UK-IMRD.zip",
+                           dataFolder = imrdShinyOutput)
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = imrdShinyOutput,
+                                                   blind = TRUE)
+
+# HK
+hkShinyOutput <- "d:/LegendT2dmOutput_shiny_hk"
+prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_HK-HA-DM.zip",
+                           dataFolder = hkShinyOutput)
+LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = hkShinyOutput,
+                                                   blind = TRUE)
+
+# Simple statistics
+dataSource <- c("CCAE","MDCD", "MDCR", "OptumDOD", "OptumEHR")
+bind_rows(lapply(dataSource, function(db) {
+  readRDS(file.path(shinyOutput, paste0("results_date_time_", db, ".rds")))
+}))
+
+
+ccae <- readRDS(file.path(shinyOutput, "cohort_method_result_CCAE.rds"))
+sort(unique(ccae$analysis_id))
+
+oc <- readRDS(file.path(shinyOutput, "cohort_method_result_US_Open_Claims.rds"))
+sort(unique(oc$analysis_id))
+
+ccae <- readRDS(file.path(shinyOutput, "covariate_balance_t101100000_c201100000_CCAE.rds"))
+
+
+readRDS(file.path(imrdShinyOutput, paste0("results_date_time_", "UK-IMRD", ".rds")))
+>>>>>>> Stashed changes

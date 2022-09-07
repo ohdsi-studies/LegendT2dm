@@ -13,14 +13,14 @@ oracleTempSchema <- NULL
 # tablePrefix <- "legend_t2dm_ccae"
 # outputFolder <- "d:/LegendT2dmOutput_ccae3" # DONE
 
-cdmDatabaseSchema <- "cdm_optum_ehr_v1821"
-serverSuffix <- "optum_ehr"
-cohortDatabaseSchema <- "scratch_msuchard"
-databaseId <- "OptumEHR"
-databaseName <- "Optum© de-identified Electronic Health Record Dataset"
-databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
-tablePrefix <- "legend_t2dm_optum_ehr"
-outputFolder <- "d:/LegendT2dmOutput_optum_ehr2" # DONE
+# cdmDatabaseSchema <- "cdm_optum_ehr_v1821"
+# serverSuffix <- "optum_ehr"
+# cohortDatabaseSchema <- "scratch_msuchard"
+# databaseId <- "OptumEHR"
+# databaseName <- "Optum© de-identified Electronic Health Record Dataset"
+# databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
+# tablePrefix <- "legend_t2dm_optum_ehr"
+# outputFolder <- "d:/LegendT2dmOutput_optum_ehr2" # DONE
 
 # cdmDatabaseSchema <- "cdm_truven_mdcr_v1838"
 # serverSuffix <- "truven_mdcr"
@@ -39,6 +39,15 @@ outputFolder <- "d:/LegendT2dmOutput_optum_ehr2" # DONE
 # databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
 # tablePrefix <- "legend_t2dm_mdcd"
 # outputFolder <- "d:/LegendT2dmOutput_mdcd2" # DONE
+
+cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
+serverSuffix <- "truven_mdcd"
+cohortDatabaseSchema <- "scratch_msuchard"
+databaseId<- "MDCD"
+databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
+databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
+tablePrefix <- "legend_t2dm_mdcd"
+outputFolder <- "d:/LegendT2dmOutput_debug_mdcd" # DEBUG
 
 # cdmDatabaseSchema <- "cdm_optum_extended_dod_v1825"
 # serverSuffix <- "optum_extended_dod"
@@ -82,6 +91,7 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 #                        databaseId = databaseId,
 #                        maxCores = 16)
 
+
 execute(connectionDetails = connectionDetails,
         cdmDatabaseSchema = cdmDatabaseSchema,
         oracleTempSchema = oracleTempSchema,
@@ -92,12 +102,32 @@ execute(connectionDetails = connectionDetails,
         databaseName = databaseName,
         databaseDescription = databaseDescription,
         tablePrefix = tablePrefix,
-        createExposureCohorts = TRUE,
-        createOutcomeCohorts = TRUE,
-        fetchAllDataFromServer = TRUE,
-        generateAllCohortMethodDataObjects = TRUE,
-        runCohortMethod = TRUE,
-        computeCovariateBalance = TRUE,
+        createExposureCohorts = FALSE,
+        createOutcomeCohorts = FALSE,
+        fetchAllDataFromServer = FALSE,
+        generateAllCohortMethodDataObjects = FALSE,
+        runCohortMethod = FALSE,
+        runSections = c(1),
+        computeCovariateBalance = FALSE,
         exportToCsv = TRUE,
         maxCores = 16)
+
+# execute(connectionDetails = connectionDetails,
+#         cdmDatabaseSchema = cdmDatabaseSchema,
+#         oracleTempSchema = oracleTempSchema,
+#         cohortDatabaseSchema = cohortDatabaseSchema,
+#         outputFolder = outputFolder,
+#         indicationId = "class",
+#         databaseId = databaseId,
+#         databaseName = databaseName,
+#         databaseDescription = databaseDescription,
+#         tablePrefix = tablePrefix,
+#         createExposureCohorts = TRUE,
+#         createOutcomeCohorts = TRUE,
+#         fetchAllDataFromServer = TRUE,
+#         generateAllCohortMethodDataObjects = TRUE,
+#         runCohortMethod = TRUE,
+#         computeCovariateBalance = TRUE,
+#         exportToCsv = TRUE,
+#         maxCores = 16)
 
