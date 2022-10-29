@@ -42,5 +42,5 @@ Protocol.pdf
 
 ignore
 
-inst/sql/sql_server/class/
-inst/cohorts/class/
+inst/sql/sql_server/class/*
+inst/cohorts/class/*
