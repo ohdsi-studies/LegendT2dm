@@ -469,12 +469,13 @@ for (i in 1:nrow(permutationsForDrugs)) {
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
+# check out some example cohort definitions
 permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
-printCohortDefinitionFromNameAndJson(name = "DDP4I any",
+printCohortDefinitionFromNameAndJson(name = "alogliptin any",
                                      json = permutationsForDrugs$json[1])
-printCohortDefinitionFromNameAndJson(name = "DDP4I younger",
+printCohortDefinitionFromNameAndJson(name = "alogliptin younger",
                                      json = permutationsForDrugs$json[2])
-printCohortDefinitionFromNameAndJson(name = "DDP4I older",
+printCohortDefinitionFromNameAndJson(name = "alogliptin older",
                                      json = permutationsForDrugs$json[3])
 
 
@@ -545,4 +546,11 @@ drugTcos <- rbind(
   makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "with")
 )
 
-readr::write_csv(drugTcos, "inst/settings/drugTcosOfInterest.csv")
+
+# save TCOs for one class (DPP4I) only
+# save TCOs for one class of drugs only
+this.class = permutationsForDrugs$class[1]
+filePath = "inst/settings/"
+fileName = sprintf('%sTcosOfInterest.csv', this.class)
+
+readr::write_csv(drugTcos, file.path(filePath, fileName))
