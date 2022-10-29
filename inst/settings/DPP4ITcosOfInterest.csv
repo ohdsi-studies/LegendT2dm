@@ -1,0 +1,221 @@
+targetId,comparatorId,outcomeIds,excludedCovariateConceptIds,targetName,comparatorName
+111100000,121100000,-1,NA,alogliptin main,linagliptin main
+111100000,131100000,-1,NA,alogliptin main,saxagliptin main
+111100000,141100000,-1,NA,alogliptin main,sitagliptin main
+111100000,151100000,-1,NA,alogliptin main,vildagliptin main
+121100000,131100000,-1,NA,linagliptin main,saxagliptin main
+121100000,141100000,-1,NA,linagliptin main,sitagliptin main
+121100000,151100000,-1,NA,linagliptin main,vildagliptin main
+131100000,141100000,-1,NA,saxagliptin main,sitagliptin main
+131100000,151100000,-1,NA,saxagliptin main,vildagliptin main
+141100000,151100000,-1,NA,sitagliptin main,vildagliptin main
+111110000,121110000,-1,NA,alogliptin younger-age,linagliptin younger-age
+111110000,131110000,-1,NA,alogliptin younger-age,saxagliptin younger-age
+111110000,141110000,-1,NA,alogliptin younger-age,sitagliptin younger-age
+111110000,151110000,-1,NA,alogliptin younger-age,vildagliptin younger-age
+121110000,131110000,-1,NA,linagliptin younger-age,saxagliptin younger-age
+121110000,141110000,-1,NA,linagliptin younger-age,sitagliptin younger-age
+121110000,151110000,-1,NA,linagliptin younger-age,vildagliptin younger-age
+131110000,141110000,-1,NA,saxagliptin younger-age,sitagliptin younger-age
+131110000,151110000,-1,NA,saxagliptin younger-age,vildagliptin younger-age
+141110000,151110000,-1,NA,sitagliptin younger-age,vildagliptin younger-age
+111120000,121120000,-1,NA,alogliptin middle-age,linagliptin middle-age
+111120000,131120000,-1,NA,alogliptin middle-age,saxagliptin middle-age
+111120000,141120000,-1,NA,alogliptin middle-age,sitagliptin middle-age
+111120000,151120000,-1,NA,alogliptin middle-age,vildagliptin middle-age
+121120000,131120000,-1,NA,linagliptin middle-age,saxagliptin middle-age
+121120000,141120000,-1,NA,linagliptin middle-age,sitagliptin middle-age
+121120000,151120000,-1,NA,linagliptin middle-age,vildagliptin middle-age
+131120000,141120000,-1,NA,saxagliptin middle-age,sitagliptin middle-age
+131120000,151120000,-1,NA,saxagliptin middle-age,vildagliptin middle-age
+141120000,151120000,-1,NA,sitagliptin middle-age,vildagliptin middle-age
+111130000,121130000,-1,NA,alogliptin older-age,linagliptin older-age
+111130000,131130000,-1,NA,alogliptin older-age,saxagliptin older-age
+111130000,141130000,-1,NA,alogliptin older-age,sitagliptin older-age
+111130000,151130000,-1,NA,alogliptin older-age,vildagliptin older-age
+121130000,131130000,-1,NA,linagliptin older-age,saxagliptin older-age
+121130000,141130000,-1,NA,linagliptin older-age,sitagliptin older-age
+121130000,151130000,-1,NA,linagliptin older-age,vildagliptin older-age
+131130000,141130000,-1,NA,saxagliptin older-age,sitagliptin older-age
+131130000,151130000,-1,NA,saxagliptin older-age,vildagliptin older-age
+141130000,151130000,-1,NA,sitagliptin older-age,vildagliptin older-age
+111101000,121101000,-1,NA,alogliptin female,linagliptin female
+111101000,131101000,-1,NA,alogliptin female,saxagliptin female
+111101000,141101000,-1,NA,alogliptin female,sitagliptin female
+111101000,151101000,-1,NA,alogliptin female,vildagliptin female
+121101000,131101000,-1,NA,linagliptin female,saxagliptin female
+121101000,141101000,-1,NA,linagliptin female,sitagliptin female
+121101000,151101000,-1,NA,linagliptin female,vildagliptin female
+131101000,141101000,-1,NA,saxagliptin female,sitagliptin female
+131101000,151101000,-1,NA,saxagliptin female,vildagliptin female
+141101000,151101000,-1,NA,sitagliptin female,vildagliptin female
+111102000,121102000,-1,NA,alogliptin male,linagliptin male
+111102000,131102000,-1,NA,alogliptin male,saxagliptin male
+111102000,141102000,-1,NA,alogliptin male,sitagliptin male
+111102000,151102000,-1,NA,alogliptin male,vildagliptin male
+121102000,131102000,-1,NA,linagliptin male,saxagliptin male
+121102000,141102000,-1,NA,linagliptin male,sitagliptin male
+121102000,151102000,-1,NA,linagliptin male,vildagliptin male
+131102000,141102000,-1,NA,saxagliptin male,sitagliptin male
+131102000,151102000,-1,NA,saxagliptin male,vildagliptin male
+141102000,151102000,-1,NA,sitagliptin male,vildagliptin male
+111100100,121100100,-1,NA,alogliptin black,linagliptin black
+111100100,131100100,-1,NA,alogliptin black,saxagliptin black
+111100100,141100100,-1,NA,alogliptin black,sitagliptin black
+111100100,151100100,-1,NA,alogliptin black,vildagliptin black
+121100100,131100100,-1,NA,linagliptin black,saxagliptin black
+121100100,141100100,-1,NA,linagliptin black,sitagliptin black
+121100100,151100100,-1,NA,linagliptin black,vildagliptin black
+131100100,141100100,-1,NA,saxagliptin black,sitagliptin black
+131100100,151100100,-1,NA,saxagliptin black,vildagliptin black
+141100100,151100100,-1,NA,sitagliptin black,vildagliptin black
+111100010,121100010,-1,NA,alogliptin low-cvr,linagliptin low-cvr
+111100010,131100010,-1,NA,alogliptin low-cvr,saxagliptin low-cvr
+111100010,141100010,-1,NA,alogliptin low-cvr,sitagliptin low-cvr
+111100010,151100010,-1,NA,alogliptin low-cvr,vildagliptin low-cvr
+121100010,131100010,-1,NA,linagliptin low-cvr,saxagliptin low-cvr
+121100010,141100010,-1,NA,linagliptin low-cvr,sitagliptin low-cvr
+121100010,151100010,-1,NA,linagliptin low-cvr,vildagliptin low-cvr
+131100010,141100010,-1,NA,saxagliptin low-cvr,sitagliptin low-cvr
+131100010,151100010,-1,NA,saxagliptin low-cvr,vildagliptin low-cvr
+141100010,151100010,-1,NA,sitagliptin low-cvr,vildagliptin low-cvr
+111100020,121100020,-1,NA,alogliptin higher-cvr,linagliptin higher-cvr
+111100020,131100020,-1,NA,alogliptin higher-cvr,saxagliptin higher-cvr
+111100020,141100020,-1,NA,alogliptin higher-cvr,sitagliptin higher-cvr
+111100020,151100020,-1,NA,alogliptin higher-cvr,vildagliptin higher-cvr
+121100020,131100020,-1,NA,linagliptin higher-cvr,saxagliptin higher-cvr
+121100020,141100020,-1,NA,linagliptin higher-cvr,sitagliptin higher-cvr
+121100020,151100020,-1,NA,linagliptin higher-cvr,vildagliptin higher-cvr
+131100020,141100020,-1,NA,saxagliptin higher-cvr,sitagliptin higher-cvr
+131100020,151100020,-1,NA,saxagliptin higher-cvr,vildagliptin higher-cvr
+141100020,151100020,-1,NA,sitagliptin higher-cvr,vildagliptin higher-cvr
+111100001,121100001,-1,NA,alogliptin without-rdz,linagliptin without-rdz
+111100001,131100001,-1,NA,alogliptin without-rdz,saxagliptin without-rdz
+111100001,141100001,-1,NA,alogliptin without-rdz,sitagliptin without-rdz
+111100001,151100001,-1,NA,alogliptin without-rdz,vildagliptin without-rdz
+121100001,131100001,-1,NA,linagliptin without-rdz,saxagliptin without-rdz
+121100001,141100001,-1,NA,linagliptin without-rdz,sitagliptin without-rdz
+121100001,151100001,-1,NA,linagliptin without-rdz,vildagliptin without-rdz
+131100001,141100001,-1,NA,saxagliptin without-rdz,sitagliptin without-rdz
+131100001,151100001,-1,NA,saxagliptin without-rdz,vildagliptin without-rdz
+141100001,151100001,-1,NA,sitagliptin without-rdz,vildagliptin without-rdz
+111100002,121100002,-1,NA,alogliptin with-rdz,linagliptin with-rdz
+111100002,131100002,-1,NA,alogliptin with-rdz,saxagliptin with-rdz
+111100002,141100002,-1,NA,alogliptin with-rdz,sitagliptin with-rdz
+111100002,151100002,-1,NA,alogliptin with-rdz,vildagliptin with-rdz
+121100002,131100002,-1,NA,linagliptin with-rdz,saxagliptin with-rdz
+121100002,141100002,-1,NA,linagliptin with-rdz,sitagliptin with-rdz
+121100002,151100002,-1,NA,linagliptin with-rdz,vildagliptin with-rdz
+131100002,141100002,-1,NA,saxagliptin with-rdz,sitagliptin with-rdz
+131100002,151100002,-1,NA,saxagliptin with-rdz,vildagliptin with-rdz
+141100002,151100002,-1,NA,sitagliptin with-rdz,vildagliptin with-rdz
+112100000,122100000,-1,NA,alogliptin main ot2,linagliptin main ot2
+112100000,132100000,-1,NA,alogliptin main ot2,saxagliptin main ot2
+112100000,142100000,-1,NA,alogliptin main ot2,sitagliptin main ot2
+112100000,152100000,-1,NA,alogliptin main ot2,vildagliptin main ot2
+122100000,132100000,-1,NA,linagliptin main ot2,saxagliptin main ot2
+122100000,142100000,-1,NA,linagliptin main ot2,sitagliptin main ot2
+122100000,152100000,-1,NA,linagliptin main ot2,vildagliptin main ot2
+132100000,142100000,-1,NA,saxagliptin main ot2,sitagliptin main ot2
+132100000,152100000,-1,NA,saxagliptin main ot2,vildagliptin main ot2
+142100000,152100000,-1,NA,sitagliptin main ot2,vildagliptin main ot2
+112110000,122110000,-1,NA,alogliptin ot2 younger-age,linagliptin ot2 younger-age
+112110000,132110000,-1,NA,alogliptin ot2 younger-age,saxagliptin ot2 younger-age
+112110000,142110000,-1,NA,alogliptin ot2 younger-age,sitagliptin ot2 younger-age
+112110000,152110000,-1,NA,alogliptin ot2 younger-age,vildagliptin ot2 younger-age
+122110000,132110000,-1,NA,linagliptin ot2 younger-age,saxagliptin ot2 younger-age
+122110000,142110000,-1,NA,linagliptin ot2 younger-age,sitagliptin ot2 younger-age
+122110000,152110000,-1,NA,linagliptin ot2 younger-age,vildagliptin ot2 younger-age
+132110000,142110000,-1,NA,saxagliptin ot2 younger-age,sitagliptin ot2 younger-age
+132110000,152110000,-1,NA,saxagliptin ot2 younger-age,vildagliptin ot2 younger-age
+142110000,152110000,-1,NA,sitagliptin ot2 younger-age,vildagliptin ot2 younger-age
+112120000,122120000,-1,NA,alogliptin ot2 middle-age,linagliptin ot2 middle-age
+112120000,132120000,-1,NA,alogliptin ot2 middle-age,saxagliptin ot2 middle-age
+112120000,142120000,-1,NA,alogliptin ot2 middle-age,sitagliptin ot2 middle-age
+112120000,152120000,-1,NA,alogliptin ot2 middle-age,vildagliptin ot2 middle-age
+122120000,132120000,-1,NA,linagliptin ot2 middle-age,saxagliptin ot2 middle-age
+122120000,142120000,-1,NA,linagliptin ot2 middle-age,sitagliptin ot2 middle-age
+122120000,152120000,-1,NA,linagliptin ot2 middle-age,vildagliptin ot2 middle-age
+132120000,142120000,-1,NA,saxagliptin ot2 middle-age,sitagliptin ot2 middle-age
+132120000,152120000,-1,NA,saxagliptin ot2 middle-age,vildagliptin ot2 middle-age
+142120000,152120000,-1,NA,sitagliptin ot2 middle-age,vildagliptin ot2 middle-age
+112130000,122130000,-1,NA,alogliptin ot2 older-age,linagliptin ot2 older-age
+112130000,132130000,-1,NA,alogliptin ot2 older-age,saxagliptin ot2 older-age
+112130000,142130000,-1,NA,alogliptin ot2 older-age,sitagliptin ot2 older-age
+112130000,152130000,-1,NA,alogliptin ot2 older-age,vildagliptin ot2 older-age
+122130000,132130000,-1,NA,linagliptin ot2 older-age,saxagliptin ot2 older-age
+122130000,142130000,-1,NA,linagliptin ot2 older-age,sitagliptin ot2 older-age
+122130000,152130000,-1,NA,linagliptin ot2 older-age,vildagliptin ot2 older-age
+132130000,142130000,-1,NA,saxagliptin ot2 older-age,sitagliptin ot2 older-age
+132130000,152130000,-1,NA,saxagliptin ot2 older-age,vildagliptin ot2 older-age
+142130000,152130000,-1,NA,sitagliptin ot2 older-age,vildagliptin ot2 older-age
+112101000,122101000,-1,NA,alogliptin ot2 female,linagliptin ot2 female
+112101000,132101000,-1,NA,alogliptin ot2 female,saxagliptin ot2 female
+112101000,142101000,-1,NA,alogliptin ot2 female,sitagliptin ot2 female
+112101000,152101000,-1,NA,alogliptin ot2 female,vildagliptin ot2 female
+122101000,132101000,-1,NA,linagliptin ot2 female,saxagliptin ot2 female
+122101000,142101000,-1,NA,linagliptin ot2 female,sitagliptin ot2 female
+122101000,152101000,-1,NA,linagliptin ot2 female,vildagliptin ot2 female
+132101000,142101000,-1,NA,saxagliptin ot2 female,sitagliptin ot2 female
+132101000,152101000,-1,NA,saxagliptin ot2 female,vildagliptin ot2 female
+142101000,152101000,-1,NA,sitagliptin ot2 female,vildagliptin ot2 female
+112102000,122102000,-1,NA,alogliptin ot2 male,linagliptin ot2 male
+112102000,132102000,-1,NA,alogliptin ot2 male,saxagliptin ot2 male
+112102000,142102000,-1,NA,alogliptin ot2 male,sitagliptin ot2 male
+112102000,152102000,-1,NA,alogliptin ot2 male,vildagliptin ot2 male
+122102000,132102000,-1,NA,linagliptin ot2 male,saxagliptin ot2 male
+122102000,142102000,-1,NA,linagliptin ot2 male,sitagliptin ot2 male
+122102000,152102000,-1,NA,linagliptin ot2 male,vildagliptin ot2 male
+132102000,142102000,-1,NA,saxagliptin ot2 male,sitagliptin ot2 male
+132102000,152102000,-1,NA,saxagliptin ot2 male,vildagliptin ot2 male
+142102000,152102000,-1,NA,sitagliptin ot2 male,vildagliptin ot2 male
+112100100,122100100,-1,NA,alogliptin ot2 black,linagliptin ot2 black
+112100100,132100100,-1,NA,alogliptin ot2 black,saxagliptin ot2 black
+112100100,142100100,-1,NA,alogliptin ot2 black,sitagliptin ot2 black
+112100100,152100100,-1,NA,alogliptin ot2 black,vildagliptin ot2 black
+122100100,132100100,-1,NA,linagliptin ot2 black,saxagliptin ot2 black
+122100100,142100100,-1,NA,linagliptin ot2 black,sitagliptin ot2 black
+122100100,152100100,-1,NA,linagliptin ot2 black,vildagliptin ot2 black
+132100100,142100100,-1,NA,saxagliptin ot2 black,sitagliptin ot2 black
+132100100,152100100,-1,NA,saxagliptin ot2 black,vildagliptin ot2 black
+142100100,152100100,-1,NA,sitagliptin ot2 black,vildagliptin ot2 black
+112100010,122100010,-1,NA,alogliptin ot2 low-cvr,linagliptin ot2 low-cvr
+112100010,132100010,-1,NA,alogliptin ot2 low-cvr,saxagliptin ot2 low-cvr
+112100010,142100010,-1,NA,alogliptin ot2 low-cvr,sitagliptin ot2 low-cvr
+112100010,152100010,-1,NA,alogliptin ot2 low-cvr,vildagliptin ot2 low-cvr
+122100010,132100010,-1,NA,linagliptin ot2 low-cvr,saxagliptin ot2 low-cvr
+122100010,142100010,-1,NA,linagliptin ot2 low-cvr,sitagliptin ot2 low-cvr
+122100010,152100010,-1,NA,linagliptin ot2 low-cvr,vildagliptin ot2 low-cvr
+132100010,142100010,-1,NA,saxagliptin ot2 low-cvr,sitagliptin ot2 low-cvr
+132100010,152100010,-1,NA,saxagliptin ot2 low-cvr,vildagliptin ot2 low-cvr
+142100010,152100010,-1,NA,sitagliptin ot2 low-cvr,vildagliptin ot2 low-cvr
+112100020,122100020,-1,NA,alogliptin ot2 higher-cvr,linagliptin ot2 higher-cvr
+112100020,132100020,-1,NA,alogliptin ot2 higher-cvr,saxagliptin ot2 higher-cvr
+112100020,142100020,-1,NA,alogliptin ot2 higher-cvr,sitagliptin ot2 higher-cvr
+112100020,152100020,-1,NA,alogliptin ot2 higher-cvr,vildagliptin ot2 higher-cvr
+122100020,132100020,-1,NA,linagliptin ot2 higher-cvr,saxagliptin ot2 higher-cvr
+122100020,142100020,-1,NA,linagliptin ot2 higher-cvr,sitagliptin ot2 higher-cvr
+122100020,152100020,-1,NA,linagliptin ot2 higher-cvr,vildagliptin ot2 higher-cvr
+132100020,142100020,-1,NA,saxagliptin ot2 higher-cvr,sitagliptin ot2 higher-cvr
+132100020,152100020,-1,NA,saxagliptin ot2 higher-cvr,vildagliptin ot2 higher-cvr
+142100020,152100020,-1,NA,sitagliptin ot2 higher-cvr,vildagliptin ot2 higher-cvr
+112100001,122100001,-1,NA,alogliptin ot2 without-rdz,linagliptin ot2 without-rdz
+112100001,132100001,-1,NA,alogliptin ot2 without-rdz,saxagliptin ot2 without-rdz
+112100001,142100001,-1,NA,alogliptin ot2 without-rdz,sitagliptin ot2 without-rdz
+112100001,152100001,-1,NA,alogliptin ot2 without-rdz,vildagliptin ot2 without-rdz
+122100001,132100001,-1,NA,linagliptin ot2 without-rdz,saxagliptin ot2 without-rdz
+122100001,142100001,-1,NA,linagliptin ot2 without-rdz,sitagliptin ot2 without-rdz
+122100001,152100001,-1,NA,linagliptin ot2 without-rdz,vildagliptin ot2 without-rdz
+132100001,142100001,-1,NA,saxagliptin ot2 without-rdz,sitagliptin ot2 without-rdz
+132100001,152100001,-1,NA,saxagliptin ot2 without-rdz,vildagliptin ot2 without-rdz
+142100001,152100001,-1,NA,sitagliptin ot2 without-rdz,vildagliptin ot2 without-rdz
+112100002,122100002,-1,NA,alogliptin ot2 with-rdz,linagliptin ot2 with-rdz
+112100002,132100002,-1,NA,alogliptin ot2 with-rdz,saxagliptin ot2 with-rdz
+112100002,142100002,-1,NA,alogliptin ot2 with-rdz,sitagliptin ot2 with-rdz
+112100002,152100002,-1,NA,alogliptin ot2 with-rdz,vildagliptin ot2 with-rdz
+122100002,132100002,-1,NA,linagliptin ot2 with-rdz,saxagliptin ot2 with-rdz
+122100002,142100002,-1,NA,linagliptin ot2 with-rdz,sitagliptin ot2 with-rdz
+122100002,152100002,-1,NA,linagliptin ot2 with-rdz,vildagliptin ot2 with-rdz
+132100002,142100002,-1,NA,saxagliptin ot2 with-rdz,sitagliptin ot2 with-rdz
+132100002,152100002,-1,NA,saxagliptin ot2 with-rdz,vildagliptin ot2 with-rdz
+142100002,152100002,-1,NA,sitagliptin ot2 with-rdz,vildagliptin ot2 with-rdz
