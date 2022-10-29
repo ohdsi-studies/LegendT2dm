@@ -478,6 +478,19 @@ printCohortDefinitionFromNameAndJson(name = "alogliptin younger",
 printCohortDefinitionFromNameAndJson(name = "alogliptin older",
                                      json = permutationsForDrugs$json[3])
 
+# save drug-level cohorts to cohortsToCreate.csv file
+# only do this for DPP4I for now
+this.class = permutationsForDrugs$class[1]
+drugCohortsToCreate <- permutationsForDrugs %>%
+  mutate(atlasId = cohortId,
+         name = sprintf('%s/%s',this.class,name)) %>%
+  select(atlasId, atlasName, cohortId, name)
+
+filePath = "inst/settings/"
+fileName = sprintf('%sCohortsToCreate.csv', this.class)
+
+readr::write_csv(drugCohortsToCreate,
+                 file.path(filePath, fileName))
 
 #make drug-level TCOs
 
