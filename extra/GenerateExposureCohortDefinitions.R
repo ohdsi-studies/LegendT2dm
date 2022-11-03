@@ -447,7 +447,7 @@ permutationsForDrugs$json <-
 permutationsForDrugs$sql <-
   do.call("rbind",
           lapply(1:nrow(permutationsForDrugs), function(i) {
-            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,])
+            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,], ingredientLevel = TRUE)
             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
                                                     baseUrlWebApi,
                                                     generateStats = generateStats)
