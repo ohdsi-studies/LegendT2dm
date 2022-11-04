@@ -29,7 +29,7 @@ databaseId<- "MDCR"
 databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
 databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
 tablePrefix <- "legend_t2dm_mdcr"
-outputFolder <- "E:/LegendT2dmOutput_mdcr_DPP4I" # OLD
+outputFolder <- "E:/LegendT2dmOutput_mdcr_DPP4I_2" # OLD
 
 # cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
 # serverSuffix <- "truven_mdcd"
@@ -74,16 +74,16 @@ assessPhenotypes(connectionDetails = conn,
                  runExposureCohortDiagnostics = TRUE,
                  createOutcomeCohorts = TRUE,
                  runOutcomeCohortDiagnostics = TRUE)
-#
-# assessPropensityModels(connectionDetails = connectionDetails,
-#                        cdmDatabaseSchema = cdmDatabaseSchema,
-#                        oracleTempSchema = oracleTempSchema,
-#                        cohortDatabaseSchema = cohortDatabaseSchema,
-#                        outputFolder = outputFolder,
-#                        indicationId = "class",
-#                        tablePrefix = tablePrefix,
-#                        databaseId = databaseId,
-#                        maxCores = 16)
+
+assessPropensityModels(connectionDetails = conn,
+                       cdmDatabaseSchema = cdmDatabaseSchema,
+                       tablePrefix = tablePrefix,
+                       indicationId = 'DPP4I',
+                       oracleTempSchema = oracleTempSchema,
+                       cohortDatabaseSchema = cohortDatabaseSchema,
+                       outputFolder = outputFolder,
+                       databaseId = databaseId,
+                       maxCores = 16)
 
 
 # execute(connectionDetails = connectionDetails,
