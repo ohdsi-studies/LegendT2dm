@@ -447,7 +447,7 @@ permutationsForDrugs$json <-
 permutationsForDrugs$sql <-
   do.call("rbind",
           lapply(1:nrow(permutationsForDrugs), function(i) {
-            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,])
+            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,], ingredientLevel = TRUE)
             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
                                                     baseUrlWebApi,
                                                     generateStats = generateStats)
@@ -477,6 +477,11 @@ printCohortDefinitionFromNameAndJson(name = "alogliptin younger",
                                      json = permutationsForDrugs$json[2])
 printCohortDefinitionFromNameAndJson(name = "alogliptin older",
                                      json = permutationsForDrugs$json[3])
+
+# # sanity check --- inspect json and sql concept set IDs
+# cohortID = 2
+# conceptSetJson = CohortDiagnostics:::extractConceptSetsJsonFromCohortJson(permutationsForDrugs$json[cohortID])
+# conceptSetSql = CohortDiagnostics:::extractConceptSetsSqlFromCohortSql(permutationsForDrugs$sql[cohortID])
 
 # save drug-level cohorts to cohortsToCreate.csv file
 # only do this for DPP4I for now
