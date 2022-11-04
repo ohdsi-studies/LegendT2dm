@@ -1,7 +1,7 @@
 library(LegendT2dm)
 
 Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
-options(andromedaTempFolder = "d:/andromedaTemp")
+options(andromedaTempFolder = "E:/andromedaTemp")
 oracleTempSchema <- NULL
 
 # cdmDatabaseSchema <- "cdm_truven_ccae_v1709"
@@ -22,14 +22,14 @@ oracleTempSchema <- NULL
 # tablePrefix <- "legend_t2dm_optum_ehr"
 # outputFolder <- "d:/LegendT2dmOutput_optum_ehr_v114" # OLD
 
-# cdmDatabaseSchema <- "cdm_truven_mdcr_v1838"
-# serverSuffix <- "truven_mdcr"
-# cohortDatabaseSchema <- "scratch_msuchard"
-# databaseId<- "MDCR"
-# databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
-# databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
-# tablePrefix <- "legend_t2dm_mdcr"
-# outputFolder <- "d:/LegendT2dmOutput_mdcr_v114" # OLD
+cdmDatabaseSchema <- "cdm_truven_mdcr_v1838"
+serverSuffix <- "truven_mdcr"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId<- "MDCR"
+databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
+databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
+tablePrefix <- "legend_t2dm_mdcr"
+outputFolder <- "E:/LegendT2dmOutput_mdcr_DPP4I" # OLD
 
 # cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
 # serverSuffix <- "truven_mdcd"
@@ -49,28 +49,31 @@ oracleTempSchema <- NULL
 # tablePrefix <- "legend_t2dm_optum_dod"
 # outputFolder <- "d:/LegendT2dmOutput_optum_dod_v114" # OLD
 
-connectionDetails <- DatabaseConnector::createConnectionDetails(
+
+conn <- DatabaseConnector::createConnectionDetails(
   dbms = "redshift",
-  server = paste0(keyring::key_get("redshiftServer"), "/", !!serverSuffix),
+  server = paste0(keyring::key_get("epi_server"), "/", !!serverSuffix),
   port = 5439,
   user = keyring::key_get("redshiftUser"),
   password = keyring::key_get("redshiftPassword"),
-  extraSettings = "ssl=true&sslfactory=com.amazon.redshift.ssl.NonValidatingFactory")
+  extraSettings = "ssl=true&sslfactory=com.amazon.redshift.ssl.NonValidatingFactory",
+  pathToDriver = 'D:/Drivers')
 
 # Feasibility assessment ---------------------------------------------------------
-# assessPhenotypes(connectionDetails = connectionDetails,
-#                  cdmDatabaseSchema = cdmDatabaseSchema,
-#                  oracleTempSchema = oracleTempSchema,
-#                  cohortDatabaseSchema = cohortDatabaseSchema,
-#                  outputFolder = outputFolder,
-#                  tablePrefix = tablePrefix,
-#                  databaseId = databaseId,
-#                  databaseName = databaseName,
-#                  databaseDescription = databaseDescription,
-#                  createExposureCohorts = TRUE,
-#                  runExposureCohortDiagnostics = TRUE,
-#                  createOutcomeCohorts = TRUE,
-#                  runOutcomeCohortDiagnostics = TRUE)
+assessPhenotypes(connectionDetails = conn,
+                 cdmDatabaseSchema = cdmDatabaseSchema,
+                 oracleTempSchema = oracleTempSchema,
+                 cohortDatabaseSchema = cohortDatabaseSchema,
+                 outputFolder = outputFolder,
+                 tablePrefix = tablePrefix,
+                 indicationId = 'DPP4I',
+                 databaseId = databaseId,
+                 databaseName = databaseName,
+                 databaseDescription = databaseDescription,
+                 createExposureCohorts = TRUE,
+                 runExposureCohortDiagnostics = TRUE,
+                 createOutcomeCohorts = TRUE,
+                 runOutcomeCohortDiagnostics = TRUE)
 #
 # assessPropensityModels(connectionDetails = connectionDetails,
 #                        cdmDatabaseSchema = cdmDatabaseSchema,
