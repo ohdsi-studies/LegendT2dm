@@ -86,6 +86,16 @@ assessPropensityModels(connectionDetails = conn,
                        maxCores = 16)
 
 
+# Cohort Explorer
+# to check one example cohort
+CohortDiagnostics::launchCohortExplorer(connectionDetails = conn,
+                                        cdmDatabaseSchema = cdmDatabaseSchema,
+                                        cohortDatabaseSchema = cohortDatabaseSchema,
+                                        cohortTable = paste0(tablePrefix,'_',
+                                                             'DPP4I','_cohort'),
+                                        cohortId = 111100000)
+
+
 # execute(connectionDetails = connectionDetails,
 #         cdmDatabaseSchema = cdmDatabaseSchema,
 #         oracleTempSchema = oracleTempSchema,
