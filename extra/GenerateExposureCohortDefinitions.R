@@ -432,7 +432,9 @@ createPermutationsForDrugs <- function(classId){
 
 # try DPP4 I first...
 #classIds <- c(10, 20, 30, 40)
-classIds = c(10)
+#classIds = c(10)
+# shift to SGLT2I
+classIds = c(30)
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>% bind_rows()
 
 permutationsForDrugs$json <-
@@ -457,26 +459,18 @@ permutationsForDrugs$sql <-
 
 # save SQL and JSON files under class name (e.g., "DPP4I") folder
 ## need to create the directory for this class first
-this.class = permutationsForDrugs[1,]$class
+this.class = tolower(permutationsForDrugs[1,]$class)
 dir.create(file.path("inst/sql/sql_server", this.class))
 dir.create(file.path("inst/cohorts", this.class))
 
 for (i in 1:nrow(permutationsForDrugs)) {
   row <- permutationsForDrugs[i,]
-  sqlFileName <- file.path("inst/sql/sql_server", row$class, paste(row$name, "sql", sep = "."))
+  sqlFileName <- file.path("inst/sql/sql_server", tolower(row$class), paste(row$name, "sql", sep = "."))
   SqlRender::writeSql(row$sql, sqlFileName)
-  jsonFileName <- file.path("inst/cohorts", row$class, paste(row$name, "json", sep = "."))
+  jsonFileName <- file.path("inst/cohorts", tolower(row$class), paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
-# check out some example cohort definitions
-permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
-printCohortDefinitionFromNameAndJson(name = "alogliptin any",
-                                     json = permutationsForDrugs$json[1])
-printCohortDefinitionFromNameAndJson(name = "alogliptin younger",
-                                     json = permutationsForDrugs$json[2])
-printCohortDefinitionFromNameAndJson(name = "alogliptin older",
-                                     json = permutationsForDrugs$json[3])
 
 # # sanity check --- inspect json and sql concept set IDs
 # cohortID = 2
@@ -485,7 +479,8 @@ printCohortDefinitionFromNameAndJson(name = "alogliptin older",
 
 # save drug-level cohorts to cohortsToCreate.csv file
 # only do this for DPP4I for now
-this.class = permutationsForDrugs$class[1]
+# do it for SGLT2I
+this.class = permutationsForDrugs$class[1] %>% tolower()
 drugCohortsToCreate <- permutationsForDrugs %>%
   mutate(atlasId = cohortId,
          name = sprintf('%s/%s',this.class,name)) %>%
@@ -493,12 +488,21 @@ drugCohortsToCreate <- permutationsForDrugs %>%
 
 filePath = "inst/settings/"
 fileName = sprintf('%sCohortsToCreate.csv', this.class)
-
 readr::write_csv(drugCohortsToCreate,
                  file.path(filePath, fileName))
 
-#make drug-level TCOs
+# check out some example cohort definitions
+# (updating ingredient name for each drug class)
+permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
+printCohortDefinitionFromNameAndJson(name = "canagliflozin main",
+                                     json = permutationsForDrugs$json[1])
+printCohortDefinitionFromNameAndJson(name = "canagliflozin younger-age",
+                                     json = permutationsForDrugs$json[2])
+printCohortDefinitionFromNameAndJson(name = "anagliflozin middle-age",
+                                     json = permutationsForDrugs$json[3])
 
+
+#make drug-level TCOs
 makeTCOsDrug <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
   baseTs <- permutationsForDrugs %>%
@@ -567,7 +571,7 @@ drugTcos <- rbind(
 
 # save TCOs for one class (DPP4I) only
 # save TCOs for one class of drugs only
-this.class = permutationsForDrugs$class[1]
+this.class = tolower(permutationsForDrugs$class[1])
 filePath = "inst/settings/"
 fileName = sprintf('%sTcosOfInterest.csv', this.class)
 

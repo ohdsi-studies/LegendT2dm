@@ -1,0 +1,133 @@
+targetId,comparatorId,outcomeIds,excludedCovariateConceptIds,targetName,comparatorName
+311100000,321100000,-1,NA,canagliflozin main,dapagliflozin main
+311100000,331100000,-1,NA,canagliflozin main,empagliflozin main
+311100000,341100000,-1,NA,canagliflozin main,ertugliflozin main
+321100000,331100000,-1,NA,dapagliflozin main,empagliflozin main
+321100000,341100000,-1,NA,dapagliflozin main,ertugliflozin main
+331100000,341100000,-1,NA,empagliflozin main,ertugliflozin main
+311110000,321110000,-1,NA,canagliflozin younger-age,dapagliflozin younger-age
+311110000,331110000,-1,NA,canagliflozin younger-age,empagliflozin younger-age
+311110000,341110000,-1,NA,canagliflozin younger-age,ertugliflozin younger-age
+321110000,331110000,-1,NA,dapagliflozin younger-age,empagliflozin younger-age
+321110000,341110000,-1,NA,dapagliflozin younger-age,ertugliflozin younger-age
+331110000,341110000,-1,NA,empagliflozin younger-age,ertugliflozin younger-age
+311120000,321120000,-1,NA,canagliflozin middle-age,dapagliflozin middle-age
+311120000,331120000,-1,NA,canagliflozin middle-age,empagliflozin middle-age
+311120000,341120000,-1,NA,canagliflozin middle-age,ertugliflozin middle-age
+321120000,331120000,-1,NA,dapagliflozin middle-age,empagliflozin middle-age
+321120000,341120000,-1,NA,dapagliflozin middle-age,ertugliflozin middle-age
+331120000,341120000,-1,NA,empagliflozin middle-age,ertugliflozin middle-age
+311130000,321130000,-1,NA,canagliflozin older-age,dapagliflozin older-age
+311130000,331130000,-1,NA,canagliflozin older-age,empagliflozin older-age
+311130000,341130000,-1,NA,canagliflozin older-age,ertugliflozin older-age
+321130000,331130000,-1,NA,dapagliflozin older-age,empagliflozin older-age
+321130000,341130000,-1,NA,dapagliflozin older-age,ertugliflozin older-age
+331130000,341130000,-1,NA,empagliflozin older-age,ertugliflozin older-age
+311101000,321101000,-1,NA,canagliflozin female,dapagliflozin female
+311101000,331101000,-1,NA,canagliflozin female,empagliflozin female
+311101000,341101000,-1,NA,canagliflozin female,ertugliflozin female
+321101000,331101000,-1,NA,dapagliflozin female,empagliflozin female
+321101000,341101000,-1,NA,dapagliflozin female,ertugliflozin female
+331101000,341101000,-1,NA,empagliflozin female,ertugliflozin female
+311102000,321102000,-1,NA,canagliflozin male,dapagliflozin male
+311102000,331102000,-1,NA,canagliflozin male,empagliflozin male
+311102000,341102000,-1,NA,canagliflozin male,ertugliflozin male
+321102000,331102000,-1,NA,dapagliflozin male,empagliflozin male
+321102000,341102000,-1,NA,dapagliflozin male,ertugliflozin male
+331102000,341102000,-1,NA,empagliflozin male,ertugliflozin male
+311100100,321100100,-1,NA,canagliflozin black,dapagliflozin black
+311100100,331100100,-1,NA,canagliflozin black,empagliflozin black
+311100100,341100100,-1,NA,canagliflozin black,ertugliflozin black
+321100100,331100100,-1,NA,dapagliflozin black,empagliflozin black
+321100100,341100100,-1,NA,dapagliflozin black,ertugliflozin black
+331100100,341100100,-1,NA,empagliflozin black,ertugliflozin black
+311100010,321100010,-1,NA,canagliflozin low-cvr,dapagliflozin low-cvr
+311100010,331100010,-1,NA,canagliflozin low-cvr,empagliflozin low-cvr
+311100010,341100010,-1,NA,canagliflozin low-cvr,ertugliflozin low-cvr
+321100010,331100010,-1,NA,dapagliflozin low-cvr,empagliflozin low-cvr
+321100010,341100010,-1,NA,dapagliflozin low-cvr,ertugliflozin low-cvr
+331100010,341100010,-1,NA,empagliflozin low-cvr,ertugliflozin low-cvr
+311100020,321100020,-1,NA,canagliflozin higher-cvr,dapagliflozin higher-cvr
+311100020,331100020,-1,NA,canagliflozin higher-cvr,empagliflozin higher-cvr
+311100020,341100020,-1,NA,canagliflozin higher-cvr,ertugliflozin higher-cvr
+321100020,331100020,-1,NA,dapagliflozin higher-cvr,empagliflozin higher-cvr
+321100020,341100020,-1,NA,dapagliflozin higher-cvr,ertugliflozin higher-cvr
+331100020,341100020,-1,NA,empagliflozin higher-cvr,ertugliflozin higher-cvr
+311100001,321100001,-1,NA,canagliflozin without-rdz,dapagliflozin without-rdz
+311100001,331100001,-1,NA,canagliflozin without-rdz,empagliflozin without-rdz
+311100001,341100001,-1,NA,canagliflozin without-rdz,ertugliflozin without-rdz
+321100001,331100001,-1,NA,dapagliflozin without-rdz,empagliflozin without-rdz
+321100001,341100001,-1,NA,dapagliflozin without-rdz,ertugliflozin without-rdz
+331100001,341100001,-1,NA,empagliflozin without-rdz,ertugliflozin without-rdz
+311100002,321100002,-1,NA,canagliflozin with-rdz,dapagliflozin with-rdz
+311100002,331100002,-1,NA,canagliflozin with-rdz,empagliflozin with-rdz
+311100002,341100002,-1,NA,canagliflozin with-rdz,ertugliflozin with-rdz
+321100002,331100002,-1,NA,dapagliflozin with-rdz,empagliflozin with-rdz
+321100002,341100002,-1,NA,dapagliflozin with-rdz,ertugliflozin with-rdz
+331100002,341100002,-1,NA,empagliflozin with-rdz,ertugliflozin with-rdz
+312100000,322100000,-1,NA,canagliflozin main ot2,dapagliflozin main ot2
+312100000,332100000,-1,NA,canagliflozin main ot2,empagliflozin main ot2
+312100000,342100000,-1,NA,canagliflozin main ot2,ertugliflozin main ot2
+322100000,332100000,-1,NA,dapagliflozin main ot2,empagliflozin main ot2
+322100000,342100000,-1,NA,dapagliflozin main ot2,ertugliflozin main ot2
+332100000,342100000,-1,NA,empagliflozin main ot2,ertugliflozin main ot2
+312110000,322110000,-1,NA,canagliflozin ot2 younger-age,dapagliflozin ot2 younger-age
+312110000,332110000,-1,NA,canagliflozin ot2 younger-age,empagliflozin ot2 younger-age
+312110000,342110000,-1,NA,canagliflozin ot2 younger-age,ertugliflozin ot2 younger-age
+322110000,332110000,-1,NA,dapagliflozin ot2 younger-age,empagliflozin ot2 younger-age
+322110000,342110000,-1,NA,dapagliflozin ot2 younger-age,ertugliflozin ot2 younger-age
+332110000,342110000,-1,NA,empagliflozin ot2 younger-age,ertugliflozin ot2 younger-age
+312120000,322120000,-1,NA,canagliflozin ot2 middle-age,dapagliflozin ot2 middle-age
+312120000,332120000,-1,NA,canagliflozin ot2 middle-age,empagliflozin ot2 middle-age
+312120000,342120000,-1,NA,canagliflozin ot2 middle-age,ertugliflozin ot2 middle-age
+322120000,332120000,-1,NA,dapagliflozin ot2 middle-age,empagliflozin ot2 middle-age
+322120000,342120000,-1,NA,dapagliflozin ot2 middle-age,ertugliflozin ot2 middle-age
+332120000,342120000,-1,NA,empagliflozin ot2 middle-age,ertugliflozin ot2 middle-age
+312130000,322130000,-1,NA,canagliflozin ot2 older-age,dapagliflozin ot2 older-age
+312130000,332130000,-1,NA,canagliflozin ot2 older-age,empagliflozin ot2 older-age
+312130000,342130000,-1,NA,canagliflozin ot2 older-age,ertugliflozin ot2 older-age
+322130000,332130000,-1,NA,dapagliflozin ot2 older-age,empagliflozin ot2 older-age
+322130000,342130000,-1,NA,dapagliflozin ot2 older-age,ertugliflozin ot2 older-age
+332130000,342130000,-1,NA,empagliflozin ot2 older-age,ertugliflozin ot2 older-age
+312101000,322101000,-1,NA,canagliflozin ot2 female,dapagliflozin ot2 female
+312101000,332101000,-1,NA,canagliflozin ot2 female,empagliflozin ot2 female
+312101000,342101000,-1,NA,canagliflozin ot2 female,ertugliflozin ot2 female
+322101000,332101000,-1,NA,dapagliflozin ot2 female,empagliflozin ot2 female
+322101000,342101000,-1,NA,dapagliflozin ot2 female,ertugliflozin ot2 female
+332101000,342101000,-1,NA,empagliflozin ot2 female,ertugliflozin ot2 female
+312102000,322102000,-1,NA,canagliflozin ot2 male,dapagliflozin ot2 male
+312102000,332102000,-1,NA,canagliflozin ot2 male,empagliflozin ot2 male
+312102000,342102000,-1,NA,canagliflozin ot2 male,ertugliflozin ot2 male
+322102000,332102000,-1,NA,dapagliflozin ot2 male,empagliflozin ot2 male
+322102000,342102000,-1,NA,dapagliflozin ot2 male,ertugliflozin ot2 male
+332102000,342102000,-1,NA,empagliflozin ot2 male,ertugliflozin ot2 male
+312100100,322100100,-1,NA,canagliflozin ot2 black,dapagliflozin ot2 black
+312100100,332100100,-1,NA,canagliflozin ot2 black,empagliflozin ot2 black
+312100100,342100100,-1,NA,canagliflozin ot2 black,ertugliflozin ot2 black
+322100100,332100100,-1,NA,dapagliflozin ot2 black,empagliflozin ot2 black
+322100100,342100100,-1,NA,dapagliflozin ot2 black,ertugliflozin ot2 black
+332100100,342100100,-1,NA,empagliflozin ot2 black,ertugliflozin ot2 black
+312100010,322100010,-1,NA,canagliflozin ot2 low-cvr,dapagliflozin ot2 low-cvr
+312100010,332100010,-1,NA,canagliflozin ot2 low-cvr,empagliflozin ot2 low-cvr
+312100010,342100010,-1,NA,canagliflozin ot2 low-cvr,ertugliflozin ot2 low-cvr
+322100010,332100010,-1,NA,dapagliflozin ot2 low-cvr,empagliflozin ot2 low-cvr
+322100010,342100010,-1,NA,dapagliflozin ot2 low-cvr,ertugliflozin ot2 low-cvr
+332100010,342100010,-1,NA,empagliflozin ot2 low-cvr,ertugliflozin ot2 low-cvr
+312100020,322100020,-1,NA,canagliflozin ot2 higher-cvr,dapagliflozin ot2 higher-cvr
+312100020,332100020,-1,NA,canagliflozin ot2 higher-cvr,empagliflozin ot2 higher-cvr
+312100020,342100020,-1,NA,canagliflozin ot2 higher-cvr,ertugliflozin ot2 higher-cvr
+322100020,332100020,-1,NA,dapagliflozin ot2 higher-cvr,empagliflozin ot2 higher-cvr
+322100020,342100020,-1,NA,dapagliflozin ot2 higher-cvr,ertugliflozin ot2 higher-cvr
+332100020,342100020,-1,NA,empagliflozin ot2 higher-cvr,ertugliflozin ot2 higher-cvr
+312100001,322100001,-1,NA,canagliflozin ot2 without-rdz,dapagliflozin ot2 without-rdz
+312100001,332100001,-1,NA,canagliflozin ot2 without-rdz,empagliflozin ot2 without-rdz
+312100001,342100001,-1,NA,canagliflozin ot2 without-rdz,ertugliflozin ot2 without-rdz
+322100001,332100001,-1,NA,dapagliflozin ot2 without-rdz,empagliflozin ot2 without-rdz
+322100001,342100001,-1,NA,dapagliflozin ot2 without-rdz,ertugliflozin ot2 without-rdz
+332100001,342100001,-1,NA,empagliflozin ot2 without-rdz,ertugliflozin ot2 without-rdz
+312100002,322100002,-1,NA,canagliflozin ot2 with-rdz,dapagliflozin ot2 with-rdz
+312100002,332100002,-1,NA,canagliflozin ot2 with-rdz,empagliflozin ot2 with-rdz
+312100002,342100002,-1,NA,canagliflozin ot2 with-rdz,ertugliflozin ot2 with-rdz
+322100002,332100002,-1,NA,dapagliflozin ot2 with-rdz,empagliflozin ot2 with-rdz
+322100002,342100002,-1,NA,dapagliflozin ot2 with-rdz,ertugliflozin ot2 with-rdz
+332100002,342100002,-1,NA,empagliflozin ot2 with-rdz,ertugliflozin ot2 with-rdz
