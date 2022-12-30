@@ -29,7 +29,7 @@ databaseId<- "MDCR"
 databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
 databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
 tablePrefix <- "legend_t2dm_mdcr"
-outputFolder <- "E:/LegendT2dmOutput_mdcr_DPP4I_2" # OLD
+outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_2" # OLD?
 
 # cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
 # serverSuffix <- "truven_mdcd"
@@ -66,7 +66,7 @@ assessPhenotypes(connectionDetails = conn,
                  cohortDatabaseSchema = cohortDatabaseSchema,
                  outputFolder = outputFolder,
                  tablePrefix = tablePrefix,
-                 indicationId = 'DPP4I',
+                 indicationId = 'sglt2i',
                  databaseId = databaseId,
                  databaseName = databaseName,
                  databaseDescription = databaseDescription,
@@ -78,7 +78,7 @@ assessPhenotypes(connectionDetails = conn,
 assessPropensityModels(connectionDetails = conn,
                        cdmDatabaseSchema = cdmDatabaseSchema,
                        tablePrefix = tablePrefix,
-                       indicationId = 'DPP4I',
+                       indicationId = 'sglt2i',
                        oracleTempSchema = oracleTempSchema,
                        cohortDatabaseSchema = cohortDatabaseSchema,
                        outputFolder = outputFolder,
@@ -88,12 +88,20 @@ assessPropensityModels(connectionDetails = conn,
 
 # Cohort Explorer
 # to check one example cohort
-CohortDiagnostics::launchCohortExplorer(connectionDetails = conn,
-                                        cdmDatabaseSchema = cdmDatabaseSchema,
-                                        cohortDatabaseSchema = cohortDatabaseSchema,
-                                        cohortTable = paste0(tablePrefix,'_',
-                                                             'DPP4I','_cohort'),
-                                        cohortId = 111100000)
+# CohortDiagnostics::launchCohortExplorer(connectionDetails = conn,
+#                                         cdmDatabaseSchema = cdmDatabaseSchema,
+#                                         cohortDatabaseSchema = cohortDatabaseSchema,
+#                                         cohortTable = paste0(tablePrefix,'_',
+#                                                              'dpp4i','_cohort'),
+#                                         cohortId = 111100000)
+
+# check out cohort table rows first to make sure things are there
+# connection = connect(conn)
+# sql = 'SELECT *
+#       FROM scratch_fbu2.legend_t2dm_mdcr_dpp4i_cohort'
+# sql <- SqlRender::translate(sql, targetDialect = connection@dbms)
+# allCohorts <- DatabaseConnector::querySql(connection, sql)
+
 
 
 # execute(connectionDetails = connectionDetails,
@@ -116,12 +124,12 @@ CohortDiagnostics::launchCohortExplorer(connectionDetails = conn,
 #         exportToCsv = TRUE,
 #         maxCores = 16)
 
-execute(connectionDetails = connectionDetails,
+execute(connectionDetails = conn,
         cdmDatabaseSchema = cdmDatabaseSchema,
         oracleTempSchema = oracleTempSchema,
         cohortDatabaseSchema = cohortDatabaseSchema,
         outputFolder = outputFolder,
-        indicationId = "class",
+        indicationId = "sglt2i",
         databaseId = databaseId,
         databaseName = databaseName,
         databaseDescription = databaseDescription,
