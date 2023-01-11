@@ -677,3 +677,40 @@ deleteAllRecordsForDatabaseId <- function(connection,
                                   reportOverallTime = FALSE)
   }
 }
+
+#' @export
+renameDatabaseId <- function(originalZipFileName, newZipFileName,
+                                        originalDatabaseId, newDatabaseId,
+                                        tempFolder = tempdir()) {
+
+  unzipFolder <- tempfile("unzipTempFolder", tmpdir = tempFolder)
+  dir.create(path = unzipFolder, recursive = TRUE)
+  on.exit(unlink(unzipFolder, recursive = TRUE), add = TRUE)
+
+  ParallelLogger::logInfo("Unzipping ", originalZipFileName)
+  zip::unzip(originalZipFileName, exdir = unzipFolder)
+
+
+  fileList <- list.files(path = unzipFolder)
+
+  lapply(fileList, function(fileName) {
+    file <- file.path(unzipFolder, fileName)
+    table <- readr::read_csv(file = file,
+                             col_types = readr::cols(),
+                             guess_max = 1e6)
+    if ("database_id" %in% colnames(table)) {
+      ParallelLogger::logInfo("Changing database_id in ", fileName)
+
+      fileId <- table %>% pull(database_id) %>% unique()
+      if (length(fileId) != 1 || fileId != originalDatabaseId) {
+        stop("Invalid databaseId")
+      }
+
+      table$database_id <- newDatabaseId
+      readr::write_csv(table, file)
+    }
+  })
+
+  ParallelLogger::logInfo("Zipping ", newZipFileName)
+  zip::zip(newZipFileName, root = unzipFolder, files = fileList)
+}
