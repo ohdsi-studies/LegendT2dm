@@ -235,7 +235,6 @@ develop <- function() {
 
   connection <- DatabaseConnector::connect(legendT2dmConnectionDetails)
 
-#
 #   balanceTable <- getCovariateBalance(connection = connection,
 #                                       resultsDatabaseSchema = "legendt2dm_class_results",
 #                                       targetId = 101100000,
@@ -259,4 +258,32 @@ develop <- function() {
   saveRDS(diagnostics, "diagnostics.Rds")
 
   DatabaseConnector::disconnect(connection)
+
+
+  diagnostics <- readRDS("diagnostics.Rds")
+
+  # Remove no outcomes
+  diagnostics <- diagnostics %>% filter(is.finite(mdrr))
+  nrow(diagnostics)
+
+  # Remove MDRR > 2
+  diagnostics <- diagnostics %>% filter(mdrr < 2)
+  nrow(diagnostics)
+
+  ggplot(diagnostics,
+         aes(x=maxAbsStdDiffMean, fill=databaseId)) +
+    geom_histogram() +
+    geom_vline(xintercept=c(0.1,0.2), linetype="dotted")
+
+  # Remove stdDiff > 0.1
+  diagnostics <- diagnostics %>% filter(maxAbsStdDiffMean < 0.1)
+  nrow(diagnostics)
+
+  diagnostics %>% group_by(databaseId) %>% tally()
+
+  ggplot(diagnostics,
+         aes(x=maxAbsStdDiffMean, fill=databaseId)) +
+    geom_histogram(right = TRUE, bins = 101) +
+    geom_vline(xintercept=c(0.1,0.2), linetype="dotted")
+
 }
