@@ -182,13 +182,14 @@ CREATE TABLE kaplan_meier_dist (
 );
 
 CREATE TABLE likelihood_profile (
+     database_id VARCHAR(255) NOT NULL,
      target_id BIGINT NOT NULL,
      comparator_id BIGINT NOT NULL,
      outcome_id BIGINT NOT NULL,
      analysis_id INTEGER NOT NULL,
      point TEXT NOT NULL,
      value TEXT NOT NULL,
-     PRIMARY KEY(target_id, comparator_id, outcome_id, analysis_id)
+     PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
 CREATE TABLE negative_control_outcome (

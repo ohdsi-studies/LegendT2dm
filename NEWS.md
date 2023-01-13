@@ -1,3 +1,10 @@
+LegendT2dm 1.1.5
+=======================
+
+Changes:
+
+1. Add `database_id` as column to resulting `likelihood_profile` table
+
 LegendT2dm 1.1.4
 =======================
 
