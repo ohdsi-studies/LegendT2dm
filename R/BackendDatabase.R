@@ -421,6 +421,63 @@ uploadResultsToDatabase <- function(connectionDetails,
   }
 }
 
+#' Add databaseId column to tables in results *.zip files
+#'
+#' @description
+#' Adds databaseId column to tables that are missing such a column in results *.zip files
+#'
+#' @param originalZipFileName    Name of single or vector of multiple zip files.
+#' @param newZipFilaName         Name of single or vector of multiple zip files
+#' @param databaseId             Name or single or vector of multiple databaseId to add
+#' @param tempFolder             Directory which to use to unpack files
+#'
+#' @export
+addDatabaseIdToTables <- function(tableName,
+                                  originalZipFileName,
+                                  newZipFileName,
+                                  databaseId,
+                                  tempFolder = tempdir()) {
+
+  tableNames <- c(tableName)
+  originalZipFileNames <- c(originalZipFileName)
+  newZipFileNames <- c(newZipFileName)
+  databaseIds <- c(databaseId)
+
+  if ((length(originalZipFileNames) != length(newZipFileNames)) ||
+      (length(originalZipFileNames) != length(databaseIds))) {
+    stop("Must provide 1 databaseId for each zipFileName")
+  }
+
+  for (i in 1:length(originalZipFileNames)) {
+
+    unzipFolder <- tempfile("unzipTempFolder", tmpdir = paste0(tempFolder, i))
+    originalZipFileName <- originalZipFileNames[i]
+    newZipFileName <- databaseId[i]
+    newZipFileName <- newZipFileNames[i]
+
+    ParallelLogger::logInfo("Unzipping ", originalZipFileName)
+    zip::unzip(originalZipFileName, exdir = unzipFolder)
+
+    for (tableName in tableNames) {
+      csvFileName <- paste0(tableName, ".csv")
+      table <- readr::read_csv(file = file.path(unzipFolder, csvFileName),
+                               col_types = readr::cols())
+
+      if (!("database_id" %in% colnames(table))) {
+        table$database_id <- databaseId
+      }
+
+      readr::write_csv(table, file = file.path(unzipFolder, csvFileName))
+    }
+
+    ParallelLogger::logInfo("Zipping ", newZipFileName)
+    fileList <- list.files(path = unzipFolder)
+    zip::zip(newZipFileName, root = unzipFolder, files = fileList)
+
+    unlink(unzipFolder, recursive = TRUE)
+  }
+}
+
 uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, specifications,
                                         forceOverWriteOfSpecifications, purgeSiteDataBeforeUploading,
                                         convertFromCamelCase, tempFolder) {
@@ -676,4 +733,41 @@ deleteAllRecordsForDatabaseId <- function(connection,
                                   progressBar = FALSE,
                                   reportOverallTime = FALSE)
   }
+}
+
+#' @export
+renameDatabaseId <- function(originalZipFileName, newZipFileName,
+                                        originalDatabaseId, newDatabaseId,
+                                        tempFolder = tempdir()) {
+
+  unzipFolder <- tempfile("unzipTempFolder", tmpdir = tempFolder)
+  dir.create(path = unzipFolder, recursive = TRUE)
+  on.exit(unlink(unzipFolder, recursive = TRUE), add = TRUE)
+
+  ParallelLogger::logInfo("Unzipping ", originalZipFileName)
+  zip::unzip(originalZipFileName, exdir = unzipFolder)
+
+
+  fileList <- list.files(path = unzipFolder)
+
+  lapply(fileList, function(fileName) {
+    file <- file.path(unzipFolder, fileName)
+    table <- readr::read_csv(file = file,
+                             col_types = readr::cols(),
+                             guess_max = 1e6)
+    if ("database_id" %in% colnames(table)) {
+      ParallelLogger::logInfo("Changing database_id in ", fileName)
+
+      fileId <- table %>% pull(database_id) %>% unique()
+      if (length(fileId) != 1 || fileId != originalDatabaseId) {
+        stop("Invalid databaseId")
+      }
+
+      table$database_id <- newDatabaseId
+      readr::write_csv(table, file)
+    }
+  })
+
+  ParallelLogger::logInfo("Zipping ", newZipFileName)
+  zip::zip(newZipFileName, root = unzipFolder, files = fileList)
 }

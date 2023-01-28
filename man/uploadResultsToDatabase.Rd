@@ -12,6 +12,7 @@ uploadResultsToDatabase(
   forceOverWriteOfSpecifications = FALSE,
   purgeSiteDataBeforeUploading = FALSE,
   convertFromCamelCase = FALSE,
+  replaceInfinities = NULL,
   tempFolder = tempdir()
 )
 }
@@ -34,7 +35,9 @@ have changed since the last upload.}
 that site will be dropped. This assumes the input zip file contains the full data for that
 data site.}
 
-\item{convertFromCamelCase}{Convert column names from camelCase to snake_case when uploading?                       .}
+\item{convertFromCamelCase}{Convert column names from camelCase to snake_case when uploading?}
+
+\item{replaceInfinities}{Value to which to change infinities, NULL does not change                   .}
 
 \item{tempFolder}{Folder on the local file system where the zip files are extracted to. Will be cleaned
 up when the function is finished. Can be used to specify a temp folder on a drive that

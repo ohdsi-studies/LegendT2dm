@@ -117,6 +117,7 @@ kaplan_meier_dist,target_survival_ub,numeric,Upper bound of the 95% confidence i
 kaplan_meier_dist,comparator_survival,numeric,Estimated survival fraction in the comparator cohort,Yes,No,No,Yes
 kaplan_meier_dist,comparator_survival_lb,numeric,Lower bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
 kaplan_meier_dist,comparator_survival_ub,numeric,Upper bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
+likelihood_profile,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 likelihood_profile,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 likelihood_profile,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 likelihood_profile,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,Yes
