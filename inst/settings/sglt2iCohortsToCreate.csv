@@ -1,0 +1,177 @@
+atlasId,atlasName,cohortId,name
+311100000,canagliflozin main,311100000,sglt2i/ID311100000
+311110000,canagliflozin younger-age,311110000,sglt2i/ID311110000
+311120000,canagliflozin middle-age,311120000,sglt2i/ID311120000
+311130000,canagliflozin older-age,311130000,sglt2i/ID311130000
+311100010,canagliflozin low-cvr,311100010,sglt2i/ID311100010
+311100020,canagliflozin higher-cvr,311100020,sglt2i/ID311100020
+311101000,canagliflozin female,311101000,sglt2i/ID311101000
+311102000,canagliflozin male,311102000,sglt2i/ID311102000
+311100100,canagliflozin black,311100100,sglt2i/ID311100100
+311100001,canagliflozin without-rdz,311100001,sglt2i/ID311100001
+311100002,canagliflozin with-rdz,311100002,sglt2i/ID311100002
+312100000,canagliflozin main ot2,312100000,sglt2i/ID312100000
+312110000,canagliflozin ot2 younger-age,312110000,sglt2i/ID312110000
+312120000,canagliflozin ot2 middle-age,312120000,sglt2i/ID312120000
+312130000,canagliflozin ot2 older-age,312130000,sglt2i/ID312130000
+312100010,canagliflozin ot2 low-cvr,312100010,sglt2i/ID312100010
+312100020,canagliflozin ot2 higher-cvr,312100020,sglt2i/ID312100020
+312101000,canagliflozin ot2 female,312101000,sglt2i/ID312101000
+312102000,canagliflozin ot2 male,312102000,sglt2i/ID312102000
+312100100,canagliflozin ot2 black,312100100,sglt2i/ID312100100
+312100001,canagliflozin ot2 without-rdz,312100001,sglt2i/ID312100001
+312100002,canagliflozin ot2 with-rdz,312100002,sglt2i/ID312100002
+311200000,canagliflozin main no-met,311200000,sglt2i/ID311200000
+311210000,canagliflozin no-met younger-age,311210000,sglt2i/ID311210000
+311220000,canagliflozin no-met middle-age,311220000,sglt2i/ID311220000
+311230000,canagliflozin no-met older-age,311230000,sglt2i/ID311230000
+311200010,canagliflozin no-met low-cvr,311200010,sglt2i/ID311200010
+311200020,canagliflozin no-met higher-cvr,311200020,sglt2i/ID311200020
+311201000,canagliflozin no-met female,311201000,sglt2i/ID311201000
+311202000,canagliflozin no-met male,311202000,sglt2i/ID311202000
+311200100,canagliflozin no-met black,311200100,sglt2i/ID311200100
+311200001,canagliflozin no-met without-rdz,311200001,sglt2i/ID311200001
+311200002,canagliflozin no-met with-rdz,311200002,sglt2i/ID311200002
+312200000,canagliflozin main ot2 no-met,312200000,sglt2i/ID312200000
+312210000,canagliflozin ot2 no-met younger-age,312210000,sglt2i/ID312210000
+312220000,canagliflozin ot2 no-met middle-age,312220000,sglt2i/ID312220000
+312230000,canagliflozin ot2 no-met older-age,312230000,sglt2i/ID312230000
+312200010,canagliflozin ot2 no-met low-cvr,312200010,sglt2i/ID312200010
+312200020,canagliflozin ot2 no-met higher-cvr,312200020,sglt2i/ID312200020
+312201000,canagliflozin ot2 no-met female,312201000,sglt2i/ID312201000
+312202000,canagliflozin ot2 no-met male,312202000,sglt2i/ID312202000
+312200100,canagliflozin ot2 no-met black,312200100,sglt2i/ID312200100
+312200001,canagliflozin ot2 no-met without-rdz,312200001,sglt2i/ID312200001
+312200002,canagliflozin ot2 no-met with-rdz,312200002,sglt2i/ID312200002
+321100000,dapagliflozin main,321100000,sglt2i/ID321100000
+321110000,dapagliflozin younger-age,321110000,sglt2i/ID321110000
+321120000,dapagliflozin middle-age,321120000,sglt2i/ID321120000
+321130000,dapagliflozin older-age,321130000,sglt2i/ID321130000
+321100010,dapagliflozin low-cvr,321100010,sglt2i/ID321100010
+321100020,dapagliflozin higher-cvr,321100020,sglt2i/ID321100020
+321101000,dapagliflozin female,321101000,sglt2i/ID321101000
+321102000,dapagliflozin male,321102000,sglt2i/ID321102000
+321100100,dapagliflozin black,321100100,sglt2i/ID321100100
+321100001,dapagliflozin without-rdz,321100001,sglt2i/ID321100001
+321100002,dapagliflozin with-rdz,321100002,sglt2i/ID321100002
+322100000,dapagliflozin main ot2,322100000,sglt2i/ID322100000
+322110000,dapagliflozin ot2 younger-age,322110000,sglt2i/ID322110000
+322120000,dapagliflozin ot2 middle-age,322120000,sglt2i/ID322120000
+322130000,dapagliflozin ot2 older-age,322130000,sglt2i/ID322130000
+322100010,dapagliflozin ot2 low-cvr,322100010,sglt2i/ID322100010
+322100020,dapagliflozin ot2 higher-cvr,322100020,sglt2i/ID322100020
+322101000,dapagliflozin ot2 female,322101000,sglt2i/ID322101000
+322102000,dapagliflozin ot2 male,322102000,sglt2i/ID322102000
+322100100,dapagliflozin ot2 black,322100100,sglt2i/ID322100100
+322100001,dapagliflozin ot2 without-rdz,322100001,sglt2i/ID322100001
+322100002,dapagliflozin ot2 with-rdz,322100002,sglt2i/ID322100002
+321200000,dapagliflozin main no-met,321200000,sglt2i/ID321200000
+321210000,dapagliflozin no-met younger-age,321210000,sglt2i/ID321210000
+321220000,dapagliflozin no-met middle-age,321220000,sglt2i/ID321220000
+321230000,dapagliflozin no-met older-age,321230000,sglt2i/ID321230000
+321200010,dapagliflozin no-met low-cvr,321200010,sglt2i/ID321200010
+321200020,dapagliflozin no-met higher-cvr,321200020,sglt2i/ID321200020
+321201000,dapagliflozin no-met female,321201000,sglt2i/ID321201000
+321202000,dapagliflozin no-met male,321202000,sglt2i/ID321202000
+321200100,dapagliflozin no-met black,321200100,sglt2i/ID321200100
+321200001,dapagliflozin no-met without-rdz,321200001,sglt2i/ID321200001
+321200002,dapagliflozin no-met with-rdz,321200002,sglt2i/ID321200002
+322200000,dapagliflozin main ot2 no-met,322200000,sglt2i/ID322200000
+322210000,dapagliflozin ot2 no-met younger-age,322210000,sglt2i/ID322210000
+322220000,dapagliflozin ot2 no-met middle-age,322220000,sglt2i/ID322220000
+322230000,dapagliflozin ot2 no-met older-age,322230000,sglt2i/ID322230000
+322200010,dapagliflozin ot2 no-met low-cvr,322200010,sglt2i/ID322200010
+322200020,dapagliflozin ot2 no-met higher-cvr,322200020,sglt2i/ID322200020
+322201000,dapagliflozin ot2 no-met female,322201000,sglt2i/ID322201000
+322202000,dapagliflozin ot2 no-met male,322202000,sglt2i/ID322202000
+322200100,dapagliflozin ot2 no-met black,322200100,sglt2i/ID322200100
+322200001,dapagliflozin ot2 no-met without-rdz,322200001,sglt2i/ID322200001
+322200002,dapagliflozin ot2 no-met with-rdz,322200002,sglt2i/ID322200002
+331100000,empagliflozin main,331100000,sglt2i/ID331100000
+331110000,empagliflozin younger-age,331110000,sglt2i/ID331110000
+331120000,empagliflozin middle-age,331120000,sglt2i/ID331120000
+331130000,empagliflozin older-age,331130000,sglt2i/ID331130000
+331100010,empagliflozin low-cvr,331100010,sglt2i/ID331100010
+331100020,empagliflozin higher-cvr,331100020,sglt2i/ID331100020
+331101000,empagliflozin female,331101000,sglt2i/ID331101000
+331102000,empagliflozin male,331102000,sglt2i/ID331102000
+331100100,empagliflozin black,331100100,sglt2i/ID331100100
+331100001,empagliflozin without-rdz,331100001,sglt2i/ID331100001
+331100002,empagliflozin with-rdz,331100002,sglt2i/ID331100002
+332100000,empagliflozin main ot2,332100000,sglt2i/ID332100000
+332110000,empagliflozin ot2 younger-age,332110000,sglt2i/ID332110000
+332120000,empagliflozin ot2 middle-age,332120000,sglt2i/ID332120000
+332130000,empagliflozin ot2 older-age,332130000,sglt2i/ID332130000
+332100010,empagliflozin ot2 low-cvr,332100010,sglt2i/ID332100010
+332100020,empagliflozin ot2 higher-cvr,332100020,sglt2i/ID332100020
+332101000,empagliflozin ot2 female,332101000,sglt2i/ID332101000
+332102000,empagliflozin ot2 male,332102000,sglt2i/ID332102000
+332100100,empagliflozin ot2 black,332100100,sglt2i/ID332100100
+332100001,empagliflozin ot2 without-rdz,332100001,sglt2i/ID332100001
+332100002,empagliflozin ot2 with-rdz,332100002,sglt2i/ID332100002
+331200000,empagliflozin main no-met,331200000,sglt2i/ID331200000
+331210000,empagliflozin no-met younger-age,331210000,sglt2i/ID331210000
+331220000,empagliflozin no-met middle-age,331220000,sglt2i/ID331220000
+331230000,empagliflozin no-met older-age,331230000,sglt2i/ID331230000
+331200010,empagliflozin no-met low-cvr,331200010,sglt2i/ID331200010
+331200020,empagliflozin no-met higher-cvr,331200020,sglt2i/ID331200020
+331201000,empagliflozin no-met female,331201000,sglt2i/ID331201000
+331202000,empagliflozin no-met male,331202000,sglt2i/ID331202000
+331200100,empagliflozin no-met black,331200100,sglt2i/ID331200100
+331200001,empagliflozin no-met without-rdz,331200001,sglt2i/ID331200001
+331200002,empagliflozin no-met with-rdz,331200002,sglt2i/ID331200002
+332200000,empagliflozin main ot2 no-met,332200000,sglt2i/ID332200000
+332210000,empagliflozin ot2 no-met younger-age,332210000,sglt2i/ID332210000
+332220000,empagliflozin ot2 no-met middle-age,332220000,sglt2i/ID332220000
+332230000,empagliflozin ot2 no-met older-age,332230000,sglt2i/ID332230000
+332200010,empagliflozin ot2 no-met low-cvr,332200010,sglt2i/ID332200010
+332200020,empagliflozin ot2 no-met higher-cvr,332200020,sglt2i/ID332200020
+332201000,empagliflozin ot2 no-met female,332201000,sglt2i/ID332201000
+332202000,empagliflozin ot2 no-met male,332202000,sglt2i/ID332202000
+332200100,empagliflozin ot2 no-met black,332200100,sglt2i/ID332200100
+332200001,empagliflozin ot2 no-met without-rdz,332200001,sglt2i/ID332200001
+332200002,empagliflozin ot2 no-met with-rdz,332200002,sglt2i/ID332200002
+341100000,ertugliflozin main,341100000,sglt2i/ID341100000
+341110000,ertugliflozin younger-age,341110000,sglt2i/ID341110000
+341120000,ertugliflozin middle-age,341120000,sglt2i/ID341120000
+341130000,ertugliflozin older-age,341130000,sglt2i/ID341130000
+341100010,ertugliflozin low-cvr,341100010,sglt2i/ID341100010
+341100020,ertugliflozin higher-cvr,341100020,sglt2i/ID341100020
+341101000,ertugliflozin female,341101000,sglt2i/ID341101000
+341102000,ertugliflozin male,341102000,sglt2i/ID341102000
+341100100,ertugliflozin black,341100100,sglt2i/ID341100100
+341100001,ertugliflozin without-rdz,341100001,sglt2i/ID341100001
+341100002,ertugliflozin with-rdz,341100002,sglt2i/ID341100002
+342100000,ertugliflozin main ot2,342100000,sglt2i/ID342100000
+342110000,ertugliflozin ot2 younger-age,342110000,sglt2i/ID342110000
+342120000,ertugliflozin ot2 middle-age,342120000,sglt2i/ID342120000
+342130000,ertugliflozin ot2 older-age,342130000,sglt2i/ID342130000
+342100010,ertugliflozin ot2 low-cvr,342100010,sglt2i/ID342100010
+342100020,ertugliflozin ot2 higher-cvr,342100020,sglt2i/ID342100020
+342101000,ertugliflozin ot2 female,342101000,sglt2i/ID342101000
+342102000,ertugliflozin ot2 male,342102000,sglt2i/ID342102000
+342100100,ertugliflozin ot2 black,342100100,sglt2i/ID342100100
+342100001,ertugliflozin ot2 without-rdz,342100001,sglt2i/ID342100001
+342100002,ertugliflozin ot2 with-rdz,342100002,sglt2i/ID342100002
+341200000,ertugliflozin main no-met,341200000,sglt2i/ID341200000
+341210000,ertugliflozin no-met younger-age,341210000,sglt2i/ID341210000
+341220000,ertugliflozin no-met middle-age,341220000,sglt2i/ID341220000
+341230000,ertugliflozin no-met older-age,341230000,sglt2i/ID341230000
+341200010,ertugliflozin no-met low-cvr,341200010,sglt2i/ID341200010
+341200020,ertugliflozin no-met higher-cvr,341200020,sglt2i/ID341200020
+341201000,ertugliflozin no-met female,341201000,sglt2i/ID341201000
+341202000,ertugliflozin no-met male,341202000,sglt2i/ID341202000
+341200100,ertugliflozin no-met black,341200100,sglt2i/ID341200100
+341200001,ertugliflozin no-met without-rdz,341200001,sglt2i/ID341200001
+341200002,ertugliflozin no-met with-rdz,341200002,sglt2i/ID341200002
+342200000,ertugliflozin main ot2 no-met,342200000,sglt2i/ID342200000
+342210000,ertugliflozin ot2 no-met younger-age,342210000,sglt2i/ID342210000
+342220000,ertugliflozin ot2 no-met middle-age,342220000,sglt2i/ID342220000
+342230000,ertugliflozin ot2 no-met older-age,342230000,sglt2i/ID342230000
+342200010,ertugliflozin ot2 no-met low-cvr,342200010,sglt2i/ID342200010
+342200020,ertugliflozin ot2 no-met higher-cvr,342200020,sglt2i/ID342200020
+342201000,ertugliflozin ot2 no-met female,342201000,sglt2i/ID342201000
+342202000,ertugliflozin ot2 no-met male,342202000,sglt2i/ID342202000
+342200100,ertugliflozin ot2 no-met black,342200100,sglt2i/ID342200100
+342200001,ertugliflozin ot2 no-met without-rdz,342200001,sglt2i/ID342200001
+342200002,ertugliflozin ot2 no-met with-rdz,342200002,sglt2i/ID342200002

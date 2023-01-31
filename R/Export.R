@@ -556,7 +556,8 @@ exportMainResults <- function(indicationId,
                                       outcomeId = reference$outcomeId[i],
                                       analysisId = reference$analysisId[i],
                                       point = paste0(names(profile), collapse = ";"),
-                                      value = paste0(profile, collapse = ";"))
+                                      value = paste0(profile, collapse = ";"),
+                                      databaseId = databaseId)
                 colnames(profile) <- SqlRender::camelCaseToSnakeCase(colnames(profile))
                 write.table(x = profile,
                             file = fileName,
