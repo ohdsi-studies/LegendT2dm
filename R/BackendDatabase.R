@@ -360,6 +360,47 @@ infToLargeNumber <- function(x) {
   return(x)
 }
 
+#' Remove results from the database server.
+#'
+#' @description
+#' Requires the results data model tables have been created using the \code{\link{createResultsDataModel}} function.
+#'
+#' Set the POSTGRES_PATH environmental variable to the path to the folder containing the psql executable to enable
+#' bulk upload (recommended).
+#'
+#' @param connectionDetails   Object of type \code{connectionDetails} as created using the
+#'                            \code{\link[DatabaseConnector]{createConnectionDetails}} function in the
+#'                            DatabaseConnector package.
+#' @param schema         Schema on the postgres server where the tables have been created.
+#' @param databaseId     Data sources to remove
+#' @param specifications Specification of results tables
+#'
+#' @export
+removeResultsFromDatabase <- function(connectionDetails,
+                                    schema,
+                                    databaseId,
+                                    specifications) {
+
+  connection <- DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(connection))
+
+  databaseIds <- c(databaseId, NULL)
+
+  tables <- specifications %>%
+    filter(fieldName == "database_id") %>%
+    select(.data$tableName) %>%
+    pull()
+
+  for (tableName in tables) {
+    for (databaseId in databaseIds) {
+    deleteAllRecordsForDatabaseId(connection = connection,
+                                  schema = schema,
+                                  tableName = tableName,
+                                  databaseId = databaseId)
+    }
+  }
+}
+
 #' Upload results to the database server.
 #'
 #' @description
@@ -715,8 +756,9 @@ deleteAllRecordsForDatabaseId <- function(connection,
   if (databaseIdCount != 0) {
     ParallelLogger::logInfo(
       sprintf(
-        "- Found %s rows in  database with database ID '%s'. Deleting all before inserting.",
+        "- Found %s rows in table '%s' with database ID '%s'. Deleting all.",
         databaseIdCount,
+        tableName,
         databaseId
       )
     )
