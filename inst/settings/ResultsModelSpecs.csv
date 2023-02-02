@@ -64,6 +64,7 @@ cohort_method_result,ci_95_lb,numeric,Lower bound of the 95% confidence interval
 cohort_method_result,ci_95_ub,numeric,Upper bound of the 95% confidence interval of the relative risk,No,No,No,Yes
 cohort_method_result,p,numeric,Two-sided p-value considering the null hypothesis of no effect,No,No,No,Yes
 cohort_method_result,i_2,numeric,I^2 measure of between-database heterogeneity (for meta-analyses estimates only),No,No,No,Yes
+cohort_method_result,sources,varchar(255),Data sources aggregated (for meta-analysis estimates only),No,No,Yes,Yes
 cohort_method_result,log_rr,numeric,Log of the relative risk,No,No,No,Yes
 cohort_method_result,se_log_rr,numeric,Standard error of the log of the relative risk,No,No,No,Yes
 cohort_method_result,target_subjects,integer,Number of subject in the target cohort,No,No,No,Yes
