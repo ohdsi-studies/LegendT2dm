@@ -1,18 +1,18 @@
 library(LegendT2dm)
 
 Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
-options(andromedaTempFolder = "d:/andromedaTemp")
+options(andromedaTempFolder = "E:/andromedaTemp")
 oracleTempSchema <- NULL
 
 # cdmDatabaseSchema <- "cdm_truven_ccae_v1709"
 # serverSuffix <- "truven_ccae"
-# cohortDatabaseSchema <- "scratch_msuchard"
+# cohortDatabaseSchema <- "scratch_fbu2"
 # databaseId <- "CCAE"
 # databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
 # databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
 # tablePrefix <- "legend_t2dm_ccae"
-# outputFolder <- "d:/LegendT2dmOutput_ccae_v114" # OLD
-
+# outputFolder <- "E:/LegendT2dmOutput_ccae_sglt2i" # OLD
+#
 # cdmDatabaseSchema <- "cdm_optum_ehr_v1821"
 # serverSuffix <- "optum_ehr"
 # cohortDatabaseSchema <- "scratch_msuchard"
@@ -20,25 +20,25 @@ oracleTempSchema <- NULL
 # databaseName <- "Optum© de-identified Electronic Health Record Dataset"
 # databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
 # tablePrefix <- "legend_t2dm_optum_ehr"
-# outputFolder <- "d:/LegendT2dmOutput_optum_ehr_v114" # OLD
+# outputFolder <- "E:/LegendT2dmOutput_optum_ehr_v114" # OLD
 
 # cdmDatabaseSchema <- "cdm_truven_mdcr_v1838"
 # serverSuffix <- "truven_mdcr"
-# cohortDatabaseSchema <- "scratch_msuchard"
+# cohortDatabaseSchema <- "scratch_fbu2"
 # databaseId<- "MDCR"
 # databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
 # databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
 # tablePrefix <- "legend_t2dm_mdcr"
-# outputFolder <- "d:/LegendT2dmOutput_mdcr_v114" # OLD
+# outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_2" # OLD?
 
-# cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
-# serverSuffix <- "truven_mdcd"
-# cohortDatabaseSchema <- "scratch_msuchard"
-# databaseId<- "MDCD"
-# databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
-# databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
-# tablePrefix <- "legend_t2dm_mdcd"
-# outputFolder <- "d:/LegendT2dmOutput_mdcd_v114" # OLD
+cdmDatabaseSchema <- "cdm_truven_mdcd_v1714"
+serverSuffix <- "truven_mdcd"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId<- "MDCD"
+databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
+databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
+tablePrefix <- "legend_t2dm_mdcd"
+outputFolder <- "E:/LegendT2dmOutput_mdcd" # OLD
 
 # cdmDatabaseSchema <- "cdm_optum_extended_dod_v1825"
 # serverSuffix <- "optum_extended_dod"
@@ -49,21 +49,24 @@ oracleTempSchema <- NULL
 # tablePrefix <- "legend_t2dm_optum_dod"
 # outputFolder <- "d:/LegendT2dmOutput_optum_dod_v114" # OLD
 
-connectionDetails <- DatabaseConnector::createConnectionDetails(
+
+conn <- DatabaseConnector::createConnectionDetails(
   dbms = "redshift",
-  server = paste0(keyring::key_get("redshiftServer"), "/", !!serverSuffix),
+  server = paste0(keyring::key_get("epi_server"), "/", !!serverSuffix),
   port = 5439,
   user = keyring::key_get("redshiftUser"),
   password = keyring::key_get("redshiftPassword"),
-  extraSettings = "ssl=true&sslfactory=com.amazon.redshift.ssl.NonValidatingFactory")
+  extraSettings = "ssl=true&sslfactory=com.amazon.redshift.ssl.NonValidatingFactory",
+  pathToDriver = 'D:/Drivers')
 
 # Feasibility assessment ---------------------------------------------------------
-# assessPhenotypes(connectionDetails = connectionDetails,
+# assessPhenotypes(connectionDetails = conn,
 #                  cdmDatabaseSchema = cdmDatabaseSchema,
 #                  oracleTempSchema = oracleTempSchema,
 #                  cohortDatabaseSchema = cohortDatabaseSchema,
 #                  outputFolder = outputFolder,
 #                  tablePrefix = tablePrefix,
+#                  indicationId = 'sglt2i',
 #                  databaseId = databaseId,
 #                  databaseName = databaseName,
 #                  databaseDescription = databaseDescription,
@@ -72,17 +75,35 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 #                  createOutcomeCohorts = TRUE,
 #                  runOutcomeCohortDiagnostics = TRUE)
 #
-# assessPropensityModels(connectionDetails = connectionDetails,
+# assessPropensityModels(connectionDetails = conn,
 #                        cdmDatabaseSchema = cdmDatabaseSchema,
+#                        tablePrefix = tablePrefix,
+#                        indicationId = 'sglt2i',
 #                        oracleTempSchema = oracleTempSchema,
 #                        cohortDatabaseSchema = cohortDatabaseSchema,
 #                        outputFolder = outputFolder,
-#                        indicationId = "class",
-#                        tablePrefix = tablePrefix,
 #                        databaseId = databaseId,
 #                        maxCores = 16)
 
 
+# Cohort Explorer
+# to check one example cohort
+# CohortDiagnostics::launchCohortExplorer(connectionDetails = conn,
+#                                         cdmDatabaseSchema = cdmDatabaseSchema,
+#                                         cohortDatabaseSchema = cohortDatabaseSchema,
+#                                         cohortTable = paste0(tablePrefix,'_',
+#                                                              'dpp4i','_cohort'),
+#                                         cohortId = 111100000)
+
+# check out cohort table rows first to make sure things are there
+# connection = connect(conn)
+# sql = 'SELECT *
+#       FROM scratch_fbu2.legend_t2dm_mdcr_dpp4i_cohort'
+# sql <- SqlRender::translate(sql, targetDialect = connection@dbms)
+# allCohorts <- DatabaseConnector::querySql(connection, sql)
+
+
+## test code? only run one section
 # execute(connectionDetails = connectionDetails,
 #         cdmDatabaseSchema = cdmDatabaseSchema,
 #         oracleTempSchema = oracleTempSchema,
@@ -103,12 +124,13 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 #         exportToCsv = TRUE,
 #         maxCores = 16)
 
-execute(connectionDetails = connectionDetails,
+## full-on execution of CES; run all sections of analyses
+execute(connectionDetails = conn,
         cdmDatabaseSchema = cdmDatabaseSchema,
         oracleTempSchema = oracleTempSchema,
         cohortDatabaseSchema = cohortDatabaseSchema,
         outputFolder = outputFolder,
-        indicationId = "class",
+        indicationId = "sglt2i",
         databaseId = databaseId,
         databaseName = databaseName,
         databaseDescription = databaseDescription,
@@ -122,4 +144,25 @@ execute(connectionDetails = connectionDetails,
         computeCovariateBalance = TRUE,
         exportToCsv = TRUE,
         maxCores = 16)
+
+# quick bug-fix to re-package results (likelihood profile re-extraction)
+# execute(connectionDetails = conn,
+#         cdmDatabaseSchema = cdmDatabaseSchema,
+#         oracleTempSchema = oracleTempSchema,
+#         cohortDatabaseSchema = cohortDatabaseSchema,
+#         outputFolder = outputFolder,
+#         indicationId = "sglt2i",
+#         databaseId = databaseId,
+#         databaseName = databaseName,
+#         databaseDescription = databaseDescription,
+#         tablePrefix = tablePrefix,
+#         createExposureCohorts = FALSE,
+#         createOutcomeCohorts = FALSE,
+#         fetchAllDataFromServer = FALSE,
+#         generateAllCohortMethodDataObjects = FALSE,
+#         runCohortMethod = FALSE,
+#         runSections = c(1:6),
+#         computeCovariateBalance = FALSE,
+#         exportToCsv = TRUE,
+#         maxCores = 16)
 

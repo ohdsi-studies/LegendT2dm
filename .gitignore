@@ -41,3 +41,6 @@ Protocol.html
 Protocol.pdf
 
 ignore
+
+inst/sql/sql_server/class/*
+inst/cohorts/class/*

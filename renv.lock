@@ -129,15 +129,15 @@
     },
     "LegendT2dmEvidenceExplorer": {
       "Package": "LegendT2dmEvidenceExplorer",
-      "Version": "0.2.0",
+      "Version": "0.3.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "LegendT2dmEvidenceExplorer",
       "RemoteUsername": "ohdsi-studies",
       "RemoteRef": "HEAD",
-      "RemoteSha": "81911a1ce1b3411ae60e0ae133f31233440d1656",
-      "Hash": "801bea4976734903edce9b1f07a6d25e"
+      "RemoteSha": "b3564ea3c8257817d92de24b0f2244fed1df1f99",
+      "Hash": "ab76013040353a1bf03c04d8f1e83a30"
     },
     "MASS": {
       "Package": "MASS",
@@ -822,13 +822,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "35de1ce639f20b5e10f7f46260730c65"
-    },
-    "nloptr": {
-      "Package": "nloptr",
-      "Version": "1.2.2.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "2737faeee353704efec5afa1e943dd64"
     },
     "openssl": {
       "Package": "openssl",

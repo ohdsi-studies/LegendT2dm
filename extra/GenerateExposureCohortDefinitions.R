@@ -7,9 +7,14 @@
 #   ExposuresOfInterest.csv
 library(dplyr)
 
+# set ATLAS web API link
+baseUrl = "https://atlas-demo.ohdsi.org/WebAPI"
+
+keyring::key_set_with_value('baseUrl', password = baseUrl)
 baseUrlWebApi <- keyring::key_get("baseUrl")
 
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "https://atlas-covid19.ohdsi.org/WebAPI")
+# code to query the Atlas Web API to get the base cohort (based on pre-defined ATLAS cohort)
+# baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "https://atlas-demo.ohdsi.org/WebAPI")
 # baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, indent = 2, digits = 50)
 # SqlRender::writeSql(baseCohortJson, targetFile = "inst/settings/baseCohort.json")
 # saveRDS(baseCohort, file = "inst/settings/baseCohort.rds")
@@ -406,7 +411,8 @@ readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
 # Generate ingredient-level cohorts
 permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
-permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
+permutations <- inner_join(permutations, exposuresOfInterestTable %>%
+                             select(cohortId, shortName), by = c("targetId" = "cohortId"))
 
 # permutations <- permutations %>% filter(cohortId == 101100000)
 # classId <- 10
@@ -424,7 +430,11 @@ createPermutationsForDrugs <- function(classId){
     mutate(name = paste0("ID", as.integer(cohortId)))
 }
 
-classIds <- c(10, 20, 30, 40)
+# try DPP4 I first...
+#classIds <- c(10, 20, 30, 40)
+#classIds = c(10)
+# shift to SGLT2I
+classIds = c(30)
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>% bind_rows()
 
 permutationsForDrugs$json <-
@@ -439,33 +449,60 @@ permutationsForDrugs$json <-
 permutationsForDrugs$sql <-
   do.call("rbind",
           lapply(1:nrow(permutationsForDrugs), function(i) {
-            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,])
+            cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[i,], ingredientLevel = TRUE)
             cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
                                                     baseUrlWebApi,
                                                     generateStats = generateStats)
           }))
 
-cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[1,])
+#cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[1,])
+
+# save SQL and JSON files under class name (e.g., "DPP4I") folder
+## need to create the directory for this class first
+this.class = tolower(permutationsForDrugs[1,]$class)
+dir.create(file.path("inst/sql/sql_server", this.class))
+dir.create(file.path("inst/cohorts", this.class))
 
 for (i in 1:nrow(permutationsForDrugs)) {
   row <- permutationsForDrugs[i,]
-  sqlFileName <- file.path("inst/sql/sql_server/drug", paste(row$name, "sql", sep = "."))
+  sqlFileName <- file.path("inst/sql/sql_server", tolower(row$class), paste(row$name, "sql", sep = "."))
   SqlRender::writeSql(row$sql, sqlFileName)
-  jsonFileName <- file.path("inst/cohorts/drug", paste(row$name, "json", sep = "."))
+  jsonFileName <- file.path("inst/cohorts", tolower(row$class), paste(row$name, "json", sep = "."))
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
+
+# # sanity check --- inspect json and sql concept set IDs
+# cohortID = 2
+# conceptSetJson = CohortDiagnostics:::extractConceptSetsJsonFromCohortJson(permutationsForDrugs$json[cohortID])
+# conceptSetSql = CohortDiagnostics:::extractConceptSetsSqlFromCohortSql(permutationsForDrugs$sql[cohortID])
+
+# save drug-level cohorts to cohortsToCreate.csv file
+# only do this for DPP4I for now
+# do it for SGLT2I
+this.class = permutationsForDrugs$class[1] %>% tolower()
+drugCohortsToCreate <- permutationsForDrugs %>%
+  mutate(atlasId = cohortId,
+         name = sprintf('%s/%s',this.class,name)) %>%
+  select(atlasId, atlasName, cohortId, name)
+
+filePath = "inst/settings/"
+fileName = sprintf('%sCohortsToCreate.csv', this.class)
+readr::write_csv(drugCohortsToCreate,
+                 file.path(filePath, fileName))
+
+# check out some example cohort definitions
+# (updating ingredient name for each drug class)
 permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
-printCohortDefinitionFromNameAndJson(name = "DDP4I any",
+printCohortDefinitionFromNameAndJson(name = "canagliflozin main",
                                      json = permutationsForDrugs$json[1])
-printCohortDefinitionFromNameAndJson(name = "DDP4I younger",
+printCohortDefinitionFromNameAndJson(name = "canagliflozin younger-age",
                                      json = permutationsForDrugs$json[2])
-printCohortDefinitionFromNameAndJson(name = "DDP4I older",
+printCohortDefinitionFromNameAndJson(name = "anagliflozin middle-age",
                                      json = permutationsForDrugs$json[3])
 
 
 #make drug-level TCOs
-
 makeTCOsDrug <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
   baseTs <- permutationsForDrugs %>%
@@ -531,4 +568,11 @@ drugTcos <- rbind(
   makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "with")
 )
 
-readr::write_csv(drugTcos, "inst/settings/drugTcosOfInterest.csv")
+
+# save TCOs for one class (DPP4I) only
+# save TCOs for one class of drugs only
+this.class = tolower(permutationsForDrugs$class[1])
+filePath = "inst/settings/"
+fileName = sprintf('%sTcosOfInterest.csv', this.class)
+
+readr::write_csv(drugTcos, file.path(filePath, fileName))
