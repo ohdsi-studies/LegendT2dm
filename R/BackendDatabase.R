@@ -493,8 +493,8 @@ addDatabaseIdToTables <- function(tableName,
 
     unzipFolder <- tempfile("unzipTempFolder", tmpdir = paste0(tempFolder, i))
     originalZipFileName <- originalZipFileNames[i]
-    newZipFileName <- databaseId[i]
     newZipFileName <- newZipFileNames[i]
+    databaseId <- databaseIds[i]
 
     ParallelLogger::logInfo("Unzipping ", originalZipFileName)
     zip::unzip(originalZipFileName, exdir = unzipFolder)
