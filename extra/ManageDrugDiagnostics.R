@@ -26,30 +26,32 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("ohdsiPostgresUser"),
   password = keyring::key_get("ohdsiPostgresPassword"))
 
-Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+# have to install PostgreSQL first?
+#Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 
-# Class diagnostics
+# drug diagnostics
 
-classSchema <- "legendt2dm_class_diagnostics"
+drugSchema <- "legendt2dm_drug_diagnostics"
 LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = classSchema,
+                                    schema = drugSchema,
                                     sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legend", schema = classSchema)
+                                    user = "legend", schema = drugSchema)
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legendt2dm_readonly", schema = classSchema)
+                                    user = "legendt2dm_readonly", schema = drugSchema)
 
+# CohortDiagnostics::uploadResults(
+#   connectionDetails = connectionDetails,
+#   schema = classSchema,
+#   zipFileName = "d:/LegendT2dmOutput_optum_ehr1/class/cohortDiagnosticsExport/Results_class_exposures_OptumEHR.zip")
+
+# uploaded, Feb 6 2023
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
-  schema = classSchema,
-  zipFileName = "d:/LegendT2dmOutput_optum_ehr1/class/cohortDiagnosticsExport/Results_class_exposures_OptumEHR.zip")
-
-CohortDiagnostics::uploadResults(
-  connectionDetails = connectionDetails,
-  schema = classSchema,
-  zipFileName = "d:/LegendT2dmOutput_optum_dod1/class/cohortDiagnosticsExport/Results_class_exposures_OptumDod.zip")
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_optum_dod/sglt2i/cohortDiagnosticsExport/Results_sglt2i_exposures_OptumDod.zip")
 
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
@@ -58,8 +60,15 @@ CohortDiagnostics::uploadResults(
 
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
-  schema = classSchema,
+  schema = drugSchema,
   zipFileName = "d:/LegendT2dmOutput_mdcr1/class/cohortDiagnosticsExport/Results_class_exposures_MDCR.zip")
+
+# uploaded for dpp4i too, Feb 6 2023
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_mdcr_DPP4I_2/DPP4I/cohortDiagnosticsExport/Results_DPP4I_exposures_MDCR.zip")
+
 
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
