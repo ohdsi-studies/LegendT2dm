@@ -25,11 +25,13 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("ohdsiPostgresUser"),
   password = keyring::key_get("ohdsiPostgresPassword"))
 
-Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+# Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 
-# Class CER results
+# Drug CER results
+# create the data model first
+# DO NOT DO THIS IF NOT NECESSARY! WILL PURGE EVEYTHING
 
-resultsSchema <- "legendt2dm_class_results"
+resultsSchema <- "legendt2dm_drug_results"
 LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
                                     schema = resultsSchema,
                                     sqlFileName = "CreateResultsTables.sql")
@@ -40,17 +42,19 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legendt2dm_readonly", schema = resultsSchema)
 
+
+# Uploaded for sglt2i, Feb 9 2023
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    # "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
-    # "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
-    # "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
-    # "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
-    # "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
-    "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
+    "E:/LegendT2dmOutput_optum_ehr_v114/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
+    "E:/LegendT2dmOutput_optum_dod/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
+    "E:/LegendT2dmOutput_mdcd/sglt2i/export/Results_sglt2i_study_MDCD.zip",
+    "E:/LegendT2dmOutput_mdcr_sglt2i_2/sglt2i/export/Results_sglt2i_study_MDCR.zip",
+    "E:/LegendT2dmOutput_ccae_sglt2i/sglt2i/export/Results_sglt2i_study_CCAE.zip"
+    #"d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
     ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
