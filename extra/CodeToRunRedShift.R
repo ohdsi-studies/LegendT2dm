@@ -15,7 +15,7 @@ oracleTempSchema <- NULL
 #
 # cdmDatabaseSchema <- "cdm_optum_ehr_v1821"
 # serverSuffix <- "optum_ehr"
-# cohortDatabaseSchema <- "scratch_msuchard"
+# cohortDatabaseSchema <- "scratch_fbu2"
 # databaseId <- "OptumEHR"
 # databaseName <- "Optum© de-identified Electronic Health Record Dataset"
 # databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
@@ -42,12 +42,12 @@ outputFolder <- "E:/LegendT2dmOutput_mdcd" # OLD
 
 # cdmDatabaseSchema <- "cdm_optum_extended_dod_v1825"
 # serverSuffix <- "optum_extended_dod"
-# cohortDatabaseSchema <- "scratch_msuchard"
+# cohortDatabaseSchema <- "scratch_fbu2"
 # databaseId <- "OptumDod"
 # databaseName <- "Optum Clinformatics Extended Data Mart - Date of Death (DOD)"
 # databaseDescription <- "Optum Clinformatics Extended DataMart is an adjudicated US administrative health claims database for members of private health insurance, who are fully insured in commercial plans or in administrative services only (ASOs), Legacy Medicare Choice Lives (prior to January 2006), and Medicare Advantage (Medicare Advantage Prescription Drug coverage starting January 2006).  The population is primarily representative of commercial claims patients (0-65 years old) with some Medicare (65+ years old) however ages are capped at 90 years.  It includes data captured from administrative claims processed from inpatient and outpatient medical services and prescriptions as dispensed, as well as results for outpatient lab tests processed by large national lab vendors who participate in data exchange with Optum.  This dataset also provides date of death (month and year only) for members with both medical and pharmacy coverage from the Social Security Death Master File (however after 2011 reporting frequency changed due to changes in reporting requirements) and location information for patients is at the US state level."
 # tablePrefix <- "legend_t2dm_optum_dod"
-# outputFolder <- "d:/LegendT2dmOutput_optum_dod_v114" # OLD
+# outputFolder <- "E:/LegendT2dmOutput_optum_dod" # OLD
 
 
 conn <- DatabaseConnector::createConnectionDetails(
@@ -60,30 +60,30 @@ conn <- DatabaseConnector::createConnectionDetails(
   pathToDriver = 'D:/Drivers')
 
 # Feasibility assessment ---------------------------------------------------------
-# assessPhenotypes(connectionDetails = conn,
-#                  cdmDatabaseSchema = cdmDatabaseSchema,
-#                  oracleTempSchema = oracleTempSchema,
-#                  cohortDatabaseSchema = cohortDatabaseSchema,
-#                  outputFolder = outputFolder,
-#                  tablePrefix = tablePrefix,
-#                  indicationId = 'sglt2i',
-#                  databaseId = databaseId,
-#                  databaseName = databaseName,
-#                  databaseDescription = databaseDescription,
-#                  createExposureCohorts = TRUE,
-#                  runExposureCohortDiagnostics = TRUE,
-#                  createOutcomeCohorts = TRUE,
-#                  runOutcomeCohortDiagnostics = TRUE)
-#
-# assessPropensityModels(connectionDetails = conn,
-#                        cdmDatabaseSchema = cdmDatabaseSchema,
-#                        tablePrefix = tablePrefix,
-#                        indicationId = 'sglt2i',
-#                        oracleTempSchema = oracleTempSchema,
-#                        cohortDatabaseSchema = cohortDatabaseSchema,
-#                        outputFolder = outputFolder,
-#                        databaseId = databaseId,
-#                        maxCores = 16)
+assessPhenotypes(connectionDetails = conn,
+                 cdmDatabaseSchema = cdmDatabaseSchema,
+                 oracleTempSchema = oracleTempSchema,
+                 cohortDatabaseSchema = cohortDatabaseSchema,
+                 outputFolder = outputFolder,
+                 tablePrefix = tablePrefix,
+                 indicationId = 'sglt2i',
+                 databaseId = databaseId,
+                 databaseName = databaseName,
+                 databaseDescription = databaseDescription,
+                 createExposureCohorts = FALSE,#TRUE,
+                 runExposureCohortDiagnostics = TRUE,
+                 createOutcomeCohorts = FALSE,#TRUE,
+                 runOutcomeCohortDiagnostics = TRUE)
+
+assessPropensityModels(connectionDetails = conn,
+                       cdmDatabaseSchema = cdmDatabaseSchema,
+                       tablePrefix = tablePrefix,
+                       indicationId = 'sglt2i',
+                       oracleTempSchema = oracleTempSchema,
+                       cohortDatabaseSchema = cohortDatabaseSchema,
+                       outputFolder = outputFolder,
+                       databaseId = databaseId,
+                       maxCores = 16)
 
 
 # Cohort Explorer

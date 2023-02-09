@@ -32,9 +32,11 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 # drug diagnostics
 
 drugSchema <- "legendt2dm_drug_diagnostics"
-LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = drugSchema,
-                                    sqlFileName = "CreateCohortDiagnosticsTables.sql")
+
+# create all data tables; will nuke everything
+# LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+#                                     schema = drugSchema,
+#                                     sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legend", schema = drugSchema)
@@ -58,10 +60,11 @@ CohortDiagnostics::uploadResults(
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_mdcd1/class/cohortDiagnosticsExport/Results_class_exposures_MDCD.zip")
 
+# uploaded, Feb 8 2023
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
   schema = drugSchema,
-  zipFileName = "d:/LegendT2dmOutput_mdcr1/class/cohortDiagnosticsExport/Results_class_exposures_MDCR.zip")
+  zipFileName = "E:/LegendT2dmOutput_mdcr_sglt2i_2/sglt2i/cohortDiagnosticsExport/Results_sglt2i_exposures_MDCR.zip")
 
 # uploaded for dpp4i too, Feb 6 2023
 CohortDiagnostics::uploadResults(
@@ -69,11 +72,11 @@ CohortDiagnostics::uploadResults(
   schema = drugSchema,
   zipFileName = "E:/LegendT2dmOutput_mdcr_DPP4I_2/DPP4I/cohortDiagnosticsExport/Results_DPP4I_exposures_MDCR.zip")
 
-
+# uploaded, Feb 8 2023
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
-  schema = classSchema,
-  zipFileName = "d:/LegendT2dmOutput_ccae1/class/cohortDiagnosticsExport/Results_class_exposures_CCAE.zip")
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_ccae_sglt2i/sglt2i/cohortDiagnosticsExport/Results_sglt2i_exposures_CCAE.zip")
 
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
@@ -141,6 +144,7 @@ CohortDiagnostics::uploadResults(
   zipFileName = "d:/LegendT2dmOutput_SFTP/go15dnyv_Results_class_exposures_STARR.zip")
 
 # Outcome diagnostics
+# no need to do this again for drug-level studies (?)
 
 outcomeSchema <- "legendt2dm_outcome_diagnostics"
 LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
@@ -222,35 +226,36 @@ CohortDiagnostics::uploadResults(
 
 # PS Assessment
 
-classPsSchema <- "legendt2dm_class_diagnostics"
+drugPsSchema <- "legendt2dm_drug_diagnostics"
 LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = classPsSchema,
+                                    schema = drugPsSchema,
                                     sqlFileName = "CreatePsAssessmentTables.sql")
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legend", schema = classPsSchema)
+                                    user = "legend", schema = drugPsSchema)
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legendt2dm_readonly", schema = classPsSchema)
+                                    user = "legendt2dm_readonly", schema = drugPsSchema)
 
+# Feb 9 2023 upload for sglt2i w/ JnJ databases (To Do)
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
-  schema = classPsSchema,
+  schema = drugPsSchema,
   purgeSiteDataBeforeUploading = FALSE,
   zipFileName = c(
-    "d:/LegendT2dmOutput_optum_ehr1/class/assessmentOfPropensityScores/Results_class_ps_OptumEHR.zip",
-    "d:/LegendT2dmOutput_optum_dod1/class/assessmentOfPropensityScores/Results_class_ps_OptumDod.zip",
-    "d:/LegendT2dmOutput_mdcd1/class/assessmentOfPropensityScores/Results_class_ps_MDCD.zip",
-    "d:/LegendT2dmOutput_mdcr3/class/assessmentOfPropensityScores/Results_class_ps_MDCR.zip",
-    "d:/LegendT2dmOutput_ccae1/class/assessmentOfPropensityScores/Results_class_ps_CCAE.zip",
-    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_Germany_DA.zip",
-    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_France_LPD.zip",
-    "d:/LegendT2dmOutput_IQVIA/Results_class_ps_US_Open_Claims.zip",
-    "d:/LegendT2dmOutput_SFTP/8fjt16zl_Results_class_ps_CUIMC.zip",
-    "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip",
-    "d:/LegendT2dmOutput_SFTP/yu12zpk5_Results_class_ps_HK-HA-DM.zip",
-    "d:/LegendT2dmOutput_SFTP/9knopym8_Results_class_ps_VA-OMOP.zip",
-    "d:/LegendT2dmOutput_SFTP/a9o8izgx_Results_class_ps_SIDIAP.zip"
+    "E:/LegendT2dmOutput_optum_ehr_v114/sglt2i/assessmentOfPropensityScores/Results_sglt2i_ps_OptumEHR.zip",
+    "E:/LegendT2dmOutput_optum_dod/sglt2i/assessmentOfPropensityScores/Results_sglt2i_ps_OptumDod.zip",
+    "E:/LegendT2dmOutput_mdcd/sglt2i/assessmentOfPropensityScores/Results_sglt2i_ps_MDCD.zip",
+    "E:/LegendT2dmOutput_mdcr_sglt2i_2/sglt2i/assessmentOfPropensityScores/Results_sglt2i_ps_MDCR.zip",
+    "E:/LegendT2dmOutput_ccae_sglt2i/sglt2i/assessmentOfPropensityScores/Results_sglt2i_ps_CCAE.zip"#,
+    # "d:/LegendT2dmOutput_IQVIA/Results_class_ps_Germany_DA.zip",
+    # "d:/LegendT2dmOutput_IQVIA/Results_class_ps_France_LPD.zip",
+    # "d:/LegendT2dmOutput_IQVIA/Results_class_ps_US_Open_Claims.zip",
+    # "d:/LegendT2dmOutput_SFTP/8fjt16zl_Results_class_ps_CUIMC.zip",
+    # "d:/LegendT2dmOutput_SFTP/eo7lwdtp_Results_class_ps_UK-IMRD.zip",
+    # "d:/LegendT2dmOutput_SFTP/yu12zpk5_Results_class_ps_HK-HA-DM.zip",
+    # "d:/LegendT2dmOutput_SFTP/9knopym8_Results_class_ps_VA-OMOP.zip",
+    # "d:/LegendT2dmOutput_SFTP/a9o8izgx_Results_class_ps_SIDIAP.zip"
     # TODO Add JHU, HIC, STARR
   ),
   specifications = tibble::tibble(read.csv("inst/settings/PsAssessmentModelSpecs.csv"))
