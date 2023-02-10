@@ -140,21 +140,27 @@ doMaEffectType <- function(connectionDetails,
   allResults <- loadMainResults(connectionDetails, resultsDatabaseSchema,
                                  cacheFileName)
 
+  ncIds <- allResults %>% filter(trueEffectSize == 1) %>% pull(outcomeId) %>% unique()
+
   if (!is.null(diagnosticsFilter)) {
     diagnosticsFilter <- diagnosticsFilter %>%
-      select("targetId", "comparatorId", "analysisId", "databaseId", "pass")
+      filter(pass) %>%
+      select("targetId", "comparatorId", "analysisId", "databaseId", "outcomeId")
+
+    ncDiagnostics <- diagnosticsFilter %>%
+      distinct(targetId, comparatorId, analysisId, databaseId) %>%
+      merge(data.frame(outcomeId = ncIds))
+
+    blind <- rbind(diagnosticsFilter, ncDiagnostics)
 
     allResults <- allResults %>%
-      left_join(diagnosticsFilter,
-                by = c("targetId",
-                       "comparatorId",
-                       "analysisId",
-                       "databaseId")) %>%
-      mutate(pass = ifelse(is.na(pass), FALSE, pass)) %>%
-      filter(pass == TRUE) %>% select(-"pass")
+      inner_join(blind, by = c("targetId",
+                               "comparatorId",
+                               "analysisId",
+                               "outcomeId",
+                               "databaseId"))
   }
 
-  ncIds <- allResults %>% filter(trueEffectSize == 1) %>% pull(outcomeId) %>% unique()
   allResults$type[allResults$outcomeId %in% ncIds] <- "Negative control"
   allResults$type[is.na(allResults$type)] <- "Outcome of interest"
 
@@ -168,7 +174,6 @@ doMaEffectType <- function(connectionDetails,
   ParallelLogger::stopCluster(cluster)
   results <- do.call(rbind, results)
 
-  maName <- maName
   results <- results %>% mutate(databaseId = maName) %>%
     select(-trueEffectSize,-type)
   colnames(results) <- SqlRender::camelCaseToSnakeCase(colnames(results))
@@ -272,7 +277,8 @@ computeSingleMetaAnalysis <- function(outcomeGroup) {
     maRow$mdrr <- exp(sqrt((zBeta + z1MinAlpha)^2/(totalEvents * pA * pB)))
   }
   maRow$databaseId <- "Meta-analysis"
-  maRow$sources <- paste(outcomeGroup$databaseId[order(outcomeGroup$databaseId)], collapse = ";")
+  maRow$sources <- paste(outcomeGroup$databaseId[order(outcomeGroup$databaseId)],
+                         collapse = ";")
   return(maRow)
 }
 

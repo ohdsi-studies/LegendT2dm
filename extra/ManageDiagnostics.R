@@ -71,6 +71,13 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                diagnosticsFilter = diagnosticsLit,
                maxCores = 4)
 
+doMetaAnalysis(legendT2dmConnectionDetails,
+               resultsDatabaseSchema = "legendt2dm_class_results",
+               maName = "Meta-analysis0",
+               maExportFolder = "maAll",
+               diagnosticsFilter = NULL,
+               maxCores = 4)
+
 # # Remove no outcomes
 # diagnostics <- diagnostics %>% filter(is.finite(mdrr))
 # nrow(diagnostics)
