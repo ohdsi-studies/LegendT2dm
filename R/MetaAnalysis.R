@@ -39,8 +39,8 @@ doMetaAnalysis <- function(connectionDetails,
                            cacheFileName = NULL) {
 
   if (!is.null(diagnosticsFilter)) {
-    if (!(c("targetId", "comparatorId", "outcomeId", "analysisId",
-            "databaseId", "pass") %in% names(diagnosticsFilter))) {
+    if (!(all(c("targetId", "comparatorId", "outcomeId", "analysisId",
+            "databaseId", "pass") %in% names(diagnosticsFilter)))) {
       stop("Improperly formatted diagnostics filter")
     }
   }
@@ -141,13 +141,17 @@ doMaEffectType <- function(connectionDetails,
                                  cacheFileName)
 
   if (!is.null(diagnosticsFilter)) {
-    blind <- allResults %>%
+    diagnosticsFilter <- diagnosticsFilter %>%
+      select("targetId", "comparatorId", "analysisId", "databaseId", "pass")
+
+    allResults <- allResults %>%
       left_join(diagnosticsFilter,
                 by = c("targetId",
                        "comparatorId",
                        "analysisId",
                        "databaseId")) %>%
-      filter("pass") %>% select(-"pass")
+      mutate(pass = ifelse(is.na(pass), FALSE, pass)) %>%
+      filter(pass == TRUE) %>% select(-"pass")
   }
 
   ncIds <- allResults %>% filter(trueEffectSize == 1) %>% pull(outcomeId) %>% unique()
@@ -164,14 +168,13 @@ doMaEffectType <- function(connectionDetails,
   ParallelLogger::stopCluster(cluster)
   results <- do.call(rbind, results)
 
-  maName <- "Meta-analysis"
+  maName <- maName
   results <- results %>% mutate(databaseId = maName) %>%
     select(-trueEffectSize,-type)
   colnames(results) <- SqlRender::camelCaseToSnakeCase(colnames(results))
 
   fileName <- file.path(maExportFolder, "cohort_method_result.csv")
   write.csv(results, fileName, row.names = FALSE, na = "")
-
 }
 
 computeGroupMetaAnalysis <- function(group,
