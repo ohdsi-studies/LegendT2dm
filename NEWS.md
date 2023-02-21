@@ -1,3 +1,19 @@
+LegendT2dm 1.2.0
+=======================
+
+Changes: 
+
+1. Add meta-analysis routines
+2. Update `LegendT2dmEvidenceExplorer` to display meta-analysis results
+3. Add `sources` to `cohort_method_result` in results schema to record which sources are used in a meta-analysis
+
+LegendT2dm 1.1.5
+=======================
+
+Changes:
+
+1. Add `database_id` as column to resulting `likelihood_profile` table
+
 LegendT2dm 1.1.4
 =======================
 

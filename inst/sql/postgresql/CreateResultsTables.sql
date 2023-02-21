@@ -41,22 +41,22 @@ CREATE TABLE cm_follow_up_dist (
      comparator_id BIGINT NOT NULL,
      outcome_id BIGINT NOT NULL,
      analysis_id INTEGER NOT NULL,
-     target_min_days INTEGER NOT NULL,
-     target_p10_days INTEGER NOT NULL,
-     target_p25_days INTEGER NOT NULL,
-     target_median_days INTEGER NOT NULL,
-     target_p75_days INTEGER NOT NULL,
-     target_p90_days INTEGER NOT NULL,
-     target_max_days INTEGER NOT NULL,
-     target_zero_days INTEGER NOT NULL,
-     comparator_min_days INTEGER NOT NULL,
-     comparator_p10_days INTEGER NOT NULL,
-     comparator_p25_days INTEGER NOT NULL,
-     comparator_median_days INTEGER NOT NULL,
-     comparator_p75_days INTEGER NOT NULL,
-     comparator_p90_days INTEGER NOT NULL,
-     comparator_max_days INTEGER NOT NULL,
-     comparator_zero_days INTEGER NOT NULL,
+     target_min_days INTEGER ,
+     target_p10_days INTEGER ,
+     target_p25_days INTEGER ,
+     target_median_days INTEGER ,
+     target_p75_days INTEGER ,
+     target_p90_days INTEGER ,
+     target_max_days INTEGER ,
+     target_zero_days INTEGER ,
+     comparator_min_days INTEGER ,
+     comparator_p10_days INTEGER ,
+     comparator_p25_days INTEGER ,
+     comparator_median_days INTEGER ,
+     comparator_p75_days INTEGER ,
+     comparator_p90_days INTEGER ,
+     comparator_max_days INTEGER ,
+     comparator_zero_days INTEGER ,
      PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
@@ -78,6 +78,7 @@ CREATE TABLE cohort_method_result (
      ci_95_ub NUMERIC ,
      p NUMERIC ,
      i_2 NUMERIC ,
+     sources VARCHAR(255) ,
      log_rr NUMERIC ,
      se_log_rr NUMERIC ,
      target_subjects INTEGER ,
@@ -182,13 +183,14 @@ CREATE TABLE kaplan_meier_dist (
 );
 
 CREATE TABLE likelihood_profile (
+     database_id VARCHAR(255) NOT NULL,
      target_id BIGINT NOT NULL,
      comparator_id BIGINT NOT NULL,
      outcome_id BIGINT NOT NULL,
      analysis_id INTEGER NOT NULL,
      point TEXT NOT NULL,
      value TEXT NOT NULL,
-     PRIMARY KEY(target_id, comparator_id, outcome_id, analysis_id)
+     PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
 CREATE TABLE negative_control_outcome (

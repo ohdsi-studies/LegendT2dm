@@ -38,22 +38,22 @@ cm_follow_up_dist,target_id,bigint,Foreign key referencing the exposure_of_inter
 cm_follow_up_dist,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 cm_follow_up_dist,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
 cm_follow_up_dist,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
-cm_follow_up_dist,target_min_days,integer,Minimum number of observation days for a person,Yes,No,No,Yes
-cm_follow_up_dist,target_p10_days,integer,10th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p25_days,integer,25th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_median_days,integer,Median number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p75_days,integer,75th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_p90_days,integer,90th percentile of number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_max_days,integer,Maximum number of observation days for a person in the target group,Yes,No,No,Yes
-cm_follow_up_dist,target_zero_days,integer,Number of persons with 0 observation days in the target group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_min_days,integer,Minimum number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p10_days,integer,10th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p25_days,integer,25th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_median_days,integer,Median number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p75_days,integer,75th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_p90_days,integer,90th percentile of number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_max_days,integer,Maximum number of observation days for a person in the comparator group,Yes,No,No,Yes
-cm_follow_up_dist,comparator_zero_days,integer,Number of persons with 0 observation days in the comparator group,Yes,No,No,Yes
+cm_follow_up_dist,target_min_days,integer,Minimum number of observation days for a person,No,No,No,Yes
+cm_follow_up_dist,target_p10_days,integer,10th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p25_days,integer,25th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_median_days,integer,Median number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p75_days,integer,75th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p90_days,integer,90th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_max_days,integer,Maximum number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_zero_days,integer,Number of persons with 0 observation days in the target group,No,No,No,Yes
+cm_follow_up_dist,comparator_min_days,integer,Minimum number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p10_days,integer,10th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p25_days,integer,25th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_median_days,integer,Median number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p75_days,integer,75th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p90_days,integer,90th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_max_days,integer,Maximum number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_zero_days,integer,Number of persons with 0 observation days in the comparator group,No,No,No,Yes
 cohort_method_result,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 cohort_method_result,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 cohort_method_result,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
@@ -64,6 +64,7 @@ cohort_method_result,ci_95_lb,numeric,Lower bound of the 95% confidence interval
 cohort_method_result,ci_95_ub,numeric,Upper bound of the 95% confidence interval of the relative risk,No,No,No,Yes
 cohort_method_result,p,numeric,Two-sided p-value considering the null hypothesis of no effect,No,No,No,Yes
 cohort_method_result,i_2,numeric,I^2 measure of between-database heterogeneity (for meta-analyses estimates only),No,No,No,Yes
+cohort_method_result,sources,varchar(255),Data sources aggregated (for meta-analysis estimates only),No,No,Yes,Yes
 cohort_method_result,log_rr,numeric,Log of the relative risk,No,No,No,Yes
 cohort_method_result,se_log_rr,numeric,Standard error of the log of the relative risk,No,No,No,Yes
 cohort_method_result,target_subjects,integer,Number of subject in the target cohort,No,No,No,Yes
@@ -117,6 +118,7 @@ kaplan_meier_dist,target_survival_ub,numeric,Upper bound of the 95% confidence i
 kaplan_meier_dist,comparator_survival,numeric,Estimated survival fraction in the comparator cohort,Yes,No,No,Yes
 kaplan_meier_dist,comparator_survival_lb,numeric,Lower bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
 kaplan_meier_dist,comparator_survival_ub,numeric,Upper bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
+likelihood_profile,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 likelihood_profile,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 likelihood_profile,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 likelihood_profile,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,Yes
