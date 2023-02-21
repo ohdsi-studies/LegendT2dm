@@ -31,13 +31,17 @@ Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 # Class diagnostics
 
 classSchema <- "legendt2dm_class_diagnostics"
-LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = classSchema,
-                                    sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
+## CAUTION!!!create all tables -- run this will PURGE everything!
+# LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+#                                     schema = classSchema,
+#                                     sqlFileName = "CreateCohortDiagnosticsTables.sql")
+
+## grant user read permission
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legend", schema = classSchema)
 
+## grant user read permission
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legendt2dm_readonly", schema = classSchema)
 
