@@ -14,25 +14,25 @@ oracleTempSchema <- NULL
 # tablePrefix <- "legend_t2dm_ccae"
 # outputFolder <- "E:/LegendT2dmOutput_ccae_sglt2i_new"
 
-# Feb 2023: fast forward data version to the latest accessible
-cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
-serverSuffix <- "optum_ehr"
-cohortDatabaseSchema <- "scratch_fbu2"
-databaseId <- "OptumEHR"
-databaseName <- "Optum© de-identified Electronic Health Record Dataset"
-databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
-tablePrefix <- "legend_t2dm_optum_ehr"
-outputFolder <- "E:/LegendT2dmOutput_optum_ehr_new"
-
 # # Feb 2023: fast forward data version to the latest accessible
-# cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
-# serverSuffix <- "truven_mdcr"
+# cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
+# serverSuffix <- "optum_ehr"
 # cohortDatabaseSchema <- "scratch_fbu2"
-# databaseId<- "MDCR"
-# databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
-# databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
-# tablePrefix <- "legend_t2dm_mdcr"
-# outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_new"
+# databaseId <- "OptumEHR"
+# databaseName <- "Optum© de-identified Electronic Health Record Dataset"
+# databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
+# tablePrefix <- "legend_t2dm_optum_ehr"
+# outputFolder <- "E:/LegendT2dmOutput_optum_ehr_new"
+
+# Feb 2023: fast forward data version to the latest accessible
+cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
+serverSuffix <- "truven_mdcr"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId<- "MDCR"
+databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
+databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
+tablePrefix <- "legend_t2dm_mdcr"
+outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_new_test"
 
 # # Feb 2023: fast forward data version to the latest accessible
 # cdmDatabaseSchema <- "cdm_truven_mdcd_v2321" #v2128
@@ -143,13 +143,14 @@ execute(connectionDetails = conn,
         databaseId = databaseId,
         databaseName = databaseName,
         databaseDescription = databaseDescription,
+        minCohortSize = 1000,
         tablePrefix = tablePrefix,
         createExposureCohorts = TRUE,
         createOutcomeCohorts = TRUE,
         fetchAllDataFromServer = TRUE,
         generateAllCohortMethodDataObjects = TRUE,
         runCohortMethod = TRUE,
-        runSections = c(1:6),
+        runSections = #c(1:6),
         computeCovariateBalance = TRUE,
         exportToCsv = TRUE,
         maxCores = 16)
