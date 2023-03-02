@@ -1,3 +1,9 @@
+LegendT2dm 2.0.1
+=======================
+
+Changes:
+
+1. Handle ungraceful crash when all paired exposure cohorts are too small
 
 LegendT2dm 2.0.0
 =======================
