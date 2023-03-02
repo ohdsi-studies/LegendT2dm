@@ -131,9 +131,9 @@ execute <- function(connectionDetails,
     filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId,
                                 minCohortSize = minCohortSize)
 
-    exposureSummary = read.csv(file.path(indicationFolder, "pairedExposureSummary.csv"))
+    exposureSummary = read.csv(file.path(indicationFolder, "pairedExposureSummaryFilteredBySize.csv"))
     if(nrow(exposureSummary) < 1){
-      ParallelLogger::logInfo(sprintf("All exposure cohort sizes for target-comparator pairs are below %s! No analyses to run.",
+      ParallelLogger::logInfo(sprintf("All exposure cohort sizes in target-comparator pairs are below `minCohortSize = %s`! No analyses to run.",
                                       minCohortSize))
       ParallelLogger::logInfo(sprintf("Stopped execute() for LEGEND-T2DM %s-vs-%s studies without generating results.",
                                       indicationId, indicationId))
