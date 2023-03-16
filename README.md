@@ -25,7 +25,7 @@ Requirements
 
 How to run
 ==========
-1. Follow [these instructions](https://ohdsi.github.io/Hades/rSetup.html) for seting up your R environment, including RTools and Java.
+1. Follow [these instructions](https://ohdsi.github.io/Hades/rSetup.html) for setting up your R environment, including RTools and Java.
 
 2. Open your study package in RStudio. Use the following code to install all the dependencies:
 
@@ -37,7 +37,11 @@ How to run
 
 3. In RStudio, select 'Build' then 'Install and Restart' to install the `LegendT2dm` package.
 
-4. Once installed, you can execute the feasibility assessment partion of the study by modifying and using the code below. For your convenience, this code is also provided under `extras/CodeToRun.R`:
+4. For **class v.s. class** studies, follow the instructions in Steps 6-11 below. For your convenience, all code is also provided under `extras/CodeToRun.R`.
+
+5. For **drug v.s. drug** studies within the **SGLT2 Inhibitors** drug class, follow the instructions in Steps 6-11. Replace the argument `indicationId = "class"` with `indicationId = "sglt2i"` and also replace `cohorts = "class"` with `cohorts = "sglt2i"` to view/upload diagnostics and results. It is _strongly recommended_ to run all the code provided under `extras/CodeToRunSglt2i.R` for more reliable execution. 
+
+6. Once the `LegendT2dm` package is installed, you can execute the feasibility assessment portion of the study by modifying and using the code below. You may also refer to the code provided under `extras/CodeToRun.R` (or `indicationId = "sglt2i"` for SGLT2 inhibitors studies):
 
 	```r
 	library(LegendT2dm)
@@ -88,6 +92,7 @@ How to run
 					 cohortDatabaseSchema = cohortDatabaseSchema,
 					 outputFolder = outputFolder,
 					 tablePrefix = tablePrefix,
+					 indicationId = 'class',
 					 databaseId = databaseId,
 					 databaseName = databaseName,
 					 databaseDescription = databaseDescription,
@@ -98,7 +103,7 @@ How to run
 
 	```
 
-5. Upload the files ```class/cohortDiagnosticsExport/Results_class_exposures_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_outcomes_<DatabaseId>.zip``` in the output folder to the study coordinator:
+7. Upload the files ```class/cohortDiagnosticsExport/Results_class_exposures_<DatabaseId>.zip``` and ```outcome/cohortDiagnosticsExport/Results_outcomes_<DatabaseId>.zip``` in the output folder to the study coordinator:
 
 	```r
 	uploadPhenotypeResults(cohorts = "class",
@@ -109,7 +114,7 @@ How to run
   	
 	where `<file>` and `<name>` are the credentials provided to you personally by the study coordinator.
   
-6. View your cohort diagnostics locally via:
+8. View your cohort diagnostics locally via:
 
 	```r
 	CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = file.path(outputFolder, 
@@ -125,7 +130,7 @@ How to run
 						                              "outcome/cohortDiagnosticsExport"))
 	```
 
-7. Complete the feasibility assessment by constructing sample-restricted propensity models: 
+9. Complete the feasibility assessment by constructing sample-restricted propensity models: 
   	```r
 	assessPropensityModels(connectionDetails = connectionDetails,
 	                       cdmDatabaseSchema = cdmDatabaseSchema,
@@ -144,12 +149,12 @@ How to run
 	                          outputFolder, privateKeyFileName = "<file>", userName = "<name>")
 	```
 
-8. To prepare to execute the class-vs-class comparative effectiveness and safety (CES) study, first update your `LegendT2dm` to version `>= 1.1.1`.  You can accomplish this via a `git pull` in RStudio and then select 'Build' and 'Install and Restart'.  To check your package version:
+10. To prepare to execute the class-vs-class comparative effectiveness and safety (CES) study, first update your `LegendT2dm` to version `>= 2.0.0`.  You can accomplish this via a `git pull` in RStudio and then select 'Build' and 'Install and Restart'.  To check your package version:
   	```
   	packageVersion("LegendT2dm")
   	```
 
-9. Execute the class-vs-class CES study via:
+11. Execute the CES study via:
 	```
 	execute(connectionDetails = connectionDetails,
         	cdmDatabaseSchema = cdmDatabaseSchema,
@@ -161,8 +166,8 @@ How to run
         	databaseName = databaseName,
         	databaseDescription = databaseDescription,
         	tablePrefix = tablePrefix,
-        	createExposureCohorts = FALSE, # It is not necessary to re-generate the exposure cohorts
-        	createOutcomeCohorts = TRUE,   # It is necessary to re-generate the outcome cohorts
+        	createExposureCohorts = TRUE, 
+        	createOutcomeCohorts = TRUE,  
         	fetchAllDataFromServer = TRUE,
         	generateAllCohortMethodDataObjects = TRUE,
         	runCohortMethod = TRUE,
