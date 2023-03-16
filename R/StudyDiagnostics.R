@@ -26,10 +26,37 @@ getAbsStdDiff <- function(connection,
                            outcome_id = outcomeId)
   sql <- SqlRender::translate(sql, targetDialect = connection@dbms)
   absStdDiff <- DatabaseConnector::querySql(connection, sql)
-
-
   colnames(absStdDiff) <- SqlRender::snakeCaseToCamelCase(colnames(absStdDiff))
+
+  remainingAnalysisId <- setdiff(analysisId, c(5,6))
+  if (length(remainingAnalysisId) > 0) {
+    duplicated <- do.call("rbind",
+                          lapply(remainingAnalysisId, function(id) {
+                            mappedId <- mapAnalysisIdForBalance(id)
+                            slice <- absStdDiff %>% filter(analysisId == mappedId) %>%
+                              mutate(analysisId = id)
+                            if (id %in% c(7,8,9,18,19)) {
+                              slice <- slice %>%
+                                mutate(targetId = makeOt2(targetId),
+                                       comparatorId = makeOt2(comparatorId))
+                            }
+                            return(slice)
+                          }))
+    absStdDiff <- rbind(absStdDiff, duplicated)
+  }
+
   return(absStdDiff)
+}
+
+mapAnalysisIdForBalance <- function(analysisId) {
+  map <- c(1,5,6,
+           4,5,6,
+           7,5,6,
+           0,
+           11,5,6,
+           14,5,6,
+           17,5,6)
+  return(map[analysisId])
 }
 
 #' @export
@@ -47,17 +74,6 @@ getCovariateBalance <- function(connection,
 
   if (is.null(outcomeId)) {
     outcomeId <- 0
-  }
-
-  mapAnalysisIdForBalance <- function(analysisId) {
-    map <- c(1,5,6,
-             4,5,6,
-             7,5,6,
-             0,
-             11,5,6,
-             14,5,6,
-             17,5,6)
-    return(map[analysisId])
   }
 
   if (mapAnalysis) {
@@ -201,10 +217,10 @@ makeDiagnosticsTable <- function(connection,
                               analysisId = analysisIds) %>%
     select(-outcomeId) %>% rename(maxAbsStdDiffMean = absStdDiff)
 
-  merged <- arguments %>% left_join(equipoise %>% select(-targetEquipoise, -comparatorEquipoise),
+  merged1 <- arguments %>% left_join(equipoise %>% select(-targetEquipoise, -comparatorEquipoise),
                                     by = c("databaseId", "targetId", "comparatorId"))
 
-  merged <- merged %>% left_join(absStdDiff,
+  merged2 <- merged1 %>% left_join(absStdDiff,
                                  by = c("databaseId", "targetId", "comparatorId", "analysisId"))
 
   ParallelLogger::logInfo("\n", "Computing MDRR")
@@ -215,10 +231,10 @@ makeDiagnosticsTable <- function(connection,
     mutate(anyOutcomes = !(targetOutcomes == 0 & comparatorOutcomes == 0)) %>%
     select(databaseId, analysisId, targetId, comparatorId, outcomeId, mdrr, minBoundOnMdrr, anyOutcomes)
 
-  merged <- cm %>% inner_join(merged, by = c("databaseId", "targetId", "comparatorId", "analysisId")) %>%
+  merged3 <- cm %>% inner_join(merged2, by = c("databaseId", "targetId", "comparatorId", "analysisId")) %>%
     arrange(databaseId, analysisId, targetId, comparatorId)
 
-  return(merged)
+  return(merged3)
 }
 
 develop <- function() {
