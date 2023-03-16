@@ -1,0 +1,15 @@
+How to modify package for drug-level within-class study
+
+(1) modify the `Indications.csv` file under "inst/settings/": add a new row with `indicationId = [className]`, and `indicationName = [className]-vs-[className] study`, while everything else can be just copied from previous rows.
+
+(2) run the code in `extra/GenerateExposureCohortDefinitions.R` to generate:
+
+(i) all JSON files and SQL files needed to create all the exposure cohorts for this specific class (they should exist under the class name folders within `inst/cohorts/` and `inst/sql/sql_server`, respectively)
+
+(ii) the `[className]CohortsToCreate.csv` file, which should exist under `inst/settings`
+
+(iii) the `[className]TcosOfInterest.csv` file, which should also exist under `inst/settings'
+
+(3) in the `CodeToRun.R` file (or better, create a separate `CodeToRun[className].R` file), change all `indicationId` argument to [className]
+
+(4) re-build the package, and test run the code!
