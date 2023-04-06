@@ -410,7 +410,8 @@ permutations$atlasName <- makeShortName(permutations)
 
 
 
-# Generate ingredient-level cohorts
+# WE NEED TO RUN THIS!
+# Generate ingredient-level cohorts----
 # NOTE: need to use `permutations` generated from previous class-level code!
 permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
@@ -437,7 +438,10 @@ createPermutationsForDrugs <- function(classId){
 #classIds <- c(10, 20, 30, 40)
 #classIds = c(10)
 # shift to SGLT2I
-classIds = c(30)
+#classIds = c(30)
+
+# March 2023 GLP1RAs:
+classIds = c(20)
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>% bind_rows()
 
 permutationsForDrugs$json <-
@@ -483,7 +487,7 @@ for (i in 1:nrow(permutationsForDrugs)) {
 # save drug-level cohorts to cohortsToCreate.csv file
 # only do this for DPP4I for now
 # do it for SGLT2I
-this.class = permutationsForDrugs$class[1] %>% tolower()
+this.class = permutationsForDrugs$class[1] %>% tolower() # this line defines name of drug class
 drugCohortsToCreate <- permutationsForDrugs %>%
   mutate(atlasId = cohortId,
          name = sprintf('%s/%s',this.class,name)) %>%
@@ -492,13 +496,13 @@ drugCohortsToCreate <- permutationsForDrugs %>%
 filePath = "inst/settings/"
 fileName = sprintf('%sCohortsToCreate.csv', this.class)
 readr::write_csv(drugCohortsToCreate,
-                 file.path(filePath, fileName))
+                 file.path(filePath, fileName)) # this creates CohortsToCreate.csv file; can eye-ball to check
 
 # check out some example cohort definitions
 # (updating ingredient name for each drug class)
 permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
 printCohortDefinitionFromNameAndJson(name = "canagliflozin main",
-                                     json = permutationsForDrugs$json[1])
+                                     json = permutationsForDrugs$json[1]) # change this to one GLP1RA name instead!
 printCohortDefinitionFromNameAndJson(name = "canagliflozin younger-age",
                                      json = permutationsForDrugs$json[2])
 printCohortDefinitionFromNameAndJson(name = "anagliflozin middle-age",
