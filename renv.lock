@@ -117,15 +117,15 @@
     },
     "LegendT2dmCohortExplorer": {
       "Package": "LegendT2dmCohortExplorer",
-      "Version": "0.1.0",
+      "Version": "0.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "LegendT2dmCohortExplorer",
       "RemoteUsername": "ohdsi-studies",
       "RemoteRef": "HEAD",
-      "RemoteSha": "1f3a5eed965694e3d5a32a3847a2adba10981c7f",
-      "Hash": "c659b1f7a2bcf50945438aa1ff76021f"
+      "RemoteSha": "b1349f871b05afcbbfb784475a907859de32a022",
+      "Hash": "5f2b826c325ae43a8a40846645198abd"
     },
     "LegendT2dmEvidenceExplorer": {
       "Package": "LegendT2dmEvidenceExplorer",
