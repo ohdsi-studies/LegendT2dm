@@ -1,0 +1,463 @@
+targetId,comparatorId,outcomeIds,excludedCovariateConceptIds,targetName,comparatorName
+411100000,421100000,-1,NA,chlorpropamide main,glimepiride main
+411100000,431100000,-1,NA,chlorpropamide main,glipizide main
+411100000,441100000,-1,NA,chlorpropamide main,gliquidone main
+411100000,451100000,-1,NA,chlorpropamide main,glyburide main
+411100000,461100000,-1,NA,chlorpropamide main,tolazamide main
+411100000,471100000,-1,NA,chlorpropamide main,tolbutamide main
+421100000,431100000,-1,NA,glimepiride main,glipizide main
+421100000,441100000,-1,NA,glimepiride main,gliquidone main
+421100000,451100000,-1,NA,glimepiride main,glyburide main
+421100000,461100000,-1,NA,glimepiride main,tolazamide main
+421100000,471100000,-1,NA,glimepiride main,tolbutamide main
+431100000,441100000,-1,NA,glipizide main,gliquidone main
+431100000,451100000,-1,NA,glipizide main,glyburide main
+431100000,461100000,-1,NA,glipizide main,tolazamide main
+431100000,471100000,-1,NA,glipizide main,tolbutamide main
+441100000,451100000,-1,NA,gliquidone main,glyburide main
+441100000,461100000,-1,NA,gliquidone main,tolazamide main
+441100000,471100000,-1,NA,gliquidone main,tolbutamide main
+451100000,461100000,-1,NA,glyburide main,tolazamide main
+451100000,471100000,-1,NA,glyburide main,tolbutamide main
+461100000,471100000,-1,NA,tolazamide main,tolbutamide main
+411110000,421110000,-1,NA,chlorpropamide younger-age,glimepiride younger-age
+411110000,431110000,-1,NA,chlorpropamide younger-age,glipizide younger-age
+411110000,441110000,-1,NA,chlorpropamide younger-age,gliquidone younger-age
+411110000,451110000,-1,NA,chlorpropamide younger-age,glyburide younger-age
+411110000,461110000,-1,NA,chlorpropamide younger-age,tolazamide younger-age
+411110000,471110000,-1,NA,chlorpropamide younger-age,tolbutamide younger-age
+421110000,431110000,-1,NA,glimepiride younger-age,glipizide younger-age
+421110000,441110000,-1,NA,glimepiride younger-age,gliquidone younger-age
+421110000,451110000,-1,NA,glimepiride younger-age,glyburide younger-age
+421110000,461110000,-1,NA,glimepiride younger-age,tolazamide younger-age
+421110000,471110000,-1,NA,glimepiride younger-age,tolbutamide younger-age
+431110000,441110000,-1,NA,glipizide younger-age,gliquidone younger-age
+431110000,451110000,-1,NA,glipizide younger-age,glyburide younger-age
+431110000,461110000,-1,NA,glipizide younger-age,tolazamide younger-age
+431110000,471110000,-1,NA,glipizide younger-age,tolbutamide younger-age
+441110000,451110000,-1,NA,gliquidone younger-age,glyburide younger-age
+441110000,461110000,-1,NA,gliquidone younger-age,tolazamide younger-age
+441110000,471110000,-1,NA,gliquidone younger-age,tolbutamide younger-age
+451110000,461110000,-1,NA,glyburide younger-age,tolazamide younger-age
+451110000,471110000,-1,NA,glyburide younger-age,tolbutamide younger-age
+461110000,471110000,-1,NA,tolazamide younger-age,tolbutamide younger-age
+411120000,421120000,-1,NA,chlorpropamide middle-age,glimepiride middle-age
+411120000,431120000,-1,NA,chlorpropamide middle-age,glipizide middle-age
+411120000,441120000,-1,NA,chlorpropamide middle-age,gliquidone middle-age
+411120000,451120000,-1,NA,chlorpropamide middle-age,glyburide middle-age
+411120000,461120000,-1,NA,chlorpropamide middle-age,tolazamide middle-age
+411120000,471120000,-1,NA,chlorpropamide middle-age,tolbutamide middle-age
+421120000,431120000,-1,NA,glimepiride middle-age,glipizide middle-age
+421120000,441120000,-1,NA,glimepiride middle-age,gliquidone middle-age
+421120000,451120000,-1,NA,glimepiride middle-age,glyburide middle-age
+421120000,461120000,-1,NA,glimepiride middle-age,tolazamide middle-age
+421120000,471120000,-1,NA,glimepiride middle-age,tolbutamide middle-age
+431120000,441120000,-1,NA,glipizide middle-age,gliquidone middle-age
+431120000,451120000,-1,NA,glipizide middle-age,glyburide middle-age
+431120000,461120000,-1,NA,glipizide middle-age,tolazamide middle-age
+431120000,471120000,-1,NA,glipizide middle-age,tolbutamide middle-age
+441120000,451120000,-1,NA,gliquidone middle-age,glyburide middle-age
+441120000,461120000,-1,NA,gliquidone middle-age,tolazamide middle-age
+441120000,471120000,-1,NA,gliquidone middle-age,tolbutamide middle-age
+451120000,461120000,-1,NA,glyburide middle-age,tolazamide middle-age
+451120000,471120000,-1,NA,glyburide middle-age,tolbutamide middle-age
+461120000,471120000,-1,NA,tolazamide middle-age,tolbutamide middle-age
+411130000,421130000,-1,NA,chlorpropamide older-age,glimepiride older-age
+411130000,431130000,-1,NA,chlorpropamide older-age,glipizide older-age
+411130000,441130000,-1,NA,chlorpropamide older-age,gliquidone older-age
+411130000,451130000,-1,NA,chlorpropamide older-age,glyburide older-age
+411130000,461130000,-1,NA,chlorpropamide older-age,tolazamide older-age
+411130000,471130000,-1,NA,chlorpropamide older-age,tolbutamide older-age
+421130000,431130000,-1,NA,glimepiride older-age,glipizide older-age
+421130000,441130000,-1,NA,glimepiride older-age,gliquidone older-age
+421130000,451130000,-1,NA,glimepiride older-age,glyburide older-age
+421130000,461130000,-1,NA,glimepiride older-age,tolazamide older-age
+421130000,471130000,-1,NA,glimepiride older-age,tolbutamide older-age
+431130000,441130000,-1,NA,glipizide older-age,gliquidone older-age
+431130000,451130000,-1,NA,glipizide older-age,glyburide older-age
+431130000,461130000,-1,NA,glipizide older-age,tolazamide older-age
+431130000,471130000,-1,NA,glipizide older-age,tolbutamide older-age
+441130000,451130000,-1,NA,gliquidone older-age,glyburide older-age
+441130000,461130000,-1,NA,gliquidone older-age,tolazamide older-age
+441130000,471130000,-1,NA,gliquidone older-age,tolbutamide older-age
+451130000,461130000,-1,NA,glyburide older-age,tolazamide older-age
+451130000,471130000,-1,NA,glyburide older-age,tolbutamide older-age
+461130000,471130000,-1,NA,tolazamide older-age,tolbutamide older-age
+411101000,421101000,-1,NA,chlorpropamide female,glimepiride female
+411101000,431101000,-1,NA,chlorpropamide female,glipizide female
+411101000,441101000,-1,NA,chlorpropamide female,gliquidone female
+411101000,451101000,-1,NA,chlorpropamide female,glyburide female
+411101000,461101000,-1,NA,chlorpropamide female,tolazamide female
+411101000,471101000,-1,NA,chlorpropamide female,tolbutamide female
+421101000,431101000,-1,NA,glimepiride female,glipizide female
+421101000,441101000,-1,NA,glimepiride female,gliquidone female
+421101000,451101000,-1,NA,glimepiride female,glyburide female
+421101000,461101000,-1,NA,glimepiride female,tolazamide female
+421101000,471101000,-1,NA,glimepiride female,tolbutamide female
+431101000,441101000,-1,NA,glipizide female,gliquidone female
+431101000,451101000,-1,NA,glipizide female,glyburide female
+431101000,461101000,-1,NA,glipizide female,tolazamide female
+431101000,471101000,-1,NA,glipizide female,tolbutamide female
+441101000,451101000,-1,NA,gliquidone female,glyburide female
+441101000,461101000,-1,NA,gliquidone female,tolazamide female
+441101000,471101000,-1,NA,gliquidone female,tolbutamide female
+451101000,461101000,-1,NA,glyburide female,tolazamide female
+451101000,471101000,-1,NA,glyburide female,tolbutamide female
+461101000,471101000,-1,NA,tolazamide female,tolbutamide female
+411102000,421102000,-1,NA,chlorpropamide male,glimepiride male
+411102000,431102000,-1,NA,chlorpropamide male,glipizide male
+411102000,441102000,-1,NA,chlorpropamide male,gliquidone male
+411102000,451102000,-1,NA,chlorpropamide male,glyburide male
+411102000,461102000,-1,NA,chlorpropamide male,tolazamide male
+411102000,471102000,-1,NA,chlorpropamide male,tolbutamide male
+421102000,431102000,-1,NA,glimepiride male,glipizide male
+421102000,441102000,-1,NA,glimepiride male,gliquidone male
+421102000,451102000,-1,NA,glimepiride male,glyburide male
+421102000,461102000,-1,NA,glimepiride male,tolazamide male
+421102000,471102000,-1,NA,glimepiride male,tolbutamide male
+431102000,441102000,-1,NA,glipizide male,gliquidone male
+431102000,451102000,-1,NA,glipizide male,glyburide male
+431102000,461102000,-1,NA,glipizide male,tolazamide male
+431102000,471102000,-1,NA,glipizide male,tolbutamide male
+441102000,451102000,-1,NA,gliquidone male,glyburide male
+441102000,461102000,-1,NA,gliquidone male,tolazamide male
+441102000,471102000,-1,NA,gliquidone male,tolbutamide male
+451102000,461102000,-1,NA,glyburide male,tolazamide male
+451102000,471102000,-1,NA,glyburide male,tolbutamide male
+461102000,471102000,-1,NA,tolazamide male,tolbutamide male
+411100100,421100100,-1,NA,chlorpropamide black,glimepiride black
+411100100,431100100,-1,NA,chlorpropamide black,glipizide black
+411100100,441100100,-1,NA,chlorpropamide black,gliquidone black
+411100100,451100100,-1,NA,chlorpropamide black,glyburide black
+411100100,461100100,-1,NA,chlorpropamide black,tolazamide black
+411100100,471100100,-1,NA,chlorpropamide black,tolbutamide black
+421100100,431100100,-1,NA,glimepiride black,glipizide black
+421100100,441100100,-1,NA,glimepiride black,gliquidone black
+421100100,451100100,-1,NA,glimepiride black,glyburide black
+421100100,461100100,-1,NA,glimepiride black,tolazamide black
+421100100,471100100,-1,NA,glimepiride black,tolbutamide black
+431100100,441100100,-1,NA,glipizide black,gliquidone black
+431100100,451100100,-1,NA,glipizide black,glyburide black
+431100100,461100100,-1,NA,glipizide black,tolazamide black
+431100100,471100100,-1,NA,glipizide black,tolbutamide black
+441100100,451100100,-1,NA,gliquidone black,glyburide black
+441100100,461100100,-1,NA,gliquidone black,tolazamide black
+441100100,471100100,-1,NA,gliquidone black,tolbutamide black
+451100100,461100100,-1,NA,glyburide black,tolazamide black
+451100100,471100100,-1,NA,glyburide black,tolbutamide black
+461100100,471100100,-1,NA,tolazamide black,tolbutamide black
+411100010,421100010,-1,NA,chlorpropamide low-cvr,glimepiride low-cvr
+411100010,431100010,-1,NA,chlorpropamide low-cvr,glipizide low-cvr
+411100010,441100010,-1,NA,chlorpropamide low-cvr,gliquidone low-cvr
+411100010,451100010,-1,NA,chlorpropamide low-cvr,glyburide low-cvr
+411100010,461100010,-1,NA,chlorpropamide low-cvr,tolazamide low-cvr
+411100010,471100010,-1,NA,chlorpropamide low-cvr,tolbutamide low-cvr
+421100010,431100010,-1,NA,glimepiride low-cvr,glipizide low-cvr
+421100010,441100010,-1,NA,glimepiride low-cvr,gliquidone low-cvr
+421100010,451100010,-1,NA,glimepiride low-cvr,glyburide low-cvr
+421100010,461100010,-1,NA,glimepiride low-cvr,tolazamide low-cvr
+421100010,471100010,-1,NA,glimepiride low-cvr,tolbutamide low-cvr
+431100010,441100010,-1,NA,glipizide low-cvr,gliquidone low-cvr
+431100010,451100010,-1,NA,glipizide low-cvr,glyburide low-cvr
+431100010,461100010,-1,NA,glipizide low-cvr,tolazamide low-cvr
+431100010,471100010,-1,NA,glipizide low-cvr,tolbutamide low-cvr
+441100010,451100010,-1,NA,gliquidone low-cvr,glyburide low-cvr
+441100010,461100010,-1,NA,gliquidone low-cvr,tolazamide low-cvr
+441100010,471100010,-1,NA,gliquidone low-cvr,tolbutamide low-cvr
+451100010,461100010,-1,NA,glyburide low-cvr,tolazamide low-cvr
+451100010,471100010,-1,NA,glyburide low-cvr,tolbutamide low-cvr
+461100010,471100010,-1,NA,tolazamide low-cvr,tolbutamide low-cvr
+411100020,421100020,-1,NA,chlorpropamide higher-cvr,glimepiride higher-cvr
+411100020,431100020,-1,NA,chlorpropamide higher-cvr,glipizide higher-cvr
+411100020,441100020,-1,NA,chlorpropamide higher-cvr,gliquidone higher-cvr
+411100020,451100020,-1,NA,chlorpropamide higher-cvr,glyburide higher-cvr
+411100020,461100020,-1,NA,chlorpropamide higher-cvr,tolazamide higher-cvr
+411100020,471100020,-1,NA,chlorpropamide higher-cvr,tolbutamide higher-cvr
+421100020,431100020,-1,NA,glimepiride higher-cvr,glipizide higher-cvr
+421100020,441100020,-1,NA,glimepiride higher-cvr,gliquidone higher-cvr
+421100020,451100020,-1,NA,glimepiride higher-cvr,glyburide higher-cvr
+421100020,461100020,-1,NA,glimepiride higher-cvr,tolazamide higher-cvr
+421100020,471100020,-1,NA,glimepiride higher-cvr,tolbutamide higher-cvr
+431100020,441100020,-1,NA,glipizide higher-cvr,gliquidone higher-cvr
+431100020,451100020,-1,NA,glipizide higher-cvr,glyburide higher-cvr
+431100020,461100020,-1,NA,glipizide higher-cvr,tolazamide higher-cvr
+431100020,471100020,-1,NA,glipizide higher-cvr,tolbutamide higher-cvr
+441100020,451100020,-1,NA,gliquidone higher-cvr,glyburide higher-cvr
+441100020,461100020,-1,NA,gliquidone higher-cvr,tolazamide higher-cvr
+441100020,471100020,-1,NA,gliquidone higher-cvr,tolbutamide higher-cvr
+451100020,461100020,-1,NA,glyburide higher-cvr,tolazamide higher-cvr
+451100020,471100020,-1,NA,glyburide higher-cvr,tolbutamide higher-cvr
+461100020,471100020,-1,NA,tolazamide higher-cvr,tolbutamide higher-cvr
+411100001,421100001,-1,NA,chlorpropamide without-rdz,glimepiride without-rdz
+411100001,431100001,-1,NA,chlorpropamide without-rdz,glipizide without-rdz
+411100001,441100001,-1,NA,chlorpropamide without-rdz,gliquidone without-rdz
+411100001,451100001,-1,NA,chlorpropamide without-rdz,glyburide without-rdz
+411100001,461100001,-1,NA,chlorpropamide without-rdz,tolazamide without-rdz
+411100001,471100001,-1,NA,chlorpropamide without-rdz,tolbutamide without-rdz
+421100001,431100001,-1,NA,glimepiride without-rdz,glipizide without-rdz
+421100001,441100001,-1,NA,glimepiride without-rdz,gliquidone without-rdz
+421100001,451100001,-1,NA,glimepiride without-rdz,glyburide without-rdz
+421100001,461100001,-1,NA,glimepiride without-rdz,tolazamide without-rdz
+421100001,471100001,-1,NA,glimepiride without-rdz,tolbutamide without-rdz
+431100001,441100001,-1,NA,glipizide without-rdz,gliquidone without-rdz
+431100001,451100001,-1,NA,glipizide without-rdz,glyburide without-rdz
+431100001,461100001,-1,NA,glipizide without-rdz,tolazamide without-rdz
+431100001,471100001,-1,NA,glipizide without-rdz,tolbutamide without-rdz
+441100001,451100001,-1,NA,gliquidone without-rdz,glyburide without-rdz
+441100001,461100001,-1,NA,gliquidone without-rdz,tolazamide without-rdz
+441100001,471100001,-1,NA,gliquidone without-rdz,tolbutamide without-rdz
+451100001,461100001,-1,NA,glyburide without-rdz,tolazamide without-rdz
+451100001,471100001,-1,NA,glyburide without-rdz,tolbutamide without-rdz
+461100001,471100001,-1,NA,tolazamide without-rdz,tolbutamide without-rdz
+411100002,421100002,-1,NA,chlorpropamide with-rdz,glimepiride with-rdz
+411100002,431100002,-1,NA,chlorpropamide with-rdz,glipizide with-rdz
+411100002,441100002,-1,NA,chlorpropamide with-rdz,gliquidone with-rdz
+411100002,451100002,-1,NA,chlorpropamide with-rdz,glyburide with-rdz
+411100002,461100002,-1,NA,chlorpropamide with-rdz,tolazamide with-rdz
+411100002,471100002,-1,NA,chlorpropamide with-rdz,tolbutamide with-rdz
+421100002,431100002,-1,NA,glimepiride with-rdz,glipizide with-rdz
+421100002,441100002,-1,NA,glimepiride with-rdz,gliquidone with-rdz
+421100002,451100002,-1,NA,glimepiride with-rdz,glyburide with-rdz
+421100002,461100002,-1,NA,glimepiride with-rdz,tolazamide with-rdz
+421100002,471100002,-1,NA,glimepiride with-rdz,tolbutamide with-rdz
+431100002,441100002,-1,NA,glipizide with-rdz,gliquidone with-rdz
+431100002,451100002,-1,NA,glipizide with-rdz,glyburide with-rdz
+431100002,461100002,-1,NA,glipizide with-rdz,tolazamide with-rdz
+431100002,471100002,-1,NA,glipizide with-rdz,tolbutamide with-rdz
+441100002,451100002,-1,NA,gliquidone with-rdz,glyburide with-rdz
+441100002,461100002,-1,NA,gliquidone with-rdz,tolazamide with-rdz
+441100002,471100002,-1,NA,gliquidone with-rdz,tolbutamide with-rdz
+451100002,461100002,-1,NA,glyburide with-rdz,tolazamide with-rdz
+451100002,471100002,-1,NA,glyburide with-rdz,tolbutamide with-rdz
+461100002,471100002,-1,NA,tolazamide with-rdz,tolbutamide with-rdz
+412100000,422100000,-1,NA,chlorpropamide main ot2,glimepiride main ot2
+412100000,432100000,-1,NA,chlorpropamide main ot2,glipizide main ot2
+412100000,442100000,-1,NA,chlorpropamide main ot2,gliquidone main ot2
+412100000,452100000,-1,NA,chlorpropamide main ot2,glyburide main ot2
+412100000,462100000,-1,NA,chlorpropamide main ot2,tolazamide main ot2
+412100000,472100000,-1,NA,chlorpropamide main ot2,tolbutamide main ot2
+422100000,432100000,-1,NA,glimepiride main ot2,glipizide main ot2
+422100000,442100000,-1,NA,glimepiride main ot2,gliquidone main ot2
+422100000,452100000,-1,NA,glimepiride main ot2,glyburide main ot2
+422100000,462100000,-1,NA,glimepiride main ot2,tolazamide main ot2
+422100000,472100000,-1,NA,glimepiride main ot2,tolbutamide main ot2
+432100000,442100000,-1,NA,glipizide main ot2,gliquidone main ot2
+432100000,452100000,-1,NA,glipizide main ot2,glyburide main ot2
+432100000,462100000,-1,NA,glipizide main ot2,tolazamide main ot2
+432100000,472100000,-1,NA,glipizide main ot2,tolbutamide main ot2
+442100000,452100000,-1,NA,gliquidone main ot2,glyburide main ot2
+442100000,462100000,-1,NA,gliquidone main ot2,tolazamide main ot2
+442100000,472100000,-1,NA,gliquidone main ot2,tolbutamide main ot2
+452100000,462100000,-1,NA,glyburide main ot2,tolazamide main ot2
+452100000,472100000,-1,NA,glyburide main ot2,tolbutamide main ot2
+462100000,472100000,-1,NA,tolazamide main ot2,tolbutamide main ot2
+412110000,422110000,-1,NA,chlorpropamide ot2 younger-age,glimepiride ot2 younger-age
+412110000,432110000,-1,NA,chlorpropamide ot2 younger-age,glipizide ot2 younger-age
+412110000,442110000,-1,NA,chlorpropamide ot2 younger-age,gliquidone ot2 younger-age
+412110000,452110000,-1,NA,chlorpropamide ot2 younger-age,glyburide ot2 younger-age
+412110000,462110000,-1,NA,chlorpropamide ot2 younger-age,tolazamide ot2 younger-age
+412110000,472110000,-1,NA,chlorpropamide ot2 younger-age,tolbutamide ot2 younger-age
+422110000,432110000,-1,NA,glimepiride ot2 younger-age,glipizide ot2 younger-age
+422110000,442110000,-1,NA,glimepiride ot2 younger-age,gliquidone ot2 younger-age
+422110000,452110000,-1,NA,glimepiride ot2 younger-age,glyburide ot2 younger-age
+422110000,462110000,-1,NA,glimepiride ot2 younger-age,tolazamide ot2 younger-age
+422110000,472110000,-1,NA,glimepiride ot2 younger-age,tolbutamide ot2 younger-age
+432110000,442110000,-1,NA,glipizide ot2 younger-age,gliquidone ot2 younger-age
+432110000,452110000,-1,NA,glipizide ot2 younger-age,glyburide ot2 younger-age
+432110000,462110000,-1,NA,glipizide ot2 younger-age,tolazamide ot2 younger-age
+432110000,472110000,-1,NA,glipizide ot2 younger-age,tolbutamide ot2 younger-age
+442110000,452110000,-1,NA,gliquidone ot2 younger-age,glyburide ot2 younger-age
+442110000,462110000,-1,NA,gliquidone ot2 younger-age,tolazamide ot2 younger-age
+442110000,472110000,-1,NA,gliquidone ot2 younger-age,tolbutamide ot2 younger-age
+452110000,462110000,-1,NA,glyburide ot2 younger-age,tolazamide ot2 younger-age
+452110000,472110000,-1,NA,glyburide ot2 younger-age,tolbutamide ot2 younger-age
+462110000,472110000,-1,NA,tolazamide ot2 younger-age,tolbutamide ot2 younger-age
+412120000,422120000,-1,NA,chlorpropamide ot2 middle-age,glimepiride ot2 middle-age
+412120000,432120000,-1,NA,chlorpropamide ot2 middle-age,glipizide ot2 middle-age
+412120000,442120000,-1,NA,chlorpropamide ot2 middle-age,gliquidone ot2 middle-age
+412120000,452120000,-1,NA,chlorpropamide ot2 middle-age,glyburide ot2 middle-age
+412120000,462120000,-1,NA,chlorpropamide ot2 middle-age,tolazamide ot2 middle-age
+412120000,472120000,-1,NA,chlorpropamide ot2 middle-age,tolbutamide ot2 middle-age
+422120000,432120000,-1,NA,glimepiride ot2 middle-age,glipizide ot2 middle-age
+422120000,442120000,-1,NA,glimepiride ot2 middle-age,gliquidone ot2 middle-age
+422120000,452120000,-1,NA,glimepiride ot2 middle-age,glyburide ot2 middle-age
+422120000,462120000,-1,NA,glimepiride ot2 middle-age,tolazamide ot2 middle-age
+422120000,472120000,-1,NA,glimepiride ot2 middle-age,tolbutamide ot2 middle-age
+432120000,442120000,-1,NA,glipizide ot2 middle-age,gliquidone ot2 middle-age
+432120000,452120000,-1,NA,glipizide ot2 middle-age,glyburide ot2 middle-age
+432120000,462120000,-1,NA,glipizide ot2 middle-age,tolazamide ot2 middle-age
+432120000,472120000,-1,NA,glipizide ot2 middle-age,tolbutamide ot2 middle-age
+442120000,452120000,-1,NA,gliquidone ot2 middle-age,glyburide ot2 middle-age
+442120000,462120000,-1,NA,gliquidone ot2 middle-age,tolazamide ot2 middle-age
+442120000,472120000,-1,NA,gliquidone ot2 middle-age,tolbutamide ot2 middle-age
+452120000,462120000,-1,NA,glyburide ot2 middle-age,tolazamide ot2 middle-age
+452120000,472120000,-1,NA,glyburide ot2 middle-age,tolbutamide ot2 middle-age
+462120000,472120000,-1,NA,tolazamide ot2 middle-age,tolbutamide ot2 middle-age
+412130000,422130000,-1,NA,chlorpropamide ot2 older-age,glimepiride ot2 older-age
+412130000,432130000,-1,NA,chlorpropamide ot2 older-age,glipizide ot2 older-age
+412130000,442130000,-1,NA,chlorpropamide ot2 older-age,gliquidone ot2 older-age
+412130000,452130000,-1,NA,chlorpropamide ot2 older-age,glyburide ot2 older-age
+412130000,462130000,-1,NA,chlorpropamide ot2 older-age,tolazamide ot2 older-age
+412130000,472130000,-1,NA,chlorpropamide ot2 older-age,tolbutamide ot2 older-age
+422130000,432130000,-1,NA,glimepiride ot2 older-age,glipizide ot2 older-age
+422130000,442130000,-1,NA,glimepiride ot2 older-age,gliquidone ot2 older-age
+422130000,452130000,-1,NA,glimepiride ot2 older-age,glyburide ot2 older-age
+422130000,462130000,-1,NA,glimepiride ot2 older-age,tolazamide ot2 older-age
+422130000,472130000,-1,NA,glimepiride ot2 older-age,tolbutamide ot2 older-age
+432130000,442130000,-1,NA,glipizide ot2 older-age,gliquidone ot2 older-age
+432130000,452130000,-1,NA,glipizide ot2 older-age,glyburide ot2 older-age
+432130000,462130000,-1,NA,glipizide ot2 older-age,tolazamide ot2 older-age
+432130000,472130000,-1,NA,glipizide ot2 older-age,tolbutamide ot2 older-age
+442130000,452130000,-1,NA,gliquidone ot2 older-age,glyburide ot2 older-age
+442130000,462130000,-1,NA,gliquidone ot2 older-age,tolazamide ot2 older-age
+442130000,472130000,-1,NA,gliquidone ot2 older-age,tolbutamide ot2 older-age
+452130000,462130000,-1,NA,glyburide ot2 older-age,tolazamide ot2 older-age
+452130000,472130000,-1,NA,glyburide ot2 older-age,tolbutamide ot2 older-age
+462130000,472130000,-1,NA,tolazamide ot2 older-age,tolbutamide ot2 older-age
+412101000,422101000,-1,NA,chlorpropamide ot2 female,glimepiride ot2 female
+412101000,432101000,-1,NA,chlorpropamide ot2 female,glipizide ot2 female
+412101000,442101000,-1,NA,chlorpropamide ot2 female,gliquidone ot2 female
+412101000,452101000,-1,NA,chlorpropamide ot2 female,glyburide ot2 female
+412101000,462101000,-1,NA,chlorpropamide ot2 female,tolazamide ot2 female
+412101000,472101000,-1,NA,chlorpropamide ot2 female,tolbutamide ot2 female
+422101000,432101000,-1,NA,glimepiride ot2 female,glipizide ot2 female
+422101000,442101000,-1,NA,glimepiride ot2 female,gliquidone ot2 female
+422101000,452101000,-1,NA,glimepiride ot2 female,glyburide ot2 female
+422101000,462101000,-1,NA,glimepiride ot2 female,tolazamide ot2 female
+422101000,472101000,-1,NA,glimepiride ot2 female,tolbutamide ot2 female
+432101000,442101000,-1,NA,glipizide ot2 female,gliquidone ot2 female
+432101000,452101000,-1,NA,glipizide ot2 female,glyburide ot2 female
+432101000,462101000,-1,NA,glipizide ot2 female,tolazamide ot2 female
+432101000,472101000,-1,NA,glipizide ot2 female,tolbutamide ot2 female
+442101000,452101000,-1,NA,gliquidone ot2 female,glyburide ot2 female
+442101000,462101000,-1,NA,gliquidone ot2 female,tolazamide ot2 female
+442101000,472101000,-1,NA,gliquidone ot2 female,tolbutamide ot2 female
+452101000,462101000,-1,NA,glyburide ot2 female,tolazamide ot2 female
+452101000,472101000,-1,NA,glyburide ot2 female,tolbutamide ot2 female
+462101000,472101000,-1,NA,tolazamide ot2 female,tolbutamide ot2 female
+412102000,422102000,-1,NA,chlorpropamide ot2 male,glimepiride ot2 male
+412102000,432102000,-1,NA,chlorpropamide ot2 male,glipizide ot2 male
+412102000,442102000,-1,NA,chlorpropamide ot2 male,gliquidone ot2 male
+412102000,452102000,-1,NA,chlorpropamide ot2 male,glyburide ot2 male
+412102000,462102000,-1,NA,chlorpropamide ot2 male,tolazamide ot2 male
+412102000,472102000,-1,NA,chlorpropamide ot2 male,tolbutamide ot2 male
+422102000,432102000,-1,NA,glimepiride ot2 male,glipizide ot2 male
+422102000,442102000,-1,NA,glimepiride ot2 male,gliquidone ot2 male
+422102000,452102000,-1,NA,glimepiride ot2 male,glyburide ot2 male
+422102000,462102000,-1,NA,glimepiride ot2 male,tolazamide ot2 male
+422102000,472102000,-1,NA,glimepiride ot2 male,tolbutamide ot2 male
+432102000,442102000,-1,NA,glipizide ot2 male,gliquidone ot2 male
+432102000,452102000,-1,NA,glipizide ot2 male,glyburide ot2 male
+432102000,462102000,-1,NA,glipizide ot2 male,tolazamide ot2 male
+432102000,472102000,-1,NA,glipizide ot2 male,tolbutamide ot2 male
+442102000,452102000,-1,NA,gliquidone ot2 male,glyburide ot2 male
+442102000,462102000,-1,NA,gliquidone ot2 male,tolazamide ot2 male
+442102000,472102000,-1,NA,gliquidone ot2 male,tolbutamide ot2 male
+452102000,462102000,-1,NA,glyburide ot2 male,tolazamide ot2 male
+452102000,472102000,-1,NA,glyburide ot2 male,tolbutamide ot2 male
+462102000,472102000,-1,NA,tolazamide ot2 male,tolbutamide ot2 male
+412100100,422100100,-1,NA,chlorpropamide ot2 black,glimepiride ot2 black
+412100100,432100100,-1,NA,chlorpropamide ot2 black,glipizide ot2 black
+412100100,442100100,-1,NA,chlorpropamide ot2 black,gliquidone ot2 black
+412100100,452100100,-1,NA,chlorpropamide ot2 black,glyburide ot2 black
+412100100,462100100,-1,NA,chlorpropamide ot2 black,tolazamide ot2 black
+412100100,472100100,-1,NA,chlorpropamide ot2 black,tolbutamide ot2 black
+422100100,432100100,-1,NA,glimepiride ot2 black,glipizide ot2 black
+422100100,442100100,-1,NA,glimepiride ot2 black,gliquidone ot2 black
+422100100,452100100,-1,NA,glimepiride ot2 black,glyburide ot2 black
+422100100,462100100,-1,NA,glimepiride ot2 black,tolazamide ot2 black
+422100100,472100100,-1,NA,glimepiride ot2 black,tolbutamide ot2 black
+432100100,442100100,-1,NA,glipizide ot2 black,gliquidone ot2 black
+432100100,452100100,-1,NA,glipizide ot2 black,glyburide ot2 black
+432100100,462100100,-1,NA,glipizide ot2 black,tolazamide ot2 black
+432100100,472100100,-1,NA,glipizide ot2 black,tolbutamide ot2 black
+442100100,452100100,-1,NA,gliquidone ot2 black,glyburide ot2 black
+442100100,462100100,-1,NA,gliquidone ot2 black,tolazamide ot2 black
+442100100,472100100,-1,NA,gliquidone ot2 black,tolbutamide ot2 black
+452100100,462100100,-1,NA,glyburide ot2 black,tolazamide ot2 black
+452100100,472100100,-1,NA,glyburide ot2 black,tolbutamide ot2 black
+462100100,472100100,-1,NA,tolazamide ot2 black,tolbutamide ot2 black
+412100010,422100010,-1,NA,chlorpropamide ot2 low-cvr,glimepiride ot2 low-cvr
+412100010,432100010,-1,NA,chlorpropamide ot2 low-cvr,glipizide ot2 low-cvr
+412100010,442100010,-1,NA,chlorpropamide ot2 low-cvr,gliquidone ot2 low-cvr
+412100010,452100010,-1,NA,chlorpropamide ot2 low-cvr,glyburide ot2 low-cvr
+412100010,462100010,-1,NA,chlorpropamide ot2 low-cvr,tolazamide ot2 low-cvr
+412100010,472100010,-1,NA,chlorpropamide ot2 low-cvr,tolbutamide ot2 low-cvr
+422100010,432100010,-1,NA,glimepiride ot2 low-cvr,glipizide ot2 low-cvr
+422100010,442100010,-1,NA,glimepiride ot2 low-cvr,gliquidone ot2 low-cvr
+422100010,452100010,-1,NA,glimepiride ot2 low-cvr,glyburide ot2 low-cvr
+422100010,462100010,-1,NA,glimepiride ot2 low-cvr,tolazamide ot2 low-cvr
+422100010,472100010,-1,NA,glimepiride ot2 low-cvr,tolbutamide ot2 low-cvr
+432100010,442100010,-1,NA,glipizide ot2 low-cvr,gliquidone ot2 low-cvr
+432100010,452100010,-1,NA,glipizide ot2 low-cvr,glyburide ot2 low-cvr
+432100010,462100010,-1,NA,glipizide ot2 low-cvr,tolazamide ot2 low-cvr
+432100010,472100010,-1,NA,glipizide ot2 low-cvr,tolbutamide ot2 low-cvr
+442100010,452100010,-1,NA,gliquidone ot2 low-cvr,glyburide ot2 low-cvr
+442100010,462100010,-1,NA,gliquidone ot2 low-cvr,tolazamide ot2 low-cvr
+442100010,472100010,-1,NA,gliquidone ot2 low-cvr,tolbutamide ot2 low-cvr
+452100010,462100010,-1,NA,glyburide ot2 low-cvr,tolazamide ot2 low-cvr
+452100010,472100010,-1,NA,glyburide ot2 low-cvr,tolbutamide ot2 low-cvr
+462100010,472100010,-1,NA,tolazamide ot2 low-cvr,tolbutamide ot2 low-cvr
+412100020,422100020,-1,NA,chlorpropamide ot2 higher-cvr,glimepiride ot2 higher-cvr
+412100020,432100020,-1,NA,chlorpropamide ot2 higher-cvr,glipizide ot2 higher-cvr
+412100020,442100020,-1,NA,chlorpropamide ot2 higher-cvr,gliquidone ot2 higher-cvr
+412100020,452100020,-1,NA,chlorpropamide ot2 higher-cvr,glyburide ot2 higher-cvr
+412100020,462100020,-1,NA,chlorpropamide ot2 higher-cvr,tolazamide ot2 higher-cvr
+412100020,472100020,-1,NA,chlorpropamide ot2 higher-cvr,tolbutamide ot2 higher-cvr
+422100020,432100020,-1,NA,glimepiride ot2 higher-cvr,glipizide ot2 higher-cvr
+422100020,442100020,-1,NA,glimepiride ot2 higher-cvr,gliquidone ot2 higher-cvr
+422100020,452100020,-1,NA,glimepiride ot2 higher-cvr,glyburide ot2 higher-cvr
+422100020,462100020,-1,NA,glimepiride ot2 higher-cvr,tolazamide ot2 higher-cvr
+422100020,472100020,-1,NA,glimepiride ot2 higher-cvr,tolbutamide ot2 higher-cvr
+432100020,442100020,-1,NA,glipizide ot2 higher-cvr,gliquidone ot2 higher-cvr
+432100020,452100020,-1,NA,glipizide ot2 higher-cvr,glyburide ot2 higher-cvr
+432100020,462100020,-1,NA,glipizide ot2 higher-cvr,tolazamide ot2 higher-cvr
+432100020,472100020,-1,NA,glipizide ot2 higher-cvr,tolbutamide ot2 higher-cvr
+442100020,452100020,-1,NA,gliquidone ot2 higher-cvr,glyburide ot2 higher-cvr
+442100020,462100020,-1,NA,gliquidone ot2 higher-cvr,tolazamide ot2 higher-cvr
+442100020,472100020,-1,NA,gliquidone ot2 higher-cvr,tolbutamide ot2 higher-cvr
+452100020,462100020,-1,NA,glyburide ot2 higher-cvr,tolazamide ot2 higher-cvr
+452100020,472100020,-1,NA,glyburide ot2 higher-cvr,tolbutamide ot2 higher-cvr
+462100020,472100020,-1,NA,tolazamide ot2 higher-cvr,tolbutamide ot2 higher-cvr
+412100001,422100001,-1,NA,chlorpropamide ot2 without-rdz,glimepiride ot2 without-rdz
+412100001,432100001,-1,NA,chlorpropamide ot2 without-rdz,glipizide ot2 without-rdz
+412100001,442100001,-1,NA,chlorpropamide ot2 without-rdz,gliquidone ot2 without-rdz
+412100001,452100001,-1,NA,chlorpropamide ot2 without-rdz,glyburide ot2 without-rdz
+412100001,462100001,-1,NA,chlorpropamide ot2 without-rdz,tolazamide ot2 without-rdz
+412100001,472100001,-1,NA,chlorpropamide ot2 without-rdz,tolbutamide ot2 without-rdz
+422100001,432100001,-1,NA,glimepiride ot2 without-rdz,glipizide ot2 without-rdz
+422100001,442100001,-1,NA,glimepiride ot2 without-rdz,gliquidone ot2 without-rdz
+422100001,452100001,-1,NA,glimepiride ot2 without-rdz,glyburide ot2 without-rdz
+422100001,462100001,-1,NA,glimepiride ot2 without-rdz,tolazamide ot2 without-rdz
+422100001,472100001,-1,NA,glimepiride ot2 without-rdz,tolbutamide ot2 without-rdz
+432100001,442100001,-1,NA,glipizide ot2 without-rdz,gliquidone ot2 without-rdz
+432100001,452100001,-1,NA,glipizide ot2 without-rdz,glyburide ot2 without-rdz
+432100001,462100001,-1,NA,glipizide ot2 without-rdz,tolazamide ot2 without-rdz
+432100001,472100001,-1,NA,glipizide ot2 without-rdz,tolbutamide ot2 without-rdz
+442100001,452100001,-1,NA,gliquidone ot2 without-rdz,glyburide ot2 without-rdz
+442100001,462100001,-1,NA,gliquidone ot2 without-rdz,tolazamide ot2 without-rdz
+442100001,472100001,-1,NA,gliquidone ot2 without-rdz,tolbutamide ot2 without-rdz
+452100001,462100001,-1,NA,glyburide ot2 without-rdz,tolazamide ot2 without-rdz
+452100001,472100001,-1,NA,glyburide ot2 without-rdz,tolbutamide ot2 without-rdz
+462100001,472100001,-1,NA,tolazamide ot2 without-rdz,tolbutamide ot2 without-rdz
+412100002,422100002,-1,NA,chlorpropamide ot2 with-rdz,glimepiride ot2 with-rdz
+412100002,432100002,-1,NA,chlorpropamide ot2 with-rdz,glipizide ot2 with-rdz
+412100002,442100002,-1,NA,chlorpropamide ot2 with-rdz,gliquidone ot2 with-rdz
+412100002,452100002,-1,NA,chlorpropamide ot2 with-rdz,glyburide ot2 with-rdz
+412100002,462100002,-1,NA,chlorpropamide ot2 with-rdz,tolazamide ot2 with-rdz
+412100002,472100002,-1,NA,chlorpropamide ot2 with-rdz,tolbutamide ot2 with-rdz
+422100002,432100002,-1,NA,glimepiride ot2 with-rdz,glipizide ot2 with-rdz
+422100002,442100002,-1,NA,glimepiride ot2 with-rdz,gliquidone ot2 with-rdz
+422100002,452100002,-1,NA,glimepiride ot2 with-rdz,glyburide ot2 with-rdz
+422100002,462100002,-1,NA,glimepiride ot2 with-rdz,tolazamide ot2 with-rdz
+422100002,472100002,-1,NA,glimepiride ot2 with-rdz,tolbutamide ot2 with-rdz
+432100002,442100002,-1,NA,glipizide ot2 with-rdz,gliquidone ot2 with-rdz
+432100002,452100002,-1,NA,glipizide ot2 with-rdz,glyburide ot2 with-rdz
+432100002,462100002,-1,NA,glipizide ot2 with-rdz,tolazamide ot2 with-rdz
+432100002,472100002,-1,NA,glipizide ot2 with-rdz,tolbutamide ot2 with-rdz
+442100002,452100002,-1,NA,gliquidone ot2 with-rdz,glyburide ot2 with-rdz
+442100002,462100002,-1,NA,gliquidone ot2 with-rdz,tolazamide ot2 with-rdz
+442100002,472100002,-1,NA,gliquidone ot2 with-rdz,tolbutamide ot2 with-rdz
+452100002,462100002,-1,NA,glyburide ot2 with-rdz,tolazamide ot2 with-rdz
+452100002,472100002,-1,NA,glyburide ot2 with-rdz,tolbutamide ot2 with-rdz
+462100002,472100002,-1,NA,tolazamide ot2 with-rdz,tolbutamide ot2 with-rdz
