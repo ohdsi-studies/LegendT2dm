@@ -1,0 +1,331 @@
+targetId,comparatorId,outcomeIds,excludedCovariateConceptIds,targetName,comparatorName
+211100000,221100000,-1,NA,albiglutide main,dulaglutide main
+211100000,231100000,-1,NA,albiglutide main,exenatide main
+211100000,241100000,-1,NA,albiglutide main,liraglutide main
+211100000,251100000,-1,NA,albiglutide main,lixisenatide main
+211100000,261100000,-1,NA,albiglutide main,semaglutide main
+221100000,231100000,-1,NA,dulaglutide main,exenatide main
+221100000,241100000,-1,NA,dulaglutide main,liraglutide main
+221100000,251100000,-1,NA,dulaglutide main,lixisenatide main
+221100000,261100000,-1,NA,dulaglutide main,semaglutide main
+231100000,241100000,-1,NA,exenatide main,liraglutide main
+231100000,251100000,-1,NA,exenatide main,lixisenatide main
+231100000,261100000,-1,NA,exenatide main,semaglutide main
+241100000,251100000,-1,NA,liraglutide main,lixisenatide main
+241100000,261100000,-1,NA,liraglutide main,semaglutide main
+251100000,261100000,-1,NA,lixisenatide main,semaglutide main
+211110000,221110000,-1,NA,albiglutide younger-age,dulaglutide younger-age
+211110000,231110000,-1,NA,albiglutide younger-age,exenatide younger-age
+211110000,241110000,-1,NA,albiglutide younger-age,liraglutide younger-age
+211110000,251110000,-1,NA,albiglutide younger-age,lixisenatide younger-age
+211110000,261110000,-1,NA,albiglutide younger-age,semaglutide younger-age
+221110000,231110000,-1,NA,dulaglutide younger-age,exenatide younger-age
+221110000,241110000,-1,NA,dulaglutide younger-age,liraglutide younger-age
+221110000,251110000,-1,NA,dulaglutide younger-age,lixisenatide younger-age
+221110000,261110000,-1,NA,dulaglutide younger-age,semaglutide younger-age
+231110000,241110000,-1,NA,exenatide younger-age,liraglutide younger-age
+231110000,251110000,-1,NA,exenatide younger-age,lixisenatide younger-age
+231110000,261110000,-1,NA,exenatide younger-age,semaglutide younger-age
+241110000,251110000,-1,NA,liraglutide younger-age,lixisenatide younger-age
+241110000,261110000,-1,NA,liraglutide younger-age,semaglutide younger-age
+251110000,261110000,-1,NA,lixisenatide younger-age,semaglutide younger-age
+211120000,221120000,-1,NA,albiglutide middle-age,dulaglutide middle-age
+211120000,231120000,-1,NA,albiglutide middle-age,exenatide middle-age
+211120000,241120000,-1,NA,albiglutide middle-age,liraglutide middle-age
+211120000,251120000,-1,NA,albiglutide middle-age,lixisenatide middle-age
+211120000,261120000,-1,NA,albiglutide middle-age,semaglutide middle-age
+221120000,231120000,-1,NA,dulaglutide middle-age,exenatide middle-age
+221120000,241120000,-1,NA,dulaglutide middle-age,liraglutide middle-age
+221120000,251120000,-1,NA,dulaglutide middle-age,lixisenatide middle-age
+221120000,261120000,-1,NA,dulaglutide middle-age,semaglutide middle-age
+231120000,241120000,-1,NA,exenatide middle-age,liraglutide middle-age
+231120000,251120000,-1,NA,exenatide middle-age,lixisenatide middle-age
+231120000,261120000,-1,NA,exenatide middle-age,semaglutide middle-age
+241120000,251120000,-1,NA,liraglutide middle-age,lixisenatide middle-age
+241120000,261120000,-1,NA,liraglutide middle-age,semaglutide middle-age
+251120000,261120000,-1,NA,lixisenatide middle-age,semaglutide middle-age
+211130000,221130000,-1,NA,albiglutide older-age,dulaglutide older-age
+211130000,231130000,-1,NA,albiglutide older-age,exenatide older-age
+211130000,241130000,-1,NA,albiglutide older-age,liraglutide older-age
+211130000,251130000,-1,NA,albiglutide older-age,lixisenatide older-age
+211130000,261130000,-1,NA,albiglutide older-age,semaglutide older-age
+221130000,231130000,-1,NA,dulaglutide older-age,exenatide older-age
+221130000,241130000,-1,NA,dulaglutide older-age,liraglutide older-age
+221130000,251130000,-1,NA,dulaglutide older-age,lixisenatide older-age
+221130000,261130000,-1,NA,dulaglutide older-age,semaglutide older-age
+231130000,241130000,-1,NA,exenatide older-age,liraglutide older-age
+231130000,251130000,-1,NA,exenatide older-age,lixisenatide older-age
+231130000,261130000,-1,NA,exenatide older-age,semaglutide older-age
+241130000,251130000,-1,NA,liraglutide older-age,lixisenatide older-age
+241130000,261130000,-1,NA,liraglutide older-age,semaglutide older-age
+251130000,261130000,-1,NA,lixisenatide older-age,semaglutide older-age
+211101000,221101000,-1,NA,albiglutide female,dulaglutide female
+211101000,231101000,-1,NA,albiglutide female,exenatide female
+211101000,241101000,-1,NA,albiglutide female,liraglutide female
+211101000,251101000,-1,NA,albiglutide female,lixisenatide female
+211101000,261101000,-1,NA,albiglutide female,semaglutide female
+221101000,231101000,-1,NA,dulaglutide female,exenatide female
+221101000,241101000,-1,NA,dulaglutide female,liraglutide female
+221101000,251101000,-1,NA,dulaglutide female,lixisenatide female
+221101000,261101000,-1,NA,dulaglutide female,semaglutide female
+231101000,241101000,-1,NA,exenatide female,liraglutide female
+231101000,251101000,-1,NA,exenatide female,lixisenatide female
+231101000,261101000,-1,NA,exenatide female,semaglutide female
+241101000,251101000,-1,NA,liraglutide female,lixisenatide female
+241101000,261101000,-1,NA,liraglutide female,semaglutide female
+251101000,261101000,-1,NA,lixisenatide female,semaglutide female
+211102000,221102000,-1,NA,albiglutide male,dulaglutide male
+211102000,231102000,-1,NA,albiglutide male,exenatide male
+211102000,241102000,-1,NA,albiglutide male,liraglutide male
+211102000,251102000,-1,NA,albiglutide male,lixisenatide male
+211102000,261102000,-1,NA,albiglutide male,semaglutide male
+221102000,231102000,-1,NA,dulaglutide male,exenatide male
+221102000,241102000,-1,NA,dulaglutide male,liraglutide male
+221102000,251102000,-1,NA,dulaglutide male,lixisenatide male
+221102000,261102000,-1,NA,dulaglutide male,semaglutide male
+231102000,241102000,-1,NA,exenatide male,liraglutide male
+231102000,251102000,-1,NA,exenatide male,lixisenatide male
+231102000,261102000,-1,NA,exenatide male,semaglutide male
+241102000,251102000,-1,NA,liraglutide male,lixisenatide male
+241102000,261102000,-1,NA,liraglutide male,semaglutide male
+251102000,261102000,-1,NA,lixisenatide male,semaglutide male
+211100100,221100100,-1,NA,albiglutide black,dulaglutide black
+211100100,231100100,-1,NA,albiglutide black,exenatide black
+211100100,241100100,-1,NA,albiglutide black,liraglutide black
+211100100,251100100,-1,NA,albiglutide black,lixisenatide black
+211100100,261100100,-1,NA,albiglutide black,semaglutide black
+221100100,231100100,-1,NA,dulaglutide black,exenatide black
+221100100,241100100,-1,NA,dulaglutide black,liraglutide black
+221100100,251100100,-1,NA,dulaglutide black,lixisenatide black
+221100100,261100100,-1,NA,dulaglutide black,semaglutide black
+231100100,241100100,-1,NA,exenatide black,liraglutide black
+231100100,251100100,-1,NA,exenatide black,lixisenatide black
+231100100,261100100,-1,NA,exenatide black,semaglutide black
+241100100,251100100,-1,NA,liraglutide black,lixisenatide black
+241100100,261100100,-1,NA,liraglutide black,semaglutide black
+251100100,261100100,-1,NA,lixisenatide black,semaglutide black
+211100010,221100010,-1,NA,albiglutide low-cvr,dulaglutide low-cvr
+211100010,231100010,-1,NA,albiglutide low-cvr,exenatide low-cvr
+211100010,241100010,-1,NA,albiglutide low-cvr,liraglutide low-cvr
+211100010,251100010,-1,NA,albiglutide low-cvr,lixisenatide low-cvr
+211100010,261100010,-1,NA,albiglutide low-cvr,semaglutide low-cvr
+221100010,231100010,-1,NA,dulaglutide low-cvr,exenatide low-cvr
+221100010,241100010,-1,NA,dulaglutide low-cvr,liraglutide low-cvr
+221100010,251100010,-1,NA,dulaglutide low-cvr,lixisenatide low-cvr
+221100010,261100010,-1,NA,dulaglutide low-cvr,semaglutide low-cvr
+231100010,241100010,-1,NA,exenatide low-cvr,liraglutide low-cvr
+231100010,251100010,-1,NA,exenatide low-cvr,lixisenatide low-cvr
+231100010,261100010,-1,NA,exenatide low-cvr,semaglutide low-cvr
+241100010,251100010,-1,NA,liraglutide low-cvr,lixisenatide low-cvr
+241100010,261100010,-1,NA,liraglutide low-cvr,semaglutide low-cvr
+251100010,261100010,-1,NA,lixisenatide low-cvr,semaglutide low-cvr
+211100020,221100020,-1,NA,albiglutide higher-cvr,dulaglutide higher-cvr
+211100020,231100020,-1,NA,albiglutide higher-cvr,exenatide higher-cvr
+211100020,241100020,-1,NA,albiglutide higher-cvr,liraglutide higher-cvr
+211100020,251100020,-1,NA,albiglutide higher-cvr,lixisenatide higher-cvr
+211100020,261100020,-1,NA,albiglutide higher-cvr,semaglutide higher-cvr
+221100020,231100020,-1,NA,dulaglutide higher-cvr,exenatide higher-cvr
+221100020,241100020,-1,NA,dulaglutide higher-cvr,liraglutide higher-cvr
+221100020,251100020,-1,NA,dulaglutide higher-cvr,lixisenatide higher-cvr
+221100020,261100020,-1,NA,dulaglutide higher-cvr,semaglutide higher-cvr
+231100020,241100020,-1,NA,exenatide higher-cvr,liraglutide higher-cvr
+231100020,251100020,-1,NA,exenatide higher-cvr,lixisenatide higher-cvr
+231100020,261100020,-1,NA,exenatide higher-cvr,semaglutide higher-cvr
+241100020,251100020,-1,NA,liraglutide higher-cvr,lixisenatide higher-cvr
+241100020,261100020,-1,NA,liraglutide higher-cvr,semaglutide higher-cvr
+251100020,261100020,-1,NA,lixisenatide higher-cvr,semaglutide higher-cvr
+211100001,221100001,-1,NA,albiglutide without-rdz,dulaglutide without-rdz
+211100001,231100001,-1,NA,albiglutide without-rdz,exenatide without-rdz
+211100001,241100001,-1,NA,albiglutide without-rdz,liraglutide without-rdz
+211100001,251100001,-1,NA,albiglutide without-rdz,lixisenatide without-rdz
+211100001,261100001,-1,NA,albiglutide without-rdz,semaglutide without-rdz
+221100001,231100001,-1,NA,dulaglutide without-rdz,exenatide without-rdz
+221100001,241100001,-1,NA,dulaglutide without-rdz,liraglutide without-rdz
+221100001,251100001,-1,NA,dulaglutide without-rdz,lixisenatide without-rdz
+221100001,261100001,-1,NA,dulaglutide without-rdz,semaglutide without-rdz
+231100001,241100001,-1,NA,exenatide without-rdz,liraglutide without-rdz
+231100001,251100001,-1,NA,exenatide without-rdz,lixisenatide without-rdz
+231100001,261100001,-1,NA,exenatide without-rdz,semaglutide without-rdz
+241100001,251100001,-1,NA,liraglutide without-rdz,lixisenatide without-rdz
+241100001,261100001,-1,NA,liraglutide without-rdz,semaglutide without-rdz
+251100001,261100001,-1,NA,lixisenatide without-rdz,semaglutide without-rdz
+211100002,221100002,-1,NA,albiglutide with-rdz,dulaglutide with-rdz
+211100002,231100002,-1,NA,albiglutide with-rdz,exenatide with-rdz
+211100002,241100002,-1,NA,albiglutide with-rdz,liraglutide with-rdz
+211100002,251100002,-1,NA,albiglutide with-rdz,lixisenatide with-rdz
+211100002,261100002,-1,NA,albiglutide with-rdz,semaglutide with-rdz
+221100002,231100002,-1,NA,dulaglutide with-rdz,exenatide with-rdz
+221100002,241100002,-1,NA,dulaglutide with-rdz,liraglutide with-rdz
+221100002,251100002,-1,NA,dulaglutide with-rdz,lixisenatide with-rdz
+221100002,261100002,-1,NA,dulaglutide with-rdz,semaglutide with-rdz
+231100002,241100002,-1,NA,exenatide with-rdz,liraglutide with-rdz
+231100002,251100002,-1,NA,exenatide with-rdz,lixisenatide with-rdz
+231100002,261100002,-1,NA,exenatide with-rdz,semaglutide with-rdz
+241100002,251100002,-1,NA,liraglutide with-rdz,lixisenatide with-rdz
+241100002,261100002,-1,NA,liraglutide with-rdz,semaglutide with-rdz
+251100002,261100002,-1,NA,lixisenatide with-rdz,semaglutide with-rdz
+212100000,222100000,-1,NA,albiglutide main ot2,dulaglutide main ot2
+212100000,232100000,-1,NA,albiglutide main ot2,exenatide main ot2
+212100000,242100000,-1,NA,albiglutide main ot2,liraglutide main ot2
+212100000,252100000,-1,NA,albiglutide main ot2,lixisenatide main ot2
+212100000,262100000,-1,NA,albiglutide main ot2,semaglutide main ot2
+222100000,232100000,-1,NA,dulaglutide main ot2,exenatide main ot2
+222100000,242100000,-1,NA,dulaglutide main ot2,liraglutide main ot2
+222100000,252100000,-1,NA,dulaglutide main ot2,lixisenatide main ot2
+222100000,262100000,-1,NA,dulaglutide main ot2,semaglutide main ot2
+232100000,242100000,-1,NA,exenatide main ot2,liraglutide main ot2
+232100000,252100000,-1,NA,exenatide main ot2,lixisenatide main ot2
+232100000,262100000,-1,NA,exenatide main ot2,semaglutide main ot2
+242100000,252100000,-1,NA,liraglutide main ot2,lixisenatide main ot2
+242100000,262100000,-1,NA,liraglutide main ot2,semaglutide main ot2
+252100000,262100000,-1,NA,lixisenatide main ot2,semaglutide main ot2
+212110000,222110000,-1,NA,albiglutide ot2 younger-age,dulaglutide ot2 younger-age
+212110000,232110000,-1,NA,albiglutide ot2 younger-age,exenatide ot2 younger-age
+212110000,242110000,-1,NA,albiglutide ot2 younger-age,liraglutide ot2 younger-age
+212110000,252110000,-1,NA,albiglutide ot2 younger-age,lixisenatide ot2 younger-age
+212110000,262110000,-1,NA,albiglutide ot2 younger-age,semaglutide ot2 younger-age
+222110000,232110000,-1,NA,dulaglutide ot2 younger-age,exenatide ot2 younger-age
+222110000,242110000,-1,NA,dulaglutide ot2 younger-age,liraglutide ot2 younger-age
+222110000,252110000,-1,NA,dulaglutide ot2 younger-age,lixisenatide ot2 younger-age
+222110000,262110000,-1,NA,dulaglutide ot2 younger-age,semaglutide ot2 younger-age
+232110000,242110000,-1,NA,exenatide ot2 younger-age,liraglutide ot2 younger-age
+232110000,252110000,-1,NA,exenatide ot2 younger-age,lixisenatide ot2 younger-age
+232110000,262110000,-1,NA,exenatide ot2 younger-age,semaglutide ot2 younger-age
+242110000,252110000,-1,NA,liraglutide ot2 younger-age,lixisenatide ot2 younger-age
+242110000,262110000,-1,NA,liraglutide ot2 younger-age,semaglutide ot2 younger-age
+252110000,262110000,-1,NA,lixisenatide ot2 younger-age,semaglutide ot2 younger-age
+212120000,222120000,-1,NA,albiglutide ot2 middle-age,dulaglutide ot2 middle-age
+212120000,232120000,-1,NA,albiglutide ot2 middle-age,exenatide ot2 middle-age
+212120000,242120000,-1,NA,albiglutide ot2 middle-age,liraglutide ot2 middle-age
+212120000,252120000,-1,NA,albiglutide ot2 middle-age,lixisenatide ot2 middle-age
+212120000,262120000,-1,NA,albiglutide ot2 middle-age,semaglutide ot2 middle-age
+222120000,232120000,-1,NA,dulaglutide ot2 middle-age,exenatide ot2 middle-age
+222120000,242120000,-1,NA,dulaglutide ot2 middle-age,liraglutide ot2 middle-age
+222120000,252120000,-1,NA,dulaglutide ot2 middle-age,lixisenatide ot2 middle-age
+222120000,262120000,-1,NA,dulaglutide ot2 middle-age,semaglutide ot2 middle-age
+232120000,242120000,-1,NA,exenatide ot2 middle-age,liraglutide ot2 middle-age
+232120000,252120000,-1,NA,exenatide ot2 middle-age,lixisenatide ot2 middle-age
+232120000,262120000,-1,NA,exenatide ot2 middle-age,semaglutide ot2 middle-age
+242120000,252120000,-1,NA,liraglutide ot2 middle-age,lixisenatide ot2 middle-age
+242120000,262120000,-1,NA,liraglutide ot2 middle-age,semaglutide ot2 middle-age
+252120000,262120000,-1,NA,lixisenatide ot2 middle-age,semaglutide ot2 middle-age
+212130000,222130000,-1,NA,albiglutide ot2 older-age,dulaglutide ot2 older-age
+212130000,232130000,-1,NA,albiglutide ot2 older-age,exenatide ot2 older-age
+212130000,242130000,-1,NA,albiglutide ot2 older-age,liraglutide ot2 older-age
+212130000,252130000,-1,NA,albiglutide ot2 older-age,lixisenatide ot2 older-age
+212130000,262130000,-1,NA,albiglutide ot2 older-age,semaglutide ot2 older-age
+222130000,232130000,-1,NA,dulaglutide ot2 older-age,exenatide ot2 older-age
+222130000,242130000,-1,NA,dulaglutide ot2 older-age,liraglutide ot2 older-age
+222130000,252130000,-1,NA,dulaglutide ot2 older-age,lixisenatide ot2 older-age
+222130000,262130000,-1,NA,dulaglutide ot2 older-age,semaglutide ot2 older-age
+232130000,242130000,-1,NA,exenatide ot2 older-age,liraglutide ot2 older-age
+232130000,252130000,-1,NA,exenatide ot2 older-age,lixisenatide ot2 older-age
+232130000,262130000,-1,NA,exenatide ot2 older-age,semaglutide ot2 older-age
+242130000,252130000,-1,NA,liraglutide ot2 older-age,lixisenatide ot2 older-age
+242130000,262130000,-1,NA,liraglutide ot2 older-age,semaglutide ot2 older-age
+252130000,262130000,-1,NA,lixisenatide ot2 older-age,semaglutide ot2 older-age
+212101000,222101000,-1,NA,albiglutide ot2 female,dulaglutide ot2 female
+212101000,232101000,-1,NA,albiglutide ot2 female,exenatide ot2 female
+212101000,242101000,-1,NA,albiglutide ot2 female,liraglutide ot2 female
+212101000,252101000,-1,NA,albiglutide ot2 female,lixisenatide ot2 female
+212101000,262101000,-1,NA,albiglutide ot2 female,semaglutide ot2 female
+222101000,232101000,-1,NA,dulaglutide ot2 female,exenatide ot2 female
+222101000,242101000,-1,NA,dulaglutide ot2 female,liraglutide ot2 female
+222101000,252101000,-1,NA,dulaglutide ot2 female,lixisenatide ot2 female
+222101000,262101000,-1,NA,dulaglutide ot2 female,semaglutide ot2 female
+232101000,242101000,-1,NA,exenatide ot2 female,liraglutide ot2 female
+232101000,252101000,-1,NA,exenatide ot2 female,lixisenatide ot2 female
+232101000,262101000,-1,NA,exenatide ot2 female,semaglutide ot2 female
+242101000,252101000,-1,NA,liraglutide ot2 female,lixisenatide ot2 female
+242101000,262101000,-1,NA,liraglutide ot2 female,semaglutide ot2 female
+252101000,262101000,-1,NA,lixisenatide ot2 female,semaglutide ot2 female
+212102000,222102000,-1,NA,albiglutide ot2 male,dulaglutide ot2 male
+212102000,232102000,-1,NA,albiglutide ot2 male,exenatide ot2 male
+212102000,242102000,-1,NA,albiglutide ot2 male,liraglutide ot2 male
+212102000,252102000,-1,NA,albiglutide ot2 male,lixisenatide ot2 male
+212102000,262102000,-1,NA,albiglutide ot2 male,semaglutide ot2 male
+222102000,232102000,-1,NA,dulaglutide ot2 male,exenatide ot2 male
+222102000,242102000,-1,NA,dulaglutide ot2 male,liraglutide ot2 male
+222102000,252102000,-1,NA,dulaglutide ot2 male,lixisenatide ot2 male
+222102000,262102000,-1,NA,dulaglutide ot2 male,semaglutide ot2 male
+232102000,242102000,-1,NA,exenatide ot2 male,liraglutide ot2 male
+232102000,252102000,-1,NA,exenatide ot2 male,lixisenatide ot2 male
+232102000,262102000,-1,NA,exenatide ot2 male,semaglutide ot2 male
+242102000,252102000,-1,NA,liraglutide ot2 male,lixisenatide ot2 male
+242102000,262102000,-1,NA,liraglutide ot2 male,semaglutide ot2 male
+252102000,262102000,-1,NA,lixisenatide ot2 male,semaglutide ot2 male
+212100100,222100100,-1,NA,albiglutide ot2 black,dulaglutide ot2 black
+212100100,232100100,-1,NA,albiglutide ot2 black,exenatide ot2 black
+212100100,242100100,-1,NA,albiglutide ot2 black,liraglutide ot2 black
+212100100,252100100,-1,NA,albiglutide ot2 black,lixisenatide ot2 black
+212100100,262100100,-1,NA,albiglutide ot2 black,semaglutide ot2 black
+222100100,232100100,-1,NA,dulaglutide ot2 black,exenatide ot2 black
+222100100,242100100,-1,NA,dulaglutide ot2 black,liraglutide ot2 black
+222100100,252100100,-1,NA,dulaglutide ot2 black,lixisenatide ot2 black
+222100100,262100100,-1,NA,dulaglutide ot2 black,semaglutide ot2 black
+232100100,242100100,-1,NA,exenatide ot2 black,liraglutide ot2 black
+232100100,252100100,-1,NA,exenatide ot2 black,lixisenatide ot2 black
+232100100,262100100,-1,NA,exenatide ot2 black,semaglutide ot2 black
+242100100,252100100,-1,NA,liraglutide ot2 black,lixisenatide ot2 black
+242100100,262100100,-1,NA,liraglutide ot2 black,semaglutide ot2 black
+252100100,262100100,-1,NA,lixisenatide ot2 black,semaglutide ot2 black
+212100010,222100010,-1,NA,albiglutide ot2 low-cvr,dulaglutide ot2 low-cvr
+212100010,232100010,-1,NA,albiglutide ot2 low-cvr,exenatide ot2 low-cvr
+212100010,242100010,-1,NA,albiglutide ot2 low-cvr,liraglutide ot2 low-cvr
+212100010,252100010,-1,NA,albiglutide ot2 low-cvr,lixisenatide ot2 low-cvr
+212100010,262100010,-1,NA,albiglutide ot2 low-cvr,semaglutide ot2 low-cvr
+222100010,232100010,-1,NA,dulaglutide ot2 low-cvr,exenatide ot2 low-cvr
+222100010,242100010,-1,NA,dulaglutide ot2 low-cvr,liraglutide ot2 low-cvr
+222100010,252100010,-1,NA,dulaglutide ot2 low-cvr,lixisenatide ot2 low-cvr
+222100010,262100010,-1,NA,dulaglutide ot2 low-cvr,semaglutide ot2 low-cvr
+232100010,242100010,-1,NA,exenatide ot2 low-cvr,liraglutide ot2 low-cvr
+232100010,252100010,-1,NA,exenatide ot2 low-cvr,lixisenatide ot2 low-cvr
+232100010,262100010,-1,NA,exenatide ot2 low-cvr,semaglutide ot2 low-cvr
+242100010,252100010,-1,NA,liraglutide ot2 low-cvr,lixisenatide ot2 low-cvr
+242100010,262100010,-1,NA,liraglutide ot2 low-cvr,semaglutide ot2 low-cvr
+252100010,262100010,-1,NA,lixisenatide ot2 low-cvr,semaglutide ot2 low-cvr
+212100020,222100020,-1,NA,albiglutide ot2 higher-cvr,dulaglutide ot2 higher-cvr
+212100020,232100020,-1,NA,albiglutide ot2 higher-cvr,exenatide ot2 higher-cvr
+212100020,242100020,-1,NA,albiglutide ot2 higher-cvr,liraglutide ot2 higher-cvr
+212100020,252100020,-1,NA,albiglutide ot2 higher-cvr,lixisenatide ot2 higher-cvr
+212100020,262100020,-1,NA,albiglutide ot2 higher-cvr,semaglutide ot2 higher-cvr
+222100020,232100020,-1,NA,dulaglutide ot2 higher-cvr,exenatide ot2 higher-cvr
+222100020,242100020,-1,NA,dulaglutide ot2 higher-cvr,liraglutide ot2 higher-cvr
+222100020,252100020,-1,NA,dulaglutide ot2 higher-cvr,lixisenatide ot2 higher-cvr
+222100020,262100020,-1,NA,dulaglutide ot2 higher-cvr,semaglutide ot2 higher-cvr
+232100020,242100020,-1,NA,exenatide ot2 higher-cvr,liraglutide ot2 higher-cvr
+232100020,252100020,-1,NA,exenatide ot2 higher-cvr,lixisenatide ot2 higher-cvr
+232100020,262100020,-1,NA,exenatide ot2 higher-cvr,semaglutide ot2 higher-cvr
+242100020,252100020,-1,NA,liraglutide ot2 higher-cvr,lixisenatide ot2 higher-cvr
+242100020,262100020,-1,NA,liraglutide ot2 higher-cvr,semaglutide ot2 higher-cvr
+252100020,262100020,-1,NA,lixisenatide ot2 higher-cvr,semaglutide ot2 higher-cvr
+212100001,222100001,-1,NA,albiglutide ot2 without-rdz,dulaglutide ot2 without-rdz
+212100001,232100001,-1,NA,albiglutide ot2 without-rdz,exenatide ot2 without-rdz
+212100001,242100001,-1,NA,albiglutide ot2 without-rdz,liraglutide ot2 without-rdz
+212100001,252100001,-1,NA,albiglutide ot2 without-rdz,lixisenatide ot2 without-rdz
+212100001,262100001,-1,NA,albiglutide ot2 without-rdz,semaglutide ot2 without-rdz
+222100001,232100001,-1,NA,dulaglutide ot2 without-rdz,exenatide ot2 without-rdz
+222100001,242100001,-1,NA,dulaglutide ot2 without-rdz,liraglutide ot2 without-rdz
+222100001,252100001,-1,NA,dulaglutide ot2 without-rdz,lixisenatide ot2 without-rdz
+222100001,262100001,-1,NA,dulaglutide ot2 without-rdz,semaglutide ot2 without-rdz
+232100001,242100001,-1,NA,exenatide ot2 without-rdz,liraglutide ot2 without-rdz
+232100001,252100001,-1,NA,exenatide ot2 without-rdz,lixisenatide ot2 without-rdz
+232100001,262100001,-1,NA,exenatide ot2 without-rdz,semaglutide ot2 without-rdz
+242100001,252100001,-1,NA,liraglutide ot2 without-rdz,lixisenatide ot2 without-rdz
+242100001,262100001,-1,NA,liraglutide ot2 without-rdz,semaglutide ot2 without-rdz
+252100001,262100001,-1,NA,lixisenatide ot2 without-rdz,semaglutide ot2 without-rdz
+212100002,222100002,-1,NA,albiglutide ot2 with-rdz,dulaglutide ot2 with-rdz
+212100002,232100002,-1,NA,albiglutide ot2 with-rdz,exenatide ot2 with-rdz
+212100002,242100002,-1,NA,albiglutide ot2 with-rdz,liraglutide ot2 with-rdz
+212100002,252100002,-1,NA,albiglutide ot2 with-rdz,lixisenatide ot2 with-rdz
+212100002,262100002,-1,NA,albiglutide ot2 with-rdz,semaglutide ot2 with-rdz
+222100002,232100002,-1,NA,dulaglutide ot2 with-rdz,exenatide ot2 with-rdz
+222100002,242100002,-1,NA,dulaglutide ot2 with-rdz,liraglutide ot2 with-rdz
+222100002,252100002,-1,NA,dulaglutide ot2 with-rdz,lixisenatide ot2 with-rdz
+222100002,262100002,-1,NA,dulaglutide ot2 with-rdz,semaglutide ot2 with-rdz
+232100002,242100002,-1,NA,exenatide ot2 with-rdz,liraglutide ot2 with-rdz
+232100002,252100002,-1,NA,exenatide ot2 with-rdz,lixisenatide ot2 with-rdz
+232100002,262100002,-1,NA,exenatide ot2 with-rdz,semaglutide ot2 with-rdz
+242100002,252100002,-1,NA,liraglutide ot2 with-rdz,lixisenatide ot2 with-rdz
+242100002,262100002,-1,NA,liraglutide ot2 with-rdz,semaglutide ot2 with-rdz
+252100002,262100002,-1,NA,lixisenatide ot2 with-rdz,semaglutide ot2 with-rdz
