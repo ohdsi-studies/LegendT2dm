@@ -1,10 +1,14 @@
+# generates drug-level exposure cohorts
+# derived from `GenerateExposureCohortDefinitions.R`
+
 # Generates:
-#   classCohortsToCreate.csv
-#   classTcosOfInterest.csv
+#   [className]CohortsToCreate.csv
+#   [className]TcosOfInterest.csv
 #
 # Requires at input:
 #   classGeneratorList.csv
 #   ExposuresOfInterest.csv
+
 library(dplyr)
 
 # set ATLAS web API link
@@ -13,28 +17,26 @@ baseUrl = "https://atlas-demo.ohdsi.org/WebAPI"
 keyring::key_set_with_value('baseUrl', password = baseUrl)
 baseUrlWebApi <- keyring::key_get("baseUrl")
 
-# code to query the Atlas Web API to get the base cohort (based on pre-defined ATLAS cohort)
-# baseCohort <- ROhdsiWebApi::getCohortDefinition(1487, baseUrl = "https://atlas-demo.ohdsi.org/WebAPI")
-# baseCohortJson <- RJSONIO::toJSON(baseCohort$expression, indent = 2, digits = 50)
-# SqlRender::writeSql(baseCohortJson, targetFile = "inst/settings/baseCohort.json")
-# saveRDS(baseCohort, file = "inst/settings/baseCohort.rds")
-
-# Inclusion rules: Age == 1, Sex == 2, Race == 3, CVD == 4, Renal == 5, PriorMet == 6, NoMet == 7
-
+# load in base cohort
 baseCohort <- readRDS("inst/settings/baseCohort.rds")
 
 generateStats <- TRUE
 
+# start from drug-level permutations and exposures
 permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
-permutations <- inner_join(permutations, exposuresOfInterestTable %>% select(cohortId, shortName), by = c("targetId" = "cohortId"))
+permutations <- inner_join(permutations, exposuresOfInterestTable %>%
+                             select(cohortId, shortName),
+                           by = c("targetId" = "cohortId"))
 
+# helper function to create cohort names
 makeName <- function(permutation) {
   paste0(permutation$shortName, ": ", permutation$tar, ", ", permutation$met, " prior met, ",
          permutation$age, " age, ", permutation$sex, " sex, ", permutation$race, " race, ",
          permutation$cvd, " cv risk, ", permutation$renal, " renal")
 }
 
+# another helper function to generate `shortName` (used as `atlasName` for creating cohort)
 makeShortName <- function(permutation) {
   paste0(permutation$shortName,
          ifelse(permutation$age == "any" &
@@ -51,6 +53,21 @@ makeShortName <- function(permutation) {
          ifelse(permutation$renal != "any", paste0(" ", permutation$renal, "-rdz"), ""))
 }
 
+# function to create permute drug-level target-comparator pairs----
+createPermutationsForDrugs <- function(classId){
+  drugsForClass <- exposuresOfInterestTable %>% filter(cohortId > classId, cohortId < (classId + 10)) %>% mutate(classId = classId)
+  permutationsForDrugs <- drugsForClass %>% left_join(permutations, by = c("classId" ="targetId")) %>%
+    mutate(targetId = cohortId.x,
+           cohortId = cohortId.y,
+           includedConceptIds = conceptId,
+           shortName = name) %>%
+    select(-type, -shortName.x, -order, -includedConceptIds, -conceptId, -cohortId.x, -cohortId.y, -shortName.y) %>%
+    rowwise() %>%
+    mutate(cohortId = as.integer(sub(paste0("^",classId), targetId, cohortId))) %>%
+    mutate(name = paste0("ID", as.integer(cohortId)))
+}
+
+# another function to actually permute the target-comparator pairs----
 permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 
   c1Id <- floor(permutation$comparator1Id / 10)
@@ -289,161 +306,18 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
   return(cohort)
 }
 
-allCohortsSql <-
-  do.call("rbind",
-          lapply(1:nrow(permutations), function(i) {
-            cohortDefinition <- permuteTC(baseCohort, permutations[i,])
-            cohortSql <- ROhdsiWebApi::getCohortSql(cohortDefinition,
-                                                    baseUrlWebApi,
-                                                    generateStats = generateStats)
-            return(cohortSql)
-          }))
-
-allCohortsJson <-
-  do.call("rbind",
-          lapply(1:nrow(permutations), function(i) {
-            cohortDefinition <- permuteTC(baseCohort, permutations[i,])
-            cohortJson <- RJSONIO::toJSON(cohortDefinition$expression, indent = 2, digits = 12)
-            return(cohortJson)
-          }))
 
 
-
-permutations$json <- allCohortsJson
-permutations$sql <- allCohortsSql
-
-permutations <- permutations %>%
-  mutate(name = paste0("ID", as.integer(cohortId)))
-
-permutations$atlasName <- makeShortName(permutations)
-
-# # write class-level SQL and JSON files----
-# for (i in 1:nrow(permutations)) {
-#   row <- permutations[i,]
-#   sqlFileName <- file.path("inst/sql/sql_server/class", paste(row$name, "sql", sep = "."))
-#   SqlRender::writeSql(row$sql, sqlFileName)
-#   jsonFileName <- file.path("inst/cohorts/class", paste(row$name, "json", sep = "."))
-#   SqlRender::writeSql(row$json, jsonFileName)
-# }
-#
-# # write class-level CohortsToCreate.csv file----
-# classCohortsToCreate <- permutations %>%
-#   mutate(atlasId = cohortId,
-#          name = paste0("class/", name)) %>%
-#   select(atlasId, atlasName, cohortId, name)
-#
-# readr::write_csv(classCohortsToCreate, "inst/settings/classCohortsToCreate.csv")
-#
-# # Make classTcosOfInterest.csv ----
-# makeTCOs <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
-#
-#   baseTs <- permutations %>%
-#     filter(tar == tarId,
-#            age == ageId, sex == sexId, race == raceId, cvd == cvdId,
-#            renal == renalId, met == metId)
-#
-#   tab <- as.data.frame(t(combn(baseTs$cohortId, m = 2)))
-#   names(tab) <- c("targetId", "comparatorId")
-#   tab$outcomeIds <- -1
-#   tab$excludedCovariateConceptIds <- NA
-#
-#   tab <- tab %>% inner_join(permutations %>% select(cohortId, atlasName) %>% rename(targetId = cohortId),
-#                             by = "targetId") %>%
-#     rename(targetName = atlasName)
-#
-#   tab <- tab %>% inner_join(permutations %>% select(cohortId, atlasName) %>% rename(comparatorId = cohortId),
-#                             by = "comparatorId") %>%
-#     rename(comparatorName = atlasName)
-#
-#   return(tab)
-# }
-#
-# classTcos <- rbind(
-#   # Order: tar, met, age, sex, race, cvd, renal
-#   #
-#   # OT1
-#   # Main
-#   makeTCOs("ot1", "with", "any", "any", "any", "any", "any"),
-#   # Age
-#   makeTCOs("ot1", "with", "younger", "any", "any", "any", "any"),
-#   makeTCOs("ot1", "with", "middle", "any", "any", "any", "any"),
-#   makeTCOs("ot1", "with", "older", "any", "any", "any", "any"),
-#   # Sex
-#   makeTCOs("ot1", "with", "any", "female", "any", "any", "any"),
-#   makeTCOs("ot1", "with", "any", "male", "any", "any", "any"),
-#   # Race
-#   makeTCOs("ot1", "with", "any", "any", "black", "any", "any"),
-#   # CV risk
-#   makeTCOs("ot1", "with", "any", "any", "any", "low", "any"),
-#   makeTCOs("ot1", "with", "any", "any", "any", "higher", "any"),
-#   # Renal dz
-#   makeTCOs("ot1", "with", "any", "any", "any", "any", "without"),
-#   makeTCOs("ot1", "with", "any", "any", "any", "any", "with"),
-#   #
-#   # OT2
-#   # Main
-#   makeTCOs("ot2", "with", "any", "any", "any", "any", "any"),
-#   # Age
-#   makeTCOs("ot2", "with", "younger", "any", "any", "any", "any"),
-#   makeTCOs("ot2", "with", "middle", "any", "any", "any", "any"),
-#   makeTCOs("ot2", "with", "older", "any", "any", "any", "any"),
-#   # Sex
-#   makeTCOs("ot2", "with", "any", "female", "any", "any", "any"),
-#   makeTCOs("ot2", "with", "any", "male", "any", "any", "any"),
-#   # Race
-#   makeTCOs("ot2", "with", "any", "any", "black", "any", "any"),
-#   # CV risk
-#   makeTCOs("ot2", "with", "any", "any", "any", "low", "any"),
-#   makeTCOs("ot2", "with", "any", "any", "any", "higher", "any"),
-#   # Renal dz
-#   makeTCOs("ot2", "with", "any", "any", "any", "any", "without"),
-#   makeTCOs("ot2", "with", "any", "any", "any", "any", "with")
-# )
-# readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
-
-
-# readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
-# TODO Move to separate file
-
-
-
-
-
-
-# WE NEED TO RUN THIS!
-# Generate ingredient-level cohorts----
-# NOTE: need to use `permutations` generated from previous class-level code!
-permutations <- readr::read_csv("extra/classGeneratorList.csv")
-exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
-permutations <- inner_join(permutations, exposuresOfInterestTable %>%
-                             select(cohortId, shortName), by = c("targetId" = "cohortId"))
-
-# permutations <- permutations %>% filter(cohortId == 101100000)
-# classId <- 10
-
-createPermutationsForDrugs <- function(classId){
-  drugsForClass <- exposuresOfInterestTable %>% filter(cohortId > classId, cohortId < (classId + 10)) %>% mutate(classId = classId)
-  permutationsForDrugs <- drugsForClass %>% left_join(permutations, by = c("classId" ="targetId")) %>%
-    mutate(targetId = cohortId.x,
-           cohortId = cohortId.y,
-           includedConceptIds = conceptId,
-           shortName = name) %>%
-    select(-type, -shortName.x, -order, -includedConceptIds, -conceptId, -cohortId.x, -cohortId.y, -shortName.y) %>%
-    rowwise() %>%
-    mutate(cohortId = as.integer(sub(paste0("^",classId), targetId, cohortId))) %>%
-    mutate(name = paste0("ID", as.integer(cohortId)))
-}
-
-# try DPP4 I first...
-#classIds <- c(10, 20, 30, 40)
-#classIds = c(10)
-# shift to SGLT2I
-#classIds = c(30)
-
-# March 2023 GLP1RAs:
+# !! #------
+# specify drug class here
+# e.g., GLP1RAs:
 classIds = c(20)
-permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>% bind_rows()
 
+# then create permutations for the desired drug class
+permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>%
+  bind_rows()
+
+# generate the needed JSON and SQL files to create the drug-level exposure cohorts
 permutationsForDrugs$json <-
   do.call("rbind",
           lapply(1:nrow(permutationsForDrugs), function(i) {
@@ -462,14 +336,13 @@ permutationsForDrugs$sql <-
                                                     generateStats = generateStats)
           }))
 
-#cohortDefinition <- permuteTC(baseCohort, permutationsForDrugs[1,])
-
 # save SQL and JSON files under class name (e.g., "DPP4I") folder
 ## need to create the directory for this class first
 this.class = tolower(permutationsForDrugs[1,]$class)
 dir.create(file.path("inst/sql/sql_server", this.class))
 dir.create(file.path("inst/cohorts", this.class))
 
+## and then save JSON and SQL files
 for (i in 1:nrow(permutationsForDrugs)) {
   row <- permutationsForDrugs[i,]
   sqlFileName <- file.path("inst/sql/sql_server", tolower(row$class), paste(row$name, "sql", sep = "."))
@@ -478,38 +351,31 @@ for (i in 1:nrow(permutationsForDrugs)) {
   SqlRender::writeSql(row$json, jsonFileName)
 }
 
-
-# # sanity check --- inspect json and sql concept set IDs
-# cohortID = 2
-# conceptSetJson = CohortDiagnostics:::extractConceptSetsJsonFromCohortJson(permutationsForDrugs$json[cohortID])
-# conceptSetSql = CohortDiagnostics:::extractConceptSetsSqlFromCohortSql(permutationsForDrugs$sql[cohortID])
-
-# save drug-level cohorts to cohortsToCreate.csv file
-# only do this for DPP4I for now
-# do it for SGLT2I
+# save drug-level cohorts to [className]cohortsToCreate.csv file
 this.class = permutationsForDrugs$class[1] %>% tolower() # this line defines name of drug class
+permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs) # add `atlasName` as short cohort name
 drugCohortsToCreate <- permutationsForDrugs %>%
   mutate(atlasId = cohortId,
          name = sprintf('%s/%s',this.class,name)) %>%
-  select(atlasId, atlasName, cohortId, name)
+  select(atlasId, atlasName, cohortId, name) # creates the cohortsToCreate table
 
 filePath = "inst/settings/"
-fileName = sprintf('%sCohortsToCreate.csv', this.class)
+fileName = sprintf('%sCohortsToCreate.csv', this.class) # file path
 readr::write_csv(drugCohortsToCreate,
-                 file.path(filePath, fileName)) # this creates CohortsToCreate.csv file; can eye-ball to check
+                 file.path(filePath, fileName)) # write the file as `[className]cohortsToCreate.csv`
 
 # check out some example cohort definitions
-# (updating ingredient name for each drug class)
-permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
-printCohortDefinitionFromNameAndJson(name = "canagliflozin main",
-                                     json = permutationsForDrugs$json[1]) # change this to one GLP1RA name instead!
-printCohortDefinitionFromNameAndJson(name = "canagliflozin younger-age",
+## PLEASE UPDATE INGREDIENT NAME FOR EACH DRUG-CLASS!
+## (examples here are within the GLP1RA class)
+#permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
+printCohortDefinitionFromNameAndJson(name = "albiglutide main",
+                                     json = permutationsForDrugs$json[1])
+printCohortDefinitionFromNameAndJson(name = "albiglutide younger-age",
                                      json = permutationsForDrugs$json[2])
-printCohortDefinitionFromNameAndJson(name = "anagliflozin middle-age",
-                                     json = permutationsForDrugs$json[3])
 
 
-#make drug-level TCOs
+# generate drug-level TCOs-----
+# function to create TCO triplets
 makeTCOsDrug <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
 
   baseTs <- permutationsForDrugs %>%
@@ -533,6 +399,7 @@ makeTCOsDrug <- function(tarId, metId, ageId, sexId, raceId, cvdId, renalId) {
   return(tab)
 }
 
+# use the function to create all TCOs
 drugTcos <- rbind(
   # Order: tar, met, age, sex, race, cvd, renal
   #
@@ -575,9 +442,13 @@ drugTcos <- rbind(
   makeTCOsDrug("ot2", "with", "any", "any", "any", "any", "with")
 )
 
-# save TCOs for one class of drugs only
+
+# save TCOs for the desired drug class
 this.class = tolower(permutationsForDrugs$class[1])
 filePath = "inst/settings/"
-fileName = sprintf('%sTcosOfInterest.csv', this.class)
+fileName = sprintf('%sTcosOfInterest.csv', this.class) # file path
 
-readr::write_csv(drugTcos, file.path(filePath, fileName))
+readr::write_csv(drugTcos, file.path(filePath, fileName)) # save it
+
+
+
