@@ -34,9 +34,9 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 drugSchema <- "legendt2dm_drug_diagnostics"
 
 # create all data tables; will nuke everything
-LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = drugSchema,
-                                    sqlFileName = "CreateCohortDiagnosticsTables.sql")
+# LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+#                                     schema = drugSchema,
+#                                     sqlFileName = "CreateCohortDiagnosticsTables.sql")
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legend", schema = drugSchema)
