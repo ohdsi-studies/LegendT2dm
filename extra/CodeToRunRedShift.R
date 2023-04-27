@@ -32,7 +32,7 @@ databaseId<- "MDCR"
 databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
 databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
 tablePrefix <- "legend_t2dm_mdcr"
-outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_new_test"
+outputFolder <- "E:/LegendT2dmOutput_mdcr_sglt2i_r42test"
 
 # # Feb 2023: fast forward data version to the latest accessible
 # cdmDatabaseSchema <- "cdm_truven_mdcd_v2321" #v2128
@@ -79,9 +79,9 @@ assessPhenotypes(connectionDetails = conn,
                  databaseId = databaseId,
                  databaseName = databaseName,
                  databaseDescription = databaseDescription,
-                 createExposureCohorts = FALSE,#TRUE,
+                 createExposureCohorts = TRUE,
                  runExposureCohortDiagnostics = TRUE,
-                 createOutcomeCohorts = FALSE, #TRUE,
+                 createOutcomeCohorts = TRUE,
                  runOutcomeCohortDiagnostics = FALSE) #TRUE)
 
 assessPropensityModels(connectionDetails = conn,
@@ -150,7 +150,7 @@ execute(connectionDetails = conn,
         fetchAllDataFromServer = TRUE,
         generateAllCohortMethodDataObjects = TRUE,
         runCohortMethod = TRUE,
-        runSections = #c(1:6),
+        runSections = c(1:6),
         computeCovariateBalance = TRUE,
         exportToCsv = TRUE,
         maxCores = 16)

@@ -46,17 +46,19 @@ resultsSchema <- "legendt2dm_drug_results"
 
 # Feb 2023 SGLT2I CES results upload ----
 # Results uploaded for newer data versions!
+# March 2023: uploaded DA Germany & US Open Claims
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "E:/LegendT2dmOutput_optum_ehr_new/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
-    "E:/LegendT2dmOutput_optum_dod_new/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
-    "E:/LegendT2dmOutput_mdcd_new/sglt2i/export/Results_sglt2i_study_MDCD.zip",
-    "E:/LegendT2dmOutput_mdcr_sglt2i_new/sglt2i/export/Results_sglt2i_study_MDCR.zip",
-    "E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip"
-    #"d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
+    #"E:/LegendT2dmOutput_optum_ehr_new/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
+    #"E:/LegendT2dmOutput_optum_dod_new/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
+    #"E:/LegendT2dmOutput_mdcd_new/sglt2i/export/Results_sglt2i_study_MDCD.zip",
+    #"E:/LegendT2dmOutput_mdcr_sglt2i_new/sglt2i/export/Results_sglt2i_study_MDCR.zip",
+    #"E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip"
+    "E:/Results_sglt2i_study_OPENCLAIMS.zip",
+    "E:/Results_sglt2i_study_DA_GERMANY.zip"
     ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
