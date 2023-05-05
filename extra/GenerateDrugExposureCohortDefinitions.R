@@ -313,8 +313,11 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 # e.g., GLP1RAs:
 #classIds = c(20)
 
+# or, DPP4i
+classIds = c(10)
+
 # also, for SU
-classIds = c(40)
+#classIds = c(40)
 
 # then create permutations for the desired drug class
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>%
