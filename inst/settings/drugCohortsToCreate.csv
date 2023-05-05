@@ -1,0 +1,969 @@
+atlasId,atlasName,cohortId,name
+111100000,alogliptin main,111100000,DPP4I/ID111100000
+111110000,alogliptin younger-age,111110000,DPP4I/ID111110000
+111120000,alogliptin middle-age,111120000,DPP4I/ID111120000
+111130000,alogliptin older-age,111130000,DPP4I/ID111130000
+111100010,alogliptin low-cvr,111100010,DPP4I/ID111100010
+111100020,alogliptin higher-cvr,111100020,DPP4I/ID111100020
+111101000,alogliptin female,111101000,DPP4I/ID111101000
+111102000,alogliptin male,111102000,DPP4I/ID111102000
+111100100,alogliptin black,111100100,DPP4I/ID111100100
+111100001,alogliptin without-rdz,111100001,DPP4I/ID111100001
+111100002,alogliptin with-rdz,111100002,DPP4I/ID111100002
+112100000,alogliptin main ot2,112100000,DPP4I/ID112100000
+112110000,alogliptin ot2 younger-age,112110000,DPP4I/ID112110000
+112120000,alogliptin ot2 middle-age,112120000,DPP4I/ID112120000
+112130000,alogliptin ot2 older-age,112130000,DPP4I/ID112130000
+112100010,alogliptin ot2 low-cvr,112100010,DPP4I/ID112100010
+112100020,alogliptin ot2 higher-cvr,112100020,DPP4I/ID112100020
+112101000,alogliptin ot2 female,112101000,DPP4I/ID112101000
+112102000,alogliptin ot2 male,112102000,DPP4I/ID112102000
+112100100,alogliptin ot2 black,112100100,DPP4I/ID112100100
+112100001,alogliptin ot2 without-rdz,112100001,DPP4I/ID112100001
+112100002,alogliptin ot2 with-rdz,112100002,DPP4I/ID112100002
+111200000,alogliptin main no-met,111200000,DPP4I/ID111200000
+111210000,alogliptin no-met younger-age,111210000,DPP4I/ID111210000
+111220000,alogliptin no-met middle-age,111220000,DPP4I/ID111220000
+111230000,alogliptin no-met older-age,111230000,DPP4I/ID111230000
+111200010,alogliptin no-met low-cvr,111200010,DPP4I/ID111200010
+111200020,alogliptin no-met higher-cvr,111200020,DPP4I/ID111200020
+111201000,alogliptin no-met female,111201000,DPP4I/ID111201000
+111202000,alogliptin no-met male,111202000,DPP4I/ID111202000
+111200100,alogliptin no-met black,111200100,DPP4I/ID111200100
+111200001,alogliptin no-met without-rdz,111200001,DPP4I/ID111200001
+111200002,alogliptin no-met with-rdz,111200002,DPP4I/ID111200002
+112200000,alogliptin main ot2 no-met,112200000,DPP4I/ID112200000
+112210000,alogliptin ot2 no-met younger-age,112210000,DPP4I/ID112210000
+112220000,alogliptin ot2 no-met middle-age,112220000,DPP4I/ID112220000
+112230000,alogliptin ot2 no-met older-age,112230000,DPP4I/ID112230000
+112200010,alogliptin ot2 no-met low-cvr,112200010,DPP4I/ID112200010
+112200020,alogliptin ot2 no-met higher-cvr,112200020,DPP4I/ID112200020
+112201000,alogliptin ot2 no-met female,112201000,DPP4I/ID112201000
+112202000,alogliptin ot2 no-met male,112202000,DPP4I/ID112202000
+112200100,alogliptin ot2 no-met black,112200100,DPP4I/ID112200100
+112200001,alogliptin ot2 no-met without-rdz,112200001,DPP4I/ID112200001
+112200002,alogliptin ot2 no-met with-rdz,112200002,DPP4I/ID112200002
+121100000,linagliptin main,121100000,DPP4I/ID121100000
+121110000,linagliptin younger-age,121110000,DPP4I/ID121110000
+121120000,linagliptin middle-age,121120000,DPP4I/ID121120000
+121130000,linagliptin older-age,121130000,DPP4I/ID121130000
+121100010,linagliptin low-cvr,121100010,DPP4I/ID121100010
+121100020,linagliptin higher-cvr,121100020,DPP4I/ID121100020
+121101000,linagliptin female,121101000,DPP4I/ID121101000
+121102000,linagliptin male,121102000,DPP4I/ID121102000
+121100100,linagliptin black,121100100,DPP4I/ID121100100
+121100001,linagliptin without-rdz,121100001,DPP4I/ID121100001
+121100002,linagliptin with-rdz,121100002,DPP4I/ID121100002
+122100000,linagliptin main ot2,122100000,DPP4I/ID122100000
+122110000,linagliptin ot2 younger-age,122110000,DPP4I/ID122110000
+122120000,linagliptin ot2 middle-age,122120000,DPP4I/ID122120000
+122130000,linagliptin ot2 older-age,122130000,DPP4I/ID122130000
+122100010,linagliptin ot2 low-cvr,122100010,DPP4I/ID122100010
+122100020,linagliptin ot2 higher-cvr,122100020,DPP4I/ID122100020
+122101000,linagliptin ot2 female,122101000,DPP4I/ID122101000
+122102000,linagliptin ot2 male,122102000,DPP4I/ID122102000
+122100100,linagliptin ot2 black,122100100,DPP4I/ID122100100
+122100001,linagliptin ot2 without-rdz,122100001,DPP4I/ID122100001
+122100002,linagliptin ot2 with-rdz,122100002,DPP4I/ID122100002
+121200000,linagliptin main no-met,121200000,DPP4I/ID121200000
+121210000,linagliptin no-met younger-age,121210000,DPP4I/ID121210000
+121220000,linagliptin no-met middle-age,121220000,DPP4I/ID121220000
+121230000,linagliptin no-met older-age,121230000,DPP4I/ID121230000
+121200010,linagliptin no-met low-cvr,121200010,DPP4I/ID121200010
+121200020,linagliptin no-met higher-cvr,121200020,DPP4I/ID121200020
+121201000,linagliptin no-met female,121201000,DPP4I/ID121201000
+121202000,linagliptin no-met male,121202000,DPP4I/ID121202000
+121200100,linagliptin no-met black,121200100,DPP4I/ID121200100
+121200001,linagliptin no-met without-rdz,121200001,DPP4I/ID121200001
+121200002,linagliptin no-met with-rdz,121200002,DPP4I/ID121200002
+122200000,linagliptin main ot2 no-met,122200000,DPP4I/ID122200000
+122210000,linagliptin ot2 no-met younger-age,122210000,DPP4I/ID122210000
+122220000,linagliptin ot2 no-met middle-age,122220000,DPP4I/ID122220000
+122230000,linagliptin ot2 no-met older-age,122230000,DPP4I/ID122230000
+122200010,linagliptin ot2 no-met low-cvr,122200010,DPP4I/ID122200010
+122200020,linagliptin ot2 no-met higher-cvr,122200020,DPP4I/ID122200020
+122201000,linagliptin ot2 no-met female,122201000,DPP4I/ID122201000
+122202000,linagliptin ot2 no-met male,122202000,DPP4I/ID122202000
+122200100,linagliptin ot2 no-met black,122200100,DPP4I/ID122200100
+122200001,linagliptin ot2 no-met without-rdz,122200001,DPP4I/ID122200001
+122200002,linagliptin ot2 no-met with-rdz,122200002,DPP4I/ID122200002
+131100000,saxagliptin main,131100000,DPP4I/ID131100000
+131110000,saxagliptin younger-age,131110000,DPP4I/ID131110000
+131120000,saxagliptin middle-age,131120000,DPP4I/ID131120000
+131130000,saxagliptin older-age,131130000,DPP4I/ID131130000
+131100010,saxagliptin low-cvr,131100010,DPP4I/ID131100010
+131100020,saxagliptin higher-cvr,131100020,DPP4I/ID131100020
+131101000,saxagliptin female,131101000,DPP4I/ID131101000
+131102000,saxagliptin male,131102000,DPP4I/ID131102000
+131100100,saxagliptin black,131100100,DPP4I/ID131100100
+131100001,saxagliptin without-rdz,131100001,DPP4I/ID131100001
+131100002,saxagliptin with-rdz,131100002,DPP4I/ID131100002
+132100000,saxagliptin main ot2,132100000,DPP4I/ID132100000
+132110000,saxagliptin ot2 younger-age,132110000,DPP4I/ID132110000
+132120000,saxagliptin ot2 middle-age,132120000,DPP4I/ID132120000
+132130000,saxagliptin ot2 older-age,132130000,DPP4I/ID132130000
+132100010,saxagliptin ot2 low-cvr,132100010,DPP4I/ID132100010
+132100020,saxagliptin ot2 higher-cvr,132100020,DPP4I/ID132100020
+132101000,saxagliptin ot2 female,132101000,DPP4I/ID132101000
+132102000,saxagliptin ot2 male,132102000,DPP4I/ID132102000
+132100100,saxagliptin ot2 black,132100100,DPP4I/ID132100100
+132100001,saxagliptin ot2 without-rdz,132100001,DPP4I/ID132100001
+132100002,saxagliptin ot2 with-rdz,132100002,DPP4I/ID132100002
+131200000,saxagliptin main no-met,131200000,DPP4I/ID131200000
+131210000,saxagliptin no-met younger-age,131210000,DPP4I/ID131210000
+131220000,saxagliptin no-met middle-age,131220000,DPP4I/ID131220000
+131230000,saxagliptin no-met older-age,131230000,DPP4I/ID131230000
+131200010,saxagliptin no-met low-cvr,131200010,DPP4I/ID131200010
+131200020,saxagliptin no-met higher-cvr,131200020,DPP4I/ID131200020
+131201000,saxagliptin no-met female,131201000,DPP4I/ID131201000
+131202000,saxagliptin no-met male,131202000,DPP4I/ID131202000
+131200100,saxagliptin no-met black,131200100,DPP4I/ID131200100
+131200001,saxagliptin no-met without-rdz,131200001,DPP4I/ID131200001
+131200002,saxagliptin no-met with-rdz,131200002,DPP4I/ID131200002
+132200000,saxagliptin main ot2 no-met,132200000,DPP4I/ID132200000
+132210000,saxagliptin ot2 no-met younger-age,132210000,DPP4I/ID132210000
+132220000,saxagliptin ot2 no-met middle-age,132220000,DPP4I/ID132220000
+132230000,saxagliptin ot2 no-met older-age,132230000,DPP4I/ID132230000
+132200010,saxagliptin ot2 no-met low-cvr,132200010,DPP4I/ID132200010
+132200020,saxagliptin ot2 no-met higher-cvr,132200020,DPP4I/ID132200020
+132201000,saxagliptin ot2 no-met female,132201000,DPP4I/ID132201000
+132202000,saxagliptin ot2 no-met male,132202000,DPP4I/ID132202000
+132200100,saxagliptin ot2 no-met black,132200100,DPP4I/ID132200100
+132200001,saxagliptin ot2 no-met without-rdz,132200001,DPP4I/ID132200001
+132200002,saxagliptin ot2 no-met with-rdz,132200002,DPP4I/ID132200002
+141100000,sitagliptin main,141100000,DPP4I/ID141100000
+141110000,sitagliptin younger-age,141110000,DPP4I/ID141110000
+141120000,sitagliptin middle-age,141120000,DPP4I/ID141120000
+141130000,sitagliptin older-age,141130000,DPP4I/ID141130000
+141100010,sitagliptin low-cvr,141100010,DPP4I/ID141100010
+141100020,sitagliptin higher-cvr,141100020,DPP4I/ID141100020
+141101000,sitagliptin female,141101000,DPP4I/ID141101000
+141102000,sitagliptin male,141102000,DPP4I/ID141102000
+141100100,sitagliptin black,141100100,DPP4I/ID141100100
+141100001,sitagliptin without-rdz,141100001,DPP4I/ID141100001
+141100002,sitagliptin with-rdz,141100002,DPP4I/ID141100002
+142100000,sitagliptin main ot2,142100000,DPP4I/ID142100000
+142110000,sitagliptin ot2 younger-age,142110000,DPP4I/ID142110000
+142120000,sitagliptin ot2 middle-age,142120000,DPP4I/ID142120000
+142130000,sitagliptin ot2 older-age,142130000,DPP4I/ID142130000
+142100010,sitagliptin ot2 low-cvr,142100010,DPP4I/ID142100010
+142100020,sitagliptin ot2 higher-cvr,142100020,DPP4I/ID142100020
+142101000,sitagliptin ot2 female,142101000,DPP4I/ID142101000
+142102000,sitagliptin ot2 male,142102000,DPP4I/ID142102000
+142100100,sitagliptin ot2 black,142100100,DPP4I/ID142100100
+142100001,sitagliptin ot2 without-rdz,142100001,DPP4I/ID142100001
+142100002,sitagliptin ot2 with-rdz,142100002,DPP4I/ID142100002
+141200000,sitagliptin main no-met,141200000,DPP4I/ID141200000
+141210000,sitagliptin no-met younger-age,141210000,DPP4I/ID141210000
+141220000,sitagliptin no-met middle-age,141220000,DPP4I/ID141220000
+141230000,sitagliptin no-met older-age,141230000,DPP4I/ID141230000
+141200010,sitagliptin no-met low-cvr,141200010,DPP4I/ID141200010
+141200020,sitagliptin no-met higher-cvr,141200020,DPP4I/ID141200020
+141201000,sitagliptin no-met female,141201000,DPP4I/ID141201000
+141202000,sitagliptin no-met male,141202000,DPP4I/ID141202000
+141200100,sitagliptin no-met black,141200100,DPP4I/ID141200100
+141200001,sitagliptin no-met without-rdz,141200001,DPP4I/ID141200001
+141200002,sitagliptin no-met with-rdz,141200002,DPP4I/ID141200002
+142200000,sitagliptin main ot2 no-met,142200000,DPP4I/ID142200000
+142210000,sitagliptin ot2 no-met younger-age,142210000,DPP4I/ID142210000
+142220000,sitagliptin ot2 no-met middle-age,142220000,DPP4I/ID142220000
+142230000,sitagliptin ot2 no-met older-age,142230000,DPP4I/ID142230000
+142200010,sitagliptin ot2 no-met low-cvr,142200010,DPP4I/ID142200010
+142200020,sitagliptin ot2 no-met higher-cvr,142200020,DPP4I/ID142200020
+142201000,sitagliptin ot2 no-met female,142201000,DPP4I/ID142201000
+142202000,sitagliptin ot2 no-met male,142202000,DPP4I/ID142202000
+142200100,sitagliptin ot2 no-met black,142200100,DPP4I/ID142200100
+142200001,sitagliptin ot2 no-met without-rdz,142200001,DPP4I/ID142200001
+142200002,sitagliptin ot2 no-met with-rdz,142200002,DPP4I/ID142200002
+151100000,vildagliptin main,151100000,DPP4I/ID151100000
+151110000,vildagliptin younger-age,151110000,DPP4I/ID151110000
+151120000,vildagliptin middle-age,151120000,DPP4I/ID151120000
+151130000,vildagliptin older-age,151130000,DPP4I/ID151130000
+151100010,vildagliptin low-cvr,151100010,DPP4I/ID151100010
+151100020,vildagliptin higher-cvr,151100020,DPP4I/ID151100020
+151101000,vildagliptin female,151101000,DPP4I/ID151101000
+151102000,vildagliptin male,151102000,DPP4I/ID151102000
+151100100,vildagliptin black,151100100,DPP4I/ID151100100
+151100001,vildagliptin without-rdz,151100001,DPP4I/ID151100001
+151100002,vildagliptin with-rdz,151100002,DPP4I/ID151100002
+152100000,vildagliptin main ot2,152100000,DPP4I/ID152100000
+152110000,vildagliptin ot2 younger-age,152110000,DPP4I/ID152110000
+152120000,vildagliptin ot2 middle-age,152120000,DPP4I/ID152120000
+152130000,vildagliptin ot2 older-age,152130000,DPP4I/ID152130000
+152100010,vildagliptin ot2 low-cvr,152100010,DPP4I/ID152100010
+152100020,vildagliptin ot2 higher-cvr,152100020,DPP4I/ID152100020
+152101000,vildagliptin ot2 female,152101000,DPP4I/ID152101000
+152102000,vildagliptin ot2 male,152102000,DPP4I/ID152102000
+152100100,vildagliptin ot2 black,152100100,DPP4I/ID152100100
+152100001,vildagliptin ot2 without-rdz,152100001,DPP4I/ID152100001
+152100002,vildagliptin ot2 with-rdz,152100002,DPP4I/ID152100002
+151200000,vildagliptin main no-met,151200000,DPP4I/ID151200000
+151210000,vildagliptin no-met younger-age,151210000,DPP4I/ID151210000
+151220000,vildagliptin no-met middle-age,151220000,DPP4I/ID151220000
+151230000,vildagliptin no-met older-age,151230000,DPP4I/ID151230000
+151200010,vildagliptin no-met low-cvr,151200010,DPP4I/ID151200010
+151200020,vildagliptin no-met higher-cvr,151200020,DPP4I/ID151200020
+151201000,vildagliptin no-met female,151201000,DPP4I/ID151201000
+151202000,vildagliptin no-met male,151202000,DPP4I/ID151202000
+151200100,vildagliptin no-met black,151200100,DPP4I/ID151200100
+151200001,vildagliptin no-met without-rdz,151200001,DPP4I/ID151200001
+151200002,vildagliptin no-met with-rdz,151200002,DPP4I/ID151200002
+152200000,vildagliptin main ot2 no-met,152200000,DPP4I/ID152200000
+152210000,vildagliptin ot2 no-met younger-age,152210000,DPP4I/ID152210000
+152220000,vildagliptin ot2 no-met middle-age,152220000,DPP4I/ID152220000
+152230000,vildagliptin ot2 no-met older-age,152230000,DPP4I/ID152230000
+152200010,vildagliptin ot2 no-met low-cvr,152200010,DPP4I/ID152200010
+152200020,vildagliptin ot2 no-met higher-cvr,152200020,DPP4I/ID152200020
+152201000,vildagliptin ot2 no-met female,152201000,DPP4I/ID152201000
+152202000,vildagliptin ot2 no-met male,152202000,DPP4I/ID152202000
+152200100,vildagliptin ot2 no-met black,152200100,DPP4I/ID152200100
+152200001,vildagliptin ot2 no-met without-rdz,152200001,DPP4I/ID152200001
+152200002,vildagliptin ot2 no-met with-rdz,152200002,DPP4I/ID152200002
+211100000,albiglutide main,211100000,glp1ra/ID211100000
+211110000,albiglutide younger-age,211110000,glp1ra/ID211110000
+211120000,albiglutide middle-age,211120000,glp1ra/ID211120000
+211130000,albiglutide older-age,211130000,glp1ra/ID211130000
+211100010,albiglutide low-cvr,211100010,glp1ra/ID211100010
+211100020,albiglutide higher-cvr,211100020,glp1ra/ID211100020
+211101000,albiglutide female,211101000,glp1ra/ID211101000
+211102000,albiglutide male,211102000,glp1ra/ID211102000
+211100100,albiglutide black,211100100,glp1ra/ID211100100
+211100001,albiglutide without-rdz,211100001,glp1ra/ID211100001
+211100002,albiglutide with-rdz,211100002,glp1ra/ID211100002
+212100000,albiglutide main ot2,212100000,glp1ra/ID212100000
+212110000,albiglutide ot2 younger-age,212110000,glp1ra/ID212110000
+212120000,albiglutide ot2 middle-age,212120000,glp1ra/ID212120000
+212130000,albiglutide ot2 older-age,212130000,glp1ra/ID212130000
+212100010,albiglutide ot2 low-cvr,212100010,glp1ra/ID212100010
+212100020,albiglutide ot2 higher-cvr,212100020,glp1ra/ID212100020
+212101000,albiglutide ot2 female,212101000,glp1ra/ID212101000
+212102000,albiglutide ot2 male,212102000,glp1ra/ID212102000
+212100100,albiglutide ot2 black,212100100,glp1ra/ID212100100
+212100001,albiglutide ot2 without-rdz,212100001,glp1ra/ID212100001
+212100002,albiglutide ot2 with-rdz,212100002,glp1ra/ID212100002
+211200000,albiglutide main no-met,211200000,glp1ra/ID211200000
+211210000,albiglutide no-met younger-age,211210000,glp1ra/ID211210000
+211220000,albiglutide no-met middle-age,211220000,glp1ra/ID211220000
+211230000,albiglutide no-met older-age,211230000,glp1ra/ID211230000
+211200010,albiglutide no-met low-cvr,211200010,glp1ra/ID211200010
+211200020,albiglutide no-met higher-cvr,211200020,glp1ra/ID211200020
+211201000,albiglutide no-met female,211201000,glp1ra/ID211201000
+211202000,albiglutide no-met male,211202000,glp1ra/ID211202000
+211200100,albiglutide no-met black,211200100,glp1ra/ID211200100
+211200001,albiglutide no-met without-rdz,211200001,glp1ra/ID211200001
+211200002,albiglutide no-met with-rdz,211200002,glp1ra/ID211200002
+212200000,albiglutide main ot2 no-met,212200000,glp1ra/ID212200000
+212210000,albiglutide ot2 no-met younger-age,212210000,glp1ra/ID212210000
+212220000,albiglutide ot2 no-met middle-age,212220000,glp1ra/ID212220000
+212230000,albiglutide ot2 no-met older-age,212230000,glp1ra/ID212230000
+212200010,albiglutide ot2 no-met low-cvr,212200010,glp1ra/ID212200010
+212200020,albiglutide ot2 no-met higher-cvr,212200020,glp1ra/ID212200020
+212201000,albiglutide ot2 no-met female,212201000,glp1ra/ID212201000
+212202000,albiglutide ot2 no-met male,212202000,glp1ra/ID212202000
+212200100,albiglutide ot2 no-met black,212200100,glp1ra/ID212200100
+212200001,albiglutide ot2 no-met without-rdz,212200001,glp1ra/ID212200001
+212200002,albiglutide ot2 no-met with-rdz,212200002,glp1ra/ID212200002
+221100000,dulaglutide main,221100000,glp1ra/ID221100000
+221110000,dulaglutide younger-age,221110000,glp1ra/ID221110000
+221120000,dulaglutide middle-age,221120000,glp1ra/ID221120000
+221130000,dulaglutide older-age,221130000,glp1ra/ID221130000
+221100010,dulaglutide low-cvr,221100010,glp1ra/ID221100010
+221100020,dulaglutide higher-cvr,221100020,glp1ra/ID221100020
+221101000,dulaglutide female,221101000,glp1ra/ID221101000
+221102000,dulaglutide male,221102000,glp1ra/ID221102000
+221100100,dulaglutide black,221100100,glp1ra/ID221100100
+221100001,dulaglutide without-rdz,221100001,glp1ra/ID221100001
+221100002,dulaglutide with-rdz,221100002,glp1ra/ID221100002
+222100000,dulaglutide main ot2,222100000,glp1ra/ID222100000
+222110000,dulaglutide ot2 younger-age,222110000,glp1ra/ID222110000
+222120000,dulaglutide ot2 middle-age,222120000,glp1ra/ID222120000
+222130000,dulaglutide ot2 older-age,222130000,glp1ra/ID222130000
+222100010,dulaglutide ot2 low-cvr,222100010,glp1ra/ID222100010
+222100020,dulaglutide ot2 higher-cvr,222100020,glp1ra/ID222100020
+222101000,dulaglutide ot2 female,222101000,glp1ra/ID222101000
+222102000,dulaglutide ot2 male,222102000,glp1ra/ID222102000
+222100100,dulaglutide ot2 black,222100100,glp1ra/ID222100100
+222100001,dulaglutide ot2 without-rdz,222100001,glp1ra/ID222100001
+222100002,dulaglutide ot2 with-rdz,222100002,glp1ra/ID222100002
+221200000,dulaglutide main no-met,221200000,glp1ra/ID221200000
+221210000,dulaglutide no-met younger-age,221210000,glp1ra/ID221210000
+221220000,dulaglutide no-met middle-age,221220000,glp1ra/ID221220000
+221230000,dulaglutide no-met older-age,221230000,glp1ra/ID221230000
+221200010,dulaglutide no-met low-cvr,221200010,glp1ra/ID221200010
+221200020,dulaglutide no-met higher-cvr,221200020,glp1ra/ID221200020
+221201000,dulaglutide no-met female,221201000,glp1ra/ID221201000
+221202000,dulaglutide no-met male,221202000,glp1ra/ID221202000
+221200100,dulaglutide no-met black,221200100,glp1ra/ID221200100
+221200001,dulaglutide no-met without-rdz,221200001,glp1ra/ID221200001
+221200002,dulaglutide no-met with-rdz,221200002,glp1ra/ID221200002
+222200000,dulaglutide main ot2 no-met,222200000,glp1ra/ID222200000
+222210000,dulaglutide ot2 no-met younger-age,222210000,glp1ra/ID222210000
+222220000,dulaglutide ot2 no-met middle-age,222220000,glp1ra/ID222220000
+222230000,dulaglutide ot2 no-met older-age,222230000,glp1ra/ID222230000
+222200010,dulaglutide ot2 no-met low-cvr,222200010,glp1ra/ID222200010
+222200020,dulaglutide ot2 no-met higher-cvr,222200020,glp1ra/ID222200020
+222201000,dulaglutide ot2 no-met female,222201000,glp1ra/ID222201000
+222202000,dulaglutide ot2 no-met male,222202000,glp1ra/ID222202000
+222200100,dulaglutide ot2 no-met black,222200100,glp1ra/ID222200100
+222200001,dulaglutide ot2 no-met without-rdz,222200001,glp1ra/ID222200001
+222200002,dulaglutide ot2 no-met with-rdz,222200002,glp1ra/ID222200002
+231100000,exenatide main,231100000,glp1ra/ID231100000
+231110000,exenatide younger-age,231110000,glp1ra/ID231110000
+231120000,exenatide middle-age,231120000,glp1ra/ID231120000
+231130000,exenatide older-age,231130000,glp1ra/ID231130000
+231100010,exenatide low-cvr,231100010,glp1ra/ID231100010
+231100020,exenatide higher-cvr,231100020,glp1ra/ID231100020
+231101000,exenatide female,231101000,glp1ra/ID231101000
+231102000,exenatide male,231102000,glp1ra/ID231102000
+231100100,exenatide black,231100100,glp1ra/ID231100100
+231100001,exenatide without-rdz,231100001,glp1ra/ID231100001
+231100002,exenatide with-rdz,231100002,glp1ra/ID231100002
+232100000,exenatide main ot2,232100000,glp1ra/ID232100000
+232110000,exenatide ot2 younger-age,232110000,glp1ra/ID232110000
+232120000,exenatide ot2 middle-age,232120000,glp1ra/ID232120000
+232130000,exenatide ot2 older-age,232130000,glp1ra/ID232130000
+232100010,exenatide ot2 low-cvr,232100010,glp1ra/ID232100010
+232100020,exenatide ot2 higher-cvr,232100020,glp1ra/ID232100020
+232101000,exenatide ot2 female,232101000,glp1ra/ID232101000
+232102000,exenatide ot2 male,232102000,glp1ra/ID232102000
+232100100,exenatide ot2 black,232100100,glp1ra/ID232100100
+232100001,exenatide ot2 without-rdz,232100001,glp1ra/ID232100001
+232100002,exenatide ot2 with-rdz,232100002,glp1ra/ID232100002
+231200000,exenatide main no-met,231200000,glp1ra/ID231200000
+231210000,exenatide no-met younger-age,231210000,glp1ra/ID231210000
+231220000,exenatide no-met middle-age,231220000,glp1ra/ID231220000
+231230000,exenatide no-met older-age,231230000,glp1ra/ID231230000
+231200010,exenatide no-met low-cvr,231200010,glp1ra/ID231200010
+231200020,exenatide no-met higher-cvr,231200020,glp1ra/ID231200020
+231201000,exenatide no-met female,231201000,glp1ra/ID231201000
+231202000,exenatide no-met male,231202000,glp1ra/ID231202000
+231200100,exenatide no-met black,231200100,glp1ra/ID231200100
+231200001,exenatide no-met without-rdz,231200001,glp1ra/ID231200001
+231200002,exenatide no-met with-rdz,231200002,glp1ra/ID231200002
+232200000,exenatide main ot2 no-met,232200000,glp1ra/ID232200000
+232210000,exenatide ot2 no-met younger-age,232210000,glp1ra/ID232210000
+232220000,exenatide ot2 no-met middle-age,232220000,glp1ra/ID232220000
+232230000,exenatide ot2 no-met older-age,232230000,glp1ra/ID232230000
+232200010,exenatide ot2 no-met low-cvr,232200010,glp1ra/ID232200010
+232200020,exenatide ot2 no-met higher-cvr,232200020,glp1ra/ID232200020
+232201000,exenatide ot2 no-met female,232201000,glp1ra/ID232201000
+232202000,exenatide ot2 no-met male,232202000,glp1ra/ID232202000
+232200100,exenatide ot2 no-met black,232200100,glp1ra/ID232200100
+232200001,exenatide ot2 no-met without-rdz,232200001,glp1ra/ID232200001
+232200002,exenatide ot2 no-met with-rdz,232200002,glp1ra/ID232200002
+241100000,liraglutide main,241100000,glp1ra/ID241100000
+241110000,liraglutide younger-age,241110000,glp1ra/ID241110000
+241120000,liraglutide middle-age,241120000,glp1ra/ID241120000
+241130000,liraglutide older-age,241130000,glp1ra/ID241130000
+241100010,liraglutide low-cvr,241100010,glp1ra/ID241100010
+241100020,liraglutide higher-cvr,241100020,glp1ra/ID241100020
+241101000,liraglutide female,241101000,glp1ra/ID241101000
+241102000,liraglutide male,241102000,glp1ra/ID241102000
+241100100,liraglutide black,241100100,glp1ra/ID241100100
+241100001,liraglutide without-rdz,241100001,glp1ra/ID241100001
+241100002,liraglutide with-rdz,241100002,glp1ra/ID241100002
+242100000,liraglutide main ot2,242100000,glp1ra/ID242100000
+242110000,liraglutide ot2 younger-age,242110000,glp1ra/ID242110000
+242120000,liraglutide ot2 middle-age,242120000,glp1ra/ID242120000
+242130000,liraglutide ot2 older-age,242130000,glp1ra/ID242130000
+242100010,liraglutide ot2 low-cvr,242100010,glp1ra/ID242100010
+242100020,liraglutide ot2 higher-cvr,242100020,glp1ra/ID242100020
+242101000,liraglutide ot2 female,242101000,glp1ra/ID242101000
+242102000,liraglutide ot2 male,242102000,glp1ra/ID242102000
+242100100,liraglutide ot2 black,242100100,glp1ra/ID242100100
+242100001,liraglutide ot2 without-rdz,242100001,glp1ra/ID242100001
+242100002,liraglutide ot2 with-rdz,242100002,glp1ra/ID242100002
+241200000,liraglutide main no-met,241200000,glp1ra/ID241200000
+241210000,liraglutide no-met younger-age,241210000,glp1ra/ID241210000
+241220000,liraglutide no-met middle-age,241220000,glp1ra/ID241220000
+241230000,liraglutide no-met older-age,241230000,glp1ra/ID241230000
+241200010,liraglutide no-met low-cvr,241200010,glp1ra/ID241200010
+241200020,liraglutide no-met higher-cvr,241200020,glp1ra/ID241200020
+241201000,liraglutide no-met female,241201000,glp1ra/ID241201000
+241202000,liraglutide no-met male,241202000,glp1ra/ID241202000
+241200100,liraglutide no-met black,241200100,glp1ra/ID241200100
+241200001,liraglutide no-met without-rdz,241200001,glp1ra/ID241200001
+241200002,liraglutide no-met with-rdz,241200002,glp1ra/ID241200002
+242200000,liraglutide main ot2 no-met,242200000,glp1ra/ID242200000
+242210000,liraglutide ot2 no-met younger-age,242210000,glp1ra/ID242210000
+242220000,liraglutide ot2 no-met middle-age,242220000,glp1ra/ID242220000
+242230000,liraglutide ot2 no-met older-age,242230000,glp1ra/ID242230000
+242200010,liraglutide ot2 no-met low-cvr,242200010,glp1ra/ID242200010
+242200020,liraglutide ot2 no-met higher-cvr,242200020,glp1ra/ID242200020
+242201000,liraglutide ot2 no-met female,242201000,glp1ra/ID242201000
+242202000,liraglutide ot2 no-met male,242202000,glp1ra/ID242202000
+242200100,liraglutide ot2 no-met black,242200100,glp1ra/ID242200100
+242200001,liraglutide ot2 no-met without-rdz,242200001,glp1ra/ID242200001
+242200002,liraglutide ot2 no-met with-rdz,242200002,glp1ra/ID242200002
+251100000,lixisenatide main,251100000,glp1ra/ID251100000
+251110000,lixisenatide younger-age,251110000,glp1ra/ID251110000
+251120000,lixisenatide middle-age,251120000,glp1ra/ID251120000
+251130000,lixisenatide older-age,251130000,glp1ra/ID251130000
+251100010,lixisenatide low-cvr,251100010,glp1ra/ID251100010
+251100020,lixisenatide higher-cvr,251100020,glp1ra/ID251100020
+251101000,lixisenatide female,251101000,glp1ra/ID251101000
+251102000,lixisenatide male,251102000,glp1ra/ID251102000
+251100100,lixisenatide black,251100100,glp1ra/ID251100100
+251100001,lixisenatide without-rdz,251100001,glp1ra/ID251100001
+251100002,lixisenatide with-rdz,251100002,glp1ra/ID251100002
+252100000,lixisenatide main ot2,252100000,glp1ra/ID252100000
+252110000,lixisenatide ot2 younger-age,252110000,glp1ra/ID252110000
+252120000,lixisenatide ot2 middle-age,252120000,glp1ra/ID252120000
+252130000,lixisenatide ot2 older-age,252130000,glp1ra/ID252130000
+252100010,lixisenatide ot2 low-cvr,252100010,glp1ra/ID252100010
+252100020,lixisenatide ot2 higher-cvr,252100020,glp1ra/ID252100020
+252101000,lixisenatide ot2 female,252101000,glp1ra/ID252101000
+252102000,lixisenatide ot2 male,252102000,glp1ra/ID252102000
+252100100,lixisenatide ot2 black,252100100,glp1ra/ID252100100
+252100001,lixisenatide ot2 without-rdz,252100001,glp1ra/ID252100001
+252100002,lixisenatide ot2 with-rdz,252100002,glp1ra/ID252100002
+251200000,lixisenatide main no-met,251200000,glp1ra/ID251200000
+251210000,lixisenatide no-met younger-age,251210000,glp1ra/ID251210000
+251220000,lixisenatide no-met middle-age,251220000,glp1ra/ID251220000
+251230000,lixisenatide no-met older-age,251230000,glp1ra/ID251230000
+251200010,lixisenatide no-met low-cvr,251200010,glp1ra/ID251200010
+251200020,lixisenatide no-met higher-cvr,251200020,glp1ra/ID251200020
+251201000,lixisenatide no-met female,251201000,glp1ra/ID251201000
+251202000,lixisenatide no-met male,251202000,glp1ra/ID251202000
+251200100,lixisenatide no-met black,251200100,glp1ra/ID251200100
+251200001,lixisenatide no-met without-rdz,251200001,glp1ra/ID251200001
+251200002,lixisenatide no-met with-rdz,251200002,glp1ra/ID251200002
+252200000,lixisenatide main ot2 no-met,252200000,glp1ra/ID252200000
+252210000,lixisenatide ot2 no-met younger-age,252210000,glp1ra/ID252210000
+252220000,lixisenatide ot2 no-met middle-age,252220000,glp1ra/ID252220000
+252230000,lixisenatide ot2 no-met older-age,252230000,glp1ra/ID252230000
+252200010,lixisenatide ot2 no-met low-cvr,252200010,glp1ra/ID252200010
+252200020,lixisenatide ot2 no-met higher-cvr,252200020,glp1ra/ID252200020
+252201000,lixisenatide ot2 no-met female,252201000,glp1ra/ID252201000
+252202000,lixisenatide ot2 no-met male,252202000,glp1ra/ID252202000
+252200100,lixisenatide ot2 no-met black,252200100,glp1ra/ID252200100
+252200001,lixisenatide ot2 no-met without-rdz,252200001,glp1ra/ID252200001
+252200002,lixisenatide ot2 no-met with-rdz,252200002,glp1ra/ID252200002
+261100000,semaglutide main,261100000,glp1ra/ID261100000
+261110000,semaglutide younger-age,261110000,glp1ra/ID261110000
+261120000,semaglutide middle-age,261120000,glp1ra/ID261120000
+261130000,semaglutide older-age,261130000,glp1ra/ID261130000
+261100010,semaglutide low-cvr,261100010,glp1ra/ID261100010
+261100020,semaglutide higher-cvr,261100020,glp1ra/ID261100020
+261101000,semaglutide female,261101000,glp1ra/ID261101000
+261102000,semaglutide male,261102000,glp1ra/ID261102000
+261100100,semaglutide black,261100100,glp1ra/ID261100100
+261100001,semaglutide without-rdz,261100001,glp1ra/ID261100001
+261100002,semaglutide with-rdz,261100002,glp1ra/ID261100002
+262100000,semaglutide main ot2,262100000,glp1ra/ID262100000
+262110000,semaglutide ot2 younger-age,262110000,glp1ra/ID262110000
+262120000,semaglutide ot2 middle-age,262120000,glp1ra/ID262120000
+262130000,semaglutide ot2 older-age,262130000,glp1ra/ID262130000
+262100010,semaglutide ot2 low-cvr,262100010,glp1ra/ID262100010
+262100020,semaglutide ot2 higher-cvr,262100020,glp1ra/ID262100020
+262101000,semaglutide ot2 female,262101000,glp1ra/ID262101000
+262102000,semaglutide ot2 male,262102000,glp1ra/ID262102000
+262100100,semaglutide ot2 black,262100100,glp1ra/ID262100100
+262100001,semaglutide ot2 without-rdz,262100001,glp1ra/ID262100001
+262100002,semaglutide ot2 with-rdz,262100002,glp1ra/ID262100002
+261200000,semaglutide main no-met,261200000,glp1ra/ID261200000
+261210000,semaglutide no-met younger-age,261210000,glp1ra/ID261210000
+261220000,semaglutide no-met middle-age,261220000,glp1ra/ID261220000
+261230000,semaglutide no-met older-age,261230000,glp1ra/ID261230000
+261200010,semaglutide no-met low-cvr,261200010,glp1ra/ID261200010
+261200020,semaglutide no-met higher-cvr,261200020,glp1ra/ID261200020
+261201000,semaglutide no-met female,261201000,glp1ra/ID261201000
+261202000,semaglutide no-met male,261202000,glp1ra/ID261202000
+261200100,semaglutide no-met black,261200100,glp1ra/ID261200100
+261200001,semaglutide no-met without-rdz,261200001,glp1ra/ID261200001
+261200002,semaglutide no-met with-rdz,261200002,glp1ra/ID261200002
+262200000,semaglutide main ot2 no-met,262200000,glp1ra/ID262200000
+262210000,semaglutide ot2 no-met younger-age,262210000,glp1ra/ID262210000
+262220000,semaglutide ot2 no-met middle-age,262220000,glp1ra/ID262220000
+262230000,semaglutide ot2 no-met older-age,262230000,glp1ra/ID262230000
+262200010,semaglutide ot2 no-met low-cvr,262200010,glp1ra/ID262200010
+262200020,semaglutide ot2 no-met higher-cvr,262200020,glp1ra/ID262200020
+262201000,semaglutide ot2 no-met female,262201000,glp1ra/ID262201000
+262202000,semaglutide ot2 no-met male,262202000,glp1ra/ID262202000
+262200100,semaglutide ot2 no-met black,262200100,glp1ra/ID262200100
+262200001,semaglutide ot2 no-met without-rdz,262200001,glp1ra/ID262200001
+262200002,semaglutide ot2 no-met with-rdz,262200002,glp1ra/ID262200002
+311100000,canagliflozin main,311100000,sglt2i/ID311100000
+311110000,canagliflozin younger-age,311110000,sglt2i/ID311110000
+311120000,canagliflozin middle-age,311120000,sglt2i/ID311120000
+311130000,canagliflozin older-age,311130000,sglt2i/ID311130000
+311100010,canagliflozin low-cvr,311100010,sglt2i/ID311100010
+311100020,canagliflozin higher-cvr,311100020,sglt2i/ID311100020
+311101000,canagliflozin female,311101000,sglt2i/ID311101000
+311102000,canagliflozin male,311102000,sglt2i/ID311102000
+311100100,canagliflozin black,311100100,sglt2i/ID311100100
+311100001,canagliflozin without-rdz,311100001,sglt2i/ID311100001
+311100002,canagliflozin with-rdz,311100002,sglt2i/ID311100002
+312100000,canagliflozin main ot2,312100000,sglt2i/ID312100000
+312110000,canagliflozin ot2 younger-age,312110000,sglt2i/ID312110000
+312120000,canagliflozin ot2 middle-age,312120000,sglt2i/ID312120000
+312130000,canagliflozin ot2 older-age,312130000,sglt2i/ID312130000
+312100010,canagliflozin ot2 low-cvr,312100010,sglt2i/ID312100010
+312100020,canagliflozin ot2 higher-cvr,312100020,sglt2i/ID312100020
+312101000,canagliflozin ot2 female,312101000,sglt2i/ID312101000
+312102000,canagliflozin ot2 male,312102000,sglt2i/ID312102000
+312100100,canagliflozin ot2 black,312100100,sglt2i/ID312100100
+312100001,canagliflozin ot2 without-rdz,312100001,sglt2i/ID312100001
+312100002,canagliflozin ot2 with-rdz,312100002,sglt2i/ID312100002
+311200000,canagliflozin main no-met,311200000,sglt2i/ID311200000
+311210000,canagliflozin no-met younger-age,311210000,sglt2i/ID311210000
+311220000,canagliflozin no-met middle-age,311220000,sglt2i/ID311220000
+311230000,canagliflozin no-met older-age,311230000,sglt2i/ID311230000
+311200010,canagliflozin no-met low-cvr,311200010,sglt2i/ID311200010
+311200020,canagliflozin no-met higher-cvr,311200020,sglt2i/ID311200020
+311201000,canagliflozin no-met female,311201000,sglt2i/ID311201000
+311202000,canagliflozin no-met male,311202000,sglt2i/ID311202000
+311200100,canagliflozin no-met black,311200100,sglt2i/ID311200100
+311200001,canagliflozin no-met without-rdz,311200001,sglt2i/ID311200001
+311200002,canagliflozin no-met with-rdz,311200002,sglt2i/ID311200002
+312200000,canagliflozin main ot2 no-met,312200000,sglt2i/ID312200000
+312210000,canagliflozin ot2 no-met younger-age,312210000,sglt2i/ID312210000
+312220000,canagliflozin ot2 no-met middle-age,312220000,sglt2i/ID312220000
+312230000,canagliflozin ot2 no-met older-age,312230000,sglt2i/ID312230000
+312200010,canagliflozin ot2 no-met low-cvr,312200010,sglt2i/ID312200010
+312200020,canagliflozin ot2 no-met higher-cvr,312200020,sglt2i/ID312200020
+312201000,canagliflozin ot2 no-met female,312201000,sglt2i/ID312201000
+312202000,canagliflozin ot2 no-met male,312202000,sglt2i/ID312202000
+312200100,canagliflozin ot2 no-met black,312200100,sglt2i/ID312200100
+312200001,canagliflozin ot2 no-met without-rdz,312200001,sglt2i/ID312200001
+312200002,canagliflozin ot2 no-met with-rdz,312200002,sglt2i/ID312200002
+321100000,dapagliflozin main,321100000,sglt2i/ID321100000
+321110000,dapagliflozin younger-age,321110000,sglt2i/ID321110000
+321120000,dapagliflozin middle-age,321120000,sglt2i/ID321120000
+321130000,dapagliflozin older-age,321130000,sglt2i/ID321130000
+321100010,dapagliflozin low-cvr,321100010,sglt2i/ID321100010
+321100020,dapagliflozin higher-cvr,321100020,sglt2i/ID321100020
+321101000,dapagliflozin female,321101000,sglt2i/ID321101000
+321102000,dapagliflozin male,321102000,sglt2i/ID321102000
+321100100,dapagliflozin black,321100100,sglt2i/ID321100100
+321100001,dapagliflozin without-rdz,321100001,sglt2i/ID321100001
+321100002,dapagliflozin with-rdz,321100002,sglt2i/ID321100002
+322100000,dapagliflozin main ot2,322100000,sglt2i/ID322100000
+322110000,dapagliflozin ot2 younger-age,322110000,sglt2i/ID322110000
+322120000,dapagliflozin ot2 middle-age,322120000,sglt2i/ID322120000
+322130000,dapagliflozin ot2 older-age,322130000,sglt2i/ID322130000
+322100010,dapagliflozin ot2 low-cvr,322100010,sglt2i/ID322100010
+322100020,dapagliflozin ot2 higher-cvr,322100020,sglt2i/ID322100020
+322101000,dapagliflozin ot2 female,322101000,sglt2i/ID322101000
+322102000,dapagliflozin ot2 male,322102000,sglt2i/ID322102000
+322100100,dapagliflozin ot2 black,322100100,sglt2i/ID322100100
+322100001,dapagliflozin ot2 without-rdz,322100001,sglt2i/ID322100001
+322100002,dapagliflozin ot2 with-rdz,322100002,sglt2i/ID322100002
+321200000,dapagliflozin main no-met,321200000,sglt2i/ID321200000
+321210000,dapagliflozin no-met younger-age,321210000,sglt2i/ID321210000
+321220000,dapagliflozin no-met middle-age,321220000,sglt2i/ID321220000
+321230000,dapagliflozin no-met older-age,321230000,sglt2i/ID321230000
+321200010,dapagliflozin no-met low-cvr,321200010,sglt2i/ID321200010
+321200020,dapagliflozin no-met higher-cvr,321200020,sglt2i/ID321200020
+321201000,dapagliflozin no-met female,321201000,sglt2i/ID321201000
+321202000,dapagliflozin no-met male,321202000,sglt2i/ID321202000
+321200100,dapagliflozin no-met black,321200100,sglt2i/ID321200100
+321200001,dapagliflozin no-met without-rdz,321200001,sglt2i/ID321200001
+321200002,dapagliflozin no-met with-rdz,321200002,sglt2i/ID321200002
+322200000,dapagliflozin main ot2 no-met,322200000,sglt2i/ID322200000
+322210000,dapagliflozin ot2 no-met younger-age,322210000,sglt2i/ID322210000
+322220000,dapagliflozin ot2 no-met middle-age,322220000,sglt2i/ID322220000
+322230000,dapagliflozin ot2 no-met older-age,322230000,sglt2i/ID322230000
+322200010,dapagliflozin ot2 no-met low-cvr,322200010,sglt2i/ID322200010
+322200020,dapagliflozin ot2 no-met higher-cvr,322200020,sglt2i/ID322200020
+322201000,dapagliflozin ot2 no-met female,322201000,sglt2i/ID322201000
+322202000,dapagliflozin ot2 no-met male,322202000,sglt2i/ID322202000
+322200100,dapagliflozin ot2 no-met black,322200100,sglt2i/ID322200100
+322200001,dapagliflozin ot2 no-met without-rdz,322200001,sglt2i/ID322200001
+322200002,dapagliflozin ot2 no-met with-rdz,322200002,sglt2i/ID322200002
+331100000,empagliflozin main,331100000,sglt2i/ID331100000
+331110000,empagliflozin younger-age,331110000,sglt2i/ID331110000
+331120000,empagliflozin middle-age,331120000,sglt2i/ID331120000
+331130000,empagliflozin older-age,331130000,sglt2i/ID331130000
+331100010,empagliflozin low-cvr,331100010,sglt2i/ID331100010
+331100020,empagliflozin higher-cvr,331100020,sglt2i/ID331100020
+331101000,empagliflozin female,331101000,sglt2i/ID331101000
+331102000,empagliflozin male,331102000,sglt2i/ID331102000
+331100100,empagliflozin black,331100100,sglt2i/ID331100100
+331100001,empagliflozin without-rdz,331100001,sglt2i/ID331100001
+331100002,empagliflozin with-rdz,331100002,sglt2i/ID331100002
+332100000,empagliflozin main ot2,332100000,sglt2i/ID332100000
+332110000,empagliflozin ot2 younger-age,332110000,sglt2i/ID332110000
+332120000,empagliflozin ot2 middle-age,332120000,sglt2i/ID332120000
+332130000,empagliflozin ot2 older-age,332130000,sglt2i/ID332130000
+332100010,empagliflozin ot2 low-cvr,332100010,sglt2i/ID332100010
+332100020,empagliflozin ot2 higher-cvr,332100020,sglt2i/ID332100020
+332101000,empagliflozin ot2 female,332101000,sglt2i/ID332101000
+332102000,empagliflozin ot2 male,332102000,sglt2i/ID332102000
+332100100,empagliflozin ot2 black,332100100,sglt2i/ID332100100
+332100001,empagliflozin ot2 without-rdz,332100001,sglt2i/ID332100001
+332100002,empagliflozin ot2 with-rdz,332100002,sglt2i/ID332100002
+331200000,empagliflozin main no-met,331200000,sglt2i/ID331200000
+331210000,empagliflozin no-met younger-age,331210000,sglt2i/ID331210000
+331220000,empagliflozin no-met middle-age,331220000,sglt2i/ID331220000
+331230000,empagliflozin no-met older-age,331230000,sglt2i/ID331230000
+331200010,empagliflozin no-met low-cvr,331200010,sglt2i/ID331200010
+331200020,empagliflozin no-met higher-cvr,331200020,sglt2i/ID331200020
+331201000,empagliflozin no-met female,331201000,sglt2i/ID331201000
+331202000,empagliflozin no-met male,331202000,sglt2i/ID331202000
+331200100,empagliflozin no-met black,331200100,sglt2i/ID331200100
+331200001,empagliflozin no-met without-rdz,331200001,sglt2i/ID331200001
+331200002,empagliflozin no-met with-rdz,331200002,sglt2i/ID331200002
+332200000,empagliflozin main ot2 no-met,332200000,sglt2i/ID332200000
+332210000,empagliflozin ot2 no-met younger-age,332210000,sglt2i/ID332210000
+332220000,empagliflozin ot2 no-met middle-age,332220000,sglt2i/ID332220000
+332230000,empagliflozin ot2 no-met older-age,332230000,sglt2i/ID332230000
+332200010,empagliflozin ot2 no-met low-cvr,332200010,sglt2i/ID332200010
+332200020,empagliflozin ot2 no-met higher-cvr,332200020,sglt2i/ID332200020
+332201000,empagliflozin ot2 no-met female,332201000,sglt2i/ID332201000
+332202000,empagliflozin ot2 no-met male,332202000,sglt2i/ID332202000
+332200100,empagliflozin ot2 no-met black,332200100,sglt2i/ID332200100
+332200001,empagliflozin ot2 no-met without-rdz,332200001,sglt2i/ID332200001
+332200002,empagliflozin ot2 no-met with-rdz,332200002,sglt2i/ID332200002
+341100000,ertugliflozin main,341100000,sglt2i/ID341100000
+341110000,ertugliflozin younger-age,341110000,sglt2i/ID341110000
+341120000,ertugliflozin middle-age,341120000,sglt2i/ID341120000
+341130000,ertugliflozin older-age,341130000,sglt2i/ID341130000
+341100010,ertugliflozin low-cvr,341100010,sglt2i/ID341100010
+341100020,ertugliflozin higher-cvr,341100020,sglt2i/ID341100020
+341101000,ertugliflozin female,341101000,sglt2i/ID341101000
+341102000,ertugliflozin male,341102000,sglt2i/ID341102000
+341100100,ertugliflozin black,341100100,sglt2i/ID341100100
+341100001,ertugliflozin without-rdz,341100001,sglt2i/ID341100001
+341100002,ertugliflozin with-rdz,341100002,sglt2i/ID341100002
+342100000,ertugliflozin main ot2,342100000,sglt2i/ID342100000
+342110000,ertugliflozin ot2 younger-age,342110000,sglt2i/ID342110000
+342120000,ertugliflozin ot2 middle-age,342120000,sglt2i/ID342120000
+342130000,ertugliflozin ot2 older-age,342130000,sglt2i/ID342130000
+342100010,ertugliflozin ot2 low-cvr,342100010,sglt2i/ID342100010
+342100020,ertugliflozin ot2 higher-cvr,342100020,sglt2i/ID342100020
+342101000,ertugliflozin ot2 female,342101000,sglt2i/ID342101000
+342102000,ertugliflozin ot2 male,342102000,sglt2i/ID342102000
+342100100,ertugliflozin ot2 black,342100100,sglt2i/ID342100100
+342100001,ertugliflozin ot2 without-rdz,342100001,sglt2i/ID342100001
+342100002,ertugliflozin ot2 with-rdz,342100002,sglt2i/ID342100002
+341200000,ertugliflozin main no-met,341200000,sglt2i/ID341200000
+341210000,ertugliflozin no-met younger-age,341210000,sglt2i/ID341210000
+341220000,ertugliflozin no-met middle-age,341220000,sglt2i/ID341220000
+341230000,ertugliflozin no-met older-age,341230000,sglt2i/ID341230000
+341200010,ertugliflozin no-met low-cvr,341200010,sglt2i/ID341200010
+341200020,ertugliflozin no-met higher-cvr,341200020,sglt2i/ID341200020
+341201000,ertugliflozin no-met female,341201000,sglt2i/ID341201000
+341202000,ertugliflozin no-met male,341202000,sglt2i/ID341202000
+341200100,ertugliflozin no-met black,341200100,sglt2i/ID341200100
+341200001,ertugliflozin no-met without-rdz,341200001,sglt2i/ID341200001
+341200002,ertugliflozin no-met with-rdz,341200002,sglt2i/ID341200002
+342200000,ertugliflozin main ot2 no-met,342200000,sglt2i/ID342200000
+342210000,ertugliflozin ot2 no-met younger-age,342210000,sglt2i/ID342210000
+342220000,ertugliflozin ot2 no-met middle-age,342220000,sglt2i/ID342220000
+342230000,ertugliflozin ot2 no-met older-age,342230000,sglt2i/ID342230000
+342200010,ertugliflozin ot2 no-met low-cvr,342200010,sglt2i/ID342200010
+342200020,ertugliflozin ot2 no-met higher-cvr,342200020,sglt2i/ID342200020
+342201000,ertugliflozin ot2 no-met female,342201000,sglt2i/ID342201000
+342202000,ertugliflozin ot2 no-met male,342202000,sglt2i/ID342202000
+342200100,ertugliflozin ot2 no-met black,342200100,sglt2i/ID342200100
+342200001,ertugliflozin ot2 no-met without-rdz,342200001,sglt2i/ID342200001
+342200002,ertugliflozin ot2 no-met with-rdz,342200002,sglt2i/ID342200002
+411100000,chlorpropamide main,411100000,su/ID411100000
+411110000,chlorpropamide younger-age,411110000,su/ID411110000
+411120000,chlorpropamide middle-age,411120000,su/ID411120000
+411130000,chlorpropamide older-age,411130000,su/ID411130000
+411100010,chlorpropamide low-cvr,411100010,su/ID411100010
+411100020,chlorpropamide higher-cvr,411100020,su/ID411100020
+411101000,chlorpropamide female,411101000,su/ID411101000
+411102000,chlorpropamide male,411102000,su/ID411102000
+411100100,chlorpropamide black,411100100,su/ID411100100
+411100001,chlorpropamide without-rdz,411100001,su/ID411100001
+411100002,chlorpropamide with-rdz,411100002,su/ID411100002
+412100000,chlorpropamide main ot2,412100000,su/ID412100000
+412110000,chlorpropamide ot2 younger-age,412110000,su/ID412110000
+412120000,chlorpropamide ot2 middle-age,412120000,su/ID412120000
+412130000,chlorpropamide ot2 older-age,412130000,su/ID412130000
+412100010,chlorpropamide ot2 low-cvr,412100010,su/ID412100010
+412100020,chlorpropamide ot2 higher-cvr,412100020,su/ID412100020
+412101000,chlorpropamide ot2 female,412101000,su/ID412101000
+412102000,chlorpropamide ot2 male,412102000,su/ID412102000
+412100100,chlorpropamide ot2 black,412100100,su/ID412100100
+412100001,chlorpropamide ot2 without-rdz,412100001,su/ID412100001
+412100002,chlorpropamide ot2 with-rdz,412100002,su/ID412100002
+411200000,chlorpropamide main no-met,411200000,su/ID411200000
+411210000,chlorpropamide no-met younger-age,411210000,su/ID411210000
+411220000,chlorpropamide no-met middle-age,411220000,su/ID411220000
+411230000,chlorpropamide no-met older-age,411230000,su/ID411230000
+411200010,chlorpropamide no-met low-cvr,411200010,su/ID411200010
+411200020,chlorpropamide no-met higher-cvr,411200020,su/ID411200020
+411201000,chlorpropamide no-met female,411201000,su/ID411201000
+411202000,chlorpropamide no-met male,411202000,su/ID411202000
+411200100,chlorpropamide no-met black,411200100,su/ID411200100
+411200001,chlorpropamide no-met without-rdz,411200001,su/ID411200001
+411200002,chlorpropamide no-met with-rdz,411200002,su/ID411200002
+412200000,chlorpropamide main ot2 no-met,412200000,su/ID412200000
+412210000,chlorpropamide ot2 no-met younger-age,412210000,su/ID412210000
+412220000,chlorpropamide ot2 no-met middle-age,412220000,su/ID412220000
+412230000,chlorpropamide ot2 no-met older-age,412230000,su/ID412230000
+412200010,chlorpropamide ot2 no-met low-cvr,412200010,su/ID412200010
+412200020,chlorpropamide ot2 no-met higher-cvr,412200020,su/ID412200020
+412201000,chlorpropamide ot2 no-met female,412201000,su/ID412201000
+412202000,chlorpropamide ot2 no-met male,412202000,su/ID412202000
+412200100,chlorpropamide ot2 no-met black,412200100,su/ID412200100
+412200001,chlorpropamide ot2 no-met without-rdz,412200001,su/ID412200001
+412200002,chlorpropamide ot2 no-met with-rdz,412200002,su/ID412200002
+421100000,glimepiride main,421100000,su/ID421100000
+421110000,glimepiride younger-age,421110000,su/ID421110000
+421120000,glimepiride middle-age,421120000,su/ID421120000
+421130000,glimepiride older-age,421130000,su/ID421130000
+421100010,glimepiride low-cvr,421100010,su/ID421100010
+421100020,glimepiride higher-cvr,421100020,su/ID421100020
+421101000,glimepiride female,421101000,su/ID421101000
+421102000,glimepiride male,421102000,su/ID421102000
+421100100,glimepiride black,421100100,su/ID421100100
+421100001,glimepiride without-rdz,421100001,su/ID421100001
+421100002,glimepiride with-rdz,421100002,su/ID421100002
+422100000,glimepiride main ot2,422100000,su/ID422100000
+422110000,glimepiride ot2 younger-age,422110000,su/ID422110000
+422120000,glimepiride ot2 middle-age,422120000,su/ID422120000
+422130000,glimepiride ot2 older-age,422130000,su/ID422130000
+422100010,glimepiride ot2 low-cvr,422100010,su/ID422100010
+422100020,glimepiride ot2 higher-cvr,422100020,su/ID422100020
+422101000,glimepiride ot2 female,422101000,su/ID422101000
+422102000,glimepiride ot2 male,422102000,su/ID422102000
+422100100,glimepiride ot2 black,422100100,su/ID422100100
+422100001,glimepiride ot2 without-rdz,422100001,su/ID422100001
+422100002,glimepiride ot2 with-rdz,422100002,su/ID422100002
+421200000,glimepiride main no-met,421200000,su/ID421200000
+421210000,glimepiride no-met younger-age,421210000,su/ID421210000
+421220000,glimepiride no-met middle-age,421220000,su/ID421220000
+421230000,glimepiride no-met older-age,421230000,su/ID421230000
+421200010,glimepiride no-met low-cvr,421200010,su/ID421200010
+421200020,glimepiride no-met higher-cvr,421200020,su/ID421200020
+421201000,glimepiride no-met female,421201000,su/ID421201000
+421202000,glimepiride no-met male,421202000,su/ID421202000
+421200100,glimepiride no-met black,421200100,su/ID421200100
+421200001,glimepiride no-met without-rdz,421200001,su/ID421200001
+421200002,glimepiride no-met with-rdz,421200002,su/ID421200002
+422200000,glimepiride main ot2 no-met,422200000,su/ID422200000
+422210000,glimepiride ot2 no-met younger-age,422210000,su/ID422210000
+422220000,glimepiride ot2 no-met middle-age,422220000,su/ID422220000
+422230000,glimepiride ot2 no-met older-age,422230000,su/ID422230000
+422200010,glimepiride ot2 no-met low-cvr,422200010,su/ID422200010
+422200020,glimepiride ot2 no-met higher-cvr,422200020,su/ID422200020
+422201000,glimepiride ot2 no-met female,422201000,su/ID422201000
+422202000,glimepiride ot2 no-met male,422202000,su/ID422202000
+422200100,glimepiride ot2 no-met black,422200100,su/ID422200100
+422200001,glimepiride ot2 no-met without-rdz,422200001,su/ID422200001
+422200002,glimepiride ot2 no-met with-rdz,422200002,su/ID422200002
+431100000,glipizide main,431100000,su/ID431100000
+431110000,glipizide younger-age,431110000,su/ID431110000
+431120000,glipizide middle-age,431120000,su/ID431120000
+431130000,glipizide older-age,431130000,su/ID431130000
+431100010,glipizide low-cvr,431100010,su/ID431100010
+431100020,glipizide higher-cvr,431100020,su/ID431100020
+431101000,glipizide female,431101000,su/ID431101000
+431102000,glipizide male,431102000,su/ID431102000
+431100100,glipizide black,431100100,su/ID431100100
+431100001,glipizide without-rdz,431100001,su/ID431100001
+431100002,glipizide with-rdz,431100002,su/ID431100002
+432100000,glipizide main ot2,432100000,su/ID432100000
+432110000,glipizide ot2 younger-age,432110000,su/ID432110000
+432120000,glipizide ot2 middle-age,432120000,su/ID432120000
+432130000,glipizide ot2 older-age,432130000,su/ID432130000
+432100010,glipizide ot2 low-cvr,432100010,su/ID432100010
+432100020,glipizide ot2 higher-cvr,432100020,su/ID432100020
+432101000,glipizide ot2 female,432101000,su/ID432101000
+432102000,glipizide ot2 male,432102000,su/ID432102000
+432100100,glipizide ot2 black,432100100,su/ID432100100
+432100001,glipizide ot2 without-rdz,432100001,su/ID432100001
+432100002,glipizide ot2 with-rdz,432100002,su/ID432100002
+431200000,glipizide main no-met,431200000,su/ID431200000
+431210000,glipizide no-met younger-age,431210000,su/ID431210000
+431220000,glipizide no-met middle-age,431220000,su/ID431220000
+431230000,glipizide no-met older-age,431230000,su/ID431230000
+431200010,glipizide no-met low-cvr,431200010,su/ID431200010
+431200020,glipizide no-met higher-cvr,431200020,su/ID431200020
+431201000,glipizide no-met female,431201000,su/ID431201000
+431202000,glipizide no-met male,431202000,su/ID431202000
+431200100,glipizide no-met black,431200100,su/ID431200100
+431200001,glipizide no-met without-rdz,431200001,su/ID431200001
+431200002,glipizide no-met with-rdz,431200002,su/ID431200002
+432200000,glipizide main ot2 no-met,432200000,su/ID432200000
+432210000,glipizide ot2 no-met younger-age,432210000,su/ID432210000
+432220000,glipizide ot2 no-met middle-age,432220000,su/ID432220000
+432230000,glipizide ot2 no-met older-age,432230000,su/ID432230000
+432200010,glipizide ot2 no-met low-cvr,432200010,su/ID432200010
+432200020,glipizide ot2 no-met higher-cvr,432200020,su/ID432200020
+432201000,glipizide ot2 no-met female,432201000,su/ID432201000
+432202000,glipizide ot2 no-met male,432202000,su/ID432202000
+432200100,glipizide ot2 no-met black,432200100,su/ID432200100
+432200001,glipizide ot2 no-met without-rdz,432200001,su/ID432200001
+432200002,glipizide ot2 no-met with-rdz,432200002,su/ID432200002
+441100000,gliquidone main,441100000,su/ID441100000
+441110000,gliquidone younger-age,441110000,su/ID441110000
+441120000,gliquidone middle-age,441120000,su/ID441120000
+441130000,gliquidone older-age,441130000,su/ID441130000
+441100010,gliquidone low-cvr,441100010,su/ID441100010
+441100020,gliquidone higher-cvr,441100020,su/ID441100020
+441101000,gliquidone female,441101000,su/ID441101000
+441102000,gliquidone male,441102000,su/ID441102000
+441100100,gliquidone black,441100100,su/ID441100100
+441100001,gliquidone without-rdz,441100001,su/ID441100001
+441100002,gliquidone with-rdz,441100002,su/ID441100002
+442100000,gliquidone main ot2,442100000,su/ID442100000
+442110000,gliquidone ot2 younger-age,442110000,su/ID442110000
+442120000,gliquidone ot2 middle-age,442120000,su/ID442120000
+442130000,gliquidone ot2 older-age,442130000,su/ID442130000
+442100010,gliquidone ot2 low-cvr,442100010,su/ID442100010
+442100020,gliquidone ot2 higher-cvr,442100020,su/ID442100020
+442101000,gliquidone ot2 female,442101000,su/ID442101000
+442102000,gliquidone ot2 male,442102000,su/ID442102000
+442100100,gliquidone ot2 black,442100100,su/ID442100100
+442100001,gliquidone ot2 without-rdz,442100001,su/ID442100001
+442100002,gliquidone ot2 with-rdz,442100002,su/ID442100002
+441200000,gliquidone main no-met,441200000,su/ID441200000
+441210000,gliquidone no-met younger-age,441210000,su/ID441210000
+441220000,gliquidone no-met middle-age,441220000,su/ID441220000
+441230000,gliquidone no-met older-age,441230000,su/ID441230000
+441200010,gliquidone no-met low-cvr,441200010,su/ID441200010
+441200020,gliquidone no-met higher-cvr,441200020,su/ID441200020
+441201000,gliquidone no-met female,441201000,su/ID441201000
+441202000,gliquidone no-met male,441202000,su/ID441202000
+441200100,gliquidone no-met black,441200100,su/ID441200100
+441200001,gliquidone no-met without-rdz,441200001,su/ID441200001
+441200002,gliquidone no-met with-rdz,441200002,su/ID441200002
+442200000,gliquidone main ot2 no-met,442200000,su/ID442200000
+442210000,gliquidone ot2 no-met younger-age,442210000,su/ID442210000
+442220000,gliquidone ot2 no-met middle-age,442220000,su/ID442220000
+442230000,gliquidone ot2 no-met older-age,442230000,su/ID442230000
+442200010,gliquidone ot2 no-met low-cvr,442200010,su/ID442200010
+442200020,gliquidone ot2 no-met higher-cvr,442200020,su/ID442200020
+442201000,gliquidone ot2 no-met female,442201000,su/ID442201000
+442202000,gliquidone ot2 no-met male,442202000,su/ID442202000
+442200100,gliquidone ot2 no-met black,442200100,su/ID442200100
+442200001,gliquidone ot2 no-met without-rdz,442200001,su/ID442200001
+442200002,gliquidone ot2 no-met with-rdz,442200002,su/ID442200002
+451100000,glyburide main,451100000,su/ID451100000
+451110000,glyburide younger-age,451110000,su/ID451110000
+451120000,glyburide middle-age,451120000,su/ID451120000
+451130000,glyburide older-age,451130000,su/ID451130000
+451100010,glyburide low-cvr,451100010,su/ID451100010
+451100020,glyburide higher-cvr,451100020,su/ID451100020
+451101000,glyburide female,451101000,su/ID451101000
+451102000,glyburide male,451102000,su/ID451102000
+451100100,glyburide black,451100100,su/ID451100100
+451100001,glyburide without-rdz,451100001,su/ID451100001
+451100002,glyburide with-rdz,451100002,su/ID451100002
+452100000,glyburide main ot2,452100000,su/ID452100000
+452110000,glyburide ot2 younger-age,452110000,su/ID452110000
+452120000,glyburide ot2 middle-age,452120000,su/ID452120000
+452130000,glyburide ot2 older-age,452130000,su/ID452130000
+452100010,glyburide ot2 low-cvr,452100010,su/ID452100010
+452100020,glyburide ot2 higher-cvr,452100020,su/ID452100020
+452101000,glyburide ot2 female,452101000,su/ID452101000
+452102000,glyburide ot2 male,452102000,su/ID452102000
+452100100,glyburide ot2 black,452100100,su/ID452100100
+452100001,glyburide ot2 without-rdz,452100001,su/ID452100001
+452100002,glyburide ot2 with-rdz,452100002,su/ID452100002
+451200000,glyburide main no-met,451200000,su/ID451200000
+451210000,glyburide no-met younger-age,451210000,su/ID451210000
+451220000,glyburide no-met middle-age,451220000,su/ID451220000
+451230000,glyburide no-met older-age,451230000,su/ID451230000
+451200010,glyburide no-met low-cvr,451200010,su/ID451200010
+451200020,glyburide no-met higher-cvr,451200020,su/ID451200020
+451201000,glyburide no-met female,451201000,su/ID451201000
+451202000,glyburide no-met male,451202000,su/ID451202000
+451200100,glyburide no-met black,451200100,su/ID451200100
+451200001,glyburide no-met without-rdz,451200001,su/ID451200001
+451200002,glyburide no-met with-rdz,451200002,su/ID451200002
+452200000,glyburide main ot2 no-met,452200000,su/ID452200000
+452210000,glyburide ot2 no-met younger-age,452210000,su/ID452210000
+452220000,glyburide ot2 no-met middle-age,452220000,su/ID452220000
+452230000,glyburide ot2 no-met older-age,452230000,su/ID452230000
+452200010,glyburide ot2 no-met low-cvr,452200010,su/ID452200010
+452200020,glyburide ot2 no-met higher-cvr,452200020,su/ID452200020
+452201000,glyburide ot2 no-met female,452201000,su/ID452201000
+452202000,glyburide ot2 no-met male,452202000,su/ID452202000
+452200100,glyburide ot2 no-met black,452200100,su/ID452200100
+452200001,glyburide ot2 no-met without-rdz,452200001,su/ID452200001
+452200002,glyburide ot2 no-met with-rdz,452200002,su/ID452200002
+461100000,tolazamide main,461100000,su/ID461100000
+461110000,tolazamide younger-age,461110000,su/ID461110000
+461120000,tolazamide middle-age,461120000,su/ID461120000
+461130000,tolazamide older-age,461130000,su/ID461130000
+461100010,tolazamide low-cvr,461100010,su/ID461100010
+461100020,tolazamide higher-cvr,461100020,su/ID461100020
+461101000,tolazamide female,461101000,su/ID461101000
+461102000,tolazamide male,461102000,su/ID461102000
+461100100,tolazamide black,461100100,su/ID461100100
+461100001,tolazamide without-rdz,461100001,su/ID461100001
+461100002,tolazamide with-rdz,461100002,su/ID461100002
+462100000,tolazamide main ot2,462100000,su/ID462100000
+462110000,tolazamide ot2 younger-age,462110000,su/ID462110000
+462120000,tolazamide ot2 middle-age,462120000,su/ID462120000
+462130000,tolazamide ot2 older-age,462130000,su/ID462130000
+462100010,tolazamide ot2 low-cvr,462100010,su/ID462100010
+462100020,tolazamide ot2 higher-cvr,462100020,su/ID462100020
+462101000,tolazamide ot2 female,462101000,su/ID462101000
+462102000,tolazamide ot2 male,462102000,su/ID462102000
+462100100,tolazamide ot2 black,462100100,su/ID462100100
+462100001,tolazamide ot2 without-rdz,462100001,su/ID462100001
+462100002,tolazamide ot2 with-rdz,462100002,su/ID462100002
+461200000,tolazamide main no-met,461200000,su/ID461200000
+461210000,tolazamide no-met younger-age,461210000,su/ID461210000
+461220000,tolazamide no-met middle-age,461220000,su/ID461220000
+461230000,tolazamide no-met older-age,461230000,su/ID461230000
+461200010,tolazamide no-met low-cvr,461200010,su/ID461200010
+461200020,tolazamide no-met higher-cvr,461200020,su/ID461200020
+461201000,tolazamide no-met female,461201000,su/ID461201000
+461202000,tolazamide no-met male,461202000,su/ID461202000
+461200100,tolazamide no-met black,461200100,su/ID461200100
+461200001,tolazamide no-met without-rdz,461200001,su/ID461200001
+461200002,tolazamide no-met with-rdz,461200002,su/ID461200002
+462200000,tolazamide main ot2 no-met,462200000,su/ID462200000
+462210000,tolazamide ot2 no-met younger-age,462210000,su/ID462210000
+462220000,tolazamide ot2 no-met middle-age,462220000,su/ID462220000
+462230000,tolazamide ot2 no-met older-age,462230000,su/ID462230000
+462200010,tolazamide ot2 no-met low-cvr,462200010,su/ID462200010
+462200020,tolazamide ot2 no-met higher-cvr,462200020,su/ID462200020
+462201000,tolazamide ot2 no-met female,462201000,su/ID462201000
+462202000,tolazamide ot2 no-met male,462202000,su/ID462202000
+462200100,tolazamide ot2 no-met black,462200100,su/ID462200100
+462200001,tolazamide ot2 no-met without-rdz,462200001,su/ID462200001
+462200002,tolazamide ot2 no-met with-rdz,462200002,su/ID462200002
+471100000,tolbutamide main,471100000,su/ID471100000
+471110000,tolbutamide younger-age,471110000,su/ID471110000
+471120000,tolbutamide middle-age,471120000,su/ID471120000
+471130000,tolbutamide older-age,471130000,su/ID471130000
+471100010,tolbutamide low-cvr,471100010,su/ID471100010
+471100020,tolbutamide higher-cvr,471100020,su/ID471100020
+471101000,tolbutamide female,471101000,su/ID471101000
+471102000,tolbutamide male,471102000,su/ID471102000
+471100100,tolbutamide black,471100100,su/ID471100100
+471100001,tolbutamide without-rdz,471100001,su/ID471100001
+471100002,tolbutamide with-rdz,471100002,su/ID471100002
+472100000,tolbutamide main ot2,472100000,su/ID472100000
+472110000,tolbutamide ot2 younger-age,472110000,su/ID472110000
+472120000,tolbutamide ot2 middle-age,472120000,su/ID472120000
+472130000,tolbutamide ot2 older-age,472130000,su/ID472130000
+472100010,tolbutamide ot2 low-cvr,472100010,su/ID472100010
+472100020,tolbutamide ot2 higher-cvr,472100020,su/ID472100020
+472101000,tolbutamide ot2 female,472101000,su/ID472101000
+472102000,tolbutamide ot2 male,472102000,su/ID472102000
+472100100,tolbutamide ot2 black,472100100,su/ID472100100
+472100001,tolbutamide ot2 without-rdz,472100001,su/ID472100001
+472100002,tolbutamide ot2 with-rdz,472100002,su/ID472100002
+471200000,tolbutamide main no-met,471200000,su/ID471200000
+471210000,tolbutamide no-met younger-age,471210000,su/ID471210000
+471220000,tolbutamide no-met middle-age,471220000,su/ID471220000
+471230000,tolbutamide no-met older-age,471230000,su/ID471230000
+471200010,tolbutamide no-met low-cvr,471200010,su/ID471200010
+471200020,tolbutamide no-met higher-cvr,471200020,su/ID471200020
+471201000,tolbutamide no-met female,471201000,su/ID471201000
+471202000,tolbutamide no-met male,471202000,su/ID471202000
+471200100,tolbutamide no-met black,471200100,su/ID471200100
+471200001,tolbutamide no-met without-rdz,471200001,su/ID471200001
+471200002,tolbutamide no-met with-rdz,471200002,su/ID471200002
+472200000,tolbutamide main ot2 no-met,472200000,su/ID472200000
+472210000,tolbutamide ot2 no-met younger-age,472210000,su/ID472210000
+472220000,tolbutamide ot2 no-met middle-age,472220000,su/ID472220000
+472230000,tolbutamide ot2 no-met older-age,472230000,su/ID472230000
+472200010,tolbutamide ot2 no-met low-cvr,472200010,su/ID472200010
+472200020,tolbutamide ot2 no-met higher-cvr,472200020,su/ID472200020
+472201000,tolbutamide ot2 no-met female,472201000,su/ID472201000
+472202000,tolbutamide ot2 no-met male,472202000,su/ID472202000
+472200100,tolbutamide ot2 no-met black,472200100,su/ID472200100
+472200001,tolbutamide ot2 no-met without-rdz,472200001,su/ID472200001
+472200002,tolbutamide ot2 no-met with-rdz,472200002,su/ID472200002
