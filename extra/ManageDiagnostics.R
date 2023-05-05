@@ -20,7 +20,7 @@ outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
 
 databaseIds <- c("OptumEHR", "MDCR", "OptumDod", "UK_IMRD", "MDCD",
                  "CCAE", "US_Open_Claims", "SIDIAP", "VA-OMOP", "France_LPD",
-                 "CUIMC", "HK-HA-DM", "HIC Dundee")
+                 "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
 
 analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
                  11,12,13,14,15,16,17,18,19)
@@ -57,6 +57,10 @@ diagnosticsLit <- diagnostics %>%
     (minEquipoise > 0.5)
   ))
 
+diagnosticsLitNoOc <- diagnosticsLit %>%
+  filter(databaseId != "US_Open_Claims")
+
+
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis1",
@@ -73,10 +77,39 @@ doMetaAnalysis(legendT2dmConnectionDetails,
 
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
+               maName = "Meta-analysis3",
+               maExportFolder = "maLitNoOc",
+               diagnosticsFilter = diagnosticsLit,
+               maxCores = 4)
+
+doMetaAnalysis(legendT2dmConnectionDetails,
+               resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis0",
                maExportFolder = "maAll",
                diagnosticsFilter = NULL,
                maxCores = 4)
+
+writeableConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("ohdsiPostgresServer"),
+                 keyring::key_get("ohdsiPostgresShinyDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("ohdsiPostgresUser"),
+  password = keyring::key_get("ohdsiPostgresPassword"))
+
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = writeableConnectionDetails,
+  schema = "legendt2dm_class_results",
+  purgeSiteDataBeforeUploading = TRUE,
+  zipFileName = c(
+    "maAll/Results_class_study_Meta-analysis0.zip",
+    "maHtn/Results_class_study_Meta-analysis1.zip",
+    "maLit/Results_class_study_Meta-analysis2.zip",
+    "maLitNoOc/Results_class_study_Meta-analysis3.zip",
+    NULL
+  ),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
+)
 
 # # Remove no outcomes
 # diagnostics <- diagnostics %>% filter(is.finite(mdrr))

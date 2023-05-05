@@ -1,3 +1,12 @@
+# It is recommended to specify the environmental variable:
+#
+#    DATABASECONNECTOR_JAR_FOLDER=<folder-of-your-choice>
+#
+# in `.Renviron` located in the user's home directory.
+# Then to install the required `postgresql` JDBC drivers, use:
+#
+#    DatabaseConnector::downloadJdbcDrivers(dbms = "postgresql")
+#
 # OHDSI shinydb legendt2dm read-only credentials
 appConnectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
