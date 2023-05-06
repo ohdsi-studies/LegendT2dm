@@ -80,6 +80,20 @@ CohortDiagnostics::uploadResults(
   schema = drugSchema,
   zipFileName = "E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/cohortDiagnosticsExport/Results_sglt2i_exposures_CCAE.zip")
 
+# April 2023: upload VA exposure diagnostics
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/m6oukety_Results_sglt2i_exposures_VA-OMOP.zip")
+
+# April 2023: upload CUIMC exposure diagnostics
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/Results_sglt2i_exposures_CUIMC.zip")
+
+
+
 # CohortDiagnostics::uploadResults(
 #   connectionDetails = connectionDetails,
 #   schema = classSchema,
