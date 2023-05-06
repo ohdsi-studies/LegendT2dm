@@ -3,6 +3,7 @@
 
 # Generates:
 #   drugTcosOfInterest.csv
+#   drugCohortsToCreate.csv
 #
 # Requires at input:
 #   classGeneratorList.csv
@@ -38,6 +39,26 @@ exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.c
 #                              select(cohortId, shortName),
 #                            by = c("targetId" = "cohortId"))
 
+# generate drugCohortsToCreate table by combining drug cohorts within each class----
+classNames = exposuresOfInterestTable %>%
+  filter(type == 'Drug') %>% pull(class) %>%
+  unique() %>% tolower()
+
+cohortsTable = NULL
+filePath = "inst/settings"
+
+for(cl in classNames){
+  classFileName = sprintf("%sCohortsToCreate.csv", cl)
+
+  cohortsTable = bind_rows(cohortsTable,
+                           readr::read_csv(file.path(filePath, classFileName)))
+}
+
+fileName = sprintf("%sCohortsToCreate.csv", "drug")
+readr::write_csv(cohortsTable, file.path(filePath, fileName)) # save it
+
+
+# generate drugTcosOfInterest table ----
 allDrugs <- exposuresOfInterestTable %>%
   filter(type == "Drug", !(cohortId %in% c(10,20,30,40))) %>%
   select(cohortId, name)
