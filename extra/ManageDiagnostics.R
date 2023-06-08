@@ -60,7 +60,7 @@ diagnosticsLit <- diagnostics %>%
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "US_Open_Claims")
 
-
+# (1) using LEGEND-HTN data-driven diagnostics rule
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis1",
@@ -68,6 +68,7 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                diagnosticsFilter = diagnosticsHtn,
                maxCores = 4)
 
+# (2) using literature-common rules of thumb
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis2",
@@ -75,6 +76,7 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                diagnosticsFilter = diagnosticsLit,
                maxCores = 4)
 
+# (3) exclude Open Claims
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis3",

@@ -211,7 +211,7 @@ makeDiagnosticsTable <- function(connection,
   arguments <- merge(merge(tcs, data.frame(analysisId = analysisIds)), data.frame(databaseId = databaseIds))
 
   absStdDiff <- getAbsStdDiff(connection = connection,
-                              resultsDatabaseSchema = "legendt2dm_class_results",
+                              resultsDatabaseSchema = resultsDatabaseSchema,
                               targetId = tcs$targetId,
                               comparatorId = tcs$comparatorId,
                               analysisId = analysisIds) %>%
