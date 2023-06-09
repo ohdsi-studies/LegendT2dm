@@ -79,22 +79,25 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                maName = "Meta-analysis1",
                maExportFolder = "maHtn",
                diagnosticsFilter = diagnosticsHtn,
-               maxCores = 1)
+               indicationId = "drug",
+               maxCores = 8)
 
 # (2) using literature-common rules of thumb
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis2",
                maExportFolder = "maLit",
                diagnosticsFilter = diagnosticsLit,
-               maxCores = 4)
+               indicationId = "drug",
+               maxCores = 8)
 
 # (3) exclude Open Claims
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis3",
                maExportFolder = "maLitNoOc",
                diagnosticsFilter = diagnosticsLit,
+               indicationId = "drug",
                maxCores = 4)
 
 doMetaAnalysis(legendT2dmConnectionDetails,
@@ -102,8 +105,10 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                maName = "Meta-analysis0",
                maExportFolder = "maAll",
                diagnosticsFilter = NULL,
+               indicationId = "drug",
                maxCores = 4)
 
+# connect to results database and upload meta analysis results
 writeableConnectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
   server = paste(keyring::key_get("ohdsiPostgresServer"),
@@ -114,13 +119,13 @@ writeableConnectionDetails <- DatabaseConnector::createConnectionDetails(
 
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = writeableConnectionDetails,
-  schema = "legendt2dm_class_results",
+  schema = "legendt2dm_drug_results",
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "maAll/Results_class_study_Meta-analysis0.zip",
-    "maHtn/Results_class_study_Meta-analysis1.zip",
-    "maLit/Results_class_study_Meta-analysis2.zip",
-    "maLitNoOc/Results_class_study_Meta-analysis3.zip",
+    #"maAll/Results_class_study_Meta-analysis0.zip",
+    "maHtn/Results_drug_study_Meta-analysis1.zip",
+    "maLit/Results_drug_study_Meta-analysis2.zip",
+    #"maLitNoOc/Results_class_study_Meta-analysis3.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
