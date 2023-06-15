@@ -31,9 +31,55 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
                                     outcomeIds = outcomeIds,
                                     analysisIds = analysisIds,
                                     databaseIds = databaseIds)
+DatabaseConnector::disconnect(connection)
 
 saveRDS(diagnostics, "diagnostics.rds")
+
+diagnosticsCsv <- diagnostics %>%
+  mutate(anyOutcomes = ifelse(anyOutcomes, 1, 0)) %>%
+  select(-minBoundOnMdrr) %>%
+  mutate(ease = 0) ## TODO
+
+colnames(diagnosticsCsv) <- SqlRender::camelCaseToSnakeCase(colnames(diagnosticsCsv))
+readr::write_csv(diagnosticsCsv, "diagnostics.csv")
+DatabaseConnector::createZipFile(zipFile = "diagnostics.zip", files = "diagnostics.csv")
+
+# Add to shinydb
+
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = paste(keyring::key_get("ohdsiPostgresServer"),
+                 keyring::key_get("ohdsiPostgresShinyDatabase"),
+                 sep = "/"),
+  user = keyring::key_get("ohdsiPostgresUser"),
+  password = keyring::key_get("ohdsiPostgresPassword"))
+
+connection <- DatabaseConnector::connect(connectionDetails)
+DatabaseConnector::executeSql(connection, sql = "
+  SET search_path TO legendt2dm_class_results;
+  DROP TABLE IF EXISTS diagnostics;
+  CREATE TABLE diagnostics (
+     database_id VARCHAR(255) NOT NULL,
+     target_id BIGINT NOT NULL,
+     comparator_id BIGINT NOT NULL,
+     outcome_id BIGINT NOT NULL,
+     analysis_id INTEGER NOT NULL,
+     any_outcomes INTEGER ,
+     mdrr NUMERIC ,
+     max_abs_std_diff_mean NUMERIC ,
+     min_equipoise NUMERIC ,
+     ease NUMERIC ,
+     PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
+  );")
 DatabaseConnector::disconnect(connection)
+
+resultsSchema <- "legendt2dm_class_results"
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading = FALSE,
+  zipFileName = "diagnostics.zip",
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")))
 
 # Start of diagnostics processing
 
@@ -59,7 +105,6 @@ diagnosticsLit <- diagnostics %>%
 
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "US_Open_Claims")
-
 
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
@@ -110,28 +155,3 @@ LegendT2dm::uploadResultsToDatabase(
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
 )
-
-# # Remove no outcomes
-# diagnostics <- diagnostics %>% filter(is.finite(mdrr))
-# nrow(diagnostics)
-#
-# # Remove MDRR > 2
-# diagnostics <- diagnostics %>% filter(mdrr < 2)
-# nrow(diagnostics)
-#
-# ggplot(diagnostics,
-#        aes(x=maxAbsStdDiffMean, fill=databaseId)) +
-#   geom_histogram() +
-#   geom_vline(xintercept=c(0.1,0.2), linetype="dotted")
-#
-# # Remove stdDiff > 0.1
-# diagnostics <- diagnostics %>% filter(maxAbsStdDiffMean < 0.1)
-# nrow(diagnostics)
-#
-# diagnostics %>% group_by(databaseId) %>% tally()
-#
-# ggplot(diagnostics,
-#        aes(x=maxAbsStdDiffMean, fill=databaseId)) +
-#   geom_histogram(right = TRUE, bins = 101) +
-#   geom_vline(xintercept=c(0.1,0.2), linetype="dotted")
-
