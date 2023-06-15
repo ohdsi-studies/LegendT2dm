@@ -161,6 +161,8 @@ CREATE TABLE diagnostics (
      max_abs_std_diff_mean NUMERIC ,
      min_equipoise NUMERIC ,
      ease NUMERIC ,
+     pass INTEGER ,
+     criteria VARCHAR(255) ,
      PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
