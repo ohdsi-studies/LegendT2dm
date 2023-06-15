@@ -34,11 +34,20 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
 DatabaseConnector::disconnect(connection)
 
 saveRDS(diagnostics, "diagnostics.rds")
+diagnostics <- readRDS("diagnostics.rds")
 
 diagnosticsCsv <- diagnostics %>%
   mutate(anyOutcomes = ifelse(anyOutcomes, 1, 0)) %>%
+  mutate(pass = ( # Add LEGEND-HTN criteria
+    (is.finite(mdrr)) &
+      (!is.na(maxAbsStdDiffMean)) &
+      (mdrr < 4.0) &
+      (maxAbsStdDiffMean < 0.15) &
+      (minEquipoise > 0.25))) %>%
+  mutate(pass = ifelse(pass, 1, 0)) %>%
   select(-minBoundOnMdrr) %>%
-  mutate(ease = 0) ## TODO
+  mutate(ease = 0, ## TODO
+         criteria = "legend-htn: mdrr < 4.0 & sdm < 0.15 & equip > 0.25")
 
 colnames(diagnosticsCsv) <- SqlRender::camelCaseToSnakeCase(colnames(diagnosticsCsv))
 readr::write_csv(diagnosticsCsv, "diagnostics.csv")
@@ -69,6 +78,8 @@ DatabaseConnector::executeSql(connection, sql = "
      max_abs_std_diff_mean NUMERIC ,
      min_equipoise NUMERIC ,
      ease NUMERIC ,
+     pass INTEGER ,
+     criteria VARCHAR(255) ,
      PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
   );")
 DatabaseConnector::disconnect(connection)
@@ -82,8 +93,6 @@ LegendT2dm::uploadResultsToDatabase(
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")))
 
 # Start of diagnostics processing
-
-diagnostics <- readRDS("diagnostics.rds")
 
 diagnosticsHtn <- diagnostics %>%
   filter(is.finite(mdrr)) %>%
@@ -106,6 +115,9 @@ diagnosticsLit <- diagnostics %>%
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "US_Open_Claims")
 
+diagnosticsHtnNoOc <- diagnosticsHtn %>%
+  filter(databaseId != "US_Open_Claims")
+
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis1",
@@ -123,8 +135,15 @@ doMetaAnalysis(legendT2dmConnectionDetails,
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_class_results",
                maName = "Meta-analysis3",
+               maExportFolder = "maHtnNoOc",
+               diagnosticsFilter = diagnosticsHtnNoOc,
+               maxCores = 4)
+
+doMetaAnalysis(legendT2dmConnectionDetails,
+               resultsDatabaseSchema = "legendt2dm_class_results",
+               maName = "Meta-analysis4",
                maExportFolder = "maLitNoOc",
-               diagnosticsFilter = diagnosticsLit,
+               diagnosticsFilter = diagnosticsLitNoOc,
                maxCores = 4)
 
 doMetaAnalysis(legendT2dmConnectionDetails,
@@ -150,7 +169,8 @@ LegendT2dm::uploadResultsToDatabase(
     "maAll/Results_class_study_Meta-analysis0.zip",
     "maHtn/Results_class_study_Meta-analysis1.zip",
     "maLit/Results_class_study_Meta-analysis2.zip",
-    "maLitNoOc/Results_class_study_Meta-analysis3.zip",
+    "maHtnNoOc/Results_class_study_Meta-analysis3.zip",
+    "maLitNoOc/Results_class_study_Meta-analysis4.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
