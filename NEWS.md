@@ -1,3 +1,17 @@
+LegendT2dm 2.0.1
+=======================
+
+Changes:
+
+1. Handle ungraceful crash when all paired exposure cohorts are too small
+
+LegendT2dm 2.0.0
+=======================
+
+Changes: 
+
+1. Expand study package to include within-class drug-level CES studies for SGLT2 Inhibitors
+
 LegendT2dm 1.2.0
 =======================
 
