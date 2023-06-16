@@ -115,10 +115,15 @@ CohortDiagnostics::uploadResults(
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/0z4r1kpn_Results_class_exposures_JHM.zip")
 
+# CohortDiagnostics::uploadResults(
+#   connectionDetails = connectionDetails,
+#   schema = classSchema,
+#   zipFileName = "d:/LegendT2dmOutput_SFTP/9gkhynbo_Results_class_exposures_VA-OMOP.zip")
+
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
   schema = classSchema,
-  zipFileName = "d:/LegendT2dmOutput_SFTP/9gkhynbo_Results_class_exposures_VA-OMOP.zip")
+  zipFileName = "d:/LegendT2dmOutput_SFTP/Results_class_exposures_VA-OMOP_patched.zip")
 
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
@@ -129,6 +134,11 @@ CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
   schema = classSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/go15dnyv_Results_class_exposures_STARR.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = classSchema,
+  zipFileName = "d:/LegendT2dmOutput_SFTP/Results_class_exposures_China_WD_230403.zip")
 
 # Outcome diagnostics
 
@@ -208,7 +218,7 @@ CohortDiagnostics::uploadResults(
   schema = outcomeSchema,
   zipFileName = "d:/LegendT2dmOutput_SFTP/4ouldb7r_Results_outcomes_SG_KTPH.zip")
 
-# TODO Add VA, JHU, HIC, SIDIAP, STARR
+# TODO Add VA, JHU, HIC, SIDIAP, STARR, China_WD
 
 # PS Assessment
 
