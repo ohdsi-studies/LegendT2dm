@@ -20,7 +20,7 @@ outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
 
 databaseIds <- c("OptumEHR", "MDCR", "OptumDod", "UK_IMRD", "MDCD",
                  "CCAE", "US_Open_Claims", "SIDIAP", "VA-OMOP", "France_LPD",
-                 "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
+                 "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA", "TMUCRD")
 
 analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
                  11,12,13,14,15,16,17,18,19)
