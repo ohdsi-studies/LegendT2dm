@@ -32,9 +32,15 @@
 grantPermissionOnServer <- function(connectionDetails,
                                     schema,
                                     user = "legendt2dm_readonly") {
-  sql <- paste0("grant select on all tables in schema ", schema, " to ", user, ";")
   connection <- DatabaseConnector::connect(connectionDetails)
+
+  sql <- paste0("grant usage on schema ", schema, " to ", user, ";")
   DatabaseConnector::executeSql(connection, sql)
+  sql <- paste0("grant select on all tables in schema ", schema, " to ", user, ";")
+  DatabaseConnector::executeSql(connection, sql)
+  sql <- paste0("alter default privileges in schema ", schema, " grant select on tables to ", user, ";")
+  DatabaseConnector::executeSql(connection, sql)
+
   DatabaseConnector::disconnect(connection)
 }
 
