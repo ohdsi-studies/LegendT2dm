@@ -1,3 +1,5 @@
+# study diagnostics & meta analysis for drug-level CES
+
 library(dplyr)
 library(LegendT2dm)
 
@@ -11,33 +13,44 @@ legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
 
 connection <- DatabaseConnector::connect(legendT2dmConnectionDetails)
 
-tcs <- read.csv(system.file("settings", "classTcosOfInterest.csv",
+# set indication Id here
+# doing sglt2i for now
+indicationId = "sglt2i"
+tcoFileName = sprintf("%sTcosOfInterest.csv", indicationId)
+
+resultsSchema = "legendt2dm_drug_results"
+
+tcs <- read.csv(system.file("settings", tcoFileName,
                             package = "LegendT2dm")) %>%
   dplyr::select(targetId, comparatorId)
+
 outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
                                    package = "LegendT2dm")) %>%
   dplyr::select(cohortId) %>% pull(cohortId)
 
-databaseIds <- c("OptumEHR", "MDCR", "OptumDod", "UK_IMRD", "MDCD",
-                 "CCAE", "US_Open_Claims", "SIDIAP", "VA-OMOP", "France_LPD",
-                 "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
+# databaseIds <- c("OptumEHR", "MDCR", "OptumDod", "UK_IMRD", "MDCD",
+#                  "CCAE", "US_Open_Claims", "SIDIAP", "VA-OMOP", "France_LPD",
+#                  "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
+
+databaseIdsDrug <- c("OptumEHR", "MDCR", "OptumDod", "MDCD",
+                     "CCAE", "OPENCLAIMS", "DA_Germany")
 
 analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                 11,12,13,14,15,16,17,18,19)
+                  11,12,13,14,15,16,17,18,19)
 
 diagnostics <- makeDiagnosticsTable(connection = connection,
-                                    resultsDatabaseSchema = "legendt2dm_class_results",
+                                    resultsDatabaseSchema = resultsSchema,
                                     tcs = tcs,
                                     outcomeIds = outcomeIds,
                                     analysisIds = analysisIds,
-                                    databaseIds = databaseIds)
+                                    databaseIds = databaseIdsDrug)
 
-saveRDS(diagnostics, "diagnostics.rds")
+saveRDS(diagnostics, "extra/diagnostics.rds")
 DatabaseConnector::disconnect(connection)
 
 # Start of diagnostics processing
 
-diagnostics <- readRDS("diagnostics.rds")
+diagnostics <- readRDS("extra/diagnostics.rds")
 
 diagnosticsHtn <- diagnostics %>%
   filter(is.finite(mdrr)) %>%
@@ -53,35 +66,38 @@ diagnosticsLit <- diagnostics %>%
   filter(!is.na(maxAbsStdDiffMean)) %>%
   mutate(pass = (
     (mdrr < 10.0) &
-    (maxAbsStdDiffMean < 0.10) &
-    (minEquipoise > 0.5)
+      (maxAbsStdDiffMean < 0.10) &
+      (minEquipoise > 0.5)
   ))
 
 diagnosticsLitNoOc <- diagnosticsLit %>%
-  filter(databaseId != "US_Open_Claims")
+  filter(databaseId != "OPENCLAIMS")
 
 # (1) using LEGEND-HTN data-driven diagnostics rule
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis1",
                maExportFolder = "maHtn",
                diagnosticsFilter = diagnosticsHtn,
-               maxCores = 4)
+               indicationId = "drug",
+               maxCores = 8)
 
 # (2) using literature-common rules of thumb
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis2",
                maExportFolder = "maLit",
                diagnosticsFilter = diagnosticsLit,
-               maxCores = 4)
+               indicationId = "drug",
+               maxCores = 8)
 
 # (3) exclude Open Claims
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis3",
                maExportFolder = "maLitNoOc",
                diagnosticsFilter = diagnosticsLit,
+               indicationId = "drug",
                maxCores = 4)
 
 doMetaAnalysis(legendT2dmConnectionDetails,
@@ -89,8 +105,10 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                maName = "Meta-analysis0",
                maExportFolder = "maAll",
                diagnosticsFilter = NULL,
+               indicationId = "drug",
                maxCores = 4)
 
+# connect to results database and upload meta analysis results
 writeableConnectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
   server = paste(keyring::key_get("ohdsiPostgresServer"),
@@ -101,13 +119,13 @@ writeableConnectionDetails <- DatabaseConnector::createConnectionDetails(
 
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = writeableConnectionDetails,
-  schema = "legendt2dm_class_results",
+  schema = "legendt2dm_drug_results",
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "maAll/Results_class_study_Meta-analysis0.zip",
-    "maHtn/Results_class_study_Meta-analysis1.zip",
-    "maLit/Results_class_study_Meta-analysis2.zip",
-    "maLitNoOc/Results_class_study_Meta-analysis3.zip",
+    #"maAll/Results_class_study_Meta-analysis0.zip",
+    "maHtn/Results_drug_study_Meta-analysis1.zip",
+    "maLit/Results_drug_study_Meta-analysis2.zip",
+    #"maLitNoOc/Results_class_study_Meta-analysis3.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
