@@ -2466,23 +2466,6 @@
 },
 {
  "concept": {
- "CONCEPT_ID":    44785829,
-"CONCEPT_NAME": "dapagliflozin",
-"STANDARD_CONCEPT": "S",
-"STANDARD_CONCEPT_CAPTION": "Standard",
-"INVALID_REASON": "V",
-"INVALID_REASON_CAPTION": "Valid",
-"CONCEPT_CODE": "1488564",
-"DOMAIN_ID": "Drug",
-"VOCABULARY_ID": "RxNorm",
-"CONCEPT_CLASS_ID": "Ingredient" 
-},
-"isExcluded": false,
-"includeDescendants": true,
-"includeMapped": false 
-},
-{
- "concept": {
  "CONCEPT_ID":    45774435,
 "CONCEPT_NAME": "dulaglutide",
 "STANDARD_CONCEPT": "S",

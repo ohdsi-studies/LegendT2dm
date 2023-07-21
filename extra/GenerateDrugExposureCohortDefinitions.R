@@ -25,6 +25,11 @@ generateStats <- TRUE
 # start from drug-level permutations and exposures
 permutations <- readr::read_csv("extra/classGeneratorList.csv")
 exposuresOfInterestTable <- readr::read_csv("inst/settings/ExposuresOfInterest.csv")
+
+## DEBUG: fill in `includedConceptIds` for drug-level exposure cohorts
+exposuresOfInterestTable <- exposuresOfInterestTable %>%
+  mutate(includedConceptIds = if_else(type == "Drug", as.character(conceptId), includedConceptIds))
+
 permutations <- inner_join(permutations, exposuresOfInterestTable %>%
                              select(cohortId, shortName),
                            by = c("targetId" = "cohortId"))
@@ -55,8 +60,11 @@ makeShortName <- function(permutation) {
 
 # function to create permute drug-level target-comparator pairs----
 createPermutationsForDrugs <- function(classId){
-  drugsForClass <- exposuresOfInterestTable %>% filter(cohortId > classId, cohortId < (classId + 10)) %>% mutate(classId = classId)
-  permutationsForDrugs <- drugsForClass %>% left_join(permutations, by = c("classId" ="targetId")) %>%
+  drugsForClass <- exposuresOfInterestTable %>%
+    filter(cohortId > classId, cohortId < (classId + 10)) %>%
+    mutate(classId = classId)
+  permutationsForDrugs <- drugsForClass %>%
+    left_join(permutations, by = c("classId" ="targetId")) %>%
     mutate(targetId = cohortId.x,
            cohortId = cohortId.y,
            includedConceptIds = conceptId,
@@ -314,10 +322,13 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 #classIds = c(20)
 
 # or, DPP4i
-classIds = c(10)
+#classIds = c(10)
 
 # also, for SU
 #classIds = c(40)
+
+# DEBUG: test with SGLT2i
+classIds = c(30)
 
 # then create permutations for the desired drug class
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>%
@@ -345,8 +356,12 @@ permutationsForDrugs$sql <-
 # save SQL and JSON files under class name (e.g., "DPP4I") folder
 ## need to create the directory for this class first
 this.class = tolower(permutationsForDrugs[1,]$class)
-dir.create(file.path("inst/sql/sql_server", this.class))
-dir.create(file.path("inst/cohorts", this.class))
+if(!dir.exists(file.path("inst/sql/sql_server", this.class))){
+  dir.create(file.path("inst/sql/sql_server", this.class))
+}
+if(!dir.exists(file.path("inst/cohorts", this.class))){
+  dir.create(file.path("inst/cohorts", this.class))
+}
 
 ## and then save JSON and SQL files
 for (i in 1:nrow(permutationsForDrugs)) {
