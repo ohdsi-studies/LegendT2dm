@@ -18,24 +18,24 @@ oracleTempSchema <- NULL
 # outputFolder <- "E:/LegendT2dmOutput_ccae_drug"
 
 # # Feb 2023: fast forward data version to the latest accessible
-cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
-serverSuffix <- "optum_ehr"
-cohortDatabaseSchema <- "scratch_fbu2"
-databaseId <- "OptumEHR"
-databaseName <- "Optum© de-identified Electronic Health Record Dataset"
-databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
-tablePrefix <- "legend_t2dm_optum_ehr"
-outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug"
+# cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
+# serverSuffix <- "optum_ehr"
+# cohortDatabaseSchema <- "scratch_fbu2"
+# databaseId <- "OptumEHR"
+# databaseName <- "Optum© de-identified Electronic Health Record Dataset"
+# databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
+# tablePrefix <- "legend_t2dm_optum_ehr"
+# outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug"
 
 # Feb 2023: fast forward data version to the latest accessible
-# cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
-# serverSuffix <- "truven_mdcr"
-# cohortDatabaseSchema <- "scratch_fbu2"
-# databaseId<- "MDCR"
-# databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
-# databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
-# tablePrefix <- "legend_t2dm_mdcr"
-# outputFolder <- "E:/LegendT2dmOutput_mdcr_drug"
+cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
+serverSuffix <- "truven_mdcr"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId<- "MDCR"
+databaseName <- "IBM Health MarketScan Medicare Supplemental and Coordination of Benefits Database"
+databaseDescription <- "IBM Health MarketScan® Medicare Supplemental and Coordination of Benefits Database (MDCR) represents health services of retirees in the United States with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service, or capitated health plans. These data include adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy). Additionally, it captures laboratory tests for a subset of the covered lives."
+tablePrefix <- "legend_t2dm_mdcr"
+outputFolder <- "E:/LegendT2dmOutput_mdcr_OT2_reRun2"
 
 # # Feb 2023: fast forward data version to the latest accessible
 # TBD: run drug-level study on MDCD
@@ -79,19 +79,19 @@ assessPhenotypes(connectionDetails = conn,
                  cohortDatabaseSchema = cohortDatabaseSchema,
                  outputFolder = outputFolder,
                  tablePrefix = tablePrefix,
-                 indicationId = 'drug',
+                 indicationId = 'sglt2i',
                  databaseId = databaseId,
                  databaseName = databaseName,
                  databaseDescription = databaseDescription,
                  createExposureCohorts = TRUE,
                  runExposureCohortDiagnostics = TRUE,
                  createOutcomeCohorts = TRUE,
-                 runOutcomeCohortDiagnostics = TRUE) #TRUE)
+                 runOutcomeCohortDiagnostics = FALSE) #TRUE)
 
 assessPropensityModels(connectionDetails = conn,
                        cdmDatabaseSchema = cdmDatabaseSchema,
                        tablePrefix = tablePrefix,
-                       indicationId = 'drug',
+                       indicationId = 'sglt2i',
                        oracleTempSchema = oracleTempSchema,
                        cohortDatabaseSchema = cohortDatabaseSchema,
                        outputFolder = outputFolder,
@@ -138,45 +138,46 @@ assessPropensityModels(connectionDetails = conn,
 #         maxCores = 16)
 
 ## full-on execution of CES; run all sections of analyses
-execute(connectionDetails = conn,
-        cdmDatabaseSchema = cdmDatabaseSchema,
-        oracleTempSchema = oracleTempSchema,
-        cohortDatabaseSchema = cohortDatabaseSchema,
-        outputFolder = outputFolder,
-        indicationId = "drug",
-        databaseId = databaseId,
-        databaseName = databaseName,
-        databaseDescription = databaseDescription,
-        minCohortSize = 1000,
-        tablePrefix = tablePrefix,
-        createExposureCohorts = FALSE,
-        createOutcomeCohorts = FALSE,
-        fetchAllDataFromServer = TRUE,
-        generateAllCohortMethodDataObjects = TRUE,
-        runCohortMethod = TRUE,
-        runSections = c(1:6),
-        computeCovariateBalance = TRUE,
-        exportToCsv = TRUE,
-        maxCores = 16)
-
-# quick bug-fix to re-package results (likelihood profile re-extraction)
 # execute(connectionDetails = conn,
 #         cdmDatabaseSchema = cdmDatabaseSchema,
 #         oracleTempSchema = oracleTempSchema,
 #         cohortDatabaseSchema = cohortDatabaseSchema,
 #         outputFolder = outputFolder,
-#         indicationId = "sglt2i",
+#         indicationId = "drug",
 #         databaseId = databaseId,
 #         databaseName = databaseName,
 #         databaseDescription = databaseDescription,
+#         minCohortSize = 1000,
 #         tablePrefix = tablePrefix,
 #         createExposureCohorts = FALSE,
 #         createOutcomeCohorts = FALSE,
-#         fetchAllDataFromServer = FALSE,
-#         generateAllCohortMethodDataObjects = FALSE,
-#         runCohortMethod = FALSE,
+#         fetchAllDataFromServer = TRUE,
+#         generateAllCohortMethodDataObjects = TRUE,
+#         runCohortMethod = TRUE,
 #         runSections = c(1:6),
-#         computeCovariateBalance = FALSE,
+#         computeCovariateBalance = TRUE,
 #         exportToCsv = TRUE,
 #         maxCores = 16)
+
+# quick bug-fix to re-package results (likelihood profile re-extraction)
+# re-run SGLT2i with OT2 only
+execute(connectionDetails = conn,
+        cdmDatabaseSchema = cdmDatabaseSchema,
+        oracleTempSchema = oracleTempSchema,
+        cohortDatabaseSchema = cohortDatabaseSchema,
+        outputFolder = outputFolder,
+        indicationId = "sglt2i",
+        databaseId = databaseId,
+        databaseName = databaseName,
+        databaseDescription = databaseDescription,
+        tablePrefix = tablePrefix,
+        createExposureCohorts = FALSE,
+        createOutcomeCohorts = FALSE,
+        fetchAllDataFromServer = TRUE,
+        generateAllCohortMethodDataObjects = FALSE,
+        runCohortMethod = FALSE,
+        runSections = c(3,6),
+        computeCovariateBalance = TRUE,
+        exportToCsv = TRUE,
+        maxCores = 16)
 
