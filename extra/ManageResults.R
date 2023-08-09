@@ -30,9 +30,9 @@ Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 # Class CER results
 
 resultsSchema <- "legendt2dm_class_results"
-LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = resultsSchema,
-                                    sqlFileName = "CreateResultsTables.sql")
+# LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+#                                     schema = resultsSchema,
+#                                     sqlFileName = "CreateResultsTables.sql")
 
 LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legend", schema = resultsSchema)

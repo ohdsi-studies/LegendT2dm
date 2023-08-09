@@ -394,6 +394,12 @@ printCohortDefinitionFromNameAndJson(name = "albiglutide main",
 printCohortDefinitionFromNameAndJson(name = "albiglutide younger-age",
                                      json = permutationsForDrugs$json[2])
 
+# print out an example for SGLT2i
+cohortName = "canagliflozin main ot2"
+jsonFile = drugCohortsToCreate %>% filter(atlasName == cohortName) %>% pull(name)
+printCohortDefinitionFromNameAndJson(name = "canagliflozin main ot2",
+                                     json = SqlRender::readSql(paste0("inst/cohorts/", jsonFile, ".json")))
+
 
 # generate drug-level TCOs-----
 # function to create TCO triplets

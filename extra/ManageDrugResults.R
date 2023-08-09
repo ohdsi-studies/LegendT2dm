@@ -37,11 +37,11 @@ resultsSchema <- "legendt2dm_drug_results"
 #                                     sqlFileName = "CreateResultsTables.sql")
 
 # grant user permission
-# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-#                                     user = "legend", schema = resultsSchema)
-#
-# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-#                                     user = "legendt2dm_readonly", schema = resultsSchema)
+LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                    user = "legend", schema = resultsSchema)
+
+LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+                                    user = "legendt2dm_readonly", schema = resultsSchema)
 
 
 # Feb 2023 SGLT2I CES results upload ----
