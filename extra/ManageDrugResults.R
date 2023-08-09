@@ -44,18 +44,20 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
                                     user = "legendt2dm_readonly", schema = resultsSchema)
 
 
-# Feb 2023 SGLT2I CES results upload ----
+# July 2023 drug-vs-drug CES results upload ----
 # Results uploaded for newer data versions!
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "E:/LegendT2dmOutput_optum_ehr_new/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
-    "E:/LegendT2dmOutput_optum_dod_new/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
-    "E:/LegendT2dmOutput_mdcd_new/sglt2i/export/Results_sglt2i_study_MDCD.zip",
-    "E:/LegendT2dmOutput_mdcr_sglt2i_new/sglt2i/export/Results_sglt2i_study_MDCR.zip",
-    "E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip"
+    #"E:/LegendT2dmOutput_mdcr_drug/drug/export/Results_drug_study_MDCR.zip",
+    "E:/LegendT2dmOutput_ccae_drug/drug/export/Results_drug_study_CCAE.zip"
+    #"E:/LegendT2dmOutput_optum_ehr_new/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
+    #"E:/LegendT2dmOutput_optum_dod_new/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
+    #"E:/LegendT2dmOutput_mdcd_new/sglt2i/export/Results_sglt2i_study_MDCD.zip",
+    #"E:/LegendT2dmOutput_mdcr_sglt2i_new/sglt2i/export/Results_sglt2i_study_MDCR.zip",
+    #"E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip"
     #"d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
     ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
