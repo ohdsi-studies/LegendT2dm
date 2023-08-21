@@ -12,6 +12,7 @@
       "maxCohortSize": 0,
       "covariateSettings": {
         "temporal": false,
+        "temporalSequence": false,
         "DemographicsGender": true,
         "DemographicsAgeGroup": true,
         "DemographicsRace": true,
@@ -45,8 +46,9 @@
         "mediumTermStartDays": -180,
         "endDays": 0,
         "longTermStartDays": -365,
-        "attr_fun": "getDbDefaultCovariateData",
-        "attr_class": "covariateSettings"
+        "DemographicsAge": true,
+        "attr_class": "covariateSettings",
+        "attr_fun": "getDbDefaultCovariateData"
       },
       "attr_class": "args"
     },
@@ -134,6 +136,7 @@
       "maxCohortSize": 0,
       "covariateSettings": {
         "temporal": false,
+        "temporalSequence": false,
         "DemographicsGender": true,
         "DemographicsAgeGroup": true,
         "DemographicsRace": true,
@@ -167,8 +170,9 @@
         "mediumTermStartDays": -180,
         "endDays": 0,
         "longTermStartDays": -365,
-        "attr_fun": "getDbDefaultCovariateData",
-        "attr_class": "covariateSettings"
+        "DemographicsAge": true,
+        "attr_class": "covariateSettings",
+        "attr_fun": "getDbDefaultCovariateData"
       },
       "attr_class": "args"
     },
@@ -190,6 +194,7 @@
     },
     "createPs": true,
     "createPsArgs": {
+      "excludeCovariateIds": 1002,
       "maxCohortSizeForFitting": 100000,
       "errorOnHighCorrelation": true,
       "stopOnError": false,
@@ -303,6 +308,7 @@
       "maxCohortSize": 0,
       "covariateSettings": {
         "temporal": false,
+        "temporalSequence": false,
         "DemographicsGender": true,
         "DemographicsAgeGroup": true,
         "DemographicsRace": true,
@@ -336,8 +342,9 @@
         "mediumTermStartDays": -180,
         "endDays": 0,
         "longTermStartDays": -365,
-        "attr_fun": "getDbDefaultCovariateData",
-        "attr_class": "covariateSettings"
+        "DemographicsAge": true,
+        "attr_class": "covariateSettings",
+        "attr_fun": "getDbDefaultCovariateData"
       },
       "attr_class": "args"
     },
@@ -359,6 +366,7 @@
     },
     "createPs": true,
     "createPsArgs": {
+      "excludeCovariateIds": 1002,
       "maxCohortSizeForFitting": 100000,
       "errorOnHighCorrelation": true,
       "stopOnError": false,

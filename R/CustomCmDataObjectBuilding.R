@@ -130,6 +130,9 @@ fetchAllDataFromServer <- function(connectionDetails,
     defaultCovariateSettings <- FeatureExtraction::createDefaultCovariateSettings(excludedCovariateConceptIds = filterConceptIds,
                                                                                   addDescendantsToExclude = TRUE)
 
+    # add continuous age to covariates
+    defaultCovariateSettings$DemographicsAge = TRUE
+
     # Add subgroupCovariateSettings here (see Legend package )
     covariateSettings <- list(defaultCovariateSettings)
 
