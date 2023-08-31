@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+library(dplyr)
 
 Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
 
@@ -30,116 +31,81 @@ Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
 # Class CER results
 
 resultsSchema <- "legendt2dm_class_results"
-LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
-                                    schema = resultsSchema,
-                                    sqlFileName = "CreateResultsTables.sql")
+# LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
+#                                     schema = resultsSchema,
+#                                     sqlFileName = "CreateResultsTables.sql")
+#
+# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+#                                     user = "legend", schema = resultsSchema)
+#
+# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+#                                     user = "legendt2dm_readonly", schema = resultsSchema)
 
-LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legend", schema = resultsSchema)
-
-LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legendt2dm_readonly", schema = resultsSchema)
+LegendT2dm::addDatabaseIdToTables(
+  tableName = "likelihood_profile",
+  databaseId = c(
+    # "OptumEHR", "OptumDod", "MDCD", "MDCR", "CCAE", "US_Open_Claims", "SIDIAP", "UK_IMRD",
+    #              "VA-OMOP", "France_LPD", "HIC-Dundee", "HK-HA-DM",
+    # "CUIMC",
+    # "Germany_DA",
+    "TMUCRD"),
+  originalZipFileName = c(
+    # "d:/LegendT2dmOutput_optum_ehr_v114/class/export/Results_class_study_OptumEHR.zip",
+    # "d:/LegendT2dmOutput_optum_dod_v114/class/export/Results_class_study_OptumDod.zip",
+    # "d:/LegendT2dmOutput_mdcd_v114/class/export/Results_class_study_MDCD.zip",
+    # "d:/LegendT2dmOutput_mdcr_v114/class/export/Results_class_study_MDCR.zip",
+    # "d:/LegendT2dmOutput_ccae_v114/class/export/Results_class_study_CCAE.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_SIDIAP_221226.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_UK_IMRD_230105.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_VA-OMOP_221121.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_France_LPD_220906.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_HIC-Dundee_220529_v1121.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_HK-HA-DM_220507_v1121.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_CUIMC_230119.zip",
+    # "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_Germany_DA_220907.zip",
+    "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_TMUCRD_230426.zip",
+    NULL),
+  newZipFileName = c(
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_OptumEHR.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_OptumDod.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_MDCD.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_MDCR.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_CCAE.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_US_Open_Claims_220816.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_SIDIAP_221226.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_UK_IMRD_230105.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_VA-OMOP_221121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_France_LPD_220906.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_HIC-Dundee_220529_v1121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_HK-HA-DM_220507_v1121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_CUIMC_230119.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_Germany_DA_220907.zip",
+    "d:/LegendT2dmOutput_final/class_ces/Results_class_study_TMUCRD_230426.zip",
+    NULL)
+  )
 
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    # "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
-    # "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
-    # "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
-    # "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
-    # "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
-    "d:/LegendT2dmOutput_SFTP/class_ces/Results_class_study_US_Open_Claims_220816.zip"
-    ),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_OptumEHR.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_OptumDod.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_MDCD.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_MDCR.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_CCAE.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_US_Open_Claims_220816.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_SIDIAP_221226.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_UK_IMRD_230105.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_VA-OMOP_221121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_France_LPD_220906.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_HIC-Dundee_220529_v1121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_HK-HA-DM_220507_v1121.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_CUIMC_230119.zip",
+    # "d:/LegendT2dmOutput_final/class_ces/Results_class_study_Germany_DA_220907.zip",
+    "d:/LegendT2dmOutput_final/class_ces/Results_class_study_TMUCRD_230426.zip",
+    NULL),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv") %>%
+                                    filter(!(tableName %in% c("kaplan_meier_dist"))))
 )
-
-imrdZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/5w17o2h3_Results_class_study_UK-IMRD.zip"
-
-LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = imrdZipFile,
-                                       dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd")
-
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd")
-
-model <- readRDS("/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/imrd/propensity_model_UK-IMRD.rds")
-
-
-# SIDIAP
-
-sidiapZipFile <- "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/ouy7l9at_Results_class_study_SIDIAP.zip"
-
-LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = sidiapZipFile,
-                                       dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
-
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = "/Users/msuchard/Dropbox/Projects/LegendT2dm_Results/class_ces/sidiap")
-
-
-
-## Display local results
-
-zipFileName = c(
-  "d:/LegendT2dmOutput_optum_ehr2/class/export/Results_class_study_OptumEHR.zip",
-  "d:/LegendT2dmOutput_optum_dod2/class/export/Results_class_study_OptumDod.zip",
-  "d:/LegendT2dmOutput_mdcd2/class/export/Results_class_study_MDCD.zip",
-  "d:/LegendT2dmOutput_mdcr4/class/export/Results_class_study_MDCR.zip",
-  "d:/LegendT2dmOutput_ccae3/class/export/Results_class_study_CCAE.zip"
-#  ,"d:/LegendT2dmOutput_SFTP/Results_class_study_US_Open_Claims.zip"
-)
-
-shinyOutput <- "d:/LegendT2dmOutput_shiny"
-lapply(zipFileName, function(file) {
-  prepareForEvidenceExplorer(resultsZipFile = file,
-                             dataFolder = shinyOutput)
-})
-
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = shinyOutput,
-                                                   blind = TRUE)
-
-# Open_Claims
-ocShinyOutput <- "d:/LegendT2dmOutput_shiny_oc"
-prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_US_Open_Claims.zip",
-                             dataFolder = ocShinyOutput)
-
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = ocShinyOutput,
-                                                   blind = TRUE)
-
-# CUIMC
-cuimcShinyOutput <- "d:/LegendT2dmOutput_shiny_cuimc"
-prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_CUIMC.zip",
-                           dataFolder = cuimcShinyOutput)
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = cuimcShinyOutput,
-                                                   blind = TRUE)
-
-# IMRD
-imrdShinyOutput <- "d:/LegendT2dmOutput_shiny_imrd"
-prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/5w17o2h3_Results_class_study_UK-IMRD.zip",
-                           dataFolder = imrdShinyOutput)
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = imrdShinyOutput,
-                                                   blind = TRUE)
-
-# HK
-hkShinyOutput <- "d:/LegendT2dmOutput_shiny_hk"
-prepareForEvidenceExplorer(resultsZipFile = "d:/LegendT2dmOutput_SFTP/Results_class_study_HK-HA-DM.zip",
-                           dataFolder = hkShinyOutput)
-LegendT2dmEvidenceExplorer::launchEvidenceExplorer(dataFolder = hkShinyOutput,
-                                                   blind = TRUE)
-
-# Simple statistics
-dataSource <- c("CCAE","MDCD", "MDCR", "OptumDOD", "OptumEHR")
-bind_rows(lapply(dataSource, function(db) {
-  readRDS(file.path(shinyOutput, paste0("results_date_time_", db, ".rds")))
-}))
-
-
-ccae <- readRDS(file.path(shinyOutput, "cohort_method_result_CCAE.rds"))
-sort(unique(ccae$analysis_id))
-
-oc <- readRDS(file.path(shinyOutput, "cohort_method_result_US_Open_Claims.rds"))
-sort(unique(oc$analysis_id))
-
-ccae <- readRDS(file.path(shinyOutput, "covariate_balance_t101100000_c201100000_CCAE.rds"))
-
-
-readRDS(file.path(imrdShinyOutput, paste0("results_date_time_", "UK-IMRD", ".rds")))
-

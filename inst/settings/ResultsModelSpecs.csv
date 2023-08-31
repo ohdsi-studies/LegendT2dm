@@ -147,3 +147,15 @@ ps_auc_assessment,equipoise,numeric,"%-subjects with preference scores between 0
 results_date_time,database_id,varchar(255),"Foreign key referencing the database",Yes,Yes,No,Yes
 results_date_time,date_time,varchar(255),"Date and time when results were compiled",Yes,No,No,Yes
 results_date_time,package_version,varchar(255), "LegendT2dm package version",Yes,No,No,Yes
+diagnostics,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+diagnostics,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+diagnostics,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+diagnostics,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
+diagnostics,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+diagnostics,any_outcomes,integer,Indicator of non-zero outcomes across both exposure cohorts,No,No,No,Yes
+diagnostics,mdrr,numeric,Minimal detectable risk ratio,No,No,No,Yes
+diagnostics,max_abs_std_diff_mean,numeric,Maximium absolute standardized difference in means,No,No,No,Yes
+diagnostics,min_equipoise,numeric,Proportion of subjects in clinical equipoise,No,No,No,Yes
+diagnostics,ease,numeric,Expected absolute systematic error,No,No,No,Yes
+diagnostics,pass,integer,Indicator of whether the study has passed the diagnostics,No,No,No,Yes
+diagnostics,criteria,varchar(255),Description of diagnostics criteria,No,No,No,Yes
