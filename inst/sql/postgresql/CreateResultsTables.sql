@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS covariate;
 DROP TABLE IF EXISTS covariate_analysis;
 DROP TABLE IF EXISTS covariate_balance;
 DROP TABLE IF EXISTS database;
+DROP TABLE IF EXISTS diagnostics;
 DROP TABLE IF EXISTS exposure_of_interest;
 DROP TABLE IF EXISTS exposure_summary;
 DROP TABLE IF EXISTS kaplan_meier_dist;
@@ -147,6 +148,22 @@ CREATE TABLE database (
      study_package_version VARCHAR(255) ,
      is_meta_analysis INTEGER NOT NULL,
      PRIMARY KEY(database_id)
+);
+
+CREATE TABLE diagnostics (
+     database_id VARCHAR(255) NOT NULL,
+     target_id BIGINT NOT NULL,
+     comparator_id BIGINT NOT NULL,
+     outcome_id BIGINT NOT NULL,
+     analysis_id INTEGER NOT NULL,
+     any_outcomes INTEGER ,
+     mdrr NUMERIC ,
+     max_abs_std_diff_mean NUMERIC ,
+     min_equipoise NUMERIC ,
+     ease NUMERIC ,
+     pass INTEGER ,
+     criteria VARCHAR(255) ,
+     PRIMARY KEY(database_id, target_id, comparator_id, outcome_id, analysis_id)
 );
 
 CREATE TABLE exposure_of_interest (
