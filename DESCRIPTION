@@ -1,9 +1,10 @@
 Package: LegendT2dm
 Title: Large-Scale Evidence Generation and Evaluation in a Network of Databases
-Version: 2.0.1
+Version: 2.1.0
 Author: Marc A. Suchard [aut, cre],
     Martijn J. Schuemie [aut],
-    Patrick B. Ryan [aut]
+    Patrick B. Ryan [aut],
+    Fan Bu [aut]
 Maintainer: Marc A. Suchard <msuchard@ucla.edu>
 Description: Large-Scale Evidence Generation and Evaluation in a Network of Databases
     for Type 2 Diabetes (LEGEND-T2DM) studies the comparative effectiveness and safety
