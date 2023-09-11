@@ -39,9 +39,9 @@ How to run
 
 4. For **class v.s. class** studies, follow the instructions in Steps 6-11 below. For your convenience, all code is also provided under `extras/CodeToRun.R`.
 
-5. For **drug v.s. drug** studies within the **SGLT2 Inhibitors** drug class, follow the instructions in Steps 6-11. Replace the argument `indicationId = "class"` with `indicationId = "sglt2i"` and also replace `cohorts = "class"` with `cohorts = "sglt2i"` to view/upload diagnostics and results. It is _strongly recommended_ to run all the code provided under `extras/CodeToRunSglt2i.R` for more reliable execution. 
+5. For **drug v.s. drug** studies across all drug classes, follow the instructions in Steps 6-11. Replace the argument `indicationId = "class"` with `indicationId = "drug"` and also replace `cohorts = "class"` with `cohorts = "drug"` to view/upload diagnostics and results. It is _strongly recommended_ to run all the code provided under `extras/CodeToRunAllDrugs.R` for more reliable execution. 
 
-6. Once the `LegendT2dm` package is installed, you can execute the feasibility assessment portion of the study by modifying and using the code below. You may also refer to the code provided under `extras/CodeToRun.R` (or `indicationId = "sglt2i"` for SGLT2 inhibitors studies):
+6. Once the `LegendT2dm` package is installed, you can execute the feasibility assessment portion of the study by modifying and using the code below. You may also refer to the code provided under `extras/CodeToRun.R` (or `indicationId = "drug"` for drug-level studies):
 
 	```r
 	library(LegendT2dm)
