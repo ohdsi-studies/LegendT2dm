@@ -25,10 +25,17 @@ createAnalysesDetails <- function(outputFolder,
   filterConceptIds <- as.character(indications$filterConceptIds[indications$indicationId == "class"])
   filterConceptIds <- as.numeric(strsplit(filterConceptIds, split = ";")[[1]])
 
+  # create default covariateSettings
+  defaultCovariateSettings =  FeatureExtraction::createDefaultCovariateSettings(
+    excludedCovariateConceptIds = filterConceptIds,
+    addDescendantsToExclude = TRUE)
+
+  # add continuous age to covariateSettings
+  defaultCovariateSettings$DemographicsAge = TRUE
+
   getDbCmDataArgs <- CohortMethod::createGetDbCohortMethodDataArgs(
-    covariateSettings = FeatureExtraction::createDefaultCovariateSettings(
-      excludedCovariateConceptIds = filterConceptIds,
-      addDescendantsToExclude = TRUE))
+    covariateSettings = defaultCovariateSettings
+    )
 
   createStudyPopArgsOnTreatment <- CohortMethod::createCreateStudyPopulationArgs(
     restrictToCommonPeriod = TRUE,
@@ -59,7 +66,9 @@ createAnalysesDetails <- function(outputFolder,
                                 # irrespective of multi-threading
       seed = 123),
     stopOnError = FALSE,
-    maxCohortSizeForFitting = 1e+05)
+    maxCohortSizeForFitting = 1e+05,
+    excludeCovariateIds = c(1002) # exclude continuous age from PS model
+    )
 
   matchOnPsArgs <- CohortMethod::createMatchOnPsArgs(
     caliper = 0.2,
