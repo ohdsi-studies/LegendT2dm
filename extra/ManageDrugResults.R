@@ -46,6 +46,7 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 
 # July 2023 drug-vs-drug CES results upload ----
 # Results uploaded for newer data versions!
+# March 2023: uploaded DA Germany & US Open Claims
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,

@@ -1,3 +1,12 @@
+LegendT2dm 2.1.0
+=======================
+
+Changes:
+
+1. Enable drug-vs-drug comparisons for all drug classes (within and across classes)
+2. Fixed a bug for drug-level studies where OT2 studies failed to execute
+3. Include continuous age in patient characteristics
+
 LegendT2dm 2.0.1
 =======================
 
