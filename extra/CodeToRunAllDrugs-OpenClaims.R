@@ -94,11 +94,42 @@ uploadPsAssessmentResults(cohort = indicationId,
 
 
 # run CES for drug vs drug -----------------------------------------------------------
+# execute(connectionDetails = connectionDetails,
+#         cdmDatabaseSchema = cdmDatabaseSchema,
+#         oracleTempSchema = oracleTempSchema,
+#         cohortDatabaseSchema = cohortDatabaseSchema,
+#         outputFolder = outputFolder,
+#         indicationId = indicationId,
+#         databaseId = databaseId,
+#         databaseName = databaseName,
+#         databaseDescription = databaseDescription,
+#         tablePrefix = tablePrefix,
+#         createExposureCohorts = FALSE,
+#         createOutcomeCohorts = FALSE,
+#         fetchAllDataFromServer = TRUE,
+#         generateAllCohortMethodDataObjects = TRUE,
+#         runCohortMethod = TRUE,
+#         computeCovariateBalance = TRUE,
+#         exportToCsv = TRUE,
+#         maxCores = maxCores)
+
+
+##### OPEN CLAIMS staged execution code: ------
+
+## create separate output folders for staged study execution:
+prepareStagedExecution(originalOutputFolder = outputFolder,
+                       outputFolderHeader = outputFolder,
+                       indicationId = "drug",
+                       stages = 10)
+
+## try this out (only run the first 1/10 of target-comparator pairs):
+newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
+
 execute(connectionDetails = connectionDetails,
         cdmDatabaseSchema = cdmDatabaseSchema,
         oracleTempSchema = oracleTempSchema,
         cohortDatabaseSchema = cohortDatabaseSchema,
-        outputFolder = outputFolder,
+        outputFolder = newOutputFolder1,
         indicationId = indicationId,
         databaseId = databaseId,
         databaseName = databaseName,
