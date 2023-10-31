@@ -40,7 +40,10 @@ prepareStagedExecution <- function(originalOutputFolder,
   stageCounter = rep(1:stages, each = chunkSize)
   exposureSummary$stage = stageCounter[1:nrow(exposureSummary)]
 
-  # file path to cohortCounts table
+  # file path to exposure cohortCounts table
+  exposureCohortCountsFile = file.path(indicationFolder, "cohortCounts.csv")
+
+  # file path to outcome cohortCounts table
   outcomeFold <- file.path(originalOutputFolder, "outcome")
   cohortCountsFile = file.path(outcomeFold, "cohortCounts.csv")
 
@@ -51,19 +54,21 @@ prepareStagedExecution <- function(originalOutputFolder,
       dir.create(newOutputFolder)
     }
 
-    # copy over cohortCounts table
+    # copy over outcome cohortCounts table
     newOutcomeFolder = file.path(newOutputFolder, "outcome")
     if(!dir.exists(newOutcomeFolder)){
       dir.create(newOutcomeFolder)
     }
     file.copy(cohortCountsFile, newOutcomeFolder)
 
-    # write sliced pairedExposureSummary file
+    # copy over exposure cohortCounts table
     newIndicationFolder = file.path(newOutputFolder, indicationId)
     if(!dir.exists(newIndicationFolder)){
       dir.create(newIndicationFolder)
     }
+    file.copy(exposureCohortCountsFile, newIndicationFolder)
 
+    # write sliced pairedExposureSummary file
     exposureSummarySlice <- exposureSummary %>% filter(stage == s) %>% select(-stage)
     exposureSummarySliceFile = file.path(newIndicationFolder, "pairedExposureSummaryFilteredBySize.csv")
     write.csv(exposureSummarySlice, exposureSummarySliceFile, row.names = FALSE)
