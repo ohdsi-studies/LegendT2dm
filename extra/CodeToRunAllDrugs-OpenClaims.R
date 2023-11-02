@@ -117,6 +117,7 @@ uploadPsAssessmentResults(cohort = indicationId,
 ##### OPEN CLAIMS staged execution code: ------
 
 ## create separate output folders for staged study execution:
+## (try splitting to 10 stages first)
 prepareStagedExecution(originalOutputFolder = outputFolder,
                        outputFolderHeader = outputFolder,
                        indicationId = "drug",
