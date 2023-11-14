@@ -54,6 +54,7 @@
 #'                                             length is missing?
 #' @param createExposureCohorts                Create the tables with the exposure cohorts?
 #' @param createOutcomeCohorts                 Create the tables with the outcome cohorts?
+#' @param createPairedExposureSummary          Create local fils with paired exposure summary?
 #' @param fetchAllDataFromServer               Fetch all relevant data from the server?
 #' @param synthesizePositiveControls           Inject signals to create synthetic controls?
 #' @param generateAllCohortMethodDataObjects   Create the cohortMethodData objects from the fetched
@@ -86,6 +87,7 @@ execute <- function(connectionDetails,
                     studyEndDate = "",
                     createExposureCohorts = TRUE,
                     createOutcomeCohorts = TRUE,
+                    createPairedExposureSummary = TRUE,
                     fetchAllDataFromServer = TRUE,
                     synthesizePositiveControls = FALSE,
                     generateAllCohortMethodDataObjects = TRUE,
@@ -127,11 +129,13 @@ execute <- function(connectionDetails,
                               imputeExposureLengthWhenMissing = imputeExposureLengthWhenMissing)
     }
 
-    writePairedCounts(outputFolder = outputFolder, indicationId = indicationId)
-    filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId,
-                                minCohortSize = minCohortSize)
-
-    exposureSummary = read.csv(file.path(indicationFolder, "pairedExposureSummaryFilteredBySize.csv"))
+    pairedExposureSummaryPath = file.path(indicationFolder, "pairedExposureSummaryFilteredBySize.csv")
+    if(!file.exists(pairedExposureSummaryPath) || createPairedExposureSummary){
+      writePairedCounts(outputFolder = outputFolder, indicationId = indicationId)
+      filterByExposureCohortsSize(outputFolder = outputFolder, indicationId = indicationId,
+                                  minCohortSize = minCohortSize)
+    }
+    exposureSummary = read.csv(pairedExposureSummaryPath)
     if(nrow(exposureSummary) < 1){
       ParallelLogger::logInfo(sprintf("All exposure cohort sizes in target-comparator pairs are below `minCohortSize = %s`! No analyses to run.",
                                       minCohortSize))
