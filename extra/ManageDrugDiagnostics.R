@@ -40,12 +40,25 @@ drugSchema <- "legendt2dm_drug_diagnostics"
 
 
 ## grant user read permission
-LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legend", schema = drugSchema)
+# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+#                                     user = "legend", schema = drugSchema)
+#
+# ## grant user read permission
+# LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
+#                                     user = "legendt2dm_readonly", schema = drugSchema)
 
-## grant user read permission
-LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
-                                    user = "legendt2dm_readonly", schema = drugSchema)
+# uploaded, Oct 2023
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_optum_ehr_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_OptumEHR.zip")
+
+# uploaded, Oct 2023
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "C:/Users/Admin_FBu2/Downloads/b9ps8anh_Results_drug_exposures_CUIMC.zip")
+
 
 # uploaded, Feb 28 2023
 CohortDiagnostics::uploadResults(
@@ -71,12 +84,6 @@ CohortDiagnostics::uploadResults(
   zipFileName = "E:/LegendT2dmOutput_mdcd_new/sglt2i/cohortDiagnosticsExport/Results_sglt2i_exposures_MDCD.zip")
 
 
-# # uploaded for dpp4i too, Feb 6 2023
-# CohortDiagnostics::uploadResults(
-#   connectionDetails = connectionDetails,
-#   schema = drugSchema,
-#   zipFileName = "E:/LegendT2dmOutput_mdcr_DPP4I_2/DPP4I/cohortDiagnosticsExport/Results_DPP4I_exposures_MDCR.zip")
-
 # uploaded, Feb 8 2023
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
@@ -94,6 +101,18 @@ CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
   schema = drugSchema,
   zipFileName = "E:/Results_sglt2i_exposures_CUIMC.zip")
+
+
+# Sept 2023: upload IQVIA data sources' exposure diagnostics
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/Results_drug_exposures_DA_GERMANY.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/Results_drug_exposures_LPD_FRANCE.zip")
 
 
 

@@ -45,25 +45,38 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 
 
 # July 2023 drug-vs-drug CES results upload ----
-# Results uploaded for newer data versions!
-# March 2023: uploaded DA Germany & US Open Claims
+# Results after for newer data version & package de-bug
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
-  purgeSiteDataBeforeUploading = FALSE,
+  purgeSiteDataBeforeUploading =TRUE,
   zipFileName = c(
     #"E:/LegendT2dmOutput_mdcr_drug/drug/export/Results_drug_study_MDCR.zip",
     #"E:/LegendT2dmOutput_ccae_drug/drug/export/Results_drug_study_CCAE.zip"
     #"E:/LegendT2dmOutput_optum_ehr_new/sglt2i/export/Results_sglt2i_study_OptumEHR.zip",
     #"E:/LegendT2dmOutput_optum_dod_new/sglt2i/export/Results_sglt2i_study_OptumDod.zip",
     #"E:/LegendT2dmOutput_mdcd_drug2/drug/export/Results_drug_study_MDCD.zip",
-    "E:/LegendT2dmOutput_mdcr_continuousAge_test/sglt2i/export/Results_sglt2i_study_MDCR.zip",
-    #"E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip"
+    #"E:/LegendT2dmOutput_mdcr_continuousAge_test/sglt2i/export/Results_sglt2i_study_MDCR.zip",
+    #"E:/LegendT2dmOutput_ccae_sglt2i_new/sglt2i/export/Results_sglt2i_study_CCAE.zip",
+    #"C:/Users/Admin_FBu2/Downloads/Results_drug_study_DA_GERMANY.zip",
+    #"C:/Users/Admin_FBu2/Downloads/Results_drug_study_LPD_FRANCE.zip",
+    # "E:/Results_drug_study_LPD_FRANCE.zip",
+    # "E:/Results_drug_study_DA_GERMANY.zip",
+    # "E:/LegendT2dmOutput_mdcr_drug2/drug/export/Results_drug_study_MDCR.zip",
+    # "E:/LegendT2dmOutput_mdcd_drug2/drug/export/Results_drug_study_MDCD.zip",
+    "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/Results_drug_study_OptumEHR.zip",
+    #"C:/Users/Admin_FBu2/Downloads/rzbxa8v1_Results_drug_study_IMRD.zip",
     NULL
     ),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")),
+  tempFolder = "E:/uploadTemp/"
 )
 
+
+# locally examine OptumEHR drug-v-drug results
+optumEHRZipFile =  "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/Results_drug_study_OptumEHR.zip"
+LegendT2dm::prepareForEvidenceExplorer(resultsZipFile = optumEHRZipFile,
+                                       dataFolder = "E:/LegendT2dmOutput_optum_ehr_drug2/EvidenceExplorer/")
 
 
 
