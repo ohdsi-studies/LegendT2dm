@@ -19,4 +19,4 @@ LegendT2dmEvidenceExplorer::launchEvidenceExplorer(connectionDetails = legendT2d
                                                    blind = FALSE)
 
 LegendT2dmCohortExplorer::launchCohortExplorer(connectionDetails = legendT2dmConnectionDetails,
-                                               cohorts = 'drug')
+                                               cohorts = "drug") #'drug')

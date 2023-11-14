@@ -34,6 +34,8 @@ resultsSchema <- "legendt2dm_class_results"
 # LegendT2dm::createDataModelOnServer(connectionDetails = connectionDetails,
 #                                     schema = resultsSchema,
 #                                     sqlFileName = "CreateResultsTables.sql")
+
+
 #
 # LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 #                                     user = "legend", schema = resultsSchema)
@@ -84,6 +86,7 @@ LegendT2dm::addDatabaseIdToTables(
     "d:/LegendT2dmOutput_final/class_ces/Results_class_study_TMUCRD_230426.zip",
     NULL)
   )
+
 
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,

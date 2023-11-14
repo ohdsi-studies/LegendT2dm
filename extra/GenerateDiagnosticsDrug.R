@@ -101,7 +101,7 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                maxCores = 4)
 
 doMetaAnalysis(legendT2dmConnectionDetails,
-               resultsDatabaseSchema = "legendt2dm_class_results",
+               resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis0",
                maExportFolder = "maAll",
                diagnosticsFilter = NULL,
@@ -122,10 +122,10 @@ LegendT2dm::uploadResultsToDatabase(
   schema = "legendt2dm_drug_results",
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    #"maAll/Results_class_study_Meta-analysis0.zip",
-    "maHtn/Results_drug_study_Meta-analysis1.zip",
-    "maLit/Results_drug_study_Meta-analysis2.zip",
-    #"maLitNoOc/Results_class_study_Meta-analysis3.zip",
+    "maAll/Results_drug_study_Meta-analysis0.zip",
+    # "maHtn/Results_drug_study_Meta-analysis1.zip",
+    # "maLit/Results_drug_study_Meta-analysis2.zip",
+    #"maLitNoOc/Results_drug_study_Meta-analysis3.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
