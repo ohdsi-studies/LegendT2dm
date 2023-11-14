@@ -22,6 +22,7 @@ execute(
   studyEndDate = "",
   createExposureCohorts = TRUE,
   createOutcomeCohorts = TRUE,
+  createPairedExposureSummary = TRUE,
   fetchAllDataFromServer = TRUE,
   synthesizePositiveControls = FALSE,
   generateAllCohortMethodDataObjects = TRUE,
@@ -85,6 +86,8 @@ length is missing?}
 \item{createExposureCohorts}{Create the tables with the exposure cohorts?}
 
 \item{createOutcomeCohorts}{Create the tables with the outcome cohorts?}
+
+\item{createPairedExposureSummary}{Create local fils with paired exposure summary?}
 
 \item{fetchAllDataFromServer}{Fetch all relevant data from the server?}
 
