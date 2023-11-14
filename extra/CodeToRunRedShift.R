@@ -182,32 +182,33 @@ execute(connectionDetails = conn,
 #         maxCores = 16)
 #
 
-## try staged execution code on a big JnJ data source ----
-prepareStagedExecution(originalOutputFolder = outputFolder,
-                       outputFolderHeader = outputFolder,
-                       indicationId = "drug",
-                       stages = 10)
-
-## try this out (only run the first 1/10 of target-comparator pairs):
-newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
-
-indicationId = "drug"
-
-execute(connectionDetails = conn,
-        cdmDatabaseSchema = cdmDatabaseSchema,
-        oracleTempSchema = oracleTempSchema,
-        cohortDatabaseSchema = cohortDatabaseSchema,
-        outputFolder = newOutputFolder1,
-        indicationId = indicationId,
-        databaseId = databaseId,
-        databaseName = databaseName,
-        databaseDescription = databaseDescription,
-        tablePrefix = tablePrefix,
-        createExposureCohorts = FALSE,
-        createOutcomeCohorts = FALSE,
-        fetchAllDataFromServer = TRUE,
-        generateAllCohortMethodDataObjects = TRUE,
-        runCohortMethod = TRUE,
-        computeCovariateBalance = TRUE,
-        exportToCsv = TRUE,
-        maxCores = maxCores)
+#### test staged execution code on a big JnJ data source ----
+# prepareStagedExecution(originalOutputFolder = outputFolder,
+#                        outputFolderHeader = outputFolder,
+#                        indicationId = "drug",
+#                        stages = 10)
+#
+# ## try this out (only run the first 1/10 of target-comparator pairs):
+# newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
+#
+# indicationId = "drug"
+#
+# execute(connectionDetails = conn,
+#         cdmDatabaseSchema = cdmDatabaseSchema,
+#         oracleTempSchema = oracleTempSchema,
+#         cohortDatabaseSchema = cohortDatabaseSchema,
+#         outputFolder = newOutputFolder1,
+#         indicationId = indicationId,
+#         databaseId = databaseId,
+#         databaseName = databaseName,
+#         databaseDescription = databaseDescription,
+#         tablePrefix = tablePrefix,
+#         createExposureCohorts = FALSE,
+#         createOutcomeCohorts = FALSE,
+#         createPairedExposureSummary = FALSE,
+#         fetchAllDataFromServer = FALSE,
+#         generateAllCohortMethodDataObjects = TRUE,
+#         runCohortMethod = TRUE,
+#         computeCovariateBalance = TRUE,
+#         exportToCsv = TRUE,
+#         maxCores = 16)
