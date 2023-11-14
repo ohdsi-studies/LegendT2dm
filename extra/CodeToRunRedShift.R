@@ -8,24 +8,24 @@ options(andromedaTempFolder = "E:/andromedaTemp")
 oracleTempSchema <- NULL
 
 # # Feb 2023: fast forward data version to the latest accessible
-cdmDatabaseSchema <- "cdm_truven_ccae_v2182"
-serverSuffix <- "truven_ccae"
-cohortDatabaseSchema <- "scratch_fbu2"
-databaseId <- "CCAE"
-databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
-databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
-tablePrefix <- "legend_t2dm_ccae"
-outputFolder <- "E:/LegendT2dmOutput_ccae_drug2"
+# cdmDatabaseSchema <- "cdm_truven_ccae_v2182"
+# serverSuffix <- "truven_ccae"
+# cohortDatabaseSchema <- "scratch_fbu2"
+# databaseId <- "CCAE"
+# databaseName <- "IBM Health MarketScan Commercial Claims and Encounters Database"
+# databaseDescription <- "IBM Health MarketScan® Commercial Claims and Encounters Database (CCAE) represent data from individuals enrolled in United States employer-sponsored insurance health plans. The data includes adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy) as well as enrollment data from large employers and health plans who provide private healthcare coverage to employees, their spouses, and dependents. Additionally, it captures laboratory tests for a subset of the covered lives. This administrative claims database includes a variety of fee-for-service, preferred provider organizations, and capitated health plans."
+# tablePrefix <- "legend_t2dm_ccae"
+# outputFolder <- "E:/LegendT2dmOutput_ccae_drug2"
 
 # # Feb 2023: fast forward data version to the latest accessible
-# cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
-# serverSuffix <- "optum_ehr"
-# cohortDatabaseSchema <- "scratch_fbu2"
-# databaseId <- "OptumEHR"
-# databaseName <- "Optum© de-identified Electronic Health Record Dataset"
-# databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
-# tablePrefix <- "legend_t2dm_optum_ehr"
-# outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug"
+cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
+serverSuffix <- "optum_ehr"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId <- "OptumEHR"
+databaseName <- "Optum© de-identified Electronic Health Record Dataset"
+databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
+tablePrefix <- "legend_t2dm_optum_ehr"
+outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug2"
 
 # Feb 2023: fast forward data version to the latest accessible
 # cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
@@ -181,3 +181,33 @@ execute(connectionDetails = conn,
 #         exportToCsv = TRUE,
 #         maxCores = 16)
 #
+
+## try staged execution code on a big JnJ data source ----
+prepareStagedExecution(originalOutputFolder = outputFolder,
+                       outputFolderHeader = outputFolder,
+                       indicationId = "drug",
+                       stages = 10)
+
+## try this out (only run the first 1/10 of target-comparator pairs):
+newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
+
+indicationId = "drug"
+
+execute(connectionDetails = conn,
+        cdmDatabaseSchema = cdmDatabaseSchema,
+        oracleTempSchema = oracleTempSchema,
+        cohortDatabaseSchema = cohortDatabaseSchema,
+        outputFolder = newOutputFolder1,
+        indicationId = indicationId,
+        databaseId = databaseId,
+        databaseName = databaseName,
+        databaseDescription = databaseDescription,
+        tablePrefix = tablePrefix,
+        createExposureCohorts = FALSE,
+        createOutcomeCohorts = FALSE,
+        fetchAllDataFromServer = TRUE,
+        generateAllCohortMethodDataObjects = TRUE,
+        runCohortMethod = TRUE,
+        computeCovariateBalance = TRUE,
+        exportToCsv = TRUE,
+        maxCores = maxCores)
