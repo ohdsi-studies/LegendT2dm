@@ -123,7 +123,7 @@ prepareStagedExecution(originalOutputFolder = outputFolder,
                        indicationId = "drug",
                        stages = 10)
 
-## try this out (only run the first 1/10 of target-comparator pairs):
+## try this out (only run the first 1/10th of target-comparator pairs):
 newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
 
 execute(connectionDetails = connectionDetails,
@@ -138,7 +138,7 @@ execute(connectionDetails = connectionDetails,
         tablePrefix = tablePrefix,
         createExposureCohorts = FALSE,
         createOutcomeCohorts = FALSE,
-        createPairedExposureSummary = FALSE,
+        createPairedExposureSummary = FALSE, # not re-create exposure summary file
         fetchAllDataFromServer = TRUE,
         generateAllCohortMethodDataObjects = TRUE,
         runCohortMethod = TRUE,
