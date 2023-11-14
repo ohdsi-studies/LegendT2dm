@@ -17,11 +17,12 @@ legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
   password = keyring::key_get("legendt2dmPassword"))
 
 # results
+## set `cohorts = 'drug'` for drug-vs-drug results
 LegendT2dmEvidenceExplorer::launchEvidenceExplorer(connectionDetails = legendT2dmConnectionDetails,
-                                                   cohorts = 'drug',
+                                                   cohorts = 'class',
                                                    blind = FALSE)
 # cohort diagnostics
+## set `cohorts = 'drug'` for drug-vs-drug cohorts
 LegendT2dmCohortExplorer::launchCohortExplorer(connectionDetails = legendT2dmConnectionDetails,
                                                cohorts = 'class')
-## can check out "index event breakdown" / "concepts in database" for ingredient-level info
 
