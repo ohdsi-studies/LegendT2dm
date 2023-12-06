@@ -50,16 +50,16 @@
     },
     "CohortMethod": {
       "Package": "CohortMethod",
-      "Version": "4.2.2",
+      "Version": "4.2.3",
       "Source": "GitHub",
+      "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "OHDSI",
       "RemoteRepo": "CohortMethod",
-      "RemoteRef": "fa14f60c2e46f5098a20dbc93741611446ff710e",
-      "RemoteSha": "fa14f60c2e46f5098a20dbc93741611446ff710e",
-      "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
-      "Hash": "1ac378e873dbab3d2cdb4c3613a7e23f"
+      "RemoteUsername": "OHDSI",
+      "RemoteRef": "legendBalancePatch",
+      "RemoteSha": "18634a3c68a93106562c7b176283d5cafaba5861",
+      "Hash": "b0285b10945182412332a0d30577c0e7"
     },
     "CompQuadForm": {
       "Package": "CompQuadForm",
