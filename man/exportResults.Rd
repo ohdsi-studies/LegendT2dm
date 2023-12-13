@@ -11,6 +11,7 @@ exportResults(
   databaseName,
   databaseDescription,
   runSections,
+  exportSettings = createExportSettings(),
   minCellCount = 5,
   maxCores
 )
@@ -30,6 +31,8 @@ performance.}
 \item{databaseDescription}{A short description (several sentences) of the database.}
 
 \item{runSections}{Run specific sections through CohortMethod}
+
+\item{exportSettings}{A list of options for exporting csv files; see `createExportSettings()`.}
 
 \item{minCellCount}{The minimum cell count for fields contains person counts or fractions.}
 

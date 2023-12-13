@@ -26,6 +26,8 @@
 #'                              performance.
 #' @param databaseId            A short string for identifying the database (e.g. 'Synpuf').
 #' @param databaseName          The full name of the database.
+#' @param runSections           A vector of analysis sections to export results for.
+#' @param exportSettings        A list of options for exporting csv files; see `createExportSettings()`.
 #' @param databaseDescription   A short description (several sentences) of the database.
 #' @param minCellCount          The minimum cell count for fields contains person counts or fractions.
 #' @param runSections                          Run specific sections through CohortMethod
@@ -39,6 +41,7 @@ exportResults <- function(indicationId = "class",
                           databaseName,
                           databaseDescription,
                           runSections,
+                          exportSettings = createExportSettings(),
                           minCellCount = 5,
                           maxCores) {
     indicationFolder <- file.path(outputFolder, indicationId)
@@ -47,47 +50,57 @@ exportResults <- function(indicationId = "class",
         dir.create(exportFolder, recursive = TRUE)
     }
 
-    exportAnalyses(indicationId = indicationId,
-                   outputFolder = outputFolder,
-                   exportFolder = exportFolder,
-                   databaseId = databaseId,
-                   runSections = runSections)
+    if (exportSettings$exportAnalysisInfo) {
+      exportAnalyses(indicationId = indicationId,
+                     outputFolder = outputFolder,
+                     exportFolder = exportFolder,
+                     databaseId = databaseId,
+                     runSections = runSections)
 
-    exportExposures(indicationId = indicationId,
-                    outputFolder = outputFolder,
-                    exportFolder = exportFolder,
-                    databaseId = databaseId)
-
-    exportOutcomes(indicationId = indicationId,
-                   outputFolder = outputFolder,
-                   exportFolder = exportFolder,
-                   databaseId = databaseId)
-
-    exportMetadata(indicationId = indicationId,
-                   outputFolder = outputFolder,
-                   exportFolder = exportFolder,
-                   databaseId = databaseId,
-                   databaseName = databaseName,
-                   databaseDescription = databaseDescription,
-                   minCellCount = minCellCount)
-
-    exportMainResults(indicationId = indicationId,
+      exportExposures(indicationId = indicationId,
                       outputFolder = outputFolder,
                       exportFolder = exportFolder,
-                      databaseId = databaseId,
-                      minCellCount = minCellCount,
-                      maxCores = maxCores)
+                      databaseId = databaseId)
 
-    exportDiagnostics(indicationId = indicationId,
-                      outputFolder = outputFolder,
-                      exportFolder = exportFolder,
-                      databaseId = databaseId,
-                      minCellCount = minCellCount,
-                      maxCores = maxCores)
+      exportOutcomes(indicationId = indicationId,
+                     outputFolder = outputFolder,
+                     exportFolder = exportFolder,
+                     databaseId = databaseId)
 
-    exportDateTime(indicationId = indicationId,
-                   databaseId = databaseId,
-                   exportFolder = exportFolder)
+      exportMetadata(indicationId = indicationId,
+                     outputFolder = outputFolder,
+                     exportFolder = exportFolder,
+                     databaseId = databaseId,
+                     databaseName = databaseName,
+                     databaseDescription = databaseDescription,
+                     minCellCount = minCellCount)
+    }
+
+    if (exportSettings$exportStudyResults){
+      exportMainResults(indicationId = indicationId,
+                        outputFolder = outputFolder,
+                        exportFolder = exportFolder,
+                        databaseId = databaseId,
+                        minCellCount = minCellCount,
+                        maxCores = maxCores)
+    }
+
+    if (exportSettings$exportStudyDiagnostics) {
+      exportDiagnostics(indicationId = indicationId,
+                        outputFolder = outputFolder,
+                        exportFolder = exportFolder,
+                        databaseId = databaseId,
+                        minCellCount = minCellCount,
+                        maxCores = maxCores,
+                        balanceOnly = exportSettings$exportBalanceOnly)
+    }
+
+    if (exportSettings$exportDateTimeInfo) {
+      exportDateTime(indicationId = indicationId,
+                     databaseId = databaseId,
+                     exportFolder = exportFolder)
+    }
+
 
     # Add all to zip file -------------------------------------------------------------------------------
     ParallelLogger::logInfo("Adding results to zip file")
@@ -115,6 +128,21 @@ swapColumnContents <- function(df, column1 = "targetId", column2 = "comparatorId
 #     analysisIds <- as.vector(unlist(ParallelLogger::selectFromList(cmAnalysisListAsym, "analysisId")))
 #     return(analysisIds)
 # }
+
+createExportSettings <- function(exportAnalysisInfo = TRUE,
+                                 exportStudyResults = TRUE,
+                                 exportStudyDiagnostics = TRUE,
+                                 exportDateTimeInfo = TRUE,
+                                 exportBalanceOnly = FALSE){
+  exportSettings = list()
+  exportSettings$exportAnalysisInfo = exportAnalysisInfo
+  exportSettings$exportStudyResults = exportStudyResults
+  exportSettings$exportStudyDiagnostics = exportStudyDiagnostics
+  exportSettings$exportDateTimeInfo = exportDateTimeInfo
+  exportSettings$exportBalanceOnly = exportBalanceOnly
+
+  return(exportSettings)
+}
 
 
 enforceMinCellValue <- function(data, fieldName, minValues, silent = FALSE) {
@@ -774,7 +802,8 @@ exportDiagnostics <- function(indicationId,
                               exportFolder,
                               databaseId,
                               minCellCount,
-                              maxCores) {
+                              maxCores,
+                              balanceOnly = FALSE) {
     ParallelLogger::logInfo("Exporting diagnostics")
     ParallelLogger::logInfo("- covariate_balance table")
     fileName <- file.path(exportFolder, "covariate_balance.csv")
@@ -788,24 +817,28 @@ exportDiagnostics <- function(indicationId,
 
     if (length(files) > 0) {
 
-    for (i in 1:length(files)) {
+      for (i in 1:length(files)) {
         ids <- gsub("^.*bal_t", "", files[i])
         targetId <- as.numeric(gsub("_c.*", "", ids))
         ids <- gsub("^.*_c", "", ids)
         comparatorId <- as.numeric(gsub("_[aso].*$", "", ids))
         if (grepl("_s", ids)) {
-            subgroupId <- as.numeric(gsub("^.*_s", "", gsub("_a[0-9]*.rds", "", ids)))
+          subgroupId <- as.numeric(gsub("^.*_s", "", gsub("_a[0-9]*.rds", "", ids)))
         } else {
-            subgroupId <- NA
+          subgroupId <- NA
         }
         if (grepl("_o", ids)) {
-            outcomeId <- as.numeric(gsub("^.*_o", "", gsub("_a[0-9]*.rds", "", ids)))
+          outcomeId <- as.numeric(gsub("^.*_o", "", gsub("_a[0-9]*.rds", "", ids)))
         } else {
-            outcomeId <- NA
+          outcomeId <- NA
         }
         ids <- gsub("^.*_a", "", ids)
         analysisId <- as.numeric(gsub(".rds", "", ids))
         balance <- readRDS(files[i])
+
+        #cat(sprintf("Reading balance file %s ...\n", files[i]))
+        #cat(sprintf("Column names: %s \n", paste(names(balance), collapse = ", ")))
+
         inferredTargetBeforeSize <- mean(balance$beforeMatchingSumTarget/balance$beforeMatchingMeanTarget,
                                          na.rm = TRUE)
         inferredComparatorBeforeSize <- mean(balance$beforeMatchingSumComparator/balance$beforeMatchingMeanComparator,
@@ -821,46 +854,51 @@ exportDiagnostics <- function(indicationId,
         balance$outcomeId <- outcomeId
         balance$analysisId <- analysisId
         balance$interactionCovariateId <- subgroupId
-        balance <- balance[, c("databaseId",
-                               "targetId",
-                               "comparatorId",
-                               "outcomeId",
-                               "analysisId",
-                               "interactionCovariateId",
-                               "covariateId",
-                               "beforeMatchingMeanTarget",
-                               "beforeMatchingMeanComparator",
-                               "beforeMatchingStdDiff",
-                               "afterMatchingMeanTarget",
-                               "afterMatchingMeanComparator",
-                               "afterMatchingStdDiff",
-                               "beforeMatchingSumTarget",
-                               "beforeMatchingSumComparator",
-                               "afterMatchingSumTarget",
-                               "afterMatchingSumComparator")]
-        colnames(balance) <- c("databaseId",
-                               "targetId",
-                               "comparatorId",
-                               "outcomeId",
-                               "analysisId",
-                               "interactionCovariateId",
-                               "covariateId",
-                               "targetMeanBefore",
-                               "comparatorMeanBefore",
-                               "stdDiffBefore",
-                               "targetMeanAfter",
-                               "comparatorMeanAfter",
-                               "stdDiffAfter",
-                               "targetSumBefore",
-                               "comparatorSumBefore",
-                               "targetSumAfter",
-                               "comparatorSumAfter")
-        balance$targetMeanBefore[is.na(balance$targetMeanBefore)] <- 0
-        balance$comparatorMeanBefore[is.na(balance$comparatorMeanBefore)] <- 0
-        balance$stdDiffBefore <- round(balance$stdDiffBefore, 3)
-        balance$targetMeanAfter[is.na(balance$targetMeanAfter)] <- 0
-        balance$comparatorMeanAfter[is.na(balance$comparatorMeanAfter)] <- 0
-        balance$stdDiffAfter <- round(balance$stdDiffAfter, 3)
+
+        balance <- balance %>%
+          select("databaseId",
+                 "targetId",
+                 "comparatorId",
+                 "outcomeId",
+                 "analysisId",
+                 "interactionCovariateId",
+                 "covariateId",
+                 targetMeanBefore = "beforeMatchingMeanTarget",
+                 comparatorMeanBefore = "beforeMatchingMeanComparator",
+                 targetSdBefore = "beforeMatchingSdTarget",
+                 comparatorSdBefore = "beforeMatchingSdComparator",
+                 stdDiffBefore = "beforeMatchingStdDiff",
+                 meanBefore = "beforeMatchingMean",
+                 sdBefore = "beforeMatchingSd",
+                 targetMeanAfter = "afterMatchingMeanTarget",
+                 comparatorMeanAfter = "afterMatchingMeanComparator",
+                 targetSdAfter = "afterMatchingSdTarget",
+                 comparatorSdAfter = "afterMatchingSdComparator",
+                 stdDiffAfter = "afterMatchingStdDiff",
+                 meanAfter = "afterMatchingMean",
+                 sdAfter = "afterMatchingSd",
+                 targetSumBefore = "beforeMatchingSumTarget",
+                 comparatorSumBefore = "beforeMatchingSumComparator",
+                 targetSumAfter = "afterMatchingSumTarget",
+                 comparatorSumAfter = "afterMatchingSumComparator") %>%
+          mutate(targetMeanBefore = if_else(is.na(targetMeanBefore), 0, targetMeanBefore),
+                 comparatorMeanBefore = if_else(is.na(comparatorMeanBefore), 0, comparatorMeanBefore),
+                 targetSdBefore = if_else(is.na(targetSdBefore), 0, targetSdBefore),
+                 comparatorSdBefore = if_else(is.na(comparatorSdBefore), 0, comparatorSdBefore),
+                 stdDiffBefore = round(stdDiffBefore, 3),
+                 meanBefore = if_else(is.na(meanBefore), 0, meanBefore),
+                 sdBefore = if_else(is.na(sdBefore), 0, sdBefore),
+                 targetMeanAfter = if_else(is.na(targetMeanAfter), 0, targetMeanAfter),
+                 comparatorMeanAfter = if_else(is.na(comparatorMeanAfter), 0, comparatorMeanAfter),
+                 targetSdAfter = if_else(is.na(targetSdAfter), 0, targetSdAfter),
+                 comparatorSdAfter = if_else(is.na(comparatorSdAfter), 0, comparatorSdAfter),
+                 stdDiffAfter = round(stdDiffAfter, 3),
+                 meanAfter = if_else(is.na(meanAfter), 0, meanAfter),
+                 sdAfter = if_else(is.na(sdAfter), 0, sdAfter),
+                 targetSumBefore = if_else(is.na(targetSumBefore), 0, targetSumBefore),
+                 comparatorSumBefore = if_else(is.na(comparatorSumBefore), 0, comparatorSumBefore),
+                 targetSumAfter = if_else(is.na(targetSumAfter), 0, targetSumAfter),
+                 comparatorSumAfter = if_else(is.na(comparatorSumAfter), 0, comparatorSumAfter))
 
         # balance$targetSizeBefore <- inferredTargetBeforeSize
         # balance$targetSizeBefore[is.na(inferredTargetBeforeSize)] <- 0
@@ -874,11 +912,6 @@ exportDiagnostics <- function(indicationId,
         # balance$comparatorSizeAfter <- inferredComparatorAfterSize
         # balance$comparatorSizeAfter[is.na(inferredComparatorAfterSize)] <- 0
 
-
-        balance$targetSumBefore[is.na(balance$targetSumBefore)] <- 0
-        balance$comparatorSumBefore[is.na(balance$comparatorSumBefore)] <- 0
-        balance$targetSumAfter[is.na(balance$targetSumAfter)] <- 0
-        balance$comparatorSumAfter[is.na(balance$comparatorSumAfter)] <- 0
 
         balance <- enforceMinCellValue(balance,
                                        "targetMeanBefore",
@@ -894,6 +927,14 @@ exportDiagnostics <- function(indicationId,
                                        TRUE)
         balance <- enforceMinCellValue(balance,
                                        "comparatorMeanAfter",
+                                       minCellCount/inferredComparatorAfterSize,
+                                       TRUE)
+        balance <- enforceMinCellValue(balance,
+                                       "meanBefore",
+                                       minCellCount/inferredComparatorAfterSize,
+                                       TRUE)
+        balance <- enforceMinCellValue(balance,
+                                       "meanAfter",
                                        minCellCount/inferredComparatorAfterSize,
                                        TRUE)
 
@@ -918,10 +959,12 @@ exportDiagnostics <- function(indicationId,
         balance$comparatorMeanBefore <- round(balance$comparatorMeanBefore, 3)
         balance$targetMeanAfter <- round(balance$targetMeanAfter, 3)
         balance$comparatorMeanAfter <- round(balance$comparatorMeanAfter, 3)
+        balance$meanBefore <- round(balance$meanBefore, 3)
+        balance$meanAfter <- round(balance$meanAfter, 3)
 
         balance <- balance[balance$targetMeanBefore != 0 & balance$comparatorMeanBefore != 0 & balance$targetMeanAfter !=
-                               0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
-                               0, ]
+                             0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
+                             0, ]
 
         # balance$targetSizeBefore <- round(balance$targetSizeBefore, 0)
         # balance$comparatorSizeBefore <- round(balance$comparatorSizeBefore, 0)
@@ -940,164 +983,167 @@ exportDiagnostics <- function(indicationId,
                     append = !first)
         first <- FALSE
         setTxtProgressBar(pb, i/length(files))
-    }
+      }
 
     }
     close(pb)
 
-    ParallelLogger::logInfo("- preference_score_dist table")
-    reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
-    preparePlot <- function(row, reference) {
+    if (!balanceOnly) {
+      ParallelLogger::logInfo("- preference_score_dist table")
+      reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
+      preparePlot <- function(row, reference) {
         idx <- reference$analysisId == row$analysisId &
-            reference$targetId == row$targetId &
-            reference$comparatorId == row$comparatorId
+          reference$targetId == row$targetId &
+          reference$comparatorId == row$comparatorId
         psFileName <- file.path(outputFolder, indicationId,
                                 "cmOutput",
                                 reference$sharedPsFile[idx][1])
         if (file.exists(psFileName)) {
-            ps <- readRDS(psFileName)
-            if (min(ps$propensityScore) < max(ps$propensityScore)) {
-                ps <- CohortMethod:::computePreferenceScore(ps)
-
-                d1 <- density(ps$preferenceScore[ps$treatment == 1], from = 0, to = 1, n = 100)
-                d0 <- density(ps$preferenceScore[ps$treatment == 0], from = 0, to = 1, n = 100)
-
-                result <- tibble::tibble(databaseId = databaseId,
-                                         targetId = row$targetId,
-                                         comparatorId = row$comparatorId,
-                                         analysisId = row$analysisId,
-                                         preferenceScore = d1$x,
-                                         targetDensity = d1$y,
-                                         comparatorDensity = d0$y)
-                return(result)
-            }
-        }
-        return(NULL)
-    }
-    subset <- unique(reference[reference$sharedPsFile != "",
-                               c("targetId", "comparatorId", "analysisId")])
-    data <- plyr::llply(split(subset, 1:nrow(subset)),
-                        preparePlot,
-                        reference = reference,
-                        .progress = "text")
-    data <- do.call("rbind", data)
-    fileName <- file.path(exportFolder, "preference_score_dist.csv")
-    if (!is.null(data)) {
-        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-    }
-    readr::write_csv(data, fileName)
-
-    ParallelLogger::logInfo("- ps_auc_assessment table")
-
-    getAuc <- function(row, reference) {
-        idx <- reference$analysisId == row$analysisId &
-            reference$targetId == row$targetId &
-            reference$comparatorId == row$comparatorId
-        psFileName <- file.path(outputFolder, indicationId,
-                                "cmOutput",
-                                reference$sharedPsFile[idx][1])
-        if (file.exists(psFileName)) {
-            ps <- readRDS(psFileName)
+          ps <- readRDS(psFileName)
+          if (min(ps$propensityScore) < max(ps$propensityScore)) {
             ps <- CohortMethod:::computePreferenceScore(ps)
-            auc <- tibble::tibble(auc = CohortMethod::computePsAuc(ps),
-                                  equipoise = mean(
-                                      ps$preferenceScore >= 0.3 &
-                                          ps$preferenceScore <= 0.7),
-                                  targetId = row$targetId,
-                                  comparatorId = row$comparatorId,
-                                  analysisId = row$analysisId,
-                                  databaseId = databaseId)
-            return(auc)
+
+            d1 <- density(ps$preferenceScore[ps$treatment == 1], from = 0, to = 1, n = 100)
+            d0 <- density(ps$preferenceScore[ps$treatment == 0], from = 0, to = 1, n = 100)
+
+            result <- tibble::tibble(databaseId = databaseId,
+                                     targetId = row$targetId,
+                                     comparatorId = row$comparatorId,
+                                     analysisId = row$analysisId,
+                                     preferenceScore = d1$x,
+                                     targetDensity = d1$y,
+                                     comparatorDensity = d0$y)
+            return(result)
+          }
         }
         return(NULL)
-    }
-
-    subset <- unique(reference[reference$sharedPsFile != "",
-                               c("targetId", "comparatorId", "analysisId")])
-    data <- plyr::llply(split(subset, 1:nrow(subset)),
-                        getAuc,
-                        reference = reference,
-                        .progress = "text")
-    data <- do.call("rbind", data)
-    fileName <- file.path(exportFolder, "ps_auc_assessment.csv")
-    if (!is.null(data)) {
+      }
+      subset <- unique(reference[reference$sharedPsFile != "",
+                                 c("targetId", "comparatorId", "analysisId")])
+      data <- plyr::llply(split(subset, 1:nrow(subset)),
+                          preparePlot,
+                          reference = reference,
+                          .progress = "text")
+      data <- do.call("rbind", data)
+      fileName <- file.path(exportFolder, "preference_score_dist.csv")
+      if (!is.null(data)) {
         colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-    }
-    readr::write_csv(data, fileName)
+      }
+      readr::write_csv(data, fileName)
 
-    ParallelLogger::logInfo("- propensity_model table")
-    getPsModel <- function(row, reference) {
+
+
+      ParallelLogger::logInfo("- ps_auc_assessment table")
+
+      getAuc <- function(row, reference) {
         idx <- reference$analysisId == row$analysisId &
-            reference$targetId == row$targetId &
-            reference$comparatorId == row$comparatorId
+          reference$targetId == row$targetId &
+          reference$comparatorId == row$comparatorId
         psFileName <- file.path(outputFolder, indicationId,
                                 "cmOutput",
                                 reference$sharedPsFile[idx][1])
         if (file.exists(psFileName)) {
-            ps <- readRDS(psFileName)
-            metaData <- attr(ps, "metaData")
-            if (is.null(metaData$psError)) {
-                cmDataFile <- file.path(outputFolder, indicationId,
-                                        "cmOutput",
-                                        reference$cohortMethodDataFile[idx][1])
-                cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
-                model <- CohortMethod::getPsModel(ps, cmData)
-                model$covariateId[is.na(model$covariateId)] <- 0
-                Andromeda::close(cmData)
-                model$databaseId <- databaseId
-                model$targetId <- row$targetId
-                model$comparatorId <- row$comparatorId
-                model$analysisId <- row$analysisId
-                model <- model[, c("databaseId", "targetId", "comparatorId", "analysisId", "covariateId", "coefficient")]
-                return(model)
-            }
+          ps <- readRDS(psFileName)
+          ps <- CohortMethod:::computePreferenceScore(ps)
+          auc <- tibble::tibble(auc = CohortMethod::computePsAuc(ps),
+                                equipoise = mean(
+                                  ps$preferenceScore >= 0.3 &
+                                    ps$preferenceScore <= 0.7),
+                                targetId = row$targetId,
+                                comparatorId = row$comparatorId,
+                                analysisId = row$analysisId,
+                                databaseId = databaseId)
+          return(auc)
         }
         return(NULL)
-    }
-    subset <- unique(reference[reference$sharedPsFile != "",
-                               c("targetId", "comparatorId", "analysisId")])
-    data <- plyr::llply(split(subset, 1:nrow(subset)),
-                        getPsModel,
-                        reference = reference,
-                        .progress = "text")
-    data <- do.call("rbind", data)
-    fileName <- file.path(exportFolder, "propensity_model.csv")
-    if (!is.null(data)) {
-        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
-    }
-    readr::write_csv(data, fileName)
+      }
 
-    ParallelLogger::logInfo("- kaplan_meier_dist table")
-    ParallelLogger::logInfo("  Computing KM curves")
-    reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
-    outcomesOfInterest <- getOutcomesOfInterest()
-    reference <- reference[reference$outcomeId %in% outcomesOfInterest, ]
-    reference <- reference[, c("strataFile",
-                               "studyPopFile",
-                               "targetId",
-                               "comparatorId",
-                               "outcomeId",
-                               "analysisId")]
-    tempFolder <- file.path(exportFolder, "temp")
-    if (!file.exists(tempFolder)) {
+      subset <- unique(reference[reference$sharedPsFile != "",
+                                 c("targetId", "comparatorId", "analysisId")])
+      data <- plyr::llply(split(subset, 1:nrow(subset)),
+                          getAuc,
+                          reference = reference,
+                          .progress = "text")
+      data <- do.call("rbind", data)
+      fileName <- file.path(exportFolder, "ps_auc_assessment.csv")
+      if (!is.null(data)) {
+        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+      }
+      readr::write_csv(data, fileName)
+
+      ParallelLogger::logInfo("- propensity_model table")
+      getPsModel <- function(row, reference) {
+        idx <- reference$analysisId == row$analysisId &
+          reference$targetId == row$targetId &
+          reference$comparatorId == row$comparatorId
+        psFileName <- file.path(outputFolder, indicationId,
+                                "cmOutput",
+                                reference$sharedPsFile[idx][1])
+        if (file.exists(psFileName)) {
+          ps <- readRDS(psFileName)
+          metaData <- attr(ps, "metaData")
+          if (is.null(metaData$psError)) {
+            cmDataFile <- file.path(outputFolder, indicationId,
+                                    "cmOutput",
+                                    reference$cohortMethodDataFile[idx][1])
+            cmData <- CohortMethod::loadCohortMethodData(cmDataFile)
+            model <- CohortMethod::getPsModel(ps, cmData)
+            model$covariateId[is.na(model$covariateId)] <- 0
+            Andromeda::close(cmData)
+            model$databaseId <- databaseId
+            model$targetId <- row$targetId
+            model$comparatorId <- row$comparatorId
+            model$analysisId <- row$analysisId
+            model <- model[, c("databaseId", "targetId", "comparatorId", "analysisId", "covariateId", "coefficient")]
+            return(model)
+          }
+        }
+        return(NULL)
+      }
+      subset <- unique(reference[reference$sharedPsFile != "",
+                                 c("targetId", "comparatorId", "analysisId")])
+      data <- plyr::llply(split(subset, 1:nrow(subset)),
+                          getPsModel,
+                          reference = reference,
+                          .progress = "text")
+      data <- do.call("rbind", data)
+      fileName <- file.path(exportFolder, "propensity_model.csv")
+      if (!is.null(data)) {
+        colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+      }
+      readr::write_csv(data, fileName)
+
+      ParallelLogger::logInfo("- kaplan_meier_dist table")
+      ParallelLogger::logInfo("  Computing KM curves")
+      reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
+      outcomesOfInterest <- getOutcomesOfInterest()
+      reference <- reference[reference$outcomeId %in% outcomesOfInterest, ]
+      reference <- reference[, c("strataFile",
+                                 "studyPopFile",
+                                 "targetId",
+                                 "comparatorId",
+                                 "outcomeId",
+                                 "analysisId")]
+      tempFolder <- file.path(exportFolder, "temp")
+      if (!file.exists(tempFolder)) {
         dir.create(tempFolder)
-    }
-    cluster <- ParallelLogger::makeCluster(min(4, maxCores))
-    ParallelLogger::clusterRequire(cluster, "LegendT2dm")
-    tasks <- split(reference, seq(nrow(reference)))
-    ParallelLogger::clusterApply(cluster,
-                                 tasks,
-                                 prepareKm,
-                                 outputFolder = file.path(outputFolder, indicationId),
-                                 tempFolder = tempFolder,
-                                 databaseId = databaseId,
-                                 minCellCount = minCellCount)
-    ParallelLogger::stopCluster(cluster)
-    ParallelLogger::logInfo("  Writing to single csv file")
-    saveKmToCsv <- function(file, first, outputFile) {
+      }
+      cluster <- ParallelLogger::makeCluster(min(4, maxCores))
+      ParallelLogger::clusterRequire(cluster, "LegendT2dm")
+      tasks <- split(reference, seq(nrow(reference)))
+      ParallelLogger::clusterApply(cluster,
+                                   tasks,
+                                   prepareKm,
+                                   outputFolder = file.path(outputFolder, indicationId),
+                                   tempFolder = tempFolder,
+                                   databaseId = databaseId,
+                                   minCellCount = minCellCount)
+      ParallelLogger::stopCluster(cluster)
+      ParallelLogger::logInfo("  Writing to single csv file")
+      saveKmToCsv <- function(file, first, outputFile) {
         data <- readRDS(file)
         if (!is.null(data)) {
-            colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
+          colnames(data) <- SqlRender::camelCaseToSnakeCase(colnames(data))
         }
         write.table(x = data,
                     file = outputFile,
@@ -1107,14 +1153,16 @@ exportDiagnostics <- function(indicationId,
                     dec = ".",
                     qmethod = "double",
                     append = !first)
-    }
-    outputFile <- file.path(exportFolder, "kaplan_meier_dist.csv")
-    files <- list.files(tempFolder, "km_.*.rds", full.names = TRUE)
-    saveKmToCsv(files[1], first = TRUE, outputFile = outputFile)
-    if (length(files) > 1) {
+      }
+      outputFile <- file.path(exportFolder, "kaplan_meier_dist.csv")
+      files <- list.files(tempFolder, "km_.*.rds", full.names = TRUE)
+      saveKmToCsv(files[1], first = TRUE, outputFile = outputFile)
+      if (length(files) > 1) {
         plyr::l_ply(files[2:length(files)], saveKmToCsv, first = FALSE, outputFile = outputFile, .progress = "text")
+      }
+      unlink(tempFolder, recursive = TRUE)
     }
-    unlink(tempFolder, recursive = TRUE)
+
 }
 
 

@@ -30,6 +30,7 @@ execute(
   runSections = c(1:6),
   computeCovariateBalance = TRUE,
   exportToCsv = TRUE,
+  exportSettings = createExportSettings(),
   filterExposureCohorts = NULL,
   filterOutcomeCohorts = NULL,
   maxCores = 4
@@ -104,6 +105,8 @@ models?}
 \item{computeCovariateBalance}{Report covariate balance statistics across comparisons?}
 
 \item{exportToCsv}{Export all results to CSV files?}
+
+\item{exportSettings}{Settings to optionalize restuls export; see `createExportSettings()`.}
 
 \item{filterExposureCohorts}{Optional subset of exposure cohorts to use; \code{NULL} implies all.}
 
