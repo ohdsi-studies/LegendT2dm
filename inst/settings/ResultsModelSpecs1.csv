@@ -1,0 +1,174 @@
+tableName,fieldName,type,description,isRequired,primaryKey,optional,emptyIsNa
+database,database_id,varchar(255),"Unique identifier for a database, e.g. ‘MDCD’",Yes,Yes,No,Yes
+database,database_name,varchar(255),"Full name for the database, e.g. ‘Truven MarketScan Multi-state Medicaid (MDCD)’",Yes,No,No,Yes
+database,description,text,"Longer description, e.g. ‘Truven Health MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states ...'",Yes,No,No,Yes
+database,vocabulary_version,varchar(255),Version information on OMOP vocabulary,No,No,Yes,Yes
+database,min_obs_period_date,date,Earliest observation date in database,No,No,Yes,Yes
+database,max_obs_period_date,date,Latest observation date in database,No,No,Yes,Yes
+database,study_package_version,varchar(255),Version of the LegendT2dm study package,No,No,Yes,Yes
+database,is_meta_analysis,integer,"Does the record pertain a meta-analysis across databases? (0=no, 1=yes)",Yes,No,No,Yes
+exposure_summary,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+exposure_summary,exposure_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+exposure_summary,min_date,date,Earliest date when the exposure was observed in the database,Yes,No,No,Yes
+exposure_summary,max_date,date,Earliest date when the exposure was observed in the database,Yes,No,No,Yes
+comparison_summary,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+comparison_summary,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+comparison_summary,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+comparison_summary,min_date,date,Earliest date when both target and comparator were observed in the database,Yes,No,No,Yes
+comparison_summary,max_date,date,Latest date when both target and comparator were observed in the database,Yes,No,No,Yes
+attrition,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+attrition,exposure_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+attrition,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+attrition,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+attrition,outcome_id,bigint,Foreign key referencing the outcome_of_interest table,Yes,Yes,No,Yes
+attrition,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+attrition,sequence_number,integer,The place in the sequence of steps defining the final analysis cohort. 1 indicates the original exposed population without any inclusion criteria,Yes,Yes,No,Yes
+attrition,description,text,"Description of the last restriction, e.g. 'Removing persons with the outcome prior'",No,No,No,Yes
+attrition,subjects,integer,Number of subjects in the cohort,No,No,No,Yes
+covariate,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+covariate,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+covariate,covariate_id,bigint,Unique identified for a covariate,Yes,Yes,No,Yes
+covariate,covariate_analysis_id,bigint,Foreign key referencing the covariate_analysis table,Yes,Yes,No,Yes
+covariate,covariate_name,text,"Name for a covariate, e.g. 'Age group: 20-25 years'",Yes,No,No,Yes
+covariate_analysis,covariate_analysis_id,bigint,Foreign key referencing the covariate_analysis table,Yes,Yes,No,Yes
+covariate_analysis,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+covariate_analysis,covariate_analysis_name,text,Name for a covariate,Yes,No,No,Yes
+cm_follow_up_dist,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+cm_follow_up_dist,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+cm_follow_up_dist,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+cm_follow_up_dist,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
+cm_follow_up_dist,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+cm_follow_up_dist,target_min_days,integer,Minimum number of observation days for a person,No,No,No,Yes
+cm_follow_up_dist,target_p10_days,integer,10th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p25_days,integer,25th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_median_days,integer,Median number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p75_days,integer,75th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_p90_days,integer,90th percentile of number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_max_days,integer,Maximum number of observation days for a person in the target group,No,No,No,Yes
+cm_follow_up_dist,target_zero_days,integer,Number of persons with 0 observation days in the target group,No,No,No,Yes
+cm_follow_up_dist,comparator_min_days,integer,Minimum number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p10_days,integer,10th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p25_days,integer,25th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_median_days,integer,Median number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p75_days,integer,75th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_p90_days,integer,90th percentile of number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_max_days,integer,Maximum number of observation days for a person in the comparator group,No,No,No,Yes
+cm_follow_up_dist,comparator_zero_days,integer,Number of persons with 0 observation days in the comparator group,No,No,No,Yes
+cohort_method_result,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+cohort_method_result,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+cohort_method_result,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+cohort_method_result,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
+cohort_method_result,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+cohort_method_result,rr,numeric,Estimated relative risk (hazard ratio),No,No,No,Yes
+cohort_method_result,ci_95_lb,numeric,Lower bound of the 95% confidence interval of the relative risk,No,No,No,Yes
+cohort_method_result,ci_95_ub,numeric,Upper bound of the 95% confidence interval of the relative risk,No,No,No,Yes
+cohort_method_result,p,numeric,Two-sided p-value considering the null hypothesis of no effect,No,No,No,Yes
+cohort_method_result,i_2,numeric,I^2 measure of between-database heterogeneity (for meta-analyses estimates only),No,No,No,Yes
+cohort_method_result,sources,varchar(255),Data sources aggregated (for meta-analysis estimates only),No,No,Yes,Yes
+cohort_method_result,log_rr,numeric,Log of the relative risk,No,No,No,Yes
+cohort_method_result,se_log_rr,numeric,Standard error of the log of the relative risk,No,No,No,Yes
+cohort_method_result,target_subjects,integer,Number of subject in the target cohort,No,No,No,Yes
+cohort_method_result,comparator_subjects,integer,Number of subject in the comparator cohort,No,No,No,Yes
+cohort_method_result,target_days,bigint,Number of days observed in the target cohort,No,No,No,Yes
+cohort_method_result,comparator_days,bigint,Number of days observed in the comparator cohort,No,No,No,Yes
+cohort_method_result,target_outcomes,integer,Number of outcomes observed in the target cohort,No,No,No,Yes
+cohort_method_result,comparator_outcomes,integer,Number of outcomes observed in the comparator cohort,No,No,No,Yes
+cohort_method_result,calibrated_p,numeric,Calibrated p-value,No,No,No,Yes
+cohort_method_result,calibrated_rr,numeric,Calibrated relative risk (hazard ratio),No,No,No,Yes
+cohort_method_result,calibrated_ci_95_lb,numeric,Lower bound of the calibrated 95% confidence interval of the relative risk,No,No,No,Yes
+cohort_method_result,calibrated_ci_95_ub,numeric,Upper bound of the calibrated 95% confidence interval of the relative risk,No,No,No,Yes
+cohort_method_result,calibrated_log_rr,numeric,Log of the calibrated relative risk,No,No,No,Yes
+cohort_method_result,calibrated_se_log_rr,numeric,Standard error of the log of the calibrated relative risk,No,No,No,Yes
+covariate_balance,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+covariate_balance,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+covariate_balance,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+covariate_balance,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,No
+covariate_balance,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+covariate_balance,covariate_id,bigint,Foreign key referencing the covariate table,Yes,Yes,No,Yes
+covariate_balance,target_mean_before,numeric,Mean value of the covariate in the target cohort before propensity score adjustment,Yes,No,No,Yes
+covariate_balance,comparator_mean_before,numeric,Mean value of the covariate in the comparator cohort before propensity score adjustment,Yes,No,No,Yes
+covariate_balance,std_diff_before,numeric,Standardized difference of the means between the target and comparator cohort before propensity score adjustment,Yes,No,No,Yes
+covariate_balance,target_mean_after,numeric,Mean value of the covariate in the target cohort after propensity score adjustment,Yes,No,No,Yes
+covariate_balance,comparator_mean_after,numeric,Mean value of the covariate in the comparator cohort after propensity score adjustment,Yes,No,No,Yes
+covariate_balance,std_diff_after,numeric,Standardized difference of the means between the target and comparator cohort after propensity score adjustment,Yes,No,No,Yes
+preference_score_dist,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+preference_score_dist,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+preference_score_dist,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+preference_score_dist,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+preference_score_dist,preference_score,numeric,Preference score value,Yes,Yes,No,Yes
+preference_score_dist,target_density,numeric,Distribution density for the target cohort at the given preference score,Yes,No,No,Yes
+preference_score_dist,comparator_density,numeric,Distribution density for the comparator cohort at the given preference score,Yes,No,No,Yes
+propensity_model,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+propensity_model,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+propensity_model,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+propensity_model,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+propensity_model,covariate_id,bigint,Foreign key referencing the covariate table,Yes,Yes,No,Yes
+propensity_model,coefficient,numeric,Coefficient (beta) for the covariate in the propensity model,Yes,No,No,Yes
+kaplan_meier_dist,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+kaplan_meier_dist,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+kaplan_meier_dist,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+kaplan_meier_dist,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,Yes
+kaplan_meier_dist,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+kaplan_meier_dist,time,integer,Time in days since cohort start,Yes,Yes,No,Yes
+kaplan_meier_dist,target_at_risk,integer,Number of subjects still at risk in the target cohort,No,No,No,Yes
+kaplan_meier_dist,comparator_at_risk,integer,Number of subjects still at risk in the comparator cohort,No,No,No,Yes
+kaplan_meier_dist,target_survival,numeric,Estimated survival fraction in the target cohort,Yes,No,No,Yes
+kaplan_meier_dist,target_survival_lb,numeric,Lower bound of the 95% confidence interval of the survival fraction in the target cohort,Yes,No,No,Yes
+kaplan_meier_dist,target_survival_ub,numeric,Upper bound of the 95% confidence interval of the survival fraction in the target cohort,Yes,No,No,Yes
+kaplan_meier_dist,comparator_survival,numeric,Estimated survival fraction in the comparator cohort,Yes,No,No,Yes
+kaplan_meier_dist,comparator_survival_lb,numeric,Lower bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
+kaplan_meier_dist,comparator_survival_ub,numeric,Upper bound of the 95% confidence interval of the survival fraction in the comparator cohort,Yes,No,No,Yes
+likelihood_profile,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+likelihood_profile,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+likelihood_profile,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+likelihood_profile,outcome_id,bigint,Foreign key referencing the outcomes_of_interest table,Yes,Yes,No,Yes
+likelihood_profile,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+likelihood_profile,point,text,Grid points of the log-likelihood profile function as a semicolon-delimited list,Yes,No,No,Yes
+likelihood_profile,value,text,Values of the log-likelihood profile function as a semicolon-delimited list,Yes,No,No,Yes
+cohort_method_analysis,analysis_id,integer,Unique identifier for an analysis,Yes,Yes,No,Yes
+cohort_method_analysis,description,text,"Description for an analysis, e.g. 'On-treatment'",Yes,No,No,Yes
+cohort_method_analysis,definition,text,CohortMethod JSON object specifying the analysis,Yes,No,No,Yes
+exposure_of_interest,exposure_id,bigint,Unique identifier for an exposure,Yes,Yes,No,Yes
+exposure_of_interest,exposure_name,text,Name for the exposure,Yes,No,No,Yes
+exposure_of_interest,definition,text,OHDSI JSON cohort definition for constructing the exposure,Yes,No,No,Yes
+outcome_of_interest,outcome_id,int,Unique identifier for an outcome of interest,Yes,Yes,No,Yes
+outcome_of_interest,outcome_name,text,"Name for the outcome, e.g. 'Stroke'",Yes,No,No,Yes
+outcome_of_interest,description,text,"Longer description, e.g. 'First occurrence of a stroke diagnosis code in an inpatient setting'",No,No,No,Yes
+outcome_of_interest,definition,text,OHDSI JSON cohort definition for constructing the outcome,Yes,No,No,Yes
+negative_control_outcome,outcome_id,bigint,Unique identifier for a negative control outcome,Yes,Yes,No,Yes
+negative_control_outcome,concept_id,bigint,Concept ID defining the negative control,Yes,Yes,No,Yes
+negative_control_outcome,outcome_name,text,"Name for the outcome, e.g. 'Ingrown nail'",Yes,No,No,Yes
+ps_auc_assessment,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+ps_auc_assessment,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+ps_auc_assessment,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+ps_auc_assessment,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+ps_auc_assessment,auc,numeric,Area under the receiver-operator curve classifying subjects by their propensity score,Yes,No,No,Yes
+ps_auc_assessment,equipoise,numeric,%-subjects with preference scores between 0.3 and 0.7,Yes,No,No,Yes
+results_date_time,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+results_date_time,date_time,varchar(255),Date and time when results were compiled,Yes,No,No,Yes
+results_date_time,package_version,varchar(255),LegendT2dm package version,Yes,No,No,Yes
+diagnostics,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+diagnostics,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+diagnostics,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+diagnostics,outcome_id,bigint,"Foreign key referencing the outcomes_of_interest, negative_control_outcome or positive_control_outcome table",Yes,Yes,No,Yes
+diagnostics,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
+diagnostics,any_outcomes,integer,Indicator of non-zero outcomes across both exposure cohorts,No,No,No,Yes
+diagnostics,mdrr,numeric,Minimal detectable risk ratio,No,No,No,Yes
+diagnostics,max_abs_std_diff_mean,numeric,Maximium absolute standardized difference in means,No,No,No,Yes
+diagnostics,min_equipoise,numeric,Proportion of subjects in clinical equipoise,No,No,No,Yes
+diagnostics,ease,numeric,Expected absolute systematic error,No,No,No,Yes
+diagnostics,pass,integer,Indicator of whether the study has passed the diagnostics,No,No,No,Yes
+diagnostics,criteria,varchar(255),Description of diagnostics criteria,No,No,No,Yes
+covariate_balance,interaction_covariate_id,bigint,id for covariates of interaction terms,No,No,Yes,Yes
+covariate_balance,target_sd_before,numeric,standard deviation in target cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sd_before,numeric,standard deviation in comparator cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,mean_before,numeric,overall mean before PS adjustment,No,No,Yes,Yes
+covariate_balance,sd_before,numeric,overall standard deviation before PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sd_after,numeric,standard deviation in target cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sd_after,numeric,standard deviation in comparator cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,mean_after,numeric,overall mean after PS adjustment,No,No,Yes,Yes
+covariate_balance,sd_after,numeric,overall standard deviation after PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sum_before,numeric,sum in target cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sum_before,numeric,sum in comparator cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sum_after,numeric,sum in target cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sum_after,numeric,sum in comparator cohort after PS adjustment,No,No,Yes,Yes
