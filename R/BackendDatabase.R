@@ -779,6 +779,18 @@ uploadResultsToDatabaseFromCsv <- function(connectionDetails, schema,
         env$primaryKeyValuesInDb <- primaryKeyValuesInDb
       }
 
+      if(tableName == "covariate_balance"){
+        cat("Correcting column order for covariate_balance table...\n")
+        sql <- "SELECT * FROM @schema.@table_name LIMIT 2;"
+        sql <- SqlRender::render(
+          sql = sql,
+          schema = schema,
+          table_name = tableName
+        )
+        db_columns = names(DatabaseConnector::querySql(connection, sql))
+        db_columns = tolower(db_columns)
+      }
+
       uploadChunk <- function(chunk, pos) {
         ParallelLogger::logInfo("- Preparing to upload rows ",
                                 pos,
@@ -788,22 +800,26 @@ uploadResultsToDatabaseFromCsv <- function(connectionDetails, schema,
         chunk <- checkFixColumnNames(
           table = chunk,
           tableName = env$tableName,
-          zipFileName = zipFileName,
+          zipFileName = exportFolder,
           specifications = specifications,
           convertFromCamelCase = convertFromCamelCase
         )
         chunk <- checkAndFixDataTypes(
           table = chunk,
           tableName = env$tableName,
-          zipFileName = zipFileName,
+          zipFileName = exportFolder,
           specifications = specifications
         )
         chunk <- checkAndFixDuplicateRows(
           table = chunk,
           tableName = env$tableName,
-          zipFileName = zipFileName,
+          zipFileName = exportFolder,
           specifications = specifications
         )
+
+        if(tableName == "covariate_balance"){
+          chunk <- chunk[,db_columns]
+        }
 
         # Primary key fields cannot be NULL, so for some tables convert NAs to empty or zero:
         toEmpty <- specifications %>%
@@ -897,6 +913,7 @@ uploadResultsToDatabaseFromCsv <- function(connectionDetails, schema,
 
     }
   }
+  cat("tablesNames = ", paste(tableNames, collapse = ','), "\n")
   invisible(lapply(unique(tableNames), uploadTable))
   delta <- Sys.time() - start
   writeLines(paste("Uploading data took", signif(delta, 3), attr(delta, "units")))
