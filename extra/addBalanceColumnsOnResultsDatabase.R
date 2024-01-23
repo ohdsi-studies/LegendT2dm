@@ -57,3 +57,20 @@ DatabaseConnector::insertTable(
   tempTable = FALSE,
   progressBar = TRUE
 )
+
+
+exportFolder = "~/Downloads/export_example/"
+tablesNames = c("covariate")
+
+uploadResultsToDatabaseFromCsv(connectionDetails = connectionDetails,
+                               schema = schema,
+                               exportFolder = exportFolder, tableNames = c("covariate"),
+                               specifications = read_csv("inst/settings/ResultsModelSpecs1.csv"))
+
+## check on uploaded portion
+sql <- "SELECT * FROM covariate_balance
+        WHERE covariate_id = 1002
+        AND database_id = 'OptumEHR';"
+
+sel_bal <- DatabaseConnector::querySql(connection, sql)
+names(sel_bal) = tolower(names(sel_bal))

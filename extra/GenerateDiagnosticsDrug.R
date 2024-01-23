@@ -45,12 +45,12 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
                                     analysisIds = analysisIds,
                                     databaseIds = databaseIdsDrug)
 
-saveRDS(diagnostics, "extra/diagnostics.rds")
+saveRDS(diagnostics, "extra/diagnostics-sglt2i.rds")
 DatabaseConnector::disconnect(connection)
 
 # Start of diagnostics processing
 
-diagnostics <- readRDS("extra/diagnostics.rds")
+diagnostics <- readRDS("extra/diagnostics-sglt2i.rds")
 
 diagnosticsHtn <- diagnostics %>%
   filter(is.finite(mdrr)) %>%
@@ -72,6 +72,15 @@ diagnosticsLit <- diagnostics %>%
 
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "OPENCLAIMS")
+
+diagnosticsBal <- diagnostics %>%
+  filter(is.finite(mdrr)) %>%
+  filter(!is.na(maxAbsStdDiffMean)) %>%
+  mutate(pass = (
+    (mdrr < 4.0) &
+      (maxAbsStdDiffMean < 0.12) &
+      (minEquipoise > 0.30)
+    ))
 
 # (1) using LEGEND-HTN data-driven diagnostics rule
 doMetaAnalysis(legendT2dmConnectionDetails,
@@ -96,9 +105,18 @@ doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis3",
                maExportFolder = "maLitNoOc",
-               diagnosticsFilter = diagnosticsLit,
+               diagnosticsFilter = diagnosticsLitNoOc,
                indicationId = "drug",
                maxCores = 4)
+
+# (4) use 0.30 as equipoise threshold instead...
+doMetaAnalysis(legendT2dmConnectionDetails,
+               resultsDatabaseSchema = "legendt2dm_drug_results",
+               maName = "Meta-analysis4",
+               maExportFolder = "maMoreBal",
+               diagnosticsFilter = diagnosticsBal,
+               indicationId = "drug",
+               maxCores = 8)
 
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
@@ -122,10 +140,11 @@ LegendT2dm::uploadResultsToDatabase(
   schema = "legendt2dm_drug_results",
   purgeSiteDataBeforeUploading = TRUE,
   zipFileName = c(
-    "maAll/Results_drug_study_Meta-analysis0.zip",
-    # "maHtn/Results_drug_study_Meta-analysis1.zip",
-    # "maLit/Results_drug_study_Meta-analysis2.zip",
+    #"maAll/Results_drug_study_Meta-analysis0.zip",
+    #"maHtn/Results_drug_study_Meta-analysis1.zip",
+    #"maLit/Results_drug_study_Meta-analysis2.zip",
     #"maLitNoOc/Results_drug_study_Meta-analysis3.zip",
+    "maMoreBal/Results_drug_study_Meta-analysis4.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv"))
