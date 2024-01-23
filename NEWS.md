@@ -1,3 +1,11 @@
+LegendT2dm 2.1.1
+
+=======================
+
+Changes:
+
+1.Update covariate balance computation and results data model for `covariate_balance` table
+
 LegendT2dm 2.1.0
 =======================
 
