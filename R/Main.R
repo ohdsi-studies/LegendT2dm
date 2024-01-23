@@ -64,6 +64,7 @@
 #' @param runSections                          Run specific sections through CohortMethod
 #' @param computeCovariateBalance              Report covariate balance statistics across comparisons?
 #' @param exportToCsv                          Export all results to CSV files?
+#' @param exportSettings                        Settings to optionalize restuls export; see `createExportSettings()`.
 #' @param filterExposureCohorts  Optional subset of exposure cohorts to use; \code{NULL} implies all.
 #' @param filterOutcomeCohorts   Options subset of outcome cohorts to use; \code{NULL} implies all.
 #' @param maxCores                             How many parallel cores should be used? If more cores
@@ -95,6 +96,7 @@ execute <- function(connectionDetails,
                     runSections = c(1:6),
                     computeCovariateBalance = TRUE,
                     exportToCsv = TRUE,
+                    exportSettings = createExportSettings(),
                     filterExposureCohorts = NULL,
                     filterOutcomeCohorts = NULL,
                     maxCores = 4) {
@@ -221,7 +223,8 @@ execute <- function(connectionDetails,
                       databaseDescription = databaseDescription,
                       minCellCount = minCellCount,
                       runSections = runSections,
-                      maxCores = maxCores)
+                      maxCores = maxCores,
+                      exportSettings = exportSettings)
     }
 
     ParallelLogger::logInfo(sprintf("Finished execute() for LEGEND-T2DM %s-vs-%s studies",

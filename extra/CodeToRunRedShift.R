@@ -7,7 +7,7 @@ Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
 options(andromedaTempFolder = "E:/andromedaTemp")
 oracleTempSchema <- NULL
 
-# # Feb 2023: fast forward data version to the latest accessible
+# Feb 2023: fast forward data version to the latest accessible
 # cdmDatabaseSchema <- "cdm_truven_ccae_v2182"
 # serverSuffix <- "truven_ccae"
 # cohortDatabaseSchema <- "scratch_fbu2"
@@ -18,14 +18,14 @@ oracleTempSchema <- NULL
 # outputFolder <- "E:/LegendT2dmOutput_ccae_drug2"
 
 # # Feb 2023: fast forward data version to the latest accessible
-cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
-serverSuffix <- "optum_ehr"
-cohortDatabaseSchema <- "scratch_fbu2"
-databaseId <- "OptumEHR"
-databaseName <- "Optum© de-identified Electronic Health Record Dataset"
-databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
-tablePrefix <- "legend_t2dm_optum_ehr"
-outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug2"
+# cdmDatabaseSchema <- "cdm_optum_ehr_v2247" #v2137
+# serverSuffix <- "optum_ehr"
+# cohortDatabaseSchema <- "scratch_fbu2"
+# databaseId <- "OptumEHR"
+# databaseName <- "Optum© de-identified Electronic Health Record Dataset"
+# databaseDescription <- "Optum© de-identified Electronic Health Record Dataset represents Humedica’s Electronic Health Record data a medical records database. The medical record data includes clinical information, inclusive of prescriptions as prescribed and administered, lab results, vital signs, body measurements, diagnoses, procedures, and information derived from clinical Notes using Natural Language Processing (NLP)."
+# tablePrefix <- "legend_t2dm_optum_ehr"
+# outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug2"
 
 # Feb 2023: fast forward data version to the latest accessible
 # cdmDatabaseSchema <- "cdm_truven_mdcr_v2322" #v2183
@@ -39,14 +39,14 @@ outputFolder <- "E:/LegendT2dmOutput_optum_ehr_drug2"
 
 # # Feb 2023: fast forward data version to the latest accessible
 # TBD: run drug-level study on MDCD
-# cdmDatabaseSchema <- "cdm_truven_mdcd_v2321" #v2128
-# serverSuffix <- "truven_mdcd"
-# cohortDatabaseSchema <- "scratch_fbu2"
-# databaseId<- "MDCD"
-# databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
-# databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
-# tablePrefix <- "legend_t2dm_mdcd"
-# outputFolder <- "E:/LegendT2dmOutput_mdcd_drug2"
+cdmDatabaseSchema <- "cdm_truven_mdcd_v2321" #v2128
+serverSuffix <- "truven_mdcd"
+cohortDatabaseSchema <- "scratch_fbu2"
+databaseId<- "MDCD"
+databaseName <- "IBM Health MarketScan® Multi-State Medicaid Database"
+databaseDescription <- "IBM MarketScan® Multi-State Medicaid Database (MDCD) adjudicated US health insurance claims for Medicaid enrollees from multiple states and includes hospital discharge diagnoses, outpatient diagnoses and procedures, and outpatient pharmacy claims as well as ethnicity and Medicare eligibility. Members maintain their same identifier even if they leave the system for a brief period however the dataset lacks lab data."
+tablePrefix <- "legend_t2dm_mdcd"
+outputFolder <- "E:/LegendT2dmOutput_mdcd_drug2"
 
 # # Feb 2023: fast forward data version to the latest accessible
 cdmDatabaseSchema <- "cdm_optum_extended_dod_v2323" #v2228 #v2134
@@ -159,28 +159,34 @@ execute(connectionDetails = conn,
         exportToCsv = TRUE,
         maxCores = 10)
 
-# # try re-packaging OptumEHR result files
-# execute(
-#   connectionDetails = conn,
-#   cdmDatabaseSchema = cdmDatabaseSchema,
-#   oracleTempSchema = oracleTempSchema,
-#   cohortDatabaseSchema = cohortDatabaseSchema,
-#   outputFolder = outputFolder,
-#   indicationId = "drug",
-#   databaseId = databaseId,
-#   databaseName = databaseName,
-#   databaseDescription = databaseDescription,
-#   tablePrefix = tablePrefix,
-#   createExposureCohorts = FALSE,
-#   createOutcomeCohorts = FALSE,
-#   fetchAllDataFromServer = FALSE,
-#   generateAllCohortMethodDataObjects = FALSE,
-#   runCohortMethod = FALSE,
-#   runSections = c(1:6),
-#   computeCovariateBalance = FALSE,
-#   exportToCsv = TRUE,
-#   maxCores = 4
-# )
+# re-run compute covariate and results export
+exportSettings = LegendT2dm:::createExportSettings(exportAnalysisInfo = FALSE,
+                                                   exportStudyResults = FALSE,
+                                                   exportStudyDiagnostics = TRUE,
+                                                   exportDateTimeInfo = FALSE,
+                                                   exportBalanceOnly = TRUE)
+execute(
+  connectionDetails = conn,
+  cdmDatabaseSchema = cdmDatabaseSchema,
+  oracleTempSchema = oracleTempSchema,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  outputFolder = outputFolder,
+  indicationId = "drug",
+  databaseId = databaseId,
+  databaseName = databaseName,
+  databaseDescription = databaseDescription,
+  tablePrefix = tablePrefix,
+  createExposureCohorts = FALSE,
+  createOutcomeCohorts = FALSE,
+  fetchAllDataFromServer = FALSE,
+  generateAllCohortMethodDataObjects = FALSE,
+  runCohortMethod = FALSE,
+  runSections = c(1:6),
+  computeCovariateBalance = TRUE,
+  exportToCsv = TRUE,
+  exportSettings = exportSettings,
+  maxCores = 16
+)
 
 
 #### test staged execution code on a big JnJ data source ----

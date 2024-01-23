@@ -145,3 +145,36 @@ execute(connectionDetails = connectionDetails,
         computeCovariateBalance = TRUE,
         exportToCsv = TRUE,
         maxCores = maxCores)
+
+
+# ## **RUN THIS ONLY iF NECESSARY!**
+# ## re-run computing covariate balance step
+# ## need to delete all files under "drug/balance"
+# ## OR, rename "drug/balance" folder to something else
+# newOutputFolder1 = file.path(paste0(outputFolder, "-1"))
+# exportSettings = LegendT2dm:::createExportSettings(exportAnalysisInfo = FALSE,
+#                                                    exportStudyResults = FALSE,
+#                                                    exportStudyDiagnostics = TRUE,
+#                                                    exportDateTimeInfo = FALSE,
+#                                                    exportBalanceOnly = TRUE)
+# execute(connectionDetails = connectionDetails,
+#         cdmDatabaseSchema = cdmDatabaseSchema,
+#         oracleTempSchema = oracleTempSchema,
+#         cohortDatabaseSchema = cohortDatabaseSchema,
+#         outputFolder = newOutputFolder1,
+#         indicationId = indicationId,
+#         databaseId = databaseId,
+#         databaseName = databaseName,
+#         databaseDescription = databaseDescription,
+#         tablePrefix = tablePrefix,
+#         createExposureCohorts = FALSE,
+#         createOutcomeCohorts = FALSE,
+#         createPairedExposureSummary = FALSE, # not re-create exposure summary file
+#         fetchAllDataFromServer = FALSE,
+#         generateAllCohortMethodDataObjects = FALSE,
+#         runCohortMethod = FALSE,
+#         computeCovariateBalance = FALSE,
+#         exportToCsv = TRUE,
+#         exportSettings = exportSettings,
+#         maxCores = maxCores)
+
