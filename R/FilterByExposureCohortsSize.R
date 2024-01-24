@@ -20,12 +20,20 @@
 #' @param indicationId     A string denoting the indicationId.
 #' @param minCohortSize   Minimum number of people that have to be in each cohort to keep a pair of
 #'                         cohorts.
+#' @param summaryFile     File name of the csv that contains paired exposure summary;
+#'                        if NULL, then default to "pairedExposureSummary.csv"
 #'
 #' @export
 filterByExposureCohortsSize <- function(outputFolder,
                                         indicationId,
-                                        minCohortSize) {
-    exposureSummary <- read.csv(file.path(outputFolder, indicationId, "pairedExposureSummary.csv"))
+                                        minCohortSize,
+                                        summaryFile = NULL) {
+    if(is.null(summaryFile)){
+      summaryFilePath = file.path(outputFolder, indicationId, "pairedExposureSummary.csv")
+    }else{
+      summaryFilePath = file.path(outputFolder, indicationId, summaryFile)
+    }
+    exposureSummary <- read.csv(summaryFilePath)
     filtered <- exposureSummary[exposureSummary$targetPairedPersons > minCohortSize & exposureSummary$comparatorPairedPersons >
                                   minCohortSize, ]
     write.csv(filtered,
