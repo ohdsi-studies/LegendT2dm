@@ -955,6 +955,7 @@ exportDiagnostics <- function(indicationId,
                                        minCellCount,
                                        TRUE)
 
+        ## round covariate means to 3 digits
         balance$targetMeanBefore <- round(balance$targetMeanBefore, 3)
         balance$comparatorMeanBefore <- round(balance$comparatorMeanBefore, 3)
         balance$targetMeanAfter <- round(balance$targetMeanAfter, 3)
@@ -962,9 +963,14 @@ exportDiagnostics <- function(indicationId,
         balance$meanBefore <- round(balance$meanBefore, 3)
         balance$meanAfter <- round(balance$meanAfter, 3)
 
-        balance <- balance[balance$targetMeanBefore != 0 & balance$comparatorMeanBefore != 0 & balance$targetMeanAfter !=
-                             0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
-                             0, ]
+        ## remove covariates with very small means before AND after
+        ## (if has large enough mean before OR after in either target and comparator or in stdDiff, then need to keep!!)
+        balance <- balance %>%
+          filter(targetMeanBefore != 0 | comparatorMeanBefore != 0 | targetMeanAfter != 0 | comparatorMeanAfter != 0) %>%
+          filter(stdDiffBefore != 0 | stdDiffAfter != 0)
+        # balance <- balance[balance$targetMeanBefore != 0 & balance$comparatorMeanBefore != 0 & balance$targetMeanAfter !=
+        #                      0 & balance$comparatorMeanAfter != 0 & balance$stdDiffBefore != 0 & balance$stdDiffAfter !=
+        #                      0, ]
 
         # balance$targetSizeBefore <- round(balance$targetSizeBefore, 0)
         # balance$comparatorSizeBefore <- round(balance$comparatorSizeBefore, 0)
