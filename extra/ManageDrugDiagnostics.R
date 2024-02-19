@@ -59,6 +59,12 @@ CohortDiagnostics::uploadResults(
   schema = drugSchema,
   zipFileName = "C:/Users/Admin_FBu2/Downloads/b9ps8anh_Results_drug_exposures_CUIMC.zip")
 
+# uploaded, Nov 2023
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "~/Downloads/Results_drug_exposures_OPENCLAIMS.zip")
+
 
 # uploaded, Feb 28 2023
 CohortDiagnostics::uploadResults(

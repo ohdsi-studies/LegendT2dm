@@ -14,8 +14,9 @@ legendT2dmConnectionDetails <- DatabaseConnector::createConnectionDetails(
 connection <- DatabaseConnector::connect(legendT2dmConnectionDetails)
 
 # set indication Id here
-# doing sglt2i for now
-indicationId = "sglt2i"
+# doing this for all drug-v-drug
+## OPEN CLAIMS results still pending...
+indicationId = "drug"
 tcoFileName = sprintf("%sTcosOfInterest.csv", indicationId)
 
 resultsSchema = "legendt2dm_drug_results"
@@ -33,7 +34,7 @@ outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
 #                  "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
 
 databaseIdsDrug <- c("OptumEHR", "MDCR", "OptumDod", "MDCD",
-                     "CCAE", "OPENCLAIMS", "DA_Germany")
+                     "CCAE", "OPENCLAIMS", "DA_Germany", "LPD_France")
 
 analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
                   11,12,13,14,15,16,17,18,19)
@@ -48,7 +49,8 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
 saveRDS(diagnostics, "extra/diagnostics-sglt2i.rds")
 DatabaseConnector::disconnect(connection)
 
-# Start of diagnostics processing
+# Start of diagnostics processing & do meta analysis
+## NOTE: still waiting for results from Open Claims! Done partially for now
 
 diagnostics <- readRDS("extra/diagnostics-sglt2i.rds")
 
