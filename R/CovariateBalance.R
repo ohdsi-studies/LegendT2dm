@@ -163,12 +163,16 @@ computeBalance <- function(subset,
     stratifiedPop <- CohortMethod::stratifyByPs(population = studyPop,
                                                 numberOfStrata = stratifyByPsArgs$numberOfStrata,
                                                 baseSelection = stratifyByPsArgs$baseSelection)
+
+    ## Patch: what if PS model is degenerated so stratification is ill-behaved?
+
     fileName <- file.path(balanceFolder, paste0("bal_t",
                                                 subset$targetId[1],
                                                 "_c",
                                                 subset$comparatorId[1],
                                                 "_a6.rds")) # analysisId == ITT stratification
-    if (!file.exists(fileName)) {
+    ## check to make sure the population table is workable
+    if (!file.exists(fileName) && nrow(stratifiedPop) > 0 && "stratumId" %in% names(stratifiedPop)) {
         ParallelLogger::logTrace("Creating stratified balance file " , fileName)
         balance <- CohortMethod::computeCovariateBalance(population = stratifiedPop,
                                                          cohortMethodData = cmData)
