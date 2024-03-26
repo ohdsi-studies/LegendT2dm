@@ -1,3 +1,12 @@
+LegendT2dm 2.1.2
+
+=======================
+
+Changes:
+
+1. Small patch in `computeBalance` function for robustness
+
+
 LegendT2dm 2.1.1
 
 =======================
