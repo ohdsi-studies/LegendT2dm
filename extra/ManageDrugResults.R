@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+library(dplyr)
+
 Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
+
+#Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="~/Documents/Drivers/")
 
 ### Manage OHDSI Postgres server
 connectionDetails <- DatabaseConnector::createConnectionDetails(
@@ -70,6 +74,35 @@ LegendT2dm::uploadResultsToDatabase(
     ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")),
   tempFolder = "E:/uploadTemp/"
+)
+
+
+## May 2024: upload all Open Claims drug-v-drug results
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =FALSE,
+  zipFileName = c(
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_2.zip",
+    "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_3.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_4.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_5.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_6.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_7.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_9.zip",
+    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
+    NULL
+  ),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")) %>%
+    filter(!tableName %in% c("database",
+                             "covariate_analysis",
+                             "kaplan_meier_dist",
+                             "covariate_balance")),
+  # no upload of KM curves in this round; taking too long
+  # also not uploading balance table? it gets stuck all the time
+  tempFolder = "~/Documents/uploadTemp/"
 )
 
 
