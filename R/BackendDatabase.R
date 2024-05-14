@@ -568,6 +568,16 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
     }
 
     csvFileName <- paste0(tableName, ".csv")
+
+    uploadChunkSize = ifelse(tableName %in% c("kaplan_meier_dist",
+                                              "covariate_balance"),
+                             1e4,
+                             1e7)
+    readGuessSize = ifelse(tableName %in% c("kaplan_meier_dist",
+                                            "covariate_balance"),
+                           1e3,
+                           1e6)
+
     if (csvFileName %in% list.files(unzipFolder)) {
       env <- new.env()
       env$schema <- schema
@@ -589,6 +599,19 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
         colnames(primaryKeyValuesInDb) <-
           tolower(colnames(primaryKeyValuesInDb))
         env$primaryKeyValuesInDb <- primaryKeyValuesInDb
+      }
+
+      # get correct order of columns from results database
+      if(tableName == "covariate_balance"){
+        cat("Correcting column order for covariate_balance table...\n")
+        sql <- "SELECT * FROM @schema.@table_name LIMIT 2;"
+        sql <- SqlRender::render(
+          sql = sql,
+          schema = schema,
+          table_name = tableName
+        )
+        db_columns = names(DatabaseConnector::querySql(connection, sql))
+        db_columns = tolower(db_columns)
       }
 
       uploadChunk <- function(chunk, pos) {
@@ -616,6 +639,11 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
           zipFileName = zipFileName,
           specifications = specifications
         )
+
+        # fix column ordering for the balance table
+        if(tableName == "covariate_balance"){
+          chunk <- chunk[,db_columns]
+        }
 
         # Primary key fields cannot be NULL, so for some tables convert NAs to empty or zero:
         toEmpty <- specifications %>%
@@ -697,9 +725,9 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
       readr::read_csv_chunked(
         file = file.path(unzipFolder, csvFileName),
         callback = uploadChunk,
-        chunk_size = 1e7,
+        chunk_size = uploadChunkSize,
         col_types = readr::cols(),
-        guess_max = 1e6,
+        guess_max = readGuessSize,
         progress = FALSE
       )
 
