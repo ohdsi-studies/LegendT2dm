@@ -2619,23 +2619,6 @@
 },
 {
  "concept": {
- "CONCEPT_ID":    44506754,
-"CONCEPT_NAME": "lixisenatide",
-"STANDARD_CONCEPT": "S",
-"STANDARD_CONCEPT_CAPTION": "Standard",
-"INVALID_REASON": "V",
-"INVALID_REASON_CAPTION": "Valid",
-"CONCEPT_CODE": "1440051",
-"DOMAIN_ID": "Drug",
-"VOCABULARY_ID": "RxNorm",
-"CONCEPT_CLASS_ID": "Ingredient" 
-},
-"isExcluded": false,
-"includeDescendants": true,
-"includeMapped": false 
-},
-{
- "concept": {
  "CONCEPT_ID":    40166035,
 "CONCEPT_NAME": "saxagliptin",
 "STANDARD_CONCEPT": "S",
