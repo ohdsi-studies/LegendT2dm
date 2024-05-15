@@ -2551,23 +2551,6 @@
 },
 {
  "concept": {
- "CONCEPT_ID":     1559684,
-"CONCEPT_NAME": "glyburide",
-"STANDARD_CONCEPT": "S",
-"STANDARD_CONCEPT_CAPTION": "Standard",
-"INVALID_REASON": "V",
-"INVALID_REASON_CAPTION": "Valid",
-"CONCEPT_CODE": "4815",
-"DOMAIN_ID": "Drug",
-"VOCABULARY_ID": "RxNorm",
-"CONCEPT_CLASS_ID": "Ingredient" 
-},
-"isExcluded": false,
-"includeDescendants": true,
-"includeMapped": false 
-},
-{
- "concept": {
  "CONCEPT_ID":    40239216,
 "CONCEPT_NAME": "linagliptin",
 "STANDARD_CONCEPT": "S",

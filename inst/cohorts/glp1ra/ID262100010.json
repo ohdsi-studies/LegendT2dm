@@ -2653,23 +2653,6 @@
 },
 {
  "concept": {
- "CONCEPT_ID":      793143,
-"CONCEPT_NAME": "semaglutide",
-"STANDARD_CONCEPT": "S",
-"STANDARD_CONCEPT_CAPTION": "Standard",
-"INVALID_REASON": "V",
-"INVALID_REASON_CAPTION": "Valid",
-"CONCEPT_CODE": "1991302",
-"DOMAIN_ID": "Drug",
-"VOCABULARY_ID": "RxNorm",
-"CONCEPT_CLASS_ID": "Ingredient" 
-},
-"isExcluded": false,
-"includeDescendants": true,
-"includeMapped": false 
-},
-{
- "concept": {
  "CONCEPT_ID":     1580747,
 "CONCEPT_NAME": "sitagliptin",
 "STANDARD_CONCEPT": "S",

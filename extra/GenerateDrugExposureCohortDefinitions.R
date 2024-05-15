@@ -325,10 +325,10 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 #classIds = c(10)
 
 # also, for SU
-#classIds = c(40)
+classIds = c(40)
 
 # DEBUG: test with SGLT2i
-classIds = c(30)
+#classIds = c(30)
 
 # then create permutations for the desired drug class
 permutationsForDrugs <- lapply(classIds, createPermutationsForDrugs) %>%

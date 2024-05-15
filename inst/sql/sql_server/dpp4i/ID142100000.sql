@@ -161,11 +161,11 @@ UNION  select c.concept_id
 ) C UNION ALL 
 SELECT 14 as codeset_id, c.concept_id FROM (select distinct I.concept_id FROM
 ( 
-  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (44816332,43013884,43526465,1594973,44785829,45774435,45774751,793293,1583722,1597756,1560171,19097821,1559684,40239216,40170911,44506754,40166035,793143,1580747,1502809,1502855,19122137)
+  select concept_id from @vocabulary_database_schema.CONCEPT where concept_id in (44816332,43013884,43526465,1594973,44785829,45774435,45774751,793293,1583722,1597756,1560171,19097821,1559684,40239216,40170911,44506754,40166035,793143,1502809,1502855,19122137)
 UNION  select c.concept_id
   from @vocabulary_database_schema.CONCEPT c
   join @vocabulary_database_schema.CONCEPT_ANCESTOR ca on c.concept_id = ca.descendant_concept_id
-  and ca.ancestor_concept_id in (44816332,43013884,43526465,1594973,44785829,45774435,45774751,793293,1583722,1597756,1560171,19097821,1559684,40239216,40170911,44506754,40166035,793143,1580747,1502809,1502855,19122137)
+  and ca.ancestor_concept_id in (44816332,43013884,43526465,1594973,44785829,45774435,45774751,793293,1583722,1597756,1560171,19097821,1559684,40239216,40170911,44506754,40166035,793143,1502809,1502855,19122137)
   and c.invalid_reason is null
 
 ) I
@@ -180,8 +180,10 @@ UNION  select c.concept_id
   and c.invalid_reason is null
 
 ) I
-) C
-;
+) C;
+
+UPDATE STATISTICS #Codesets;
+
 
 SELECT event_id, person_id, start_date, end_date, op_start_date, op_end_date, visit_occurrence_id
 INTO #qualified_events
@@ -198,12 +200,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -235,12 +236,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -270,12 +270,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -292,11 +291,11 @@ WHERE P.ordinal = 1
 ) P
 JOIN (
   -- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
+SELECT C.person_id, C.condition_occurrence_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id, C.start_date as sort_date
 FROM 
 (
-  SELECT co.* 
+  SELECT co.person_id,co.condition_occurrence_id,co.condition_concept_id,co.visit_occurrence_id,co.condition_start_date as start_date, COALESCE(co.condition_end_date, DATEADD(day,1,co.condition_start_date)) as end_date 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
   JOIN #Codesets cs on (co.condition_concept_id = cs.concept_id and cs.codeset_id = 12)
 ) C
@@ -322,12 +321,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -354,12 +352,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -376,11 +373,11 @@ WHERE P.ordinal = 1
 ) P
 JOIN (
   -- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
+SELECT C.person_id, C.condition_occurrence_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id, C.start_date as sort_date
 FROM 
 (
-  SELECT co.* 
+  SELECT co.person_id,co.condition_occurrence_id,co.condition_concept_id,co.visit_occurrence_id,co.condition_start_date as start_date, COALESCE(co.condition_end_date, DATEADD(day,1,co.condition_start_date)) as end_date 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
   JOIN #Codesets cs on (co.condition_concept_id = cs.concept_id and cs.codeset_id = 11)
 ) C
@@ -406,12 +403,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -438,12 +434,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -460,11 +455,11 @@ WHERE P.ordinal = 1
 ) P
 JOIN (
   -- Begin Condition Occurrence Criteria
-SELECT C.person_id, C.condition_occurrence_id as event_id, C.condition_start_date as start_date, COALESCE(C.condition_end_date, DATEADD(day,1,C.condition_start_date)) as end_date,
-  C.visit_occurrence_id, C.condition_start_date as sort_date
+SELECT C.person_id, C.condition_occurrence_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id, C.start_date as sort_date
 FROM 
 (
-  SELECT co.* 
+  SELECT co.person_id,co.condition_occurrence_id,co.condition_concept_id,co.visit_occurrence_id,co.condition_start_date as start_date, COALESCE(co.condition_end_date, DATEADD(day,1,co.condition_start_date)) as end_date 
   FROM @cdm_database_schema.CONDITION_OCCURRENCE co
   JOIN #Codesets cs on (co.condition_concept_id = cs.concept_id and cs.codeset_id = 10)
 ) C
@@ -490,12 +485,11 @@ FROM
   FROM 
   (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date , row_number() over (PARTITION BY de.person_id ORDER BY de.drug_exposure_start_date, de.drug_exposure_id) as ordinal
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 ) C
@@ -552,12 +546,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 15)
 ) C
@@ -603,12 +596,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 2)
 ) C
@@ -654,12 +646,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 3)
 ) C
@@ -705,12 +696,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 4)
 ) C
@@ -756,12 +746,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 5)
 ) C
@@ -805,16 +794,16 @@ from (SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Era Criteria
-select C.person_id, C.drug_era_id as event_id, C.drug_era_start_date as start_date, C.drug_era_end_date as end_date,
-    CAST(NULL as bigint) as visit_occurrence_id,C.drug_era_start_date as sort_date
+select C.person_id, C.drug_era_id as event_id, C.start_date, C.end_date,
+    CAST(NULL as bigint) as visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_era_id,de.drug_concept_id,de.drug_exposure_count,de.gap_days,de.drug_era_start_date as start_date, de.drug_era_end_date as end_date 
   FROM @cdm_database_schema.DRUG_ERA de
 where de.drug_concept_id in (SELECT concept_id from  #Codesets where codeset_id = 7)
 ) C
 
-WHERE DATEDIFF(d,C.drug_era_start_date, C.drug_era_end_date) >= 90
+WHERE DATEDIFF(d,C.start_date, C.end_date) >= 90
 -- End Drug Era Criteria
 
 ) A on A.person_id = P.person_id  AND A.START_DATE <= DATEADD(day,-90,P.START_DATE) ) cc 
@@ -829,12 +818,11 @@ from (SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 7)
 ) C
@@ -880,16 +868,16 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Era Criteria
-select C.person_id, C.drug_era_id as event_id, C.drug_era_start_date as start_date, C.drug_era_end_date as end_date,
-    CAST(NULL as bigint) as visit_occurrence_id,C.drug_era_start_date as sort_date
+select C.person_id, C.drug_era_id as event_id, C.start_date, C.end_date,
+    CAST(NULL as bigint) as visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_era_id,de.drug_concept_id,de.drug_exposure_count,de.gap_days,de.drug_era_start_date as start_date, de.drug_era_end_date as end_date 
   FROM @cdm_database_schema.DRUG_ERA de
 where de.drug_concept_id in (SELECT concept_id from  #Codesets where codeset_id = 6)
 ) C
 
-WHERE DATEDIFF(d,C.drug_era_start_date, C.drug_era_end_date) > 30
+WHERE DATEDIFF(d,C.start_date, C.end_date) > 30
 -- End Drug Era Criteria
 
 ) A on A.person_id = P.person_id  AND A.START_DATE <= DATEADD(day,-30,P.START_DATE) ) cc on p.person_id = cc.person_id and p.event_id = cc.event_id
@@ -906,11 +894,11 @@ SELECT p.person_id, p.event_id
 FROM #qualified_events P
 JOIN (
   -- Begin Drug Era Criteria
-select C.person_id, C.drug_era_id as event_id, C.drug_era_start_date as start_date, C.drug_era_end_date as end_date,
-    CAST(NULL as bigint) as visit_occurrence_id,C.drug_era_start_date as sort_date
+select C.person_id, C.drug_era_id as event_id, C.start_date, C.end_date,
+    CAST(NULL as bigint) as visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_era_id,de.drug_concept_id,de.drug_exposure_count,de.gap_days,de.drug_era_start_date as start_date, de.drug_era_end_date as end_date 
   FROM @cdm_database_schema.DRUG_ERA de
 where de.drug_concept_id in (SELECT concept_id from  #Codesets where codeset_id = 6)
 ) C
@@ -1061,7 +1049,7 @@ INTO #cohort_rows
 from ( -- first_ends
 	select F.person_id, F.start_date, F.end_date
 	FROM (
-	  select I.event_id, I.person_id, I.start_date, CE.end_date, row_number() over (partition by I.person_id, I.event_id order by CE.end_date) as ordinal 
+	  select I.event_id, I.person_id, I.start_date, CE.end_date, row_number() over (partition by I.person_id, I.event_id order by CE.end_date) as ordinal
 	  from #included_events I
 	  join ( -- cohort_ends
 -- cohort exit dates
@@ -1078,12 +1066,11 @@ FROM #included_events i
 JOIN
 (
 -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 14)
 ) C
@@ -1100,12 +1087,11 @@ FROM #included_events i
 JOIN
 (
 -- Begin Drug Exposure Criteria
-select C.person_id, C.drug_exposure_id as event_id, C.drug_exposure_start_date as start_date,
-       COALESCE(C.DRUG_EXPOSURE_END_DATE, DATEADD(day,C.DAYS_SUPPLY,DRUG_EXPOSURE_START_DATE), DATEADD(day,1,C.DRUG_EXPOSURE_START_DATE)) as end_date,
-       C.visit_occurrence_id,C.drug_exposure_start_date as sort_date
+select C.person_id, C.drug_exposure_id as event_id, C.start_date, C.end_date,
+  C.visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_exposure_id,de.drug_concept_id,de.visit_occurrence_id,days_supply,quantity,refills,de.drug_exposure_start_date as start_date, COALESCE(de.drug_exposure_end_date, DATEADD(day,de.days_supply,de.drug_exposure_start_date), DATEADD(day,1,de.drug_exposure_start_date)) as end_date 
   FROM @cdm_database_schema.DRUG_EXPOSURE de
 JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 5)
 ) C
@@ -1122,16 +1108,16 @@ FROM #included_events i
 JOIN
 (
 -- Begin Drug Era Criteria
-select C.person_id, C.drug_era_id as event_id, C.drug_era_start_date as start_date, C.drug_era_end_date as end_date,
-    CAST(NULL as bigint) as visit_occurrence_id,C.drug_era_start_date as sort_date
+select C.person_id, C.drug_era_id as event_id, C.start_date, C.end_date,
+    CAST(NULL as bigint) as visit_occurrence_id,C.start_date as sort_date
 from 
 (
-  select de.* 
+  select de.person_id,de.drug_era_id,de.drug_concept_id,de.drug_exposure_count,de.gap_days,de.drug_era_start_date as start_date, de.drug_era_end_date as end_date 
   FROM @cdm_database_schema.DRUG_ERA de
 where de.drug_concept_id in (SELECT concept_id from  #Codesets where codeset_id = 6)
 ) C
 
-WHERE DATEDIFF(d,C.drug_era_start_date, C.drug_era_end_date) > 30
+WHERE DATEDIFF(d,C.start_date, C.end_date) > 30
 -- End Drug Era Criteria
 
 ) C on C.person_id = I.person_id and C.start_date >= I.start_date and C.START_DATE <= I.op_end_date
@@ -1161,15 +1147,13 @@ from ( --cteEnds
         person_id
         , event_date
         , event_type
-        , MAX(start_ordinal) OVER (PARTITION BY person_id ORDER BY event_date, event_type, start_ordinal ROWS UNBOUNDED PRECEDING) AS start_ordinal 
-        , ROW_NUMBER() OVER (PARTITION BY person_id ORDER BY event_date, event_type, start_ordinal) AS overall_ord
+        , SUM(event_type) OVER (PARTITION BY person_id ORDER BY event_date, event_type ROWS UNBOUNDED PRECEDING) AS interval_status
       FROM
       (
         SELECT
           person_id
           , start_date AS event_date
           , -1 AS event_type
-          , ROW_NUMBER() OVER (PARTITION BY person_id ORDER BY start_date) AS start_ordinal
         FROM #cohort_rows
 
         UNION ALL
@@ -1179,11 +1163,10 @@ from ( --cteEnds
           person_id
           , DATEADD(day,0,end_date) as end_date
           , 1 AS event_type
-          , NULL
         FROM #cohort_rows
       ) RAWDATA
     ) e
-    WHERE (2 * e.start_ordinal) - e.overall_ord = 0
+    WHERE interval_status = 0
   ) ed ON c.person_id = ed.person_id AND ed.end_date >= c.start_date
 	GROUP BY c.person_id, c.start_date
 ) e

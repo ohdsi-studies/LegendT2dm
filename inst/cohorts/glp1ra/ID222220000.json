@@ -2449,23 +2449,6 @@
 },
 {
  "concept": {
- "CONCEPT_ID":    45774435,
-"CONCEPT_NAME": "dulaglutide",
-"STANDARD_CONCEPT": "S",
-"STANDARD_CONCEPT_CAPTION": "Standard",
-"INVALID_REASON": "V",
-"INVALID_REASON_CAPTION": "Valid",
-"CONCEPT_CODE": "1551291",
-"DOMAIN_ID": "Drug",
-"VOCABULARY_ID": "RxNorm",
-"CONCEPT_CLASS_ID": "Ingredient" 
-},
-"isExcluded": false,
-"includeDescendants": true,
-"includeMapped": false 
-},
-{
- "concept": {
  "CONCEPT_ID":    45774751,
 "CONCEPT_NAME": "empagliflozin",
 "STANDARD_CONCEPT": "S",
