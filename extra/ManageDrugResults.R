@@ -29,7 +29,10 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   user = keyring::key_get("ohdsiPostgresUser"),
   password = keyring::key_get("ohdsiPostgresPassword"))
 
-# Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+
+# try using bulk load (need PostGreSQL installed on machine)
+Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+Sys.setenv(DATABASE_CONNECTOR_BULK_UPLOAD = TRUE)
 
 # Drug CES results
 resultsSchema <- "legendt2dm_drug_results"
@@ -50,6 +53,7 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 
 # July 2023 drug-vs-drug CES results upload ----
 # Results after for newer data version & package de-bug
+# Aug 2024: try using bulk upload for OptumEHR results again....
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
@@ -73,9 +77,24 @@ LegendT2dm::uploadResultsToDatabase(
     "~/Downloads/Results_drug_study_VAOMOP.zip",
     NULL
     ),
+  #specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")),
-  #tempFolder = "E:/uploadTemp/"
-  tempFolder = "~/Downloads/uploadTemp/",
+  tempFolder = "E:/uploadTemp/"
+  #tempFolder = "~/Downloads/uploadTemp/",
+  #forceOverWriteOfSpecifications = TRUE
+)
+
+
+## maybe only upload the covariate balance table (10GB) to see if it works?
+LegendT2dm::uploadResultsToDatabaseFromCsv(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =TRUE,
+  exportFolder = "F:/LegendT2dmOutput_optum_ehr_drug2/drug/export/",
+  tableNames = c("covariate_balance"),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in% c("covariate_balance")),
+  chunkSize = 1e6,
   forceOverWriteOfSpecifications = TRUE
 )
 
@@ -88,7 +107,7 @@ LegendT2dm::uploadResultsToDatabase(
   zipFileName = c(
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_2.zip",
-    "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_3.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_3.zip",
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_4.zip",
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_5.zip",
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_6.zip",
@@ -96,17 +115,133 @@ LegendT2dm::uploadResultsToDatabase(
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_9.zip",
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_10.zip", # tried this; should have worked
+    # "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_5.zip", # prioritize GLP1RAs in chunk 5-8
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_6.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_8.zip",
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_9.zip", # need to re-upload SGLT2i
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
     filter(!tableName %in% c("database",
                              "covariate_analysis",
-                             "kaplan_meier_dist",
-                             "covariate_balance")),
-  # no upload of KM curves in this round; taking too long
-  # also not uploading balance table? it gets stuck all the time
-  tempFolder = "~/Documents/uploadTemp/"
+                             "negative_control_outcome",
+                             "outcome_of_interest",
+                             "results_date_time", # don't upload shared tables
+                             NULL,
+                             # "covariate",
+                             # "attrition",
+                             # "cohort_method_result",
+                             # "preference_score_dist",
+                             NULL,
+                             "kaplan_meier_dist", # not uploading KM curves for now; takes too long
+                             "diagnostics", # will upload diagnostics later once generated
+                             NULL)
+           ),
+  tempFolder = "d:/uploadTemp/" # folder for temporary data storage during upload
 )
+
+## Aug 2024: upload KM curves for open claims results
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =FALSE,
+  zipFileName = c(
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_1.zip",
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_5.zip", # prioritize GLP1RAs in chunk 5-8
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_6.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_8.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_9.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_10.zip",
+    NULL
+  ),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in% c("kaplan_meier_dist",
+                            NULL)
+    ),
+  tempFolder = "E:/uploadTemp/", # folder for temporary data storage during upload
+  defaultChunkSize = 1e5 # force small chunk size for KM curve table
+)
+
+
+## Only upload results for "main" OT1/ITT cohorts, to save some time
+#library(dplyr)
+allCohorts = readr::read_csv("inst/settings/drugCohortsToCreate.csv")
+selectedCohorts = bind_rows(
+  allCohorts %>%
+    filter(stringr::str_ends(atlasName, "main")),
+  allCohorts %>%
+    filter(stringr::str_starts(name, "sglt2i"), stringr::str_ends(atlasName, "main ot2"))
+)
+
+selectedCohortIds = selectedCohorts %>% pull(cohortId)
+
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =FALSE,
+  zipFileName = c(
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_10.zip", # tried this; should have worked
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_4.zip",
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_5.zip", # prioritize GLP1RAs in chunk 5-8
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_6.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_8.zip", # this has some GLP1 and SGLT2
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_9.zip", # need to re-upload SGLT2i
+    NULL
+  ),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(!tableName %in% c("database",
+                             "covariate_analysis",
+                             "negative_control_outcome",
+                             "outcome_of_interest",
+                             "results_date_time", # don't upload shared tables
+                             NULL,
+                             # "covariate",
+                             # "attrition",
+                             # "cohort_method_result",
+                             # "preference_score_dist",
+                             NULL,
+                             "kaplan_meier_dist", # not uploading KM curves for now; takes too long
+                             "diagnostics", # will upload diagnostics later once generated
+                             NULL)
+    ),
+  tempFolder = "d:/uploadTemp/", # folder for temporary data storage during upload
+  forceOverWriteOfSpecifications = TRUE,
+  exposureCohortIds = selectedCohortIds
+)
+
+
+# cana vs empa for OptumEHR
+selectedCohortIds = c(311100000, 331100000,
+                      312100000, 332100000) # cana vs empa stuff
+
+# LegendT2dm::uploadResultsToDatabase(
+#   connectionDetails = connectionDetails,
+#   schema = resultsSchema,
+#   purgeSiteDataBeforeUploading =FALSE,
+#   zipFileName = c(
+#     "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/Results_drug_study_OptumEHR.zip",
+#     NULL
+#   ),
+#   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+#     filter(tableName %in% c("covariate_balance")),
+#   tempFolder = "d:/uploadTemp/",
+#   exposureCohortIds = selectedCohortIds
+# )
+
+## try to upload just that chunk between cana vs empa OT1 ....
+LegendT2dm::uploadResultsToDatabaseFromCsv(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =FALSE,
+  exportFolder = "E:/LegendT2dm_OptumEhr_temp/",
+  tableNames = c("covariate_balance"),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in% c("covariate_balance")),
+  chunkSize = 1e6,
+  forceOverWriteOfSpecifications = TRUE
+)
+
 
 
 # locally examine OptumEHR drug-v-drug results

@@ -434,7 +434,7 @@ removeResultsFromDatabase <- function(connectionDetails,
 #'                       has sufficient space if the default system temp space is too limited.
 #' @param exposureCohortIds   Export cohort IDs to selectively upload results for. If NULL, then up
 #'                      all by default.
-#'
+#' @param defaultChunkSize    Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7
 #'
 #' @export
 uploadResultsToDatabase <- function(connectionDetails,
@@ -446,7 +446,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                     convertFromCamelCase = FALSE,
                                     replaceInfinities = NULL,
                                     tempFolder = tempdir(),
-                                    exposureCohortIds = NULL) {
+                                    exposureCohortIds = NULL,
+                                    defaultChunkSize = 1e7) {
 
   if (length(zipFileName) > 1) {
     for (i in 1:length(zipFileName)) {
@@ -458,7 +459,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                   purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
                                   convertFromCamelCase = convertFromCamelCase,
                                   tempFolder = file.path(tempFolder, i),
-                                  exposureCohortIds = exposureCohortIds)
+                                  exposureCohortIds = exposureCohortIds,
+                                  defaultChunkSize = defaultChunkSize)
     }
   } else {
     uploadResultsToDatabaseImpl(connectionDetails = connectionDetails,
@@ -469,7 +471,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                 purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
                                 convertFromCamelCase = convertFromCamelCase,
                                 tempFolder = tempFolder,
-                                exposureCohortIds = exposureCohortIds)
+                                exposureCohortIds = exposureCohortIds,
+                                defaultChunkSize = defaultChunkSize)
   }
 }
 
@@ -533,7 +536,8 @@ addDatabaseIdToTables <- function(tableName,
 uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, specifications,
                                         forceOverWriteOfSpecifications, purgeSiteDataBeforeUploading,
                                         convertFromCamelCase, tempFolder,
-                                        exposureCohortIds = NULL) {
+                                        exposureCohortIds = NULL,
+                                        defaultChunkSize = 1e7) {
   start <- Sys.time()
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -579,8 +583,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
 
     uploadChunkSize = ifelse(tableName %in% c("kaplan_meier_dist",
                                               "covariate_balance"),
-                             1e4,
-                             1e7)
+                             defaultChunkSize %/% 10,
+                             defaultChunkSize)
     readGuessSize = ifelse(tableName %in% c("kaplan_meier_dist",
                                             "covariate_balance"),
                            1e3,
@@ -670,8 +674,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
                                             0,
                                             std_diff_after)) %>%
             mutate(std_diff_before = if_else(is.na(std_diff_before),
-                                             0,
-                                             std_diff_before))
+                                            0,
+                                            std_diff_before))
           ParallelLogger::logInfo("Correcting column order for covariate_balance table...")
           chunk <- chunk[,db_columns]
         }

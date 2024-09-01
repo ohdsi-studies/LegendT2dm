@@ -2,9 +2,22 @@
 
 library(dplyr)
 
+
+thePath = "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/"
+csvFileName = "covariate_balance.csv"
+
+chunk0 <- readr::read_csv(
+  file = file.path(thePath, csvFileName),
+  n_max = 2,
+  col_types = readr::cols(),
+  guess_max = 2
+)
+theNames = names(chunk0)
+
+
 checkBalance <- function(chunk, pos){
-  sprintf("Checking row %s through %s ...\n",
-         pos, nrow(chunk)+pos-1)
+  cat(sprintf("Checking row %s through %s ...\n",
+              pos, nrow(chunk)+pos-1))
 
   sel <- chunk %>%
     filter(database_id == "OptumEHR",
@@ -22,11 +35,17 @@ checkBalance <- function(chunk, pos){
     cat("The maxStdDiff after is:",
         paste(round(maxStd,4), collapse = ", "),
         "\n\n\n")
+
+    names(sel) = theNames
+
+    readr::write_csv(sel, file.path(thePath, "covariate_balance_canaempa.csv"))
+    cat("Relevant chunk has been out put!\n")
+
   }
 }
 
 
-thePath = ""
+thePath = "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/"
 csvFileName = "covariate_balance.csv"
 
 readr::read_csv_chunked(
@@ -37,3 +56,36 @@ readr::read_csv_chunked(
   guess_max = 1e5,
   progress = FALSE
 )
+
+
+## write the relevant rows to a file...
+
+# theBalance = readr::read_csv_chunked(
+#   file = file.path(thePath, csvFileName),
+#   callback = writeIt,
+#   chunk_size = 1e6,
+#   skip = 3.7e+7,
+#   col_types = readr::cols(),
+#   guess_max = 1e5,
+#   progress = FALSE
+# )
+
+chunk0 <- readr::read_csv(
+  file = file.path(thePath, csvFileName),
+  n_max = 2,
+  col_types = readr::cols(),
+  guess_max = 2
+)
+theNames = names(chunk0)
+
+chunk <- readr::read_csv(
+  file = file.path(thePath, csvFileName),
+  skip = 3.7e7,
+  n_max = 1e6,
+  col_types = readr::cols(),
+  guess_max = 1e5
+)
+
+names(chunk) = theNames
+
+readr::write_csv(chunk, file =  file.path(thePath, "covariate_balance_chunk.csv"))

@@ -47,6 +47,40 @@ drugSchema <- "legendt2dm_drug_diagnostics"
 # LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 #                                     user = "legendt2dm_readonly", schema = drugSchema)
 
+# uploaded, May 2024
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  purgeSiteDataBeforeUploading = FALSE, # re-upload, w/o removing all data-site results
+  zipFileName = "E:/LegendT2dmOutput_ccae_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_CCAE.zip")
+
+## MDCR: upload OT2 only...
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  purgeSiteDataBeforeUploading = FALSE,
+  zipFileName = "E:/LegendT2dmOutput_mdcr_drug2/drugOt2/cohortDiagnosticsExport/Results_drugOt2_exposures_MDCR.zip"
+    #"E:/LegendT2dmOutput_mdcr_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_MDCR.zip"
+  )
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  purgeSiteDataBeforeUploading = FALSE, # re-upload, w/o removing all data-site results
+  zipFileName = "E:/LegendT2dmOutput_mdcr_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_MDCR.zip"
+)
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_mdcd_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_MDCD.zip")
+
+CohortDiagnostics::uploadResults(
+  connectionDetails = connectionDetails,
+  schema = drugSchema,
+  zipFileName = "E:/LegendT2dmOutput_optum_dod_drug2/drug/cohortDiagnosticsExport/Results_drug_exposures_OptumDod.zip")
+
+
 # uploaded, Oct 2023
 CohortDiagnostics::uploadResults(
   connectionDetails = connectionDetails,
