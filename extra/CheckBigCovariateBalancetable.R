@@ -3,7 +3,7 @@
 library(dplyr)
 
 checkBalance <- function(chunk, pos){
-  printf("Checking row %s through %s ...\n",
+  sprintf("Checking row %s through %s ...\n",
          pos, nrow(chunk)+pos-1)
 
   sel <- chunk %>%
@@ -31,7 +31,7 @@ csvFileName = "covariate_balance.csv"
 
 readr::read_csv_chunked(
   file = file.path(thePath, csvFileName),
-  callback = uploadChunk,
+  callback = checkBalance,
   chunk_size = 1e6,
   col_types = readr::cols(),
   guess_max = 1e5,

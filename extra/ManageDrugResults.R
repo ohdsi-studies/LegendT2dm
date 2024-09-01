@@ -68,12 +68,15 @@ LegendT2dm::uploadResultsToDatabase(
     # "E:/Results_drug_study_DA_GERMANY.zip",
     # "E:/LegendT2dmOutput_mdcr_drug2/drug/export/Results_drug_study_MDCR.zip",
     # "E:/LegendT2dmOutput_mdcd_drug2/drug/export/Results_drug_study_MDCD.zip",
-    "E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/Results_drug_study_OptumEHR.zip",
+    #"E:/LegendT2dmOutput_optum_ehr_drug2/drug/export/Results_drug_study_OptumEHR.zip",
     #"C:/Users/Admin_FBu2/Downloads/rzbxa8v1_Results_drug_study_IMRD.zip",
+    "~/Downloads/Results_drug_study_VAOMOP.zip",
     NULL
     ),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")),
-  tempFolder = "E:/uploadTemp/"
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")),
+  #tempFolder = "E:/uploadTemp/"
+  tempFolder = "~/Downloads/uploadTemp/",
+  forceOverWriteOfSpecifications = TRUE
 )
 
 
@@ -95,7 +98,7 @@ LegendT2dm::uploadResultsToDatabase(
     # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
     NULL
   ),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")) %>%
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
     filter(!tableName %in% c("database",
                              "covariate_analysis",
                              "kaplan_meier_dist",

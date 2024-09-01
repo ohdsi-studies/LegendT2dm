@@ -257,9 +257,9 @@ checkAndFixDataTypes <-
             )
           )
           table <- mutate_at(table, i, function(x) {
-              y <- as.numeric(x)
-              ifelse(is.infinite(y), NA, y)
-            })
+            y <- as.numeric(x)
+            ifelse(is.infinite(y), NA, y)
+          })
         }
       } else if (expectedType == "int") {
         if (observedTypes[i] != "integer") {
@@ -383,9 +383,9 @@ infToLargeNumber <- function(x) {
 #'
 #' @export
 removeResultsFromDatabase <- function(connectionDetails,
-                                    schema,
-                                    databaseId,
-                                    specifications) {
+                                      schema,
+                                      databaseId,
+                                      specifications) {
 
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -399,10 +399,10 @@ removeResultsFromDatabase <- function(connectionDetails,
 
   for (tableName in tables) {
     for (databaseId in databaseIds) {
-    deleteAllRecordsForDatabaseId(connection = connection,
-                                  schema = schema,
-                                  tableName = tableName,
-                                  databaseId = databaseId)
+      deleteAllRecordsForDatabaseId(connection = connection,
+                                    schema = schema,
+                                    tableName = tableName,
+                                    databaseId = databaseId)
     }
   }
 }
@@ -432,6 +432,8 @@ removeResultsFromDatabase <- function(connectionDetails,
 #' @param tempFolder     Folder on the local file system where the zip files are extracted to. Will be cleaned
 #'                       up when the function is finished. Can be used to specify a temp folder on a drive that
 #'                       has sufficient space if the default system temp space is too limited.
+#' @param exposureCohortIds   Export cohort IDs to selectively upload results for. If NULL, then up
+#'                      all by default.
 #'
 #'
 #' @export
@@ -443,7 +445,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                     purgeSiteDataBeforeUploading = FALSE,
                                     convertFromCamelCase = FALSE,
                                     replaceInfinities = NULL,
-                                    tempFolder = tempdir()) {
+                                    tempFolder = tempdir(),
+                                    exposureCohortIds = NULL) {
 
   if (length(zipFileName) > 1) {
     for (i in 1:length(zipFileName)) {
@@ -454,7 +457,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                   forceOverWriteOfSpecifications = forceOverWriteOfSpecifications,
                                   purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
                                   convertFromCamelCase = convertFromCamelCase,
-                                  tempFolder = file.path(tempFolder, i))
+                                  tempFolder = file.path(tempFolder, i),
+                                  exposureCohortIds = exposureCohortIds)
     }
   } else {
     uploadResultsToDatabaseImpl(connectionDetails = connectionDetails,
@@ -464,7 +468,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                 forceOverWriteOfSpecifications = forceOverWriteOfSpecifications,
                                 purgeSiteDataBeforeUploading = purgeSiteDataBeforeUploading,
                                 convertFromCamelCase = convertFromCamelCase,
-                                tempFolder = tempFolder)
+                                tempFolder = tempFolder,
+                                exposureCohortIds = exposureCohortIds)
   }
 }
 
@@ -527,7 +532,8 @@ addDatabaseIdToTables <- function(tableName,
 
 uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, specifications,
                                         forceOverWriteOfSpecifications, purgeSiteDataBeforeUploading,
-                                        convertFromCamelCase, tempFolder) {
+                                        convertFromCamelCase, tempFolder,
+                                        exposureCohortIds = NULL) {
   start <- Sys.time()
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -557,6 +563,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
       select(.data$fieldName) %>%
       pull()
 
+    selectFlag = (length(which(primaryKey %in% c("target_id", "comparator_id"))) > 0)
+
     if (purgeSiteDataBeforeUploading &&
         "database_id" %in% primaryKey) {
       deleteAllRecordsForDatabaseId(
@@ -568,6 +576,16 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
     }
 
     csvFileName <- paste0(tableName, ".csv")
+
+    uploadChunkSize = ifelse(tableName %in% c("kaplan_meier_dist",
+                                              "covariate_balance"),
+                             1e4,
+                             1e7)
+    readGuessSize = ifelse(tableName %in% c("kaplan_meier_dist",
+                                            "covariate_balance"),
+                           1e3,
+                           1e6)
+
     if (csvFileName %in% list.files(unzipFolder)) {
       env <- new.env()
       env$schema <- schema
@@ -591,11 +609,36 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
         env$primaryKeyValuesInDb <- primaryKeyValuesInDb
       }
 
+      # get correct order of columns from results database
+      if(tableName == "covariate_balance"){
+        cat("Correcting column order for covariate_balance table...\n")
+        sql <- "SELECT * FROM @schema.@table_name LIMIT 2;"
+        sql <- SqlRender::render(
+          sql = sql,
+          schema = schema,
+          table_name = tableName
+        )
+        db_columns = names(DatabaseConnector::querySql(connection, sql))
+        db_columns = tolower(db_columns)
+      }
+
       uploadChunk <- function(chunk, pos) {
         ParallelLogger::logInfo("- Preparing to upload rows ",
                                 pos,
                                 " through ",
                                 pos + nrow(chunk) - 1)
+        if(selectFlag && !is.null(exposureCohortIds)){
+          chunk <- chunk %>%
+            filter(target_id %in% exposureCohortIds,
+                   comparator_id %in% exposureCohortIds)
+        }
+
+        if(nrow(chunk) == 0){
+          ParallelLogger::logInfo("No match for selected exposure cohorts. Skip uploading...")
+          return()
+        }else{
+          ParallelLogger::logInfo("Found results for selected exposure cohorts! Proceeding ...")
+        }
 
         chunk <- checkFixColumnNames(
           table = chunk,
@@ -616,6 +659,22 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
           zipFileName = zipFileName,
           specifications = specifications
         )
+
+        # fix column ordering for the balance table
+        # also fix std_diff_after NA values
+
+        if(tableName == "covariate_balance"){
+          ParallelLogger::logInfo("Setting NA columns to zero...")
+          chunk <- chunk %>%
+            mutate(std_diff_after = if_else(is.na(std_diff_after),
+                                            0,
+                                            std_diff_after)) %>%
+            mutate(std_diff_before = if_else(is.na(std_diff_before),
+                                             0,
+                                             std_diff_before))
+          ParallelLogger::logInfo("Correcting column order for covariate_balance table...")
+          chunk <- chunk[,db_columns]
+        }
 
         # Primary key fields cannot be NULL, so for some tables convert NAs to empty or zero:
         toEmpty <- specifications %>%
@@ -697,9 +756,9 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
       readr::read_csv_chunked(
         file = file.path(unzipFolder, csvFileName),
         callback = uploadChunk,
-        chunk_size = 1e7,
+        chunk_size = uploadChunkSize,
         col_types = readr::cols(),
-        guess_max = 1e6,
+        guess_max = readGuessSize,
         progress = FALSE
       )
 
@@ -780,7 +839,7 @@ uploadResultsToDatabaseFromCsv <- function(connectionDetails, schema,
       }
 
       if(tableName == "covariate_balance"){
-        cat("Correcting column order for covariate_balance table...\n")
+        #cat("Correcting column order for covariate_balance table...\n")
         sql <- "SELECT * FROM @schema.@table_name LIMIT 2;"
         sql <- SqlRender::render(
           sql = sql,
@@ -818,6 +877,12 @@ uploadResultsToDatabaseFromCsv <- function(connectionDetails, schema,
         )
 
         if(tableName == "covariate_balance"){
+          ParallelLogger::logInfo("Setting NA columns to zero...")
+          chunk <- chunk %>%
+            mutate(std_diff_after = if_else(is.na(std_diff_after),
+                                            0,
+                                            std_diff_after))
+          ParallelLogger::logInfo("Correcting column order for covariate_balance table...")
           chunk <- chunk[,db_columns]
         }
 
@@ -990,8 +1055,8 @@ deleteAllRecordsForDatabaseId <- function(connection,
 
 #' @export
 renameDatabaseId <- function(originalZipFileName, newZipFileName,
-                                        originalDatabaseId, newDatabaseId,
-                                        tempFolder = tempdir()) {
+                             originalDatabaseId, newDatabaseId,
+                             tempFolder = tempdir()) {
 
   unzipFolder <- tempfile("unzipTempFolder", tmpdir = tempFolder)
   dir.create(path = unzipFolder, recursive = TRUE)
