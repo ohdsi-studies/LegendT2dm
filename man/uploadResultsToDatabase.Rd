@@ -13,7 +13,9 @@ uploadResultsToDatabase(
   purgeSiteDataBeforeUploading = FALSE,
   convertFromCamelCase = FALSE,
   replaceInfinities = NULL,
-  tempFolder = tempdir()
+  tempFolder = tempdir(),
+  exposureCohortIds = NULL,
+  defaultChunkSize = 1e+07
 )
 }
 \arguments{
@@ -42,6 +44,11 @@ data site.}
 \item{tempFolder}{Folder on the local file system where the zip files are extracted to. Will be cleaned
 up when the function is finished. Can be used to specify a temp folder on a drive that
 has sufficient space if the default system temp space is too limited.}
+
+\item{exposureCohortIds}{Export cohort IDs to selectively upload results for. If NULL, then up
+all by default.}
+
+\item{defaultChunkSize}{Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7}
 }
 \description{
 Requires the results data model tables have been created using the \code{\link{createResultsDataModel}} function.

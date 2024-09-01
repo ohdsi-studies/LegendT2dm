@@ -32,6 +32,7 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 
 # try using bulk load (need PostGreSQL installed on machine)
 Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+Sys.setenv(DATABASE_CONNECTOR_BULK_UPLOAD = TRUE)
 
 # Drug CES results
 resultsSchema <- "legendt2dm_drug_results"
@@ -85,7 +86,7 @@ LegendT2dm::uploadResultsToDatabase(
 LegendT2dm::uploadResultsToDatabaseFromCsv(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
-  purgeSiteDataBeforeUploading =FALSE,
+  purgeSiteDataBeforeUploading =TRUE,
   exportFolder = "F:/LegendT2dmOutput_optum_ehr_drug2/drug/export/",
   tableNames = c("covariate_balance"),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
@@ -136,6 +137,29 @@ LegendT2dm::uploadResultsToDatabase(
            ),
   tempFolder = "d:/uploadTemp/" # folder for temporary data storage during upload
 )
+
+## Aug 2024: upload KM curves for open claims results
+LegendT2dm::uploadResultsToDatabase(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =FALSE,
+  zipFileName = c(
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_1.zip",
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_5.zip", # prioritize GLP1RAs in chunk 5-8
+    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_6.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_8.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_9.zip",
+    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_10.zip",
+    NULL
+  ),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in% c("kaplan_meier_dist",
+                            NULL)
+    ),
+  tempFolder = "E:/uploadTemp/", # folder for temporary data storage during upload
+  defaultChunkSize = 1e5 # force small chunk size for KM curve table
+)
+
 
 ## Only upload results for "main" OT1/ITT cohorts, to save some time
 #library(dplyr)
