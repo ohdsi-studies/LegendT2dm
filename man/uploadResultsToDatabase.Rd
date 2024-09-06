@@ -15,7 +15,8 @@ uploadResultsToDatabase(
   replaceInfinities = NULL,
   tempFolder = tempdir(),
   exposureCohortIds = NULL,
-  defaultChunkSize = 1e+07
+  defaultChunkSize = 1e+07,
+  useTempTable = FALSE
 )
 }
 \arguments{
@@ -48,7 +49,9 @@ has sufficient space if the default system temp space is too limited.}
 \item{exposureCohortIds}{Export cohort IDs to selectively upload results for. If NULL, then up
 all by default.}
 
-\item{defaultChunkSize}{Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7}
+\item{defaultChunkSize}{Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7.}
+
+\item{useTempTable}{If upload to a temp table first; default is FALSE.}
 }
 \description{
 Requires the results data model tables have been created using the \code{\link{createResultsDataModel}} function.

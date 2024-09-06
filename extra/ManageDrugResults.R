@@ -16,9 +16,8 @@
 
 library(dplyr)
 
-Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
-
-#Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="~/Documents/Drivers/")
+#Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="d:/Drivers")
+Sys.setenv(DATABASECONNECTOR_JAR_FOLDER="~/Documents/Drivers/")
 
 ### Manage OHDSI Postgres server
 connectionDetails <- DatabaseConnector::createConnectionDetails(
@@ -31,7 +30,8 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 
 
 # try using bulk load (need PostGreSQL installed on machine)
-Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+#Sys.setenv(POSTGRES_PATH = "C:\\Program Files\\PostgreSQL\\13\\bin")
+Sys.setenv(POSTGRES_PATH = "/Library/PostgreSQL/13/bin")
 Sys.setenv(DATABASE_CONNECTOR_BULK_UPLOAD = TRUE)
 
 # Drug CES results
@@ -54,6 +54,7 @@ LegendT2dm::grantPermissionOnServer(connectionDetails = connectionDetails,
 # July 2023 drug-vs-drug CES results upload ----
 # Results after for newer data version & package de-bug
 # Aug 2024: try using bulk upload for OptumEHR results again....
+# Aug 2024: also re-upload VA KM curves
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
@@ -78,10 +79,17 @@ LegendT2dm::uploadResultsToDatabase(
     NULL
     ),
   #specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs.csv")),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")),
-  tempFolder = "E:/uploadTemp/"
-  #tempFolder = "~/Downloads/uploadTemp/",
-  #forceOverWriteOfSpecifications = TRUE
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in%
+             #c("kaplan_meier_dist", "covariate_balance")
+             #c("preference_score_dist", "propensity_model")
+             c("kaplan_meier_dist")
+           ),
+  #tempFolder = "E:/uploadTemp/"
+  tempFolder = "~/Downloads/uploadTemp/",
+  defaultChunkSize = 5e6,
+  forceOverWriteOfSpecifications = FALSE,
+  useTempTable = FALSE
 )
 
 
@@ -240,6 +248,19 @@ LegendT2dm::uploadResultsToDatabaseFromCsv(
     filter(tableName %in% c("covariate_balance")),
   chunkSize = 1e6,
   forceOverWriteOfSpecifications = TRUE
+)
+
+# try to upload just covariate balance file for VA
+LegendT2dm::uploadResultsToDatabaseFromCsv(
+  connectionDetails = connectionDetails,
+  schema = resultsSchema,
+  purgeSiteDataBeforeUploading =TRUE,
+  exportFolder = "~/Downloads/drug_VAOMOP/",
+  tableNames = c("covariate_balance"),
+  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+    filter(tableName %in% c("covariate_balance")),
+  chunkSize = 5e5,
+  forceOverWriteOfSpecifications = FALSE
 )
 
 

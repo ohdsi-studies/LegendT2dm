@@ -434,7 +434,9 @@ removeResultsFromDatabase <- function(connectionDetails,
 #'                       has sufficient space if the default system temp space is too limited.
 #' @param exposureCohortIds   Export cohort IDs to selectively upload results for. If NULL, then up
 #'                      all by default.
-#' @param defaultChunkSize    Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7
+#' @param defaultChunkSize    Number of roles to upload in one attempt for a not-too-wide table; default is 1e+7.
+#'
+#' @param useTempTable  If upload to a temp table first; default is FALSE.
 #'
 #' @export
 uploadResultsToDatabase <- function(connectionDetails,
@@ -447,7 +449,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                     replaceInfinities = NULL,
                                     tempFolder = tempdir(),
                                     exposureCohortIds = NULL,
-                                    defaultChunkSize = 1e7) {
+                                    defaultChunkSize = 1e7,
+                                    useTempTable = FALSE) {
 
   if (length(zipFileName) > 1) {
     for (i in 1:length(zipFileName)) {
@@ -460,7 +463,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                   convertFromCamelCase = convertFromCamelCase,
                                   tempFolder = file.path(tempFolder, i),
                                   exposureCohortIds = exposureCohortIds,
-                                  defaultChunkSize = defaultChunkSize)
+                                  defaultChunkSize = defaultChunkSize,
+                                  useTempTable = useTempTable)
     }
   } else {
     uploadResultsToDatabaseImpl(connectionDetails = connectionDetails,
@@ -472,7 +476,8 @@ uploadResultsToDatabase <- function(connectionDetails,
                                 convertFromCamelCase = convertFromCamelCase,
                                 tempFolder = tempFolder,
                                 exposureCohortIds = exposureCohortIds,
-                                defaultChunkSize = defaultChunkSize)
+                                defaultChunkSize = defaultChunkSize,
+                                useTempTable = useTempTable)
   }
 }
 
@@ -537,7 +542,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
                                         forceOverWriteOfSpecifications, purgeSiteDataBeforeUploading,
                                         convertFromCamelCase, tempFolder,
                                         exposureCohortIds = NULL,
-                                        defaultChunkSize = 1e7) {
+                                        defaultChunkSize = 1e7,
+                                        useTempTable = FALSE) {
   start <- Sys.time()
   connection <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(connection))
@@ -640,7 +646,7 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
         if(nrow(chunk) == 0){
           ParallelLogger::logInfo("No match for selected exposure cohorts. Skip uploading...")
           return()
-        }else{
+        }else if(!is.null(exposureCohortIds)){
           ParallelLogger::logInfo("Found results for selected exposure cohorts! Proceeding ...")
         }
 
@@ -680,6 +686,17 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
           chunk <- chunk[,db_columns]
         }
 
+        if(tableName == "kaplan_meier_dist"){
+          ParallelLogger::logInfo("Setting NA bounds to one for KM curves...")
+          chunk <- chunk %>%
+            mutate_at(c("target_survival_lb", "comparator_survival_lb",
+                        #"target_at_risk", "comparator_at_risk",
+                        NULL),
+                      function(x) if_else(is.na(x), 1.0, x)) %>%
+            mutate_at(c("target_survival_ub", "comparator_survival_ub"),
+                      function(x) if_else(is.na(x), 1.0, x))
+        }
+
         # Primary key fields cannot be NULL, so for some tables convert NAs to empty or zero:
         toEmpty <- specifications %>%
           filter(
@@ -707,6 +724,21 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
         }
 
         # Check if inserting data would violate primary key constraints:
+
+        # ## update primary keys in DB already...
+        # sql <- "SELECT DISTINCT @primary_key FROM @schema.@table_name;"
+        # sql <- SqlRender::render(
+        #   sql = sql,
+        #   primary_key = primaryKey,
+        #   schema = schema,
+        #   table_name = tableName
+        # )
+        # primaryKeyValuesInDb <-
+        #   DatabaseConnector::querySql(connection, sql)
+        # colnames(primaryKeyValuesInDb) <-
+        #   tolower(colnames(primaryKeyValuesInDb))
+        # env$primaryKeyValuesInDb <- primaryKeyValuesInDb
+
         if (!is.null(env$primaryKeyValuesInDb)) {
           primaryKeyValuesInChunk <- unique(chunk[env$primaryKey])
           duplicates <- inner_join(env$primaryKeyValuesInDb,
@@ -746,15 +778,45 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
         if (nrow(chunk) == 0) {
           ParallelLogger::logInfo("- No data left to insert")
         } else {
-          DatabaseConnector::insertTable(
-            connection = connection,
-            tableName = paste(env$schema, env$tableName, sep = "."),
-            data = chunk,
-            dropTableIfExists = FALSE,
-            createTable = FALSE,
-            tempTable = FALSE,
-            progressBar = TRUE
-          )
+
+          if(useTempTable){
+            cat("Uploading to temp table first...\n")
+            tempTableName = paste("temp", env$tableName, sep = "_")
+            DatabaseConnector::insertTable(
+              connection = connection,
+              tableName = paste(env$schema, tempTableName, sep = "."),
+              data = chunk,
+              dropTableIfExists = TRUE,
+              createTable = TRUE,
+              tempTable = FALSE,
+              progressBar = TRUE
+            )
+            cat("Copying from temp table to results schema...\n")
+            sql = "INSERT INTO @schema.@table_name
+            SELECT *
+            FROM @schema.@temp_table_name
+            ON CONFLICT DO NOTHING;"
+            sql <- SqlRender::render(
+              sql = sql,
+              schema = env$schema,
+              table_name = env$tableName,
+              temp_table_name = tempTableName
+            )
+            DatabaseConnector::executeSql(connection = connection,
+                                          sql = sql)
+          }else{
+            cat("Directly upload to results schema...\n")
+            DatabaseConnector::insertTable(
+              connection = connection,
+              tableName = paste(env$schema, env$tableName, sep = "."),
+              data = chunk,
+              dropTableIfExists = FALSE,
+              createTable = FALSE,
+              tempTable = FALSE,
+              progressBar = TRUE
+            )
+          }
+
         }
       }
       readr::read_csv_chunked(
