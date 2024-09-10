@@ -192,7 +192,8 @@ execute <- function(connectionDetails,
                         indicationId = indicationId,
                         databaseId = databaseId,
                         maxCores = maxCores,
-                        runSections = runSections)
+                        runSections = runSections,
+                        limitHois = filterOutcomeCohorts)
     }
 
     # if (computeIncidence) {

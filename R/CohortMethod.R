@@ -28,7 +28,8 @@
 #'                       can speed up the analyses.
 #'
 #' @export
-runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4, runSections) {
+runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4, runSections,
+                            limitHois = NULL) {
 
     # Tell CohortMethod to minimize files sizes by dropping unneeded columns:
     options("minimizeFileSizes" = TRUE)
@@ -38,6 +39,10 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                                           "pairedExposureSummaryFilteredBySize.csv"))
     pathToCsv <- system.file("settings", "OutcomesOfInterest.csv", package = "LegendT2dm")
     hois <- read.csv(pathToCsv)
+
+    if (!is.null(limitHois)) {
+      hois <- hois %>% filter(.data$cohortId %in% limitHois)
+    }
 
     pathToCsv <- system.file("settings", "NegativeControls.csv", package = "LegendT2dm")
     negativeControls <- read.csv(pathToCsv)
