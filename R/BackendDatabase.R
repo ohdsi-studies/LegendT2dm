@@ -604,6 +604,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
       if (purgeSiteDataBeforeUploading &&
           "database_id" %in% primaryKey) {
         env$primaryKeyValuesInDb <- NULL
+      } else if (useTempTable) {
+        env$primaryKeyValuesInDb <- NULL
       } else {
         sql <- "SELECT DISTINCT @primary_key FROM @schema.@table_name;"
         sql <- SqlRender::render(
@@ -620,8 +622,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
       }
 
       # get correct order of columns from results database
-      if(tableName == "covariate_balance"){
-        cat("Correcting column order for covariate_balance table...\n")
+      if(tableName == "covariate_balance" || tableName == "kaplan_meier_dist"){
+        cat("Correcting column order for results table...\n")
         sql <- "SELECT * FROM @schema.@table_name LIMIT 2;"
         sql <- SqlRender::render(
           sql = sql,
@@ -695,6 +697,8 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
                       function(x) if_else(is.na(x), 1.0, x)) %>%
             mutate_at(c("target_survival_ub", "comparator_survival_ub"),
                       function(x) if_else(is.na(x), 1.0, x))
+          ParallelLogger::logInfo("Correcting column order for KM curves table...")
+          chunk <- chunk[,db_columns]
         }
 
         # Primary key fields cannot be NULL, so for some tables convert NAs to empty or zero:
@@ -782,15 +786,52 @@ uploadResultsToDatabaseImpl <- function(connectionDetails, schema, zipFileName, 
           if(useTempTable){
             cat("Uploading to temp table first...\n")
             tempTableName = paste("temp", env$tableName, sep = "_")
+
+            sql = "DROP TABLE IF EXISTS @schema.@temp_table_name;
+            CREATE TABLE @schema.@temp_table_name
+            (LIKE @schema.@table_name INCLUDING ALL);"
+            sql <- SqlRender::render(
+              sql = sql,
+              schema = env$schema,
+              table_name = env$tableName,
+              temp_table_name = tempTableName
+            )
+            DatabaseConnector::executeSql(connection = connection,
+                                          sql = sql)
+            # DatabaseConnector::insertTable(
+            #   connection = connection,
+            #   tableName = paste(env$schema, tempTableName, sep = "."),
+            #   data = chunk,
+            #   dropTableIfExists = TRUE,
+            #   createTable = TRUE,
+            #   tempTable = FALSE,
+            #   progressBar = TRUE
+            # )
             DatabaseConnector::insertTable(
               connection = connection,
               tableName = paste(env$schema, tempTableName, sep = "."),
               data = chunk,
-              dropTableIfExists = TRUE,
-              createTable = TRUE,
+              dropTableIfExists = FALSE,
+              createTable = FALSE,
               tempTable = FALSE,
               progressBar = TRUE
             )
+
+            # if(tableName == "kaplan_meier_dist"){
+            #   cat("Fixing temp table column data types for KM curves...\n")
+            #   sql = "ALTER TABLE @schema.@temp_table_name
+            #          ALTER COLUMN target_at_risk TYPE integer USING target_at_risk::integer;
+            #          ALTER TABLE @schema.@temp_table_name
+            #          ALTER COLUMN comparator_at_risk TYPE integer USING comparator_at_risk::integer;"
+            #   sql <- SqlRender::render(
+            #     sql = sql,
+            #     schema = env$schema,
+            #     temp_table_name = tempTableName
+            #   )
+            #   DatabaseConnector::executeSql(connection = connection,
+            #                                 sql = sql)
+            # }
+
             cat("Copying from temp table to results schema...\n")
             sql = "INSERT INTO @schema.@table_name
             SELECT *

@@ -93,60 +93,62 @@ LegendT2dm::uploadResultsToDatabase(
 )
 
 
-## maybe only upload the covariate balance table (10GB) to see if it works?
-LegendT2dm::uploadResultsToDatabaseFromCsv(
-  connectionDetails = connectionDetails,
-  schema = resultsSchema,
-  purgeSiteDataBeforeUploading =TRUE,
-  exportFolder = "F:/LegendT2dmOutput_optum_ehr_drug2/drug/export/",
-  tableNames = c("covariate_balance"),
-  specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
-    filter(tableName %in% c("covariate_balance")),
-  chunkSize = 1e6,
-  forceOverWriteOfSpecifications = TRUE
-)
+# ## only upload the covariate balance table (10GB) to see if it works?
+# LegendT2dm::uploadResultsToDatabaseFromCsv(
+#   connectionDetails = connectionDetails,
+#   schema = resultsSchema,
+#   purgeSiteDataBeforeUploading =TRUE,
+#   exportFolder = "F:/LegendT2dmOutput_optum_ehr_drug2/drug/export/",
+#   tableNames = c("covariate_balance"),
+#   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
+#     filter(tableName %in% c("covariate_balance")),
+#   chunkSize = 1e6,
+#   forceOverWriteOfSpecifications = TRUE
+# )
 
 
 ## May 2024: upload all Open Claims drug-v-drug results
+## Sept 2024: try again with covariate_balance and KM
 LegendT2dm::uploadResultsToDatabase(
   connectionDetails = connectionDetails,
   schema = resultsSchema,
   purgeSiteDataBeforeUploading =FALSE,
   zipFileName = c(
-    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
+    "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_2.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_3.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_4.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_5.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_6.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_7.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_9.zip",
-    # "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
-    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_10.zip", # tried this; should have worked
-    # "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_5.zip", # prioritize GLP1RAs in chunk 5-8
-    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_6.zip",
-    #"d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_8.zip",
-    "d:/LegendT2dm_OpenClaims_results/Results_drug_study_OPENCLAIMS_9.zip", # need to re-upload SGLT2i
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_4.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_5.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_6.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_9.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
     NULL
   ),
   specifications = tibble::tibble(read.csv("inst/settings/ResultsModelSpecs1.csv")) %>%
-    filter(!tableName %in% c("database",
-                             "covariate_analysis",
-                             "negative_control_outcome",
-                             "outcome_of_interest",
-                             "results_date_time", # don't upload shared tables
-                             NULL,
-                             # "covariate",
-                             # "attrition",
-                             # "cohort_method_result",
-                             # "preference_score_dist",
-                             NULL,
-                             "kaplan_meier_dist", # not uploading KM curves for now; takes too long
-                             "diagnostics", # will upload diagnostics later once generated
-                             NULL)
+    # filter(!tableName %in% c("database",
+    #                          "covariate_analysis",
+    #                          "negative_control_outcome",
+    #                          "outcome_of_interest",
+    #                          "results_date_time", # don't upload shared tables
+    #                          NULL,
+    #                          # "covariate",
+    #                          # "attrition",
+    #                          # "cohort_method_result",
+    #                          # "preference_score_dist",
+    #                          NULL,
+    #                          "kaplan_meier_dist", # not uploading KM curves for now; takes too long
+    #                          "diagnostics", # will upload diagnostics later once generated
+    #                          NULL)
+    filter(tableName %in% c(#"covariate_balance",
+                            "kaplan_meier_dist",
+                            NULL) # re-do balance table + upload KM curves
            ),
-  tempFolder = "d:/uploadTemp/" # folder for temporary data storage during upload
+  #tempFolder = "d:/uploadTemp/" # folder for temporary data storage during upload
+  tempFolder = "~/Downloads/uploadTemp/",
+  defaultChunkSize = 5e6,
+  forceOverWriteOfSpecifications = FALSE,
+  useTempTable = TRUE
 )
 
 ## Aug 2024: upload KM curves for open claims results

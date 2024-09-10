@@ -23,7 +23,10 @@ resultsSchema = "legendt2dm_drug_results"
 
 tcs <- read.csv(system.file("settings", tcoFileName,
                             package = "LegendT2dm")) %>%
-  dplyr::select(targetId, comparatorId)
+  dplyr::select(targetId, comparatorId) %>%
+  filter((targetId %/% 1e6) %% 2 == 1, (comparatorId %/% 1e6) %% 2 == 1) %>%
+# only pick "..1....." IDs for ITT and OT1; not doing OT2 for now...
+  filter(targetId %% 1e5 == 0, comparatorId %% 1e5 == 0) # only work on main cohorts to reduce computation time
 
 outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
                                    package = "LegendT2dm")) %>%
@@ -34,10 +37,13 @@ outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
 #                  "CUIMC", "HK-HA-DM", "HIC Dundee", "Germany_DA")
 
 databaseIdsDrug <- c("OptumEHR", "MDCR", "OptumDod", "MDCD",
-                     "CCAE", "OPENCLAIMS", "DA_Germany", "LPD_France")
+                     "CCAE", "OPENCLAIMS", "DA_GERMANY", "LPD_FRANCE",
+                     "VAOMOP", "IMRD", "CUIMC")
 
-analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                  11,12,13,14,15,16,17,18,19)
+# analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9,
+#                   11,12,13,14,15,16,17,18,19) # all analyses
+#analysisIds <- c( 1, 2, 3, 4, 5, 6, 7, 8, 9) # not doing prior outcome analyses for now
+analysisIds <- c( 1, 2, 3, 4, 5, 6) # only ITT and OT1 analyses
 
 diagnostics <- makeDiagnosticsTable(connection = connection,
                                     resultsDatabaseSchema = resultsSchema,
@@ -46,13 +52,14 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
                                     analysisIds = analysisIds,
                                     databaseIds = databaseIdsDrug)
 
-saveRDS(diagnostics, "extra/diagnostics-sglt2i.rds")
+#saveRDS(diagnostics, "extra/diagnostics-sglt2i.rds")
+saveRDS(diagnostics, "extra/diagnostics-drugs-main.rds")
 DatabaseConnector::disconnect(connection)
 
 # Start of diagnostics processing & do meta analysis
-## NOTE: still waiting for results from Open Claims! Done partially for now
-
-diagnostics <- readRDS("extra/diagnostics-sglt2i.rds")
+## doing this for all drugs v all drugs
+#diagnostics <- readRDS("extra/diagnostics-sglt2i.rds")
+diagnostics <- readRDS("extra/diagnostics-drugs.rds")
 
 diagnosticsHtn <- diagnostics %>%
   filter(is.finite(mdrr)) %>%
@@ -75,12 +82,13 @@ diagnosticsLit <- diagnostics %>%
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "OPENCLAIMS")
 
+# Fan's additional diagnostics: same to Htn but with more equipoise >0.3
 diagnosticsBal <- diagnostics %>%
   filter(is.finite(mdrr)) %>%
   filter(!is.na(maxAbsStdDiffMean)) %>%
   mutate(pass = (
     (mdrr < 4.0) &
-      (maxAbsStdDiffMean < 0.12) &
+      (maxAbsStdDiffMean < 0.15) &
       (minEquipoise > 0.30)
     ))
 
@@ -88,7 +96,7 @@ diagnosticsBal <- diagnostics %>%
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis1",
-               maExportFolder = "maHtn",
+               maExportFolder = "maHtnAllDrugs",
                diagnosticsFilter = diagnosticsHtn,
                indicationId = "drug",
                maxCores = 8)
@@ -97,7 +105,7 @@ doMetaAnalysis(legendT2dmConnectionDetails,
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis2",
-               maExportFolder = "maLit",
+               maExportFolder = "maLitAllDrugs",
                diagnosticsFilter = diagnosticsLit,
                indicationId = "drug",
                maxCores = 8)
@@ -106,16 +114,16 @@ doMetaAnalysis(legendT2dmConnectionDetails,
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis3",
-               maExportFolder = "maLitNoOc",
+               maExportFolder = "maLitNoOcAllDrugs",
                diagnosticsFilter = diagnosticsLitNoOc,
                indicationId = "drug",
-               maxCores = 4)
+               maxCores = 8)
 
 # (4) use 0.30 as equipoise threshold instead...
 doMetaAnalysis(legendT2dmConnectionDetails,
                resultsDatabaseSchema = "legendt2dm_drug_results",
                maName = "Meta-analysis4",
-               maExportFolder = "maMoreBal",
+               maExportFolder = "maMoreBalAllDrugs",
                diagnosticsFilter = diagnosticsBal,
                indicationId = "drug",
                maxCores = 8)
