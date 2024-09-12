@@ -55,6 +55,15 @@ createAnalysesDetails <- function(outputFolder,
     startAnchor = "cohort start",
     endAnchor = "cohort end")
 
+  createStudyPopArgsIttLagged <- CohortMethod::createCreateStudyPopulationArgs(
+    restrictToCommonPeriod = TRUE,
+    removeSubjectsWithPriorOutcome = removeSubjectsWithPriorOutcome,
+    minDaysAtRisk = 0,
+    riskWindowStart = 365,
+    riskWindowEnd = 99999,
+    startAnchor = "cohort start",
+    endAnchor = "cohort end")
+
   createPsArgs <- CohortMethod::createCreatePsArgs(
     control = Cyclops::createControl(
       noiseLevel = "silent",
@@ -186,6 +195,40 @@ createAnalysesDetails <- function(outputFolder,
     fitOutcomeModel = TRUE,
     fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
 
+  cmAnalysis10 <- CohortMethod::createCmAnalysis(
+    analysisId = getId(4, removeSubjectsWithPriorOutcome) + 100,
+    description = paste0(getDescription("Unadjusted, intent-to-treat", removeSubjectsWithPriorOutcome), ", lagged"),
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsIttLagged,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsMarginal)
+
+  cmAnalysis11 <- CohortMethod::createCmAnalysis(
+    analysisId = getId(5, removeSubjectsWithPriorOutcome) + 100,
+    description = paste0(getDescription("PS matching, intent-to-treat", removeSubjectsWithPriorOutcome), ", lagged"),
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsIttLagged,
+    createPs = TRUE,
+    createPsArgs = createPsArgs,
+    matchOnPs = TRUE,
+    matchOnPsArgs = matchOnPsArgs,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
+
+  cmAnalysis12 <- CohortMethod::createCmAnalysis(
+    analysisId = getId(6, removeSubjectsWithPriorOutcome) + 100,
+    description = paste0(getDescription("PS stratification, intent-to-treat", removeSubjectsWithPriorOutcome), ", lagged"),
+    getDbCohortMethodDataArgs = getDbCmDataArgs,
+    createStudyPopArgs = createStudyPopArgsIttLagged,
+    createPs = TRUE,
+    createPsArgs = createPsArgs,
+    stratifyByPs = TRUE,
+    stratifyByPsArgs = stratifyByPsArgs,
+    fitOutcomeModel = TRUE,
+    fitOutcomeModelArgs = fitOutcomeModelArgsConditional)
+
+
+
   if (asUnitTest) {
     CohortMethod::saveCmAnalysisList(list(cmAnalysis1, cmAnalysis2, cmAnalysis3,
                                           cmAnalysis4, cmAnalysis5, cmAnalysis6),
@@ -201,5 +244,8 @@ createAnalysesDetails <- function(outputFolder,
 
     CohortMethod::saveCmAnalysisList(list(cmAnalysis7, cmAnalysis8, cmAnalysis9),
                                      file.path(outputFolder, getFile("ot2", removeSubjectsWithPriorOutcome)))
+
+    CohortMethod::saveCmAnalysisList(list(cmAnalysis10, cmAnalysis11, cmAnalysis12),
+                                     file.path(outputFolder, getFile("lag", removeSubjectsWithPriorOutcome)))
   }
 }
