@@ -2,15 +2,15 @@
   "ConceptSets": [
     {
       "id": 1,
-      "name": "Medullary thyroid cancer",
+      "name": "Malignant thyroid tumor",
       "expression": {
         "items": [
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Disorder",
-              "CONCEPT_CODE": "255032005",
-              "CONCEPT_ID": 4111011,
-              "CONCEPT_NAME": "Medullary thyroid carcinoma",
+              "CONCEPT_CODE": "363478007",
+              "CONCEPT_ID": 4178976,
+              "CONCEPT_NAME": "Malignant tumor of thyroid gland",
               "DOMAIN_ID": "Condition",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
