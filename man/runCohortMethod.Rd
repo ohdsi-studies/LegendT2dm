@@ -9,7 +9,8 @@ runCohortMethod(
   indicationId = "class",
   databaseId,
   maxCores = 4,
-  runSections
+  runSections,
+  limitHois = NULL
 )
 }
 \arguments{
