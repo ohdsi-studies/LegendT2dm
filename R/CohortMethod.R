@@ -128,6 +128,21 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                            maxCores = maxCores)
     }
 
+    laggedOutcomeIds <- c(40,43)
+
+    # Seventh run: lagged ITT
+    if (7 %in% runSections) {
+      executeSingleCmRun(message = "ITT-Lag analyses",
+                         folder = "Run_7",
+                         exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                         cmAnalysisList = system.file("settings", "lagCmAnalysisList.json", package = "LegendT2dm"),
+                         outcomeIds = unique(c(laggedOutcomeIds, negativeControls$cohortId)),
+                         outcomeIdsOfInterest = laggedOutcomeIds,
+                         copyPsFileFolder = "Run_1",
+                         indicationFolder = indicationFolder,
+                         maxCores = maxCores)
+    }
+
     # Create analysis summaries -------------------------------------------------------------------
     outcomeModelReference <- saveCombinedOutcomeModelReference(folders = c(paste0("Run_", runSections)),
                                                                indicationFolder = indicationFolder)
