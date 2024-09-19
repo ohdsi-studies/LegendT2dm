@@ -112,6 +112,9 @@ diagnosticsLit <- diagnostics %>%
     (minEquipoise > 0.5)
   ))
 
+diagnosticsHtnNoOc <- diagnosticsHtn %>%
+  filter(databaseId != "US_Open_Claims")
+
 diagnosticsLitNoOc <- diagnosticsLit %>%
   filter(databaseId != "US_Open_Claims")
 
