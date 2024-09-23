@@ -93,7 +93,7 @@ execute <- function(connectionDetails,
                     synthesizePositiveControls = FALSE,
                     generateAllCohortMethodDataObjects = TRUE,
                     runCohortMethod = TRUE,
-                    runSections = c(1:6),
+                    runSections = c(1:7),
                     computeCovariateBalance = TRUE,
                     exportToCsv = TRUE,
                     exportSettings = createExportSettings(),
@@ -192,7 +192,8 @@ execute <- function(connectionDetails,
                         indicationId = indicationId,
                         databaseId = databaseId,
                         maxCores = maxCores,
-                        runSections = runSections)
+                        runSections = runSections,
+                        limitHois = filterOutcomeCohorts)
     }
 
     # if (computeIncidence) {

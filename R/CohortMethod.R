@@ -28,7 +28,8 @@
 #'                       can speed up the analyses.
 #'
 #' @export
-runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4, runSections) {
+runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, maxCores = 4, runSections,
+                            limitHois = NULL) {
 
     # Tell CohortMethod to minimize files sizes by dropping unneeded columns:
     options("minimizeFileSizes" = TRUE)
@@ -38,6 +39,10 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                                           "pairedExposureSummaryFilteredBySize.csv"))
     pathToCsv <- system.file("settings", "OutcomesOfInterest.csv", package = "LegendT2dm")
     hois <- read.csv(pathToCsv)
+
+    if (!is.null(limitHois)) {
+      hois <- hois %>% filter(.data$cohortId %in% limitHois)
+    }
 
     pathToCsv <- system.file("settings", "NegativeControls.csv", package = "LegendT2dm")
     negativeControls <- read.csv(pathToCsv)
@@ -121,6 +126,21 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                            convertPsFileNames = TRUE,
                            indicationFolder = indicationFolder,
                            maxCores = maxCores)
+    }
+
+    laggedOutcomeIds <- c(25,27,39,40,43)
+
+    # Seventh run: lagged ITT
+    if (7 %in% runSections) {
+      executeSingleCmRun(message = "ITT-Lag analyses",
+                         folder = "Run_7",
+                         exposureSummary = exposureSummary[isOt1(exposureSummary$targetId), ],
+                         cmAnalysisList = system.file("settings", "lagCmAnalysisList.json", package = "LegendT2dm"),
+                         outcomeIds = unique(c(laggedOutcomeIds, negativeControls$cohortId)),
+                         outcomeIdsOfInterest = laggedOutcomeIds,
+                         copyPsFileFolder = "Run_1",
+                         indicationFolder = indicationFolder,
+                         maxCores = maxCores)
     }
 
     # Create analysis summaries -------------------------------------------------------------------

@@ -1,0 +1,58 @@
+{
+  "ConceptSets": [
+    {
+      "id": 1,
+      "name": "Malignant thyroid tumor",
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Disorder",
+              "CONCEPT_CODE": "363478007",
+              "CONCEPT_ID": 4178976,
+              "CONCEPT_NAME": "Malignant tumor of thyroid gland",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "includeDescendants": true
+          }
+        ]
+      }
+    }
+  ],
+  "PrimaryCriteria": {
+    "CriteriaList": [
+      {
+        "ConditionOccurrence": {
+          "CodesetId": 1,
+          "First": true
+        }
+      }
+    ],
+    "ObservationWindow": {
+      "PriorDays": 365,
+      "PostDays": 0
+    },
+    "PrimaryCriteriaLimit": {
+      "Type": "First"
+    }
+  },
+  "QualifiedLimit": {
+    "Type": "First"
+  },
+  "ExpressionLimit": {
+    "Type": "First"
+  },
+  "InclusionRules": [],
+  "CensoringCriteria": [],
+  "CollapseSettings": {
+    "CollapseType": "ERA",
+    "EraPad": 0
+  },
+  "CensorWindow": {},
+  "cdmVersionRange": ">=5.0.0"
+}

@@ -4,7 +4,12 @@
 \alias{filterByExposureCohortsSize}
 \title{Filter exposure pairs by size of the cohorts}
 \usage{
-filterByExposureCohortsSize(outputFolder, indicationId, minCohortSize)
+filterByExposureCohortsSize(
+  outputFolder,
+  indicationId,
+  minCohortSize,
+  summaryFile = NULL
+)
 }
 \arguments{
 \item{outputFolder}{Name of local folder to place results; make sure to use forward slashes (/)}
@@ -13,6 +18,9 @@ filterByExposureCohortsSize(outputFolder, indicationId, minCohortSize)
 
 \item{minCohortSize}{Minimum number of people that have to be in each cohort to keep a pair of
 cohorts.}
+
+\item{summaryFile}{File name of the csv that contains paired exposure summary;
+if NULL, then default to "pairedExposureSummary.csv"}
 }
 \description{
 Filter exposure pairs by size of the cohorts

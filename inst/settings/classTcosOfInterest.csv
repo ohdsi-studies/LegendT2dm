@@ -131,3 +131,135 @@ targetId,comparatorId,outcomeIds,excludedCovariateConceptIds,targetName,comparat
 202100002,302100002,-1,NA,GLP1RA ot2 with-rdz,SGLT2I ot2 with-rdz
 202100002,402100002,-1,NA,GLP1RA ot2 with-rdz,SU ot2 with-rdz
 302100002,402100002,-1,NA,SGLT2I ot2 with-rdz,SU ot2 with-rdz
+101200000,201200000,-1,NA,DPP4I main no-met,GLP1RA main no-met
+101200000,301200000,-1,NA,DPP4I main no-met,SGLT2I main no-met
+101200000,401200000,-1,NA,DPP4I main no-met,SU main no-met
+201200000,301200000,-1,NA,GLP1RA main no-met,SGLT2I main no-met
+201200000,401200000,-1,NA,GLP1RA main no-met,SU main no-met
+301200000,401200000,-1,NA,SGLT2I main no-met,SU main no-met
+101210000,201210000,-1,NA,DPP4I no-met younger-age,GLP1RA no-met younger-age
+101210000,301210000,-1,NA,DPP4I no-met younger-age,SGLT2I no-met younger-age
+101210000,401210000,-1,NA,DPP4I no-met younger-age,SU no-met younger-age
+201210000,301210000,-1,NA,GLP1RA no-met younger-age,SGLT2I no-met younger-age
+201210000,401210000,-1,NA,GLP1RA no-met younger-age,SU no-met younger-age
+301210000,401210000,-1,NA,SGLT2I no-met younger-age,SU no-met younger-age
+101220000,201220000,-1,NA,DPP4I no-met middle-age,GLP1RA no-met middle-age
+101220000,301220000,-1,NA,DPP4I no-met middle-age,SGLT2I no-met middle-age
+101220000,401220000,-1,NA,DPP4I no-met middle-age,SU no-met middle-age
+201220000,301220000,-1,NA,GLP1RA no-met middle-age,SGLT2I no-met middle-age
+201220000,401220000,-1,NA,GLP1RA no-met middle-age,SU no-met middle-age
+301220000,401220000,-1,NA,SGLT2I no-met middle-age,SU no-met middle-age
+101230000,201230000,-1,NA,DPP4I no-met older-age,GLP1RA no-met older-age
+101230000,301230000,-1,NA,DPP4I no-met older-age,SGLT2I no-met older-age
+101230000,401230000,-1,NA,DPP4I no-met older-age,SU no-met older-age
+201230000,301230000,-1,NA,GLP1RA no-met older-age,SGLT2I no-met older-age
+201230000,401230000,-1,NA,GLP1RA no-met older-age,SU no-met older-age
+301230000,401230000,-1,NA,SGLT2I no-met older-age,SU no-met older-age
+101201000,201201000,-1,NA,DPP4I no-met female,GLP1RA no-met female
+101201000,301201000,-1,NA,DPP4I no-met female,SGLT2I no-met female
+101201000,401201000,-1,NA,DPP4I no-met female,SU no-met female
+201201000,301201000,-1,NA,GLP1RA no-met female,SGLT2I no-met female
+201201000,401201000,-1,NA,GLP1RA no-met female,SU no-met female
+301201000,401201000,-1,NA,SGLT2I no-met female,SU no-met female
+101202000,201202000,-1,NA,DPP4I no-met male,GLP1RA no-met male
+101202000,301202000,-1,NA,DPP4I no-met male,SGLT2I no-met male
+101202000,401202000,-1,NA,DPP4I no-met male,SU no-met male
+201202000,301202000,-1,NA,GLP1RA no-met male,SGLT2I no-met male
+201202000,401202000,-1,NA,GLP1RA no-met male,SU no-met male
+301202000,401202000,-1,NA,SGLT2I no-met male,SU no-met male
+101200100,201200100,-1,NA,DPP4I no-met black,GLP1RA no-met black
+101200100,301200100,-1,NA,DPP4I no-met black,SGLT2I no-met black
+101200100,401200100,-1,NA,DPP4I no-met black,SU no-met black
+201200100,301200100,-1,NA,GLP1RA no-met black,SGLT2I no-met black
+201200100,401200100,-1,NA,GLP1RA no-met black,SU no-met black
+301200100,401200100,-1,NA,SGLT2I no-met black,SU no-met black
+101200010,201200010,-1,NA,DPP4I no-met low-cvr,GLP1RA no-met low-cvr
+101200010,301200010,-1,NA,DPP4I no-met low-cvr,SGLT2I no-met low-cvr
+101200010,401200010,-1,NA,DPP4I no-met low-cvr,SU no-met low-cvr
+201200010,301200010,-1,NA,GLP1RA no-met low-cvr,SGLT2I no-met low-cvr
+201200010,401200010,-1,NA,GLP1RA no-met low-cvr,SU no-met low-cvr
+301200010,401200010,-1,NA,SGLT2I no-met low-cvr,SU no-met low-cvr
+101200020,201200020,-1,NA,DPP4I no-met higher-cvr,GLP1RA no-met higher-cvr
+101200020,301200020,-1,NA,DPP4I no-met higher-cvr,SGLT2I no-met higher-cvr
+101200020,401200020,-1,NA,DPP4I no-met higher-cvr,SU no-met higher-cvr
+201200020,301200020,-1,NA,GLP1RA no-met higher-cvr,SGLT2I no-met higher-cvr
+201200020,401200020,-1,NA,GLP1RA no-met higher-cvr,SU no-met higher-cvr
+301200020,401200020,-1,NA,SGLT2I no-met higher-cvr,SU no-met higher-cvr
+101200001,201200001,-1,NA,DPP4I no-met without-rdz,GLP1RA no-met without-rdz
+101200001,301200001,-1,NA,DPP4I no-met without-rdz,SGLT2I no-met without-rdz
+101200001,401200001,-1,NA,DPP4I no-met without-rdz,SU no-met without-rdz
+201200001,301200001,-1,NA,GLP1RA no-met without-rdz,SGLT2I no-met without-rdz
+201200001,401200001,-1,NA,GLP1RA no-met without-rdz,SU no-met without-rdz
+301200001,401200001,-1,NA,SGLT2I no-met without-rdz,SU no-met without-rdz
+101200002,201200002,-1,NA,DPP4I no-met with-rdz,GLP1RA no-met with-rdz
+101200002,301200002,-1,NA,DPP4I no-met with-rdz,SGLT2I no-met with-rdz
+101200002,401200002,-1,NA,DPP4I no-met with-rdz,SU no-met with-rdz
+201200002,301200002,-1,NA,GLP1RA no-met with-rdz,SGLT2I no-met with-rdz
+201200002,401200002,-1,NA,GLP1RA no-met with-rdz,SU no-met with-rdz
+301200002,401200002,-1,NA,SGLT2I no-met with-rdz,SU no-met with-rdz
+102200000,202200000,-1,NA,DPP4I main ot2 no-met,GLP1RA main ot2 no-met
+102200000,302200000,-1,NA,DPP4I main ot2 no-met,SGLT2I main ot2 no-met
+102200000,402200000,-1,NA,DPP4I main ot2 no-met,SU main ot2 no-met
+202200000,302200000,-1,NA,GLP1RA main ot2 no-met,SGLT2I main ot2 no-met
+202200000,402200000,-1,NA,GLP1RA main ot2 no-met,SU main ot2 no-met
+302200000,402200000,-1,NA,SGLT2I main ot2 no-met,SU main ot2 no-met
+102210000,202210000,-1,NA,DPP4I ot2 no-met younger-age,GLP1RA ot2 no-met younger-age
+102210000,302210000,-1,NA,DPP4I ot2 no-met younger-age,SGLT2I ot2 no-met younger-age
+102210000,402210000,-1,NA,DPP4I ot2 no-met younger-age,SU ot2 no-met younger-age
+202210000,302210000,-1,NA,GLP1RA ot2 no-met younger-age,SGLT2I ot2 no-met younger-age
+202210000,402210000,-1,NA,GLP1RA ot2 no-met younger-age,SU ot2 no-met younger-age
+302210000,402210000,-1,NA,SGLT2I ot2 no-met younger-age,SU ot2 no-met younger-age
+102220000,202220000,-1,NA,DPP4I ot2 no-met middle-age,GLP1RA ot2 no-met middle-age
+102220000,302220000,-1,NA,DPP4I ot2 no-met middle-age,SGLT2I ot2 no-met middle-age
+102220000,402220000,-1,NA,DPP4I ot2 no-met middle-age,SU ot2 no-met middle-age
+202220000,302220000,-1,NA,GLP1RA ot2 no-met middle-age,SGLT2I ot2 no-met middle-age
+202220000,402220000,-1,NA,GLP1RA ot2 no-met middle-age,SU ot2 no-met middle-age
+302220000,402220000,-1,NA,SGLT2I ot2 no-met middle-age,SU ot2 no-met middle-age
+102230000,202230000,-1,NA,DPP4I ot2 no-met older-age,GLP1RA ot2 no-met older-age
+102230000,302230000,-1,NA,DPP4I ot2 no-met older-age,SGLT2I ot2 no-met older-age
+102230000,402230000,-1,NA,DPP4I ot2 no-met older-age,SU ot2 no-met older-age
+202230000,302230000,-1,NA,GLP1RA ot2 no-met older-age,SGLT2I ot2 no-met older-age
+202230000,402230000,-1,NA,GLP1RA ot2 no-met older-age,SU ot2 no-met older-age
+302230000,402230000,-1,NA,SGLT2I ot2 no-met older-age,SU ot2 no-met older-age
+102201000,202201000,-1,NA,DPP4I ot2 no-met female,GLP1RA ot2 no-met female
+102201000,302201000,-1,NA,DPP4I ot2 no-met female,SGLT2I ot2 no-met female
+102201000,402201000,-1,NA,DPP4I ot2 no-met female,SU ot2 no-met female
+202201000,302201000,-1,NA,GLP1RA ot2 no-met female,SGLT2I ot2 no-met female
+202201000,402201000,-1,NA,GLP1RA ot2 no-met female,SU ot2 no-met female
+302201000,402201000,-1,NA,SGLT2I ot2 no-met female,SU ot2 no-met female
+102202000,202202000,-1,NA,DPP4I ot2 no-met male,GLP1RA ot2 no-met male
+102202000,302202000,-1,NA,DPP4I ot2 no-met male,SGLT2I ot2 no-met male
+102202000,402202000,-1,NA,DPP4I ot2 no-met male,SU ot2 no-met male
+202202000,302202000,-1,NA,GLP1RA ot2 no-met male,SGLT2I ot2 no-met male
+202202000,402202000,-1,NA,GLP1RA ot2 no-met male,SU ot2 no-met male
+302202000,402202000,-1,NA,SGLT2I ot2 no-met male,SU ot2 no-met male
+102200100,202200100,-1,NA,DPP4I ot2 no-met black,GLP1RA ot2 no-met black
+102200100,302200100,-1,NA,DPP4I ot2 no-met black,SGLT2I ot2 no-met black
+102200100,402200100,-1,NA,DPP4I ot2 no-met black,SU ot2 no-met black
+202200100,302200100,-1,NA,GLP1RA ot2 no-met black,SGLT2I ot2 no-met black
+202200100,402200100,-1,NA,GLP1RA ot2 no-met black,SU ot2 no-met black
+302200100,402200100,-1,NA,SGLT2I ot2 no-met black,SU ot2 no-met black
+102200010,202200010,-1,NA,DPP4I ot2 no-met low-cvr,GLP1RA ot2 no-met low-cvr
+102200010,302200010,-1,NA,DPP4I ot2 no-met low-cvr,SGLT2I ot2 no-met low-cvr
+102200010,402200010,-1,NA,DPP4I ot2 no-met low-cvr,SU ot2 no-met low-cvr
+202200010,302200010,-1,NA,GLP1RA ot2 no-met low-cvr,SGLT2I ot2 no-met low-cvr
+202200010,402200010,-1,NA,GLP1RA ot2 no-met low-cvr,SU ot2 no-met low-cvr
+302200010,402200010,-1,NA,SGLT2I ot2 no-met low-cvr,SU ot2 no-met low-cvr
+102200020,202200020,-1,NA,DPP4I ot2 no-met higher-cvr,GLP1RA ot2 no-met higher-cvr
+102200020,302200020,-1,NA,DPP4I ot2 no-met higher-cvr,SGLT2I ot2 no-met higher-cvr
+102200020,402200020,-1,NA,DPP4I ot2 no-met higher-cvr,SU ot2 no-met higher-cvr
+202200020,302200020,-1,NA,GLP1RA ot2 no-met higher-cvr,SGLT2I ot2 no-met higher-cvr
+202200020,402200020,-1,NA,GLP1RA ot2 no-met higher-cvr,SU ot2 no-met higher-cvr
+302200020,402200020,-1,NA,SGLT2I ot2 no-met higher-cvr,SU ot2 no-met higher-cvr
+102200001,202200001,-1,NA,DPP4I ot2 no-met without-rdz,GLP1RA ot2 no-met without-rdz
+102200001,302200001,-1,NA,DPP4I ot2 no-met without-rdz,SGLT2I ot2 no-met without-rdz
+102200001,402200001,-1,NA,DPP4I ot2 no-met without-rdz,SU ot2 no-met without-rdz
+202200001,302200001,-1,NA,GLP1RA ot2 no-met without-rdz,SGLT2I ot2 no-met without-rdz
+202200001,402200001,-1,NA,GLP1RA ot2 no-met without-rdz,SU ot2 no-met without-rdz
+302200001,402200001,-1,NA,SGLT2I ot2 no-met without-rdz,SU ot2 no-met without-rdz
+102200002,202200002,-1,NA,DPP4I ot2 no-met with-rdz,GLP1RA ot2 no-met with-rdz
+102200002,302200002,-1,NA,DPP4I ot2 no-met with-rdz,SGLT2I ot2 no-met with-rdz
+102200002,402200002,-1,NA,DPP4I ot2 no-met with-rdz,SU ot2 no-met with-rdz
+202200002,302200002,-1,NA,GLP1RA ot2 no-met with-rdz,SGLT2I ot2 no-met with-rdz
+202200002,402200002,-1,NA,GLP1RA ot2 no-met with-rdz,SU ot2 no-met with-rdz
+302200002,402200002,-1,NA,SGLT2I ot2 no-met with-rdz,SU ot2 no-met with-rdz

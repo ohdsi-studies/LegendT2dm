@@ -6,11 +6,6 @@
 \alias{LegendT2dm-package}
 \title{LegendT2dm: Large-Scale Evidence Generation and Evaluation in a Network of Databases}
 \description{
-Large-Scale Evidence Generation and Evaluation in a Network of Databases
-    for Type 2 Diabetes (LEGEND-T2DM) studies the comparative effectiveness and safety
-    of second-line T2DM agents.  This systematic, large-scale data experiment follows
-    Open Science principles and aims to deliver reliable and actionable healthcare
-    information for T2DM stakeholders, including patients, their care-givers and
-    physicians.
+Large-Scale Evidence Generation and Evaluation in a Network of Databases for Type 2 Diabetes (LEGEND-T2DM) studies the comparative effectiveness and safety of second-line T2DM agents. This systematic, large-scale data experiment follows Open Science principles and aims to deliver reliable and actionable healthcare information for T2DM stakeholders, including patients, their care-givers and physicians.
 }
 \keyword{internal}

@@ -397,10 +397,48 @@ permutations$atlasName <- makeShortName(permutations)
 #   makeTCOs("ot2", "with", "any", "any", "any", "higher", "any"),
 #   # Renal dz
 #   makeTCOs("ot2", "with", "any", "any", "any", "any", "without"),
-#   makeTCOs("ot2", "with", "any", "any", "any", "any", "with")
+#   makeTCOs("ot2", "with", "any", "any", "any", "any", "with"),
+#
+#   # No met
+#   # OT1
+#   # Main
+#   makeTCOs("ot1", "no", "any", "any", "any", "any", "any"),
+#   # Age
+#   makeTCOs("ot1", "no", "younger", "any", "any", "any", "any"),
+#   makeTCOs("ot1", "no", "middle", "any", "any", "any", "any"),
+#   makeTCOs("ot1", "no", "older", "any", "any", "any", "any"),
+#   # Sex
+#   makeTCOs("ot1", "no", "any", "female", "any", "any", "any"),
+#   makeTCOs("ot1", "no", "any", "male", "any", "any", "any"),
+#   # Race
+#   makeTCOs("ot1", "no", "any", "any", "black", "any", "any"),
+#   # CV risk
+#   makeTCOs("ot1", "no", "any", "any", "any", "low", "any"),
+#   makeTCOs("ot1", "no", "any", "any", "any", "higher", "any"),
+#   # Renal dz
+#   makeTCOs("ot1", "no", "any", "any", "any", "any", "without"),
+#   makeTCOs("ot1", "no", "any", "any", "any", "any", "with"),
+#   #
+#   # OT2
+#   # Main
+#   makeTCOs("ot2", "no", "any", "any", "any", "any", "any"),
+#   # Age
+#   makeTCOs("ot2", "no", "younger", "any", "any", "any", "any"),
+#   makeTCOs("ot2", "no", "middle", "any", "any", "any", "any"),
+#   makeTCOs("ot2", "no", "older", "any", "any", "any", "any"),
+#   # Sex
+#   makeTCOs("ot2", "no", "any", "female", "any", "any", "any"),
+#   makeTCOs("ot2", "no", "any", "male", "any", "any", "any"),
+#   # Race
+#   makeTCOs("ot2", "no", "any", "any", "black", "any", "any"),
+#   # CV risk
+#   makeTCOs("ot2", "no", "any", "any", "any", "low", "any"),
+#   makeTCOs("ot2", "no", "any", "any", "any", "higher", "any"),
+#   # Renal dz
+#   makeTCOs("ot2", "no", "any", "any", "any", "any", "without"),
+#   makeTCOs("ot2", "no", "any", "any", "any", "any", "with")
 # )
 # readr::write_csv(classTcos, "inst/settings/classTcosOfInterest.csv")
-
 
 # readr::write_csv(classCohortsToCreate, "inst/settings/testCohortsToCreate.csv")
 # TODO Move to separate file

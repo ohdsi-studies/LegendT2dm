@@ -206,7 +206,8 @@ exportAnalyses <- function(indicationId, outputFolder, exportFolder, databaseId,
       loadList("ot2CmAnalysisList.json", 3 %in% runSections),
       loadList("ittPoCmAnalysisList.json", 4 %in% runSections),
       loadList("ot1PoCmAnalysisList.json", 5 %in% runSections),
-      loadList("ot2PoCmAnalysisList.json", 6 %in% runSections)
+      loadList("ot2PoCmAnalysisList.json", 6 %in% runSections),
+      loadList("lagCmAnalysisList.json", 7 %in% runSections)
     )
 
     cohortMethodAnalysis <- lapply(cmAnalysisList, cmAnalysisToRow)
