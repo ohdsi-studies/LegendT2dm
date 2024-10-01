@@ -804,7 +804,9 @@ exportDiagnostics <- function(indicationId,
                               databaseId,
                               minCellCount,
                               maxCores,
-                              balanceOnly = FALSE) {
+                              balanceOnly = FALSE,
+                              excludeSensitivityAnalysis = TRUE) {
+
     ParallelLogger::logInfo("Exporting diagnostics")
     ParallelLogger::logInfo("- covariate_balance table")
     fileName <- file.path(exportFolder, "covariate_balance.csv")
@@ -1125,6 +1127,11 @@ exportDiagnostics <- function(indicationId,
       reference <- readRDS(file.path(outputFolder, indicationId, "cmOutput", "outcomeModelReference.rds"))
       outcomesOfInterest <- getOutcomesOfInterest()
       reference <- reference[reference$outcomeId %in% outcomesOfInterest, ]
+
+      if (excludeSensitivityAnalysis) {
+        reference <- reference %>% filter(.data$analysisId < 100)
+      }
+
       reference <- reference[, c("strataFile",
                                  "studyPopFile",
                                  "targetId",
