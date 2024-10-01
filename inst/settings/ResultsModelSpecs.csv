@@ -87,10 +87,10 @@ covariate_balance,analysis_id,integer,Foreign key referencing the cohort_method_
 covariate_balance,covariate_id,bigint,Foreign key referencing the covariate table,Yes,Yes,No,Yes
 covariate_balance,target_mean_before,numeric,Mean value of the covariate in the target cohort before propensity score adjustment,Yes,No,No,Yes
 covariate_balance,comparator_mean_before,numeric,Mean value of the covariate in the comparator cohort before propensity score adjustment,Yes,No,No,Yes
-covariate_balance,std_diff_before,numeric,Standardized difference of the means between the target and comparator cohort before propensity score adjustment,Yes,No,No,Yes
+covariate_balance,std_diff_before,numeric,Standardized difference of the means between the target and comparator cohort before propensity score adjustment,No,No,Yes,Yes
 covariate_balance,target_mean_after,numeric,Mean value of the covariate in the target cohort after propensity score adjustment,Yes,No,No,Yes
 covariate_balance,comparator_mean_after,numeric,Mean value of the covariate in the comparator cohort after propensity score adjustment,Yes,No,No,Yes
-covariate_balance,std_diff_after,numeric,Standardized difference of the means between the target and comparator cohort after propensity score adjustment,Yes,No,No,Yes
+covariate_balance,std_diff_after,numeric,Standardized difference of the means between the target and comparator cohort after propensity score adjustment,No,No,Yes,Yes
 preference_score_dist,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 preference_score_dist,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 preference_score_dist,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
@@ -129,7 +129,7 @@ cohort_method_analysis,analysis_id,integer,Unique identifier for an analysis,Yes
 cohort_method_analysis,description,text,"Description for an analysis, e.g. 'On-treatment'",Yes,No,No,Yes
 cohort_method_analysis,definition,text,CohortMethod JSON object specifying the analysis,Yes,No,No,Yes
 exposure_of_interest,exposure_id,bigint,Unique identifier for an exposure,Yes,Yes,No,Yes
-exposure_of_interest,exposure_name,text, Name for the exposure,Yes,No,No,Yes
+exposure_of_interest,exposure_name,text,Name for the exposure,Yes,No,No,Yes
 exposure_of_interest,definition,text,OHDSI JSON cohort definition for constructing the exposure,Yes,No,No,Yes
 outcome_of_interest,outcome_id,int,Unique identifier for an outcome of interest,Yes,Yes,No,Yes
 outcome_of_interest,outcome_name,text,"Name for the outcome, e.g. 'Stroke'",Yes,No,No,Yes
@@ -138,15 +138,15 @@ outcome_of_interest,definition,text,OHDSI JSON cohort definition for constructin
 negative_control_outcome,outcome_id,bigint,Unique identifier for a negative control outcome,Yes,Yes,No,Yes
 negative_control_outcome,concept_id,bigint,Concept ID defining the negative control,Yes,Yes,No,Yes
 negative_control_outcome,outcome_name,text,"Name for the outcome, e.g. 'Ingrown nail'",Yes,No,No,Yes
-ps_auc_assessment,database_id,varchar(255),"Foreign key referencing the database",Yes,Yes,No,Yes
-ps_auc_assessment,target_id,bigint,"Foreign key referencing the exposure_of_interest table",Yes,Yes,No,Yes
-ps_auc_assessment,comparator_id,bigint,"Foreign key referencing the exposure_of_interest table",Yes,Yes,No,Yes
+ps_auc_assessment,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+ps_auc_assessment,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
+ps_auc_assessment,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 ps_auc_assessment,analysis_id,integer,Foreign key referencing the cohort_method_analysis table,Yes,Yes,No,Yes
-ps_auc_assessment,auc,numeric,"Area under the receiver-operator curve classifying subjects by their propensity score",Yes,No,No,Yes
-ps_auc_assessment,equipoise,numeric,"%-subjects with preference scores between 0.3 and 0.7",Yes,No,No,Yes
-results_date_time,database_id,varchar(255),"Foreign key referencing the database",Yes,Yes,No,Yes
-results_date_time,date_time,varchar(255),"Date and time when results were compiled",Yes,No,No,Yes
-results_date_time,package_version,varchar(255), "LegendT2dm package version",Yes,No,No,Yes
+ps_auc_assessment,auc,numeric,Area under the receiver-operator curve classifying subjects by their propensity score,Yes,No,No,Yes
+ps_auc_assessment,equipoise,numeric,%-subjects with preference scores between 0.3 and 0.7,Yes,No,No,Yes
+results_date_time,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
+results_date_time,date_time,varchar(255),Date and time when results were compiled,Yes,No,No,Yes
+results_date_time,package_version,varchar(255),LegendT2dm package version,Yes,No,No,Yes
 diagnostics,database_id,varchar(255),Foreign key referencing the database,Yes,Yes,No,Yes
 diagnostics,target_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
 diagnostics,comparator_id,bigint,Foreign key referencing the exposure_of_interest table,Yes,Yes,No,Yes
@@ -159,3 +159,16 @@ diagnostics,min_equipoise,numeric,Proportion of subjects in clinical equipoise,N
 diagnostics,ease,numeric,Expected absolute systematic error,No,No,No,Yes
 diagnostics,pass,integer,Indicator of whether the study has passed the diagnostics,No,No,No,Yes
 diagnostics,criteria,varchar(255),Description of diagnostics criteria,No,No,No,Yes
+covariate_balance,interaction_covariate_id,bigint,id for covariates of interaction terms,No,No,Yes,Yes
+covariate_balance,target_sd_before,numeric,standard deviation in target cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sd_before,numeric,standard deviation in comparator cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,mean_before,numeric,overall mean before PS adjustment,No,No,Yes,Yes
+covariate_balance,sd_before,numeric,overall standard deviation before PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sd_after,numeric,standard deviation in target cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sd_after,numeric,standard deviation in comparator cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,mean_after,numeric,overall mean after PS adjustment,No,No,Yes,Yes
+covariate_balance,sd_after,numeric,overall standard deviation after PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sum_before,numeric,sum in target cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sum_before,numeric,sum in comparator cohort before PS adjustment,No,No,Yes,Yes
+covariate_balance,target_sum_after,numeric,sum in target cohort after PS adjustment,No,No,Yes,Yes
+covariate_balance,comparator_sum_after,numeric,sum in comparator cohort after PS adjustment,No,No,Yes,Yes
