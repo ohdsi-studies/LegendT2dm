@@ -128,7 +128,7 @@ runCohortMethod <- function(outputFolder, indicationId = "class", databaseId, ma
                            maxCores = maxCores)
     }
 
-    laggedOutcomeIds <- c(40,43)
+    laggedOutcomeIds <- c(25,27,39,40,43)
 
     # Seventh run: lagged ITT
     if (7 %in% runSections) {
