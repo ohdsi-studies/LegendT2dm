@@ -327,7 +327,7 @@ permuteTC <- function(cohort, permutation, ingredientLevel = FALSE) {
 # also, for SU
 classIds = c(40)
 
-# DEBUG: test with SGLT2i
+# finally SGLT2i
 #classIds = c(30)
 
 # then create permutations for the desired drug class
@@ -385,7 +385,7 @@ fileName = sprintf('%sCohortsToCreate.csv', this.class) # file path
 readr::write_csv(drugCohortsToCreate,
                  file.path(filePath, fileName)) # write the file as `[className]cohortsToCreate.csv`
 
-# check out some example cohort definitions
+# check out some example cohort definitions -----
 ## PLEASE UPDATE INGREDIENT NAME FOR EACH DRUG-CLASS!
 ## (examples here are within the GLP1RA class)
 #permutationsForDrugs$atlasName <- makeShortName(permutationsForDrugs)
