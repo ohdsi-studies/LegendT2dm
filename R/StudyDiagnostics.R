@@ -49,14 +49,20 @@ getAbsStdDiff <- function(connection,
 }
 
 mapAnalysisIdForBalance <- function(analysisId) {
-  map <- c(1,5,6,
-           4,5,6,
-           7,5,6,
-           0,
-           11,5,6,
-           14,5,6,
-           17,5,6)
-  return(map[analysisId])
+  if(analysisId %in% c(1:19)){
+    map <- c(1,5,6,
+             4,5,6,
+             7,5,6,
+             0,
+             11,5,6,
+             14,5,6,
+             17,5,6)
+    return(map[analysisId])
+  }else{
+    # if analysisId = 104,105,106 (lagged ITT analysis)
+    return(analysisId %% 100)
+  }
+
 }
 
 #' @export

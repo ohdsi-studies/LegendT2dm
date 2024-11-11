@@ -252,17 +252,42 @@ computeSingleMetaAnalysis <- function(outcomeGroup) {
     maRow$comparatorDays <- sum(outcomeGroup$comparatorDays)
     maRow$targetOutcomes <- sumMinCellCount(outcomeGroup$targetOutcomes)
     maRow$comparatorOutcomes <- sumMinCellCount(outcomeGroup$comparatorOutcomes)
-    meta <- meta::metagen(outcomeGroup$logRr, outcomeGroup$seLogRr, sm = "RR", hakn = FALSE)
-    s <- summary(meta)
-    maRow$i2 <- s$I2$TE
 
-    rnd <- s$random
-    maRow$rr <- exp(rnd$TE)
-    maRow$ci95Lb <- exp(rnd$lower)
-    maRow$ci95Ub <- exp(rnd$upper)
-    maRow$p <- rnd$p
-    maRow$logRr <- rnd$TE
-    maRow$seLogRr <- rnd$seTE
+    meta <- tryCatch({
+      meta::metagen(outcomeGroup$logRr,
+                    outcomeGroup$seLogRr,
+                    sm = "RR",
+                    hakn = FALSE,
+                    control = list(stepadj=0.5, maxiter=1000))
+    }, error = function(e) {
+      NULL  # NA if any error occurs
+    })
+#     meta <- meta::metagen(outcomeGroup$logRr,
+#                           outcomeGroup$seLogRr,
+#                           sm = "RR",
+#                           hakn = FALSE,
+#                           control = list(stepadj=0.5, maxiter=1000))
+
+    if(!is.null(meta)){
+      s <- summary(meta)
+      #maRow$i2 <- s$I2$TE
+      maRow$i2 <- s$I2
+      rnd <- s$random
+      maRow$rr <- exp(rnd$TE)
+      maRow$ci95Lb <- exp(rnd$lower)
+      maRow$ci95Ub <- exp(rnd$upper)
+      maRow$p <- rnd$p
+      maRow$logRr <- rnd$TE
+      maRow$seLogRr <- rnd$seTE
+    }else{
+      maRow$rr <- NA
+      maRow$ci95Lb <- NA
+      maRow$ci95Ub <- NA
+      maRow$p <- NA
+      maRow$logRr <- NA
+      maRow$seLogRr <- NA
+      maRow$i2 <- NA
+    }
   }
   if (is.na(maRow$logRr)) {
     maRow$mdrr <- NA
