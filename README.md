@@ -192,3 +192,8 @@ Development
 ### Development status
 
 Collecting cohort diagnostics from data partners.
+
+Happy holidays
+===========
+
+![Santa George](extra/Santa-George-C.png)
