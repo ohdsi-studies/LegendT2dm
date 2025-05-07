@@ -1,0 +1,14 @@
+atlas_id,cohort_id,cohort_name,logic_description,generate_stats
+11759,11759,Age <21,age <21,TRUE
+11760,11760,Age 21 - 60,age 21-60,TRUE
+11761,11761,Age >60,age >60,TRUE
+11739,11739,Obesity,NA,TRUE
+11746,11746,Severe Diabetes,NA,TRUE
+11741,11741,Diabetic Ketoacidosis,NA,TRUE
+11743,11743,Diabetic Retinopathy,NA,TRUE
+11735,11735,Essential HTN,NA,TRUE
+11737,11737,Hyperlipedemia,NA,TRUE
+11710,11710,metabolilic dysfuntion-associated steatotic liver disease,NA,TRUE
+11734,11734,no renal disease,NA,TRUE
+11732,11732,renal disease not on dialysis,NA,TRUE
+11733,11733,renal disease on dialysis,NA,TRUE

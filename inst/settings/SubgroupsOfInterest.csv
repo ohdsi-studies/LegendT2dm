@@ -1,0 +1,12 @@
+﻿Subgroup Name,Brief Description
+Age,"3 age groups, <21, 21-60, >60"
+Sex,Male vs. Female
+Race,Black vs. White
+Renal disease,"3 groups for renal disease, (1) none, (2) Chronic kidney disease, not on dialysis, (3) Chronic kidney disease, on dialysis"
+Obesity,"Obesity is defined as a BMI measurement >30 (WHO definition), or body weight >120kg, or a condition occurance of an obesity diagnosis"
+Diabetes severe,"Severe diabetes is defined as individuals with an HbA1c >8, or condition code occurance of ""Type II diabetes mellitus uncontrolled"" or ""Diabetic - poor control"" "
+Diabetetic Ketoacidosis,Defined as having a condition occurance of diabetic ketoacidosis
+Diabetic Retinopathy,Defined as having a condition occurance of diabetic retinopathy
+Essential Hypertension,Defined as having a condition occurance of hypertension
+Hyperlipidemia,Defined as having a condition occurance of hyperlipedemia 
+Metabolic dysfunction-associated steatotic liver disease (MASLD),Defined as having a condition occurance of non-alcoholic steatohepatitis or non-alcoholic fatty liver disease without non-alcoholic steatohepatitis  
