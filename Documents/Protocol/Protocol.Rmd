@@ -45,7 +45,6 @@ header-includes:
 - \usepackage{hyperref}
 - \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 - \newcommand{\footerDate}{`r params$date`}
-- \input{header.tex}
 longtable: yes
 mainfont: Arial
 bibliography: Protocol.bib
@@ -58,7 +57,7 @@ csl: bmj.csl
 ---
 
 ```{r setup, include=FALSE}
-library(LegendT2dm)
+# library(LegendT2dm)
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
