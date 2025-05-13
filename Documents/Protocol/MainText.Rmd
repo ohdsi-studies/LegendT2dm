@@ -4,42 +4,27 @@ The landscape of therapeutic options for type 2 diabetes mellitus (T2DM) has bee
 The emergence of drugs targeting the sodium-glucose co-transporter-2 (SGLT2) and the glucagon-like peptide-1 (GLP1) receptor has expanded the role of T2DM agents from lowering blood glucose to directly reducing cardiovascular risk [@North2019-xn].
 A series of large randomized clinical trials designed to evaluate the cardiovascular safety of SGLT2 inhibitors and GLP1 receptor agonists found that use of many of these agents led to a reduction in major adverse cardiovascular events, including myocardial infarction, hospitalization for heart failure, and cardiovascular mortality [@Zinman2015-ps; @Neal2017-gs; @Marso2016-zg; @Marso2016-yk].
 However, other T2DM drugs widely used before the introduction of these novel agents, such as sulfonylureas, did not undergo similarly comprehensive trials to evaluate their cardiovascular efficacy or safety.
-Moreover, direct comparisons of newer agents with dipeptidyl peptidase-4 (DPP4) inhibitors, with neutral effects on major cardiovascular outcomes [@Scirica2013-gl; @White2013-zl; @Green2015-pv; @Rosenstock2019-cp], have not been conducted.
-Nevertheless, DPP4 inhibitors and sulfonylureas continue to be used in clinical practice and are recommended as second-line T2DM agents in national clinical practice guidelines.
-
-Several challenges remain in formulating T2DM treatment recommendations based on existing evidence [@Cefalu2018-mu].
-First, trials of novel agents did not pursue head-to-head comparisons to older agents and were instead designed as additive treatments on the background of commonly used T2DM agents.
-Therefore, the relative cardiovascular efficacy and safety of novel compared with older agents is not known, and indirect estimates have relied on summary-level data restricted to common comparators [@Palmer2021-nl; @Qiu2021-sb; @Yamada2021-hw] and are less reliable [@Puhan2014-ov; @Brignardello-Petersen2020-bx].
-Second, trials of novel agents have tested individual drugs against placebo, but have not directly compared SGLT2 inhibitors with GLP1 receptor agonists in reducing adverse cardiovascular event risk.
-Moreover, there is no evidence to guide the use of individual drugs within each class and across different drug classes, particularly among patients at lower cardiovascular risk than recruited in clinical trials.
-Third, randomized trials focused on cardiovascular efficacy and safety, but were not powered to adequately assess the safety of these agents across a spectrum of non-cardiovascular outcomes.
-Finally, restricted enrollment across regions, and subgroups of age, sex, and race further limits the efficacy and safety assessment that may guide individual patients’ treatment.
-
-Evidence gaps from these trials also pose a challenge in designing treatment algorithms, which rely on comparative effectiveness and safety of drugs.
-Perhaps, as a result, there is large variation in clinical practice guidelines and in clinical practice with regard to these medications, with many patients initiated on the newer therapies and many others treated with older regimens [@McCoy2019-hu; @Curtis2018-zg; @Arnold2017-fo; @Dave2020-ql; @Le2020-lh].
-Among the second-line options, there is much variation with respect to the order of drugs used.
-This lack of consensus about the best approach provides an opportunity for systematic, large-scale observational studies.
+The effectiveness and safety of these agents can vary by subgroups like age, sex, and race, which limits the assessment that may guide individual patients’ treatment. Being able to tailor treatments to patients may inform clinical practice and improve outcomes.
+The lack of knowledge of the best context for each agent provides an opportunity for systematic, large-scale observational studies.
 
 # Study Objectives
 
-To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of second-line T2DM glucose-lowering agents. Specifically, these studies aim
+To inform critical decisions facing patients with diabetes, their caregivers, clinicians, policymakers and healthcare system leaders, we have launched the Large-Scale Evidence Generation and Evaluation across a Network of Databases for Diabetes (LEGEND-T2DM) initiative to execute a series of comprehensive observational studies to compare cardiovascular outcome rates and safety of T2DM glucose-lowering agents. Specifically, these studies aim
 
-1. To determine, through systematic evaluation, the comparative effectiveness of traditionally second-line T2DM agents, SGLT2 inhibitors and GLP1 receptor agonists, with each other and with DPP4 inhibitors and sulfonylureas, for cardiovascular outcomes.
-2. To determine, through systematic evaluation, the comparative safety of traditionally second-line T2DM agents among patients with T2DM.
-3. To assess heterogeneity in effectiveness and safety of traditionally second-line T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.
+1. To determine, through systematic evaluation, the comparative effectiveness and safety of T2DM agents, including biguanides, SGLT2 inhibitors, GLP1 receptor agonists, DPP4 inhibitors, and sulfonylureas among patients with T2DM.
+2. To assess heterogeneity in effectiveness and safety of T2DM agents among key patient subgroups: Using stratified patient cohorts, we will quantify differential effectiveness and safety across subgroups of patients based on age, sex, race, renal impairment, and baseline cardiovascular risk.
 
 # Research Methods
 
-LEGEND-T2DM will execute three systematic, large-scale observational studies of second-line T2DM agents to estimate the relative risks of cardiovascular effectiveness and safety outcomes.
+LEGEND-T2DM will execute systematic, large-scale observational studies of T2DM agents to estimate the relative risks of cardiovascular effectiveness and safety outcomes.
 
-1. The **Class-vs-Class Study** will provide all pairwise comparisons between the four major T2DM agent classes to evaluate their comparative effects on cardiovascular risk  (Objective 1) and patient-centered safety outcomes (Objective 2);
-2. The **Drug-vs-Drug Study** will furnish head-to-head pairwise comparisons between individual agents within and across classes (both Objectives 1 and 2); and
-3. The **Heterogeneity Study** will refine these comparisons for T2DM patients for important subgroups (Objective 3).
+This **Heterogeneity Study** at the class and individual-drug level for T2DM patients for important subgroups.
+
 In contrast to a single comparison approach, LEGEND-T2DM will provide a comprehensive view of the findings and their consistency across populations, drugs, and outcomes.
 We will model each study on our successful collaborative research evaluating the comparative effectiveness of antihypertensives recently published in _The Lancet_ [@Suchard2019-gq].
 
 Table \@ref(tab:drug-table) list the four major T2DM agent classes and the individual agents licensed in the U.S. within each class.
-We will examine all ${4 \choose 2} = 6$ class-wise comparisons and all ${5 + 6 + 4 + 7 \choose 2} = 231$ ingredient-wise comparisons.
+We will examine all ${9 \choose 2} = 36$ class-wise comparisons across different patient subgroups. 
 
 For each comparison, we are interested in the relative risk of each of the cardiovascular and safety outcomes described in Section \@ref(outcomes).
 <!-- listed in Table \@ref(tab:outcome-table). -->
@@ -93,6 +78,34 @@ if (knitr::is_latex_output()) {
 }
 ```
 
+In addition to the drugs listed in Table \@ref(tab:drug-table), we will also consider the sub-group stratifications listed in Table \@ref(tab:subgroups-table). We will calculate the relative risk of each of the cardiovascular and safety outcomes described in Section \@ref(outcomes), but additionally stratify the relative risks of the outcomes using the subgroups described below.
+
+```{r subgroups-table, echo=FALSE}
+subgroups <- read.csv(system.file("settings/SubgroupsOfInterest.csv",
+                                 package = "LegendT2dm")) 
+
+tab <- kable(
+  subgroups,
+  booktabs = TRUE,
+  linesep = "",
+  caption = "Subgroup definitions used for stratified analysis",
+  col.names = c("Subgroup Name", "Brief Description")
+) %>%
+  kable_styling(
+    bootstrap_options = "striped",
+    latex_options = c("striped", "hold_position")
+  )
+
+if (knitr::is_latex_output()) {
+  tab %>%
+    column_spec(1, width = "12em") %>%
+    column_spec(2, width = "35em") %>%
+    kable_styling(font_size = 9)
+} else {
+  tab
+}
+```
+
 ## Study Design
 
 For each study, we will employ an active comparator, new-user cohort design [@Yoshida2015-ln; @Ryan2013-wq; @Schuemie2020-wx].
@@ -118,7 +131,7 @@ We will execute LEGEND-T2DM as a series of OHDSI network studies.
 All data partners within OHDSI are encouraged to participate voluntarily and can do so conveniently, because of the community's shared Observational Medical Outcomes Partnership (OMOP) common data model (CDM) and OHDSI tool-stack.
 Many OHDSI community data partners have already committed to participate and we will recruit further data partners through OHDSI’s standard recruitment process, which includes protocol publication on OHDSI’s GitHub, an announcement in OHDSI’s research forum, presentation at the weekly OHDSI all-hands-on meeting and direct requests to data holders.
 
-Table \@ref(tab:data-sources) lists the 13 already committed data sources for LEGEND-T2DM; these sources encompass a large variety of practice types and populations.
+Table \@ref(tab:data-sources) lists potential data sources for LEGEND-T2DM; these sources encompass a large variety of practice types and populations.
 For each data source, we report a brief description and size of the population it represents and its patient capture process and start date.
 While the earliest patient capture begins in 1989 (CUIMC), the vast majority come from the mid-2000s to today, providing almost two decades of T2DM treatment coverage.
 US populations include those commercially and publicly insured, enriched for older individuals (MDCR, VA), lower socioeconomic status (MDCD), and racially diverse (VA >20% Black or African American, CUIMC 8%).
@@ -129,8 +142,8 @@ On the other hand, Optum, PanTher, OpenClaims, CUIMC and YNHHS may overlap in ti
 While it remains against licensing agreements to attempt to link patients between most data sources, Optum reports <20% overlap between their claims and EHR data sources that is reassuringly small.
 All data sources will receive institutional review board approval or exemption for their participation before executing LEGEND-T2DM.
 
-```{r data-sources, echo=FALSE, warning=FALSE}
-data_sources <- readr::read_delim(col_names = TRUE, delim = ";", trim_ws = TRUE, file = "
+```{r data-sources, echo=FALSE, message=FALSE, warning=FALSE}
+data_sources <- readr::read_delim(col_names = TRUE, delim = ";", show_col_types = FALSE, trim_ws = TRUE, file = "
   Data source ; Population ; Patients ; History ; Data capture process and short description
   IBM MarketScan Commercial Claims and Encounters (CCAE) ; Commercially insured, < 65 years ; 142M ; 2000 -- ; Adjudicated health insurance claims (e.g. inpatient, outpatient, and outpatient pharmacy)  from large employers and health plans who provide private healthcare coverage to employees, their spouses and dependents.
   IBM MarketScan Medicare Supplemental Database (MDCR)  ; Commercially insured, 65$+$ years ; 10M ; 2000 -- ; Adjudicated health insurance claims of retirees with primary or Medicare supplemental coverage through privately insured fee-for-service, point-of-service or capitated health plans.
@@ -165,8 +178,8 @@ if (knitr::is_latex_output()) {
 
 ## Study Population
 
-We will include all subjects in a data source who meet inclusion criteria for one or more traditionally second-line T2DM agent exposure cohorts.
-Broadly, these cohorts will consist of T2DM patients either with or without prior metformin monotherapy who initiate treatment with one of the 22 drug ingredients that comprise the DPP4 inhibitor, GLP1 receptor agonist, SGT2 inhibitor and sulfonylurea drug classes (Table \@ref(tab:drug-table)).
+We will include all subjects in a data source who meet inclusion criteria for T2DM agent exposure cohorts.
+Broadly, these cohorts will consist of T2DM patients who initiate treatment with one of the drug ingredients that comprise the biguanide, DPP4 inhibitor, GLP1 receptor agonist, SGT2 inhibitor and sulfonylurea drug classes (Table \@ref(tab:drug-table)).
 We do not consider thiazolidinediones given their known association with a risk of heart failure and bladder cancer
 [@Graham2010-pg; @Turner2014-oq].
 We describe specific definitions for exposure cohorts for each study in the following sections.
@@ -174,68 +187,54 @@ We describe specific definitions for exposure cohorts for each study in the foll
 ## Exposure Comparators
 
 ### Class-vs-Class Study comparisons {#class-v-class}
-The **Class-vs-Class** Study will construct four exposure cohorts for new-users of any drug ingredient within the four traditionally second-line drug classes in Table \@ref(tab:drug-table).
-Cohort entry (index date) for each patient is their first observed exposure to any drug ingredient for the four second-line drug classes.
+The **Class-vs-Class** Study will construct exposure cohorts for new-users of any drug ingredient within the drug classes in Table \@ref(tab:drug-table).
+Cohort entry (index date) for each patient is their first observed exposure to any drug ingredient for the  drug classes.
 Consistent with an idealized target trial for T2DM therapy and cardiovascular risk [@Hernan2016-ab; @Hernan2019-ie], inclusion criteria for patients based on the index date will include:
 
 * T2DM diagnosis and no Type 1 or secondary diabetes mellitus diagnosis before the index date;
 * At least 1 year of observation time before the index date (to improve new-user sensitivity); and
-* No prior drug exposure to a comparator second-line or other antihyperglycemic agent (i.e. thiazolidinediones, acarbose, acetohexamide, bromocriptine, glibornuride, miglitol and nateglinide) or $>$ 30 days insulin exposure before index date.
+* No prior drug exposure to a comparator or other antihyperglycemic agent (i.e. thiazolidinediones, acarbose, acetohexamide, bromocriptine, glibornuride, miglitol and nateglinide) or $>$ 30 days insulin exposure before index date.
 
-We will construct and compare separately cohorts patients either with
-
-* At least 3 months of metformin use before the index date,
-
-or
-
-* No prior metformin use before the index date.
-
-In the first case, three months of metformin is consistent with ADA guidelines [@American_Diabetes_Association2018-yz].
-In the second case, we are interested in relative effectiveness and safety of these traditionally second-line agents in patients who initiate their treatments without first using metformin.
 We purposefully do not automatically exclude or restrict to patients with a history of myocardial infarction, stroke or other major cardiovascular events, which will allow us to report relative effectiveness and safety for individuals with both low or moderate and high cardiovascular risk.
 Likewise, we do not automatically exclude or restrict to individuals with severe renal impairment [@Nathan2013-cu].
 We will use cohort diagnostics, such as achieving covariate balance and clinical empirical equipoise between exposure cohorts (Section \@ref(sample-size)) and stakeholder input to guide the possible need to exclude other prior diagnoses, such as congestive heart failure, pancreatitis or cancer [@Nathan2013-cu].
 
-Appendix \@ref(class-cohort) reports the complete OHDSI `ATLAS` cohort description for new-users of DDP4 inhibitors with prior metformin use.
+Appendix \@ref(class-cohort) reports the complete OHDSI `ATLAS` cohort description for new-users of DDP4 inhibitors.
 This description lists complete specification of cohort entry events, additional inclusion criteria, cohort exit events, and all associated standard OMOP CDM concept code sets used in the definition.
 We generate programmatically equivalent cohort definitions for new-others of each drug class with and without prior metformin use.
 `ATLAS` then automatically translates these definitions into network-deployable SQL source code.
-Appendix \@ref(prior-metformin) lists the inclusion criteria modifier for no prior metformin use.
 
 Of note, the inclusion criteria do not directly incorporate quantitative measures of poor glycemic control, such as one or more elevated serum HbA1c measurements; such laboratory values are irregularly captured in large claims and even EHR data sources.
-Older ADA guidelines (but not since 2020 for patients with cardiovascular  disease [@Association2020-ic]) advise escalating to a second-line agent only when glycemic control is not met with metformin monotherapy, nicely mirroring our cohort design for our historical data.
-We will conduct sensitivity analyses involving available HbA1c measurements to demonstrate their balance between exposure cohorts (described later in Section \@ref(sample-size)).
-In the unlikely event that balance is not met, we will consider an inclusion criterion of at least two HbA1c measurements $\ge$ 7% within 6 months before the index [@Hernan2019-ie].
-We will also conduct sensitivity analyses to assess prior insulin use exclusions, bearing in mind difficulties in assessing insulin use end-dates.
 
-For each data source, we will then execute all $2 \times {4 \choose 2} = 6$ pairwise class comparisons for which the data source yields $\ge$ 1,000 patients in each arm.
+For each data source, we will then execute all pairwise class comparisons for which the data source yields $\ge$ 1,000 patients in each arm.
 Significantly fewer numbers of patients strongly suggest data source-specific differences in prescribing practices that may introduce residual bias and sufficient samples sizes are required to construct effective propensity score models [@Schuemie_undated-rt, @Suchard2019-gq].
 
 ### Drug-vs-Drug Study comparisons {#drug-v-drug}
 
-The **Drug-vs-Drug Study** will construct $2 \times 22$ exposure cohorts for new-users of each drug ingredient in Table \@ref(tab:drug-table).
+The **Drug-vs-Drug Study** (if powered) will construct exposure cohorts for new-users of each drug ingredient in Table \@ref(tab:drug-table).
 We will apply the same cohort definition, inclusion criteria and patient count minimum as described in Section \@ref(class-v-class).
 
-For each data source, we will then execute all $2 \times {22 \choose 2} = 462$ pairwise drug comparisons.
-While we will publicly report studies results for all pairwise comparisons, we will focus primary clinical interpretation and scientific publishing to the $2 \times {5 \choose 2}$ [within DPP4Is] $+ 2 \times {6 \choose 2}$ [within GLPR1RAs] $+ 2 \times {4 \choose 2}$ [within SGLT2Is] $+ 2 \times {7 \choose 2}$ [within SUs] $= 104$ comparisons that pit drugs within the same class against each other, as well as across-class comparisons that stakeholders deem pertinent given their experiences.
-
-Appendix \@ref(drug-cohort) reports the complete OHDSI `ATLAS` cohort description for new-users of aloglipitin with prior metformin use.
-Again, we programmatically construct all new-user drug-level cohort and automatically translate into SQL.
+For each data source, we will then execute all pairwise drug comparisons.
+While we will publicly report studies results for all pairwise comparisons, we will focus primary clinical interpretation and scientific publishing to the comparisons that pit drugs within the same class against each other, as well as across-class comparisons that stakeholders deem pertinent given their experiences.
 
 ### Heterogeneity Study comparisons
 
-The **Heterogeneity Study**  will further stratify all 237 class- and drug-level exposure cohorts in Sections \@ref(class-v-class) and \@ref(drug-v-drug) by clinically important patient characteristics that modify cardiovascular risk or relative treatment heterogeneity to provide patient-focused treatment recommendations.
+The **Heterogeneity Study**  will  stratify all class- and drug-level exposure cohorts in Sections \@ref(class-v-class) and \@ref(drug-v-drug) by clinically important patient characteristics that modify cardiovascular risk or relative treatment heterogeneity to provide patient-focused treatment recommendations.
 These factors will include:
 
-* Age (18 - 44 / 45 - 64 / $\ge$ 65 at the index date)
-* Gender (women / men)
+* Age (<21, 21 - 60, >60 at the index date)
+* Biological Sex (female / male)
 * Race (African American or black)
-* Cardiovascular risk (low or moderate/high, defined by established cardiovascular disease at the index date)
-* Renal impairment (at the index date)
+* Renal impairment (at the index date) as unimpaired, impaired without dialysis, on-dialysis
+* Obesity
+* Diabetes severity 
+* Diabetic Ketoacidosis
+* Diabetic Retinopathy 
+* Essential Hypertension 
+* Hyperlipidemia
+* Metabolic dysfunction-associated steatotic liver disease (MASLD)
 
-We will define patients at high cardiovascular risk as those who fulfill at index date an established cardiovascular disease (CVD) definition that has been previously developed and validated for risk stratification among new-users of second-line T2DM agents [@Ryan2018-ci].
-Under this definition, established CVD means having at least 1 diagnosis code for a condition indicating cardiovascular disease, such as atherosclerotic vascular disease, cerebrovascular disease, ischemic heart disease or peripheral vascular disease, or having undergone at least 1 procedure indicating cardiovascular disease, such as percutaneous coronary intervention, coronary artery bypass graft or revascularization, any time on or prior to the exposure start.
-Likewise, we will define renal impairment through diagnosis codes for chronic kidney disease and end-stage renal disease, dialysis procedures, and laboratory measurements of estimated glomerular filtration rate, serum creatinine and urine albumin.
+We will define patients with renal impairment through diagnosis codes for chronic kidney disease and end-stage renal disease, dialysis procedures, and laboratory measurements of estimated glomerular filtration rate, serum creatinine and urine albumin. Obesity will be defined using the WHO definition (BMI >30), body weight >120 kg (or equivalent in pounds), or a diagnosis code for obesity. Poorly controlled diabetes will be defined an HbA1c >8, or a diagnosis code for uncontrolled type 2 diabetes or poor diabetes control. Diabetic ketoacidosis, Diabetic Retinopathy, Essential Hypertension, Hyperlipidemia, and MASLD will be defined based on the presence of relevant diagnosis codes in the patient's medical history.
 
 Appendix \@ref(atlas-subgroups) presents complete OHDSI `ATLAS` specifications for these subgroups, including all standard OMOP CDM concept codes defining cardiovascular risk and renal disease.
 
@@ -248,28 +247,24 @@ This can allow researchers and stakeholders to understand the heterogeneity of s
 
 ## Outcomes {#outcomes}
 
-Across all data sources and pairwise exposure cohorts, we will assess relative risks of 32 cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
-Primary outcomes of interest are:
+Across all data sources and pairwise exposure cohorts, we will assess relative risks of 11 cardiovascular and patient-centered outcomes (Table \@ref(tab:outcome-table)).
 
-* 3-point major adverse cardiovascular events (MACE), including acute myocardial infarction, stroke, and sudden cardiac death, and
-* 4-point MACE that additionally includes heart failure hospitalization.
-
-Secondary outcomes include:
-
-* individual MACE components,
+Cardiovascular outcomes include:
+* Acute myocardial infarction,
 * acute renal failure,
-* revascularization
+* hospitalization with heart failure, and
+* stroke
 
-In data sources with laboratory measurements, secondary outcomes further include:
+Patient-centered safety outcomes include: 
+* Acute pancreatitis,
+* diabetic ketoacidosis,
+* diarrhea,
+* vomiting, and
+* hepatic failure
 
-* glycemic control, and
-* measured renal dysfunction
+We will also study T2DM drug side-effects and safety concerns highlighted in the 2018 ADA guidelines [@American_Diabetes_Association2018-yz] and from RCTs, including:
 
-We will also study second-line T2DM drug side-effects and safety concerns highlighted in the 2018 ADA guidelines [@American_Diabetes_Association2018-yz] and from RCTs, including:
-
-* abnormal weight change,
-* genitourinary (GU) infection,
-* various cancers, and
+* abnormal weight change and 
 * hypoglycemia.
 
 <!-- While we list many patient-centered outcomes as "exploratory" in the table, we use this term to highlight those that are less likely to achieve high statistical power across all data sources due to lower event rates. -->
@@ -375,7 +370,7 @@ Given the subcutaneous route of administration of GLP1RAs compared with other dr
 We will:
 
 * Exclude patients who have experienced the outcome prior to their index date,
-* Stratify and variable-ratio match patients by PS, and
+* Stratify and 1-to-1 match patients by PS, and
 * Use Cox proportional hazards models
 
 to estimate hazard ratios (HRs) between alternative target and comparator treatments for the risk of each outcome in each data source.
@@ -410,20 +405,11 @@ Using the empirical null distributions from these experiments, we will calibrate
 We will declare an HR as significantly different from no effect when its calibrated $p < 0.05$ without correcting for multiple testing.
 Finally, blinded to all trial results, study investigators will evaluate study diagnostics for all comparisons to assess if they were likely to yield unbiased estimates (Section \@ref(sample-size)).
 
-### Sensitivity analyses and missingness
+### Subgroup effects
 
-Because of the potential confounding effect of glycemic control at baseline between treatment choice and outcomes and to better understand the impact of limited glucose level measurements on effectiveness and safety estimation that arises in administrative claims and some EHR data, we will perform pre-specified sensitivity analyses for all studies within data sources that contain reliable glucose or hemoglobin A1c measurements.
-Within a study, for each exposure pair, we will first rebuild PS models where we additionally include baseline glucose or hemoglobin A1c measurements as patient characteristics, stratify or match patients under the new PS models that directly adjust for potential confounding by glycemic control and then estimate effectiveness and safety HRs.
+We will calculate subgroup effects in two ways. First, we will calculate the difference in the hazard ratios of different subgroups for each outcome for pairs of classes (or drugs), and we will calculate the statistical significance of that difference. 
+Second, for the 1-to-1 matching comparisons, we will more directly compare incidence rates between subgroups for each outcome for pairs of classes (or drugs). This latter comparison may have more power than comparing hazard ratios.
 
-A limitation of the Cox model is that no doubly robust procedure is believed to exist for estimating HRs, due to their non-collapsibility [@dukes2019doubly].
-Doubly robust procedures combine baseline patient characteristic-adjusted outcome and PS models to control for confounding and, in theory, remain unbiased when either (but not necessarily both) model is correctly specified [@funk2011doubly].
-Doubly robust procedures do exist for hazard differences [@dukes2019doubly,@martinussen2011estimation] and we will validate the appropriateness of our univariable Cox modeling by comparing estimate differences under an additive hazards model [@aalen1989linear] with and without doubly robust-adjustment [@wang2017doubly].
-In practice, however, neither the outcome nor PS model is correctly specified, leading to systematic error in the observational setting.
-
-Missing data of potential concern are patient demographics (gender, age, race)  for our inclusion criteria.
-We will include only individuals whose baseline eligibility can be characterized that will most notably influence race subgroup assessments in the **Heterogeneity Study**.
-No further missing data can arise in our large-scale PS models because all features, with the exception of demographics, simply indicate the presence or absence of health records in a given time-period.  Finally, we limit the impact of missing data, such as prescription information, relating to exposure time-at-risk by entertaining multiple definitions [@Schneeweiss2007-am].
-In all reports, we will clearly tabulate numbers of missing observations and patient attrition.
 
 # Sample Size and Study Power {#sample-size}
 
@@ -443,8 +429,8 @@ We will define cohorts to stand in empirical equipoise if the majority of patien
 
 ## Strengths
 
-LEGEND-T2DM is, to our knowledge, the largest and most comprehensive study to provide evidence about the comparative effectiveness and safety of second-line T2DM agents.
-The LEGEND-T2DM studies will encompass over 1 million patients initiating second-line T2DM agents across at least 13 databases from 5 countries and will examine all pairwise comparisons between the four second-line drug classes against a panel of TODO health outcomes.
+LEGEND-T2DM is, to our knowledge, the largest and most comprehensive study to provide evidence about the comparative effectiveness and safety of T2DM agents in subgroups.
+The LEGEND-T2DM studies will encompass over 1 million patients initiating T2DM agents across at least databases from several countries and will examine all pairwise comparisons between the drug classes against a panel of TODO health outcomes.
 Through an international network, LEGEND-T2DM seeks to take advantage of disparate health databases drawn from different sources and across a range of countries and practice settings.
 These large-scale and unfiltered populations better represent real-world practice than the restricted study populations in prescribed treatment and follow-up settings from RCTs.
 Our use of the OMOP CDM allows extension of the LEGEND-T2DM experiment to future databases and allows replication of these results on licensable databases that were used in this experiment, while still maintaining patient privacy on patient-level data.
@@ -490,7 +476,7 @@ Most often the data are de-identified within data source.
 All data partners executing the LEGEND-T2DM studies within their data sources will have received institutional review board (IRB) approval or waiver for participation in accordance to their institutional governance prior to execution (see Table \@ref(tab:irb)).
 LEGEND-T2DM executes across a federated and distributed data network, where analysis code is sent to participating data partners and only aggregate summary statistics are returned, with no sharing of patient-level data between organizations.
 
-```{r irb, echo=FALSE}
+```{r irb, echo=FALSE, message=FALSE, warning=FALSE}
 data_sources <- readr::read_delim(col_names = TRUE, delim = "&", trim_ws = TRUE, file = "
 Data source & Statement
 IBM MarketScan Commercial Claims and Encounters (CCAE) & New England Institutional Review Board and was determined to be exempt from broad IRB approval, as this research project did not involve human subject research.
@@ -534,7 +520,7 @@ The study results will be assessed for medically important findings.
 
 Open science aims to make scientific research, including its data process and software, and its dissemination, through publication and presentation, accessible to all levels of an inquiring society, amateur or professional [@Woelfle2011-ss] and is a governing principle of LEGEND-T2DM.
 Open science delivers reproducible, transparent and reliable evidence.
-All aspects of LEGEND-T2DM (except private patient data) will be open and we will actively encourage other interested researchers, clinicians and patients to participate.
+All aspects (except private patient data) will be open and we will actively encourage other interested researchers, clinicians and patients to participate.
 This differs fundamentally from traditional studies that rarely open their analytic tools or share all result artifacts, and inform the community about hard-to-verify conclusions at completion.
 
 ## Transparent and re-usable research tools
@@ -542,7 +528,6 @@ This differs fundamentally from traditional studies that rarely open their analy
 We will publicly register this protocol and announce its availability for feedback from stakeholders, the OHDSI community and within clinical professional societies.
 This protocol will link to open source code for all steps to generating diagnostics, effect estimates, figures and tables.
 Such transparency is possible because we will construct our studies on top of the OHDSI toolstack of open source software tools that are community developed and rigorously tested [@Schuemie2020-wx].
-We will publicly host LEGEND-T2DM source code at (https://github.com/ohdsi-studies/LegendT2dm), allowing public contribution and review, and free re-use for anyone’s future research.
 
 ## Continuous sharing of results
 

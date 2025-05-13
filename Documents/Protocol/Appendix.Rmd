@@ -59,16 +59,16 @@ removeMetforminAndInsulin <- function(json) {
 }
 
 # Age
-youngerJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101210000.json", package = "LegendT2dm"))
-youngerCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(youngerJson))
+youngerJson <- SqlRender::readSql(system.file("cohorts", "subgroups", "11759.json", package = "LegendT2dm"))
+youngerCohort <- CirceR::cohortExpressionFromJson(youngerJson)
 printInclusionCriteria(youngerCohort)
 
-middleJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101220000.json", package = "LegendT2dm"))
-middleCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(middleJson))
+middleJson <- SqlRender::readSql(system.file("cohorts", "subgroups", "11760.json", package = "LegendT2dm"))
+middleCohort <- CirceR::cohortExpressionFromJson(middleJson)
 printInclusionCriteria(middleCohort)
 
-olderJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101230000.json", package = "LegendT2dm"))
-olderCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(olderJson))
+olderJson <- SqlRender::readSql(system.file("cohorts", "subgroups", "11761.json", package = "LegendT2dm"))
+olderCohort <- CirceR::cohortExpressionFromJson(olderJson)
 printInclusionCriteria(olderCohort)
 ```
 
@@ -108,23 +108,115 @@ printCohortClose()
 ```
 
 ```{r heterogenity-cohort-renal, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-# Renal
-noRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200001.json", package = "LegendT2dm"))
-noRenalCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(noRenalJson))
+# no Renal
+no_renal_dz <- SqlRender::readSql(system.file("cohorts", "subgroups", "11734.json", package = "LegendT2dm"))
+no_renalCohort <- CirceR::cohortExpressionFromJson(no_renal_dz)
+printCohortEntryandInclusionCriteria(no_renalCohort, removeDescription = TRUE)
 
-printInclusionCriteria(noRenalCohort)
+# Renal no HD
+renal_dz <- SqlRender::readSql(system.file("cohorts", "subgroups", "11732.json", package = "LegendT2dm"))
+renalCohort <- CirceR::cohortExpressionFromJson(renal_dz)
+printCohortEntryandInclusionCriteria(renalCohort, removeDescription = TRUE)
 
-withRenalJson <- SqlRender::readSql(system.file("cohorts", "class", "ID101200002.json", package = "LegendT2dm"))
+# Renal + HD
+renal_hd = SqlRender::readSql(system.file("cohorts", "subgroups", "11733.json", package = "LegendT2dm"))
+renalHDCohort <- CirceR::cohortExpressionFromJson(renal_hd)
+printCohortEntryandInclusionCriteria(renalHDCohort, removeDescription = TRUE)
 
-cohort <- RJSONIO::fromJSON(withRenalJson)
+# concept sets in renal disease
+printConceptSet(renalCohort$conceptSets[[1]])
+printConceptSet(renalCohort$conceptSets[[2]])
+printConceptSet(renalCohort$conceptSets[[3]])
 
-withRenalCohort <- CirceR::cohortExpressionFromJson(removeMetforminAndInsulin(withRenalJson))
+# dialysis
+printConceptSet(renalCohort$conceptSets[[4]])
 
-printInclusionCriteria(withRenalCohort)
-
-printConceptSet(withRenalCohort$conceptSets[[13]])
 printCohortClose()
 ```
+```{r heterogenity-cohort-obesity, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# obesity
+obesity <- SqlRender::readSql(system.file("cohorts", "subgroups", "11739.json", package = "LegendT2dm"))
+obesityCohort <- CirceR::cohortExpressionFromJson(obesity)
+printInclusionCriteria(obesityCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(obesityCohort$conceptSets[[2]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-dm-severe, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# severe diabetes
+dm_severe <- SqlRender::readSql(system.file("cohorts", "subgroups", "11746.json", package = "LegendT2dm"))
+dm_severeCohort <- CirceR::cohortExpressionFromJson(dm_severe)
+printInclusionCriteria(dm_severeCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(dm_severeCohort$conceptSets[[2]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-dka, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# DKA
+dka <- SqlRender::readSql(system.file("cohorts", "subgroups", "11741.json", package = "LegendT2dm"))
+dkaCohort <- CirceR::cohortExpressionFromJson(dka)
+printInclusionCriteria(dkaCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(dkaCohort$conceptSets[[1]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-retinopathy, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# retinopathy
+retin <- SqlRender::readSql(system.file("cohorts", "subgroups", "11743.json", package = "LegendT2dm"))
+retinCohort <- CirceR::cohortExpressionFromJson(retin)
+printInclusionCriteria(retinCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(retinCohort$conceptSets[[1]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-HTN, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# essential HTN
+htn <- SqlRender::readSql(system.file("cohorts", "subgroups", "11735.json", package = "LegendT2dm"))
+htnCohort <- CirceR::cohortExpressionFromJson(htn)
+printInclusionCriteria(htnCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(htnCohort$conceptSets[[1]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-HLD, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# hyperlipedemia
+hld <- SqlRender::readSql(system.file("cohorts", "subgroups", "11737.json", package = "LegendT2dm"))
+hldCohort <- CirceR::cohortExpressionFromJson(hld)
+printInclusionCriteria(hldCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(hldCohort$conceptSets[[1]])
+
+printCohortClose()
+```
+
+```{r heterogenity-cohort-masld, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+# MASLD
+masld <- SqlRender::readSql(system.file("cohorts", "subgroups", "11710.json", package = "LegendT2dm"))
+masldCohort <- CirceR::cohortExpressionFromJson(masld)
+printInclusionCriteria(masldCohort, removeDescription = FALSE)
+
+# concept sets
+printConceptSet(masldCohort$conceptSets[[1]])
+
+printCohortClose()
+```
+
 
 ```{r drug-cohort, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
 drugCohortJson <- SqlRender::readSql(system.file("cohorts", "drug", "ID111100000.json", package = "LegendT2dm"))

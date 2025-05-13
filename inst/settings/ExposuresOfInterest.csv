@@ -1,15 +1,20 @@
 type,name,cohortId,conceptId,class,shortName,order,includedConceptIds
+Drug,miglitol,51,1510202,AGI,NA,NA,NA
+Drug,metformin,61,1503297,BG,NA,NA,NA
 Drug,alogliptin,11,43013884,DPP4I,NA,NA,NA
 Drug,linagliptin,12,40239216,DPP4I,NA,NA,NA
 Drug,saxagliptin,13,40166035,DPP4I,NA,NA,NA
 Drug,sitagliptin,14,1580747,DPP4I,NA,NA,NA
 Drug,vildagliptin,15,19122137,DPP4I,NA,NA,NA
+Drug,tirzepatide,71,779705,GIPGLP1DA,NA,NA,NA
 Drug,albiglutide,21,44816332,GLP1RA,NA,NA,NA
 Drug,dulaglutide,22,45774435,GLP1RA,NA,NA,NA
 Drug,exenatide,23,1583722,GLP1RA,NA,NA,NA
 Drug,liraglutide,24,40170911,GLP1RA,NA,NA,NA
 Drug,lixisenatide,25,44506754,GLP1RA,NA,NA,NA
 Drug,semaglutide,26,793143,GLP1RA,NA,NA,NA
+Drug,repaglinide,81,1516766,MEG,NA,NA,NA
+Drug,nateglinide,82,1502826,MEG,NA,NA,NA
 Drug,canagliflozin,31,43526465,SGLT2I,NA,NA,NA
 Drug,dapagliflozin,32,44785829,SGLT2I,NA,NA,NA
 Drug,empagliflozin,33,45774751,SGLT2I,NA,NA,NA
@@ -21,7 +26,13 @@ Drug,gliquidone,44,19097821,SU,NA,NA,NA
 Drug,glyburide,45,1559684,SU,NA,NA,NA
 Drug,tolazamide,46,1502809,SU,NA,NA,NA
 Drug,tolbutamide,47,1502855,SU,NA,NA,NA
+Drug,pioglitazone,91,1525215,TZD,NA,NA,NA
+Drug class,Alpha-glucosidase inhibitor,50,5,NA,AGI,5,1510202
+Drug class,Biguanides,60,6,NA,BG,6,1503297
 Drug class,DPP4 inhibitors,10,1,NA,DPP4I,1,1580747;19122137;40166035;40239216;43013884
+Drug class,GIP/GLP-1 dual agonist,70,7,NA,GIPGLP1DA,7,779705
 Drug class,GLP-1 receptor agonists,20,2,NA,GLP1RA,2,793143;1583722;40170911;44506754;44816332;45774435
+Drug class,Meglitinide,80,8,NA,MEG,8,1516766;1502826
 Drug class,SGLT2 inhibitors,30,3,NA,SGLT2I,3,793293;43526465;44785829;45774751
 Drug class,Sulfonylureas,40,4,NA,SU,4,1502809;1502855;1559684;1560171;1594973;1597756;19097821
+Drug class, Thiazolidinediones,90,9,NA,TZD,1525215
