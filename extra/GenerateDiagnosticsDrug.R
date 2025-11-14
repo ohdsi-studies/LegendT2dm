@@ -15,7 +15,7 @@ connection <- DatabaseConnector::connect(legendT2dmConnectionDetails)
 
 # set indication Id here
 # doing this for all drug-v-drug
-## OPEN CLAIMS results still pending...
+## Nov 2024: including Open Claims results
 indicationId = "drug"
 tcoFileName = sprintf("%sTcosOfInterest.csv", indicationId)
 
@@ -24,13 +24,15 @@ resultsSchema = "legendt2dm_drug_results"
 tcs <- read.csv(system.file("settings", tcoFileName,
                             package = "LegendT2dm")) %>%
   dplyr::select(targetId, comparatorId) %>%
-  filter((targetId %/% 1e6) %% 2 == 1, (comparatorId %/% 1e6) %% 2 == 1) %>%
+  filter((targetId %/% 1e6) %% 2 == 1, (comparatorId %/% 1e6) %% 2 == 1)
 # only pick "..1....." IDs for ITT and OT1; not doing OT2 for now...
-  filter(targetId %% 1e5 == 0, comparatorId %% 1e5 == 0) # only work on main cohorts to reduce computation time
+  # filter(targetId %% 1e5 == 0, comparatorId %% 1e5 == 0) # only work on main cohorts to reduce computation time
 
 outcomeIds <- read.csv(system.file("settings", "OutcomesOfInterest.csv",
                                    package = "LegendT2dm")) %>%
   dplyr::select(cohortId) %>% pull(cohortId)
+
+outcomeIds <- outcomeIds[outcomeIds != 43] # remove thyroid tumor outcome....
 
 # databaseIds <- c("OptumEHR", "MDCR", "OptumDod", "UK_IMRD", "MDCD",
 #                  "CCAE", "US_Open_Claims", "SIDIAP", "VA-OMOP", "France_LPD",
@@ -53,13 +55,16 @@ diagnostics <- makeDiagnosticsTable(connection = connection,
                                     databaseIds = databaseIdsDrug)
 
 #saveRDS(diagnostics, "extra/diagnostics-sglt2i.rds")
-saveRDS(diagnostics, "extra/diagnostics-drugs-main.rds")
+#saveRDS(diagnostics, "extra/diagnostics-drugs-main.rds")
+#saveRDS(diagnostics, "extra/diagnostics-all-drugs.rds")
+saveRDS(diagnostics, "extra/diagnostics-all-drugs-ot1-itt.rds")
 DatabaseConnector::disconnect(connection)
 
 # Start of diagnostics processing & do meta analysis
 ## doing this for all drugs v all drugs
 #diagnostics <- readRDS("extra/diagnostics-sglt2i.rds")
-diagnostics <- readRDS("extra/diagnostics-drugs.rds")
+#diagnostics <- readRDS("extra/diagnostics-drugs.rds")
+diagnostics <- readRDS("extra/diagnostics-all-drugs.rds")
 
 diagnosticsHtn <- diagnostics %>%
   filter(is.finite(mdrr)) %>%

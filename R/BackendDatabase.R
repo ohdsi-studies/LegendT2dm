@@ -261,7 +261,7 @@ checkAndFixDataTypes <-
             ifelse(is.infinite(y), NA, y)
           })
         }
-      } else if (expectedType == "int") {
+      } else if (expectedType == "integer") {
         if (observedTypes[i] != "integer") {
           ParallelLogger::logDebug(
             sprintf(

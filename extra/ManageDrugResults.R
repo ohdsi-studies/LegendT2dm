@@ -114,13 +114,13 @@ LegendT2dm::uploadResultsToDatabase(
   schema = resultsSchema,
   purgeSiteDataBeforeUploading =FALSE,
   zipFileName = c(
-    "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
+    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_1.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_2.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_3.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_4.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_5.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_6.zip",
-    #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
+    "~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_8.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_9.zip",
     #"~/Downloads/OpenClaims_Results_CES/Results_drug_study_OPENCLAIMS_10.zip",
     NULL
@@ -141,14 +141,18 @@ LegendT2dm::uploadResultsToDatabase(
     #                          "diagnostics", # will upload diagnostics later once generated
     #                          NULL)
     filter(tableName %in% c(#"covariate_balance",
-                            "kaplan_meier_dist",
+                            "preference_score_dist",
+                            "propensity_model",
+                            "likelihood_profile",
+                            "cm_follow_up_dist",
+                            #"kaplan_meier_dist",
                             NULL) # re-do balance table + upload KM curves
            ),
   #tempFolder = "d:/uploadTemp/" # folder for temporary data storage during upload
   tempFolder = "~/Downloads/uploadTemp/",
   defaultChunkSize = 5e6,
   forceOverWriteOfSpecifications = FALSE,
-  useTempTable = TRUE
+  useTempTable = FALSE
 )
 
 ## Aug 2024: upload KM curves for open claims results
